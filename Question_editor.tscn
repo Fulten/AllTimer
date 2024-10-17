@@ -1,0 +1,103 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1hm6ktd2n7bk"]
+
+[ext_resource type="Script" path="res://Question_editor.gd" id="1_0k3ld"]
+
+[node name="QuestionEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 2.30396
+offset_bottom = 1.0
+script = ExtResource("1_0k3ld")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 499.576
+anchor_bottom = 657.0
+offset_right = -1.00317
+offset_bottom = -12.0001
+theme_override_constants/separation = 5
+
+[node name="Add Question" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Add"
+
+[node name="Edit Question" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Edit"
+
+[node name="Delete Question" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Delete"
+
+[node name="Questions" type="ItemList" parent="VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+
+[node name="Popup" type="Popup" parent="."]
+size = Vector2i(600, 700)
+
+[node name="Name" type="LineEdit" parent="Popup"]
+custom_minimum_size = Vector2(400, 50)
+offset_right = 67.0625
+offset_bottom = 31.0
+
+[node name="Text" type="LineEdit" parent="Popup"]
+custom_minimum_size = Vector2(400, 50)
+offset_top = 50.0
+offset_right = 67.0625
+offset_bottom = 100.0
+
+[node name="a" type="LineEdit" parent="Popup"]
+custom_minimum_size = Vector2(400, 50)
+offset_top = 100.0
+offset_right = 67.0625
+offset_bottom = 150.0
+
+[node name="b" type="LineEdit" parent="Popup"]
+custom_minimum_size = Vector2(400, 50)
+offset_top = 150.0
+offset_right = 67.0625
+offset_bottom = 200.0
+
+[node name="c" type="LineEdit" parent="Popup"]
+custom_minimum_size = Vector2(400, 50)
+offset_top = 200.0
+offset_right = 67.0625
+offset_bottom = 250.0
+
+[node name="d" type="LineEdit" parent="Popup"]
+custom_minimum_size = Vector2(400, 50)
+offset_top = 250.0
+offset_right = 67.0625
+offset_bottom = 300.0
+
+[node name="correct" type="LineEdit" parent="Popup"]
+custom_minimum_size = Vector2(400, 50)
+offset_top = 300.0
+offset_right = 67.0625
+offset_bottom = 350.0
+
+[node name="prompt" type="LineEdit" parent="Popup"]
+custom_minimum_size = Vector2(400, 50)
+offset_top = 350.0
+offset_right = 67.0625
+offset_bottom = 400.0
+
+[node name="tags" type="LineEdit" parent="Popup"]
+custom_minimum_size = Vector2(400, 50)
+offset_top = 400.0
+offset_right = 67.0625
+offset_bottom = 450.0
+
+[node name="SaveButton" type="Button" parent="Popup"]
+custom_minimum_size = Vector2(400, 50)
+offset_top = 450.0
+offset_right = 44.0
+offset_bottom = 500.0
+text = "Save
+"

@@ -15,10 +15,6 @@ run/main_scene="res://Question_editor.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-MainMenu="*res://main_menu.tscn"
-
 [editor]
 
 version_control/plugin_name="GitPlugin"

@@ -46,59 +46,61 @@ visible = false
 custom_minimum_size = Vector2(400, 50)
 offset_right = 400.0
 offset_bottom = 50.0
+placeholder_text = "enter name here"
 
 [node name="Text" type="LineEdit" parent="Popup"]
 custom_minimum_size = Vector2(400, 50)
 offset_top = 50.0
 offset_right = 400.0
-offset_bottom = 100.0
-
-[node name="a" type="LineEdit" parent="Popup"]
-custom_minimum_size = Vector2(400, 50)
-offset_top = 100.0
-offset_right = 400.0
-offset_bottom = 150.0
-
-[node name="b" type="LineEdit" parent="Popup"]
-custom_minimum_size = Vector2(400, 50)
-offset_top = 150.0
-offset_right = 400.0
 offset_bottom = 200.0
+placeholder_text = "enter question here"
 
-[node name="c" type="LineEdit" parent="Popup"]
+[node name="correct" type="LineEdit" parent="Popup"]
 custom_minimum_size = Vector2(400, 50)
 offset_top = 200.0
 offset_right = 400.0
 offset_bottom = 250.0
+placeholder_text = "enter correct answer"
 
-[node name="d" type="LineEdit" parent="Popup"]
+[node name="wrong1" type="LineEdit" parent="Popup"]
 custom_minimum_size = Vector2(400, 50)
 offset_top = 250.0
 offset_right = 400.0
 offset_bottom = 300.0
+placeholder_text = "enter a wrong answer"
 
-[node name="correct" type="LineEdit" parent="Popup"]
+[node name="wrong2" type="LineEdit" parent="Popup"]
 custom_minimum_size = Vector2(400, 50)
 offset_top = 300.0
 offset_right = 400.0
 offset_bottom = 350.0
+placeholder_text = "enter a wrong answer"
 
-[node name="prompt" type="LineEdit" parent="Popup"]
+[node name="wrong3" type="LineEdit" parent="Popup"]
 custom_minimum_size = Vector2(400, 50)
 offset_top = 350.0
 offset_right = 400.0
 offset_bottom = 400.0
+placeholder_text = "enter a wrong answer"
 
-[node name="tags" type="LineEdit" parent="Popup"]
+[node name="prompt" type="LineEdit" parent="Popup"]
 custom_minimum_size = Vector2(400, 50)
 offset_top = 400.0
 offset_right = 400.0
 offset_bottom = 450.0
+placeholder_text = "enter post prompt text if applicable"
 
-[node name="SaveButton" type="Button" parent="Popup"]
+[node name="tags" type="LineEdit" parent="Popup"]
 custom_minimum_size = Vector2(400, 50)
 offset_top = 450.0
 offset_right = 400.0
 offset_bottom = 500.0
+placeholder_text = "enter , delimited list of tags for this question"
+
+[node name="SaveButton" type="Button" parent="Popup"]
+custom_minimum_size = Vector2(400, 50)
+offset_top = 500.0
+offset_right = 400.0
+offset_bottom = 550.0
 text = "Save
 "

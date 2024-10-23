@@ -1,7 +1,23 @@
 [gd_resource type="Theme" load_steps=5 format=3 uid="uid://j8encu3x20ng"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1euet"]
-bg_color = Color(0.756863, 0.756863, 0.756863, 0.588235)
+bg_color = Color(0, 0, 0, 1)
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 150
+corner_radius_top_right = 150
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 150
+expand_margin_left = 30.0
+expand_margin_right = 30.0
+shadow_color = Color(0, 1, 1, 0.588235)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_050hy"]
+bg_color = Color(0.380392, 0.380392, 0.380392, 0.784314)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -13,26 +29,6 @@ corner_radius_bottom_right = 150
 corner_radius_bottom_left = 150
 expand_margin_left = 30.0
 expand_margin_right = 30.0
-shadow_color = Color(0, 0, 0, 0.235294)
-shadow_size = 2
-shadow_offset = Vector2(0, 5)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_050hy"]
-bg_color = Color(0.380392, 0.380392, 0.380392, 0.784314)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 150
-corner_radius_top_right = 150
-corner_radius_bottom_right = 150
-corner_radius_bottom_left = 150
-expand_margin_left = 30.0
-expand_margin_right = 30.0
-shadow_color = Color(0, 0, 0, 0.235294)
-shadow_size = 2
-shadow_offset = Vector2(0, 5)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gu8lu"]
 content_margin_left = 10.0
@@ -51,9 +47,6 @@ corner_radius_bottom_right = 150
 corner_radius_bottom_left = 150
 expand_margin_left = 30.0
 expand_margin_right = 30.0
-shadow_color = Color(0, 0, 0, 0.235294)
-shadow_size = 2
-shadow_offset = Vector2(0, 5)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2xk1e"]
 bg_color = Color(0, 0, 0, 1)
@@ -61,18 +54,17 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
+border_color = Color(0.575234, 0.38969, 1, 1)
 corner_radius_top_left = 150
 corner_radius_top_right = 150
 corner_radius_bottom_right = 150
 corner_radius_bottom_left = 150
 expand_margin_left = 30.0
 expand_margin_right = 30.0
-shadow_color = Color(0, 0, 0, 0.470588)
-shadow_size = 2
-shadow_offset = Vector2(0, 5)
 
 [resource]
 Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0.102548, 0.830346, 0.831022, 1)
 Button/colors/font_hover_pressed_color = Color(0.575234, 0.38969, 1, 1)
 Button/colors/font_pressed_color = Color(0.576471, 0.388235, 1, 1)

@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhjk8tqlvjxx3"]
+
+[ext_resource type="Script" path="res://Chances_editor.gd" id="1_y4a2d"]
+
+[node name="ChancesEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 2.30396
+offset_bottom = 1.0
+script = ExtResource("1_y4a2d")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 499.576
+anchor_bottom = 657.0
+offset_right = -1.00317
+offset_bottom = -12.0001
+theme_override_constants/separation = 5
+
+[node name="Add Chance" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Add"
+
+[node name="Edit Chance" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Edit"
+
+[node name="Delete Chance" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Delete"
+
+[node name="Chances" type="ItemList" parent="VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+
+[node name="Popup" type="Window" parent="."]
+size = Vector2i(800, 400)
+visible = false
+
+[node name="Name" type="LineEdit" parent="Popup"]
+custom_minimum_size = Vector2(800, 50)
+offset_right = 800.0
+offset_bottom = 50.0
+focus_next = NodePath("../Description")
+focus_previous = NodePath("../SaveButton")
+placeholder_text = "enter name here"
+
+[node name="Description" type="LineEdit" parent="Popup"]
+custom_minimum_size = Vector2(800, 50)
+offset_top = 50.0
+offset_right = 800.0
+offset_bottom = 200.0
+focus_next = NodePath("../SaveButton")
+focus_previous = NodePath("../Name")
+placeholder_text = "enter description here"
+
+[node name="SaveButton" type="Button" parent="Popup"]
+custom_minimum_size = Vector2(400, 50)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -50.0
+offset_right = 300.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Save
+"

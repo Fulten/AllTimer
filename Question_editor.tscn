@@ -10,7 +10,6 @@ offset_bottom = 1.0
 script = ExtResource("1_0k3ld")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 499.576
@@ -40,67 +39,106 @@ custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 
 [node name="Popup" type="Window" parent="."]
-size = Vector2i(400, 700)
+size = Vector2i(800, 700)
+visible = false
 
 [node name="Name" type="LineEdit" parent="Popup"]
-custom_minimum_size = Vector2(400, 50)
+custom_minimum_size = Vector2(800, 50)
 offset_right = 400.0
 offset_bottom = 50.0
+focus_next = NodePath("../Text")
+focus_previous = NodePath("../SaveButton")
 placeholder_text = "enter name here"
 
 [node name="Text" type="LineEdit" parent="Popup"]
-custom_minimum_size = Vector2(400, 50)
+custom_minimum_size = Vector2(800, 50)
 offset_top = 50.0
 offset_right = 400.0
 offset_bottom = 200.0
+focus_next = NodePath("../correct")
+focus_previous = NodePath("../Name")
 placeholder_text = "enter question here"
 
 [node name="correct" type="LineEdit" parent="Popup"]
-custom_minimum_size = Vector2(400, 50)
+custom_minimum_size = Vector2(800, 50)
 offset_top = 200.0
 offset_right = 400.0
 offset_bottom = 250.0
+focus_next = NodePath("../wrong1")
+focus_previous = NodePath("../Text")
 placeholder_text = "enter correct answer"
 
 [node name="wrong1" type="LineEdit" parent="Popup"]
-custom_minimum_size = Vector2(400, 50)
+custom_minimum_size = Vector2(800, 50)
 offset_top = 250.0
 offset_right = 400.0
 offset_bottom = 300.0
+focus_next = NodePath("../wrong2")
+focus_previous = NodePath("../correct")
 placeholder_text = "enter a wrong answer"
 
 [node name="wrong2" type="LineEdit" parent="Popup"]
-custom_minimum_size = Vector2(400, 50)
+custom_minimum_size = Vector2(800, 50)
 offset_top = 300.0
 offset_right = 400.0
 offset_bottom = 350.0
+focus_next = NodePath("../wrong3")
+focus_previous = NodePath("../wrong1")
 placeholder_text = "enter a wrong answer"
 
 [node name="wrong3" type="LineEdit" parent="Popup"]
-custom_minimum_size = Vector2(400, 50)
+custom_minimum_size = Vector2(800, 50)
 offset_top = 350.0
 offset_right = 400.0
 offset_bottom = 400.0
+focus_next = NodePath("../prompt")
+focus_previous = NodePath("../wrong2")
 placeholder_text = "enter a wrong answer"
 
 [node name="prompt" type="LineEdit" parent="Popup"]
-custom_minimum_size = Vector2(400, 50)
+custom_minimum_size = Vector2(800, 100)
 offset_top = 400.0
 offset_right = 400.0
 offset_bottom = 450.0
+focus_next = NodePath("../tags")
+focus_previous = NodePath("../wrong3")
 placeholder_text = "enter post prompt text if applicable"
 
 [node name="tags" type="LineEdit" parent="Popup"]
-custom_minimum_size = Vector2(400, 50)
-offset_top = 450.0
-offset_right = 400.0
-offset_bottom = 500.0
+custom_minimum_size = Vector2(800, 50)
+offset_top = 500.0
+offset_right = 800.0
+offset_bottom = 550.0
+focus_next = NodePath("../chances")
+focus_previous = NodePath("../prompt")
 placeholder_text = "enter , delimited list of tags for this question"
+
+[node name="chances" type="LineEdit" parent="Popup"]
+custom_minimum_size = Vector2(800, 50)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+offset_right = 800.0
+offset_bottom = -100.0
+grow_vertical = 0
+focus_next = NodePath("../SaveButton")
+focus_previous = NodePath("../tags")
+placeholder_text = "enter , delimited list of chances"
 
 [node name="SaveButton" type="Button" parent="Popup"]
 custom_minimum_size = Vector2(400, 50)
-offset_top = 500.0
-offset_right = 400.0
-offset_bottom = 550.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -50.0
+offset_right = 300.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_next = NodePath("../Name")
+focus_previous = NodePath("../chances")
 text = "Save
 "

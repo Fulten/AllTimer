@@ -16,7 +16,7 @@ func _process(delta):
 func _load_master_questions(excluded_tags):
 	var file = FileAccess.open("res://question_data.json", FileAccess.READ)
 	if file:
-		master_question_data = JSON.parse_string(file.get_as_text())["questions"]
+		master_question_data = JSON.parse_string(file.get_as_text())
 		file.close()
 	var i = 0
 	for question in master_question_data:

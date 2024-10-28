@@ -16,5 +16,6 @@ var CurrentQuizQuestions = [] #The questions to be used in the current quiz
 var CurrentQuestionIndex = 0 #The index of question currently on in quiz
 
 var TagsToExclude = [] #The list of tags to be excluded from quizes
+var Chances = [] #The list of chance stars to track for the game
 
 var CurrentTheme = "default" #The current quiz theme

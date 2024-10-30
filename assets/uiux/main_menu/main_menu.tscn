@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://cg4l0h700m1n4"]
 
 [ext_resource type="Theme" uid="uid://j8encu3x20ng" path="res://assets/uiux/main_menu/default_theme.tres" id="1_dddys"]
-[ext_resource type="Script" path="res://VBoxContainer.gd" id="1_lvrko"]
-[ext_resource type="Shader" path="res://scrolling_background.gdshader" id="2_3jv30"]
+[ext_resource type="Script" path="res://assets/uiux/main_menu/VBoxContainer.gd" id="1_lvrko"]
+[ext_resource type="Shader" path="res://assets/uiux/main_menu/scrolling_background.gdshader" id="2_3jv30"]
 [ext_resource type="Texture2D" uid="uid://co7e0p20gqlnk" path="res://assets/uiux/main_menu/main_menu_bg.tga" id="3_xbkon"]
 [ext_resource type="AudioStream" uid="uid://dimbdo2k6d1uw" path="res://assets/uiux/main_menu/sfx_click.mp3" id="4_eckh4"]
 [ext_resource type="AudioStream" uid="uid://c77k0qy3iet7e" path="res://assets/uiux/main_menu/sfx_hover.mp3" id="5_r0aci"]

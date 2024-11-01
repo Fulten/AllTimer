@@ -65,9 +65,18 @@ func _on_edit_question_button_pressed():
 		question_answer_wrong2.text = json_data[editing_index]["wrong_2"]
 		question_answer_wrong3.text = json_data[editing_index]["wrong_3"]
 		question_post_prompt.text = json_data[editing_index]["explainer"]
-		question_tags.text = json_data[editing_index]["tags"]
-		question_chances.text = json_data[editing_index]["chances"]
+		question_tags.text = _array_to_string(json_data[editing_index]["tags"])
+		question_chances.text =  _array_to_string(json_data[editing_index]["chances"])
 		popup_dialog.popup()
+
+func _array_to_string(arr: Array) -> String:
+	var s = ""
+	for i in arr:
+		if s == "":
+			s = i
+		else:
+			s += ","+i
+	return s
 
 func _on_delete_question_button_pressed():
 	if json_data.size() > 0 && !questions_container.get_selected_items().is_empty():
@@ -84,8 +93,8 @@ func _on_save_button_pressed():
 	new_question["wrong_2"] = question_answer_wrong2.text
 	new_question["wrong_3"] = question_answer_wrong3.text
 	new_question["explainer"] = question_post_prompt.text
-	new_question["tags"] = question_tags.text
-	new_question["chances"] = question_chances.text
+	new_question["tags"] = question_tags.text.split(",")
+	new_question["chances"] = question_chances.text.split(",")
 	if editing_index == -1:
 		json_data.append(new_question)
 	else:

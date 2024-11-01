@@ -1,22 +1,32 @@
 [
 	{
-		"chances": "test",
+		"chances": [
+			"test"
+		],
 		"correct": "Something right",
 		"explainer": "A prompt",
 		"name": "RUnning a test naem",
 		"question": "This is the question",
-		"tags": "tests",
+		"tags": [
+			"tests"
+		],
 		"wrong_1": "Wrong",
 		"wrong_2": "Wrong again",
 		"wrong_3": "Still Wrong"
 	},
 	{
-		"chances": "chance,question",
+		"chances": [
+			"chance",
+			"question"
+		],
 		"correct": "cor",
 		"explainer": "this is the prompt text",
 		"name": "More",
 		"question": "questions",
-		"tags": "something,history",
+		"tags": [
+			"something",
+			"history"
+		],
 		"wrong_1": "we",
 		"wrong_2": "wa",
 		"wrong_3": "wi"

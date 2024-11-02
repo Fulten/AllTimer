@@ -5,6 +5,7 @@ var chances_set = {}
 
 var master_chances_data = []
 @onready var progress_bar = $progress_bar
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
@@ -17,6 +18,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if progress_bar.value == 100:
+		get_tree().change_scene_to_file("res://assets/uiux/session_themes/default/quiz_session.tscn")
 	pass
 
 func _load_master_questions(excluded_tags):

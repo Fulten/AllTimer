@@ -13,6 +13,8 @@ func _on_start_button_focus_entered():
 	$HoverSFX.play()
 func _on_start_button_button_down():
 	$ClickSFX.play()
+func _on_start_button_button_up():
+	get_tree().change_scene_to_file("res://assets/uiux/loading_screen.tscn")
 
 
 func _on_options_button_mouse_entered():

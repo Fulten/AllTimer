@@ -20,9 +20,9 @@ var CurrentChances = [] #The list of chance stars to track for the game
 
 var CurrentTheme = "default" #The current quiz theme
 
-func _add_chance(name,description):
+func _add_chance(chance_name,description):
 	CurrentChances.append({
-		"name": name,
+		"name": chance_name,
 		"description": description,
 		"count_p1": 0,
 		"count_p2": 0,

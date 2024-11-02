@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cg4l0h700m1n4"]
+[gd_scene load_steps=11 format=3 uid="uid://bjrqcx0k7scpa"]
 
 [ext_resource type="Theme" uid="uid://j8encu3x20ng" path="res://assets/uiux/main_menu/default_theme.tres" id="1_dddys"]
 [ext_resource type="Script" path="res://assets/uiux/main_menu/VBoxContainer.gd" id="1_lvrko"]
@@ -140,6 +140,7 @@ volume_db = -30.0
 autoplay = true
 
 [connection signal="button_down" from="VBoxContainer/StartButton" to="VBoxContainer" method="_on_start_button_button_down"]
+[connection signal="button_up" from="VBoxContainer/StartButton" to="VBoxContainer" method="_on_start_button_button_up"]
 [connection signal="focus_entered" from="VBoxContainer/StartButton" to="VBoxContainer" method="_on_start_button_focus_entered"]
 [connection signal="mouse_entered" from="VBoxContainer/StartButton" to="VBoxContainer" method="_on_start_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/StartButton" to="VBoxContainer" method="_on_start_button_pressed"]

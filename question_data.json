@@ -10,25 +10,34 @@
 		"tags": [
 			"tests"
 		],
-		"wrong_1": "Wrong",
-		"wrong_2": "Wrong again",
-		"wrong_3": "Still Wrong"
+		"wrong": [
+			"Still Wrong",
+			"Wrong A",
+			"Wrong C"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
 	},
 	{
 		"chances": [
-			"chance",
-			"question"
+			"chance1"
 		],
-		"correct": "cor",
-		"explainer": "this is the prompt text",
-		"name": "More",
-		"question": "questions",
+		"correct": "this is right",
+		"explainer": "This is the text",
+		"name": "another one",
+		"question": "here is the question",
 		"tags": [
-			"something",
-			"history"
+			"history",
+			"game"
 		],
-		"wrong_1": "we",
-		"wrong_2": "wa",
-		"wrong_3": "wi"
+		"wrong": [
+			"I am wrong",
+			"I too hate",
+			"Wrong again"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
 	}
 ]

@@ -3,11 +3,13 @@ extends Control
 @onready var questions_name = $session_organizer/question_header/question_name
 @onready var questions_index = $session_organizer/question_header/question_index
 @onready var questions_body = $session_organizer/question_body
-@onready var questions_answer1 = $session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1
-@onready var questions_answer2 = $session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2
-@onready var questions_answer3 = $session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3
-@onready var questions_answer4 = $session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4
+@onready var post_question = $post_question
+@onready var answers = [$session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1,
+	$session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2,
+	$session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3,
+	$session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4]
 var current_index = 0
+var correct_answer = 0
 var loaded = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,8 +28,15 @@ func _load_question():
 		var current_question = GameState.CurrentQuizQuestions[current_index]
 		questions_name.text = current_question["name"]
 		questions_body.text = current_question["question"]
-		questions_answer1.text = current_question["correct"]
-		questions_answer2.text = current_question["wrong_1"]
-		questions_answer3.text = current_question["wrong_2"]
-		questions_answer4.text = current_question["wrong_3"]
+		post_question.text = current_question["explainer"]
+		_randomize_answers_track_correct(current_question)
 		loaded = true
+
+func _randomize_answers_track_correct(current_question):
+	var available_indexes = [0, 1, 2, 3]
+	correct_answer = available_indexes.pop_at(randi() % available_indexes.size())
+	answers[correct_answer].text = current_question["correct"]
+	answers[available_indexes.pop_at(randi() % available_indexes.size())].text = current_question["wrong"][0]
+	answers[available_indexes.pop_at(randi() % available_indexes.size())].text = current_question["wrong"][1]
+	answers[available_indexes.pop_at(randi() % available_indexes.size())].text = current_question["wrong"][2]
+	

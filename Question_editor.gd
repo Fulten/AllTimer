@@ -42,28 +42,28 @@ func _ready():
 
 func _on_add_question_button_pressed():
 	editing_index = -1
-	question_name.text = question_content["name"]
-	question_text.text = question_content["question"]
-	question_answer_correct.text = question_content["correct"]
-	question_answer_wrong1.text = question_content["wrong_1"]
-	question_answer_wrong2.text = question_content["wrong_2"]
-	question_answer_wrong3.text = question_content["wrong_3"]
-	question_post_prompt.text = question_content["explainer"]
-	question_tags.text = question_content["tags"]
-	question_chances.text = question_content["chances"]
+	question_name.text = ""
+	question_text.text = ""
+	question_answer_correct.text = ""
+	question_answer_wrong1.text = ""
+	question_answer_wrong2.text = ""
+	question_answer_wrong3.text = ""
+	question_post_prompt.text = ""
+	question_tags.text = ""
+	question_chances.text = ""
 	popup_dialog.popup()
 
 func _on_edit_question_button_pressed():
 	editing_index = 0
 	if !questions_container.get_selected_items().is_empty():
-		editing_index = questions_container.get_selected_items()[0];
+		editing_index = questions_container.get_selected_items()[0]
 	if json_data.size() > 0:
 		question_name.text = json_data[editing_index]["name"]
 		question_text.text = json_data[editing_index]["question"]
 		question_answer_correct.text = json_data[editing_index]["correct"]
-		question_answer_wrong1.text = json_data[editing_index]["wrong_1"]
-		question_answer_wrong2.text = json_data[editing_index]["wrong_2"]
-		question_answer_wrong3.text = json_data[editing_index]["wrong_3"]
+		question_answer_wrong1.text = json_data[editing_index]["wrong"][0]
+		question_answer_wrong2.text = json_data[editing_index]["wrong"][1]
+		question_answer_wrong3.text = json_data[editing_index]["wrong"][2]
 		question_post_prompt.text = json_data[editing_index]["explainer"]
 		question_tags.text = _array_to_string(json_data[editing_index]["tags"])
 		question_chances.text =  _array_to_string(json_data[editing_index]["chances"])
@@ -89,9 +89,7 @@ func _on_save_button_pressed():
 	new_question["name"] = question_name.text
 	new_question["question"] = question_text.text
 	new_question["correct"] = question_answer_correct.text
-	new_question["wrong_1"] = question_answer_wrong1.text
-	new_question["wrong_2"] = question_answer_wrong2.text
-	new_question["wrong_3"] = question_answer_wrong3.text
+	new_question["wrong"] = [question_answer_wrong1.text,question_answer_wrong2.text,question_answer_wrong3.text]
 	new_question["explainer"] = question_post_prompt.text
 	new_question["tags"] = question_tags.text.split(",")
 	new_question["chances"] = question_chances.text.split(",")

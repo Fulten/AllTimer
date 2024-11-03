@@ -11,6 +11,7 @@ extends Control
 var current_index = 0
 var correct_answer = 0
 var loaded = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	current_index = 0
@@ -39,4 +40,13 @@ func _randomize_answers_track_correct(current_question):
 	answers[available_indexes.pop_at(randi() % available_indexes.size())].text = current_question["wrong"][0]
 	answers[available_indexes.pop_at(randi() % available_indexes.size())].text = current_question["wrong"][1]
 	answers[available_indexes.pop_at(randi() % available_indexes.size())].text = current_question["wrong"][2]
+	
+func _next_question():
+	# play animations?
+	current_index += 1
+	loaded = false
+	
+func _input(event):
+	if event.is_action_pressed("next_question"):
+		_next_question()
 	

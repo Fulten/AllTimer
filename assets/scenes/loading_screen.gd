@@ -19,7 +19,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if progress_bar.value == 100:
-		get_tree().change_scene_to_file("res://assets/uiux/session_themes/default/quiz_session.tscn")
+		get_tree().change_scene_to_file("res://assets/scenes/quiz_session.tscn")
 	pass
 
 func _load_master_questions(excluded_tags):

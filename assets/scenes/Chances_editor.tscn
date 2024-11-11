@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bhjk8tqlvjxx3"]
 
-[ext_resource type="Script" path="res://Chances_editor.gd" id="1_y4a2d"]
+[ext_resource type="Script" path="res://assets/scenes/Chances_editor.gd" id="1_y4a2d"]
 
 [node name="ChancesEditor" type="Control"]
 layout_mode = 3
@@ -73,3 +73,7 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Save
 "
+
+[node name="score" type="Label" parent="."]
+theme_override_font_sizes/font_size = 26
+text = "0"

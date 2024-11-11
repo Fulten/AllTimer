@@ -1,0 +1,37 @@
+[
+	{
+		"chances": [
+			"test"
+		],
+		"correct": "Something right",
+		"explainer": "A prompt",
+		"name": "RUnning a test naem",
+		"question": "This is the question",
+		"tags": [
+			"tests"
+		],
+		"wrong": [
+			"Still Wrong",
+			"Wrong A",
+			"Wrong C"
+		]
+	},
+	{
+		"chances": [
+			"chance1"
+		],
+		"correct": "this is right",
+		"explainer": "This is the text",
+		"name": "another one",
+		"question": "here is the question",
+		"tags": [
+			"history",
+			"game"
+		],
+		"wrong": [
+			"I am wrong",
+			"I too hate",
+			"Wrong again"
+		]
+	}
+]

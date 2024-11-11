@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d1hm6ktd2n7bk"]
 
-[ext_resource type="Script" path="res://Question_editor.gd" id="1_0k3ld"]
+[ext_resource type="Script" path="res://assets/scenes/Question_editor.gd" id="1_0k3ld"]
 
 [node name="QuestionEditor" type="Control"]
 layout_mode = 3

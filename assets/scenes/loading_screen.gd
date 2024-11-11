@@ -9,6 +9,7 @@ var master_chances_data = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	GameState._set_name(0,"Test Player") 
 	progress_bar.value = 0
 	_prepare_quiz_questions(10, GameState.TagsToExclude)
 	progress_bar.value = 50
@@ -23,7 +24,7 @@ func _process(delta):
 	pass
 
 func _load_master_questions(excluded_tags):
-	var file = FileAccess.open("res://question_data.json", FileAccess.READ)
+	var file = FileAccess.open("res://data/question_data.json", FileAccess.READ)
 	if file:
 		master_question_data = JSON.parse_string(file.get_as_text())
 		file.close()
@@ -66,7 +67,7 @@ func _clean_chance_set_and_master():
 	master_chances_data = []
 
 func _load_master_chances():
-	var file = FileAccess.open("res://chance_data.json", FileAccess.READ)
+	var file = FileAccess.open("res://data/chance_data.json", FileAccess.READ)
 	if file:
 		master_chances_data = JSON.parse_string(file.get_as_text())
 		file.close()

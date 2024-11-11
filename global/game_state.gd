@@ -1,16 +1,22 @@
 extends Node
 
-var Player1Active = true #Player position 1 is playing or not
-var Player1Score = 0  #Player position 1's score
-
-var Player2Active = false #Player position 2 is playing or not
-var Player2Score = 0  #Player position 2's score
-
-var Player3Active = false #Player position 3 is playing or not
-var Player3Score = 0  #Player position 3's score
-
-var Player4Active = false #Player position 4 is playing or not
-var Player4Score = 0  #Player position 4's score
+var Players = [{
+	"name": "",
+	"score": 0
+},
+{
+	"name": "",
+	"score": 0
+},
+{
+	"name": "",
+	"score": 0
+},
+{
+	"name": "",
+	"score": 0
+}]
+var PlayerCount = 1
 
 var CurrentQuizQuestions = [] #The questions to be used in the current quiz
 var CurrentQuestionIndex = 0 #The index of question currently on in quiz
@@ -29,3 +35,19 @@ func _add_chance(chance_name,description):
 		"count_p3": 0,
 		"count_p4": 0
 	})
+
+func _set_name(player_index,name):
+	Players[player_index]["name"] = name
+
+func _player_name(player_index):
+	return Players[player_index]["name"]
+
+func _player_score(player_index):
+	return Players[player_index]["score"]
+
+func _increase_score(player_index,score):
+	Players[player_index]["score"] += score
+
+func _reset_players():
+	for i in range(4):
+		Players[i]["score"] = 0

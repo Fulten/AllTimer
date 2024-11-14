@@ -4,6 +4,10 @@ extends Control
 @onready var questions_index = $session_organizer/question_header/question_index
 @onready var questions_body = $session_organizer/question_body
 @onready var post_question = $post_question
+@onready var players = [$players_region/player_case,
+	$players_region/player_case2,
+	$players_region/player_case3,
+	$players_region/player_case4]
 @onready var answers = [$session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1,
 	$session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2,
 	$session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3,
@@ -16,7 +20,9 @@ extends Control
 	$players_region/player_case2/status_row/score,
 	$players_region/player_case3/status_row/score,
 	$players_region/player_case4/status_row/score]
+var pre_timer = 10.0
 var timer = 30.0
+var post_timer = 10.0
 var current_index = 0
 var correct_answer = 0
 var loaded = false
@@ -32,7 +38,8 @@ func _ready():
 	for i in range(GameState.PlayerCount):
 		player_names[i].text = GameState._player_name(i)
 		player_scores[i].text = str(GameState._player_score(i))
-	pass # Replace with function body.
+		players[i].visible = true
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

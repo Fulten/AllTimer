@@ -36,6 +36,7 @@ var question_content = {
 var editing_index: int = -1
 var editing_uuid: String;
 
+
 func _ready():
 	add_button.pressed.connect(_on_add_question_button_pressed)
 	edit_button.pressed.connect(_on_edit_question_button_pressed)
@@ -44,6 +45,7 @@ func _ready():
 	
 	_load_questions()
 	_load_chances()
+
 
 func _on_add_question_button_pressed():
 	editing_index = -1
@@ -58,6 +60,7 @@ func _on_add_question_button_pressed():
 	question_tags.text = ""
 	question_chances.deselect_all()
 	popup_dialog.popup()
+
 
 func _on_edit_question_button_pressed():
 	editing_index = 0
@@ -76,6 +79,7 @@ func _on_edit_question_button_pressed():
 		_select_chance_by_uuids(json_data[editing_index]["chances"])
 		popup_dialog.popup()
 
+
 func _array_to_string(arr: Array) -> String:
 	var s = ""
 	for i in arr:
@@ -85,11 +89,13 @@ func _array_to_string(arr: Array) -> String:
 			s += ","+i
 	return s
 
+
 func _on_delete_question_button_pressed():
 	if json_data.size() > 0 && !questions_container.get_selected_items().is_empty():
 		json_data.remove_at(questions_container.get_selected_items()[0])
 		_save_questions()
 		_load_questions()
+
 
 func _on_save_button_pressed():
 	var new_question = question_content.duplicate()
@@ -111,6 +117,7 @@ func _on_save_button_pressed():
 	question_chances.deselect_all()
 	popup_dialog.hide()
 
+
 func _selected_chance_uuids():
 	if question_chances.is_anything_selected():
 		var selected_chances = []
@@ -120,18 +127,21 @@ func _selected_chance_uuids():
 	else:
 		return []
 
+
 func _select_chance_by_uuids(chance_uuids):
 	for chance_uuid in chance_uuids:
 		for i in range(question_chances.get_item_count()):
 			if question_chances.get_item_metadata(i) == chance_uuid:
 				question_chances.select(i, false)
 			
-		
+
+
 func _save_questions():
 	var json_string = JSON.stringify(json_data, "\t")
 	var file = FileAccess.open("res://question_data.json", FileAccess.WRITE)
 	file.store_string(json_string)
 	file.close()
+
 
 func _load_questions():
 	var file = FileAccess.open("res://question_data.json", FileAccess.READ)
@@ -142,6 +152,7 @@ func _load_questions():
 	questions_container.clear()
 	for question in json_data:
 		questions_container.add_item(question["name"])
+
 
 func _load_chances():
 	var file = FileAccess.open("res://chance_data.json", FileAccess.READ)

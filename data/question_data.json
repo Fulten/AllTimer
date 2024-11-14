@@ -1,41 +1,93 @@
 [
 	{
 		"chances": [
-			"9b458853-b268-4ada-9bb5-d0225755f2cf",
-			"108295c1-6978-44fa-a082-53d4da30fe4c"
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37"
 		],
-		"correct": "a",
-		"explainer": "stuff",
-		"name": "this",
-		"question": "is ",
+		"correct": "R. Kelly",
+		"explainer": "R. Kelly has had some practice giving golden showers as the gaurd did with Raiden in Metal Gear Soild 2",
+		"name": "That Kojima...",
+		"question": "With the new Metal Gear Solid movie in production, I've been thinking about what bizarre stuff might be. Hideo Kojima has always been known for his weird sense of humor and one particularly gross sequence between a guard and Raiden while he shimmies along a railing in the big shell comes to mind. If the director of the new Metal Gear Solid movie wanted to reference this moment, what celebrity would be a good fit for the guard?",
 		"tags": [
-			"history",
-			"thing"
+			"Classic",
+			"Pop Culture"
 		],
 		"uuid": "d1a9b23f-3253-48a6-8d0b-027d71539c47",
 		"wrong": [
-			"test",
-			"of",
-			"chance"
+			"Gene Simmons",
+			"Louis C.K.",
+			"Will Smith"
 		],
 		"wrong_1": "",
 		"wrong_2": "",
 		"wrong_3": ""
 	},
 	{
-		"chances": [],
-		"correct": "correct",
-		"explainer": "dsadsadsdsa",
-		"name": "anotherone",
-		"question": "thius",
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
+		],
+		"correct": "\"I know now, without a doubt, Adam is Slugs\"",
+		"explainer": "In Bioshock, Adam is extracted from slugs",
+		"name": "Kingdom Shocks",
+		"question": "If Sora from Kingdom Hearts found himself in the Bioshock universe, what line might he say to Frank Fontaine during the final encounter about the body enhancing super plasmid juice, Adam?",
 		"tags": [
-			""
+			"Classic",
+			"RPG"
 		],
 		"uuid": "c18665cc-50c6-4330-b92a-a5e1debdde03",
 		"wrong": [
-			"stuff",
-			"thing",
-			"itis"
+			"\"I know now, without a doubt, Adam is Drugs\"",
+			"\"I know now, without a doubt, Adam is Light\"",
+			"\"I know now, without a doubt, Adam is Symmetry\""
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"9b458853-b268-4ada-9bb5-d0225755f2cf",
+			"16848d16-3133-4aa2-95ba-2457168d286f"
+		],
+		"correct": "70 power cells",
+		"explainer": "In Mario 64, you need 70 stars to fight Bowser for the final time",
+		"name": "Jak 64",
+		"question": "Jak and Daxter was heavily inspired by Mario 64, including down to collectable like orbs and power cells. If Jak was to fully embrace it's inspiration, how many power cells would you need to collect in the game to fight Gul and Maia?",
+		"tags": [
+			"Classic",
+			"Retro",
+			"Platformer"
+		],
+		"uuid": "4ebd6145-33a9-4609-b06a-da8dbe84d167",
+		"wrong": [
+			"120 power cells",
+			"90 power cells",
+			"80 power cells"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"9b458853-b268-4ada-9bb5-d0225755f2cf",
+			"108295c1-6978-44fa-a082-53d4da30fe4c",
+			"16848d16-3133-4aa2-95ba-2457168d286f"
+		],
+		"correct": "1, 2, 3, 2, 5, 3",
+		"explainer": "Final Fantasy 1, 4 and 6 were released as 1, 2 and 3 respectively in America. Final Fantasy 2,3 and 5 were not released in America originally",
+		"name": "The Final Confusion",
+		"question": "Final Fantasy has a plentiful number of sequels, but when it came to it's original releases, things got pretty messy in America. If we were to list of the first 6 final fantasies' using the American numbers where possible, what would the order be?",
+		"tags": [
+			"RPG",
+			"Retro",
+			"Game History"
+		],
+		"uuid": "b9cbed5e-dba2-4c24-ac8c-036e53d97a04",
+		"wrong": [
+			"1, 2, 3, 2, 5, 6",
+			"1, 2, 2, 4, 5, 3",
+			"1, 2, 2, 3, 4, 6"
 		],
 		"wrong_1": "",
 		"wrong_2": "",
@@ -43,18 +95,152 @@
 	},
 	{
 		"chances": [],
-		"correct": "correct",
-		"explainer": "stuffs",
-		"name": "Test",
-		"question": "Testing",
+		"correct": "Desmond Paul Henry",
+		"explainer": "Manifold Garden is heavily based on fractals, a concept of art Desmond Paul Henry is heavily into.",
+		"name": "Artistic Gamer",
+		"question": "Artists need a break sometimes too. Manifold Garden is a game comprised of beautiful infinite patterns and puzzles to connect them. Which of the following artists would likely binge this game late on a Friday Night to unwind?",
 		"tags": [
-			""
+			"History",
+			"Puzzle"
 		],
-		"uuid": "4ebd6145-33a9-4609-b06a-da8dbe84d167",
+		"uuid": "aabd48f1-7899-4018-8a23-9078c2764761",
 		"wrong": [
-			"not",
-			"nope",
-			"maybe"
+			"Vince Van Gogh",
+			"Pablo Picasso",
+			"Yayoi Kusama"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
+		],
+		"correct": "\"The Criminals of Prohibition\"",
+		"explainer": "In Shadow Hearts: From the New World you become fairly close friends with actual historical Al Capone",
+		"name": "Shadows over the Globe",
+		"question": "Shadows Hearts: From the New World follows in the footsteps of it's previous games by melding real figures with it's fictional setting one notable ally would like feature promentaly in a documentary with the following title.",
+		"tags": [
+			"RPG",
+			"History"
+		],
+		"uuid": "b443cea2-5fa6-47b5-bc6d-c3c83525024f",
+		"wrong": [
+			"\"Street Artists of the 1900s\"",
+			"\"King Tut\"",
+			"\"Mountains and their Mountaineers\""
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "Bioshock Infinite",
+		"explainer": "",
+		"name": "Bootleg Theatre",
+		"question": "The story of the last bootleg theatre was pretty odd. A guy saves a bird from a cage to get rid of some sort of a bunch of seeds he owes some guy. But the thing is, as the story goes on the guy finds out the bird might actually be his kid, and he might not actual owe a debt except to himself? Things got confusing as the bird started pecking holes to other dimensions and became a god bird after drowning me. What game was the bootleg play about?",
+		"tags": [
+			"Modern",
+			"Shooter"
+		],
+		"uuid": "6efc7101-ad9c-47b3-8a32-629ad5d58d0f",
+		"wrong": [
+			"Portal 2",
+			"Timespinner",
+			"God of War"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"9b458853-b268-4ada-9bb5-d0225755f2cf"
+		],
+		"correct": "Wart! Wart! Wart! Wart! Wart! Wart!",
+		"explainer": "",
+		"name": "It's a Flood!",
+		"question": "The Covenant elite from Halo has gained notoriety for it's strange utterance \"Wart!\". With that in mind, if an elite wanted to warn us what mission the flood would appear in in Halo 1 by the number of warts, how many warts would they wart?",
+		"tags": [
+			"Classic",
+			"Shooter"
+		],
+		"uuid": "db1919c7-fbba-4da5-a813-7f432753cdf4",
+		"wrong": [
+			"Wart! Wart!",
+			"Wart! Wart! Wart! Wart! Wart!",
+			"Wart! Wart! Wart!"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37"
+		],
+		"correct": "\"Stamp Stamp Stamp the dough into the floor!\"",
+		"explainer": "Udon noods are traditional made but wrapping",
+		"name": "Cooking with Sass",
+		"question": "If Cheap Cheap the cooking chicken were to create a dish for Cooking Momma of some authentic udon noodles, what might be a phrase that Cheap would sing?",
+		"tags": [
+			"Classic",
+			"Pop Culture"
+		],
+		"uuid": "c03aa7b5-26ab-4ae1-a9d9-b7870467e348",
+		"wrong": [
+			"\"Slap Slap Slap the dough into the bowl!\"",
+			"\"Crack Crack Crack the egg into the bowl!\"",
+			"\"Pour Pour Pour the milk onto the dough!\""
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"b5c44831-a697-43f9-adb0-b61fb485affa"
+		],
+		"correct": "A Salad",
+		"explainer": "Lagombi is based heavily on a rabbit, who would likely order a salad given the heavy presence of natural greens",
+		"name": "Cute Critters",
+		"question": "Monster Hunter has a variety of terrifying beasties. Sometimes they are even cute and based on real world creatures. If the Lagombi had a diet similar to its real world counterpart, what would it order at McDonalds",
+		"tags": [
+			"Capcom",
+			"Adventure"
+		],
+		"uuid": "6791d385-dc39-4dff-9a6e-d23fd0d99a55",
+		"wrong": [
+			"Some Fries",
+			"A McFlurry",
+			"A McMuffin"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c",
+			"b5c44831-a697-43f9-adb0-b61fb485affa",
+			"16848d16-3133-4aa2-95ba-2457168d286f"
+		],
+		"correct": "Raccoons",
+		"explainer": "",
+		"name": "They Cut What?!",
+		"question": "The original Fallout was a beefy title with a lot of cut content. One piece of cut content was an unexpected extra race added to the pool based on an animal. What was that animal?",
+		"tags": [
+			"Retro",
+			"RPG"
+		],
+		"uuid": "183f96a2-a5a0-4ddb-8b5a-d4a8aee0c6ca",
+		"wrong": [
+			"Possums",
+			"Rats",
+			"Moles"
 		],
 		"wrong_1": "",
 		"wrong_2": "",

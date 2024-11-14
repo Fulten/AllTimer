@@ -1,16 +1,51 @@
 [
 	{
-		"correct": true,
-		"description": "this is a test of our chances",
-		"name": "A new Chace",
+		"correct": false,
+		"description": "Player who got the most math based question wrong",
+		"name": "Bad at Math",
 		"type": "QUESTION",
 		"uuid": "9b458853-b268-4ada-9bb5-d0225755f2cf"
 	},
 	{
-		"correct": false,
-		"description": "this is it!",
-		"name": "Additional test of our chances",
+		"correct": true,
+		"description": "Got the most question about RPGs Correct",
+		"name": "RPG Nerd",
 		"type": "QUESTION",
 		"uuid": "108295c1-6978-44fa-a082-53d4da30fe4c"
+	},
+	{
+		"correct": true,
+		"description": "Answer the most question right about pop culture",
+		"name": "Pop Culture Wiz",
+		"type": "QUESTION",
+		"uuid": "45500936-fc97-4174-832f-c250cdf4e49b"
+	},
+	{
+		"correct": false,
+		"description": "Answered the least questions correctly about pop culture",
+		"name": "Under a rock",
+		"type": "QUESTION",
+		"uuid": "8c71f458-bf68-48b9-94ae-dab8c9538a37"
+	},
+	{
+		"correct": false,
+		"description": "Longest Correct answer(place holder)",
+		"name": "Locked In",
+		"type": "QUESTION",
+		"uuid": "7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
+	},
+	{
+		"correct": true,
+		"description": "Most questions right about animals, anthro or otherwise",
+		"name": "Furry",
+		"type": "QUESTION",
+		"uuid": "b5c44831-a697-43f9-adb0-b61fb485affa"
+	},
+	{
+		"correct": true,
+		"description": "Answered the most question correctly about retro games",
+		"name": "Old School Kool",
+		"type": "QUESTION",
+		"uuid": "16848d16-3133-4aa2-95ba-2457168d286f"
 	}
 ]

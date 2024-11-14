@@ -103,6 +103,7 @@ wait_time = 30.0
 layout_mode = 2
 text = "Question_Body"
 label_settings = SubResource("LabelSettings_3cui3")
+autowrap_mode = 3
 
 [node name="spacer - leave blank" type="Label" parent="session_organizer"]
 layout_mode = 2
@@ -171,6 +172,7 @@ text = "answer_one"
 label_settings = SubResource("LabelSettings_7sn0p")
 
 [node name="post_question" type="Label" parent="."]
+visible = false
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -205,6 +207,7 @@ layout_mode = 2
 texture = ExtResource("10_l37jf")
 
 [node name="player_case" type="VBoxContainer" parent="players_region"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 15
 
@@ -244,6 +247,7 @@ layout_mode = 2
 texture = ExtResource("10_l37jf")
 
 [node name="player_case2" type="VBoxContainer" parent="players_region"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 15
 
@@ -282,6 +286,7 @@ layout_mode = 2
 texture = ExtResource("10_l37jf")
 
 [node name="player_case3" type="VBoxContainer" parent="players_region"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 15
 
@@ -320,6 +325,7 @@ layout_mode = 2
 texture = ExtResource("10_l37jf")
 
 [node name="player_case4" type="VBoxContainer" parent="players_region"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 15
 

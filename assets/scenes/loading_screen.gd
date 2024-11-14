@@ -61,7 +61,7 @@ func _next_question_store_chances(question_index):
 		if !chances_set.has(chance):
 			chances_set[chance] = [question_index]
 		else:
-			chances_set[chance].append[question_index]
+			chances_set[chance].append(question_index)
 	return next_question
 
 func _clean_chance_set_and_master():

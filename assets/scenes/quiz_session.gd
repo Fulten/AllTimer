@@ -16,10 +16,11 @@ extends Control
 	$players_region/player_case2/status_row/score,
 	$players_region/player_case3/status_row/score,
 	$players_region/player_case4/status_row/score]
-var timer = 1
+var timer = 30.0
 var current_index = 0
 var correct_answer = 0
 var loaded = false
+var players_answered = 0
 var player_guess = [-1,-1,-1,-1]
 var player_guess_time = [-1,-1,-1,-1]
 var player_correctness = [false,false,false,false]
@@ -35,10 +36,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	_load_question_refresh_scores()
+	_update_timer(delta)
 	_handle_end_question()
+	_load_question_refresh_scores()
 	pass
 
+func _update_timer(delta):
+	if players_answered >= GameState.PlayerCount:
+		timer = 0
+	else:
+		timer -= delta
 
 func _handle_end_question():
 	if timer <= 0:
@@ -80,30 +87,36 @@ func _next_question():
 			else:
 				GameState._increase_score(0,-100)
 		GameState._add_chance_hits(current_index,player_correctness)
-		timer = 1
+		timer = 30.0
+		_reset_guesses()
 		loaded = false
 	else:
 		get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
 
 func _reset_guesses():
+	players_answered = 0
 	for i in range(GameState.PlayerCount):
 		player_guess[i] = -1
 		player_guess_time[i] = -1
 
 func _input(event):
 	if loaded:
-		if event.is_action_pressed("next_question"):1
+		if event.is_action_pressed("next_question"):
 			timer = 0
-		if timer > 0:
+		if timer > 0 && player_guess[0] < 0:
 			if event.is_action_pressed("answer_1"):
 				player_guess[0] = 0
-				player_guess_time[0] = timer1
+				player_guess_time[0] = timer
+				players_answered += 1
 			elif event.is_action_pressed("answer_2"):
 				player_guess[0] = 1
 				player_guess_time[0] = timer
+				players_answered += 1
 			elif event.is_action_pressed("answer_3"):
 				player_guess[0] = 2
 				player_guess_time[0] = timer
+				players_answered += 1
 			elif event.is_action_pressed("answer_4"):
 				player_guess[0] = 3
 				player_guess_time[0] = timer
+				players_answered += 1

@@ -51,15 +51,17 @@ func _prepare_quiz_questions(quiz_size, excluded_tags):
 	for i in range(quiz_size):
 		if master_question_data.size() == 0:
 			break
-		GameState.CurrentQuizQuestions.append(_next_question_store_chances())
+		GameState.CurrentQuizQuestions.append(_next_question_store_chances(i))
 		progress_bar.value += progress_increment
 	_clean_master_questions()
 
-func _next_question_store_chances():
+func _next_question_store_chances(question_index):
 	var next_question = master_question_data.pop_at(randi() % master_question_data.size())
 	for chance in next_question["chances"]:
 		if !chances_set.has(chance):
-			chances_set[chance] = true
+			chances_set[chance] = [question_index]
+		else:
+			chances_set[chance].append[question_index]
 	return next_question
 
 func _clean_chance_set_and_master():
@@ -86,10 +88,9 @@ func _prepare_quiz_chances(chance_count):
 
 func _next_chance():
 	var next_chance = chances_set.keys()[randi() % chances_set.keys().size()]
-	chances_set.erase(next_chance)
 	var description = ""
 	for chance in master_chances_data:
-		if chance["name"] == next_chance:
-			description = chance["description"]
-			break
-	GameState._add_chance(next_chance, description)
+		if chance["uuid"] == next_chance:
+			GameState._add_chance(chance["name"], chance["description"], chance["type"], chance["correct"], chances_set[next_chance])
+			chances_set.erase(next_chance)
+			return

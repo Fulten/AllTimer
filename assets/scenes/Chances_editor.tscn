@@ -59,6 +59,19 @@ focus_next = NodePath("../SaveButton")
 focus_previous = NodePath("../Name")
 placeholder_text = "enter description here"
 
+[node name="type" type="LineEdit" parent="Popup"]
+custom_minimum_size = Vector2(800, 50)
+offset_top = 200.0
+offset_right = 67.0625
+offset_bottom = 231.0
+editable = false
+
+[node name="correct" type="CheckButton" parent="Popup"]
+custom_minimum_size = Vector2(400, 50)
+offset_top = 250.0
+offset_right = 800.0
+offset_bottom = 300.0
+
 [node name="SaveButton" type="Button" parent="Popup"]
 custom_minimum_size = Vector2(400, 50)
 anchors_preset = 7
@@ -75,5 +88,6 @@ text = "Save
 "
 
 [node name="score" type="Label" parent="."]
+layout_mode = 0
 theme_override_font_sizes/font_size = 26
 text = "0"

@@ -16,9 +16,13 @@ extends Control
 	$players_region/player_case2/status_row/score,
 	$players_region/player_case3/status_row/score,
 	$players_region/player_case4/status_row/score]
+var timer = 1
 var current_index = 0
 var correct_answer = 0
 var loaded = false
+var player_guess = [-1,-1,-1,-1]
+var player_guess_time = [-1,-1,-1,-1]
+var player_correctness = [false,false,false,false]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,7 +36,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	_load_question_refresh_scores()
+	_handle_end_question()
 	pass
+
+
+func _handle_end_question():
+	if timer <= 0:
+		_determine_player_correctness()
+		#just end quesiton immediately for now
+		_next_question()
 
 func _load_question_refresh_scores():
 	if !loaded:
@@ -54,16 +66,44 @@ func _randomize_answers_track_correct(current_question):
 	answers[available_indexes.pop_at(randi() % available_indexes.size())].text = current_question["wrong"][1]
 	answers[available_indexes.pop_at(randi() % available_indexes.size())].text = current_question["wrong"][2]
 	
+func _determine_player_correctness():
+	for i in range(GameState.PlayerCount):
+		player_correctness[i] = player_guess[i] == correct_answer
+
 func _next_question():
 	# play animations?
 	current_index += 1
 	if current_index < GameState.CurrentQuizQuestions.size():
-		GameState._increase_score(0,100)
+		for i in range(GameState.PlayerCount):
+			if player_correctness[i]:
+				GameState._increase_score(0,100)
+			else:
+				GameState._increase_score(0,-100)
+		GameState._add_chance_hits(current_index,player_correctness)
+		timer = 1
 		loaded = false
 	else:
 		get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
-	
+
+func _reset_guesses():
+	for i in range(GameState.PlayerCount):
+		player_guess[i] = -1
+		player_guess_time[i] = -1
+
 func _input(event):
-	if event.is_action_pressed("next_question"):
-		_next_question()
-	
+	if loaded:
+		if event.is_action_pressed("next_question"):1
+			timer = 0
+		if timer > 0:
+			if event.is_action_pressed("answer_1"):
+				player_guess[0] = 0
+				player_guess_time[0] = timer1
+			elif event.is_action_pressed("answer_2"):
+				player_guess[0] = 1
+				player_guess_time[0] = timer
+			elif event.is_action_pressed("answer_3"):
+				player_guess[0] = 2
+				player_guess_time[0] = timer
+			elif event.is_action_pressed("answer_4"):
+				player_guess[0] = 3
+				player_guess_time[0] = timer

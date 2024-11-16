@@ -9,7 +9,6 @@ var master_chances_data = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	GameState._set_name(0,"Test Player") 
 	progress_bar.value = 0
 	_prepare_quiz_questions(10, GameState.TagsToExclude)
 	progress_bar.value = 50

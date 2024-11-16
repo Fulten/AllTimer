@@ -27,10 +27,7 @@ var current_index = 0
 var correct_answer = 0
 var loaded = false
 var players_answered = 0
-var player_guess = [-1,-1,-1,-1]
-var player_guess_time = [-1,-1,-1,-1]
-var player_correctness = [false,false,false,false]
-
+var player_input = "p%s_answer_%s"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	current_index = 0
@@ -56,7 +53,8 @@ func _update_timer(delta):
 
 func _handle_end_question():
 	if timer <= 0:
-		_determine_player_correctness()
+		GameState._player_correctness(correct_answer,1000)
+		GameState._add_chance_hits(current_index)
 		#just end quesiton immediately for now
 		_next_question()
 
@@ -79,51 +77,33 @@ func _randomize_answers_track_correct(current_question):
 	answers[available_indexes.pop_at(randi() % available_indexes.size())].text = current_question["wrong"][0]
 	answers[available_indexes.pop_at(randi() % available_indexes.size())].text = current_question["wrong"][1]
 	answers[available_indexes.pop_at(randi() % available_indexes.size())].text = current_question["wrong"][2]
-	
-func _determine_player_correctness():
-	for i in range(GameState.PlayerCount):
-		player_correctness[i] = player_guess[i] == correct_answer
 
 func _next_question():
 	# play animations?
 	current_index += 1
 	if current_index < GameState.CurrentQuizQuestions.size():
-		for i in range(GameState.PlayerCount):
-			if player_correctness[i]:
-				GameState._increase_score(0,100)
-			else:
-				GameState._increase_score(0,-100)
-		GameState._add_chance_hits(current_index,player_correctness)
 		timer = 30.0
-		_reset_guesses()
+		post_timer = 10.0
+		players_answered = 0
+		GameState._reset_guesses()
 		loaded = false
 	else:
 		get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
 
-func _reset_guesses():
-	players_answered = 0
-	for i in range(GameState.PlayerCount):
-		player_guess[i] = -1
-		player_guess_time[i] = -1
+func _check_player_input_record_guess(player_index,event):
+	for i in range(4):
+		if event.is_action_pressed(player_input % [player_index,i]):
+			GameState._player_guess(player_index,i,timer)
+			players_answered += 1
+			return true
+	return false
 
 func _input(event):
 	if loaded:
 		if event.is_action_pressed("next_question"):
 			timer = 0
-		if timer > 0 && player_guess[0] < 0:
-			if event.is_action_pressed("answer_1"):
-				player_guess[0] = 0
-				player_guess_time[0] = timer
-				players_answered += 1
-			elif event.is_action_pressed("answer_2"):
-				player_guess[0] = 1
-				player_guess_time[0] = timer
-				players_answered += 1
-			elif event.is_action_pressed("answer_3"):
-				player_guess[0] = 2
-				player_guess_time[0] = timer
-				players_answered += 1
-			elif event.is_action_pressed("answer_4"):
-				player_guess[0] = 3
-				player_guess_time[0] = timer
-				players_answered += 1
+		if timer > 0:
+			for i in range(4):
+				if !GameState._player_has_guessed(i):
+					if _check_player_input_record_guess(i,event):
+						break

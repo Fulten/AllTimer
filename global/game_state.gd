@@ -1,19 +1,31 @@
 extends Node
 
 var Players = [{
-	"name": "",
+	"name": "Cool Guy",
+	"guess": -1,
+	"guess_time": 0,
+	"correctness": false,
 	"score": 0
 },
 {
-	"name": "",
+	"name": "The Other One",
+	"guess": -1,
+	"guess_time": 0,
+	"correctness": false,
 	"score": 0
 },
 {
-	"name": "",
+	"name": "Sherk",
+	"guess": -1,
+	"guess_time": 0,
+	"correctness": false,
 	"score": 0
 },
 {
-	"name": "",
+	"name": "Gabe Newell",
+	"guess": -1,
+	"guess_time": 0,
+	"correctness": false,
 	"score": 0
 }]
 var PlayerCount = 1
@@ -45,16 +57,38 @@ func _player_name(player_index):
 func _player_score(player_index):
 	return Players[player_index]["score"]
 
-func _increase_score(player_index,score):
-	Players[player_index]["score"] += score
+func _adjust_score(player_index,score):
+	Players[player_index]["score"] += roundf(score * Players[player_index]["guess_time"]/30)
 
-func _add_chance_hits(question_index,player_correctness: Array):
+func _player_has_guessed(player_index):
+	return Players[player_index]["guess"] >= 0
+
+func _player_guess(player_index,guess,current_time):
+	Players[player_index]["guess"] = guess
+	Players[player_index]["guess_time"] = current_time
+	
+func _reset_guesses():
+	for i in range(PlayerCount):
+		Players[i]["guess"] = -1
+		Players[i]["guess_time"] = 0
+
+func _player_correctness(correct_answer,score):
+	for i in PlayerCount:
+		Players[i]["correctness"] = Players[i]["guess"] == correct_answer
+		if Players[i]["correctness"]:
+			_adjust_score(i,score)
+		else:
+			_adjust_score(i,-1*score)
+
+func _add_chance_hits(question_index):
 	for chance in CurrentChances:
 		if chance["associated_questions"].has(question_index):
 			for i in range(PlayerCount):
-				if player_correctness[i] == chance["correct"]:
+				if Players[i]["correctness"] == chance["correct"]:
 					chance["player_hits"][i] += 1
 	
 func _reset_players():
 	for i in range(4):
 		Players[i]["score"] = 0
+		Players[i]["guess"] = -1
+		Players[i]["guess_time"] = 0

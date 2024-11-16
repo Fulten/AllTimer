@@ -245,5 +245,304 @@
 		"wrong_1": "",
 		"wrong_2": "",
 		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "The Red Ring",
+		"explainer": "Yes - Early models of the 360 sometimes encountered hardware issues that would prevent the console from even turning on. When the console experienced a problem that required service from Microsoft, it would light up three of the four arc segments that were arranged in a ring around the power button. Mirroring the Windows “Blue Screen of Death,” Xbox gamers would come to refer to this hardware failure as the “Red Ring of Death.”",
+		"name": "Do Us Part",
+		"question": "There are many heartwarming tales of couples who were first brought together by the RNG of in-game matchmaking. Suppose you met your other half in the XBOX 360 era and were now planning your very gamer-themed wedding. What kind of ring would you most NOT want to be presented with?",
+		"tags": [
+			"Game History",
+			"Microsoft"
+		],
+		"uuid": "7f65ae6e-29a7-4e4c-8f8e-84da9a26276f",
+		"wrong": [
+			"The Calamity Ring",
+			"The Mood Ring",
+			"The Halo Ring"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Destiny",
+		"explainer": "Destiny and Destiny 2 both had notorious and well documented terrible dev cycle",
+		"name": "Toxic Relationships",
+		"question": "Game dev cycles can feel a bit like messy marriages when things don’t go as planned like duke nukem forever. What game franchise managed to have 2 messy marriages?",
+		"tags": [
+			"Shooter",
+			"Game History"
+		],
+		"uuid": "793a734e-7fda-4019-91cf-dc1f03775942",
+		"wrong": [
+			"Duke Nukem",
+			"Devil May Cry",
+			"No Man’s Sky"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Yellow",
+		"explainer": "Playstation 3's had a common issue where, after a period of time, they would stop working and flash a horrigying serious of yellow flashes indicating a hardware failure",
+		"name": "Moody Lights",
+		"question": "Mood lighting is popular among gamers, but what color lighting might be a bad pick for a PS3 fan? ",
+		"tags": [
+			"Game History",
+			"Sony"
+		],
+		"uuid": "3d5a4da2-a911-4e0e-831b-8d938b795d5e",
+		"wrong": [
+			"Red",
+			"Blue",
+			"White"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "Groovy, Wicked and Bitchin'",
+		"explainer": "In Rising Zan, Groovy, Wicked and Bitchin' are actual score ranks you can get at the end of levels",
+		"name": "Samurai Snowboarders",
+		"question": "UEP systems, creator of Cool Boarder’s, also created a non-snow boarding game “Rising Zan: The Samurai Gunman”. If they were to create a spin-off game before their closure called “Sliding Zan: The Samurai Boarder”, what would might 3 of the final score ranks be called?",
+		"tags": [
+			"Sports",
+			"Adventure",
+			"Sony"
+		],
+		"uuid": "8ac6dd37-bdde-44fa-9c20-ea26356b9c0b",
+		"wrong": [
+			"Crazy, Badass, Awesome",
+			"Super, Super Sick, Super Stylish Sick",
+			"Killer, Radical, Spectacular"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "Mira, the Dog",
+		"explainer": "The name of the dog from the secret dog ending who controls the town of Silent Hill is Mira",
+		"name": "Endless Nightmares",
+		"question": "Whose game is James Sutherland actually playing in Silent Hill 2?",
+		"tags": [
+			"Horror",
+			"Sony"
+		],
+		"uuid": "3a501dcb-5b4b-47f9-b387-b536e272173e",
+		"wrong": [
+			"Mary, the Dog",
+			"Mena, the Cat",
+			"John, the Cat"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
+		],
+		"correct": "Kingdom Hearts: Birth By Sleep",
+		"explainer": "In Kingdom Hearts: Birth By Sleep the main antagonist is played by Lenoard Nimoa and the teacher of the main characters is played by Mark Hamill",
+		"name": "Star Trek Wars",
+		"question": "If we treat the voice actors as their actor counter parts, in which game was Spock and Luke Skywalker enemies?",
+		"tags": [
+			"RPG"
+		],
+		"uuid": "4b028429-0f2a-484f-90e6-4a15037180a8",
+		"wrong": [
+			"Final Fantasy XII",
+			"Star Wars: Knights of the Old Republic",
+			"Star Trek: Fleet Command"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
+		],
+		"correct": "Bahamut would destroy the entire world, again.",
+		"explainer": "When the original servers for the first version of FFXIV went down, the in game reason was Bahmut breaking out of a moon prison and destroying Eorzea",
+		"name": "A Realm Reborn.... Again?",
+		"question": "Final Fantasy XIV’s expansion Dawntrail is sometimes referred to as 'A Realm Reborn, again”. If Dawntrail really wanted to live up to that moniker, how would the expansion need to start?",
+		"tags": [
+			"MMO",
+			"Square Enix"
+		],
+		"uuid": "4966082d-abfa-4694-adfb-59d9f0dbd2b0",
+		"wrong": [
+			"The Warrior of Light would destroy the Crystals, again.",
+			"Y’shtola would save the world, again.",
+			"Alexander would appears to protect the party, again."
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "You mad bro?",
+		"explainer": "",
+		"name": "Leaky Valves",
+		"question": "With the recent leaks surrounding the Valve v Wolfire lawsuit, what was the dude bro forum level shit posting Scott Lynch, COO of Valve at the time, sent to Tim Sweeney over his frustration over Valve’s business practices?",
+		"tags": [
+			"Game History",
+			"Valve",
+			"Epic"
+		],
+		"uuid": "17659785-e544-42e4-83d3-3f0acaf3e353",
+		"wrong": [
+			"Git Good",
+			"Triggered!",
+			"Who asked?"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"43944b2e-9790-4fba-a257-004591ba27a2",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "After a lot of soul searching, we are really sorry about the Switch joy-con drift ",
+		"explainer": "Nintendo formally apologized for the infamous joy-con drift found in the switch controls in 2020",
+		"name": "Wii would like to subscribe",
+		"question": "If Nintendo were a media influencer, how might their apology have gone in 2020?",
+		"tags": [
+			"Nintendo",
+			"Game History"
+		],
+		"uuid": "61ec94dd-e177-4ee9-9cdc-3c32ccce44e4",
+		"wrong": [
+			"Done some reflecting, we should have not sued those children for the switch mods",
+			"When we thought about it, we made a real mistake deleting the wii shop",
+			"We’re so sorry the Switch is not as powerful as the PS5"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "In both games you find a wrench to defend yourself",
+		"explainer": "",
+		"name": "Shocking Resemblance",
+		"question": "If bioshock is a spiritual successor to System Shock 2, down to a variety of matching details between the games. What event in particular happens in both games near the beginning? ",
+		"tags": [
+			"Immersive Sim"
+		],
+		"uuid": "16b70868-c37b-4c91-8aaa-81996c669f44",
+		"wrong": [
+			"In both games you find Plasmids",
+			"In both games you wake up in a space station",
+			"In both games you choose a life path"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "75",
+		"explainer": "In Nevada's Regulation 14, the require win-rate is 75% of all revenue",
+		"name": "State Approved Gacha",
+		"question": "Gacha games have become both wildly popular and controversial for their gambling style pull system. If Genshin Impact were to follow Nevada’s Regulation 14 (specifically the required percentage on a minimum payout and a 5 star is a successful payout), how many 5 stars should you pull in every 100 pulls?",
+		"tags": [
+			"Hard",
+			"Law"
+		],
+		"uuid": "45dd128f-9bce-483a-b88c-8e80896dc1db",
+		"wrong": [
+			"50",
+			"25",
+			"100"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "A Mix Table",
+		"explainer": "DJ Hero is a game you play with a Mix Table peripheral",
+		"name": "A... What Hero?",
+		"question": "Guitar Hero became a household name in the mid to late 2000s and, of course, Activision began to over saturate the market with sequels and spinoffs. This included a game dedicated to a completely different instrument. What was that instrument?",
+		"tags": [
+			"Rhythm"
+		],
+		"uuid": "226e9514-d959-4035-9672-94d560143732",
+		"wrong": [
+			"A Synthesizer",
+			"A Didgeridoo",
+			"A Piano"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37"
+		],
+		"correct": "To be on American Idol",
+		"explainer": "",
+		"name": "Sing it",
+		"question": "Harmonix’s lesser remembered singing series Karaoke Revolution eventually allowed fans to live out a particular fantasy. What was it?",
+		"tags": [
+			"Rhythm",
+			"Popculture"
+		],
+		"uuid": "947acbb3-edfb-4533-b0b1-fc4a09e6a02a",
+		"wrong": [
+			"To be on The Voice",
+			"To be on Britain’s Got Talent",
+			"To be on America’s Got Talent"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "Ballos",
+		"explainer": "",
+		"name": "Subterranean Story",
+		"question": "Sans is one of the more popular characters from Undertale. He also shares a similar eye trait and secret boss status as which character from Cave Story?",
+		"tags": [
+			"Indie"
+		],
+		"uuid": "2704a8c2-c9fe-4503-a667-f8610e7c4308",
+		"wrong": [
+			"Balrog",
+			"Misery",
+			"Doctor"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
 	}
 ]

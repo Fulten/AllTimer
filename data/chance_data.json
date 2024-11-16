@@ -47,5 +47,33 @@
 		"name": "Old School Kool",
 		"type": "QUESTION",
 		"uuid": "16848d16-3133-4aa2-95ba-2457168d286f"
+	},
+	{
+		"correct": true,
+		"description": "Answer the most Microsoft questions correctly",
+		"name": "Microsoft Fanboy",
+		"type": "QUESTION",
+		"uuid": "b9871032-d7d5-4b8a-898b-07708f349fb8"
+	},
+	{
+		"correct": true,
+		"description": "Answer the most Sony questions correctly",
+		"name": "Sony Fanboy",
+		"type": "QUESTION",
+		"uuid": "c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+	},
+	{
+		"correct": true,
+		"description": "Answer the most Nintendo questions correctly",
+		"name": "Nintendo Nerd",
+		"type": "QUESTION",
+		"uuid": "43944b2e-9790-4fba-a257-004591ba27a2"
+	},
+	{
+		"correct": true,
+		"description": "Answer the most History questions correctly",
+		"name": "Historian",
+		"type": "QUESTION",
+		"uuid": "e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
 	}
 ]

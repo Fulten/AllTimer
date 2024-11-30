@@ -7,6 +7,9 @@ var Players = [{
 	"correctness": false,
 	"score": 0
 }]
+var PlayerIdToIndex = {
+	"host" = 0,
+}
 var PlayerCount = 1
 
 var CurrentQuizQuestions = [] #The questions to be used in the current quiz
@@ -35,7 +38,6 @@ func _remove_online_player(player_id):
 
 func _add_online_player(player_id,player_name):
 	if PlayerCount < 4:
-		PlayerCount += 1
 		Players.append({
 			"name": player_name,
 			"online_id": player_id,
@@ -44,11 +46,13 @@ func _add_online_player(player_id,player_name):
 			"correctness": false,
 			"score": 0
 		})
+		PlayerIdToIndex[player_id] = PlayerCount;
+		PlayerCount += 1
 		return PlayerCount - 1
 	return -1
 	
-func _set_name(player_index,name):
-	Players[player_index]["name"] = name
+func _set_name(player_id,name):
+	Players[PlayerIdToIndex[player_id]]["name"] = name
 
 func _player_name(player_index):
 	return Players[player_index]["name"]

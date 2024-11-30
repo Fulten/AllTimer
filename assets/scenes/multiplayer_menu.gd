@@ -2,31 +2,31 @@ extends Control
 
 const PORT: int = 12345  # The port for hosting and connecting
 
-var is_hosting: bool = false
+var peer;
 
 func _ready() -> void:
 	$VBoxContainer/Host.pressed.connect(self._on_host_button_pressed)
 	$VBoxContainer/Connect.pressed.connect(self._on_connect_button_pressed)
-	$IPInput.text = "127.0.0.1"  # Default to localhost
+	$VBoxContainer/IPAddress.text = "127.0.0.1"  # Default to localhost
 	$StatusLabel.text = "Status: Idle"
 
 
 func _on_host_button_pressed() -> void:
 	var peer = ENetMultiplayerPeer.new()
-	var result = peer.listen(PORT, 32)  # Set up the server with a max of 32 connections
+	var result = peer.listen(PORT, 4)  # Set up the server with a max of 4 connections
 	if result == OK:
-		multiplayer.multiplayer_peer = peer
+		multiplayer.set_muliplayer_peer(peer)
 		multiplayer.peer_connected.connect(_add_player)
+		multiplayer.peer_disconnected.connect(_remove_player)
 		_add_player()
-		is_hosting = true
 		$StatusLabel.text = "Hosting on port %d..." % PORT
 	else:
 		$StatusLabel.text = "Failed to host. Error: %s" % result
 
 
 func _on_connect_button_pressed() -> void:
-	var ip = $IPInput.text
-	var peer = ENetMultiplayerPeer.new()
+	var ip = $VBoxContainer/IPAddress.text
+	peer = ENetMultiplayerPeer.new()
 	var result = peer.connect_to_host(ip, PORT)
 	if result == OK:
 		multiplayer.peer = peer

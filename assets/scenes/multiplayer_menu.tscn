@@ -21,6 +21,9 @@ offset_right = 200.0
 offset_bottom = 404.0
 grow_horizontal = 2
 
+[node name="IPAddress" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+
 [node name="Host" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(400, 200)
 layout_mode = 2

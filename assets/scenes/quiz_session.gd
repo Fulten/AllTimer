@@ -2,6 +2,8 @@ extends Control
 
 @onready var questions_name = $session_organizer/question_header/question_name
 @onready var questions_index = $session_organizer/question_header/question_index
+@onready var countdown_timer = $session_organizer/question_header/Countdown
+@onready var countdown_text = $session_organizer/CountdownLabel
 @onready var questions_body = $session_organizer/question_body
 @onready var post_question = $post_question
 @onready var players = [$players_region/player_case,
@@ -30,6 +32,8 @@ var players_answered = 0
 var player_input = "p%s_answer_%s"
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	countdown_timer.start()
+		
 	current_index = 0
 	GameState._reset_players()
 	for i in range(GameState.PlayerCount):
@@ -38,8 +42,14 @@ func _ready():
 		players[i].visible = true
 	pass
 
+func countdown_clock():
+	var time_left = countdown_timer.time_left
+	var minute = floor(time_left / 60)
+	var second = int(time_left) % 60
+	return [minute, second]
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	countdown_text.text = "%02d:%02d" % countdown_clock()
 	_update_timer(delta)
 	_handle_end_question()
 	_load_question_refresh_scores()

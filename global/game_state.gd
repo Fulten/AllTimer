@@ -26,26 +26,6 @@ func _add_chance(chance_name,description,type,value,associated_questions: Array)
 		"associated_questions": associated_questions,
 		"player_hits": [0,0,0,0]
 	})
-
-func _remove_online_player(player_id):
-	for i in range(PlayerCount):
-		if Players[i]["online_id"] == player_id:
-			Players.remove_at(i)
-			return
-
-func _add_online_player(player_id,player_name):
-	if PlayerCount < 4:
-		PlayerCount += 1
-		Players.append({
-			"name": player_name,
-			"online_id": player_id,
-			"guess": -1,
-			"guess_time": 0,
-			"correctness": false,
-			"score": 0
-		})
-		return PlayerCount - 1
-	return -1
 	
 func _set_name(player_index,name):
 	Players[player_index]["name"] = name

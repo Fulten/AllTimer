@@ -113,7 +113,7 @@ func _input(event):
 		if event.is_action_pressed("next_question"):
 			timer = 0
 		if timer > 0:
-			for i in range(4):
+			for i in range(GameState.PlayerCount):
 				if !GameState._player_has_guessed(i):
 					if _check_player_input_record_guess(i,event):
 						break

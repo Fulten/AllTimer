@@ -23,17 +23,18 @@ extends Control
 	$players_region/player_case3/status_row/score,
 	$players_region/player_case4/status_row/score]
 var pre_timer = 10.0
-var timer = 30.0
 var post_timer = 10.0
 var current_index = 0
 var correct_answer = 0
 var loaded = false
 var players_answered = 0
 var player_input = "p%s_answer_%s"
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	countdown_timer.start()
-		
+	countdown_timer.start(30)
+	countdown_timer.timeout.connect(_handle_end_question)
 	current_index = 0
 	GameState._reset_players()
 	for i in range(GameState.PlayerCount):
@@ -43,30 +44,25 @@ func _ready():
 	pass
 
 func countdown_clock():
-	var time_left = countdown_timer.time_left
+	var time_left = countdown_timer.get_time_left()
 	var minute = floor(time_left / 60)
 	var second = int(time_left) % 60
 	return [minute, second]
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	countdown_text.text = "%02d:%02d" % countdown_clock()
-	_update_timer(delta)
-	_handle_end_question()
 	_load_question_refresh_scores()
 	pass
 
-func _update_timer(delta):
-	if players_answered >= GameState.PlayerCount:
-		timer = 0
-	else:
-		timer -= delta
 
 func _handle_end_question():
-	if timer <= 0:
-		GameState._player_correctness(correct_answer,1000)
-		GameState._add_chance_hits(current_index)
-		#just end quesiton immediately for now
-		_next_question()
+	GameState._player_correctness(correct_answer,1000)
+	GameState._add_chance_hits(current_index)
+	#just end quesiton immediately for now
+	_next_question()
+
 
 func _load_question_refresh_scores():
 	if !loaded:
@@ -80,6 +76,7 @@ func _load_question_refresh_scores():
 			player_scores[i].text = str(GameState._player_score(i))
 		loaded = true
 
+
 func _randomize_answers_track_correct(current_question):
 	var available_indexes = [0, 1, 2, 3]
 	correct_answer = available_indexes.pop_at(randi() % available_indexes.size())
@@ -88,31 +85,36 @@ func _randomize_answers_track_correct(current_question):
 	answers[available_indexes.pop_at(randi() % available_indexes.size())].text = current_question["wrong"][1]
 	answers[available_indexes.pop_at(randi() % available_indexes.size())].text = current_question["wrong"][2]
 
+
 func _next_question():
 	# play animations?
 	current_index += 1
 	if current_index < GameState.CurrentQuizQuestions.size():
-		timer = 30.0
 		post_timer = 10.0
 		players_answered = 0
 		GameState._reset_guesses()
 		loaded = false
+		countdown_timer.start(30)
 	else:
 		get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
+
 
 func _check_player_input_record_guess(player_index,event):
 	for i in range(4):
 		if event.is_action_pressed(player_input % [player_index,i]):
-			GameState._player_guess(player_index,i,timer)
+			GameState._player_guess(player_index,i,countdown_timer.get_time_left())
 			players_answered += 1
+			if players_answered >= GameState.PlayerCount:
+				_handle_end_question()
 			return true
 	return false
+
 
 func _input(event):
 	if loaded:
 		if event.is_action_pressed("next_question"):
-			timer = 0
-		if timer > 0:
+			_handle_end_question()
+		if !countdown_timer.is_stopped():
 			for i in range(GameState.PlayerCount):
 				if !GameState._player_has_guessed(i):
 					if _check_player_input_record_guess(i,event):

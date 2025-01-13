@@ -30,9 +30,13 @@ var loaded = false
 var players_answered = 0
 var player_input = "p%s_answer_%s"
 
+signal end_of_quiz
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	pass
+
+func _start_quiz():
 	countdown_timer.start(30)
 	countdown_timer.timeout.connect(_handle_end_question)
 	current_index = 0
@@ -96,7 +100,8 @@ func _next_question():
 		loaded = false
 		countdown_timer.start(30)
 	else:
-		get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
+		# get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn") send a signal instead
+		end_of_quiz.emit()
 
 
 func _check_player_input_record_guess(player_index,event):

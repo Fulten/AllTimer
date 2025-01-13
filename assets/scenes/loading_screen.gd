@@ -4,6 +4,12 @@ var master_question_data = []
 var chances_set = {}
 
 var master_chances_data = []
+
+var loaded = false
+
+var quiz_session_instance
+
+var quiz_session_scene = preload("res://assets/scenes/quiz_session.tscn")
 @onready var progress_bar = $progress_bar
 
 # Called when the node enters the scene tree for the first time.
@@ -18,8 +24,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if progress_bar.value == 100:
-		get_tree().change_scene_to_file("res://assets/scenes/quiz_session.tscn")
+	if !loaded && progress_bar.value == 100:
+		# get_tree().change_scene_to_file("res://assets/scenes/quiz_session.tscn")	
+		quiz_session_instance = quiz_session_scene.instantiate()
+		get_tree().root.add_child(quiz_session_instance)
+		quiz_session_instance.end_of_quiz.connect(_unload_quiz)
+		quiz_session_instance._start_quiz()
+		loaded = true
 	pass
 
 func _load_master_questions(excluded_tags):
@@ -93,3 +104,8 @@ func _next_chance():
 			GameState._add_chance(chance["name"], chance["description"], chance["type"], chance["correct"], chances_set[next_chance])
 			chances_set.erase(next_chance)
 			return
+
+func _unload_quiz():
+	get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
+	
+	return

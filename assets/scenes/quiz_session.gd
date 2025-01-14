@@ -102,6 +102,7 @@ func _next_question():
 	else:
 		# get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn") send a signal instead
 		end_of_quiz.emit()
+		queue_free()
 
 
 func _check_player_input_record_guess(player_index,event):

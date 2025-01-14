@@ -108,4 +108,4 @@ func _next_chance():
 func _unload_quiz():
 	get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
 	
-	return
+	pass

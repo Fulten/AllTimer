@@ -40,6 +40,7 @@ func _adjust_score(player_index,score):
 	Players[player_index]["score"] += roundf(score * Players[player_index]["guess_time"]/30)
 
 func _player_has_guessed(player_index):
+	
 	return Players[player_index]["guess"] >= 0
 
 func _player_guess(player_index,guess,current_time):

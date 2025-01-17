@@ -10,6 +10,9 @@ var loaded = false
 var quiz_session_instance
 
 var quiz_session_scene = preload("res://assets/scenes/quiz_session.tscn")
+var player_input_scene = preload("res://assets/scenes/player.tscn")
+
+var player_input_instances = []
 @onready var progress_bar = $progress_bar
 
 # Called when the node enters the scene tree for the first time.
@@ -29,10 +32,29 @@ func _process(delta):
 		quiz_session_instance = quiz_session_scene.instantiate()
 		get_tree().root.add_child(quiz_session_instance)
 		quiz_session_instance.end_of_quiz.connect(_unload_quiz)
+		
+		_instantiate_players()
+		_connect_players()
+		
 		quiz_session_instance._start_quiz()
 		loaded = true
 	pass
 
+func _instantiate_players():
+	for i in range(GameState.PlayerCount):
+		var player_instance = player_input_scene.instantiate()
+		player_instance._set_player(i)
+		get_tree().root.add_child(player_instance)
+		player_input_instances.append(player_instance)
+		pass
+	pass
+
+func _connect_players(): 
+	for i in range(GameState.PlayerCount):
+		player_input_instances[i].player_guess.connect(quiz_session_instance._player_input)
+		pass
+	pass
+	
 func _load_master_questions(excluded_tags):
 	var file = FileAccess.open("res://data/question_data.json", FileAccess.READ)
 	if file:
@@ -106,6 +128,8 @@ func _next_chance():
 			return
 
 func _unload_quiz():
+	for i in range(GameState.PlayerCount):
+		player_input_instances[i]._freePlayer()
+		pass
 	get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
-	
 	pass

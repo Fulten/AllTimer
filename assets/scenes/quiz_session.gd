@@ -115,8 +115,16 @@ func _check_player_input_record_guess(player_index,event):
 			return true
 	return false
 
+func _player_input(player_index, guess):
+	if !countdown_timer.is_stopped():
+		if !GameState._player_has_guessed(player_index):
+			GameState._player_guess(player_index, guess, countdown_timer.get_time_left())
+			players_answered += 1
+			if players_answered >= GameState.PlayerCount:
+				_handle_end_question()
+	pass
 
-func _input(event):
+func _input_old(event):
 	if loaded:
 		if event.is_action_pressed("next_question"):
 			_handle_end_question()

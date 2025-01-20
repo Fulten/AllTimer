@@ -6,6 +6,27 @@ var Players = [{
 	"guess_time": 0,
 	"correctness": false,
 	"score": 0
+},
+{
+	"name": "Day Man",
+	"guess": -1,
+	"guess_time": 0,
+	"correctness": false,
+	"score": 0
+},
+{
+	"name": "Thrakazar",
+	"guess": -1,
+	"guess_time": 0,
+	"correctness": false,
+	"score": 0
+},
+{
+	"name": "Stephen",
+	"guess": -1,
+	"guess_time": 0,
+	"correctness": false,
+	"score": 0
 }]
 var PlayerCount = 1
 

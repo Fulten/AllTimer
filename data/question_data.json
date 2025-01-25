@@ -544,5 +544,812 @@
 		"wrong_1": "",
 		"wrong_2": "",
 		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Iron Lung",
+		"explainer": "",
+		"name": "The Titan Incident",
+		"question": "What game saw a concerning increase in popularity after the OceanGate Titan Implosion incident in 2023?",
+		"tags": [
+			"Indie",
+			"History"
+		],
+		"uuid": "2f8a8eb1-dfe1-4b2e-af2a-5d6bc5474162",
+		"wrong": [
+			"Assassin’s Creed Black Flag",
+			"Uboat",
+			"Barotrauma"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Nothing, the first two citations are warnings",
+		"explainer": "",
+		"name": "Nuclear, Please",
+		"question": "If Stanislav Petrov had actual been in Arstotzka when he made his decision to avert nuclear disaster, what amount of money would he have been fined by the M.O.A. for ignoring the alarm? History, Indie",
+		"tags": [
+			"History",
+			"Indie"
+		],
+		"uuid": "13b875c0-4f28-417d-b8f6-84227face8ab",
+		"wrong": [
+			"3 credits",
+			"10 credits",
+			"5 credits"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "Investigate the signing of the Declaration of Independence to uncover the bloodline of a leader of a cult",
+		"explainer": "",
+		"name": "Wait, For Real?",
+		"question": "In the Black Watchmen 4, there are a variety of situations that require real world research and investigation to resolve, which of the following is not an example of an actual question you are asked to investigate?",
+		"tags": [
+			"Puzzle",
+			"Hard"
+		],
+		"uuid": "58397a3e-8723-4ded-af1c-89de79215319",
+		"wrong": [
+			"Investigate superstorms that occurred in Australia in 2009 that actually turned out to be occult activity to hide a ritual",
+			"Use Google maps to identify the only building in London whose rooftop can see Cleopatra’s Needle from one street away.",
+			"Investigate a woman’s credit card history to discover what their favorite sports team was through their bets on actual basketball games."
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "Resource Management",
+		"explainer": "",
+		"name": "I Prefer Eurogames...",
+		"question": "What board game genre does the Banished Vault likely fall under?",
+		"tags": [
+			"Tabletop",
+			"Indie"
+		],
+		"uuid": "5401897a-6cb6-4b08-bbed-a1c86c465494",
+		"wrong": [
+			"Ameritrash",
+			"Worker Placement",
+			"Roll and Write"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"b9871032-d7d5-4b8a-898b-07708f349fb8"
+		],
+		"correct": "Fire their crew out of the cannons",
+		"explainer": "",
+		"name": "Sea of Bones",
+		"question": "If Skull and Bones were to take some notes from the more popular Sea of Thieves, what might players be able to do?",
+		"tags": [
+			"Adventure",
+			"Microsoft",
+			"Ubisoft"
+		],
+		"uuid": "3c4a99d8-4c43-4936-bd84-2fa6879670e1",
+		"wrong": [
+			"Toss the anchor to the enemy ship",
+			"Haul a keg of grog onto an island",
+			"Fire a gattling cannon"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "They removed OtherOS from the ps3",
+		"explainer": "",
+		"name": "Revenge of the Nerds",
+		"question": "Why was Sony forced to pay millions of dollars to Linux nerds in 2016?",
+		"tags": [
+			"Sony",
+			"History"
+		],
+		"uuid": "c9cccba4-4969-40b1-85b3-a7215ce630a7",
+		"wrong": [
+			"PSP added linux support",
+			"PSVita remove Linux support",
+			"The PSVR stole linux source code"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Nuts",
+		"explainer": "Sony's add campaign in 2006 for the PSP involved a bizarre cartoon of a squirrel telling another they could play nuts outside",
+		"name": "Say What?",
+		"question": "What might a squirrel have asked you to play outside in 2006?",
+		"tags": [
+			"Sony",
+			"History"
+		],
+		"uuid": "45e67df6-3fe8-4909-b2b6-75fb78bdb1e8",
+		"wrong": [
+			"Trees",
+			"PSP",
+			"Leaves"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "An Ink blot",
+		"explainer": "Peter Dille when asked the purpose behind the strange baby commercial for the PS3 he said it was a sort of Roarschach test where it was up to the audience to see what they saw. Like an ink blot used in the tests ",
+		"name": "PS3 is a work of Art!",
+		"question": "If Sony of America’s VP Peter Dille were to use art to help explain the strange PS3 baby commercial, what might he show you?",
+		"tags": [
+			"History",
+			"Sony"
+		],
+		"uuid": "18fe28ad-737f-4aad-8be6-cbf4c36efec9",
+		"wrong": [
+			"A Sculpture",
+			"A Still Life",
+			"Some Horror Concept Art"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"b9871032-d7d5-4b8a-898b-07708f349fb8",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Do you guys not have Xbox 360s?",
+		"explainer": "When asked in an interview what players without internet would do with an Xbox one, he said the solution was the Xbox 360",
+		"name": "Out of Season",
+		"question": "If Don Mattrick had been asked if the Xbox One’s online requirement was an out of season april fools day joke and consequently booed, what might he have said in response?",
+		"tags": [
+			"Microsoft",
+			"Blizzard",
+			"History"
+		],
+		"uuid": "e969b7ea-3977-47f8-804d-fd3547747282",
+		"wrong": [
+			"Do you guys not have money?",
+			"Do you guys not have the Internet?",
+			"Do you guys not have phones?"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Nobunaga Oda",
+		"explainer": "",
+		"name": "He was a Demon?",
+		"question": "Onimusha actually tells an alternate history of the Sengoku period centered around the death of which notable feudal lord?",
+		"tags": [
+			"Capcom",
+			"History",
+			"Horror"
+		],
+		"uuid": "23e7ccfa-8968-4f01-b4ff-2891ec141a6f",
+		"wrong": [
+			"Date Tanemune",
+			"Nagao Tamekage",
+			"Asakura Toshikage"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "Herbalism",
+		"explainer": "Every Resident Evil protaganist has the ability to mix herbs to make medical powders",
+		"name": "Professional Evil",
+		"question": "In each Resident Evil game, the playable characters all seem to share on particular vocation. What is it? ",
+		"tags": [
+			"Capcom",
+			"Horror"
+		],
+		"uuid": "c31758ec-a1c0-4151-a9ad-63095f9cede2",
+		"wrong": [
+			"Psychology",
+			"Locksmithing",
+			"Cooking"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"43944b2e-9790-4fba-a257-004591ba27a2"
+		],
+		"correct": "Players are awarded additional victory points based on random criteria at the end",
+		"explainer": "This mechanic sounds very similar to the Bonus Stars from Mario Party",
+		"name": "Super Smash.... Party?",
+		"question": "If Super Smash Brother’s Ultimate announced a new mechanic inspired by their sister series Mario Party, what might that mechanic look like? ",
+		"tags": [
+			"Nintendo",
+			"Fighting",
+			"Party"
+		],
+		"uuid": "cd0a4cb5-2c16-4d66-8604-521f15ac85f8",
+		"wrong": [
+			"There is a net in the middle of the map you have to knock other players into for bonus points",
+			"You have cards you play during the match to grant your character buffs",
+			"Eating food during the match now gives permenant stat boosts to your character"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "The Stack",
+		"explainer": "The stack is a system somewhat unique to magic design to help resolve it's complex instant speeds spell system with respect to sorceries, abilities, effects and summoning spells.",
+		"name": "Grim Lotus",
+		"question": "If Hearthstone introduced instant speed cards similar to Magic the Gathering, what concept would also need to be introduced to the game?",
+		"tags": [
+			"Blizzard",
+			"Tabletop"
+		],
+		"uuid": "287cde61-047b-48f4-8c5d-e37cf6addfba",
+		"wrong": [
+			"The Queue",
+			"The Deck",
+			"Sorcery spells"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "Skaven",
+		"explainer": "",
+		"name": "They have more in common than War",
+		"question": "If Warcraft wanted to update and include a new villainous race based on its inspiration, warhammer fantasy, what might they pick?",
+		"tags": [
+			"Blizzard",
+			"Tabletop"
+		],
+		"uuid": "27aff4b0-092d-4a8f-a310-be67b172afd3",
+		"wrong": [
+			"Aeldari",
+			"Devils",
+			"Orcs"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c",
+			"b9871032-d7d5-4b8a-898b-07708f349fb8"
+		],
+		"correct": "Energy Sword",
+		"explainer": "",
+		"name": "I need a weapon",
+		"question": "If Revan from Knights of the Old Republic found himself on a Halo ring, what weapon would he likely prefer?",
+		"tags": [
+			"Microsoft",
+			"RPG",
+			"Shooter"
+		],
+		"uuid": "a86b2e11-cda6-483f-bc6e-dce4f6529d65",
+		"wrong": [
+			"Gravity Hammer",
+			"Battle Rifle",
+			"Pistol"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"43944b2e-9790-4fba-a257-004591ba27a2",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Miley Cyrus",
+		"explainer": "",
+		"name": "Celebrimon",
+		"question": "February 23, 2016, an article published on Popcrush looked at celebrities and gave them pokemon look alikes. What celebrity looked like Lickitung?",
+		"tags": [
+			"Popculture",
+			"History",
+			"Nintendo"
+		],
+		"uuid": "e5e8eb4b-c411-49fa-b094-81bb9c24562b",
+		"wrong": [
+			"Taylor Swift",
+			"Gene Simmons",
+			"Kid Rock"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"16848d16-3133-4aa2-95ba-2457168d286f",
+			"43944b2e-9790-4fba-a257-004591ba27a2",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "NES Hands Free Controller",
+		"explainer": "",
+		"name": "More Accessible",
+		"question": "Accessibility has always been a factor in the game industry, even in the early days. What was one of the earliest examples of an accessibility controller release in 1989?",
+		"tags": [
+			"History",
+			"Nintendo",
+			"Retro"
+		],
+		"uuid": "48f823f8-e9f2-4a17-bbec-6b0fc6ce1374",
+		"wrong": [
+			"The Atari Voice Controller",
+			"The Intellivision Accessibility Joystick",
+			"The Sega Genesis"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Holding and firing a gun",
+		"explainer": "",
+		"name": "",
+		"question": "In 2006, a Novint Falcon was released to try and help you feel like you were doing what in first person shooters?",
+		"tags": [
+			"History",
+			"Shooter"
+		],
+		"uuid": "b8243683-b3fe-42fd-b0fb-9a3f2dd1ed66",
+		"wrong": [
+			"Looking around with your actual eyes",
+			"Ducking Behind cover",
+			"Haptic Feedback driven damage"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"16848d16-3133-4aa2-95ba-2457168d286f",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "ET",
+		"explainer": "",
+		"name": "Time to Crash",
+		"question": "Burnouts crash mod is a beloved mode from gaming history. What game likely would have scored highest in a “Crash the game industry in the 20th century” mission?",
+		"tags": [
+			"Racing",
+			"Retro",
+			"History"
+		],
+		"uuid": "544cb2fe-4c24-491e-a1ad-702a9f1ce604",
+		"wrong": [
+			"Cat and Mouse Game",
+			"General Custards Revenge",
+			"Qix"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Jason Schrier",
+		"explainer": "",
+		"name": "Write Up",
+		"question": "Which game journalist has broken the story behind the development of Destiny, Destiny 2, Anthem and seemingly every game with a bad development cycle?",
+		"tags": [
+			"History",
+			"Journalism"
+		],
+		"uuid": "58d3d581-fcc4-4da9-af12-b43c6e8f920d",
+		"wrong": [
+			"Tim Rogers",
+			"Jeff Gursman",
+			"Superbunnyhop"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"9b458853-b268-4ada-9bb5-d0225755f2cf",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "About 15",
+		"explainer": "",
+		"name": "Wanna Dance?",
+		"question": "If you, like the Duke Nukem, were to drink a beer for each year the game was in development, how many beers would you drink?",
+		"tags": [
+			"History"
+		],
+		"uuid": "0ef71b93-7a23-4078-9751-d1899a62ac57",
+		"wrong": [
+			"About 13",
+			"About 12",
+			"About 14"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "Combos",
+		"explainer": "",
+		"name": "Misinput",
+		"question": "Like Penicillin, some accidental discoveries have irrevocably changed the very course of society. Which accidental discovery in Street Fighter 2 changed the fighting game genre forever?",
+		"tags": [
+			"Fighting",
+			"Capcom"
+		],
+		"uuid": "4a840bb2-1e93-43f1-abef-0a563f0d3e0c",
+		"wrong": [
+			"Links",
+			"Anti Air",
+			"Back Blocking"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "Bio Force Gun v3.14",
+		"explainer": "",
+		"name": "That's a Big Gun",
+		"question": "In the Doom (2005) movie, what was the actual name of the BFG?",
+		"tags": [
+			"History",
+			"Movie",
+			"Hard",
+			"Id Software"
+		],
+		"uuid": "f2fd506e-52b5-4ade-9db8-345e7bca0eec",
+		"wrong": [
+			"Big Fuckin' Gun v1.0",
+			"Blast Force Gun v5.1",
+			"Bold Fan Gun v6.9"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37"
+		],
+		"correct": "Normal Water burns them like acid",
+		"explainer": "",
+		"name": "The Slayer",
+		"question": "What technique could Rayne teach Buffy if the vampires in Buffy’s world gained Bloodrayne's weakness?",
+		"tags": [
+			"Popculture",
+			"Adventure"
+		],
+		"uuid": "580d0b45-9d11-43b2-b438-f97ef88f59cc",
+		"wrong": [
+			"Silver is also effective",
+			"Onions repel them like garlic",
+			"They can be compelled with money"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Perfect Competition",
+		"explainer": "",
+		"name": "Who says you can't learning from Video Games?",
+		"question": "In 2009, MIT published a paper on using World of Warcraft to study which economic concept?",
+		"tags": [
+			"History",
+			"Blizzard",
+			"MMO",
+			"Hard"
+		],
+		"uuid": "1aeba6e6-4278-4fb6-9b05-a7b016b1446a",
+		"wrong": [
+			"Supply and Demand",
+			"Opportunity Cost",
+			"Scarcity"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "1 Day",
+		"explainer": "According to the accoount in Master's of Doom, Doom was selling 200,000 copies a day",
+		"name": "Master's of Doom",
+		"question": "If you were to compare 1993’s DOOM to Wolfenstien’s sales numbers, how long did it take for Doom to outsell Wolfenstien’s first month?",
+		"tags": [
+			"History",
+			"ID Software",
+			"Hard"
+		],
+		"uuid": "cd0caec5-badc-4ce0-82c6-9c1080556bda",
+		"wrong": [
+			"1 Week",
+			"1 Fortnight",
+			"1 Hour"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Ideas from the Deep",
+		"explainer": "",
+		"name": "Ego of ID",
+		"question": "ID software thought up it’s name as essential an acronym of it’s original name. What was it?",
+		"tags": [
+			"ID Software",
+			"History",
+			"Hard"
+		],
+		"uuid": "a93ae88a-460b-4dbf-a15a-d971823780c0",
+		"wrong": [
+			"Intelligent Designs",
+			"Identity Definitions",
+			"Images around the Desk"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
+		],
+		"correct": "They might have released a pillars of eternity part 1 and part 2",
+		"explainer": "",
+		"name": "Double Bind",
+		"question": "If Obsidian, like Double Fine, had similar issues making pillars of eternity as were had making Adventure, what might the have done with it?",
+		"tags": [
+			"Indie",
+			"RPG"
+		],
+		"uuid": "437b26b7-c794-4c7f-8714-8711120e7c6b",
+		"wrong": [
+			"They might have started a Fig campaign to raise money",
+			"They might cancelled Pillars altogether",
+			"They might have released Pillars into Early Access"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
+		],
+		"correct": "sans",
+		"explainer": "",
+		"name": "Determination to Enter that Room",
+		"question": "In Undertale, which character can you convince to let you into their room by reloading the game?",
+		"tags": [
+			"Indie",
+			"RPG"
+		],
+		"uuid": "daf0cd44-6c27-4b26-972d-ce48a4ab302c",
+		"wrong": [
+			"Papyrus",
+			"Alphys",
+			"Undyne"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "Duplicate a ship using the time travel experiment",
+		"explainer": "",
+		"name": "Wild...",
+		"question": "In the Outer Wilds, you can achieve a secret ending before the true end of the game. How?",
+		"tags": [
+			"Indie",
+			"Adventure"
+		],
+		"uuid": "797e9448-6d89-49d0-86c4-4289ceb10cbf",
+		"wrong": [
+			"Kill yourself with a old nuke",
+			"Play a kazoo backwards on Home",
+			"Land the model ship on Home’s moon"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Frédéric Chopin",
+		"explainer": "",
+		"name": "",
+		"question": "Eternal Sonata was a bizarre game in a number of ways. One in particular was the main character, who was based on a real composer. Who were they?",
+		"tags": [
+			"RPG",
+			"History"
+		],
+		"uuid": "2c3c2e0f-7232-4f75-a1d7-8bb9dc1867f6",
+		"wrong": [
+			"Wolfgang Amadeus Motzart",
+			"Johann Sebastian Bach",
+			"Igor Stravinsky"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "To Create Contemporary Art",
+		"explainer": "",
+		"name": "What a Trip",
+		"question": "What was the point of LSD: Dream emulator anyway?",
+		"tags": [
+			"History",
+			"Hard",
+			"Sony"
+		],
+		"uuid": "b8d1b22d-3758-4c9b-bd9e-0698b74daa1d",
+		"wrong": [
+			"To interpret real dreams of the creators",
+			"To emulate a drug trip",
+			"To creep out the player"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "You talk too long, I don’t understand",
+		"explainer": "",
+		"name": "",
+		"question": "Seaman was, indeed, a very bizarre game for the dreamcast. Not only were you expert to care for the weird “seamen”, but you were also expected to talk to them. How might they respond to a more loquacious person?",
+		"tags": [
+			"Hard",
+			"Simulator"
+		],
+		"uuid": "5bf705a6-ae56-4a63-b9b6-9cb8b18fe60d",
+		"wrong": [
+			"Slow down, I don’t understand",
+			"You are annoying",
+			"Shut up"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Psycho",
+		"explainer": "There is a level where you suck blood from a woman while she is in the bath, a intrusive and bloody act not unlike Psycho's shower scene",
+		"name": "Misquito Thriller",
+		"question": "One of the weird levels of Mister Mosquito has a level that has surprising parallels with an Alfred Hitchcock film. Which one was it?",
+		"tags": [
+			"Sony",
+			"History",
+			"Movies"
+		],
+		"uuid": "0fcec836-8c87-48d7-bbe7-c3bde187c4b9",
+		"wrong": [
+			"The Shinning",
+			"The Birds",
+			"Doctor Strangelove"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"9b458853-b268-4ada-9bb5-d0225755f2cf",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "About 1,300,000",
+		"explainer": "",
+		"name": "The Great King of Mass",
+		"question": "If Katamari Damacy included a level where you rolled up planets to make a sun, how many actual earths would you need to make it?",
+		"tags": [
+			"History",
+			"Namco"
+		],
+		"uuid": "2b2764ae-e382-461c-a06c-3be8d66bd566",
+		"wrong": [
+			"About 2,487,369",
+			"About 1,200,000,000",
+			"About 1,100"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "Take medicine every 30-40 real life minutes",
+		"explainer": "",
+		"name": "Suburban Safari",
+		"question": "If Mister Mosquito was a carrier for malaria, what would the main cast of the Yamada house have to do daily to treat their condition like the main character of Far Cry 2?",
+		"tags": [
+			"Sony",
+			"Ubisoft",
+			"Shooter"
+		],
+		"uuid": "8cc34e83-fd5c-4452-ad1b-1252defa6582",
+		"wrong": [
+			"Have to dig the virus out of their arm with a knife",
+			"They would need to use bandages",
+			"The would need to collect blood diamonds"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
 	}
 ]

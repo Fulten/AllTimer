@@ -5,15 +5,24 @@ var chances_set = {}
 
 var master_chances_data = []
 
-var loaded = false
+var launch_Quiz = false
+var multiplayerMenu = true
 
 var quiz_session_instance
+var multiplayer_menu_instance
 
 var quiz_session_scene = preload("res://assets/scenes/quiz_session.tscn")
 var player_input_scene = preload("res://assets/scenes/player.tscn")
+var multiplayer_menu_scene = preload("res://assets/scenes/multiplayer_menu.tscn")
 
 var player_input_instances = []
 @onready var progress_bar = $progress_bar
+
+const PORT: int = 12345 # port to use
+const MAX_CONNECTIONS: int = 20
+var IP_ADDRESS = "127.0.0.1" # use local host
+
+var peer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,7 +36,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if !loaded && progress_bar.value == 100:
+	if multiplayerMenu && !GameState.GameStarted:
+		multiplayer_menu_instance = multiplayer_menu_scene.instantiate()
+		get_tree().root.add_child(multiplayer_menu_instance)
+		
+		multiplayerMenu = false
+	pass
+	if launch_Quiz && progress_bar.value == 100:
 		# get_tree().change_scene_to_file("res://assets/scenes/quiz_session.tscn")	
 		quiz_session_instance = quiz_session_scene.instantiate()
 		get_tree().root.add_child(quiz_session_instance)
@@ -37,7 +52,26 @@ func _process(delta):
 		_connect_players()
 		
 		quiz_session_instance._start_quiz()
-		loaded = true
+		launch_Quiz = false
+	pass
+
+func _mp_host_server():
+	peer = ENetMultiplayerPeer.new()
+	peer.create_server(IP_ADDRESS, PORT)
+	multiplayer.multiplayer_peer = peer
+	pass
+	
+func _mp_join():
+	peer = ENetMultiplayerPeer.new()
+	peer.create_client(IP_ADDRESS, PORT)
+	multiplayer.multiplayer_peer = peer
+	pass
+	
+func _mp_exit():
+	if (multiplayer.is_server()):
+		# TODO: tell clients to disconnect
+		pass
+		multiplayer.multiplayer_peer = null
 	pass
 
 func _instantiate_players():

@@ -38,6 +38,8 @@ var CurrentChances = [] #The list of chance stars to track for the game
 
 var CurrentTheme = "default" #The current quiz theme
 
+var GameStarted = false
+
 func _add_chance(chance_name,description,type,value,associated_questions: Array):
 	CurrentChances.append({ #to be updated when we add more types with an if/switch
 		"name": chance_name,

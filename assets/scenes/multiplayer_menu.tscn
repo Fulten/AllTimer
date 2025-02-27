@@ -1,0 +1,126 @@
+[gd_scene load_steps=10 format=3 uid="uid://dhodklssctpdu"]
+
+[ext_resource type="Theme" uid="uid://j8encu3x20ng" path="res://assets/uiux/main_menu/default_theme.tres" id="1_xieqn"]
+[ext_resource type="Shader" path="res://assets/uiux/main_menu/scrolling_background.gdshader" id="2_kt0eh"]
+[ext_resource type="Texture2D" uid="uid://co7e0p20gqlnk" path="res://assets/uiux/main_menu/main_menu_bg.tga" id="3_kfk48"]
+[ext_resource type="FontFile" uid="uid://c70rl4plqsm7n" path="res://assets/uiux/main_menu/NeonSans.otf" id="4_671pl"]
+[ext_resource type="Script" path="res://assets/uiux/multiplayer_menu/VBoxContainerMultiplayer.gd" id="5_51ppk"]
+[ext_resource type="AudioStream" uid="uid://dimbdo2k6d1uw" path="res://assets/uiux/main_menu/sfx_click.mp3" id="5_f58vv"]
+[ext_resource type="AudioStream" uid="uid://c77k0qy3iet7e" path="res://assets/uiux/main_menu/sfx_hover.mp3" id="6_0h1am"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mji2r"]
+shader = ExtResource("2_kt0eh")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_mflqw"]
+diffuse_texture = ExtResource("3_kfk48")
+texture_repeat = 2
+
+[node name="MultiplayerMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xieqn")
+
+[node name="Background" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_mji2r")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.2375
+anchor_top = -0.288778
+anchor_right = 1.712
+anchor_bottom = 1.91078
+offset_left = -8.0
+offset_top = -0.0800605
+offset_right = 1288.64
+offset_bottom = 720.24
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = SubResource("CanvasTexture_mflqw")
+expand_mode = 3
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 569.0
+offset_top = 304.0
+offset_right = 717.0
+offset_bottom = 342.0
+text = "127.0.0.1:12345"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.259
+anchor_top = 0.235
+anchor_right = 0.741
+anchor_bottom = 0.449
+offset_left = 144.48
+offset_top = 49.8
+offset_right = -148.48
+offset_bottom = -39.28
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xieqn")
+theme_override_colors/font_color = Color(0.575234, 0.38969, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 15
+theme_override_fonts/font = ExtResource("4_671pl")
+theme_override_font_sizes/font_size = 50
+text = "Multiplayer"
+uppercase = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.467
+anchor_top = 0.664
+anchor_right = 0.533
+anchor_bottom = 0.82
+offset_left = 2.23999
+offset_top = -113.08
+offset_right = -0.23999
+offset_bottom = -1.40002
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(40, 58)
+theme_override_constants/separation = 10
+script = ExtResource("5_51ppk")
+
+[node name="ClickSFX" type="AudioStreamPlayer2D" parent="VBoxContainer"]
+stream = ExtResource("5_f58vv")
+
+[node name="HoverSFX" type="AudioStreamPlayer2D" parent="VBoxContainer"]
+stream = ExtResource("6_0h1am")
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="MultiplayerHostButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="MultiplayerJoinButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[connection signal="button_down" from="VBoxContainer/StartButton" to="VBoxContainer" method="_on_start_button_button_down"]
+[connection signal="button_up" from="VBoxContainer/StartButton" to="VBoxContainer" method="_on_start_button_button_up"]
+[connection signal="focus_entered" from="VBoxContainer/StartButton" to="VBoxContainer" method="_on_start_button_focus_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/StartButton" to="VBoxContainer" method="_on_start_button_mouse_entered"]
+[connection signal="button_down" from="VBoxContainer/MultiplayerHostButton" to="VBoxContainer" method="_on_multiplayer_host_button_button_down"]
+[connection signal="button_up" from="VBoxContainer/MultiplayerHostButton" to="VBoxContainer" method="_on_multiplayer_host_button_button_up"]
+[connection signal="focus_entered" from="VBoxContainer/MultiplayerHostButton" to="VBoxContainer" method="_on_multiplayer_host_button_focus_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/MultiplayerHostButton" to="VBoxContainer" method="_on_multiplayer_host_button_mouse_entered"]
+[connection signal="button_down" from="VBoxContainer/MultiplayerJoinButton" to="VBoxContainer" method="_on_multiplayer_join_button_button_down"]
+[connection signal="button_up" from="VBoxContainer/MultiplayerJoinButton" to="VBoxContainer" method="_on_multiplayer_join_button_button_up"]
+[connection signal="focus_entered" from="VBoxContainer/MultiplayerJoinButton" to="VBoxContainer" method="_on_multiplayer_join_button_focus_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/MultiplayerJoinButton" to="VBoxContainer" method="_on_multiplayer_join_button_mouse_entered"]

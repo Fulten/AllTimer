@@ -45,13 +45,12 @@ expand_mode = 3
 stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="TextEdit" type="TextEdit" parent="."]
+[node name="IpInputText" type="TextEdit" parent="."]
 layout_mode = 0
 offset_left = 569.0
 offset_top = 304.0
 offset_right = 717.0
 offset_bottom = 342.0
-text = "127.0.0.1:12345"
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -76,6 +75,15 @@ theme_override_fonts/font = ExtResource("4_671pl")
 theme_override_font_sizes/font_size = 50
 text = "Multiplayer"
 uppercase = true
+
+[node name="Multiplayer Test Node" type="Label" parent="."]
+layout_mode = 0
+offset_left = 351.0
+offset_top = 282.0
+offset_right = 446.0
+offset_bottom = 337.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "players:"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -112,6 +120,11 @@ text = "Host"
 layout_mode = 2
 text = "Join"
 
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[connection signal="text_changed" from="IpInputText" to="VBoxContainer" method="_on_text_edit_text_changed"]
 [connection signal="button_down" from="VBoxContainer/StartButton" to="VBoxContainer" method="_on_start_button_button_down"]
 [connection signal="button_up" from="VBoxContainer/StartButton" to="VBoxContainer" method="_on_start_button_button_up"]
 [connection signal="focus_entered" from="VBoxContainer/StartButton" to="VBoxContainer" method="_on_start_button_focus_entered"]
@@ -124,3 +137,5 @@ text = "Join"
 [connection signal="button_up" from="VBoxContainer/MultiplayerJoinButton" to="VBoxContainer" method="_on_multiplayer_join_button_button_up"]
 [connection signal="focus_entered" from="VBoxContainer/MultiplayerJoinButton" to="VBoxContainer" method="_on_multiplayer_join_button_focus_entered"]
 [connection signal="mouse_entered" from="VBoxContainer/MultiplayerJoinButton" to="VBoxContainer" method="_on_multiplayer_join_button_mouse_entered"]
+[connection signal="button_down" from="VBoxContainer/BackButton" to="VBoxContainer" method="_on_back_button_button_down"]
+[connection signal="button_up" from="VBoxContainer/BackButton" to="VBoxContainer" method="_on_back_button_button_up"]

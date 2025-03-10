@@ -5,11 +5,12 @@ var chances_set = {}
 
 var master_chances_data = []
 
-var launch_Quiz = false
-var multiplayerMenu = true
+var launch_quiz = false
+var multiplayer_menu = true
 
 var quiz_session_instance
 var multiplayer_menu_instance
+var multiplayer_menu_vbox
 
 var quiz_session_scene = preload("res://assets/scenes/quiz_session.tscn")
 var player_input_scene = preload("res://assets/scenes/player.tscn")
@@ -19,7 +20,7 @@ var player_input_instances = []
 @onready var progress_bar = $progress_bar
 
 const PORT: int = 12345 # port to use
-const MAX_CONNECTIONS: int = 20
+const MAX_CONNECTIONS: int = 4
 var IP_ADDRESS = "127.0.0.1" # use local host
 
 var peer
@@ -29,66 +30,103 @@ func _ready():
 	randomize()
 	progress_bar.value = 0
 	_prepare_quiz_questions(10, GameState.TagsToExclude)
-	progress_bar.value = 50
+	progress_bar.value = 25
 	_prepare_quiz_chances(3)
+	progress_bar.value = 50
+
+	multiplayer.peer_connected.connect(_mp_on_player_connected)
+	multiplayer.peer_disconnected.connect(_mp_on_player_disconnected)
+	multiplayer.connected_to_server.connect(_mp_on_connected_ok)
+	multiplayer.connection_failed.connect(_mp_on_connected_fail)
+	multiplayer.server_disconnected.connect(_mp_on_server_disconnected)
+	GameState.PlayerCount = 1;
+
 	progress_bar.value = 100
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if multiplayerMenu && !GameState.GameStarted:
+	if multiplayer_menu && !GameState.GameStarted:
 		multiplayer_menu_instance = multiplayer_menu_scene.instantiate()
 		get_tree().root.add_child(multiplayer_menu_instance)
-		
-		multiplayerMenu = false
+		multiplayer_menu_vbox = multiplayer_menu_instance.get_node("VBoxContainer")
+
+		multiplayer_menu_vbox.multiplayer_host.connect(_mp_host_server)
+		multiplayer_menu_vbox.multiplayer_connect.connect(_mp_join)
+		multiplayer_menu_vbox.launch_quiz.connect(_launch_quiz)
+
+		multiplayer_menu = false
 	pass
-	if launch_Quiz && progress_bar.value == 100:
+	if launch_quiz && progress_bar.value == 100:
 		# get_tree().change_scene_to_file("res://assets/scenes/quiz_session.tscn")	
 		quiz_session_instance = quiz_session_scene.instantiate()
 		get_tree().root.add_child(quiz_session_instance)
-		quiz_session_instance.end_of_quiz.connect(_unload_quiz)
+		quiz_session_instance.end_of_quiz.connect(_exit_quiz)
 		
-		_instantiate_players()
-		_connect_players()
+		# instantiate players
+		for i in range(GameState.PlayerCount):
+			var player_instance = player_input_scene.instantiate()
+			player_instance._set_player(i)
+			get_tree().root.add_child(player_instance)
+			player_input_instances.append(player_instance)
+			pass
+
+		# connect players
+		for i in range(GameState.PlayerCount):
+			player_input_instances[i].player_guess.connect(quiz_session_instance._player_input)
+			pass
 		
 		quiz_session_instance._start_quiz()
-		launch_Quiz = false
+		launch_quiz = false
+	pass
+
+func _set_ip(ip_address):
+	IP_ADDRESS = ip_address
 	pass
 
 func _mp_host_server():
 	peer = ENetMultiplayerPeer.new()
-	peer.create_server(IP_ADDRESS, PORT)
+	peer.create_server(PORT, MAX_CONNECTIONS)
 	multiplayer.multiplayer_peer = peer
+	print("Hosting server on IP: %s, PORT: %d" % [IP_ADDRESS, PORT])
 	pass
 	
-func _mp_join():
+func _mp_join(ip_address):
+	_set_ip(ip_address)
 	peer = ENetMultiplayerPeer.new()
 	peer.create_client(IP_ADDRESS, PORT)
+
 	multiplayer.multiplayer_peer = peer
 	pass
+
+
 	
-func _mp_exit():
-	if (multiplayer.is_server()):
-		# TODO: tell clients to disconnect
-		pass
-		multiplayer.multiplayer_peer = null
+func _mp_on_player_connected(id: int):
+	print(id)
 	pass
 
-func _instantiate_players():
-	for i in range(GameState.PlayerCount):
-		var player_instance = player_input_scene.instantiate()
-		player_instance._set_player(i)
-		get_tree().root.add_child(player_instance)
-		player_input_instances.append(player_instance)
-		pass
+func _mp_on_player_disconnected(id: int):
+	print(id)
 	pass
 
-func _connect_players(): 
-	for i in range(GameState.PlayerCount):
-		player_input_instances[i].player_guess.connect(quiz_session_instance._player_input)
-		pass
+# player has connected to server
+func _mp_on_connected_ok():
+
 	pass
-	
+
+# player has failed to connect to server
+func _mp_on_connected_fail():
+
+	pass
+
+func _mp_on_server_disconnected():
+
+	pass
+
+func _launch_quiz():
+	launch_quiz = true
+	pass
+
 func _load_master_questions(excluded_tags):
 	var file = FileAccess.open("res://data/question_data.json", FileAccess.READ)
 	if file:
@@ -161,7 +199,7 @@ func _next_chance():
 			chances_set.erase(next_chance)
 			return
 
-func _unload_quiz():
+func _exit_quiz():
 	for i in range(GameState.PlayerCount):
 		player_input_instances[i]._freePlayer()
 		pass

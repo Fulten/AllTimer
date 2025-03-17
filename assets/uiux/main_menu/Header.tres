@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://7k1y84tgkfmp"]
+
+[ext_resource type="FontFile" uid="uid://c70rl4plqsm7n" path="res://assets/uiux/main_menu/NeonSans.otf" id="1_s34si"]
+
+[resource]
+font = ExtResource("1_s34si")
+font_size = 120
+font_color = Color(0.666667, 0.529412, 1, 1)
+shadow_color = Color(0, 0, 0, 0.686275)
+shadow_offset = Vector2(0, 3)

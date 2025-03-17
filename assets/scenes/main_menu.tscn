@@ -224,6 +224,7 @@ grow_vertical = 2
 text = "Back"
 
 [node name="Options_Display" type="Control" parent="."]
+visible = false
 layout_mode = 2
 anchors_preset = 0
 anchor_right = 1.0
@@ -274,13 +275,10 @@ selected = 1
 allow_reselect = true
 popup/item_0/text = "Fullscreen"
 popup/item_0/id = 0
-popup/item_0/separator = true
 popup/item_1/text = "Windowed"
 popup/item_1/id = 1
-popup/item_1/separator = true
 popup/item_2/text = "Borderless Window"
 popup/item_2/id = 2
-popup/item_2/separator = true
 
 [node name="ResolutionSettings" type="HBoxContainer" parent="Options_Display/OptionsList"]
 layout_mode = 2
@@ -297,7 +295,6 @@ item_count = 1
 selected = 0
 popup/item_0/text = "1080 x 720"
 popup/item_0/id = 0
-popup/item_0/separator = true
 
 [node name="ButtonIcons" type="HBoxContainer" parent="Options_Display/OptionsList"]
 layout_mode = 2
@@ -546,7 +543,6 @@ grow_vertical = 0
 text = "Back"
 
 [node name="Options_Game" type="Control" parent="."]
-visible = false
 layout_mode = 2
 anchors_preset = 0
 anchor_right = 1.0

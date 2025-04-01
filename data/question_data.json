@@ -1351,5 +1351,668 @@
 		"wrong_1": "",
 		"wrong_2": "",
 		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "There are child soldiers",
+		"explainer": "",
+		"name": "Africa May Cry",
+		"question": "Far Cry 2 shares a ghastly detail accurate to the real country it is based on. What was it? ",
+		"tags": [
+			"Ubisoft",
+			"FPS"
+		],
+		"uuid": "b423b6f2-edf9-4e8a-bec0-2dcdf5b52765",
+		"wrong": [
+			"There are crocodiles",
+			"There are taxes",
+			"There are fire bombings"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "To see the World's Largest Mountain Range ",
+		"explainer": "Far Cry 4 takes place in a fictional country in the Himalayas, which contains the Largest Mountain Range",
+		"name": "Kyrat Tour Guide",
+		"question": "Based on the the real world location of the fictional county of Kyrat, what other reason might Ajay Ghale have had to visit? ",
+		"tags": [
+			"Ubisoft",
+			"FPS"
+		],
+		"uuid": "e629a941-6c2c-40b5-9172-c3a293b518b8",
+		"wrong": [
+			"To see the World’s Longest River",
+			"To see the World's Largest Canyon",
+			"To see the World’s Coldest Region"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "Yellowstone",
+		"explainer": "Far Cry 5 takes place in a fictional are in Montana, which is closest to Yellowstone national park",
+		"name": "Oh America...?",
+		"question": "If you were able to go off map in Far Cry 5, what would be a cool destination to take a break from the insanity of Project at Eden’s Gate? ",
+		"tags": [
+			"Ubisoft",
+			"FPS"
+		],
+		"uuid": "a18fd35a-7366-4881-8f3d-b6afb857a10a",
+		"wrong": [
+			"Grand Canyon",
+			"Death Valley",
+			"Niagra Falls"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "Sailing up the Congo to meet an Ivory trader",
+		"explainer": "",
+		"name": "The Heart of the Desert",
+		"question": "If Yager Development took a more direct adaptational approach to their game Spec Ops the Line and it’s in inspiration “The Heart of Darkness”, what would Martin Walker be doing instead? ",
+		"tags": [
+			"2K Games",
+			"Shooter"
+		],
+		"uuid": "7695ba92-9e11-42ee-a8be-9024da0162cf",
+		"wrong": [
+			"Sailing up the Congo to meet a Gun Runner",
+			"Sailing up the Congo to meet a King",
+			"Sailing up the Congo to meet a Dictator"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"43944b2e-9790-4fba-a257-004591ba27a2"
+		],
+		"correct": "Skyward Sword, Orcarina of Time, A Link to the Past, The Legend of Zelda, Breath of the Wild",
+		"explainer": "",
+		"name": "Tri-Force of Timelines",
+		"question": "Acording to the Hyrule Historia, what is the chronological order of the following games if we follow the Fallen Hero Timeline?",
+		"tags": [
+			"Nintendo",
+			"Adventure"
+		],
+		"uuid": "12c36957-91c1-4446-9906-437c7fe353e5",
+		"wrong": [
+			"Orcarina of Time, A Link to the Past, Skyward Sword, The Legend of Zelda, Breath of the Wild",
+			"Orcarina of Time, Skyward Sword, A Link to the Past, The Legend of Zelda, Breath of the Wild",
+			"Skyward Sword, Orcarina of Time, A Link to the Past, Breath of the Wild, The Legend of Zelda"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "Izanagi’s descent into Yomi",
+		"explainer": "",
+		"name": "Issun's Lost Lore",
+		"question": "Okami has a variety of real world myths an mythological figures. Which of the following was actually not featured in Okami?",
+		"tags": [
+			"Capcom",
+			"Adventure"
+		],
+		"uuid": "bcd06918-09fa-464f-86bb-3d02e16bc15f",
+		"wrong": [
+			"The Story of Sakura",
+			"The Yamata No Orochi",
+			"The Tale of the Bamboo Cutter"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "3 miles to the gallon",
+		"explainer": "",
+		"name": "Grand Theft Gasoline",
+		"question": "How many miles to the gallon does the Maibatsu Monstrosity get as reported in Grand Theft Auto 3? ",
+		"tags": [
+			"Rockstar",
+			"Sandbox"
+		],
+		"uuid": "5c623bec-bbdd-4850-b00d-259f4c23e81c",
+		"wrong": [
+			"32 miles to the gallon",
+			"12 miles to the gallon",
+			"1 mile to the gallon"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"9b458853-b268-4ada-9bb5-d0225755f2cf"
+		],
+		"correct": "7 and a large soda",
+		"explainer": "I'll have two number 9's(2), a number 9 large(1), a number 6 with extra dip(1), a number 7(1), two number 45's(2), one with cheese, and a large soda.﻿",
+		"name": "Damn Big Smoke",
+		"question": "How many combo items did Big smoke actually order? ",
+		"tags": [
+			"Rockstar",
+			"Sandbox",
+			"Math"
+		],
+		"uuid": "4d4f1c4b-c181-408c-a51f-3ef02797b97a",
+		"wrong": [
+			"6 and a large soda",
+			"8 and a large soda",
+			"9 and a large soda"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"9b458853-b268-4ada-9bb5-d0225755f2cf"
+		],
+		"correct": "15",
+		"explainer": "There are 17 available, but 2 are free",
+		"name": "Say Hello to my Little House",
+		"question": "To live out the true Scarface fantasy of owning the world, you can buy a number of Safe Houses and Assets in Grand Theft Auto: Vice City. How many can you actually buy? ",
+		"tags": [
+			"Sandbox"
+		],
+		"uuid": "e92a6022-caf6-4d80-bd7a-39a8e33793a7",
+		"wrong": [
+			"17",
+			"16",
+			"18"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "A Visa",
+		"explainer": "",
+		"name": "This is my cousin...",
+		"question": "If Niko Bellic were to lawfully enter Liberty City, what we he need to aquire first? ",
+		"tags": [
+			"Rockstar",
+			"Hard"
+		],
+		"uuid": "c5c8a0d2-eee7-44cd-87da-1a3c11665eb7",
+		"wrong": [
+			"An ID",
+			"A Job",
+			"A House"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37"
+		],
+		"correct": "Teen Wolf",
+		"explainer": "",
+		"name": "Easter Eggs, Franklin",
+		"question": "What movie is explicitly referenced by “The Beast” in Grand Theft Auto 5? ",
+		"tags": [
+			"Rockstar",
+			"Sandbox",
+			"Popculture"
+		],
+		"uuid": "63ea57b7-50e5-4a03-8c50-3413e13d1130",
+		"wrong": [
+			"Ginger Snaps",
+			"Airbud",
+			"American Werewolf in London"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"b9871032-d7d5-4b8a-898b-07708f349fb8"
+		],
+		"correct": "They are moving Cities with a Giant Turtle",
+		"explainer": "",
+		"name": "Wandering COGs",
+		"question": "If Marcus Fenix found himself inside of the world of “The Wandering Village” what migh he say?",
+		"tags": [
+			"Microsoft",
+			"Shooter"
+		],
+		"uuid": "4c814f89-eacf-423d-934b-045ddab26d39",
+		"wrong": [
+			"They are moving Cities with a Giant Worm",
+			"They are moving Cities with a Giant Horse",
+			"They are moving Cities with a Giant Frog"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"b9871032-d7d5-4b8a-898b-07708f349fb8"
+		],
+		"correct": "“Let me light up Betty’s titties”",
+		"explainer": "",
+		"name": "A trucker's mentality",
+		"question": "You have just met Dizzy in Gears of War. What does he say as it gets dark?",
+		"tags": [
+			"Microsoft",
+			"Shooter"
+		],
+		"uuid": "bbb285ea-9e41-4bb7-8968-86bc58b2fe31",
+		"wrong": [
+			"“Let me light up Pam’s titties”",
+			"“Let me light of Penny’s titties”",
+			"“Let me light of Dani’s titties”"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Work with the Source engine early",
+		"explainer": "Both Troika and Arkane were offered the ability to develop their next game in an early version of the Source Engine. Troika took the offer to make Vampire the Masquerade: Bloodlines and Arkane declined and made Dark Messiah of Might and Magic",
+		"name": "Tradgedy either way",
+		"question": "In an alternate universe, what might Arkane have done instead of Troika?",
+		"tags": [
+			"History",
+			"Hard"
+		],
+		"uuid": "5fca43f7-21c2-4c35-9fb1-7b82272e5858",
+		"wrong": [
+			"Created a Vampire Game",
+			"Created a Steam punk RPG",
+			"Created a Console game"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "Naughty Dog",
+		"explainer": "",
+		"name": "Nathan Drake like the great...",
+		"question": "Nathan Drake’s initials happen to reference what?",
+		"tags": [
+			"Sony",
+			"Shooter"
+		],
+		"uuid": "df643173-e419-42c8-b80c-f14ae0ade01a",
+		"wrong": [
+			"Drake the Rapper",
+			"New Days",
+			"Night Day"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "A dance to steal an item",
+		"explainer": "",
+		"name": "That would have been wild",
+		"question": "If Uncharted 4 were to include some of the exclude content, what might you have done with Elena in a chapter? ",
+		"tags": [
+			"Sony",
+			"Platformer"
+		],
+		"uuid": "785a459c-fbf3-45ec-85a2-974961c6cb57",
+		"wrong": [
+			"A brawl in the belly of a whale",
+			"A coop climb up the side of a falling building",
+			"A race thru the jungle in a CTR style dream sequence"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "8 years",
+		"explainer": "",
+		"name": "The Concert Never Stops",
+		"question": "Despite all of the issues, how long was Rock Band 4 getting dlc?",
+		"tags": [
+			"Harmonix",
+			"Rhythm"
+		],
+		"uuid": "fa4eb37f-a121-43e8-ac35-89226a5bb864",
+		"wrong": [
+			"7 years",
+			"6 years",
+			"5 years"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "The President of the United States",
+		"explainer": "",
+		"name": "Yes Sir",
+		"question": "The main character of Metal Wolf Chaos might describe himself as?",
+		"tags": [
+			"FromSoftware"
+		],
+		"uuid": "d3de90dc-6eaa-4be2-992a-3a4d0610f04b",
+		"wrong": [
+			"The Secretary of Defense",
+			"The Prime Minister of Japan",
+			"A Supreme Court Justice"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "Toxic",
+		"explainer": "",
+		"name": "Pop Ratchet",
+		"question": "What song might Courtney Gears sing in Ratchet And Clank 3 if she fully emulated her real world countepart?",
+		"tags": [
+			"Sony",
+			"Insomniac"
+		],
+		"uuid": "867f56a8-dd71-471d-ad3d-32aa9f4d11ae",
+		"wrong": [
+			"Tongue Twister",
+			"Dark Horse",
+			"1999"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "Shaken, not stirred",
+		"explainer": "",
+		"name": "Clank, Agent Clank",
+		"question": "If Secret Agent Clank is based on James Bond, how would Clank take his drink? ",
+		"tags": [
+			"Sony",
+			"Insomniac"
+		],
+		"uuid": "72674d9f-f5cc-4a68-95ff-fc6f04e2faee",
+		"wrong": [
+			"Stirred, not shaken",
+			"Neat, not shaken",
+			"Clarified, not stirred"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "Miz Ruby is desynced",
+		"explainer": "Miz Ruby is a rythm boss fight but the audio was not synced in the boss fight",
+		"name": "SLYYYY!!!",
+		"question": "Why is Sly 1 HD the inferior way to play the game?",
+		"tags": [
+			"Sony",
+			"Platformer"
+		],
+		"uuid": "6515702a-3559-4dcb-9d4b-69b3b393f487",
+		"wrong": [
+			"Sly Cooper is not a raccoon",
+			"Bentley is off-colored",
+			"Murray is too skinny"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"43944b2e-9790-4fba-a257-004591ba27a2"
+		],
+		"correct": "A man performing the kabuki yo! with a ting at the end",
+		"explainer": "",
+		"name": "Gamecube Easter Eggs",
+		"question": "What sound might you recieve if you held the z button on 4 controllers when starting the gamecube? ",
+		"tags": [
+			"Nintendo",
+			"Console"
+		],
+		"uuid": "79cbc43b-8576-4c6e-ac65-d2a296d4551d",
+		"wrong": [
+			"A bunch of dogs barking",
+			"Trick question, it is the same intro",
+			"Sort of like a squeak toy with a childs laugh"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "TiDi",
+		"explainer": "",
+		"name": "Spreadsheet Simulator",
+		"question": "If 200 people started a fight in eve online, what might happen?",
+		"tags": [
+			"EVE",
+			"Hard"
+		],
+		"uuid": "b626c5f5-9a4c-404d-8c0b-057d2e326af0",
+		"wrong": [
+			"SciFi",
+			"KiKi",
+			"ISK"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "Set up learning while offline",
+		"explainer": "",
+		"name": "Skil up",
+		"question": "What is the primary way to increase your skills in eve online?",
+		"tags": [
+			"EVE"
+		],
+		"uuid": "e07eb0b2-45e3-4463-a833-d2866edd02da",
+		"wrong": [
+			"A minigame involving tedious screen clicks",
+			"You train up a selected skill by mining",
+			"You pay an amount of isk to level them up"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [],
+		"correct": "The Corrupted Blood incident",
+		"explainer": "",
+		"name": "Murlock Pox",
+		"question": "What was the surprising debuff bug that was used to study the spread of contagions in World of Warcraft?",
+		"tags": [
+			"Blizzard",
+			"MMO"
+		],
+		"uuid": "5ddec511-ace2-452e-a48f-daee84893e33",
+		"wrong": [
+			"The Covid 19 incident",
+			"The Horde Pox incident",
+			"The Cataclysm incident"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"16848d16-3133-4aa2-95ba-2457168d286f",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "The Joy of Sex",
+		"explainer": "",
+		"name": "Yikes....",
+		"question": "Unsurprising, what was the first AO game?",
+		"tags": [
+			"History",
+			"Retro"
+		],
+		"uuid": "74e0922d-dc5b-4669-9bd5-5e7d8b4ba302",
+		"wrong": [
+			"General Custard’s Revenge",
+			"Mortal Kombat",
+			"Doom"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"43944b2e-9790-4fba-a257-004591ba27a2"
+		],
+		"correct": "Samus Aran",
+		"explainer": "",
+		"name": "That ain't gonna be in Fortnite",
+		"question": "Despite negotiations, what character will never be in Fortnite?",
+		"tags": [
+			"Nintendo",
+			"Epic"
+		],
+		"uuid": "6efce3ce-29fc-4778-8675-16d3782bbbc9",
+		"wrong": [
+			"Godzilla",
+			"Miku",
+			"Tak"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "Sly Raccoon",
+		"explainer": "",
+		"name": "Can't escape me raccoon ",
+		"question": "For whatever reason, what was Sly Cooper named in the PAL region?",
+		"tags": [
+			"Sony"
+		],
+		"uuid": "0f825b04-520e-4284-9989-37231e768bac",
+		"wrong": [
+			"Sneaky Cooper",
+			"Rogue Raccoon",
+			"Thieving Cooper"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c",
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "Ultros",
+		"explainer": "",
+		"name": "It's kinda obvious",
+		"question": "Which character has a crush on Terra?",
+		"tags": [
+			"SquareEnix",
+			"Sony",
+			"Hard"
+		],
+		"uuid": "079a4a18-add4-48c9-8df2-dae82a720409",
+		"wrong": [
+			"Rude",
+			"Zidane",
+			"Gilgamesh"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c",
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "He becomes a level 0 paladin",
+		"explainer": "",
+		"name": "The Heros Journey",
+		"question": "What happens to Cecil in the Mountain of Ordeals?",
+		"tags": [
+			"SquareEnix",
+			"Sony"
+		],
+		"uuid": "44e151c5-19b1-4aa8-9090-35877a67fa57",
+		"wrong": [
+			"He is killed by the party",
+			"He becomes the villain",
+			"He gains excalibur"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
+	},
+	{
+		"chances": [
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"43944b2e-9790-4fba-a257-004591ba27a2"
+		],
+		"correct": "Mario",
+		"explainer": "",
+		"name": "And you are?",
+		"question": "What is Luigi’s last name?",
+		"tags": [
+			"Nintendo",
+			"PopCulture"
+		],
+		"uuid": "1bdd057f-9a99-4fed-80d4-5e1353b53e6d",
+		"wrong": [
+			"Luigi",
+			"Bro",
+			"Brother"
+		],
+		"wrong_1": "",
+		"wrong_2": "",
+		"wrong_3": ""
 	}
 ]

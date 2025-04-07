@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bs1imbtgf7dr4"]
+
+[ext_resource type="FontFile" uid="uid://bc01r67d5wp2w" path="res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf" id="1_ouvee"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mmvin"]
+
+[resource]
+default_font = ExtResource("1_ouvee")
+default_font_size = 36
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0.94902, 0.94902, 0.94902, 0)
+Button/colors/font_hover_color = Color(0, 0, 0, 0)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 1, 0.65, 1)
+Button/constants/outline_size = 2
+Button/font_sizes/font_size = 36
+Button/fonts/font = ExtResource("1_ouvee")
+Button/styles/focus = SubResource("StyleBoxEmpty_mmvin")

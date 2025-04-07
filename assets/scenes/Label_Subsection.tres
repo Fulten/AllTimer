@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b8rucp80rws68"]
+
+[ext_resource type="FontFile" uid="uid://bc01r67d5wp2w" path="res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf" id="1_rv62u"]
+
+[resource]
+line_spacing = 0.0
+font = ExtResource("1_rv62u")
+font_size = 32
+font_color = Color(0, 0, 0, 1)

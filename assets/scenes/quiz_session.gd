@@ -55,7 +55,7 @@ func countdown_clock():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	countdown_text.text = "%02d:%02d" % countdown_clock()
 	_load_question_refresh_scores()
 	pass

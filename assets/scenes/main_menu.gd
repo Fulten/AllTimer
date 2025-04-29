@@ -14,17 +14,17 @@ func _process(_delta):
 	pass
 
 
-func save_audio_settings(sound_device: String, master: float, music: float, sfx: float, voiceover: float):
+func save_audio_settings():
 	config.set_value("audio", "sound_device", $Options_Sound2/SettingsList/HBoxContainer5/OptionButton.get_item_text($Options_Sound2/SettingsList/HBoxContainer5/OptionButton.get_selected_id()))
 	config.set_value("audio", "master", $Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl.get_value())
-	config.set_value("video", "music", $Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl2.get_value())
-	config.set_value("video", "sfx", $Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl3.get_value())
-	config.set_value("video", "voiceover", $Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl4.get_value())
+	config.set_value("audio", "music", $Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl2.get_value())
+	config.set_value("audio", "sfx", $Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl3.get_value())
+	config.set_value("audio", "voiceover", $Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl4.get_value())
 	config.save(config_path)
 
 
 func save_video_settings():
-	config.set_value("video", "type", $Options_Display2/OptionsList/DisplayType/DisplayList.get_item_text($Options_Display2/OptionsList/DisplayType/DisplayList.get_selected_id()))
+	config.set_value("video", "type", $Options_Display2/OptionsList/DisplayType/DisplayList.get_selected_id())
 	var resolution = $Options_Display2/OptionsList/ResolutionSettings/ResolutionsList.get_item_text($Options_Display2/OptionsList/ResolutionSettings/ResolutionsList.get_selected_id()).split("x")
 	config.set_value("video", "resolution_width", resolution[0])
 	config.set_value("video", "resolution_height", resolution[1])
@@ -33,8 +33,8 @@ func save_video_settings():
 	config.save(config_path)
 
 
-func save_game_settings(timer: int, win_con: String, tallies: bool, skipping_losses: bool, gambling_modes: bool):
-	config.set_value("game", "timer", $Options_Game2/SettingsList/TimerSetting/OptionButton.get_item_text($Options_Game2/SettingsList/TimerSetting/OptionButton.get_selected_id()))
+func save_game_settings():
+	config.set_value("game", "timer", int($Options_Game2/SettingsList/TimerSetting/OptionButton.get_item_text($Options_Game2/SettingsList/TimerSetting/OptionButton.get_selected_id())))
 	config.set_value("game", "win_con", $Options_Game2/SettingsList/WinConditions/OptionButton.get_item_text($Options_Game2/SettingsList/WinConditions/OptionButton.get_selected_id()))
 	config.set_value("game", "tallies", $Options_Game2/SettingsList/AltRulesContainer/HBoxContainer/CheckBox.is_pressed())
 	config.set_value("game", "skipping_losses", $Options_Game2/SettingsList/AltRulesContainer/HBoxContainer2/CheckBox.is_pressed())
@@ -58,7 +58,7 @@ func load_settings():
 		var input_display = config.get_value("video", "input", "default")
 		var theme = config.get_value("video", "theme", "default")
 #		GAME
-		var timer = config.get_value("game", "timer", "30")
+		var timer = config.get_value("game", "timer", 30)
 		var win_con = config.get_value("game", "win_con", "default")
 		var tallies = config.get_value("game", "tallies", false)
 		var skipping_losses = config.get_value("game", "skipping_losses", false)
@@ -77,9 +77,13 @@ func apply_audio_settings(sound_device: String, master: float, music: float, sfx
 		sound_device = devices[0]
 	AudioServer.set_output_device(sound_device)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), master)
+	$Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl.set_value_no_signal(master)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), music)
+	$Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl2.set_value_no_signal(music)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), sfx)
+	$Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl3.set_value_no_signal(sfx)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Voice"), voiceover)
+	$Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl4.set_value_no_signal(voiceover)
 	
 
 
@@ -89,6 +93,11 @@ func apply_video_settings(display_type: int, resolution: Vector2, input_display:
 
 
 func apply_game_settings(timer: int, win_con: String, tallies: bool, skipping_losses: bool, gambling_modes: bool):
+	#$Options_Game2/SettingsList/TimerSetting/OptionButton.
+	#$Options_Game2/SettingsList/WinConditions/OptionButton
+	$Options_Game2/SettingsList/AltRulesContainer/HBoxContainer/CheckBox.set_pressed_no_signal(tallies)
+	$Options_Game2/SettingsList/AltRulesContainer/HBoxContainer2/CheckBox.set_pressed_no_signal(skipping_losses)
+	$Options_Game2/SettingsList/AltRulesContainer/HBoxContainer3/CheckBox.set_pressed_no_signal(gambling_modes)
 #	will need to do this later for a game_options global state
 	return
 
@@ -206,6 +215,7 @@ func _on_options_display_return_mouse_entered():
 func _on_options_display_return_button_down():
 	$Stack_0/MainMenuButtons/SFX_Press.play()
 func _on_options_display_return_button_up():
+	save_video_settings()
 	$StackAnimator/Timer_Display_to_Options.start()
 	$StackAnimator.play("Anim_Display_FadeOut")
 func _on_timer_display_to_options_timeout():
@@ -229,6 +239,7 @@ func _on_options_sound_return_mouse_entered():
 func _on_options_sound_return_button_down():
 	$Stack_0/MainMenuButtons/SFX_Press.play()
 func _on_options_sound_return_button_up():
+	save_audio_settings()
 	$StackAnimator/Timer_Sound_to_Options.start()
 	$StackAnimator.play("Anim_Sound_FadeOut")
 func _on_timer_sound_to_options_timeout():
@@ -244,6 +255,7 @@ func _on_options_game_return_mouse_entered():
 func _on_options_game_return_button_down():
 	$Stack_0/MainMenuButtons/SFX_Press.play()
 func _on_options_game_return_button_up():
+	save_game_settings()
 	$StackAnimator/Timer_Game_to_Options.start()
 	$StackAnimator.play("Anim_Game_FadeOut")
 func _on_timer_game_to_options_timeout():

@@ -71,6 +71,22 @@ func load_settings():
 		print("No settings file found. Using defaults.")
 
 
+func select_option_by_text(option_button: OptionButton, target_text: String) -> void:
+	for i in range(option_button.item_count):
+		if option_button.get_item_text(i) == str(target_text):
+			option_button.select(i)
+			return
+	print("Text not found in OptionButton:", target_text)
+
+
+func select_option_by_int(option_button: OptionButton, target_int: int) -> void:
+	for i in range(option_button.item_count):
+		if int(option_button.get_item_text(i)) == target_int:
+			option_button.select(i)
+			return
+	print("Int not found in OptionButton:", target_int)
+
+
 func apply_audio_settings(sound_device: String, master: float, music: float, sfx: float, voiceover: float):
 	var devices = AudioServer.get_output_device_list()
 	if sound_device not in devices:
@@ -88,13 +104,16 @@ func apply_audio_settings(sound_device: String, master: float, music: float, sfx
 
 
 func apply_video_settings(display_type: int, resolution: Vector2, input_display: String, theme: String):
+	$Options_Display2/OptionsList/DisplayType/DisplayList.select(display_type)
 	_on_display_list_item_selected(display_type)
 	DisplayServer.window_set_size(resolution)
+	select_option_by_text($Options_Display2/OptionsList/ButtonIcons/OptionButton,input_display)
+	select_option_by_text($Options_Display2/OptionsList/SessionThemes/OptionButton,theme)
 
 
 func apply_game_settings(timer: int, win_con: String, tallies: bool, skipping_losses: bool, gambling_modes: bool):
-	#$Options_Game2/SettingsList/TimerSetting/OptionButton.
-	#$Options_Game2/SettingsList/WinConditions/OptionButton
+	select_option_by_int($Options_Game2/SettingsList/TimerSetting/OptionButton, timer)
+	select_option_by_text($Options_Game2/SettingsList/WinConditions/OptionButton, win_con)
 	$Options_Game2/SettingsList/AltRulesContainer/HBoxContainer/CheckBox.set_pressed_no_signal(tallies)
 	$Options_Game2/SettingsList/AltRulesContainer/HBoxContainer2/CheckBox.set_pressed_no_signal(skipping_losses)
 	$Options_Game2/SettingsList/AltRulesContainer/HBoxContainer3/CheckBox.set_pressed_no_signal(gambling_modes)
@@ -223,13 +242,17 @@ func _on_timer_display_to_options_timeout():
 	get_node("Options_2").show()
 	$StackAnimator.play("Anim_OptionsCategories_FadeIn")	
 	$Options_2/OptionsCategories/DisplayButton.grab_focus()
-	
-func _on_display_list_item_selected(index: int)->void:
-	match index:
-		0:DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
-		1:DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		2:DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
+
+const display_options = [
+	DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
+	DisplayServer.WINDOW_MODE_WINDOWED,
+	DisplayServer.WINDOW_MODE_FULLSCREEN,
+]
+
+
+func _on_display_list_item_selected(index: int) -> void:
+		DisplayServer.window_set_mode(display_options[index])
 
 
 func _on_options_sound_return_focus_entered():

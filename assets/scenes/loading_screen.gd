@@ -68,7 +68,7 @@ func _process(_delta):
 		multiplayer_menu = false
 	pass
 	if launch_quiz && progress_bar.value == 100:		
-		load_quiz()
+		load_quiz.rpc()
 		launch_quiz = false
 	pass
 
@@ -101,13 +101,6 @@ func _mp_join(ip_address):
 	multiplayer.multiplayer_peer = peer
 	pass
 
-# When the server decides to start the game from a UI scene,
-# do Lobby.load_game.rpc(filepath)
-@rpc("call_local", "reliable")
-func load_quiz():
-	quiz_session_instance = quiz_session_scene.instantiate()
-	get_tree().root.add_child(quiz_session_instance)
-	
 # Every peer will call this when they have loaded the game scene.
 @rpc("any_peer", "call_local", "reliable")
 func player_loaded():
@@ -157,9 +150,18 @@ func _mp_on_server_disconnected():
 	server_disconnected.emit()
 	pass
 
+# called when the multiplayer menu sends it's signal
+@rpc("call_local", "reliable")
 func _launch_quiz():
 	launch_quiz = true
 	pass
+
+# When the server decides to start the game from a UI scene,
+# do Lobby.load_game.rpc(filepath)
+@rpc("call_local", "reliable")
+func load_quiz():
+	quiz_session_instance = quiz_session_scene.instantiate()
+	get_tree().root.add_child(quiz_session_instance)
 
 func _load_master_questions(excluded_tags):
 	var file = FileAccess.open("res://data/question_data.json", FileAccess.READ)

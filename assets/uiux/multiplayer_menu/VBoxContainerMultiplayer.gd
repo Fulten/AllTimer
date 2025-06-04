@@ -73,10 +73,13 @@ func _update_connected_players(index):
 		var playerLabel = get_node( "../VPlayerLabelContainer/Player%dLabel" % n)
 		playerLabel.set("text", "")
 		
-	for n in range(1, index+1):
+	var n = 1
+	
+	for playerId in GameState.players:
 		var playerLabel = get_node("../VPlayerLabelContainer/Player%dLabel" % n)
-		playerLabel.set("text", GameState.Players[n].name)
-		
+		playerLabel.set("text", GameState.players[playerId].name)
+		n += 1
+
 	pass
 	
 func _exit_menu():

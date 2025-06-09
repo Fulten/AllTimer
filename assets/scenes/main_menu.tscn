@@ -1552,6 +1552,7 @@ flat = true
 [connection signal="button_up" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_button_up"]
 [connection signal="focus_entered" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_focus_entered"]
 [connection signal="mouse_entered" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_mouse_entered"]
+[connection signal="item_selected" from="Options_Sound2/SettingsList/HBoxContainer5/SoundDeviceOptions" to="." method="_on_sound_device_options_item_selected"]
 [connection signal="button_down" from="Options_Sound2/OptionsSoundReturn" to="." method="_on_options_sound_return_button_down"]
 [connection signal="button_up" from="Options_Sound2/OptionsSoundReturn" to="." method="_on_options_sound_return_button_up"]
 [connection signal="focus_entered" from="Options_Sound2/OptionsSoundReturn" to="." method="_on_options_sound_return_focus_entered"]

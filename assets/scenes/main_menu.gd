@@ -276,6 +276,10 @@ func _on_resolutions_list_item_selected(index: int) -> void:
 	DisplayServer.window_set_size(resolution_options[index])
 
 
+func _on_sound_device_options_item_selected(index: int) -> void:
+	AudioServer.set_output_device(%SoundDeviceOptions.get_item_text(index))
+
+
 func _on_options_sound_return_focus_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
 func _on_options_sound_return_mouse_entered():

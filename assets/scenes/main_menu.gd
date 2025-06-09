@@ -15,30 +15,28 @@ func _process(_delta):
 
 
 func save_audio_settings():
-	config.set_value("audio", "sound_device", $Options_Sound2/SettingsList/HBoxContainer5/OptionButton.get_item_text($Options_Sound2/SettingsList/HBoxContainer5/OptionButton.get_selected_id()))
-	config.set_value("audio", "master", $Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl.get_value())
-	config.set_value("audio", "music", $Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl2.get_value())
-	config.set_value("audio", "sfx", $Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl3.get_value())
-	config.set_value("audio", "voiceover", $Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl4.get_value())
+	config.set_value("audio", "sound_device", %SoundDeviceOptions.get_item_text(%SoundDeviceOptions.get_selected_id()))
+	config.set_value("audio", "master", %VolumeControl.get_value())
+	config.set_value("audio", "music", %VolumeControl2.get_value())
+	config.set_value("audio", "sfx", %VolumeControl3.get_value())
+	config.set_value("audio", "voiceover", %VolumeControl4.get_value())
 	config.save(config_path)
 
 
 func save_video_settings():
-	config.set_value("video", "type", $Options_Display2/OptionsList/DisplayType/DisplayList.get_selected_id())
-	var resolution = $Options_Display2/OptionsList/ResolutionSettings/ResolutionsList.get_item_text($Options_Display2/OptionsList/ResolutionSettings/ResolutionsList.get_selected_id()).split("x")
-	config.set_value("video", "resolution_width", resolution[0])
-	config.set_value("video", "resolution_height", resolution[1])
-	config.set_value("video", "input", $Options_Display2/OptionsList/ButtonIcons/OptionButton.get_item_text($Options_Display2/OptionsList/ButtonIcons/OptionButton.get_selected_id()))
-	config.set_value("video", "theme", $Options_Display2/OptionsList/SessionThemes/OptionButton.get_item_text($Options_Display2/OptionsList/SessionThemes/OptionButton.get_selected_id()))
+	config.set_value("video", "type", %DisplayList.get_selected_id())
+	config.set_value("video", "resolution", %ResolutionsList.get_selected_id())
+	config.set_value("video", "input", %InputDisplayList.get_item_text(%InputDisplayList.get_selected_id()))
+	config.set_value("video", "theme", %SessionThemesList.get_item_text(%SessionThemesList.get_selected_id()))
 	config.save(config_path)
 
 
 func save_game_settings():
-	config.set_value("game", "timer", int($Options_Game2/SettingsList/TimerSetting/OptionButton.get_item_text($Options_Game2/SettingsList/TimerSetting/OptionButton.get_selected_id())))
-	config.set_value("game", "win_con", $Options_Game2/SettingsList/WinConditions/OptionButton.get_item_text($Options_Game2/SettingsList/WinConditions/OptionButton.get_selected_id()))
-	config.set_value("game", "tallies", $Options_Game2/SettingsList/AltRulesContainer/HBoxContainer/CheckBox.is_pressed())
-	config.set_value("game", "skipping_losses", $Options_Game2/SettingsList/AltRulesContainer/HBoxContainer2/CheckBox.is_pressed())
-	config.set_value("game", "gambling_modes", $Options_Game2/SettingsList/AltRulesContainer/HBoxContainer3/CheckBox.is_pressed())
+	config.set_value("game", "timer", int(%TimerSettingList.get_item_text(%TimerSettingList.get_selected_id())))
+	config.set_value("game", "win_con", %WinConList.get_item_text(%WinConList.get_selected_id()))
+	config.set_value("game", "tallies", %TalliesCheckBox.is_pressed())
+	config.set_value("game", "skipping_losses", %Lose4SkipCheckBox.is_pressed())
+	config.set_value("game", "gambling_modes", %GamblingOnCheckBox.is_pressed())
 	config.save(config_path)
 
 
@@ -53,8 +51,7 @@ func load_settings():
 		var voiceover = config.get_value("audio", "voiceover", 1.0)
 #		VIDEO
 		var display_type = config.get_value("video", "type", 0)
-		var width = config.get_value("video", "resolution_width", 1920)
-		var height = config.get_value("video", "resolution_height", 1080)
+		var resolution = config.get_value("video", "resolution", 0)
 		var input_display = config.get_value("video", "input", "default")
 		var theme = config.get_value("video", "theme", "default")
 #		GAME
@@ -65,7 +62,7 @@ func load_settings():
 		var gambling_modes = config.get_value("game", "gambling_modes", false)
 #		APPLY
 		apply_audio_settings(sound_device, master, music, sfx, voiceover)
-		apply_video_settings(display_type, Vector2(1920, 1080), input_display, theme)
+		apply_video_settings(display_type, resolution, input_display, theme)
 		apply_game_settings(timer, win_con, tallies, skipping_losses, gambling_modes)
 	else:
 		print("No settings file found. Using defaults.")
@@ -89,34 +86,40 @@ func select_option_by_int(option_button: OptionButton, target_int: int) -> void:
 
 func apply_audio_settings(sound_device: String, master: float, music: float, sfx: float, voiceover: float):
 	var devices = AudioServer.get_output_device_list()
-	if sound_device not in devices:
-		sound_device = devices[0]
-	AudioServer.set_output_device(sound_device)
+	var found_match = false
+	%SoundDeviceOptions.clear()
+	for device in devices:
+		%SoundDeviceOptions.add_item(device)
+		if sound_device == device:
+			found_match = true
+			select_option_by_text(%SoundDeviceOptions, sound_device)
+	AudioServer.set_output_device(sound_device if found_match else devices[0])
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), master)
-	$Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl.set_value_no_signal(master)
+	%VolumeControl.set_value_no_signal(master)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), music)
-	$Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl2.set_value_no_signal(music)
+	%VolumeControl2.set_value_no_signal(music)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), sfx)
-	$Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl3.set_value_no_signal(sfx)
+	%VolumeControl3.set_value_no_signal(sfx)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Voice"), voiceover)
-	$Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase/VolumeControl4.set_value_no_signal(voiceover)
+	%VolumeControl4.set_value_no_signal(voiceover)
 	
 
 
-func apply_video_settings(display_type: int, resolution: Vector2, input_display: String, theme: String):
-	$Options_Display2/OptionsList/DisplayType/DisplayList.select(display_type)
+func apply_video_settings(display_type: int, resolution: int, input_display: String, theme: String):
+	%DisplayList.select(display_type)
 	_on_display_list_item_selected(display_type)
-	DisplayServer.window_set_size(resolution)
-	select_option_by_text($Options_Display2/OptionsList/ButtonIcons/OptionButton,input_display)
-	select_option_by_text($Options_Display2/OptionsList/SessionThemes/OptionButton,theme)
+	%ResolutionsList.select(resolution)
+	_on_resolutions_list_item_selected(resolution)
+	select_option_by_text(%InputDisplayList,input_display)
+	select_option_by_text(%SessionThemesList,theme)
 
 
 func apply_game_settings(timer: int, win_con: String, tallies: bool, skipping_losses: bool, gambling_modes: bool):
-	select_option_by_int($Options_Game2/SettingsList/TimerSetting/OptionButton, timer)
-	select_option_by_text($Options_Game2/SettingsList/WinConditions/OptionButton, win_con)
-	$Options_Game2/SettingsList/AltRulesContainer/HBoxContainer/CheckBox.set_pressed_no_signal(tallies)
-	$Options_Game2/SettingsList/AltRulesContainer/HBoxContainer2/CheckBox.set_pressed_no_signal(skipping_losses)
-	$Options_Game2/SettingsList/AltRulesContainer/HBoxContainer3/CheckBox.set_pressed_no_signal(gambling_modes)
+	select_option_by_int(%TimerSettingList, timer)
+	select_option_by_text(%WinConList, win_con)
+	%TalliesCheckBox.set_pressed_no_signal(tallies)
+	%Lose4SkipCheckBox.set_pressed_no_signal(skipping_losses)
+	%GamblingOnCheckBox.set_pressed_no_signal(gambling_modes)
 #	will need to do this later for a game_options global state
 	return
 
@@ -255,6 +258,24 @@ func _on_display_list_item_selected(index: int) -> void:
 		DisplayServer.window_set_mode(display_options[index])
 
 
+const resolution_options = [
+	 Vector2(648, 648),
+	 Vector2(640, 480),
+	 Vector2(720, 480),
+	 Vector2(800, 600),
+	 Vector2(1152, 648),
+	 Vector2(1280, 720),
+	 Vector2(1280, 800),
+	 Vector2(1680, 720),
+	 Vector2(1920, 1080),
+	 Vector2(2560, 1440)
+]
+
+
+func _on_resolutions_list_item_selected(index: int) -> void:
+	DisplayServer.window_set_size(resolution_options[index])
+
+
 func _on_options_sound_return_focus_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
 func _on_options_sound_return_mouse_entered():
@@ -286,4 +307,3 @@ func _on_timer_game_to_options_timeout():
 	get_node("Options_Game2").hide()
 	get_node("Options_2").show()
 	$Options_2/OptionsCategories/GameButton.grab_focus()
-

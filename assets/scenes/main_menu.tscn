@@ -1008,6 +1008,7 @@ text = "Display type:"
 label_settings = ExtResource("14_8jyle")
 
 [node name="DisplayList" type="OptionButton" parent="Options_Display2/OptionsList/DisplayType"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_ixy01")
 theme_override_font_sizes/font_size = 24
@@ -1034,15 +1035,34 @@ text = "Screen resolution: "
 label_settings = ExtResource("14_8jyle")
 
 [node name="ResolutionsList" type="OptionButton" parent="Options_Display2/OptionsList/ResolutionSettings"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_ixy01")
 theme_override_font_sizes/font_size = 24
 flat = true
-item_count = 1
+item_count = 10
 selected = 0
 fit_to_longest_item = false
-popup/item_0/text = "1080 x 720"
+popup/item_0/text = "648 X 648"
 popup/item_0/id = 0
+popup/item_1/text = "640 X 480"
+popup/item_1/id = 1
+popup/item_2/text = "720 X 480"
+popup/item_2/id = 2
+popup/item_3/text = "800 X 600"
+popup/item_3/id = 3
+popup/item_4/text = "1152 X 648"
+popup/item_4/id = 4
+popup/item_5/text = "1280 X 720"
+popup/item_5/id = 5
+popup/item_6/text = "1280 X 800"
+popup/item_6/id = 6
+popup/item_7/text = "1680 X 720"
+popup/item_7/id = 7
+popup/item_8/text = "1920 X 1080"
+popup/item_8/id = 8
+popup/item_9/text = "2560 X 1440"
+popup/item_9/id = 9
 
 [node name="ButtonIcons" type="HBoxContainer" parent="Options_Display2/OptionsList"]
 layout_mode = 2
@@ -1053,7 +1073,8 @@ layout_mode = 2
 text = "Input display:"
 label_settings = ExtResource("14_8jyle")
 
-[node name="OptionButton" type="OptionButton" parent="Options_Display2/OptionsList/ButtonIcons"]
+[node name="InputDisplayList" type="OptionButton" parent="Options_Display2/OptionsList/ButtonIcons"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_ixy01")
 theme_override_font_sizes/font_size = 24
@@ -1082,7 +1103,8 @@ layout_mode = 2
 text = "Interface theme: "
 label_settings = ExtResource("14_8jyle")
 
-[node name="OptionButton" type="OptionButton" parent="Options_Display2/OptionsList/SessionThemes"]
+[node name="SessionThemesList" type="OptionButton" parent="Options_Display2/OptionsList/SessionThemes"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_ixy01")
 theme_override_font_sizes/font_size = 24
@@ -1172,7 +1194,8 @@ layout_mode = 2
 text = "Sound device: "
 label_settings = ExtResource("14_8jyle")
 
-[node name="OptionButton" type="OptionButton" parent="Options_Sound2/SettingsList/HBoxContainer5"]
+[node name="SoundDeviceOptions" type="OptionButton" parent="Options_Sound2/SettingsList/HBoxContainer5"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_ixy01")
 theme_override_font_sizes/font_size = 24
@@ -1212,6 +1235,7 @@ label_settings = ExtResource("19_ihq36")
 horizontal_alignment = 1
 
 [node name="VolumeControl" type="HSlider" parent="Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_styles/slider = ExtResource("11_sycm3")
@@ -1233,6 +1257,7 @@ label_settings = ExtResource("19_ihq36")
 horizontal_alignment = 1
 
 [node name="VolumeControl2" type="HSlider" parent="Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_styles/slider = ExtResource("11_sycm3")
@@ -1254,6 +1279,7 @@ label_settings = ExtResource("19_ihq36")
 horizontal_alignment = 1
 
 [node name="VolumeControl3" type="HSlider" parent="Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_styles/slider = ExtResource("11_sycm3")
@@ -1275,6 +1301,7 @@ label_settings = ExtResource("19_ihq36")
 horizontal_alignment = 1
 
 [node name="VolumeControl4" type="HSlider" parent="Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_styles/slider = ExtResource("11_sycm3")
@@ -1361,7 +1388,8 @@ layout_mode = 2
 text = "Round timer length: "
 label_settings = ExtResource("14_8jyle")
 
-[node name="OptionButton" type="OptionButton" parent="Options_Game2/SettingsList/TimerSetting"]
+[node name="TimerSettingList" type="OptionButton" parent="Options_Game2/SettingsList/TimerSetting"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_ixy01")
 theme_override_font_sizes/font_size = 24
@@ -1388,7 +1416,8 @@ layout_mode = 2
 text = "Win condition:"
 label_settings = ExtResource("14_8jyle")
 
-[node name="OptionButton" type="OptionButton" parent="Options_Game2/SettingsList/WinConditions"]
+[node name="WinConList" type="OptionButton" parent="Options_Game2/SettingsList/WinConditions"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_ixy01")
 theme_override_font_sizes/font_size = 24
@@ -1425,7 +1454,8 @@ layout_mode = 2
 text = "Show tallies"
 label_settings = ExtResource("14_8jyle")
 
-[node name="CheckBox" type="CheckBox" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer"]
+[node name="TalliesCheckBox" type="CheckBox" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 flat = true
 
@@ -1438,7 +1468,8 @@ layout_mode = 2
 text = "Lose points for skipping"
 label_settings = ExtResource("14_8jyle")
 
-[node name="CheckBox" type="CheckBox" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer2"]
+[node name="Lose4SkipCheckBox" type="CheckBox" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 flat = true
 
@@ -1451,7 +1482,8 @@ layout_mode = 2
 text = "Gambling modes"
 label_settings = ExtResource("14_8jyle")
 
-[node name="CheckBox" type="CheckBox" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer3"]
+[node name="GamblingOnCheckBox" type="CheckBox" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer3"]
+unique_name_in_owner = true
 layout_mode = 2
 flat = true
 
@@ -1515,6 +1547,7 @@ flat = true
 [connection signal="focus_entered" from="Options_2/OptionsCategoriesReturn" to="." method="_on_options_categories_return_focus_entered"]
 [connection signal="mouse_entered" from="Options_2/OptionsCategoriesReturn" to="." method="_on_options_categories_return_mouse_entered"]
 [connection signal="item_selected" from="Options_Display2/OptionsList/DisplayType/DisplayList" to="." method="_on_display_list_item_selected"]
+[connection signal="item_selected" from="Options_Display2/OptionsList/ResolutionSettings/ResolutionsList" to="." method="_on_resolutions_list_item_selected"]
 [connection signal="button_down" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_button_down"]
 [connection signal="button_up" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_button_up"]
 [connection signal="focus_entered" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_focus_entered"]

@@ -27,9 +27,14 @@ extends Control
 var master_chances_data = []
 var master_question_data = []
 var chances_set = {}
-	
+
+var local_question_set_uuids = []
+
 signal end_of_quiz
 signal player_loaded
+
+var QUIZ_SIZE = 10
+var CHANCE_COUNT = 3
 
 var pre_timer = 10.0
 var post_timer = 10.0
@@ -41,9 +46,20 @@ var player_input = "p_answer_%s"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_load_quiz_data()
-	player_loaded.emit()
-	print("player [%s] loaded" % multiplayer.get_unique_id())
+	if multiplayer.is_server():
+		_load_quiz_data()
+		_select_quiz_questions(QUIZ_SIZE)
+		_prepare_quiz_chances(CHANCE_COUNT)
+		_save_quiz_questions_locally()
+		_sync_quiz_questions_and_chances.rpc(local_question_set_uuids)
+		_clean_master_questions()
+		_clean_chance_set_and_master()
+		
+		_debug_print_questions_and_chances()
+		
+		player_loaded.emit()
+		print("server [%s] loaded" % multiplayer.get_unique_id())
+		pass
 	pass
 	
 func _process(delta):
@@ -65,20 +81,60 @@ func _input(event):
 @rpc("any_peer", "reliable")
 func _player_guess(playerId, guess):
 	print("id: [%s], guess: [%s]" % [playerId, guess])
+	# proccess answer then send updated result to players
+	if multiplayer.is_server():
+		
+		pass
+	pass
+
+# called by the server host on clients to send question and chance data to peers
+@rpc("authority", "reliable")
+func _sync_quiz_questions_and_chances(question_set_uuids):
+	_load_quiz_data()
+	
+	var i = 0
+	for questionUuid in question_set_uuids:
+		var questionIndex = -1
+		
+		for k in range(master_question_data.size()):
+			if master_question_data[k]["uuid"] == questionUuid:
+				questionIndex = k
+				break
+			pass
+		
+		GameState.CurrentQuizQuestions.append(_next_question_data_store_chances(i, questionIndex))
+		i += 1
+		pass
+		
+	_prepare_quiz_chances(CHANCE_COUNT)
+	
+	_clean_master_questions()
+	_clean_chance_set_and_master()
+	
+	_debug_print_questions_and_chances()
+		
+	player_loaded.emit()
 	pass
 
 # called by the server when all the players are loaded in
 @rpc("authority", "call_local", "reliable")
 func _start_quiz():
+	# quiz data should already be loaded onto clients
+	# TODO: generate random question list for quiz scene
+	# TODO: synce question list between clients
+	# TODO: start quiz timer
+	
+	
+	
 	print("the quiz has been started by server")
 	pass
-	
 
 func _load_quiz_data():
-	_load_master_questions(GameState.TagsToExclude)
+	_load_master_questions()
+	_load_master_chances()
 	pass
 
-func _load_master_questions(excluded_tags):
+func _load_master_questions():
 	var file = FileAccess.open("res://data/question_data.json", FileAccess.READ)
 	if file:
 		master_question_data = JSON.parse_string(file.get_as_text())
@@ -95,5 +151,68 @@ func _load_master_questions(excluded_tags):
 			i += 1
 	pass
 	
+func _load_master_chances():
+	var file = FileAccess.open("res://data/chance_data.json", FileAccess.READ)
+	if file:
+		master_chances_data = JSON.parse_string(file.get_as_text())
+		file.close()
+	pass
+	
 func _clean_master_questions():
 	master_question_data = []
+	pass
+	
+func _clean_chance_set_and_master():
+	chances_set = {}
+	master_chances_data = []
+	pass
+	
+func _select_quiz_questions(quizSize):
+	GameState.CurrentQuizQuestions = []
+	for i in range(quizSize):
+		if master_question_data.size() == 0:
+			break
+		GameState.CurrentQuizQuestions.append(_next_question_data_store_chances(i, randi() % master_question_data.size()))
+	pass
+	
+func _prepare_quiz_chances(chance_count):
+	_load_master_chances()
+	GameState.CurrentChances = []
+	for i in range(chance_count):
+		if chances_set.keys().size() == 0:
+			break
+		_next_chance()
+
+func _next_chance():
+	var next_chance = chances_set.keys()[randi() % chances_set.keys().size()]
+	var description = ""
+	for chance in master_chances_data:
+		if chance["uuid"] == next_chance:
+			GameState._add_chance(chance["name"], chance["description"], chance["type"], chance["uuid"], chance["correct"])
+			chances_set.erase(next_chance)
+			return
+	
+func _next_question_data_store_chances(questionIndex, selected_index):
+	var nextQuestion = master_question_data.pop_at(selected_index)
+	for chance in nextQuestion["chances"]:
+		if !chances_set.has(chance):
+			chances_set[chance] = [questionIndex]
+		else:
+			chances_set[chance].append(questionIndex)
+	return nextQuestion
+	
+func _save_quiz_questions_locally():
+	for question in GameState.CurrentQuizQuestions:
+		local_question_set_uuids.append(question["uuid"])
+		pass
+	pass
+	
+func _debug_print_questions_and_chances():
+	print("questions: %s" % multiplayer.get_unique_id())
+	for question in GameState.CurrentQuizQuestions:
+		print(".  %s" % question["name"])
+		
+	print("chances: %s" % multiplayer.get_unique_id())
+	for chance in GameState.CurrentChances:
+		print(".  %s" % chance["name"])
+	pass

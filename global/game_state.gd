@@ -31,13 +31,13 @@ var CurrentTheme = "default" #The current quiz theme
 
 var GameStarted = false
 
-func _add_chance(chance_name,description,type,value,associated_questions: Array):
+func _add_chance(chance_name, description, type, uuid, value):
 	CurrentChances.append({ #to be updated when we add more types with an if/switch
 		"name": chance_name,
 		"description": description,
 		"type": type,
+		"uuid": uuid,
 		"correct": value,
-		"associated_questions": associated_questions,
 		"player_hits": [0,0,0,0]
 	})
 	

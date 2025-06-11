@@ -58,7 +58,6 @@ func _on_multiplayer_join_button_button_up():
 	$MultiplayerJoinButton.disabled = true
 	pass
 
-
 func _on_back_button_mouse_entered():
 	$HoverSFX.play()
 func _on_back_button_focus_entered():

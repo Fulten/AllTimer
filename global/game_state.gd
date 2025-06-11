@@ -19,7 +19,12 @@ class Player:
 
 var players = {}
 
+# translates player number to multiplayer id
+var playerNumberToIds = [-1, -1, -1, -1]
+
 var PlayerCount = 1
+
+var PlayersLoaded = 0
 
 var CurrentQuizQuestions = [] #The questions to be used in the current quiz
 var CurrentQuestionIndex = 0 #The index of question currently on in quiz
@@ -31,45 +36,37 @@ var CurrentTheme = "default" #The current quiz theme
 
 var GameStarted = false
 
-func _add_chance(chance_name, description, type, uuid, value):
+func _add_chance(chance_name, description, type, uuid, value, associated_questions: Array):
 	CurrentChances.append({ #to be updated when we add more types with an if/switch
 		"name": chance_name,
 		"description": description,
 		"type": type,
 		"uuid": uuid,
 		"correct": value,
-		"player_hits": [0,0,0,0]
+		"associated_questions": [],
+		"player_hits": [0,0,0,0],
 	})
-	
-func _set_name(player_index,name):
-	players[player_index]["name"] = name
-
-func _player_name(player_index):
-	return players[player_index]["name"]
-
-func _player_score(player_index):
-	return players[player_index]["score"]
 
 func _adjust_score(player_index,score):
-	players[player_index]["score"] += roundf(score * players[player_index]["guess_time"]/30)
+	var playerId = playerNumberToIds[player_index]
+	players[playerId]["score"] += roundf(score * players[playerId]["guessTime"]/30)
 
-func _player_has_guessed(player_index):
-	
-	return players[player_index]["guess"] >= 0
+func _player_has_guessed(player_id):
+	return players[player_id]["guess"] >= 0
 
-func _player_guess(player_index,guess,current_time):
-	players[player_index]["guess"] = guess
-	players[player_index]["guess_time"] = current_time
+func _player_guess(player_id,guess,current_time):
+	players[player_id]["guess"] = guess
+	players[player_id]["guessTime"] = current_time
 	
 func _reset_guesses():
 	for i in range(PlayerCount):
-		players[i]["guess"] = -1
-		players[i]["guess_time"] = 0
+		players[playerNumberToIds[i]]["guess"] = -1
+		players[playerNumberToIds[i]]["guessTime"] = 0
 
 func _player_correctness(correct_answer,score):
 	for i in PlayerCount:
-		players[i]["correctness"] = players[i]["guess"] == correct_answer
-		if players[i]["correctness"]:
+		players[playerNumberToIds[i]]["correct"] = players[playerNumberToIds[i]]["guess"] == correct_answer
+		if players[playerNumberToIds[i]]["correct"]:
 			_adjust_score(i,score)
 		else:
 			_adjust_score(i,-1*score)
@@ -78,11 +75,20 @@ func _add_chance_hits(question_index):
 	for chance in CurrentChances:
 		if chance["associated_questions"].has(question_index):
 			for i in range(PlayerCount):
-				if players[i]["correctness"] == chance["correct"]:
+				if players[playerNumberToIds[i]]["correct"] == chance["correct"]:
 					chance["player_hits"][i] += 1
 	
+func _build_player_number_to_id_table():
+	playerNumberToIds = [-1,-1,-1,-1]
+	var i = 0
+	for key in players.keys():
+		playerNumberToIds[i] = key
+		i += 1
+		pass
+	pass
+
 func _reset_players():
-	for i in range(PlayerCount):
-		players[i]["score"] = 0
-		players[i]["guess"] = -1
-		players[i]["guess_time"] = 0
+	for key in players.keys():
+		players[key]["score"] = 0
+		players[key]["guess"] = -1
+		players[key]["guessTime"] = 0

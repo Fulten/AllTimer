@@ -92,15 +92,6 @@ func _mp_join(ip_address):
 	multiplayer.multiplayer_peer = peer
 	pass
 
-# Every peer will call this when they have loaded the game scene.
-@rpc("any_peer", "call_local", "reliable")
-func _player_loaded():
-	if multiplayer.is_server():
-		players_loaded += 1
-		if players_loaded == GameState.PlayerCount:
-			quiz_session_instance._start_quiz()
-			players_loaded = 0
-	
 func _mp_on_peer_connected(id: int):
 	_register_player.rpc_id(id, "Player %s" % multiplayer.get_unique_id())
 	print("peer %s to %s" % [id, multiplayer.get_unique_id()])
@@ -157,7 +148,6 @@ func _launch_quiz():
 @rpc("authority", "call_local", "reliable")
 func load_quiz():
 	quiz_session_instance = quiz_session_scene.instantiate()
-	quiz_session_instance.player_loaded.connect(_player_loaded)
 	get_tree().root.add_child(quiz_session_instance)
 	pass
 

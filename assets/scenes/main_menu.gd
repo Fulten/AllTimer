@@ -3,12 +3,10 @@ extends Control
 var config = ConfigFile.new()
 var config_path = "user://settings.cfg"
 
-
 func _ready():
 	$StackAnimator.play("Anim_Stack0_Init")
 	$Stack_0/TitleHeader2.grab_focus()
 	load_settings()
-
 
 func _process(_delta):
 	pass
@@ -158,7 +156,7 @@ func _on_options_button_button_up():
 func _on_timer_stack_0_to_options_categories_timeout():
 		$StackAnimator.play("Anim_OptionsCategories_FadeIn")
 		get_node("Stack_0").hide()
-		get_node("Options_2").show()	
+		get_node("Options_2").show()
 		$Options_2/OptionsCategories/DisplayButton.grab_focus()
 
 
@@ -171,6 +169,90 @@ func _on_quit_button_button_down():
 func _on_quit_button_button_up():
 	get_tree().quit()
 
+
+func _on_profile_button_mouse_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_profile_button_focus_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_profile_button_button_down():
+	$Stack_0/MainMenuButtons/SFX_Press.play()
+func _on_profile_button_button_up():
+	$StackAnimator/Timer_Stack0_to_Profile.start()
+	$StackAnimator.play("Anim_Stack0_FadeOut")
+func _on_timer_stack_0_to_profile_timeout():
+	$StackAnimator.play("Anim_Profile_FadeIn")
+	get_node("Stack_0").hide()
+	get_node("Options_Profile").show()
+
+func _on_options_profile_return_focus_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_options_profile_return_mouse_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_options_profile_return_button_down():
+	$Stack_0/MainMenuButtons/SFX_Press.play()
+func _on_options_profile_return_button_up():
+	$StackAnimator/Timer_Profile_to_Stack0.start()
+	$StackAnimator.play("Anim_Profile_FadeOut")
+func _on_timer_profile_to_stack_0_timeout():
+	$StackAnimator.play("Anim_Stack0_FadeIn")
+	get_node("Options_Profile").hide()
+	get_node("Stack_0").show()
+
+func _on_profile_creator_button_mouse_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_profile_creator_button_focus_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_profile_creator_button_button_down():
+	$Stack_0/MainMenuButtons/SFX_Press.play()
+func _on_profile_creator_button_button_up():
+	get_node("Options_Profile/ProfileDestroyer").hide()
+	get_node("Options_Profile/ProfileCreator").show()
+
+func _on_save_button_mouse_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_save_button_focus_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_save_button_button_down():
+	$Stack_0/MainMenuButtons/SFX_Press.play()
+func _on_save_button_button_up():
+	pass # This is the button-press that saves a new profile to the ProfilesList. It should name the profile with whatever string is in ProfileEntryField and then clear the field
+
+func _on_cancel_profile_button_mouse_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_cancel_profile_button_focus_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_cancel_profile_button_button_down():
+	$Stack_0/MainMenuButtons/SFX_Press.play()
+func _on_cancel_profile_button_button_up():
+	get_node("Options_Profile/ProfileCreator").hide()
+
+func _on_profile_deleter_button_mouse_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_profile_deleter_button_focus_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_profile_deleter_button_button_down():
+	$Stack_0/MainMenuButtons/SFX_Press.play()
+func _on_profile_deleter_button_button_up():
+	get_node("Options_Profile/ProfileCreator").hide()
+	get_node("Options_Profile/ProfileDestroyer").show()
+	
+func _on_delete_button_mouse_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_delete_button_focus_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_delete_button_button_down():
+	$Stack_0/MainMenuButtons/SFX_Press.play()
+func _on_delete_button_button_up():
+	pass # This button should read the currently selected profile in ProfilesList and then  D E L E T E  it
+
+func _on_cancel_deletion_button_mouse_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_cancel_deletion_button_focus_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_cancel_deletion_button_button_down():
+	$Stack_0/MainMenuButtons/SFX_Press.play()
+func _on_cancel_deletion_button_button_up():
+	get_node("Options_Profile/ProfileDestroyer").hide()
 
 func _on_options_categories_return_focus_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
@@ -215,6 +297,7 @@ func _on_timer_options_to_sound_timeout():
 	get_node("Options_2").hide()
 	get_node("Options_Sound2").show()
 
+
 func _on_game_button_focus_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
 func _on_game_button_mouse_entered():
@@ -246,17 +329,14 @@ func _on_timer_display_to_options_timeout():
 	$StackAnimator.play("Anim_OptionsCategories_FadeIn")	
 	$Options_2/OptionsCategories/DisplayButton.grab_focus()
 
-
 const display_options = [
 	DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
 	DisplayServer.WINDOW_MODE_WINDOWED,
 	DisplayServer.WINDOW_MODE_FULLSCREEN,
 ]
 
-
 func _on_display_list_item_selected(index: int) -> void:
 		DisplayServer.window_set_mode(display_options[index])
-
 
 const resolution_options = [
 	 Vector2(648, 648),
@@ -271,13 +351,8 @@ const resolution_options = [
 	 Vector2(2560, 1440)
 ]
 
-
 func _on_resolutions_list_item_selected(index: int) -> void:
 	DisplayServer.window_set_size(resolution_options[index])
-
-
-func _on_sound_device_options_item_selected(index: int) -> void:
-	AudioServer.set_output_device(%SoundDeviceOptions.get_item_text(index))
 
 
 func _on_options_sound_return_focus_entered():
@@ -296,6 +371,10 @@ func _on_timer_sound_to_options_timeout():
 	get_node("Options_2").show()
 	$Options_2/OptionsCategories/SoundButton.grab_focus()
 
+func _on_sound_device_options_item_selected(index: int) -> void:
+	AudioServer.set_output_device(%SoundDeviceOptions.get_item_text(index))
+	
+	
 func _on_options_game_return_focus_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
 func _on_options_game_return_mouse_entered():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bjrqcx0k7scpa"]
+[gd_scene load_steps=38 format=3 uid="uid://bjrqcx0k7scpa"]
 
 [ext_resource type="Theme" uid="uid://j8encu3x20ng" path="res://assets/uiux/main_menu/default_theme.tres" id="1_nvabs"]
 [ext_resource type="Shader" path="res://assets/uiux/main_menu/scrolling_background.gdshader" id="2_40555"]
@@ -254,6 +254,86 @@ tracks/2/keys = {
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_qoe65"]
+resource_name = "Anim_Profile_FadeIn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Options_Profile/Profile:label_settings:font_color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Options_Profile/Profile:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(645, -200), Vector2(645, 373)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Options_Profile/ProfileSettingsCase:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(592, 1160), Vector2(592, 560)]
+}
+
+[sub_resource type="Animation" id="Animation_yjq64"]
+resource_name = "Anim_Profile_FadeOut"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Options_Profile/Profile:label_settings:font_color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Options_Profile/Profile:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(645, 373), Vector2(645, -200)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Options_Profile/ProfileSettingsCase:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(592, 560), Vector2(592, 1160)]
+}
+
 [sub_resource type="Animation" id="Animation_5jqqd"]
 resource_name = "Anim_Sound_FadeIn"
 length = 0.5
@@ -412,7 +492,6 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_mweem"]
 resource_name = "Anim_Stack0_Init"
-length = 0.5
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -442,7 +521,7 @@ tracks/2/path = NodePath("TitleHeader2:label_settings:font_color")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.2, 0.5),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
@@ -454,10 +533,46 @@ tracks/3/path = NodePath("Underline:default_color")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.1, 0.5),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ProfileButton:theme_override_colors/font_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ProfileButton/CurrentProfileLabel:theme_override_colors/font_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ProfileButton:theme_override_colors/font_outline_color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_y736k"]
@@ -617,6 +732,78 @@ tracks/12/keys = {
 "update": 0,
 "values": [Vector2(533, 500)]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("ProfileButton:theme_override_colors/font_color")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [null]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("ProfileButton/CurrentProfileLabel:theme_override_colors/font_color")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("ProfileButton:theme_override_colors/font_outline_color")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [null]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("%Options_Profile/Profile:position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(645, 373)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("%Options_Profile/ProfileSettingsCase:position")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(592, 560)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("%Options_Profile/Profile:label_settings:font_color")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hplv1"]
 _data = {
@@ -626,6 +813,8 @@ _data = {
 "Anim_Game_FadeOut": SubResource("Animation_sboeb"),
 "Anim_OptionCategories_FadeOut": SubResource("Animation_kslew"),
 "Anim_OptionsCategories_FadeIn": SubResource("Animation_8w1od"),
+"Anim_Profile_FadeIn": SubResource("Animation_qoe65"),
+"Anim_Profile_FadeOut": SubResource("Animation_yjq64"),
 "Anim_Sound_FadeIn": SubResource("Animation_5jqqd"),
 "Anim_Sound_FadeOut": SubResource("Animation_lbqsi"),
 "Anim_Stack0_FadeIn": SubResource("Animation_8vv60"),
@@ -662,6 +851,12 @@ size_flags_vertical = 3
 theme = ExtResource("1_nvabs")
 script = ExtResource("2_fcx7b")
 metadata/_edit_horizontal_guides_ = [-136.0]
+
+[node name="Menu_BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_jrbwk")
+volume_db = -30.0
+autoplay = true
+bus = &"Music"
 
 [node name="StackAnimator" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Stack_0")
@@ -701,37 +896,13 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="SolidColor" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1088.0
-offset_top = -676.0
-offset_right = 1088.0
-offset_bottom = 676.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.505882, 0, 1, 1)
+[node name="Timer_Stack0_to_Profile" type="Timer" parent="StackAnimator"]
+wait_time = 0.5
+one_shot = true
 
-[node name="VioletVignette" type="TextureRect" parent="SolidColor"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -960.0
-offset_top = -540.0
-offset_right = 960.0
-offset_bottom = 540.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_o5rrx")
-expand_mode = 3
-stretch_mode = 5
+[node name="Timer_Profile_to_Stack0" type="Timer" parent="StackAnimator"]
+wait_time = 0.5
+one_shot = true
 
 [node name="ScrollingBackground" type="TextureRect" parent="."]
 visible = false
@@ -755,6 +926,38 @@ expand_mode = 3
 stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="VignetteVeil" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1080.0
+offset_top = -665.0
+offset_right = 1096.0
+offset_bottom = 687.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.368813, 0.0017124, 0.741924, 1)
+
+[node name="VioletVignette" type="TextureRect" parent="VignetteVeil"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1202.0
+offset_top = -676.0
+offset_right = 1202.0
+offset_bottom = 676.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_o5rrx")
+expand_mode = 3
+stretch_mode = 5
+
 [node name="Stack_0" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
@@ -769,7 +972,7 @@ anchor_right = 32.925
 anchor_bottom = 13.4
 offset_left = -6.10352e-05
 offset_top = 37.0
-offset_bottom = 37.0018
+offset_bottom = 37.002
 grow_horizontal = 2
 grow_vertical = 2
 focus_neighbor_left = NodePath("../MainMenuButtons/PlayButton")
@@ -800,9 +1003,9 @@ anchor_left = 14.4
 anchor_top = 13.8
 anchor_right = 33.6
 anchor_bottom = 15.6
-offset_top = 548.0
+offset_top = 3.0
 offset_right = -0.00012207
-offset_bottom = 547.999
+offset_bottom = 2.99902
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_wr4x0")
@@ -845,11 +1048,25 @@ stream = ExtResource("12_evs6x")
 [node name="SFX_Press" type="AudioStreamPlayer2D" parent="Stack_0/MainMenuButtons"]
 stream = ExtResource("13_w17qx")
 
-[node name="Menu_BGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_jrbwk")
-volume_db = -30.0
-autoplay = true
-bus = &"Music"
+[node name="ProfileButton" type="Button" parent="Stack_0"]
+layout_mode = 0
+offset_left = 876.0
+offset_top = 898.0
+offset_right = 1048.0
+offset_bottom = 956.0
+theme = ExtResource("9_sym4l")
+text = "profile"
+flat = true
+
+[node name="CurrentProfileLabel" type="Label" parent="Stack_0/ProfileButton"]
+layout_mode = 0
+offset_left = -295.0
+offset_top = 62.0
+offset_right = 468.0
+offset_bottom = 123.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "%profname%"
+horizontal_alignment = 1
 
 [node name="Options_2" type="Control" parent="."]
 visible = false
@@ -889,13 +1106,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -368.0
+offset_left = -376.5
 offset_top = 22.0
-offset_right = 360.0
+offset_right = 368.5
 offset_bottom = 80.0001
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 120
+theme_override_constants/separation = 145
 alignment = 1
 
 [node name="DisplayButton" type="Button" parent="Options_2/OptionsCategories"]
@@ -1509,6 +1726,193 @@ theme = ExtResource("9_sym4l")
 text = "Back"
 flat = true
 
+[node name="Options_Profile" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Profile" type="Label" parent="Options_Profile"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -167.0
+offset_right = 316.0
+offset_bottom = 33.0005
+grow_horizontal = 2
+grow_vertical = 2
+text = "Profile"
+label_settings = ExtResource("8_3ymww")
+
+[node name="Underline" type="Line2D" parent="Options_Profile"]
+position = Vector2(-6.10352e-05, 10)
+points = PackedVector2Array(592, 544, 1320, 544)
+width = 2.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="ProfileSettingsCase" type="VBoxContainer" parent="Options_Profile"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.308
+anchor_top = 0.511
+anchor_right = 0.687
+anchor_bottom = 0.83
+offset_left = 0.640015
+offset_top = 8.12
+offset_right = 0.960083
+offset_bottom = -181.4
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DimensionFrame" type="VBoxContainer" parent="Options_Profile/ProfileSettingsCase"]
+layout_mode = 2
+alignment = 1
+
+[node name="CurrentProfileCase" type="HBoxContainer" parent="Options_Profile/ProfileSettingsCase/DimensionFrame"]
+layout_mode = 2
+alignment = 1
+
+[node name="CurrentProfile" type="Label" parent="Options_Profile/ProfileSettingsCase/DimensionFrame/CurrentProfileCase"]
+layout_mode = 2
+text = "Current Profile:"
+label_settings = ExtResource("14_8jyle")
+
+[node name="ProfilesList" type="OptionButton" parent="Options_Profile/ProfileSettingsCase/DimensionFrame/CurrentProfileCase"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+flat = true
+item_count = 1
+selected = 0
+popup/item_0/text = "N/A"
+popup/item_0/id = 0
+
+[node name="ProfileManagementButtons" type="HBoxContainer" parent="Options_Profile/ProfileSettingsCase/DimensionFrame"]
+layout_mode = 2
+alignment = 1
+
+[node name="ProfileCreatorButton" type="Button" parent="Options_Profile/ProfileSettingsCase/DimensionFrame/ProfileManagementButtons"]
+layout_mode = 2
+theme = ExtResource("9_sym4l")
+text = "Create"
+flat = true
+
+[node name="ProfileDeleterButton" type="Button" parent="Options_Profile/ProfileSettingsCase/DimensionFrame/ProfileManagementButtons"]
+layout_mode = 2
+theme = ExtResource("9_sym4l")
+text = "Delete"
+flat = true
+
+[node name="ProfileCreator" type="VBoxContainer" parent="Options_Profile"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = 196.0
+offset_right = 360.0
+offset_bottom = 293.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ProfileNamer" type="HBoxContainer" parent="Options_Profile/ProfileCreator"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Options_Profile/ProfileCreator/ProfileNamer"]
+layout_mode = 2
+text = "profile name:"
+label_settings = ExtResource("14_8jyle")
+
+[node name="ProfileEntryField" type="TextEdit" parent="Options_Profile/ProfileCreator/ProfileNamer"]
+custom_minimum_size = Vector2(250, 35)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+placeholder_text = "Who am I?"
+context_menu_enabled = false
+deselect_on_focus_loss_enabled = false
+
+[node name="ConfirmDeny_Create" type="HBoxContainer" parent="Options_Profile/ProfileCreator"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="SaveButton" type="Button" parent="Options_Profile/ProfileCreator/ConfirmDeny_Create"]
+layout_mode = 2
+theme = ExtResource("9_sym4l")
+text = "save"
+flat = true
+
+[node name="CancelProfileButton" type="Button" parent="Options_Profile/ProfileCreator/ConfirmDeny_Create"]
+layout_mode = 2
+theme = ExtResource("9_sym4l")
+text = "cancel"
+flat = true
+
+[node name="ProfileDestroyer" type="VBoxContainer" parent="Options_Profile"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.308
+anchor_top = 0.615
+anchor_right = 0.687
+anchor_bottom = 0.815
+offset_left = 112.64
+offset_top = 63.8
+offset_right = -103.04
+offset_bottom = -48.2001
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="DeleteQueryLabel" type="Label" parent="Options_Profile/ProfileDestroyer"]
+layout_mode = 2
+text = "Delete currently selected profile?"
+label_settings = ExtResource("14_8jyle")
+horizontal_alignment = 1
+
+[node name="ConfirmDeny_Delete" type="HBoxContainer" parent="Options_Profile/ProfileDestroyer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="DeleteButton" type="Button" parent="Options_Profile/ProfileDestroyer/ConfirmDeny_Delete"]
+layout_mode = 2
+theme = ExtResource("9_sym4l")
+text = "delete"
+flat = true
+
+[node name="CancelDeletionButton" type="Button" parent="Options_Profile/ProfileDestroyer/ConfirmDeny_Delete"]
+layout_mode = 2
+theme = ExtResource("9_sym4l")
+text = "cancel"
+flat = true
+
+[node name="OptionsProfileReturn" type="Button" parent="Options_Profile"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -141.0
+offset_right = 100.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("9_sym4l")
+text = "Back"
+flat = true
+
 [connection signal="animation_finished" from="StackAnimator" to="." method="_on_stack_animator_animation_finished"]
 [connection signal="timeout" from="StackAnimator/Timer_Stack0_to_Options" to="." method="_on_timer_stack_0_to_options_categories_timeout"]
 [connection signal="timeout" from="StackAnimator/Timer_Options_to_Stack0" to="." method="_on_timer_options_categories_to_stack_0_timeout"]
@@ -1518,6 +1922,8 @@ flat = true
 [connection signal="timeout" from="StackAnimator/Timer_Sound_to_Options" to="." method="_on_timer_sound_to_options_timeout"]
 [connection signal="timeout" from="StackAnimator/Timer_Options_to_Game" to="." method="_on_timer_options_to_game_timeout"]
 [connection signal="timeout" from="StackAnimator/Timer_Game_to_Options" to="." method="_on_timer_game_to_options_timeout"]
+[connection signal="timeout" from="StackAnimator/Timer_Stack0_to_Profile" to="." method="_on_timer_stack_0_to_profile_timeout"]
+[connection signal="timeout" from="StackAnimator/Timer_Profile_to_Stack0" to="." method="_on_timer_profile_to_stack_0_timeout"]
 [connection signal="button_down" from="Stack_0/MainMenuButtons/PlayButton" to="." method="_on_play_button_button_down"]
 [connection signal="button_up" from="Stack_0/MainMenuButtons/PlayButton" to="." method="_on_play_button_button_up"]
 [connection signal="focus_entered" from="Stack_0/MainMenuButtons/PlayButton" to="." method="_on_play_button_focus_entered"]
@@ -1530,6 +1936,10 @@ flat = true
 [connection signal="button_up" from="Stack_0/MainMenuButtons/QuitButton" to="." method="_on_quit_button_button_up"]
 [connection signal="focus_entered" from="Stack_0/MainMenuButtons/QuitButton" to="." method="_on_quit_button_focus_entered"]
 [connection signal="mouse_entered" from="Stack_0/MainMenuButtons/QuitButton" to="." method="_on_quit_button_mouse_entered"]
+[connection signal="button_down" from="Stack_0/ProfileButton" to="." method="_on_profile_button_button_down"]
+[connection signal="button_up" from="Stack_0/ProfileButton" to="." method="_on_profile_button_button_up"]
+[connection signal="focus_entered" from="Stack_0/ProfileButton" to="." method="_on_profile_button_focus_entered"]
+[connection signal="mouse_entered" from="Stack_0/ProfileButton" to="." method="_on_profile_button_mouse_entered"]
 [connection signal="button_down" from="Options_2/OptionsCategories/DisplayButton" to="." method="_on_display_button_button_down"]
 [connection signal="button_up" from="Options_2/OptionsCategories/DisplayButton" to="." method="_on_display_button_button_up"]
 [connection signal="focus_entered" from="Options_2/OptionsCategories/DisplayButton" to="." method="_on_display_button_focus_entered"]
@@ -1561,3 +1971,31 @@ flat = true
 [connection signal="button_up" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_button_up"]
 [connection signal="focus_entered" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_focus_entered"]
 [connection signal="mouse_entered" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_mouse_entered"]
+[connection signal="button_down" from="Options_Profile/ProfileSettingsCase/DimensionFrame/ProfileManagementButtons/ProfileCreatorButton" to="." method="_on_profile_creator_button_button_down"]
+[connection signal="button_up" from="Options_Profile/ProfileSettingsCase/DimensionFrame/ProfileManagementButtons/ProfileCreatorButton" to="." method="_on_profile_creator_button_button_up"]
+[connection signal="focus_entered" from="Options_Profile/ProfileSettingsCase/DimensionFrame/ProfileManagementButtons/ProfileCreatorButton" to="." method="_on_profile_creator_button_focus_entered"]
+[connection signal="mouse_entered" from="Options_Profile/ProfileSettingsCase/DimensionFrame/ProfileManagementButtons/ProfileCreatorButton" to="." method="_on_profile_creator_button_mouse_entered"]
+[connection signal="button_down" from="Options_Profile/ProfileSettingsCase/DimensionFrame/ProfileManagementButtons/ProfileDeleterButton" to="." method="_on_profile_deleter_button_button_down"]
+[connection signal="button_up" from="Options_Profile/ProfileSettingsCase/DimensionFrame/ProfileManagementButtons/ProfileDeleterButton" to="." method="_on_profile_deleter_button_button_up"]
+[connection signal="focus_entered" from="Options_Profile/ProfileSettingsCase/DimensionFrame/ProfileManagementButtons/ProfileDeleterButton" to="." method="_on_profile_deleter_button_focus_entered"]
+[connection signal="mouse_entered" from="Options_Profile/ProfileSettingsCase/DimensionFrame/ProfileManagementButtons/ProfileDeleterButton" to="." method="_on_profile_deleter_button_mouse_entered"]
+[connection signal="button_down" from="Options_Profile/ProfileCreator/ConfirmDeny_Create/SaveButton" to="." method="_on_save_button_button_down"]
+[connection signal="button_up" from="Options_Profile/ProfileCreator/ConfirmDeny_Create/SaveButton" to="." method="_on_save_button_button_up"]
+[connection signal="focus_entered" from="Options_Profile/ProfileCreator/ConfirmDeny_Create/SaveButton" to="." method="_on_save_button_focus_entered"]
+[connection signal="mouse_entered" from="Options_Profile/ProfileCreator/ConfirmDeny_Create/SaveButton" to="." method="_on_save_button_mouse_entered"]
+[connection signal="button_down" from="Options_Profile/ProfileCreator/ConfirmDeny_Create/CancelProfileButton" to="." method="_on_cancel_profile_button_button_down"]
+[connection signal="button_up" from="Options_Profile/ProfileCreator/ConfirmDeny_Create/CancelProfileButton" to="." method="_on_cancel_profile_button_button_up"]
+[connection signal="focus_entered" from="Options_Profile/ProfileCreator/ConfirmDeny_Create/CancelProfileButton" to="." method="_on_cancel_profile_button_focus_entered"]
+[connection signal="mouse_entered" from="Options_Profile/ProfileCreator/ConfirmDeny_Create/CancelProfileButton" to="." method="_on_cancel_profile_button_mouse_entered"]
+[connection signal="button_down" from="Options_Profile/ProfileDestroyer/ConfirmDeny_Delete/DeleteButton" to="." method="_on_delete_button_button_down"]
+[connection signal="button_up" from="Options_Profile/ProfileDestroyer/ConfirmDeny_Delete/DeleteButton" to="." method="_on_delete_button_button_up"]
+[connection signal="focus_entered" from="Options_Profile/ProfileDestroyer/ConfirmDeny_Delete/DeleteButton" to="." method="_on_delete_button_focus_entered"]
+[connection signal="mouse_entered" from="Options_Profile/ProfileDestroyer/ConfirmDeny_Delete/DeleteButton" to="." method="_on_delete_button_mouse_entered"]
+[connection signal="button_down" from="Options_Profile/ProfileDestroyer/ConfirmDeny_Delete/CancelDeletionButton" to="." method="_on_cancel_deletion_button_button_down"]
+[connection signal="button_up" from="Options_Profile/ProfileDestroyer/ConfirmDeny_Delete/CancelDeletionButton" to="." method="_on_cancel_deletion_button_button_up"]
+[connection signal="focus_entered" from="Options_Profile/ProfileDestroyer/ConfirmDeny_Delete/CancelDeletionButton" to="." method="_on_cancel_deletion_button_focus_entered"]
+[connection signal="mouse_entered" from="Options_Profile/ProfileDestroyer/ConfirmDeny_Delete/CancelDeletionButton" to="." method="_on_cancel_deletion_button_mouse_entered"]
+[connection signal="button_down" from="Options_Profile/OptionsProfileReturn" to="." method="_on_options_profile_return_button_down"]
+[connection signal="button_up" from="Options_Profile/OptionsProfileReturn" to="." method="_on_options_profile_return_button_up"]
+[connection signal="focus_entered" from="Options_Profile/OptionsProfileReturn" to="." method="_on_options_profile_return_focus_entered"]
+[connection signal="mouse_entered" from="Options_Profile/OptionsProfileReturn" to="." method="_on_options_profile_return_mouse_entered"]

@@ -184,6 +184,7 @@ func _on_timer_stack_0_to_profile_timeout():
 	get_node("Stack_0").hide()
 	get_node("Options_Profile").show()
 
+
 func _on_options_profile_return_focus_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
 func _on_options_profile_return_mouse_entered():
@@ -329,14 +330,17 @@ func _on_timer_display_to_options_timeout():
 	$StackAnimator.play("Anim_OptionsCategories_FadeIn")	
 	$Options_2/OptionsCategories/DisplayButton.grab_focus()
 
+
 const display_options = [
 	DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
 	DisplayServer.WINDOW_MODE_WINDOWED,
 	DisplayServer.WINDOW_MODE_FULLSCREEN,
 ]
 
+
 func _on_display_list_item_selected(index: int) -> void:
 		DisplayServer.window_set_mode(display_options[index])
+
 
 const resolution_options = [
 	 Vector2(648, 648),
@@ -350,6 +354,7 @@ const resolution_options = [
 	 Vector2(1920, 1080),
 	 Vector2(2560, 1440)
 ]
+
 
 func _on_resolutions_list_item_selected(index: int) -> void:
 	DisplayServer.window_set_size(resolution_options[index])
@@ -371,12 +376,14 @@ func _on_timer_sound_to_options_timeout():
 	get_node("Options_2").show()
 	$Options_2/OptionsCategories/SoundButton.grab_focus()
 
+
 func _on_sound_device_options_item_selected(index: int) -> void:
 	AudioServer.set_output_device(%SoundDeviceOptions.get_item_text(index))
-	
-	
+
+
 func _on_options_game_return_focus_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
+
 func _on_options_game_return_mouse_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
 func _on_options_game_return_button_down():

@@ -1059,6 +1059,7 @@ text = "profile"
 flat = true
 
 [node name="CurrentProfileLabel" type="Label" parent="Stack_0/ProfileButton"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = -295.0
 offset_top = 62.0

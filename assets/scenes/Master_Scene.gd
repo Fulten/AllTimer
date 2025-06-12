@@ -148,7 +148,17 @@ func _launch_quiz():
 @rpc("authority", "call_local", "reliable")
 func load_quiz():
 	quiz_session_instance = quiz_session_scene.instantiate()
+	quiz_session_instance.end_of_quiz.connect(_end_of_quiz_handler)
 	get_tree().root.add_child(quiz_session_instance)
+	pass
+
+func _end_of_quiz_handler():
+	if multiplayer.is_server():
+		
+		pass
+	else:
+		
+		pass
 	pass
 
 func _exit_quiz():

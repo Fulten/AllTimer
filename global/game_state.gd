@@ -92,3 +92,13 @@ func _reset_players():
 		players[key]["score"] = 0
 		players[key]["guess"] = -1
 		players[key]["guessTime"] = 0
+		pass
+
+func _reset_quiz_state():
+	_reset_players()
+	PlayersLoaded = 0
+	CurrentQuestionIndex = 0
+	CurrentChances.clear()
+	CurrentQuizQuestions.clear()
+	GameStarted = false
+	pass

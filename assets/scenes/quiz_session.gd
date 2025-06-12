@@ -216,9 +216,7 @@ func _next_question():
 		loaded = false
 		countdown_timer.start(30)
 	else:
-		# get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn") send a signal instead
-		end_of_quiz.emit()
-		queue_free()
+		_end_of_quiz.rpc()
 	pass
 
 @rpc("authority", "reliable")
@@ -334,4 +332,11 @@ func _save_quiz_questions_locally():
 	for question in GameState.CurrentQuizQuestions:
 		local_question_set_uuids.append(question["uuid"])
 		pass
+	pass
+
+@rpc("authority", "call_local", "reliable")
+func _end_of_quiz():
+	GameState._reset_quiz_state()
+	end_of_quiz.emit()
+	queue_free()
 	pass

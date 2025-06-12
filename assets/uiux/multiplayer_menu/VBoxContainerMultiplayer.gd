@@ -30,7 +30,6 @@ func _on_start_button_button_down():
 	$ClickSFX.play()
 func _on_start_button_button_up():
 	launch_quiz.emit()
-	queue_free()
 
 func _on_multiplayer_host_button_mouse_entered():
 	$HoverSFX.play()

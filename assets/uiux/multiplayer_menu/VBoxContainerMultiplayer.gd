@@ -5,7 +5,7 @@ signal multiplayer_connect (ip)
 signal launch_quiz
 signal multiplayer_disconnect
 
-var ip_address = "127.0.0.1"
+var ip_address = "127.0.0."
 var IpInputTextNode
 
 # Called when the node enters the scene tree for the first time.
@@ -19,7 +19,7 @@ func _process(_delta):
 	pass
 
 func _on_text_edit_text_changed():
-	ip_address = IpInputTextNode.get("Text")
+	ip_address = IpInputTextNode.get("text")
 	pass
 	
 func _on_start_button_mouse_entered():

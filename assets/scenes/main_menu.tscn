@@ -371,7 +371,19 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(665.5, 1100), Vector2(665.5, 501)]
+"values": [Vector2(665.5, 1100), Vector2(665.5, 550)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Options_Sound2/SoundDeviceSetter:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(520, 1044), Vector2(520, 496)]
 }
 
 [sub_resource type="Animation" id="Animation_lbqsi"]
@@ -411,7 +423,19 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(665.5, 501), Vector2(665.5, 1100)]
+"values": [Vector2(665.5, 550), Vector2(665.5, 1100)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Options_Sound2/SoundDeviceSetter:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(520, 496), Vector2(520, 1044)]
 }
 
 [sub_resource type="Animation" id="Animation_8vv60"]
@@ -804,6 +828,18 @@ tracks/18/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 1)]
 }
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("../Options_Sound2/SoundDeviceSetter:position")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(666, 494)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hplv1"]
 _data = {
@@ -970,10 +1006,10 @@ anchor_left = 0.467
 anchor_top = 0.664
 anchor_right = 0.533
 anchor_bottom = 0.82
-offset_left = 2.23999
-offset_top = -113.08
-offset_right = -0.23999
-offset_bottom = -1.40002
+offset_left = 575.32
+offset_top = 346.44
+offset_right = 1296.68
+offset_bottom = 540.2
 grow_horizontal = 2
 grow_vertical = 2
 focus_neighbor_left = NodePath("../MainMenuButtons/PlayButton")
@@ -1378,7 +1414,7 @@ anchor_bottom = 0.5
 offset_left = -282.0
 offset_top = -163.0
 offset_right = 282.0
-offset_bottom = 37.0002
+offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Sound
@@ -1391,29 +1427,27 @@ points = PackedVector2Array(592, 544, 1320, 544)
 width = 2.0
 default_color = Color(0, 0, 0, 1)
 
-[node name="SettingsList" type="VBoxContainer" parent="Options_Sound2"]
+[node name="SoundDeviceSetter" type="HBoxContainer" parent="Options_Sound2"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -222.5
-offset_top = 29.0
-offset_right = 222.5
-offset_bottom = 405.0
+anchors_preset = -1
+anchor_left = 0.375
+anchor_top = 0.523
+anchor_right = 0.626
+anchor_bottom = 0.568
+offset_left = -6.10352e-05
+offset_top = 0.287994
+offset_right = 282.224
+offset_bottom = -0.192017
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Options_Sound2/SettingsList"]
-layout_mode = 2
-
-[node name="Tag_SoundDevice" type="Label" parent="Options_Sound2/SettingsList/HBoxContainer5"]
+[node name="Tag_SoundDevice" type="Label" parent="Options_Sound2/SoundDeviceSetter"]
 layout_mode = 2
 text = "Sound device: "
 label_settings = ExtResource("14_8jyle")
 
-[node name="SoundDeviceOptions" type="OptionButton" parent="Options_Sound2/SettingsList/HBoxContainer5"]
+[node name="SoundDeviceOptions" type="OptionButton" parent="Options_Sound2/SoundDeviceSetter"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_ixy01")
@@ -1429,6 +1463,20 @@ popup/item_1/text = "Corsair VOID"
 popup/item_1/id = 1
 popup/item_2/text = "THQ Spatial Speakers"
 popup/item_2/id = 2
+
+[node name="SettingsList" type="VBoxContainer" parent="Options_Sound2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.374
+anchor_top = 0.576
+anchor_right = 0.624
+anchor_bottom = 0.932
+offset_left = 1.276
+offset_top = -42.744
+offset_right = 2.276
+offset_bottom = -42.808
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VolumeControlHeader" type="Label" parent="Options_Sound2/SettingsList"]
 layout_mode = 2
@@ -1964,7 +2012,7 @@ flat = true
 [connection signal="button_up" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_button_up"]
 [connection signal="focus_entered" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_focus_entered"]
 [connection signal="mouse_entered" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_mouse_entered"]
-[connection signal="item_selected" from="Options_Sound2/SettingsList/HBoxContainer5/SoundDeviceOptions" to="." method="_on_sound_device_options_item_selected"]
+[connection signal="item_selected" from="Options_Sound2/SoundDeviceSetter/SoundDeviceOptions" to="." method="_on_sound_device_options_item_selected"]
 [connection signal="button_down" from="Options_Sound2/OptionsSoundReturn" to="." method="_on_options_sound_return_button_down"]
 [connection signal="button_up" from="Options_Sound2/OptionsSoundReturn" to="." method="_on_options_sound_return_button_up"]
 [connection signal="focus_entered" from="Options_Sound2/OptionsSoundReturn" to="." method="_on_options_sound_return_focus_entered"]

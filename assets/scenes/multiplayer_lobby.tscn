@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://dy8lkjphm6pdg"]
+[gd_scene load_steps=11 format=3 uid="uid://dy8lkjphm6pdg"]
 
 [ext_resource type="Script" path="res://assets/scenes/multiplayer_lobby.gd" id="1_e4r6j"]
 [ext_resource type="Texture2D" uid="uid://ctaoad4ca7mx7" path="res://assets/uiux/main_menu/T_MenuVignette_D.tga" id="1_l3cbn"]
 [ext_resource type="Theme" uid="uid://bs1imbtgf7dr4" path="res://assets/scenes/Button_Clickable.tres" id="2_jy5fm"]
+[ext_resource type="AudioStream" uid="uid://c2mukxx57iwme" path="res://assets/uiux/main_menu/bgm_lobby.mp3" id="2_kyt78"]
 [ext_resource type="LabelSettings" uid="uid://dtxn1h8dpa0pi" path="res://assets/scenes/Label_Title.tres" id="2_ljpbk"]
+[ext_resource type="AudioStream" uid="uid://c77k0qy3iet7e" path="res://assets/uiux/main_menu/sfx_hover.mp3" id="3_nixvm"]
 [ext_resource type="LabelSettings" uid="uid://8a18x00tfv7d" path="res://assets/scenes/Label_Tag.tres" id="3_qhvyi"]
+[ext_resource type="AudioStream" uid="uid://dimbdo2k6d1uw" path="res://assets/uiux/main_menu/sfx_click.mp3" id="4_qshvx"]
 [ext_resource type="LabelSettings" uid="uid://b8rucp80rws68" path="res://assets/scenes/Label_Subsection.tres" id="5_wtxry"]
 [ext_resource type="LabelSettings" uid="uid://mv8bcxsbvof1" path="res://assets/scenes/Label_TagW.tres" id="6_ujxch"]
 
@@ -16,6 +19,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_e4r6j")
+
+[node name="BGM_Lobby" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_kyt78")
+volume_db = -20.0
+autoplay = true
+bus = &"Music"
+
+[node name="SFX_Hover" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_nixvm")
+bus = &"SFX"
+
+[node name="SFX_Press" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_qshvx")
+bus = &"SFX"
 
 [node name="BGBound" type="ColorRect" parent="."]
 layout_mode = 1
@@ -139,6 +156,7 @@ label_settings = ExtResource("5_wtxry")
 horizontal_alignment = 1
 
 [node name="CancelConnectionButton" type="Button" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.433

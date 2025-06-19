@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://dy8lkjphm6pdg"]
+[gd_scene load_steps=8 format=3 uid="uid://dy8lkjphm6pdg"]
 
+[ext_resource type="Script" path="res://assets/scenes/multiplayer_lobby.gd" id="1_e4r6j"]
 [ext_resource type="Texture2D" uid="uid://ctaoad4ca7mx7" path="res://assets/uiux/main_menu/T_MenuVignette_D.tga" id="1_l3cbn"]
+[ext_resource type="Theme" uid="uid://bs1imbtgf7dr4" path="res://assets/scenes/Button_Clickable.tres" id="2_jy5fm"]
+[ext_resource type="LabelSettings" uid="uid://dtxn1h8dpa0pi" path="res://assets/scenes/Label_Title.tres" id="2_ljpbk"]
+[ext_resource type="LabelSettings" uid="uid://8a18x00tfv7d" path="res://assets/scenes/Label_Tag.tres" id="3_qhvyi"]
+[ext_resource type="LabelSettings" uid="uid://b8rucp80rws68" path="res://assets/scenes/Label_Subsection.tres" id="5_wtxry"]
+[ext_resource type="LabelSettings" uid="uid://mv8bcxsbvof1" path="res://assets/scenes/Label_TagW.tres" id="6_ujxch"]
 
 [node name="MultiplayerLobby" type="Control"]
 layout_mode = 3
@@ -9,23 +15,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_e4r6j")
 
-[node name="SolidColor" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1088.0
-offset_top = -676.0
-offset_right = 1088.0
-offset_bottom = 676.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.505882, 0, 1, 1)
-
-[node name="VioletVignette" type="TextureRect" parent="SolidColor"]
+[node name="BGBound" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -38,6 +30,248 @@ offset_right = 960.0
 offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.505882, 0, 1, 1)
+
+[node name="VioletVignette" type="TextureRect" parent="BGBound"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.033
+anchor_top = 0.059
+anchor_right = 0.967
+anchor_bottom = 0.948
+offset_left = -70.36
+offset_top = -63.72
+offset_right = 70.3599
+offset_bottom = 64.1599
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_l3cbn")
 expand_mode = 3
 stretch_mode = 5
+
+[node name="Lobby" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.333
+anchor_top = 0.111
+anchor_right = 0.667
+anchor_bottom = 0.296
+offset_left = 75.64
+offset_top = 0.119987
+offset_right = -74.6401
+offset_bottom = 0.320007
+grow_horizontal = 2
+text = "lobby"
+label_settings = ExtResource("2_ljpbk")
+
+[node name="PeerConnectors" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -239.0
+offset_top = -156.0
+offset_right = 239.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HostButton" type="Button" parent="PeerConnectors"]
+layout_mode = 2
+theme = ExtResource("2_jy5fm")
+text = "Host"
+flat = true
+
+[node name="Label" type="Label" parent="PeerConnectors"]
+layout_mode = 2
+text = "or"
+label_settings = ExtResource("3_qhvyi")
+
+[node name="JoinButton" type="Button" parent="PeerConnectors"]
+layout_mode = 2
+theme = ExtResource("2_jy5fm")
+text = "Join
+"
+flat = true
+
+[node name="TextEdit" type="TextEdit" parent="PeerConnectors"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+placeholder_text = " 069.420.1.337"
+
+[node name="HostingLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.367
+anchor_top = 0.356
+anchor_right = 0.633
+anchor_bottom = 0.415
+offset_left = 7.35999
+offset_top = 7.51999
+offset_right = -7.35999
+offset_bottom = -8.20001
+grow_horizontal = 2
+grow_vertical = 2
+text = "Hosting"
+label_settings = ExtResource("5_wtxry")
+horizontal_alignment = 1
+
+[node name="JoinedLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.367
+anchor_top = 0.356
+anchor_right = 0.633
+anchor_bottom = 0.415
+offset_left = 7.35999
+offset_top = 7.51999
+offset_right = -7.35999
+offset_bottom = -8.20001
+grow_horizontal = 2
+grow_vertical = 2
+text = "Joined"
+label_settings = ExtResource("5_wtxry")
+horizontal_alignment = 1
+
+[node name="CancelConnectionButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.433
+anchor_top = 0.356
+anchor_right = 0.567
+anchor_bottom = 0.474
+offset_left = 0.639954
+offset_top = 55.52
+offset_right = -8.64001
+offset_bottom = -15.92
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_jy5fm")
+text = "cancel"
+flat = true
+
+[node name="StateChangers" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.379
+anchor_top = 0.778
+anchor_right = 0.625
+anchor_bottom = 0.889
+offset_left = 40.32
+offset_top = 3.75995
+offset_right = -48.0
+offset_bottom = -0.120056
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LaunchButton" type="Button" parent="StateChangers"]
+layout_mode = 2
+theme = ExtResource("2_jy5fm")
+text = "Launch game"
+flat = true
+
+[node name="BackToMainButton" type="Button" parent="StateChangers"]
+layout_mode = 2
+theme = ExtResource("2_jy5fm")
+text = "back"
+flat = true
+
+[node name="PeerCase" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.282
+anchor_top = 0.48
+anchor_right = 0.467
+anchor_bottom = 0.653
+offset_left = 0.559998
+offset_top = -0.400024
+offset_right = -0.640015
+offset_bottom = -0.240051
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PeerCase"]
+layout_mode = 2
+text = "Connected Players"
+label_settings = ExtResource("5_wtxry")
+
+[node name="ClientProfile" type="Label" parent="PeerCase"]
+layout_mode = 2
+text = "%ProfileName%"
+label_settings = ExtResource("6_ujxch")
+horizontal_alignment = 1
+
+[node name="Peer1" type="Label" parent="PeerCase"]
+visible = false
+layout_mode = 2
+text = "Peer_Profile_Name"
+label_settings = ExtResource("3_qhvyi")
+horizontal_alignment = 1
+
+[node name="Peer2" type="Label" parent="PeerCase"]
+visible = false
+layout_mode = 2
+text = "Peer_Profile_Name"
+label_settings = ExtResource("3_qhvyi")
+horizontal_alignment = 1
+
+[node name="Peer3" type="Label" parent="PeerCase"]
+visible = false
+layout_mode = 2
+text = "Peer_Profile_Name"
+label_settings = ExtResource("3_qhvyi")
+horizontal_alignment = 1
+
+[node name="ProfileCase" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.533
+anchor_top = 0.481
+anchor_right = 0.733
+anchor_bottom = 0.652
+offset_left = 0.639893
+offset_top = 0.519958
+offset_right = 0.639893
+offset_bottom = -0.160034
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ProfileCase"]
+layout_mode = 2
+text = "selected profile"
+label_settings = ExtResource("5_wtxry")
+
+[node name="ProfilesList" type="OptionButton" parent="ProfileCase"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+flat = true
+item_count = 1
+selected = 0
+popup/item_0/text = "N/A"
+popup/item_0/id = 0
+
+[connection signal="button_down" from="PeerConnectors/HostButton" to="." method="_on_host_button_button_down"]
+[connection signal="button_up" from="PeerConnectors/HostButton" to="." method="_on_host_button_button_up"]
+[connection signal="focus_entered" from="PeerConnectors/HostButton" to="." method="_on_host_button_focus_entered"]
+[connection signal="mouse_entered" from="PeerConnectors/HostButton" to="." method="_on_host_button_mouse_entered"]
+[connection signal="button_down" from="PeerConnectors/JoinButton" to="." method="_on_join_button_button_down"]
+[connection signal="button_up" from="PeerConnectors/JoinButton" to="." method="_on_join_button_button_up"]
+[connection signal="focus_entered" from="PeerConnectors/JoinButton" to="." method="_on_join_button_focus_entered"]
+[connection signal="mouse_entered" from="PeerConnectors/JoinButton" to="." method="_on_join_button_mouse_entered"]
+[connection signal="button_down" from="CancelConnectionButton" to="." method="_on_cancel_connection_button_button_down"]
+[connection signal="button_up" from="CancelConnectionButton" to="." method="_on_cancel_connection_button_button_up"]
+[connection signal="focus_entered" from="CancelConnectionButton" to="." method="_on_cancel_connection_button_focus_entered"]
+[connection signal="mouse_entered" from="CancelConnectionButton" to="." method="_on_cancel_connection_button_mouse_entered"]
+[connection signal="button_down" from="StateChangers/LaunchButton" to="." method="_on_launch_button_button_down"]
+[connection signal="button_up" from="StateChangers/LaunchButton" to="." method="_on_launch_button_button_up"]
+[connection signal="focus_entered" from="StateChangers/LaunchButton" to="." method="_on_launch_button_focus_entered"]
+[connection signal="mouse_entered" from="StateChangers/LaunchButton" to="." method="_on_launch_button_mouse_entered"]
+[connection signal="button_down" from="StateChangers/BackToMainButton" to="." method="_on_back_to_main_button_button_down"]
+[connection signal="button_up" from="StateChangers/BackToMainButton" to="." method="_on_back_to_main_button_button_up"]
+[connection signal="focus_entered" from="StateChangers/BackToMainButton" to="." method="_on_back_to_main_button_focus_entered"]
+[connection signal="mouse_entered" from="StateChangers/BackToMainButton" to="." method="_on_back_to_main_button_mouse_entered"]

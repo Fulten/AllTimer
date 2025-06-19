@@ -13,8 +13,8 @@
 [ext_resource type="Script" path="res://assets/scenes/MasterVolume.gd" id="11_e6ba1"]
 [ext_resource type="StyleBox" uid="uid://dcuqsqcektumy" path="res://assets/uiux/main_menu/volumeSlider.res" id="11_sycm3"]
 [ext_resource type="AudioStream" uid="uid://b7uw13gw7eym7" path="res://assets/uiux/main_menu/SFX_ButtonHover.mp3" id="12_evs6x"]
+[ext_resource type="LabelSettings" uid="uid://mv8bcxsbvof1" path="res://assets/scenes/Label_TagW.tres" id="12_fat6d"]
 [ext_resource type="AudioStream" uid="uid://crk8ui184joxw" path="res://assets/uiux/main_menu/SFX_ButtonPress.mp3" id="13_w17qx"]
-[ext_resource type="LabelSettings" uid="uid://8a18x00tfv7d" path="res://assets/scenes/Label_Tag.tres" id="14_8jyle"]
 [ext_resource type="LabelSettings" uid="uid://b8rucp80rws68" path="res://assets/scenes/Label_Subsection.tres" id="18_f5q02"]
 [ext_resource type="LabelSettings" uid="uid://bga51ml3vvwne" path="res://assets/scenes/Label_SubTag.tres" id="19_ihq36"]
 
@@ -969,10 +969,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1080.0
-offset_top = -665.0
-offset_right = 1096.0
-offset_bottom = 687.0
+offset_left = -968.0
+offset_top = -548.0
+offset_right = 968.0
+offset_bottom = 548.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.368813, 0.0017124, 0.741924, 1)
@@ -984,10 +984,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1202.0
-offset_top = -676.0
-offset_right = 1202.0
-offset_bottom = 676.0
+offset_left = -978.222
+offset_top = -548.0
+offset_right = 970.222
+offset_bottom = 548.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_o5rrx")
@@ -1097,10 +1097,13 @@ flat = true
 
 [node name="CurrentProfileLabel" type="Label" parent="Stack_0/ProfileButton"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = -295.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.715
+anchor_right = 2.721
+offset_left = -0.019989
 offset_top = 62.0
-offset_right = 468.0
+offset_right = -0.0120239
 offset_bottom = 123.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "%profname%"
@@ -1260,7 +1263,7 @@ alignment = 1
 [node name="Tag_DisplayType" type="Label" parent="Options_Display2/OptionsList/DisplayType"]
 layout_mode = 2
 text = "Display type:"
-label_settings = ExtResource("14_8jyle")
+label_settings = ExtResource("12_fat6d")
 
 [node name="DisplayList" type="OptionButton" parent="Options_Display2/OptionsList/DisplayType"]
 unique_name_in_owner = true
@@ -1287,7 +1290,7 @@ alignment = 1
 [node name="Tag_ScreenResolution" type="Label" parent="Options_Display2/OptionsList/ResolutionSettings"]
 layout_mode = 2
 text = "Screen resolution: "
-label_settings = ExtResource("14_8jyle")
+label_settings = ExtResource("12_fat6d")
 
 [node name="ResolutionsList" type="OptionButton" parent="Options_Display2/OptionsList/ResolutionSettings"]
 unique_name_in_owner = true
@@ -1326,7 +1329,7 @@ alignment = 1
 [node name="Tag_InputDisplay" type="Label" parent="Options_Display2/OptionsList/ButtonIcons"]
 layout_mode = 2
 text = "Input display:"
-label_settings = ExtResource("14_8jyle")
+label_settings = ExtResource("12_fat6d")
 
 [node name="InputDisplayList" type="OptionButton" parent="Options_Display2/OptionsList/ButtonIcons"]
 unique_name_in_owner = true
@@ -1356,7 +1359,7 @@ alignment = 1
 [node name="Interface Theme" type="Label" parent="Options_Display2/OptionsList/SessionThemes"]
 layout_mode = 2
 text = "Interface theme: "
-label_settings = ExtResource("14_8jyle")
+label_settings = ExtResource("12_fat6d")
 
 [node name="SessionThemesList" type="OptionButton" parent="Options_Display2/OptionsList/SessionThemes"]
 unique_name_in_owner = true
@@ -1434,7 +1437,6 @@ anchor_left = 0.375
 anchor_top = 0.523
 anchor_right = 0.626
 anchor_bottom = 0.568
-offset_left = -6.10352e-05
 offset_top = 0.287994
 offset_right = 282.224
 offset_bottom = -0.192017
@@ -1445,7 +1447,7 @@ alignment = 1
 [node name="Tag_SoundDevice" type="Label" parent="Options_Sound2/SoundDeviceSetter"]
 layout_mode = 2
 text = "Sound device: "
-label_settings = ExtResource("14_8jyle")
+label_settings = ExtResource("12_fat6d")
 
 [node name="SoundDeviceOptions" type="OptionButton" parent="Options_Sound2/SoundDeviceSetter"]
 unique_name_in_owner = true
@@ -1653,7 +1655,7 @@ alignment = 1
 [node name="Tag_RoundLength" type="Label" parent="Options_Game2/SettingsList/TimerSetting"]
 layout_mode = 2
 text = "Round timer length: "
-label_settings = ExtResource("14_8jyle")
+label_settings = ExtResource("12_fat6d")
 
 [node name="TimerSettingList" type="OptionButton" parent="Options_Game2/SettingsList/TimerSetting"]
 unique_name_in_owner = true
@@ -1681,7 +1683,7 @@ alignment = 1
 [node name="Tag_WinCondition" type="Label" parent="Options_Game2/SettingsList/WinConditions"]
 layout_mode = 2
 text = "Win condition:"
-label_settings = ExtResource("14_8jyle")
+label_settings = ExtResource("12_fat6d")
 
 [node name="WinConList" type="OptionButton" parent="Options_Game2/SettingsList/WinConditions"]
 unique_name_in_owner = true
@@ -1719,7 +1721,7 @@ alignment = 1
 [node name="ShowTallies" type="Label" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer"]
 layout_mode = 2
 text = "Show tallies"
-label_settings = ExtResource("14_8jyle")
+label_settings = ExtResource("12_fat6d")
 
 [node name="TalliesCheckBox" type="CheckBox" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -1733,7 +1735,7 @@ alignment = 1
 [node name="Lose4Skip" type="Label" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Lose points for skipping"
-label_settings = ExtResource("14_8jyle")
+label_settings = ExtResource("12_fat6d")
 
 [node name="Lose4SkipCheckBox" type="CheckBox" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer2"]
 unique_name_in_owner = true
@@ -1747,7 +1749,7 @@ alignment = 1
 [node name="GamblingOn" type="Label" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer3"]
 layout_mode = 2
 text = "Gambling modes"
-label_settings = ExtResource("14_8jyle")
+label_settings = ExtResource("12_fat6d")
 
 [node name="GamblingOnCheckBox" type="CheckBox" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer3"]
 unique_name_in_owner = true
@@ -1830,7 +1832,7 @@ alignment = 1
 [node name="CurrentProfile" type="Label" parent="Options_Profile/ProfileSettingsCase/DimensionFrame/CurrentProfileCase"]
 layout_mode = 2
 text = "Current Profile:"
-label_settings = ExtResource("14_8jyle")
+label_settings = ExtResource("12_fat6d")
 
 [node name="ProfilesList" type="OptionButton" parent="Options_Profile/ProfileSettingsCase/DimensionFrame/CurrentProfileCase"]
 layout_mode = 2
@@ -1880,7 +1882,7 @@ alignment = 1
 [node name="Label" type="Label" parent="Options_Profile/ProfileCreator/ProfileNamer"]
 layout_mode = 2
 text = "profile name:"
-label_settings = ExtResource("14_8jyle")
+label_settings = ExtResource("12_fat6d")
 
 [node name="ProfileEntryField" type="TextEdit" parent="Options_Profile/ProfileCreator/ProfileNamer"]
 custom_minimum_size = Vector2(250, 35)
@@ -1926,7 +1928,7 @@ alignment = 1
 [node name="DeleteQueryLabel" type="Label" parent="Options_Profile/ProfileDestroyer"]
 layout_mode = 2
 text = "Delete currently selected profile?"
-label_settings = ExtResource("14_8jyle")
+label_settings = ExtResource("12_fat6d")
 horizontal_alignment = 1
 
 [node name="ConfirmDeny_Delete" type="HBoxContainer" parent="Options_Profile/ProfileDestroyer"]
@@ -1962,6 +1964,79 @@ grow_vertical = 0
 theme = ExtResource("9_sym4l")
 text = "Back"
 flat = true
+
+[node name="ProfileStatsCase" type="VBoxContainer" parent="Options_Profile"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7
+anchor_top = 0.519
+anchor_right = 0.933
+anchor_bottom = 0.83
+offset_left = 7.99988
+offset_top = 7.47992
+offset_right = -7.36011
+offset_bottom = -8.40002
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="Options_Profile/ProfileStatsCase"]
+layout_mode = 2
+text = "Profile Stats"
+label_settings = ExtResource("18_f5q02")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Options_Profile/ProfileStatsCase"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Options_Profile/ProfileStatsCase/HBoxContainer"]
+layout_mode = 2
+text = "Correct answers: "
+label_settings = ExtResource("12_fat6d")
+
+[node name="ProfileUniqueAnswerCounter" type="Label" parent="Options_Profile/ProfileStatsCase/HBoxContainer"]
+layout_mode = 2
+text = "#/#"
+label_settings = ExtResource("12_fat6d")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Options_Profile/ProfileStatsCase"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Options_Profile/ProfileStatsCase/HBoxContainer2"]
+layout_mode = 2
+text = "Answer Accuracy:"
+label_settings = ExtResource("12_fat6d")
+
+[node name="ProfileAnswerAccuracyCounter" type="Label" parent="Options_Profile/ProfileStatsCase/HBoxContainer2"]
+layout_mode = 2
+text = "#%"
+label_settings = ExtResource("12_fat6d")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Options_Profile/ProfileStatsCase"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Options_Profile/ProfileStatsCase/HBoxContainer3"]
+layout_mode = 2
+text = "Highest Score: "
+label_settings = ExtResource("12_fat6d")
+
+[node name="ProfileHighestScoreCounter" type="Label" parent="Options_Profile/ProfileStatsCase/HBoxContainer3"]
+layout_mode = 2
+text = "#"
+label_settings = ExtResource("12_fat6d")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Options_Profile/ProfileStatsCase"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Options_Profile/ProfileStatsCase/HBoxContainer4"]
+layout_mode = 2
+text = "Lowest Score: "
+label_settings = ExtResource("12_fat6d")
+
+[node name="ProfileLowestScoreCounter" type="Label" parent="Options_Profile/ProfileStatsCase/HBoxContainer4"]
+layout_mode = 2
+text = "#"
+label_settings = ExtResource("12_fat6d")
 
 [connection signal="animation_finished" from="StackAnimator" to="." method="_on_stack_animator_animation_finished"]
 [connection signal="timeout" from="StackAnimator/Timer_Stack0_to_Options" to="." method="_on_timer_stack_0_to_options_categories_timeout"]

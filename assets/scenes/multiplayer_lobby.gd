@@ -119,7 +119,11 @@ func _connected_to_server():
 	$JoiningLabel.hide()
 	$JoinedLabel.show()
 	pass
-	
+
+func _enable_launch_button():
+	$StateChangers/LaunchButton.disabled = false
+	pass
+
 func _connection_reset(error):
 	print("Connection Failed: %s" % error)
 	_update_connected_players()

@@ -96,12 +96,18 @@ func _mp_join(ip_address):
 	pass
 
 func _mp_on_peer_connected(id: int):
-	_register_player.rpc_id(id, "Player %s" % multiplayer.get_unique_id())
-	print("peer %s to %s" % [id, multiplayer.get_unique_id()])
-	pass	
+	if !GameState.GameStarted:
+		_register_player.rpc_id(id, "Player %s" % multiplayer.get_unique_id())
+		print("peer %s to %s" % [id, multiplayer.get_unique_id()])
+		pass
+	elif multiplayer.is_server():
+		_kick_peer.rpc_id(id, "Connection Refused, quiz in progress")
+		pass
 	
 @rpc("any_peer", "reliable")
 func _register_player(playerName):
+	# if the game is already in progress deny connection
+
 	var playerData = GameState.Player.new()
 	var newPlayerId = multiplayer.get_remote_sender_id()
 	playerData.initilize(playerName, newPlayerId)
@@ -157,10 +163,16 @@ func load_quiz():
 	get_tree().root.add_child(quiz_session_instance)
 	pass
 
+@rpc("authority", "reliable")
+func _kick_peer(reason):
+	multiplayer.multiplayer_peer = null
+	GameState.players.clear()
+	multiplayer_lobby_instance._connection_reset(reason)
+	pass
 
 func _end_of_quiz_handler():
 	if multiplayer.is_server():
-		
+		multiplayer_lobby_instance._enable_launch_button()
 		pass
 	else:
 		

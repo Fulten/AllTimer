@@ -13,7 +13,7 @@ func _ready():
 	IpInputTextNode = $PeerConnectors/TextEdit
 	IpInputTextNode.set("text", ip_address)
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _on_text_edit_text_changed():
@@ -37,7 +37,6 @@ func _on_host_button_button_up():
 	$PeerConnectors/JoinButton.disabled = true
 	$StateChangers/LaunchButton.disabled = false
 
-
 func _on_join_button_mouse_entered():
 	$SFX_Hover.play()
 func _on_join_button_focus_entered():
@@ -53,7 +52,6 @@ func _on_join_button_button_up():
 	$CancelConnectionButton.disabled = false
 	$PeerConnectors/HostButton.disabled = true
 	$PeerConnectors/JoinButton.disabled = true
-
 
 func _on_cancel_connection_button_mouse_entered():
 	$SFX_Hover.play()
@@ -74,7 +72,7 @@ func _on_cancel_connection_button_button_up():
 	$StateChangers/LaunchButton.disabled = true
 	
 	multiplayer_disconnect.emit()
-	_update_connected_players(0)
+	_update_connected_players()
 	
 func _on_launch_button_mouse_entered():
 	$SFX_Hover.play()
@@ -87,7 +85,6 @@ func _on_launch_button_button_up():
 	launch_quiz.emit()
 	pass
 
-
 func _on_back_to_main_button_mouse_entered():
 	$SFX_Hover.play()
 func _on_back_to_main_button_focus_entered():
@@ -98,16 +95,18 @@ func _on_back_to_main_button_button_up():
 	_exit_menu()
 	pass
 
-func _update_connected_players(index):
+func _update_connected_players():
 	for n in range(0, 3):
 		var playerLabel = get_node("./PeerCase/Peer%d" % n)
 		playerLabel.set("text", "")
+		playerLabel.hide()
 		
 	var n = 0
 	
 	for playerId in GameState.players:
 		var playerLabel = get_node("./PeerCase/Peer%d" % n)
 		playerLabel.set("text", GameState.players[playerId].name)
+		playerLabel.show()
 		n += 1
 	pass
 	
@@ -123,7 +122,7 @@ func _connected_to_server():
 	
 func _connection_reset(error):
 	print("Connection Failed: %s" % error)
-	_update_connected_players(0)
+	_update_connected_players()
 	
 	$HostingLabel.hide()
 	$JoinedLabel.hide()

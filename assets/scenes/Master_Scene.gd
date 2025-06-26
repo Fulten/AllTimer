@@ -75,7 +75,7 @@ func _mp_host_server(ip_address):
 	playerData.initilize("Player 1", 1)
 	GameState.players[1] = playerData
 	
-	multiplayer_lobby_script._update_connected_players(GameState.PlayerCount)
+	multiplayer_lobby_script._update_connected_players()
 	print("Hosting server on IP: %s, PORT: %d" % [IP_ADDRESS, PORT])
 	pass
 	
@@ -109,14 +109,14 @@ func _register_player(playerName):
 	GameState.players[newPlayerId] = playerData
 	
 	GameState.PlayerCount += 1
-	multiplayer_lobby_script._update_connected_players(GameState.PlayerCount)
+	multiplayer_lobby_script._update_connected_players()
 	print("player %s connected" % playerData.uuid)
 	pass
 
 func _mp_on_peer_disconnected(id: int):
 	GameState.players.erase(id)
 	GameState.PlayerCount -= 1
-	multiplayer_lobby_script._update_connected_players(GameState.PlayerCount)
+	multiplayer_lobby_script._update_connected_players()
 	print("player %s disconneted" % id)
 	pass
 

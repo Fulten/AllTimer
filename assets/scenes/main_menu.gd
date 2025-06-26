@@ -122,7 +122,7 @@ func apply_game_settings(timer: int, win_con: String, tallies: bool, skipping_lo
 	return
 
 
-func _input(event):
+func _input(_event):
 	pass
 
 

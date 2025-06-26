@@ -239,6 +239,7 @@ text = "Connected Players"
 label_settings = ExtResource("5_wtxry")
 
 [node name="Peer0" type="Label" parent="PeerCase"]
+visible = false
 layout_mode = 2
 text = "%ProfileName%"
 label_settings = ExtResource("6_ujxch")

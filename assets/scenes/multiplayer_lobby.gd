@@ -47,7 +47,7 @@ func _on_join_button_button_down():
 func _on_join_button_button_up():
 	multiplayer_connect.emit(ip_address)
 	$PeerConnectors.hide()
-	$JoinedLabel.show()
+	$JoiningLabel.show()
 	$CancelConnectionButton.show()
 	
 	$CancelConnectionButton.disabled = false
@@ -63,6 +63,7 @@ func _on_cancel_connection_button_button_down():
 	$SFX_Press.play()
 func _on_cancel_connection_button_button_up():
 	$HostingLabel.hide()
+	$JoiningLabel.hide()
 	$JoinedLabel.hide()
 	$CancelConnectionButton.hide()
 	$PeerConnectors.show()
@@ -115,12 +116,18 @@ func _exit_menu():
 	get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
 	queue_free()
 	
+func _connected_to_server():
+	$JoiningLabel.hide()
+	$JoinedLabel.show()
+	pass
+	
 func _connection_reset(error):
 	print("Connection Failed: %s" % error)
 	_update_connected_players(0)
 	
 	$HostingLabel.hide()
 	$JoinedLabel.hide()
+	$JoiningLabel.hide()
 	$CancelConnectionButton.hide()
 	$PeerConnectors.show()
 	

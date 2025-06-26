@@ -85,7 +85,7 @@ func _mp_disconnect():
 		multiplayer.multiplayer_peer = null
 		pass
 	GameState.players.clear()
-	GameState.PlayerCount = 0
+	GameState.PlayerCount = 1
 	pass	
 
 func _mp_join(ip_address):
@@ -125,11 +125,11 @@ func _mp_on_connected_ok():
 	var playerData = GameState.Player.new()
 	playerData.initilize("Player %s" % multiplayer.get_unique_id(), multiplayer.get_unique_id())
 	GameState.players[multiplayer.get_unique_id()] = playerData
+	multiplayer_lobby_instance._connected_to_server()
 	pass
 
 # player has failed to connect to server
 func _mp_on_connected_fail():
-	print("connection failed")
 	multiplayer.multiplayer_peer = null
 	multiplayer_lobby_instance._connection_reset("connection failed")
 	pass
@@ -156,6 +156,7 @@ func load_quiz():
 	quiz_session_instance.end_of_quiz.connect(_end_of_quiz_handler)
 	get_tree().root.add_child(quiz_session_instance)
 	pass
+
 
 func _end_of_quiz_handler():
 	if multiplayer.is_server():

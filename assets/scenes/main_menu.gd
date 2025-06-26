@@ -123,14 +123,7 @@ func apply_game_settings(timer: int, win_con: String, tallies: bool, skipping_lo
 
 
 func _input(event):
-	if event.is_action_pressed("1_P"):
-		GameState.PlayerCount = 1
-	elif event.is_action_pressed("2_P"):
-		GameState.PlayerCount = 2
-	elif event.is_action_pressed("3_P"):
-		GameState.PlayerCount = 3
-	elif event.is_action_pressed("4_P"):
-		GameState.PlayerCount = 4
+	pass
 
 
 #Button UX

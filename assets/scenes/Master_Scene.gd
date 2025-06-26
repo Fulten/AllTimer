@@ -1,14 +1,14 @@
 extends Control
 
-var load_multiplayer_menu_scene = true
+var load_multiplayer_lobby_scene = true
 
 var quiz_session_scene = preload("res://assets/scenes/quiz_session.tscn")
-var multiplayer_menu_scene = preload("res://assets/scenes/multiplayer_menu.tscn")
+var multiplayer_lobby_scene = preload("res://assets/scenes/multiplayer_lobby.tscn")
 
 var quiz_session_instance
-var multiplayer_menu_instance
+var multiplayer_lobby_instance
 
-var multiplayer_menu_vbox
+var multiplayer_lobby_script
 
 var master_chances_data = []
 var master_question_data = []
@@ -41,17 +41,17 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if load_multiplayer_menu_scene && !GameState.GameStarted:
-		multiplayer_menu_instance = multiplayer_menu_scene.instantiate()
-		get_tree().root.add_child(multiplayer_menu_instance)
-		multiplayer_menu_vbox = multiplayer_menu_instance.get_node("VBoxContainer")
+	if load_multiplayer_lobby_scene && !GameState.GameStarted:
+		multiplayer_lobby_instance = multiplayer_lobby_scene.instantiate()
+		get_tree().root.add_child(multiplayer_lobby_instance)
+		multiplayer_lobby_script = multiplayer_lobby_instance.get_node("/root/MultiplayerLobby")
 
-		multiplayer_menu_vbox.multiplayer_host.connect(_mp_host_server)
-		multiplayer_menu_vbox.multiplayer_connect.connect(_mp_join)
-		multiplayer_menu_vbox.launch_quiz.connect(_launch_quiz)
-		multiplayer_menu_vbox.multiplayer_disconnect.connect(_mp_disconnect)
+		multiplayer_lobby_script.multiplayer_host.connect(_mp_host_server)
+		multiplayer_lobby_script.multiplayer_connect.connect(_mp_join)
+		multiplayer_lobby_script.launch_quiz.connect(_launch_quiz)
+		multiplayer_lobby_script.multiplayer_disconnect.connect(_mp_disconnect)
 
-		load_multiplayer_menu_scene = false
+		load_multiplayer_lobby_scene = false
 	pass
 	if launch_quiz:
 		load_quiz.rpc()
@@ -75,12 +75,15 @@ func _mp_host_server(ip_address):
 	playerData.initilize("Player 1", 1)
 	GameState.players[1] = playerData
 	
-	multiplayer_menu_vbox._update_connected_players(GameState.PlayerCount)
+	multiplayer_lobby_script._update_connected_players(GameState.PlayerCount)
 	print("Hosting server on IP: %s, PORT: %d" % [IP_ADDRESS, PORT])
 	pass
 	
 func _mp_disconnect():
-	multiplayer.multiplayer_peer = null
+	if multiplayer.has_multiplayer_peer():
+		print("Peer id %s, disconnecting" % multiplayer.get_unique_id())
+		multiplayer.multiplayer_peer = null
+		pass
 	GameState.players.clear()
 	GameState.PlayerCount = 0
 	pass	
@@ -106,15 +109,14 @@ func _register_player(playerName):
 	GameState.players[newPlayerId] = playerData
 	
 	GameState.PlayerCount += 1
-	multiplayer_menu_vbox._update_connected_players(GameState.PlayerCount)
+	multiplayer_lobby_script._update_connected_players(GameState.PlayerCount)
 	print("player %s connected" % playerData.uuid)
-pass
-	
+	pass
 
 func _mp_on_peer_disconnected(id: int):
 	GameState.players.erase(id)
 	GameState.PlayerCount -= 1
-	multiplayer_menu_vbox._update_connected_players(GameState.PlayerCount)
+	multiplayer_lobby_script._update_connected_players(GameState.PlayerCount)
 	print("player %s disconneted" % id)
 	pass
 
@@ -127,18 +129,21 @@ func _mp_on_connected_ok():
 
 # player has failed to connect to server
 func _mp_on_connected_fail():
+	print("connection failed")
 	multiplayer.multiplayer_peer = null
+	multiplayer_lobby_instance._connection_reset("connection failed")
 	pass
 
 func _mp_on_server_disconnected():
 	multiplayer.multiplayer_peer = null
 	GameState.players.clear()
+	multiplayer_lobby_instance._connection_reset("server disconnected")
 	pass
 
 # called when the multiplayer menu sends it's signal
 @rpc("authority", "call_local", "reliable")
 func _launch_quiz():
-	if multiplayer.is_server():
+	if multiplayer.has_multiplayer_peer() && multiplayer.is_server():
 		launch_quiz = true
 		print("server is launching quiz")
 	pass

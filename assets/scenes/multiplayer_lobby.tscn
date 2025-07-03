@@ -137,6 +137,24 @@ text = "Hosting"
 label_settings = ExtResource("5_wtxry")
 horizontal_alignment = 1
 
+[node name="JoiningLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.367
+anchor_top = 0.356
+anchor_right = 0.633
+anchor_bottom = 0.415
+offset_left = 7.35999
+offset_top = 7.51999
+offset_right = -7.35999
+offset_bottom = -8.20001
+grow_horizontal = 2
+grow_vertical = 2
+text = "Joining"
+label_settings = ExtResource("5_wtxry")
+horizontal_alignment = 1
+
 [node name="JoinedLabel" type="Label" parent="."]
 visible = false
 layout_mode = 1
@@ -170,6 +188,7 @@ offset_bottom = -15.92
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_jy5fm")
+disabled = true
 text = "cancel"
 flat = true
 
@@ -190,6 +209,7 @@ grow_vertical = 2
 [node name="LaunchButton" type="Button" parent="StateChangers"]
 layout_mode = 2
 theme = ExtResource("2_jy5fm")
+disabled = true
 text = "Launch game"
 flat = true
 
@@ -218,7 +238,8 @@ layout_mode = 2
 text = "Connected Players"
 label_settings = ExtResource("5_wtxry")
 
-[node name="ClientProfile" type="Label" parent="PeerCase"]
+[node name="Peer0" type="Label" parent="PeerCase"]
+visible = false
 layout_mode = 2
 text = "%ProfileName%"
 label_settings = ExtResource("6_ujxch")
@@ -281,6 +302,7 @@ popup/item_0/id = 0
 [connection signal="button_up" from="PeerConnectors/JoinButton" to="." method="_on_join_button_button_up"]
 [connection signal="focus_entered" from="PeerConnectors/JoinButton" to="." method="_on_join_button_focus_entered"]
 [connection signal="mouse_entered" from="PeerConnectors/JoinButton" to="." method="_on_join_button_mouse_entered"]
+[connection signal="text_changed" from="PeerConnectors/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="button_down" from="CancelConnectionButton" to="." method="_on_cancel_connection_button_button_down"]
 [connection signal="button_up" from="CancelConnectionButton" to="." method="_on_cancel_connection_button_button_up"]
 [connection signal="focus_entered" from="CancelConnectionButton" to="." method="_on_cancel_connection_button_focus_entered"]

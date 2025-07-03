@@ -64,7 +64,7 @@ func _ready():
 		pass
 	pass
 	
-func _process(delta):
+func _process(_delta):
 	if GameState.GameStarted:
 		if multiplayer.is_server():
 			local_clock_reading =  countdown_clock()
@@ -156,7 +156,7 @@ func _sync_answer_order(server_answer_order):
 
 # called by players when they have loaded in
 @rpc("any_peer", "reliable")
-func _player_loaded(peerId):
+func _player_loaded(_peerId):
 	GameState.PlayersLoaded += 1
 	if GameState.PlayersLoaded == GameState.PlayerCount:
 		_start_quiz_client.rpc()

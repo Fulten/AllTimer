@@ -38,10 +38,6 @@ font_size = 36
 font = ExtResource("5_4j7cf")
 font_size = 32
 
-[sub_resource type="LabelSettings" id="LabelSettings_d0wgl"]
-font = ExtResource("5_4j7cf")
-font_size = 24
-
 [sub_resource type="LabelSettings" id="LabelSettings_f1203"]
 font = ExtResource("16_gy4nf")
 font_size = 32
@@ -58,6 +54,10 @@ font_size = 32
 font = ExtResource("16_gy4nf")
 font_size = 32
 
+[sub_resource type="LabelSettings" id="LabelSettings_d0wgl"]
+font = ExtResource("5_4j7cf")
+font_size = 24
+
 [node name="quiz_session" type="Control"]
 clip_contents = true
 layout_mode = 3
@@ -67,11 +67,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mn3kg")
-
-[node name="Quiz_BGM" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_5xm3w")
-autoplay = true
-bus = &"Music"
 
 [node name="background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -83,13 +78,27 @@ anchor_bottom = 1.194
 offset_left = 0.320007
 offset_top = -0.319992
 offset_right = -0.320068
-offset_bottom = 0.320007
+offset_bottom = 0.319946
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_sfady")
 stretch_mode = 1
 
-[node name="session_organizer" type="VBoxContainer" parent="."]
+[node name="Quiz_BGM" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_5xm3w")
+autoplay = true
+bus = &"Music"
+
+[node name="quizBegin" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="quizInterface" type="Control" parent="."]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -101,126 +110,117 @@ offset_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="question_header" type="HBoxContainer" parent="session_organizer"]
+[node name="session_organizer" type="VBoxContainer" parent="quizInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="question_header" type="HBoxContainer" parent="quizInterface/session_organizer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="clock" type="TextureRect" parent="session_organizer/question_header"]
+[node name="clock" type="TextureRect" parent="quizInterface/session_organizer/question_header"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("2_6twy7")
 expand_mode = 1
 
-[node name="Countdown" type="Timer" parent="session_organizer/question_header"]
+[node name="Countdown" type="Timer" parent="quizInterface/session_organizer/question_header"]
 wait_time = 10.0
 one_shot = true
 
-[node name="question_index" type="Label" parent="session_organizer/question_header"]
+[node name="question_index" type="Label" parent="quizInterface/session_organizer/question_header"]
 layout_mode = 2
 text = "#"
 label_settings = SubResource("LabelSettings_35yei")
 
-[node name="question_name" type="Label" parent="session_organizer/question_header"]
+[node name="question_name" type="Label" parent="quizInterface/session_organizer/question_header"]
 layout_mode = 2
 text = "Question_Name"
 label_settings = SubResource("LabelSettings_2pk4f")
 
-[node name="CountdownLabel" type="Label" parent="session_organizer"]
+[node name="CountdownLabel" type="Label" parent="quizInterface/session_organizer"]
 layout_mode = 2
 text = "00:30"
 label_settings = SubResource("LabelSettings_m6a20")
 
-[node name="question_body" type="Label" parent="session_organizer"]
+[node name="question_body" type="Label" parent="quizInterface/session_organizer"]
+custom_minimum_size = Vector2(1792, 192)
 layout_mode = 2
 text = "Question_Body"
 label_settings = SubResource("LabelSettings_3cui3")
-autowrap_mode = 3
+autowrap_mode = 2
 
-[node name="spacer - leave blank" type="Label" parent="session_organizer"]
+[node name="spacer - leave blank" type="Label" parent="quizInterface/session_organizer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="session_organizer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="quizInterface/session_organizer"]
 layout_mode = 2
 theme_override_constants/separation = 420
 
-[node name="answer_organizer" type="VBoxContainer" parent="session_organizer/HBoxContainer"]
+[node name="answer_organizer" type="VBoxContainer" parent="quizInterface/session_organizer/HBoxContainer"]
 layout_mode = 2
 
-[node name="answer_pair1" type="HBoxContainer" parent="session_organizer/HBoxContainer/answer_organizer"]
+[node name="answer_pair1" type="HBoxContainer" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer"]
 layout_mode = 2
 
-[node name="a1_icon" type="TextureRect" parent="session_organizer/HBoxContainer/answer_organizer/answer_pair1"]
+[node name="a1_icon" type="TextureRect" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("5_axfhu")
 expand_mode = 1
 
-[node name="a1" type="Label" parent="session_organizer/HBoxContainer/answer_organizer/answer_pair1"]
+[node name="a1" type="Label" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1"]
 layout_mode = 2
 text = "answer_one"
 label_settings = SubResource("LabelSettings_7sn0p")
 
-[node name="answer_pair2" type="HBoxContainer" parent="session_organizer/HBoxContainer/answer_organizer"]
+[node name="answer_pair2" type="HBoxContainer" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer"]
 layout_mode = 2
 
-[node name="a2_icon" type="TextureRect" parent="session_organizer/HBoxContainer/answer_organizer/answer_pair2"]
+[node name="a2_icon" type="TextureRect" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("6_t6csj")
 expand_mode = 1
 
-[node name="a2" type="Label" parent="session_organizer/HBoxContainer/answer_organizer/answer_pair2"]
+[node name="a2" type="Label" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2"]
 layout_mode = 2
 text = "answer_one"
 label_settings = SubResource("LabelSettings_7sn0p")
 
-[node name="answer_pair3" type="HBoxContainer" parent="session_organizer/HBoxContainer/answer_organizer"]
+[node name="answer_pair3" type="HBoxContainer" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer"]
 layout_mode = 2
 
-[node name="a3_icon" type="TextureRect" parent="session_organizer/HBoxContainer/answer_organizer/answer_pair3"]
+[node name="a3_icon" type="TextureRect" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("7_0240t")
 expand_mode = 1
 
-[node name="a3" type="Label" parent="session_organizer/HBoxContainer/answer_organizer/answer_pair3"]
+[node name="a3" type="Label" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3"]
 layout_mode = 2
 text = "answer_one"
 label_settings = SubResource("LabelSettings_7sn0p")
 
-[node name="answer_pair4" type="HBoxContainer" parent="session_organizer/HBoxContainer/answer_organizer"]
+[node name="answer_pair4" type="HBoxContainer" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer"]
 layout_mode = 2
 
-[node name="a4_icon" type="TextureRect" parent="session_organizer/HBoxContainer/answer_organizer/answer_pair4"]
+[node name="a4_icon" type="TextureRect" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("8_1xqpo")
 expand_mode = 1
 
-[node name="a4" type="Label" parent="session_organizer/HBoxContainer/answer_organizer/answer_pair4"]
+[node name="a4" type="Label" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4"]
 layout_mode = 2
 text = "answer_one"
 label_settings = SubResource("LabelSettings_7sn0p")
 
-[node name="post_question" type="Label" parent="."]
-visible = false
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 672.0
-offset_top = 256.0
-offset_right = -64.0
-offset_bottom = -208.0
-size_flags_horizontal = 8
-size_flags_stretch_ratio = 0.0
-text = "Question_Description"
-label_settings = SubResource("LabelSettings_d0wgl")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-clip_text = true
-
-[node name="players_region" type="HBoxContainer" parent="."]
+[node name="players_region" type="HBoxContainer" parent="quizInterface"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -233,40 +233,42 @@ offset_right = 671.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="spacer_v2" type="TextureRect" parent="players_region"]
+[node name="activePlayer1" type="HBoxContainer" parent="quizInterface/players_region"]
+layout_mode = 2
+
+[node name="spacer_v2" type="TextureRect" parent="quizInterface/players_region/activePlayer1"]
 layout_mode = 2
 texture = ExtResource("10_l37jf")
 
-[node name="player_case" type="VBoxContainer" parent="players_region"]
-visible = false
+[node name="player_case" type="VBoxContainer" parent="quizInterface/players_region/activePlayer1"]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="status_row" type="HBoxContainer" parent="players_region/player_case"]
+[node name="status_row" type="HBoxContainer" parent="quizInterface/players_region/activePlayer1/player_case"]
 layout_mode = 2
 
-[node name="status_a" type="TextureRect" parent="players_region/player_case/status_row"]
+[node name="status_a" type="TextureRect" parent="quizInterface/players_region/activePlayer1/player_case/status_row"]
 layout_mode = 2
 texture = ExtResource("11_kn28g")
 
-[node name="status_b" type="TextureRect" parent="players_region/player_case/status_row"]
+[node name="status_b" type="TextureRect" parent="quizInterface/players_region/activePlayer1/player_case/status_row"]
 layout_mode = 2
 texture = ExtResource("12_ad8nh")
 
-[node name="status_c" type="TextureRect" parent="players_region/player_case/status_row"]
+[node name="status_c" type="TextureRect" parent="quizInterface/players_region/activePlayer1/player_case/status_row"]
 layout_mode = 2
 texture = ExtResource("13_rsqes")
 
-[node name="score" type="Label" parent="players_region/player_case/status_row"]
+[node name="score" type="Label" parent="quizInterface/players_region/activePlayer1/player_case/status_row"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "0"
 
-[node name="spacer_h" type="TextureRect" parent="players_region/player_case"]
+[node name="spacer_h" type="TextureRect" parent="quizInterface/players_region/activePlayer1/player_case"]
 layout_mode = 2
 texture = ExtResource("14_jng0i")
 
-[node name="player1_name" type="Label" parent="players_region/player_case"]
+[node name="player1_name" type="Label" parent="quizInterface/players_region/activePlayer1/player_case"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_3q4bo")
 theme_override_font_sizes/font_size = 48
@@ -274,126 +276,161 @@ text = "p1Name
 "
 label_settings = SubResource("LabelSettings_f1203")
 
-[node name="spacer_v" type="TextureRect" parent="players_region"]
+[node name="spacer_v" type="TextureRect" parent="quizInterface/players_region/activePlayer1"]
 layout_mode = 2
 texture = ExtResource("10_l37jf")
 
-[node name="player_case2" type="VBoxContainer" parent="players_region"]
+[node name="activePlayer2" type="HBoxContainer" parent="quizInterface/players_region"]
 visible = false
+layout_mode = 2
+
+[node name="player_case2" type="VBoxContainer" parent="quizInterface/players_region/activePlayer2"]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="status_row" type="HBoxContainer" parent="players_region/player_case2"]
+[node name="status_row" type="HBoxContainer" parent="quizInterface/players_region/activePlayer2/player_case2"]
 layout_mode = 2
 
-[node name="status_a" type="TextureRect" parent="players_region/player_case2/status_row"]
+[node name="status_a" type="TextureRect" parent="quizInterface/players_region/activePlayer2/player_case2/status_row"]
 layout_mode = 2
 texture = ExtResource("11_kn28g")
 
-[node name="status_b" type="TextureRect" parent="players_region/player_case2/status_row"]
+[node name="status_b" type="TextureRect" parent="quizInterface/players_region/activePlayer2/player_case2/status_row"]
 layout_mode = 2
 texture = ExtResource("12_ad8nh")
 
-[node name="status_c" type="TextureRect" parent="players_region/player_case2/status_row"]
+[node name="status_c" type="TextureRect" parent="quizInterface/players_region/activePlayer2/player_case2/status_row"]
 layout_mode = 2
 texture = ExtResource("13_rsqes")
 
-[node name="score" type="Label" parent="players_region/player_case2/status_row"]
+[node name="score" type="Label" parent="quizInterface/players_region/activePlayer2/player_case2/status_row"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "0"
 
-[node name="spacer_h" type="TextureRect" parent="players_region/player_case2"]
+[node name="spacer_h" type="TextureRect" parent="quizInterface/players_region/activePlayer2/player_case2"]
 layout_mode = 2
 texture = ExtResource("14_jng0i")
 
-[node name="player2_name" type="Label" parent="players_region/player_case2"]
+[node name="player2_name" type="Label" parent="quizInterface/players_region/activePlayer2/player_case2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_3q4bo")
 theme_override_font_sizes/font_size = 48
 text = "p2Name"
 label_settings = SubResource("LabelSettings_5fu58")
 
-[node name="spacer_v3" type="TextureRect" parent="players_region"]
+[node name="spacer_v3" type="TextureRect" parent="quizInterface/players_region/activePlayer2"]
 layout_mode = 2
 texture = ExtResource("10_l37jf")
 
-[node name="player_case3" type="VBoxContainer" parent="players_region"]
+[node name="activePlayer3" type="HBoxContainer" parent="quizInterface/players_region"]
 visible = false
+layout_mode = 2
+
+[node name="player_case3" type="VBoxContainer" parent="quizInterface/players_region/activePlayer3"]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="status_row" type="HBoxContainer" parent="players_region/player_case3"]
+[node name="status_row" type="HBoxContainer" parent="quizInterface/players_region/activePlayer3/player_case3"]
 layout_mode = 2
 
-[node name="status_a" type="TextureRect" parent="players_region/player_case3/status_row"]
+[node name="status_a" type="TextureRect" parent="quizInterface/players_region/activePlayer3/player_case3/status_row"]
 layout_mode = 2
 texture = ExtResource("11_kn28g")
 
-[node name="status_b" type="TextureRect" parent="players_region/player_case3/status_row"]
+[node name="status_b" type="TextureRect" parent="quizInterface/players_region/activePlayer3/player_case3/status_row"]
 layout_mode = 2
 texture = ExtResource("12_ad8nh")
 
-[node name="status_c" type="TextureRect" parent="players_region/player_case3/status_row"]
+[node name="status_c" type="TextureRect" parent="quizInterface/players_region/activePlayer3/player_case3/status_row"]
 layout_mode = 2
 texture = ExtResource("13_rsqes")
 
-[node name="score" type="Label" parent="players_region/player_case3/status_row"]
+[node name="score" type="Label" parent="quizInterface/players_region/activePlayer3/player_case3/status_row"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "0"
 
-[node name="spacer_h" type="TextureRect" parent="players_region/player_case3"]
+[node name="spacer_h" type="TextureRect" parent="quizInterface/players_region/activePlayer3/player_case3"]
 layout_mode = 2
 texture = ExtResource("14_jng0i")
 
-[node name="player3_name" type="Label" parent="players_region/player_case3"]
+[node name="player3_name" type="Label" parent="quizInterface/players_region/activePlayer3/player_case3"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_3q4bo")
 theme_override_font_sizes/font_size = 48
 text = "p3Name"
 label_settings = SubResource("LabelSettings_f02j5")
 
-[node name="spacer_v4" type="TextureRect" parent="players_region"]
+[node name="spacer_v4" type="TextureRect" parent="quizInterface/players_region/activePlayer3"]
 layout_mode = 2
 texture = ExtResource("10_l37jf")
 
-[node name="player_case4" type="VBoxContainer" parent="players_region"]
+[node name="activePlayer4" type="HBoxContainer" parent="quizInterface/players_region"]
 visible = false
+layout_mode = 2
+
+[node name="player_case4" type="VBoxContainer" parent="quizInterface/players_region/activePlayer4"]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="status_row" type="HBoxContainer" parent="players_region/player_case4"]
+[node name="status_row" type="HBoxContainer" parent="quizInterface/players_region/activePlayer4/player_case4"]
 layout_mode = 2
 
-[node name="status_a" type="TextureRect" parent="players_region/player_case4/status_row"]
+[node name="status_a" type="TextureRect" parent="quizInterface/players_region/activePlayer4/player_case4/status_row"]
 layout_mode = 2
 texture = ExtResource("11_kn28g")
 
-[node name="status_b" type="TextureRect" parent="players_region/player_case4/status_row"]
+[node name="status_b" type="TextureRect" parent="quizInterface/players_region/activePlayer4/player_case4/status_row"]
 layout_mode = 2
 texture = ExtResource("12_ad8nh")
 
-[node name="status_c" type="TextureRect" parent="players_region/player_case4/status_row"]
+[node name="status_c" type="TextureRect" parent="quizInterface/players_region/activePlayer4/player_case4/status_row"]
 layout_mode = 2
 texture = ExtResource("13_rsqes")
 
-[node name="score" type="Label" parent="players_region/player_case4/status_row"]
+[node name="score" type="Label" parent="quizInterface/players_region/activePlayer4/player_case4/status_row"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "0"
 
-[node name="spacer_h" type="TextureRect" parent="players_region/player_case4"]
+[node name="spacer_h" type="TextureRect" parent="quizInterface/players_region/activePlayer4/player_case4"]
 layout_mode = 2
 texture = ExtResource("14_jng0i")
 
-[node name="player4_name" type="Label" parent="players_region/player_case4"]
+[node name="player4_name" type="Label" parent="quizInterface/players_region/activePlayer4/player_case4"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_3q4bo")
 theme_override_font_sizes/font_size = 48
 text = "p4Name"
 label_settings = SubResource("LabelSettings_btpdw")
 
-[node name="spacer_v5" type="TextureRect" parent="players_region"]
+[node name="spacer_v5" type="TextureRect" parent="quizInterface/players_region/activePlayer4"]
 layout_mode = 2
 texture = ExtResource("10_l37jf")
+
+[node name="post_question" type="Label" parent="quizInterface"]
+visible = false
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 672.0
+offset_top = 408.0
+offset_right = -24.0
+offset_bottom = -208.0
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.0
+text = "Question_Description"
+label_settings = SubResource("LabelSettings_d0wgl")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="quizEnd" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

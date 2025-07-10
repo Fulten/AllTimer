@@ -995,7 +995,6 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="Stack_0" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -1781,6 +1780,7 @@ flat = true
 
 [node name="Options_Profile" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0

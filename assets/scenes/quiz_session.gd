@@ -1,28 +1,28 @@
 extends Control
 
 # refrences to quiz ui elements
-@onready var questions_name = $session_organizer/question_header/question_name
-@onready var questions_index = $session_organizer/question_header/question_index
-@onready var countdown_timer = $session_organizer/question_header/Countdown
-@onready var countdown_text = $session_organizer/CountdownLabel
-@onready var questions_body = $session_organizer/question_body
-@onready var post_question = $post_question
-@onready var players = [$players_region/player_case,
-	$players_region/player_case2,
-	$players_region/player_case3,
-	$players_region/player_case4]
-@onready var answers = [$session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1,
-	$session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2,
-	$session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3,
-	$session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4]
-@onready var player_names = [$players_region/player_case/player1_name,
-	$players_region/player_case2/player2_name,
-	$players_region/player_case3/player3_name,
-	$players_region/player_case4/player4_name]
-@onready var player_scores = [$players_region/player_case/status_row/score,
-	$players_region/player_case2/status_row/score,
-	$players_region/player_case3/status_row/score,
-	$players_region/player_case4/status_row/score]
+@onready var questions_name = $quizInterface/session_organizer/question_header/question_name
+@onready var questions_index = $quizInterface/session_organizer/question_header/question_index
+@onready var countdown_timer = $quizInterface/session_organizer/question_header/Countdown
+@onready var countdown_text = $quizInterface/session_organizer/CountdownLabel
+@onready var questions_body = $quizInterface/session_organizer/question_body
+@onready var post_question = $quizInterface/post_question
+@onready var players = [$quizInterface/players_region/activePlayer1/player_case,
+	$quizInterface/players_region/activePlayer2/player_case2,
+	$quizInterface/players_region/activePlayer3/player_case3,
+	$quizInterface/players_region/activePlayer4/player_case4]
+@onready var answers = [$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1,
+	$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2,
+	$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3,
+	$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4]
+@onready var player_names = [$quizInterface/players_region/activePlayer1/player_case/player1_name,
+	$quizInterface/players_region/activePlayer2/player_case2/player2_name,
+	$quizInterface/players_region/activePlayer3/player_case3/player3_name,
+	$quizInterface/players_region/activePlayer4/player_case4/player4_name]
+@onready var player_scores = [$quizInterface/players_region/activePlayer1/player_case/status_row/score,
+	$quizInterface/players_region/activePlayer2/player_case2/status_row/score,
+	$quizInterface/players_region/activePlayer3/player_case3/status_row/score,
+	$quizInterface/players_region/activePlayer4/player_case4/status_row/score]
 	
 var master_chances_data = []
 var master_question_data = []

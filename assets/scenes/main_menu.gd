@@ -1,12 +1,18 @@
 extends Control
 
+var user_profile_utils = preload("res://assets/scenes/User_Profile_Utils.gd").new()
+
 var config = ConfigFile.new()
 var config_path = "user://settings.cfg"
+
+var profiles_list_id_to_name = {}
 
 func _ready():
 	$StackAnimator.play("Anim_Stack0_Init")
 	$Stack_0/TitleHeader2.grab_focus()
 	load_settings()
+	user_profile_utils._IO_read_profiles()
+	_refresh_profiles_dropdown()
 
 func _process(_delta):
 	pass
@@ -122,6 +128,24 @@ func apply_game_settings(timer: int, win_con: String, tallies: bool, skipping_lo
 	return
 
 
+func _refresh_profiles_dropdown():
+	var profile_list = $Options_Profile/ProfileSettingsCase/DimensionFrame/CurrentProfileCase/ProfilesList
+	var id = 0
+	
+	profile_list.clear()
+	
+	if user_profile_utils.UserProfiles.size() <= 0: # use placeholder if profiles list is empty
+		profile_list.add_item("N/A")
+		return
+	
+	
+	for key in user_profile_utils.UserProfiles.keys():
+		profile_list.add_item(user_profile_utils.UserProfiles[key]["name"])
+		profiles_list_id_to_name[id] = user_profile_utils.UserProfiles[key]["name"]
+		id += 1
+		pass
+	pass
+
 func _input(_event):
 	pass
 
@@ -202,6 +226,7 @@ func _on_profile_creator_button_button_up():
 	get_node("Options_Profile/ProfileDestroyer").hide()
 	get_node("Options_Profile/ProfileCreator").show()
 
+
 func _on_save_button_mouse_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
 func _on_save_button_focus_entered():
@@ -209,8 +234,17 @@ func _on_save_button_focus_entered():
 func _on_save_button_button_down():
 	$Stack_0/MainMenuButtons/SFX_Press.play()
 func _on_save_button_button_up():
-	pass # This is the button-press that saves a new profile to the ProfilesList. It should name the profile with whatever string is in ProfileEntryField and then clear the field
-
+		var new_profile_name = $Options_Profile/ProfileCreator/ProfileNamer/ProfileEntryField.text
+		
+		if new_profile_name == "": # returns if profile name is empty
+			return	
+		
+		var new_profile = user_profile_utils._new_profile(new_profile_name)
+		
+		user_profile_utils._save_profile(new_profile)
+		_refresh_profiles_dropdown()
+		pass
+	
 func _on_cancel_profile_button_mouse_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
 func _on_cancel_profile_button_focus_entered():
@@ -237,6 +271,12 @@ func _on_delete_button_focus_entered():
 func _on_delete_button_button_down():
 	$Stack_0/MainMenuButtons/SFX_Press.play()
 func _on_delete_button_button_up():
+	var profile_list = $Options_Profile/ProfileSettingsCase/DimensionFrame/CurrentProfileCase/ProfilesList
+	if user_profile_utils.UserProfiles.size() < 1: # return if theres no profiles to delete
+		return
+		
+	user_profile_utils._delete_profile(profiles_list_id_to_name[profile_list.get_selected_id()])
+	_refresh_profiles_dropdown()
 	pass # This button should read the currently selected profile in ProfilesList and then  D E L E T E  it
 
 func _on_cancel_deletion_button_mouse_entered():
@@ -390,3 +430,5 @@ func _on_timer_game_to_options_timeout():
 	get_node("Options_Game2").hide()
 	get_node("Options_2").show()
 	$Options_2/OptionsCategories/GameButton.grab_focus()
+
+

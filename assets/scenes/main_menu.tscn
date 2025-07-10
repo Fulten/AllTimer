@@ -995,6 +995,7 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="Stack_0" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -1780,7 +1781,6 @@ flat = true
 
 [node name="Options_Profile" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -1838,10 +1838,7 @@ label_settings = ExtResource("12_fat6d")
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 flat = true
-item_count = 1
 selected = 0
-popup/item_0/text = "N/A"
-popup/item_0/id = 0
 
 [node name="ProfileManagementButtons" type="HBoxContainer" parent="Options_Profile/ProfileSettingsCase/DimensionFrame"]
 layout_mode = 2

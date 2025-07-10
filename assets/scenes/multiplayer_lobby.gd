@@ -126,6 +126,7 @@ func _enable_launch_button():
 
 func _connection_reset(error):
 	print("Connection Failed: %s" % error)
+	get_node("ConnectionFailedPopupCase").show()
 	_update_connected_players()
 	
 	$HostingLabel.hide()
@@ -140,3 +141,12 @@ func _connection_reset(error):
 	$StateChangers/LaunchButton.disabled = true
 	
 	pass
+
+func _on_conn_fail_ack_mouse_entered():
+	$SFX_Hover.play()
+func _on_conn_fail_ack_focus_entered():
+	$SFX_Hover.play()
+func _on_conn_fail_ack_button_down():
+	$SFX_Press.play()
+func _on_conn_fail_ack_button_up():
+	get_node("ConnectionFailedPopupCase").hide()

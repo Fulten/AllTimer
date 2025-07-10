@@ -294,6 +294,82 @@ selected = 0
 popup/item_0/text = "N/A"
 popup/item_0/id = 0
 
+[node name="ConnectionFailedPopupCase" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PopupVeil" type="ColorRect" parent="ConnectionFailedPopupCase"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 1916.0
+offset_bottom = 1076.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.490196)
+
+[node name="PopupBG2" type="ColorRect" parent="ConnectionFailedPopupCase"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 18.6
+anchor_top = 9.6
+anchor_right = 29.4
+anchor_bottom = 15.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 7.99994
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4609, 1, 0.729814, 1)
+
+[node name="PopupBG" type="ColorRect" parent="ConnectionFailedPopupCase"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 18.6
+anchor_top = 9.6
+anchor_right = 29.4
+anchor_bottom = 15.0
+offset_bottom = -6.10352e-05
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.470588, 0, 0.756863, 1)
+
+[node name="Label" type="Label" parent="ConnectionFailedPopupCase"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 19.2
+anchor_top = 10.6
+anchor_right = 28.8
+anchor_bottom = 11.675
+offset_top = -8.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Connection Failed!
+:("
+label_settings = ExtResource("5_wtxry")
+horizontal_alignment = 1
+
+[node name="ConnFailAck" type="Button" parent="ConnectionFailedPopupCase"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 21.0
+anchor_top = 13.2
+anchor_right = 27.15
+anchor_bottom = 14.6
+offset_left = -6.10352e-05
+theme = ExtResource("2_jy5fm")
+text = ">Dangit!<"
+flat = true
+
 [connection signal="button_down" from="PeerConnectors/HostButton" to="." method="_on_host_button_button_down"]
 [connection signal="button_up" from="PeerConnectors/HostButton" to="." method="_on_host_button_button_up"]
 [connection signal="focus_entered" from="PeerConnectors/HostButton" to="." method="_on_host_button_focus_entered"]
@@ -315,3 +391,7 @@ popup/item_0/id = 0
 [connection signal="button_up" from="StateChangers/BackToMainButton" to="." method="_on_back_to_main_button_button_up"]
 [connection signal="focus_entered" from="StateChangers/BackToMainButton" to="." method="_on_back_to_main_button_focus_entered"]
 [connection signal="mouse_entered" from="StateChangers/BackToMainButton" to="." method="_on_back_to_main_button_mouse_entered"]
+[connection signal="button_down" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_button_down"]
+[connection signal="button_up" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_button_up"]
+[connection signal="focus_entered" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_focus_entered"]
+[connection signal="mouse_entered" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_mouse_entered"]

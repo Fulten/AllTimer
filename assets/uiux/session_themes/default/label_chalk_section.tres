@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://d1rjtmrhmyval"]
+
+[ext_resource type="FontFile" uid="uid://cctkma5i2dsgs" path="res://assets/uiux/session_themes/default/chalkiez.otf" id="1_4ytyw"]
+
+[resource]
+font = ExtResource("1_4ytyw")
+font_size = 48

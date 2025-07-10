@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c1ovqmumbqjdm"]
+[gd_scene load_steps=33 format=3 uid="uid://c1ovqmumbqjdm"]
 
 [ext_resource type="Script" path="res://assets/scenes/quiz_session.gd" id="1_mn3kg"]
 [ext_resource type="Texture2D" uid="uid://7rterpy3cejg" path="res://assets/uiux/session_themes/default/session_bg.tga" id="1_sfady"]
@@ -16,6 +16,71 @@
 [ext_resource type="Texture2D" uid="uid://bp12k6v5jugjd" path="res://assets/uiux/session_themes/default/status_correct_icon.tga" id="13_rsqes"]
 [ext_resource type="Texture2D" uid="uid://sib7pjpdkuax" path="res://assets/uiux/session_themes/default/separator_h.tga" id="14_jng0i"]
 [ext_resource type="FontFile" uid="uid://1uhji12ugu15" path="res://assets/uiux/session_themes/default/kiwischoolhandwritingwithguidesregular.ttf" id="16_gy4nf"]
+[ext_resource type="LabelSettings" uid="uid://de8a24qsth43f" path="res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Default.tres" id="16_wyo5e"]
+[ext_resource type="LabelSettings" uid="uid://brpx1b1yjl0qy" path="res://assets/uiux/session_themes/default/label_chalk_title.tres" id="17_ouv3k"]
+[ext_resource type="LabelSettings" uid="uid://dfxrujlxeiwk1" path="res://assets/uiux/session_themes/default/label_chalk_numbers.tres" id="18_m58qp"]
+[ext_resource type="LabelSettings" uid="uid://bxrfww81cwua1" path="res://assets/uiux/session_themes/default/label_chalk_body.tres" id="19_f0nis"]
+
+[sub_resource type="Animation" id="Animation_3me1p"]
+resource_name = "EndOfQuiz"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("quizEnd:visible")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("quizInterface:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_87374"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("quizEnd:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("quizInterface:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2s641"]
+_data = {
+"EndOfQuiz": SubResource("Animation_3me1p"),
+"RESET": SubResource("Animation_87374")
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_35yei"]
 font = ExtResource("2_3q4bo")
@@ -36,10 +101,6 @@ font_size = 36
 
 [sub_resource type="LabelSettings" id="LabelSettings_7sn0p"]
 font = ExtResource("5_4j7cf")
-font_size = 32
-
-[sub_resource type="LabelSettings" id="LabelSettings_f1203"]
-font = ExtResource("16_gy4nf")
 font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_5fu58"]
@@ -68,6 +129,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mn3kg")
 
+[node name="ControlSwapper" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2s641")
+}
+
 [node name="background" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -77,8 +143,8 @@ anchor_right = 1.119
 anchor_bottom = 1.194
 offset_left = 0.320007
 offset_top = -0.319992
-offset_right = -0.320068
-offset_bottom = 0.319946
+offset_right = 950.8
+offset_bottom = 944.16
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_sfady")
@@ -90,6 +156,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="quizBegin" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -274,7 +341,7 @@ theme_override_fonts/font = ExtResource("2_3q4bo")
 theme_override_font_sizes/font_size = 48
 text = "p1Name
 "
-label_settings = SubResource("LabelSettings_f1203")
+label_settings = ExtResource("16_wyo5e")
 
 [node name="spacer_v" type="TextureRect" parent="quizInterface/players_region/activePlayer1"]
 layout_mode = 2
@@ -428,9 +495,189 @@ autowrap_mode = 2
 clip_text = true
 
 [node name="quizEnd" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="EndTitle" type="Label" parent="quizEnd"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.059
+anchor_right = 0.7
+anchor_bottom = 0.178
+offset_top = 0.279995
+offset_right = -0.00012207
+offset_bottom = -0.240005
+grow_horizontal = 2
+text = "End of quiz"
+label_settings = ExtResource("17_ouv3k")
+horizontal_alignment = 1
+
+[node name="PlayerStandingsOrg" type="VBoxContainer" parent="quizEnd"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.033
+anchor_top = 0.5
+anchor_right = 0.067
+anchor_bottom = 0.5
+offset_left = 0.639999
+offset_top = -292.0
+offset_right = 319.36
+offset_bottom = 418.0
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="1stPlacer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
+layout_mode = 2
+
+[node name="1P_Name" type="Label" parent="quizEnd/PlayerStandingsOrg/1stPlacer"]
+layout_mode = 2
+text = "1P Name"
+label_settings = ExtResource("18_m58qp")
+
+[node name="1P_ScoreDisplay" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/1stPlacer"]
+layout_mode = 2
+
+[node name="Score-" type="Label" parent="quizEnd/PlayerStandingsOrg/1stPlacer/1P_ScoreDisplay"]
+layout_mode = 2
+text = "Score:"
+label_settings = ExtResource("19_f0nis")
+
+[node name="1PScore" type="Label" parent="quizEnd/PlayerStandingsOrg/1stPlacer/1P_ScoreDisplay"]
+layout_mode = 2
+text = "1,000,000"
+label_settings = ExtResource("18_m58qp")
+
+[node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/1stPlacer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="quizEnd/PlayerStandingsOrg/1stPlacer/MedalCase"]
+layout_mode = 2
+text = "Certifications:"
+label_settings = ExtResource("19_f0nis")
+
+[node name="1P_Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/1stPlacer/MedalCase"]
+layout_mode = 2
+text = "Casual Gamer"
+label_settings = ExtResource("19_f0nis")
+
+[node name="2ndPlacer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
+layout_mode = 2
+
+[node name="LB" type="TextureRect" parent="quizEnd/PlayerStandingsOrg/2ndPlacer"]
+layout_mode = 2
+texture = ExtResource("14_jng0i")
+
+[node name="2P_Name" type="Label" parent="quizEnd/PlayerStandingsOrg/2ndPlacer"]
+layout_mode = 2
+text = "p2 Name"
+label_settings = ExtResource("18_m58qp")
+
+[node name="2P_ScoreDisplay" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/2ndPlacer"]
+layout_mode = 2
+
+[node name="Score-" type="Label" parent="quizEnd/PlayerStandingsOrg/2ndPlacer/2P_ScoreDisplay"]
+layout_mode = 2
+text = "Score:"
+label_settings = ExtResource("19_f0nis")
+
+[node name="2P_Score" type="Label" parent="quizEnd/PlayerStandingsOrg/2ndPlacer/2P_ScoreDisplay"]
+layout_mode = 2
+text = "750,000"
+label_settings = ExtResource("18_m58qp")
+
+[node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/2ndPlacer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="quizEnd/PlayerStandingsOrg/2ndPlacer/MedalCase"]
+layout_mode = 2
+text = "Certifications:"
+label_settings = ExtResource("19_f0nis")
+
+[node name="2P_Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/2ndPlacer/MedalCase"]
+layout_mode = 2
+text = "N/A"
+label_settings = ExtResource("19_f0nis")
+
+[node name="3rdPlacer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
+layout_mode = 2
+
+[node name="LB" type="TextureRect" parent="quizEnd/PlayerStandingsOrg/3rdPlacer"]
+layout_mode = 2
+texture = ExtResource("14_jng0i")
+
+[node name="3P_Name" type="Label" parent="quizEnd/PlayerStandingsOrg/3rdPlacer"]
+layout_mode = 2
+text = "p3 Name"
+label_settings = ExtResource("18_m58qp")
+
+[node name="3P_ScoreDisplay" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/3rdPlacer"]
+layout_mode = 2
+
+[node name="Score-" type="Label" parent="quizEnd/PlayerStandingsOrg/3rdPlacer/3P_ScoreDisplay"]
+layout_mode = 2
+text = "Score:"
+label_settings = ExtResource("19_f0nis")
+
+[node name="3P_Score" type="Label" parent="quizEnd/PlayerStandingsOrg/3rdPlacer/3P_ScoreDisplay"]
+layout_mode = 2
+text = "100,000"
+label_settings = ExtResource("18_m58qp")
+
+[node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/3rdPlacer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="quizEnd/PlayerStandingsOrg/3rdPlacer/MedalCase"]
+layout_mode = 2
+text = "Certifications:"
+label_settings = ExtResource("19_f0nis")
+
+[node name="3P_Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/3rdPlacer/MedalCase"]
+layout_mode = 2
+text = "Bad at math"
+label_settings = ExtResource("19_f0nis")
+
+[node name="4thPlacer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
+layout_mode = 2
+
+[node name="LB" type="TextureRect" parent="quizEnd/PlayerStandingsOrg/4thPlacer"]
+layout_mode = 2
+texture = ExtResource("14_jng0i")
+
+[node name="4P_Name" type="Label" parent="quizEnd/PlayerStandingsOrg/4thPlacer"]
+layout_mode = 2
+text = "p4 Name"
+label_settings = ExtResource("18_m58qp")
+
+[node name="4P_ScoreDisplay" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/4thPlacer"]
+layout_mode = 2
+
+[node name="Score-" type="Label" parent="quizEnd/PlayerStandingsOrg/4thPlacer/4P_ScoreDisplay"]
+layout_mode = 2
+text = "Score:"
+label_settings = ExtResource("19_f0nis")
+
+[node name="4P_Score" type="Label" parent="quizEnd/PlayerStandingsOrg/4thPlacer/4P_ScoreDisplay"]
+layout_mode = 2
+text = "-69,420"
+label_settings = ExtResource("18_m58qp")
+
+[node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/4thPlacer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="quizEnd/PlayerStandingsOrg/4thPlacer/MedalCase"]
+layout_mode = 2
+text = "Certifications:"
+label_settings = ExtResource("19_f0nis")
+
+[node name="4P_Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/4thPlacer/MedalCase"]
+layout_mode = 2
+text = "N/A"
+label_settings = ExtResource("19_f0nis")

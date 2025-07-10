@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://de8a24qsth43f"]
+
+[ext_resource type="FontFile" uid="uid://1uhji12ugu15" path="res://assets/uiux/session_themes/default/kiwischoolhandwritingwithguidesregular.ttf" id="1_6ajr2"]
+
+[resource]
+font = ExtResource("1_6ajr2")
+font_size = 32

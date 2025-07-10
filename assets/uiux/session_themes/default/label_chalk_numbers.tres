@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dfxrujlxeiwk1"]
+
+[ext_resource type="FontFile" uid="uid://ppcieu81eyur" path="res://assets/uiux/session_themes/default/TeachersStudent-Regular.ttf" id="1_nbrss"]
+
+[resource]
+font = ExtResource("1_nbrss")
+font_size = 54

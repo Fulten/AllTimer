@@ -17,7 +17,7 @@ func _ready():
 func _process(_delta):
 	pass
 
-
+#region Save Settings Methods
 func save_audio_settings():
 	config.set_value("audio", "sound_device", %SoundDeviceOptions.get_item_text(%SoundDeviceOptions.get_selected_id()))
 	config.set_value("audio", "master", %VolumeControl.get_value())
@@ -36,13 +36,18 @@ func save_video_settings():
 
 
 func save_game_settings():
-	config.set_value("game", "timer", int(%TimerSettingList.get_item_text(%TimerSettingList.get_selected_id())))
-	config.set_value("game", "win_con", %WinConList.get_item_text(%WinConList.get_selected_id()))
-	config.set_value("game", "tallies", %TalliesCheckBox.is_pressed())
-	config.set_value("game", "skipping_losses", %Lose4SkipCheckBox.is_pressed())
-	config.set_value("game", "gambling_modes", %GamblingOnCheckBox.is_pressed())
+	update_game_state(int(%TimerSettingList.get_item_text(%TimerSettingList.get_selected_id())),
+		%WinConList.get_item_text(%WinConList.get_selected_id()),
+		%TalliesCheckBox.is_pressed(),
+		%Lose4SkipCheckBox.is_pressed(),
+		%GamblingOnCheckBox.is_pressed())
+	config.set_value("game", "timer", GameState.quizOptions.timer)
+	config.set_value("game", "win_con", GameState.quizOptions.win_con)
+	config.set_value("game", "tallies", GameState.quizOptions.tallies)
+	config.set_value("game", "skipping_losses", GameState.quizOptions.skipping_losses)
+	config.set_value("game", "gambling_modes", GameState.quizOptions.gambling_modes)
 	config.save(config_path)
-
+#endregion
 
 func load_settings():
 	var err = config.load(config_path)
@@ -87,7 +92,7 @@ func select_option_by_int(option_button: OptionButton, target_int: int) -> void:
 			return
 	print("Int not found in OptionButton:", target_int)
 
-
+#region Apply Settings Methods
 func apply_audio_settings(sound_device: String, master: float, music: float, sfx: float, voiceover: float):
 	var devices = AudioServer.get_output_device_list()
 	var found_match = false
@@ -106,7 +111,6 @@ func apply_audio_settings(sound_device: String, master: float, music: float, sfx
 	%VolumeControl3.set_value_no_signal(sfx)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Voice"), linear_to_db(voiceover))
 	%VolumeControl4.set_value_no_signal(voiceover)
-	
 
 
 func apply_video_settings(display_type: int, resolution: int, input_display: String, theme: String):
@@ -124,8 +128,17 @@ func apply_game_settings(timer: int, win_con: String, tallies: bool, skipping_lo
 	%TalliesCheckBox.set_pressed_no_signal(tallies)
 	%Lose4SkipCheckBox.set_pressed_no_signal(skipping_losses)
 	%GamblingOnCheckBox.set_pressed_no_signal(gambling_modes)
-#	will need to do this later for a game_options global state
+	update_game_state(timer, win_con, tallies, skipping_losses, gambling_modes)
 	return
+#endregion
+
+
+func update_game_state(timer: int, win_con: String, tallies: bool, skipping_losses: bool, gambling_modes: bool):
+	GameState.quizOptions.timer = timer
+	GameState.quizOptions.win_con = win_con
+	GameState.quizOptions.tallies = tallies
+	GameState.quizOptions.skipping_losses = skipping_losses
+	GameState.quizOptions.gambling_modes = gambling_modes
 
 
 func _refresh_profiles_dropdown():
@@ -150,7 +163,7 @@ func _input(_event):
 	pass
 
 
-#Button UX
+#region Button UX
 func _on_play_button_focus_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
 func _on_play_button_mouse_entered():
@@ -364,6 +377,43 @@ func _on_timer_display_to_options_timeout():
 	$Options_2/OptionsCategories/DisplayButton.grab_focus()
 
 
+func _on_options_sound_return_focus_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_options_sound_return_mouse_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_options_sound_return_button_down():
+	$Stack_0/MainMenuButtons/SFX_Press.play()
+func _on_options_sound_return_button_up():
+	save_audio_settings()
+	$StackAnimator/Timer_Sound_to_Options.start()
+	$StackAnimator.play("Anim_Sound_FadeOut")
+func _on_timer_sound_to_options_timeout():
+	$StackAnimator.play("Anim_OptionsCategories_FadeIn")
+	get_node("Options_Sound2").hide()
+	get_node("Options_2").show()
+	$Options_2/OptionsCategories/SoundButton.grab_focus()
+
+
+func _on_options_game_return_focus_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+
+
+func _on_options_game_return_mouse_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_options_game_return_button_down():
+	$Stack_0/MainMenuButtons/SFX_Press.play()
+func _on_options_game_return_button_up():
+	save_game_settings()
+	$StackAnimator/Timer_Game_to_Options.start()
+	$StackAnimator.play("Anim_Game_FadeOut")
+func _on_timer_game_to_options_timeout():
+	$StackAnimator.play("Anim_OptionsCategories_FadeIn")
+	get_node("Options_Game2").hide()
+	get_node("Options_2").show()
+	$Options_2/OptionsCategories/GameButton.grab_focus()
+#endregion
+
+
 const display_options = [
 	DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
 	DisplayServer.WINDOW_MODE_WINDOWED,
@@ -393,42 +443,5 @@ func _on_resolutions_list_item_selected(index: int) -> void:
 	DisplayServer.window_set_size(resolution_options[index])
 
 
-func _on_options_sound_return_focus_entered():
-	$Stack_0/MainMenuButtons/SFX_Hover.play()
-func _on_options_sound_return_mouse_entered():
-	$Stack_0/MainMenuButtons/SFX_Hover.play()
-func _on_options_sound_return_button_down():
-	$Stack_0/MainMenuButtons/SFX_Press.play()
-func _on_options_sound_return_button_up():
-	save_audio_settings()
-	$StackAnimator/Timer_Sound_to_Options.start()
-	$StackAnimator.play("Anim_Sound_FadeOut")
-func _on_timer_sound_to_options_timeout():
-	$StackAnimator.play("Anim_OptionsCategories_FadeIn")
-	get_node("Options_Sound2").hide()
-	get_node("Options_2").show()
-	$Options_2/OptionsCategories/SoundButton.grab_focus()
-
-
 func _on_sound_device_options_item_selected(index: int) -> void:
 	AudioServer.set_output_device(%SoundDeviceOptions.get_item_text(index))
-
-
-func _on_options_game_return_focus_entered():
-	$Stack_0/MainMenuButtons/SFX_Hover.play()
-
-func _on_options_game_return_mouse_entered():
-	$Stack_0/MainMenuButtons/SFX_Hover.play()
-func _on_options_game_return_button_down():
-	$Stack_0/MainMenuButtons/SFX_Press.play()
-func _on_options_game_return_button_up():
-	save_game_settings()
-	$StackAnimator/Timer_Game_to_Options.start()
-	$StackAnimator.play("Anim_Game_FadeOut")
-func _on_timer_game_to_options_timeout():
-	$StackAnimator.play("Anim_OptionsCategories_FadeIn")
-	get_node("Options_Game2").hide()
-	get_node("Options_2").show()
-	$Options_2/OptionsCategories/GameButton.grab_focus()
-
-

@@ -166,7 +166,7 @@ func _player_loaded(_peerId):
 	
 func _start_quiz_server():
 	# quiz data should already be loaded onto clients
-	countdown_timer.start(30)
+	countdown_timer.start(GameState.quizOptions.timer)
 	countdown_timer.timeout.connect(_end_of_quiz_phase)
 	current_index = 0
 	GameState._reset_players()
@@ -214,7 +214,7 @@ func _next_question():
 		players_answered = 0
 		GameState._reset_guesses()
 		loaded = false
-		countdown_timer.start(30)
+		countdown_timer.start(GameState.quizOptions.timer)
 	else:
 		_end_of_quiz.rpc()
 	pass

@@ -17,6 +17,25 @@ class Player:
 		score = 0
 		pass
 
+
+class QuizOptions:
+	var timer: int
+	var win_con: String
+	var tallies: bool
+	var skipping_losses: bool
+	var gambling_modes: bool
+	
+	func initilize(i_timer = 30, i_win_con = "default", i_tallies = false, i_skipping_losses = false, i_gambling_modes = false) :
+		timer = i_timer
+		win_con = i_win_con
+		tallies = i_tallies
+		skipping_losses = i_skipping_losses
+		gambling_modes = i_gambling_modes
+		pass
+
+
+var quizOptions = QuizOptions.new()
+
 var players = {}
 
 var UserProfiles = {}

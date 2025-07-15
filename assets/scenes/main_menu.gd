@@ -13,6 +13,7 @@ func _ready():
 	load_settings()
 	user_profile_utils._IO_read_profiles()
 	_refresh_profiles_dropdown()
+	_update_current_profile_label()
 
 func _process(_delta):
 	pass
@@ -144,7 +145,6 @@ func update_game_state(timer: int, win_con: String, tallies: bool, skipping_loss
 func _refresh_profiles_dropdown():
 	var profile_list = $Options_Profile/ProfileSettingsCase/DimensionFrame/CurrentProfileCase/ProfilesList
 	var id = 0
-	
 	profile_list.clear()
 	
 	if user_profile_utils.UserProfiles.size() <= 0: # use placeholder if profiles list is empty
@@ -155,9 +155,34 @@ func _refresh_profiles_dropdown():
 	for key in user_profile_utils.UserProfiles.keys():
 		profile_list.add_item(user_profile_utils.UserProfiles[key]["name"])
 		profiles_list_id_to_name[id] = user_profile_utils.UserProfiles[key]["name"]
+		
+		if (user_profile_utils.UserProfiles[key]["selected"]):
+			profile_list.select(id)
+			pass
+		
 		id += 1
 		pass
 	pass
+
+func _update_current_profile_label():
+	var currentProfileLable = $Stack_0/ProfileButton/CurrentProfileLabel
+	
+	for key in user_profile_utils.UserProfiles.keys():
+		if user_profile_utils.UserProfiles[key]["selected"]:
+			currentProfileLable.text = user_profile_utils.UserProfiles[key]["name"]
+			return
+		pass
+	
+	if user_profile_utils.UserProfiles.size() > 0: 
+		# if there are no profiles selected, mark the first profile in the list as selected
+		user_profile_utils.UserProfiles[profiles_list_id_to_name[0]]["selected"] = true
+		currentProfileLable.text = user_profile_utils.UserProfiles[profiles_list_id_to_name[0]]["name"]
+		return
+	
+	# if there are no profiles, user placeholder Guest
+	currentProfileLable.text = "Guest"
+	pass
+	
 
 func _input(_event):
 	pass
@@ -240,6 +265,17 @@ func _on_profile_creator_button_button_up():
 	get_node("Options_Profile/ProfileCreator").show()
 
 
+func _on_profiles_list_item_selected(index):
+	for key in user_profile_utils.UserProfiles.keys():
+		user_profile_utils.UserProfiles[key]["selected"] = false
+		pass
+		
+	user_profile_utils.UserProfiles[profiles_list_id_to_name[index]]["selected"] = true
+	_update_current_profile_label()
+	pass 
+
+
+
 func _on_save_button_mouse_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
 func _on_save_button_focus_entered():
@@ -256,6 +292,8 @@ func _on_save_button_button_up():
 		
 		user_profile_utils._save_profile(new_profile)
 		_refresh_profiles_dropdown()
+		_update_current_profile_label()
+		get_node("Options_Profile/ProfileCreator").hide()
 		pass
 	
 func _on_cancel_profile_button_mouse_entered():
@@ -290,6 +328,8 @@ func _on_delete_button_button_up():
 		
 	user_profile_utils._delete_profile(profiles_list_id_to_name[profile_list.get_selected_id()])
 	_refresh_profiles_dropdown()
+	_update_current_profile_label()
+	get_node("Options_Profile/ProfileDestroyer").hide()
 	pass # This button should read the currently selected profile in ProfilesList and then  D E L E T E  it
 
 func _on_cancel_deletion_button_mouse_entered():
@@ -445,3 +485,4 @@ func _on_resolutions_list_item_selected(index: int) -> void:
 
 func _on_sound_device_options_item_selected(index: int) -> void:
 	AudioServer.set_output_device(%SoundDeviceOptions.get_item_text(index))
+

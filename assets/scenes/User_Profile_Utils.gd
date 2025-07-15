@@ -16,7 +16,8 @@ func _new_profile(profileName):
 	
 	var newProfile = {
 		"name": profileName,
-		"id": newID
+		"id": newID,
+		"selected": false
 	}
 	
 	return newProfile

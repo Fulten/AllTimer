@@ -1,7 +1,5 @@
 extends Control
 
-var user_profile_utils = preload("res://assets/scenes/User_Profile_Utils.gd").new()
-
 var config = ConfigFile.new()
 var config_path = "user://settings.cfg"
 
@@ -11,7 +9,7 @@ func _ready():
 	$StackAnimator.play("Anim_Stack0_Init")
 	$Stack_0/TitleHeader2.grab_focus()
 	load_settings()
-	user_profile_utils._IO_read_profiles()
+	UserProfiles._IO_read_profiles()
 	_refresh_profiles_dropdown()
 	_update_current_profile_label()
 
@@ -147,16 +145,16 @@ func _refresh_profiles_dropdown():
 	var id = 0
 	profile_list.clear()
 	
-	if user_profile_utils.UserProfiles.size() <= 0: # use placeholder if profiles list is empty
+	if UserProfiles.profiles.size() <= 0: # use placeholder if profiles list is empty
 		profile_list.add_item("N/A")
 		return
 	
 	
-	for key in user_profile_utils.UserProfiles.keys():
-		profile_list.add_item(user_profile_utils.UserProfiles[key]["name"])
-		profiles_list_id_to_name[id] = user_profile_utils.UserProfiles[key]["name"]
+	for key in UserProfiles.profiles.keys():
+		profile_list.add_item(UserProfiles.profiles[key]["name"])
+		profiles_list_id_to_name[id] = UserProfiles.profiles[key]["name"]
 		
-		if (user_profile_utils.UserProfiles[key]["selected"]):
+		if (UserProfiles.profiles[key]["selected"]):
 			profile_list.select(id)
 			pass
 		
@@ -167,16 +165,16 @@ func _refresh_profiles_dropdown():
 func _update_current_profile_label():
 	var currentProfileLable = $Stack_0/ProfileButton/CurrentProfileLabel
 	
-	for key in user_profile_utils.UserProfiles.keys():
-		if user_profile_utils.UserProfiles[key]["selected"]:
-			currentProfileLable.text = user_profile_utils.UserProfiles[key]["name"]
+	for key in UserProfiles.profiles.keys():
+		if UserProfiles.profiles[key]["selected"]:
+			currentProfileLable.text = UserProfiles.profiles[key]["name"]
 			return
 		pass
 	
-	if user_profile_utils.UserProfiles.size() > 0: 
+	if UserProfiles.profiles.size() > 0: 
 		# if there are no profiles selected, mark the first profile in the list as selected
-		user_profile_utils.UserProfiles[profiles_list_id_to_name[0]]["selected"] = true
-		currentProfileLable.text = user_profile_utils.UserProfiles[profiles_list_id_to_name[0]]["name"]
+		UserProfiles.profiles[profiles_list_id_to_name[0]]["selected"] = true
+		currentProfileLable.text = UserProfiles.profiles[profiles_list_id_to_name[0]]["name"]
 		return
 	
 	# if there are no profiles, user placeholder Guest
@@ -266,11 +264,11 @@ func _on_profile_creator_button_button_up():
 
 
 func _on_profiles_list_item_selected(index):
-	for key in user_profile_utils.UserProfiles.keys():
-		user_profile_utils.UserProfiles[key]["selected"] = false
+	for key in UserProfiles.profiles.keys():
+		UserProfiles.profiles[key]["selected"] = false
 		pass
 		
-	user_profile_utils.UserProfiles[profiles_list_id_to_name[index]]["selected"] = true
+	UserProfiles.profiles[profiles_list_id_to_name[index]]["selected"] = true
 	_update_current_profile_label()
 	pass 
 
@@ -288,9 +286,9 @@ func _on_save_button_button_up():
 		if new_profile_name == "": # returns if profile name is empty
 			return	
 		
-		var new_profile = user_profile_utils._new_profile(new_profile_name)
+		var new_profile = UserProfiles._new_profile(new_profile_name)
 		
-		user_profile_utils._save_profile(new_profile)
+		UserProfiles._save_profile(new_profile)
 		_refresh_profiles_dropdown()
 		_update_current_profile_label()
 		get_node("Options_Profile/ProfileCreator").hide()
@@ -323,10 +321,10 @@ func _on_delete_button_button_down():
 	$Stack_0/MainMenuButtons/SFX_Press.play()
 func _on_delete_button_button_up():
 	var profile_list = $Options_Profile/ProfileSettingsCase/DimensionFrame/CurrentProfileCase/ProfilesList
-	if user_profile_utils.UserProfiles.size() < 1: # return if theres no profiles to delete
+	if UserProfiles.profiles.size() < 1: # return if theres no profiles to delete
 		return
 		
-	user_profile_utils._delete_profile(profiles_list_id_to_name[profile_list.get_selected_id()])
+	UserProfiles._delete_profile(profiles_list_id_to_name[profile_list.get_selected_id()])
 	_refresh_profiles_dropdown()
 	_update_current_profile_label()
 	get_node("Options_Profile/ProfileDestroyer").hide()

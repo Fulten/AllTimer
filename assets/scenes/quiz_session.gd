@@ -46,6 +46,8 @@ var player_input = "p_answer_%s"
 var local_clock_reading = [0,0]
 var local_answer_order = [0, 1, 2, 3]
 
+var QuizEndScreen = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if multiplayer.is_server():
@@ -83,6 +85,9 @@ func _input(event):
 	# ignore input until quiz starts
 	if !GameState.GameStarted:
 		return
+	if multiplayer.is_server() and QuizEndScreen and (event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE):
+		_end_quiz.rpc()
+		pass
 	for i in range(4):
 		if event.is_action_pressed(player_input % i):
 			if multiplayer.is_server(): # call locally if server
@@ -216,7 +221,8 @@ func _next_question():
 		loaded = false
 		countdown_timer.start(GameState.quizOptions.timer)
 	else:
-		_end_of_quiz.rpc()
+		_update_scores_on_clients.rpc(scores)
+		_show_end_of_quiz_screen.rpc()
 	pass
 
 @rpc("authority", "reliable")
@@ -247,6 +253,7 @@ func _load_question_refresh_scores():
 		post_question.text = current_question["explainer"]
 		_render_answers_track_correct(current_question, local_answer_order)
 		for i in range(GameState.PlayerCount):
+			get_node("quizInterface/players_region/activePlayer%s" % (i + 1)).show()
 			player_scores[i].text = str(GameState.players[GameState.playerNumberToIds[i]]["score"])
 		loaded = true
 
@@ -334,8 +341,85 @@ func _save_quiz_questions_locally():
 		pass
 	pass
 
+func _debug_func():
+	
+	var scoreOrder = ["3", "4", "1", "2"]
+	var scores = {"1":400, "2":500, "3":600, "4":700}
+	
+	print("!Debug")
+	for test in scoreOrder:
+		print(test)
+		
+	for n in range(4):
+		var highestScore = scores[scoreOrder[n]]
+		var indexOfHighest = n
+		var swapTemp
+		
+		for i in range(n, 4):
+			if scores[scoreOrder[i]] > highestScore:
+				highestScore = scores[scoreOrder[i]]
+				indexOfHighest = i
+				pass
+			pass
+		
+		swapTemp = scoreOrder[n]
+		scoreOrder[n] = scoreOrder[indexOfHighest]
+		scoreOrder[indexOfHighest] = swapTemp
+		pass
+		
+	print("!Debug")
+	for test in scoreOrder:
+		print(test)
+	
+	pass
+
 @rpc("authority", "call_local", "reliable")
-func _end_of_quiz():
+func _show_end_of_quiz_screen():
+	countdown_timer.stop()
+	QuizEndScreen = true
+	
+	var scoreOrder = []
+	
+	for key in GameState.players.keys():
+		scoreOrder.append(key)
+		pass
+		
+	for n in range(GameState.PlayerCount):
+		var highestScore = GameState.players[scoreOrder[n]].score
+		var indexOfHighest = n
+		var swapTemp
+		
+		for i in range(n, GameState.PlayerCount):
+			if GameState.players[scoreOrder[i]].score > highestScore:
+				highestScore = GameState.players[scoreOrder[i]].score
+				indexOfHighest = i
+				pass
+			pass
+		
+		swapTemp = scoreOrder[n]
+		scoreOrder[n] = scoreOrder[indexOfHighest]
+		scoreOrder[indexOfHighest] = swapTemp
+		pass
+	
+	for n in range(GameState.PlayerCount):
+		GameState.players[scoreOrder[n]]
+		var uiNum = n + 1
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/Name" % uiNum).text = GameState.players[scoreOrder[n]].name
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/ScoreDisplay/Score" % uiNum).text = "%s" % GameState.players[scoreOrder[n]].score
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer" % uiNum).show()
+		pass
+	
+	
+	$quizInterface.hide()
+	$quizEnd.show()
+	pass
+	
+	
+@rpc("authority", "call_local", "reliable")
+func _end_quiz():
+	$quizInterface.show()
+	$quizEnd.hide()
+	QuizEndScreen = false
 	GameState._reset_quiz_state()
 	end_of_quiz.emit()
 	queue_free()

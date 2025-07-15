@@ -534,150 +534,153 @@ offset_bottom = 418.0
 grow_vertical = 2
 theme_override_constants/separation = 25
 
-[node name="1stPlacer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
+[node name="1Placer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
 layout_mode = 2
 
-[node name="1P_Name" type="Label" parent="quizEnd/PlayerStandingsOrg/1stPlacer"]
+[node name="Name" type="Label" parent="quizEnd/PlayerStandingsOrg/1Placer"]
 layout_mode = 2
 text = "1P Name"
 label_settings = ExtResource("18_m58qp")
 
-[node name="1P_ScoreDisplay" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/1stPlacer"]
+[node name="ScoreDisplay" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/1Placer"]
 layout_mode = 2
 
-[node name="Score-" type="Label" parent="quizEnd/PlayerStandingsOrg/1stPlacer/1P_ScoreDisplay"]
+[node name="Score-" type="Label" parent="quizEnd/PlayerStandingsOrg/1Placer/ScoreDisplay"]
 layout_mode = 2
 text = "Score:"
 label_settings = ExtResource("19_f0nis")
 
-[node name="1PScore" type="Label" parent="quizEnd/PlayerStandingsOrg/1stPlacer/1P_ScoreDisplay"]
+[node name="Score" type="Label" parent="quizEnd/PlayerStandingsOrg/1Placer/ScoreDisplay"]
 layout_mode = 2
 text = "1,000,000"
 label_settings = ExtResource("18_m58qp")
 
-[node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/1stPlacer"]
+[node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/1Placer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="quizEnd/PlayerStandingsOrg/1stPlacer/MedalCase"]
+[node name="Label" type="Label" parent="quizEnd/PlayerStandingsOrg/1Placer/MedalCase"]
 layout_mode = 2
 text = "Certifications:"
 label_settings = ExtResource("19_f0nis")
 
-[node name="1P_Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/1stPlacer/MedalCase"]
+[node name="Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/1Placer/MedalCase"]
 layout_mode = 2
 text = "Casual Gamer"
 label_settings = ExtResource("19_f0nis")
 
-[node name="2ndPlacer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
+[node name="2Placer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
+visible = false
 layout_mode = 2
 
-[node name="LB" type="TextureRect" parent="quizEnd/PlayerStandingsOrg/2ndPlacer"]
+[node name="LB" type="TextureRect" parent="quizEnd/PlayerStandingsOrg/2Placer"]
 layout_mode = 2
 texture = ExtResource("14_jng0i")
 
-[node name="2P_Name" type="Label" parent="quizEnd/PlayerStandingsOrg/2ndPlacer"]
+[node name="Name" type="Label" parent="quizEnd/PlayerStandingsOrg/2Placer"]
 layout_mode = 2
 text = "p2 Name"
 label_settings = ExtResource("18_m58qp")
 
-[node name="2P_ScoreDisplay" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/2ndPlacer"]
+[node name="ScoreDisplay" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/2Placer"]
 layout_mode = 2
 
-[node name="Score-" type="Label" parent="quizEnd/PlayerStandingsOrg/2ndPlacer/2P_ScoreDisplay"]
+[node name="Score-" type="Label" parent="quizEnd/PlayerStandingsOrg/2Placer/ScoreDisplay"]
 layout_mode = 2
 text = "Score:"
 label_settings = ExtResource("19_f0nis")
 
-[node name="2P_Score" type="Label" parent="quizEnd/PlayerStandingsOrg/2ndPlacer/2P_ScoreDisplay"]
+[node name="Score" type="Label" parent="quizEnd/PlayerStandingsOrg/2Placer/ScoreDisplay"]
 layout_mode = 2
 text = "750,000"
 label_settings = ExtResource("18_m58qp")
 
-[node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/2ndPlacer"]
+[node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/2Placer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="quizEnd/PlayerStandingsOrg/2ndPlacer/MedalCase"]
+[node name="Label" type="Label" parent="quizEnd/PlayerStandingsOrg/2Placer/MedalCase"]
 layout_mode = 2
 text = "Certifications:"
 label_settings = ExtResource("19_f0nis")
 
-[node name="2P_Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/2ndPlacer/MedalCase"]
+[node name="Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/2Placer/MedalCase"]
 layout_mode = 2
 text = "N/A"
 label_settings = ExtResource("19_f0nis")
 
-[node name="3rdPlacer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
+[node name="3Placer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
+visible = false
 layout_mode = 2
 
-[node name="LB" type="TextureRect" parent="quizEnd/PlayerStandingsOrg/3rdPlacer"]
+[node name="LB" type="TextureRect" parent="quizEnd/PlayerStandingsOrg/3Placer"]
 layout_mode = 2
 texture = ExtResource("14_jng0i")
 
-[node name="3P_Name" type="Label" parent="quizEnd/PlayerStandingsOrg/3rdPlacer"]
+[node name="Name" type="Label" parent="quizEnd/PlayerStandingsOrg/3Placer"]
 layout_mode = 2
 text = "p3 Name"
 label_settings = ExtResource("18_m58qp")
 
-[node name="3P_ScoreDisplay" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/3rdPlacer"]
+[node name="ScoreDisplay" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/3Placer"]
 layout_mode = 2
 
-[node name="Score-" type="Label" parent="quizEnd/PlayerStandingsOrg/3rdPlacer/3P_ScoreDisplay"]
+[node name="Score-" type="Label" parent="quizEnd/PlayerStandingsOrg/3Placer/ScoreDisplay"]
 layout_mode = 2
 text = "Score:"
 label_settings = ExtResource("19_f0nis")
 
-[node name="3P_Score" type="Label" parent="quizEnd/PlayerStandingsOrg/3rdPlacer/3P_ScoreDisplay"]
+[node name="Score" type="Label" parent="quizEnd/PlayerStandingsOrg/3Placer/ScoreDisplay"]
 layout_mode = 2
 text = "100,000"
 label_settings = ExtResource("18_m58qp")
 
-[node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/3rdPlacer"]
+[node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/3Placer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="quizEnd/PlayerStandingsOrg/3rdPlacer/MedalCase"]
+[node name="Label" type="Label" parent="quizEnd/PlayerStandingsOrg/3Placer/MedalCase"]
 layout_mode = 2
 text = "Certifications:"
 label_settings = ExtResource("19_f0nis")
 
-[node name="3P_Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/3rdPlacer/MedalCase"]
+[node name="Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/3Placer/MedalCase"]
 layout_mode = 2
 text = "Bad at math"
 label_settings = ExtResource("19_f0nis")
 
-[node name="4thPlacer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
+[node name="4Placer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
+visible = false
 layout_mode = 2
 
-[node name="LB" type="TextureRect" parent="quizEnd/PlayerStandingsOrg/4thPlacer"]
+[node name="LB" type="TextureRect" parent="quizEnd/PlayerStandingsOrg/4Placer"]
 layout_mode = 2
 texture = ExtResource("14_jng0i")
 
-[node name="4P_Name" type="Label" parent="quizEnd/PlayerStandingsOrg/4thPlacer"]
+[node name="Name" type="Label" parent="quizEnd/PlayerStandingsOrg/4Placer"]
 layout_mode = 2
 text = "p4 Name"
 label_settings = ExtResource("18_m58qp")
 
-[node name="4P_ScoreDisplay" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/4thPlacer"]
+[node name="ScoreDisplay" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/4Placer"]
 layout_mode = 2
 
-[node name="Score-" type="Label" parent="quizEnd/PlayerStandingsOrg/4thPlacer/4P_ScoreDisplay"]
+[node name="Score-" type="Label" parent="quizEnd/PlayerStandingsOrg/4Placer/ScoreDisplay"]
 layout_mode = 2
 text = "Score:"
 label_settings = ExtResource("19_f0nis")
 
-[node name="4P_Score" type="Label" parent="quizEnd/PlayerStandingsOrg/4thPlacer/4P_ScoreDisplay"]
+[node name="Score" type="Label" parent="quizEnd/PlayerStandingsOrg/4Placer/ScoreDisplay"]
 layout_mode = 2
 text = "-69,420"
 label_settings = ExtResource("18_m58qp")
 
-[node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/4thPlacer"]
+[node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/4Placer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="quizEnd/PlayerStandingsOrg/4thPlacer/MedalCase"]
+[node name="Label" type="Label" parent="quizEnd/PlayerStandingsOrg/4Placer/MedalCase"]
 layout_mode = 2
 text = "Certifications:"
 label_settings = ExtResource("19_f0nis")
 
-[node name="4P_Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/4thPlacer/MedalCase"]
+[node name="Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/4Placer/MedalCase"]
 layout_mode = 2
 text = "N/A"
 label_settings = ExtResource("19_f0nis")

@@ -81,3 +81,16 @@ func _IO_write_profiles():
 		print("!!ERROR: Failed to save profile at _save_profile")
 		pass
 	pass
+
+func _get_selected_profile_key():
+	if profiles.size() < 1:
+		print("!WARNING: no user profile avalible, this should be prevented")
+		return "Guest"
+	
+	for key in profiles.keys():
+		if profiles[key]["selected"]:
+			return key
+		pass
+	
+	print("!!ERROR: it shouldn't be possible there to be no selected profiles")
+	return "Profile not found"

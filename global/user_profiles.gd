@@ -55,7 +55,7 @@ func _IO_read_profiles():
 	var hasCorruptedProfile = false
 	
 	for key in profiles.keys():
-		if "name" in profiles[key] || "id" in profiles[key] || "selected" in profiles[key]:
+		if !"name" in profiles[key] || !"id" in profiles[key] || !"selected" in profiles[key]:
 			corruptedKeys.append(key)
 			print("!!Error: Profile [%s] in JSON failed Validation, deleting corrupted entry." % key)
 			hasCorruptedProfile = true

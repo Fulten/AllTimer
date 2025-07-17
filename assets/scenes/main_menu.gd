@@ -270,6 +270,7 @@ func _on_profiles_list_item_selected(index):
 		
 	UserProfiles.profiles[profiles_list_id_to_name[index]]["selected"] = true
 	_update_current_profile_label()
+	UserProfiles._IO_write_profiles()
 	pass 
 
 

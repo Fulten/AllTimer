@@ -2092,6 +2092,7 @@ label_settings = ExtResource("12_fat6d")
 [connection signal="button_up" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_button_up"]
 [connection signal="focus_entered" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_focus_entered"]
 [connection signal="mouse_entered" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_mouse_entered"]
+[connection signal="item_selected" from="Options_Profile/ProfileSettingsCase/DimensionFrame/CurrentProfileCase/ProfilesList" to="." method="_on_profiles_list_item_selected"]
 [connection signal="button_down" from="Options_Profile/ProfileSettingsCase/DimensionFrame/ProfileManagementButtons/ProfileCreatorButton" to="." method="_on_profile_creator_button_button_down"]
 [connection signal="button_up" from="Options_Profile/ProfileSettingsCase/DimensionFrame/ProfileManagementButtons/ProfileCreatorButton" to="." method="_on_profile_creator_button_button_up"]
 [connection signal="focus_entered" from="Options_Profile/ProfileSettingsCase/DimensionFrame/ProfileManagementButtons/ProfileCreatorButton" to="." method="_on_profile_creator_button_focus_entered"]

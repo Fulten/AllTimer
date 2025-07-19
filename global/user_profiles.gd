@@ -37,7 +37,7 @@ func _delete_profile(profileName):
 	pass
 
 func _IO_read_profiles():
-	var file = FileAccess.open("res://data/user_profiles.json", FileAccess.READ)
+	var file = FileAccess.open("user://user_profiles.json", FileAccess.READ)
 	if file:
 		profiles = JSON.parse_string(file.get_as_text())
 		file.close()
@@ -71,7 +71,7 @@ func _IO_read_profiles():
 		pass
 
 func _IO_write_profiles():
-	var file = FileAccess.open("res://data/user_profiles.json", FileAccess.WRITE)
+	var file = FileAccess.open("user://user_profiles.json", FileAccess.WRITE)
 	if file:
 		var jsonString = JSON.stringify(profiles)
 		file.store_string(jsonString)

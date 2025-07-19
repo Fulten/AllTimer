@@ -18,7 +18,7 @@ var players_loaded = 0
 var launch_quiz = false
 
 const PORT: int = 12345 # port to use
-const MAX_CONNECTIONS: int = 4
+const MAX_CONNECTIONS: int = 3
 var IP_ADDRESS = "127.0.0.1" # use local host
 
 var peer

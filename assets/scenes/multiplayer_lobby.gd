@@ -8,10 +8,13 @@ signal multiplayer_disconnect
 var ip_address = "127.0.0.1"
 var IpInputTextNode
 
+var profiles_list_id_to_name = {}
+
 func _ready():
 	$StateChangers/LaunchButton.grab_focus()
 	IpInputTextNode = $PeerConnectors/TextEdit
 	IpInputTextNode.set("text", ip_address)
+	_refresh_profiles_dropdown()
 
 func _process(_delta):
 	pass
@@ -150,3 +153,34 @@ func _on_conn_fail_ack_button_down():
 	$SFX_Press.play()
 func _on_conn_fail_ack_button_up():
 	get_node("ConnectionFailedPopupCase").hide()
+
+func _refresh_profiles_dropdown():
+	var profile_list = $ProfileCase/ProfilesList
+	var id = 0
+	profile_list.clear()
+	
+	if UserProfiles.profiles.size() <= 0: # use placeholder if profiles list is empty
+		profile_list.add_item("N/A")
+		return
+	
+	
+	for key in UserProfiles.profiles.keys():
+		profile_list.add_item(UserProfiles.profiles[key]["name"])
+		profiles_list_id_to_name[id] = UserProfiles.profiles[key]["name"]
+		
+		if (UserProfiles.profiles[key]["selected"]):
+			profile_list.select(id)
+			pass
+		
+		id += 1
+		pass
+	pass
+
+func _on_profiles_list_item_selected(index):
+	for key in UserProfiles.profiles.keys():
+		UserProfiles.profiles[key]["selected"] = false
+		pass
+		
+	UserProfiles.profiles[profiles_list_id_to_name[index]]["selected"] = true
+	UserProfiles._IO_write_profiles()
+	pass 

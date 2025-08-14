@@ -38,8 +38,6 @@ var quizOptions = QuizOptions.new()
 
 var players = {}
 
-var UserProfiles = {}
-
 # translates player number to multiplayer id
 var playerNumberToIds = [-1, -1, -1, -1]
 

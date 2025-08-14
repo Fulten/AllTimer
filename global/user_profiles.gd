@@ -15,7 +15,8 @@ func _new_profile(profileName):
 	var newProfile = {
 		"name": profileName,
 		"id": newID,
-		"selected": false
+		"selected": false,
+		"questions_answered": {}
 	}
 	
 	return newProfile
@@ -52,21 +53,26 @@ func _IO_read_profiles():
 	
 	# validate the json structure
 	var corruptedKeys = []
-	var hasCorruptedProfile = false
+	var saveProfilesChanges = false
 	
 	for key in profiles.keys():
 		if !"name" in profiles[key] || !"id" in profiles[key] || !"selected" in profiles[key]:
-			corruptedKeys.append(key)
+			profiles.erase(key)
 			print("!!Error: Profile [%s] in JSON failed Validation, deleting corrupted entry." % key)
-			hasCorruptedProfile = true
+			saveProfilesChanges = true
+			pass
+			
+		if !"questions_answered" in profiles[key]:
+			print("!INFO: older profile detected, adding \"questions_answered\" member")
+			profiles[key]["questions_answered"] = {}
+			saveProfilesChanges = true
 			pass
 		pass
 	
 	for key in corruptedKeys:
-		profiles.erase(key)
 		pass
 		
-	if hasCorruptedProfile:
+	if saveProfilesChanges:
 		_IO_write_profiles()
 		pass
 
@@ -84,7 +90,7 @@ func _IO_write_profiles():
 
 func _get_selected_profile_key():
 	if profiles.size() < 1:
-		print("!WARNING: no user profile avalible, this should be prevented")
+		print("!WARNING: no user profile avalible")
 		return "Guest"
 	
 	for key in profiles.keys():
@@ -92,5 +98,5 @@ func _get_selected_profile_key():
 			return key
 		pass
 	
-	print("!!ERROR: it shouldn't be possible there to be no selected profiles")
+	print("!!ERROR: it shouldn't be possible there to be no selected profile")
 	return "Profile not found"

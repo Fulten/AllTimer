@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dy8lkjphm6pdg"]
+[gd_scene load_steps=12 format=3 uid="uid://dy8lkjphm6pdg"]
 
 [ext_resource type="Script" path="res://assets/scenes/multiplayer_lobby.gd" id="1_e4r6j"]
 [ext_resource type="Texture2D" uid="uid://ctaoad4ca7mx7" path="res://assets/uiux/main_menu/T_MenuVignette_D.tga" id="1_l3cbn"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://dimbdo2k6d1uw" path="res://assets/uiux/main_menu/sfx_click.mp3" id="4_qshvx"]
 [ext_resource type="LabelSettings" uid="uid://b8rucp80rws68" path="res://assets/scenes/Label_Subsection.tres" id="5_wtxry"]
 [ext_resource type="LabelSettings" uid="uid://mv8bcxsbvof1" path="res://assets/scenes/Label_TagW.tres" id="6_ujxch"]
+[ext_resource type="Theme" uid="uid://cblo30jiqi52a" path="res://assets/scenes/ButtonNF_Clickable.tres" id="7_8se73"]
 
 [node name="MultiplayerLobby" type="Control"]
 layout_mode = 3
@@ -23,7 +24,6 @@ script = ExtResource("1_e4r6j")
 [node name="BGM_Lobby" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_kyt78")
 volume_db = -20.0
-autoplay = true
 bus = &"Music"
 
 [node name="SFX_Hover" type="AudioStreamPlayer2D" parent="."]
@@ -94,12 +94,12 @@ offset_right = 239.0
 offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 10
 
 [node name="HostButton" type="Button" parent="PeerConnectors"]
 layout_mode = 2
-theme = ExtResource("2_jy5fm")
+theme = ExtResource("7_8se73")
 text = "Host"
-flat = true
 
 [node name="Label" type="Label" parent="PeerConnectors"]
 layout_mode = 2
@@ -108,10 +108,9 @@ label_settings = ExtResource("3_qhvyi")
 
 [node name="JoinButton" type="Button" parent="PeerConnectors"]
 layout_mode = 2
-theme = ExtResource("2_jy5fm")
+theme = ExtResource("7_8se73")
 text = "Join
 "
-flat = true
 
 [node name="TextEdit" type="TextEdit" parent="PeerConnectors"]
 custom_minimum_size = Vector2(220, 0)

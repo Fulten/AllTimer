@@ -6,4 +6,4 @@
 line_spacing = 0.0
 font = ExtResource("1_i46c1")
 font_size = 150
-font_color = Color(0, 0, 0, 0)
+font_color = Color(0, 0, 0, 1)

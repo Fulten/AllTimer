@@ -364,26 +364,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Options_Sound2/SettingsList:position")
+tracks/2/path = NodePath("../Options_Sound2/SettingsCase:position")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(665.5, 1100), Vector2(665.5, 550)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../Options_Sound2/SoundDeviceSetter:position")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(520, 1044), Vector2(520, 496)]
+"values": [Vector2(608, 1096), Vector2(608, 515)]
 }
 
 [sub_resource type="Animation" id="Animation_lbqsi"]
@@ -416,26 +404,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Options_Sound2/SettingsList:position")
+tracks/2/path = NodePath("../Options_Sound2/SettingsCase:position")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(665.5, 550), Vector2(665.5, 1100)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../Options_Sound2/SoundDeviceSetter:position")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(520, 496), Vector2(520, 1044)]
+"values": [Vector2(608, 512), Vector2(608, 1100)]
 }
 
 [sub_resource type="Animation" id="Animation_8vv60"]
@@ -711,134 +687,122 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("../Options_Sound2/SettingsList:position")
+tracks/9/path = NodePath("../Options_Game2/Game:label_settings:font_color")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(665.5, 501)]
+"values": [Color(0, 0, 0, 1)]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("../Options_Game2/Game:label_settings:font_color")
+tracks/10/path = NodePath("../Options_Game2/Game:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0, 0, 0, 1)]
+"values": [Vector2(657, 309)]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("../Options_Game2/Game:position")
+tracks/11/path = NodePath("../Options_Game2/SettingsList:position")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(657, 309)]
+"values": [Vector2(533, 500)]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("../Options_Game2/SettingsList:position")
+tracks/12/path = NodePath("ProfileButton:theme_override_colors/font_color")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(533, 500)]
+"values": [null]
 }
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("ProfileButton:theme_override_colors/font_color")
+tracks/13/path = NodePath("ProfileButton/CurrentProfileLabel:theme_override_colors/font_color")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [null]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("ProfileButton/CurrentProfileLabel:theme_override_colors/font_color")
+tracks/14/path = NodePath("ProfileButton:theme_override_colors/font_outline_color")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [null]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("ProfileButton:theme_override_colors/font_outline_color")
+tracks/15/path = NodePath("%Options_Profile/Profile:position")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [null]
+"values": [Vector2(645, 373)]
 }
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("%Options_Profile/Profile:position")
+tracks/16/path = NodePath("%Options_Profile/ProfileSettingsCase:position")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(645, 373)]
+"values": [Vector2(592, 560)]
 }
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("%Options_Profile/ProfileSettingsCase:position")
+tracks/17/path = NodePath("%Options_Profile/Profile:label_settings:font_color")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(592, 560)]
+"values": [Color(0, 0, 0, 1)]
 }
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("%Options_Profile/Profile:label_settings:font_color")
+tracks/18/path = NodePath("../Options_Sound2/SettingsCase:position")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0, 0, 0, 1)]
-}
-tracks/19/type = "value"
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/path = NodePath("../Options_Sound2/SoundDeviceSetter:position")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(666, 494)]
+"values": [Vector2(608, 512)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hplv1"]
@@ -1040,9 +1004,9 @@ anchor_left = 14.4
 anchor_top = 13.8
 anchor_right = 33.6
 anchor_bottom = 15.6
-offset_top = 548.0
+offset_top = 3.0
 offset_right = -0.00012207
-offset_bottom = 547.999
+offset_bottom = 2.99902
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_wr4x0")
@@ -1400,212 +1364,6 @@ theme = ExtResource("9_sym4l")
 text = "Back"
 flat = true
 
-[node name="Options_Sound2" type="Control" parent="."]
-visible = false
-layout_mode = 2
-anchors_preset = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 72.0
-offset_top = 64.0
-offset_right = -72.0
-offset_bottom = -72.0
-
-[node name="Sound" type="Label" parent="Options_Sound2"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -282.0
-offset_top = -163.0
-offset_right = 283.0
-offset_bottom = 37.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Sound
-"
-label_settings = ExtResource("8_3ymww")
-
-[node name="Underline" type="Line2D" parent="Options_Sound2"]
-position = Vector2(-72, -54)
-points = PackedVector2Array(592, 544, 1320, 544)
-width = 2.0
-default_color = Color(0, 0, 0, 1)
-
-[node name="SoundDeviceSetter" type="HBoxContainer" parent="Options_Sound2"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.375
-anchor_top = 0.523
-anchor_right = 0.626
-anchor_bottom = 0.568
-offset_top = 0.287994
-offset_right = 282.224
-offset_bottom = -0.192017
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Tag_SoundDevice" type="Label" parent="Options_Sound2/SoundDeviceSetter"]
-layout_mode = 2
-text = "Sound device: "
-label_settings = ExtResource("12_fat6d")
-
-[node name="SoundDeviceOptions" type="OptionButton" parent="Options_Sound2/SoundDeviceSetter"]
-unique_name_in_owner = true
-layout_mode = 2
-focus_mode = 0
-theme_override_fonts/font = ExtResource("7_ixy01")
-theme_override_font_sizes/font_size = 24
-flat = true
-alignment = 1
-item_count = 3
-selected = 0
-fit_to_longest_item = false
-popup/item_0/text = "System Default"
-popup/item_0/id = 0
-popup/item_1/text = "Corsair VOID"
-popup/item_1/id = 1
-popup/item_2/text = "THQ Spatial Speakers"
-popup/item_2/id = 2
-
-[node name="SettingsList" type="VBoxContainer" parent="Options_Sound2"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.374
-anchor_top = 0.576
-anchor_right = 0.624
-anchor_bottom = 0.932
-offset_left = 1.276
-offset_top = -42.744
-offset_right = 2.276
-offset_bottom = -42.808
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VolumeControlHeader" type="Label" parent="Options_Sound2/SettingsList"]
-layout_mode = 2
-text = "Volume Controls"
-label_settings = ExtResource("18_f5q02")
-horizontal_alignment = 1
-
-[node name="VolumeSlidersCase" type="VBoxContainer" parent="Options_Sound2/SettingsList/VolumeControlHeader"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.733
-anchor_right = 1.032
-anchor_bottom = 6.8
-offset_left = -7.0
-offset_top = -31.985
-offset_right = -6.90402
-offset_bottom = -21.866
-
-[node name="Master" type="Label" parent="Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
-layout_mode = 2
-text = "Master"
-label_settings = ExtResource("19_ihq36")
-horizontal_alignment = 1
-
-[node name="VolumeControl" type="HSlider" parent="Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-theme_override_styles/slider = ExtResource("11_sycm3")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_7iv0q")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_fcyc0")
-max_value = 1.0
-step = 0.001
-value = 1.0
-tick_count = 5
-ticks_on_borders = true
-script = ExtResource("11_e6ba1")
-bus_name = "Master"
-
-[node name="Music" type="Label" parent="Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
-layout_mode = 2
-text = "Music
-"
-label_settings = ExtResource("19_ihq36")
-horizontal_alignment = 1
-
-[node name="VolumeControl2" type="HSlider" parent="Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-theme_override_styles/slider = ExtResource("11_sycm3")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_7iv0q")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_fcyc0")
-max_value = 1.0
-step = 0.001
-value = 1.0
-tick_count = 5
-ticks_on_borders = true
-script = ExtResource("11_e6ba1")
-bus_name = "Music"
-
-[node name="SFX" type="Label" parent="Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
-layout_mode = 2
-text = "Sound Effects
-"
-label_settings = ExtResource("19_ihq36")
-horizontal_alignment = 1
-
-[node name="VolumeControl3" type="HSlider" parent="Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-theme_override_styles/slider = ExtResource("11_sycm3")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_7iv0q")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_fcyc0")
-max_value = 1.0
-step = 0.001
-value = 1.0
-tick_count = 5
-ticks_on_borders = true
-script = ExtResource("11_e6ba1")
-bus_name = "SFX"
-
-[node name="VO" type="Label" parent="Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
-layout_mode = 2
-text = "Voiceover
-"
-label_settings = ExtResource("19_ihq36")
-horizontal_alignment = 1
-
-[node name="VolumeControl4" type="HSlider" parent="Options_Sound2/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-theme_override_styles/slider = ExtResource("11_sycm3")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_7iv0q")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_fcyc0")
-max_value = 1.0
-step = 0.001
-value = 1.0
-tick_count = 5
-ticks_on_borders = true
-script = ExtResource("11_e6ba1")
-bus_name = "VO"
-
-[node name="OptionsSoundReturn" type="Button" parent="Options_Sound2"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -69.0
-offset_right = 100.0
-offset_bottom = -11.0
-grow_horizontal = 2
-grow_vertical = 0
-theme = ExtResource("9_sym4l")
-text = "Back"
-flat = true
-
 [node name="Options_Game2" type="Control" parent="."]
 visible = false
 layout_mode = 2
@@ -1769,6 +1527,203 @@ layout_mode = 2
 text = "Enable/Disable Categories"
 
 [node name="OptionsGameReturn" type="Button" parent="Options_Game2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -69.0
+offset_right = 100.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("9_sym4l")
+text = "Back"
+flat = true
+
+[node name="Options_Sound2" type="Control" parent="."]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 72.0
+offset_top = 64.0
+offset_right = -72.0
+offset_bottom = -72.0
+
+[node name="Sound" type="Label" parent="Options_Sound2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -282.0
+offset_top = -163.0
+offset_right = 283.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Sound
+"
+label_settings = ExtResource("8_3ymww")
+
+[node name="Underline" type="Line2D" parent="Options_Sound2"]
+position = Vector2(-72, -54)
+points = PackedVector2Array(592, 544, 1320, 544)
+width = 2.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="SettingsCase" type="VBoxContainer" parent="Options_Sound2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.342
+anchor_top = 0.525
+anchor_right = 0.658
+anchor_bottom = 0.898
+offset_left = 0.607971
+offset_top = 16.4
+offset_right = -0.608032
+offset_bottom = 4.28809
+
+[node name="SoundDeviceSetter" type="HBoxContainer" parent="Options_Sound2/SettingsCase"]
+layout_mode = 2
+alignment = 1
+
+[node name="Tag_SoundDevice" type="Label" parent="Options_Sound2/SettingsCase/SoundDeviceSetter"]
+layout_mode = 2
+text = "Sound device: "
+label_settings = ExtResource("12_fat6d")
+
+[node name="SoundDeviceOptions" type="OptionButton" parent="Options_Sound2/SettingsCase/SoundDeviceSetter"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("7_ixy01")
+theme_override_font_sizes/font_size = 24
+flat = true
+alignment = 1
+item_count = 3
+selected = 0
+fit_to_longest_item = false
+popup/item_0/text = "System Default"
+popup/item_0/id = 0
+popup/item_1/text = "Corsair VOID"
+popup/item_1/id = 1
+popup/item_2/text = "THQ Spatial Speakers"
+popup/item_2/id = 2
+
+[node name="SettingsList" type="VBoxContainer" parent="Options_Sound2/SettingsCase"]
+layout_mode = 2
+
+[node name="VolumeControlHeader" type="Label" parent="Options_Sound2/SettingsCase/SettingsList"]
+layout_mode = 2
+text = "Volume Controls"
+label_settings = ExtResource("18_f5q02")
+horizontal_alignment = 1
+
+[node name="VolumeSlidersCase" type="VBoxContainer" parent="Options_Sound2/SettingsCase/SettingsList/VolumeControlHeader"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.733
+anchor_right = 1.032
+anchor_bottom = 6.8
+offset_left = -7.0
+offset_top = -31.985
+offset_right = -6.90402
+offset_bottom = -21.866
+
+[node name="Master" type="Label" parent="Options_Sound2/SettingsCase/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
+layout_mode = 2
+text = "Master"
+label_settings = ExtResource("19_ihq36")
+horizontal_alignment = 1
+
+[node name="VolumeControl" type="HSlider" parent="Options_Sound2/SettingsCase/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/slider = ExtResource("11_sycm3")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_7iv0q")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_fcyc0")
+max_value = 1.0
+step = 0.001
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+script = ExtResource("11_e6ba1")
+bus_name = "Master"
+
+[node name="Music" type="Label" parent="Options_Sound2/SettingsCase/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
+layout_mode = 2
+text = "Music
+"
+label_settings = ExtResource("19_ihq36")
+horizontal_alignment = 1
+
+[node name="VolumeControl2" type="HSlider" parent="Options_Sound2/SettingsCase/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/slider = ExtResource("11_sycm3")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_7iv0q")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_fcyc0")
+max_value = 1.0
+step = 0.001
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+script = ExtResource("11_e6ba1")
+bus_name = "Music"
+
+[node name="SFX" type="Label" parent="Options_Sound2/SettingsCase/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
+layout_mode = 2
+text = "Sound Effects
+"
+label_settings = ExtResource("19_ihq36")
+horizontal_alignment = 1
+
+[node name="VolumeControl3" type="HSlider" parent="Options_Sound2/SettingsCase/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/slider = ExtResource("11_sycm3")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_7iv0q")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_fcyc0")
+max_value = 1.0
+step = 0.001
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+script = ExtResource("11_e6ba1")
+bus_name = "SFX"
+
+[node name="VO" type="Label" parent="Options_Sound2/SettingsCase/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
+layout_mode = 2
+text = "Voiceover
+"
+label_settings = ExtResource("19_ihq36")
+horizontal_alignment = 1
+
+[node name="VolumeControl4" type="HSlider" parent="Options_Sound2/SettingsCase/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/slider = ExtResource("11_sycm3")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_7iv0q")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_fcyc0")
+max_value = 1.0
+step = 0.001
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+script = ExtResource("11_e6ba1")
+bus_name = "VO"
+
+[node name="OptionsSoundReturn" type="Button" parent="Options_Sound2"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2091,15 +2046,15 @@ label_settings = ExtResource("12_fat6d")
 [connection signal="button_up" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_button_up"]
 [connection signal="focus_entered" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_focus_entered"]
 [connection signal="mouse_entered" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_mouse_entered"]
-[connection signal="item_selected" from="Options_Sound2/SoundDeviceSetter/SoundDeviceOptions" to="." method="_on_sound_device_options_item_selected"]
-[connection signal="button_down" from="Options_Sound2/OptionsSoundReturn" to="." method="_on_options_sound_return_button_down"]
-[connection signal="button_up" from="Options_Sound2/OptionsSoundReturn" to="." method="_on_options_sound_return_button_up"]
-[connection signal="focus_entered" from="Options_Sound2/OptionsSoundReturn" to="." method="_on_options_sound_return_focus_entered"]
-[connection signal="mouse_entered" from="Options_Sound2/OptionsSoundReturn" to="." method="_on_options_sound_return_mouse_entered"]
 [connection signal="button_down" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_button_down"]
 [connection signal="button_up" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_button_up"]
 [connection signal="focus_entered" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_focus_entered"]
 [connection signal="mouse_entered" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_mouse_entered"]
+[connection signal="item_selected" from="Options_Sound2/SettingsCase/SoundDeviceSetter/SoundDeviceOptions" to="." method="_on_sound_device_options_item_selected"]
+[connection signal="button_down" from="Options_Sound2/OptionsSoundReturn" to="." method="_on_options_sound_return_button_down"]
+[connection signal="button_up" from="Options_Sound2/OptionsSoundReturn" to="." method="_on_options_sound_return_button_up"]
+[connection signal="focus_entered" from="Options_Sound2/OptionsSoundReturn" to="." method="_on_options_sound_return_focus_entered"]
+[connection signal="mouse_entered" from="Options_Sound2/OptionsSoundReturn" to="." method="_on_options_sound_return_mouse_entered"]
 [connection signal="item_selected" from="Options_Profile/ProfileSettingsCase/DimensionFrame/CurrentProfileCase/ProfilesList" to="." method="_on_profiles_list_item_selected"]
 [connection signal="button_down" from="Options_Profile/ProfileSettingsCase/DimensionFrame/ProfileManagementButtons/ProfileCreatorButton" to="." method="_on_profile_creator_button_button_down"]
 [connection signal="button_up" from="Options_Profile/ProfileSettingsCase/DimensionFrame/ProfileManagementButtons/ProfileCreatorButton" to="." method="_on_profile_creator_button_button_up"]

@@ -286,6 +286,7 @@ label_settings = ExtResource("5_wtxry")
 
 [node name="ProfilesList" type="OptionButton" parent="ProfileCase"]
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 28
 flat = true
 item_count = 1

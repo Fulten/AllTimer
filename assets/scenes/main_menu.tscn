@@ -1040,9 +1040,9 @@ anchor_left = 14.4
 anchor_top = 13.8
 anchor_right = 33.6
 anchor_bottom = 15.6
-offset_top = 3.0
+offset_top = 548.0
 offset_right = -0.00012207
-offset_bottom = 2.99902
+offset_bottom = 547.999
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_wr4x0")
@@ -1268,6 +1268,7 @@ label_settings = ExtResource("12_fat6d")
 [node name="DisplayList" type="OptionButton" parent="Options_Display2/OptionsList/DisplayType"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 theme_override_fonts/font = ExtResource("7_ixy01")
 theme_override_font_sizes/font_size = 24
 flat = true
@@ -1295,6 +1296,7 @@ label_settings = ExtResource("12_fat6d")
 [node name="ResolutionsList" type="OptionButton" parent="Options_Display2/OptionsList/ResolutionSettings"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 theme_override_fonts/font = ExtResource("7_ixy01")
 theme_override_font_sizes/font_size = 24
 flat = true
@@ -1334,6 +1336,7 @@ label_settings = ExtResource("12_fat6d")
 [node name="InputDisplayList" type="OptionButton" parent="Options_Display2/OptionsList/ButtonIcons"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 theme_override_fonts/font = ExtResource("7_ixy01")
 theme_override_font_sizes/font_size = 24
 flat = true
@@ -1364,6 +1367,7 @@ label_settings = ExtResource("12_fat6d")
 [node name="SessionThemesList" type="OptionButton" parent="Options_Display2/OptionsList/SessionThemes"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 theme_override_fonts/font = ExtResource("7_ixy01")
 theme_override_font_sizes/font_size = 24
 flat = true
@@ -1452,6 +1456,7 @@ label_settings = ExtResource("12_fat6d")
 [node name="SoundDeviceOptions" type="OptionButton" parent="Options_Sound2/SoundDeviceSetter"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 theme_override_fonts/font = ExtResource("7_ixy01")
 theme_override_font_sizes/font_size = 24
 flat = true
@@ -1660,6 +1665,7 @@ label_settings = ExtResource("12_fat6d")
 [node name="TimerSettingList" type="OptionButton" parent="Options_Game2/SettingsList/TimerSetting"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 theme_override_fonts/font = ExtResource("7_ixy01")
 theme_override_font_sizes/font_size = 24
 flat = true
@@ -1688,6 +1694,7 @@ label_settings = ExtResource("12_fat6d")
 [node name="WinConList" type="OptionButton" parent="Options_Game2/SettingsList/WinConditions"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 theme_override_fonts/font = ExtResource("7_ixy01")
 theme_override_font_sizes/font_size = 24
 flat = true
@@ -1836,6 +1843,7 @@ label_settings = ExtResource("12_fat6d")
 
 [node name="ProfilesList" type="OptionButton" parent="Options_Profile/ProfileSettingsCase/DimensionFrame/CurrentProfileCase"]
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 28
 flat = true
 

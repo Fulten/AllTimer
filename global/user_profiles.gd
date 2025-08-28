@@ -52,7 +52,6 @@ func _IO_read_profiles():
 		return
 	
 	# validate the json structure
-	var corruptedKeys = []
 	var saveProfilesChanges = false
 	
 	for key in profiles.keys():
@@ -67,9 +66,6 @@ func _IO_read_profiles():
 			profiles[key]["questions_answered"] = {}
 			saveProfilesChanges = true
 			pass
-		pass
-	
-	for key in corruptedKeys:
 		pass
 		
 	if saveProfilesChanges:

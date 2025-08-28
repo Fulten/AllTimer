@@ -23,7 +23,8 @@ func _process(_delta):
 func _on_text_edit_text_changed():
 	ip_address = IpInputTextNode.get("text")
 	pass
-
+	
+#region Host Button
 func _on_host_button_mouse_entered():
 	$SFX_Hover.play()
 func _on_host_button_focus_entered():
@@ -36,11 +37,15 @@ func _on_host_button_button_up():
 	$HostingLabel.show()
 	$CancelConnectionButton.show()
 	
+	$ProfileCase/ProfilesList.disabled = true
+	
 	$CancelConnectionButton.disabled = false
 	$PeerConnectors/HostButton.disabled = true
 	$PeerConnectors/JoinButton.disabled = true
 	$StateChangers/LaunchButton.disabled = false
+#endregion
 
+#region Join Button
 func _on_join_button_mouse_entered():
 	$SFX_Hover.play()
 func _on_join_button_focus_entered():
@@ -53,10 +58,14 @@ func _on_join_button_button_up():
 	$JoiningLabel.show()
 	$CancelConnectionButton.show()
 	
+	$ProfileCase/ProfilesList.disabled = true
+	
 	$CancelConnectionButton.disabled = false
 	$PeerConnectors/HostButton.disabled = true
 	$PeerConnectors/JoinButton.disabled = true
+#endregion
 
+#region Cancel Button
 func _on_cancel_connection_button_mouse_entered():
 	$SFX_Hover.play()
 func _on_cancel_connection_button_focus_entered():
@@ -70,6 +79,8 @@ func _on_cancel_connection_button_button_up():
 	$CancelConnectionButton.hide()
 	$PeerConnectors.show()
 	
+	$ProfileCase/ProfilesList.disabled = false
+	
 	$CancelConnectionButton.disabled = true
 	$PeerConnectors/HostButton.disabled = false
 	$PeerConnectors/JoinButton.disabled = false
@@ -77,7 +88,9 @@ func _on_cancel_connection_button_button_up():
 	
 	multiplayer_disconnect.emit()
 	_update_connected_players()
-	
+#endregion	
+
+#region Launch Button
 func _on_launch_button_mouse_entered():
 	$SFX_Hover.play()
 func _on_launch_button_focus_entered():
@@ -89,7 +102,9 @@ func _on_launch_button_button_up():
 	$StateChangers/LaunchButton.disabled = true
 	launch_quiz.emit()
 	pass
+#endregion
 
+#region Back Button
 func _on_back_to_main_button_mouse_entered():
 	$SFX_Hover.play()
 func _on_back_to_main_button_focus_entered():
@@ -99,6 +114,18 @@ func _on_back_to_main_button_button_down():
 func _on_back_to_main_button_button_up():
 	_exit_menu()
 	pass
+#endregion
+
+#region Connection Failed confirm Button
+func _on_conn_fail_ack_mouse_entered():
+	$SFX_Hover.play()
+func _on_conn_fail_ack_focus_entered():
+	$SFX_Hover.play()
+func _on_conn_fail_ack_button_down():
+	$SFX_Press.play()
+func _on_conn_fail_ack_button_up():
+	get_node("ConnectionFailedPopupCase").hide()
+#endregion
 
 func _update_connected_players():
 	for n in range(0, 3):
@@ -144,17 +171,8 @@ func _connection_reset(error):
 	$PeerConnectors/HostButton.disabled = false
 	$PeerConnectors/JoinButton.disabled = false
 	$StateChangers/LaunchButton.disabled = true
-	
 	pass
 
-func _on_conn_fail_ack_mouse_entered():
-	$SFX_Hover.play()
-func _on_conn_fail_ack_focus_entered():
-	$SFX_Hover.play()
-func _on_conn_fail_ack_button_down():
-	$SFX_Press.play()
-func _on_conn_fail_ack_button_up():
-	get_node("ConnectionFailedPopupCase").hide()
 
 func _refresh_profiles_dropdown():
 	var profile_list = $ProfileCase/ProfilesList

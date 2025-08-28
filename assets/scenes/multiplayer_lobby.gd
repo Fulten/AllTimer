@@ -20,9 +20,20 @@ func _ready():
 func _process(_delta):
 	pass
 
+##called when the text in the IP Address field is changed
 func _on_text_edit_text_changed():
 	ip_address = IpInputTextNode.get("text")
 	pass
+
+##called when the Profiles List drop down's selection is changed
+func _on_profiles_list_item_selected(index):
+	for key in UserProfiles.profiles.keys():
+		UserProfiles.profiles[key]["selected"] = false
+		pass
+		
+	UserProfiles.profiles[profiles_list_id_to_name[index]]["selected"] = true
+	UserProfiles._IO_write_profiles()
+	pass 
 	
 #region Host Button
 func _on_host_button_mouse_entered():
@@ -173,7 +184,6 @@ func _connection_reset(error):
 	$StateChangers/LaunchButton.disabled = true
 	pass
 
-
 func _refresh_profiles_dropdown():
 	var profile_list = $ProfileCase/ProfilesList
 	var id = 0
@@ -196,11 +206,3 @@ func _refresh_profiles_dropdown():
 		pass
 	pass
 
-func _on_profiles_list_item_selected(index):
-	for key in UserProfiles.profiles.keys():
-		UserProfiles.profiles[key]["selected"] = false
-		pass
-		
-	UserProfiles.profiles[profiles_list_id_to_name[index]]["selected"] = true
-	UserProfiles._IO_write_profiles()
-	pass 

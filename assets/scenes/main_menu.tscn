@@ -1587,7 +1587,7 @@ anchor_bottom = 0.898
 offset_left = 0.607971
 offset_top = 16.4
 offset_right = -0.608032
-offset_bottom = 4.28809
+offset_bottom = 4.28815
 
 [node name="SoundDeviceSetter" type="HBoxContainer" parent="Options_Sound2/SettingsCase"]
 layout_mode = 2

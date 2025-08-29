@@ -26,7 +26,11 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=2
 window/stretch/mode="canvas_items"
+<<<<<<< Updated upstream
 window/stretch/aspect="expand"
+=======
+window/stretch/aspect="keep_width"
+>>>>>>> Stashed changes
 
 [editor]
 
@@ -64,3 +68,7 @@ p_answer_3={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":3,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
+
+[rendering]
+
+anti_aliasing/quality/msaa_2d=1

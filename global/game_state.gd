@@ -5,6 +5,7 @@ class Player:
 	var uuid: int
 	var guess: int
 	var guessTime: int
+	var hasGuessed: bool
 	var correct: bool
 	var score: int
 	
@@ -13,10 +14,18 @@ class Player:
 		uuid = i_uuid
 		guess = -1
 		guessTime = 0
+		hasGuessed = false
 		correct = false
 		score = 0
 		pass
-
+	func reset_player():
+		guess = -1
+		guessTime = 0
+		hasGuessed = false
+		correct = false
+		score = 0
+		
+		pass
 
 class QuizOptions:
 	var timer: int
@@ -32,7 +41,6 @@ class QuizOptions:
 		skipping_losses = i_skipping_losses
 		gambling_modes = i_gambling_modes
 		pass
-
 
 var quizOptions = QuizOptions.new()
 
@@ -108,9 +116,7 @@ func _build_player_number_to_id_table():
 
 func _reset_players():
 	for key in players.keys():
-		players[key]["score"] = 0
-		players[key]["guess"] = -1
-		players[key]["guessTime"] = 0
+		players[key].reset_player()
 		pass
 
 func _reset_quiz_state():

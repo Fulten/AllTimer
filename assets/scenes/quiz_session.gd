@@ -1,25 +1,25 @@
 extends Control
 
 #region refrences to quiz ui elements
-@onready var questions_name = $quizInterface/session_organizer/question_header/question_name
-@onready var questions_index = $quizInterface/session_organizer/question_header/question_index
-@onready var countdown_timer = $quizInterface/session_organizer/question_header/Countdown
-@onready var countdown_text = $quizInterface/session_organizer/CountdownLabel
-@onready var questions_body = $quizInterface/session_organizer/question_body
-@onready var post_question = $quizInterface/post_question
-@onready var players = [$quizInterface/players_region/activePlayer1/player_case,
+@onready var ui_questions_name = $quizInterface/session_organizer/question_header/question_name
+@onready var ui_questions_index = $quizInterface/session_organizer/question_header/question_index
+@onready var ui_countdown_timer = $quizInterface/session_organizer/question_header/Countdown
+@onready var ui_countdown_text = $quizInterface/session_organizer/CountdownLabel
+@onready var ui_questions_body = $quizInterface/session_organizer/question_body
+@onready var ui_post_question = $quizInterface/post_question
+@onready var ui_players = [$quizInterface/players_region/activePlayer1/player_case,
 	$quizInterface/players_region/activePlayer2/player_case2,
 	$quizInterface/players_region/activePlayer3/player_case3,
 	$quizInterface/players_region/activePlayer4/player_case4]
-@onready var answers = [$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1,
+@onready var ui_answers = [$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1,
 	$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2,
 	$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3,
 	$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4]
-@onready var player_names = [$quizInterface/players_region/activePlayer1/player_case/player1_name,
+@onready var ui_player_names = [$quizInterface/players_region/activePlayer1/player_case/player1_name,
 	$quizInterface/players_region/activePlayer2/player_case2/player2_name,
 	$quizInterface/players_region/activePlayer3/player_case3/player3_name,
 	$quizInterface/players_region/activePlayer4/player_case4/player4_name]
-@onready var player_scores = [$quizInterface/players_region/activePlayer1/player_case/status_row/score,
+@onready var ui_player_scores = [$quizInterface/players_region/activePlayer1/player_case/status_row/score,
 	$quizInterface/players_region/activePlayer2/player_case2/status_row/score,
 	$quizInterface/players_region/activePlayer3/player_case3/status_row/score,
 	$quizInterface/players_region/activePlayer4/player_case4/status_row/score]
@@ -77,11 +77,11 @@ func _process(_delta):
 			local_clock_reading =  countdown_clock()
 			_sync_server_client_clock_reading.rpc(local_clock_reading)
 			_load_question_refresh_scores()
-			countdown_text.text = "%02d:%02d" % local_clock_reading
+			ui_countdown_text.text = "%02d:%02d" % local_clock_reading
 			pass
 		else:
 			_load_question_refresh_scores()
-			countdown_text.text = "%02d:%02d" % local_clock_reading
+			ui_countdown_text.text = "%02d:%02d" % local_clock_reading
 			pass
 		pass
 	pass
@@ -146,9 +146,9 @@ func _start_quiz_client():
 	GameState._reset_players()
 	for i in range(GameState.PlayerCount):
 		var player = GameState.players[GameState.playerNumberToIds[i]]
-		player_names[i].text = player["name"]
-		player_scores[i].text = str(player["score"])
-		players[i].visible = true
+		ui_player_names[i].text = player["name"]
+		ui_player_scores[i].text = str(player["score"])
+		ui_players[i].visible = true
 		pass
 	
 	GameState.GameStarted = true
@@ -166,10 +166,15 @@ func _sync_update_scores_on_clients(scores):
 		GameState.players[key]["score"] = scores[key]
 		pass
 	pass
+
+@rpc("authority", "reliable")
+func _sync_player_data(player_data):
 	
+	pass
+
 @rpc("authority", "call_local", "reliable")
 func _show_end_of_quiz_screen():
-	countdown_timer.stop()
+	ui_countdown_timer.stop()
 	QuizEndScreen = true
 	
 	var scoreOrder = []
@@ -226,9 +231,9 @@ func _end_quiz():
 func _player_guess(playerId, guess):
 	# proccess answer then send updated result to players
 	if multiplayer.is_server():
-		if !countdown_timer.is_stopped():
+		if !ui_countdown_timer.is_stopped():
 			if !GameState._player_has_guessed(playerId):
-				GameState._player_guess(playerId, guess, countdown_timer.get_time_left())
+				GameState._player_guess(playerId, guess, ui_countdown_timer.get_time_left())
 				players_answered += 1
 				if players_answered >= GameState.PlayerCount:
 					_end_of_quiz_phase()
@@ -271,15 +276,15 @@ func _next_question_data_and_store_chances(questionIndex, selected_index):
 
 func _start_quiz_server():
 	# quiz data should already be loaded onto clients
-	countdown_timer.start(GameState.quizOptions.timer)
-	countdown_timer.timeout.connect(_end_of_quiz_phase)
+	ui_countdown_timer.start(GameState.quizOptions.timer)
+	ui_countdown_timer.timeout.connect(_end_of_quiz_phase)
 	current_index = 0
 	GameState._reset_players()
 	for i in range(GameState.PlayerCount):
 		var player = GameState.players[GameState.playerNumberToIds[i]]
-		player_names[i].text = player["name"]
-		player_scores[i].text = str(player["score"])
-		players[i].visible = true
+		ui_player_names[i].text = player["name"]
+		ui_player_scores[i].text = str(player["score"])
+		ui_players[i].visible = true
 		pass
 	
 	GameState.GameStarted = true
@@ -294,10 +299,10 @@ func _end_of_quiz_phase():
 	
 func _render_answers_track_correct(current_question, question_order):
 	correct_answer = question_order[0]
-	answers[correct_answer].text = current_question["correct"]
-	answers[question_order[1]].text = current_question["wrong"][0]
-	answers[question_order[2]].text = current_question["wrong"][1]
-	answers[question_order[3]].text = current_question["wrong"][2]
+	ui_answers[correct_answer].text = current_question["correct"]
+	ui_answers[question_order[1]].text = current_question["wrong"][0]
+	ui_answers[question_order[2]].text = current_question["wrong"][1]
+	ui_answers[question_order[3]].text = current_question["wrong"][2]
 
 func _next_question():
 	# play animations?
@@ -315,30 +320,36 @@ func _next_question():
 		loaded = false
 		_generate_answer_order()
 		_sync_answer_order.rpc(local_answer_order)
-		countdown_timer.start(GameState.quizOptions.timer)
+		ui_countdown_timer.start(GameState.quizOptions.timer)
 	else:
 		_sync_update_scores_on_clients.rpc(scores)
 		_show_end_of_quiz_screen.rpc()
 	pass
+	
+func _ui_hide_player_statuses(player_number):
+	ui_players[player_number].player_case.status_row.status_a.visible = false
+	ui_players[player_number].player_case.status_row.status_b.visible = false
+	ui_players[player_number].player_case.status_row.status_c.visible = false
+	pass
 #endregion
 
 func countdown_clock():
-	var time_left = countdown_timer.get_time_left()
+	var time_left = ui_countdown_timer.get_time_left()
 	var minute = floor(time_left / 60)
 	var second = int(time_left) % 60
 	return [minute, second]
 	
 func _load_question_refresh_scores():
 	if !loaded:
-		questions_index.text = str(current_index + 1)
+		ui_questions_index.text = str(current_index + 1)
 		var current_question = GameState.CurrentQuizQuestions[current_index]
-		questions_name.text = current_question["name"]
-		questions_body.text = current_question["question"]
-		post_question.text = current_question["explainer"]
+		ui_questions_name.text = current_question["name"]
+		ui_questions_body.text = current_question["question"]
+		ui_post_question.text = current_question["explainer"]
 		_render_answers_track_correct(current_question, local_answer_order)
 		for i in range(GameState.PlayerCount):
 			get_node("quizInterface/players_region/activePlayer%s" % (i + 1)).show()
-			player_scores[i].text = str(GameState.players[GameState.playerNumberToIds[i]]["score"])
+			ui_player_scores[i].text = str(GameState.players[GameState.playerNumberToIds[i]]["score"])
 		loaded = true
 
 #region functions used for setting up initial quiz state

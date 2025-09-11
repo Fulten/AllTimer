@@ -239,6 +239,10 @@ expand_mode = 1
 
 [node name="a1" type="Button" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../answer_pair4/a4")
+focus_neighbor_top = NodePath("../../answer_pair4/a4")
+focus_neighbor_right = NodePath("../../answer_pair2/a2")
+focus_neighbor_bottom = NodePath("../../answer_pair2/a2")
 theme = ExtResource("8_4d841")
 text = "answer_one"
 
@@ -253,6 +257,10 @@ expand_mode = 1
 
 [node name="a2" type="Button" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../answer_pair1/a1")
+focus_neighbor_top = NodePath("../../answer_pair1/a1")
+focus_neighbor_right = NodePath("../../answer_pair3/a3")
+focus_neighbor_bottom = NodePath("../../answer_pair3/a3")
 theme = ExtResource("8_4d841")
 text = "answer_two"
 
@@ -267,6 +275,10 @@ expand_mode = 1
 
 [node name="a3" type="Button" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../answer_pair2/a2")
+focus_neighbor_top = NodePath("../../answer_pair2/a2")
+focus_neighbor_right = NodePath("../../answer_pair4/a4")
+focus_neighbor_bottom = NodePath("../../answer_pair4/a4")
 theme = ExtResource("8_4d841")
 text = "answer_three
 "
@@ -282,6 +294,10 @@ expand_mode = 1
 
 [node name="a4" type="Button" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../answer_pair3/a3")
+focus_neighbor_top = NodePath("../../answer_pair3/a3")
+focus_neighbor_right = NodePath("../../answer_pair1/a1")
+focus_neighbor_bottom = NodePath("../../answer_pair1/a1")
 theme = ExtResource("8_4d841")
 text = "answer_four
 "

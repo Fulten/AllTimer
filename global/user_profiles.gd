@@ -16,7 +16,9 @@ func _new_profile(profileName):
 		"name": profileName,
 		"id": newID,
 		"selected": false,
-		"questions_answered": {}
+		"questions_answered": {},
+		"questions_seen": {},
+		"questions_chances": {},
 	}
 	
 	return newProfile
@@ -66,6 +68,20 @@ func _IO_read_profiles():
 			profiles[key]["questions_answered"] = {}
 			saveProfilesChanges = true
 			pass
+			
+		if !"questions_seen" in profiles[key]:
+			print("!INFO: older profile detected, adding \"questions_seen\" member")
+			profiles[key]["questions_seen"] = {}
+			saveProfilesChanges = true
+			pass
+			
+		if !"questions_chances" in profiles[key]:
+			print("!INFO: older profile detected, adding \"questions_chances\" member")
+			profiles[key]["questions_chances"] = {}
+			saveProfilesChanges = true
+			pass
+			
+			
 		pass
 		
 	if saveProfilesChanges:

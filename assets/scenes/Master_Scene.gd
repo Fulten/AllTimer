@@ -110,7 +110,7 @@ func _register_player(playerProfile):
 
 	var playerData = GameState.Player.new()
 	var newPlayerId = multiplayer.get_remote_sender_id()
-	playerData.initilize(playerProfile["name"], newPlayerId)
+	playerData.initilize(playerProfile, newPlayerId)
 	
 	GameState.players[newPlayerId] = playerData
 	

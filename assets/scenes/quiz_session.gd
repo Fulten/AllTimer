@@ -23,6 +23,10 @@ extends Control
 	$quizInterface/players_region/activePlayer2/player_case2/status_row/score,
 	$quizInterface/players_region/activePlayer3/player_case3/status_row/score,
 	$quizInterface/players_region/activePlayer4/player_case4/status_row/score]
+@onready var ui_question_answer_buttons = [$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1,
+$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2,
+$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3,
+$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4]
 
 #endregion
 
@@ -455,3 +459,81 @@ func _debug_score_order_testing():
 	pass
 #endregion
 
+#region buttons for inputing question answers via ui
+#region button answer 1
+func _on_a_1_button_down():
+	# TODO: insert sound effect for button selection
+	pass
+
+func _on_a_1_button_up():
+	# ignore input until the quiz starts
+	var button_value = 0
+	if !GameState.GameStarted:
+		return
+	if multiplayer.is_server(): # call locally if server
+		_player_guess(1, button_value)
+		pass
+	else: #send guess to server
+		_player_guess.rpc_id(1, multiplayer.get_unique_id(), button_value)
+		pass
+	pass
+#endregion
+
+#region button answer 2
+func _on_a_2_button_down():
+	# TODO: insert sound effect for button selection
+	pass
+
+func _on_a_2_button_up():
+	# ignore input until the quiz starts
+	var button_value = 1
+	if !GameState.GameStarted:
+		return
+	if multiplayer.is_server(): # call locally if server
+		_player_guess(1, button_value)
+		pass
+	else: #send guess to server
+		_player_guess.rpc_id(1, multiplayer.get_unique_id(), button_value)
+		pass
+	pass
+#endregion
+
+#region button answer 3
+func _on_a_3_button_down():
+	# TODO: insert sound effect for button selection
+	pass
+
+func _on_a_3_button_up():
+	# ignore input until the quiz starts
+	var button_value = 2
+	if !GameState.GameStarted:
+		return
+	if multiplayer.is_server(): # call locally if server
+		_player_guess(1, button_value)
+		pass
+	else: #send guess to server
+		_player_guess.rpc_id(1, multiplayer.get_unique_id(), button_value)
+		pass
+	pass
+#endregion
+
+#region button answer 4
+func _on_a_4_button_down():
+	# TODO: insert sound effect for button selection
+	pass
+
+func _on_a_4_button_up():
+	# ignore input until the quiz starts
+	var button_value = 3
+	if !GameState.GameStarted:
+		return
+	if multiplayer.is_server(): # call locally if server
+		_player_guess(1, button_value)
+		pass
+	else: #send guess to server
+		_player_guess.rpc_id(1, multiplayer.get_unique_id(), button_value)
+		pass
+	pass
+#endregion
+
+#endregion

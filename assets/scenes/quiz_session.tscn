@@ -699,3 +699,12 @@ label_settings = ExtResource("19_f0nis")
 layout_mode = 2
 text = "N/A"
 label_settings = ExtResource("19_f0nis")
+
+[connection signal="button_down" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1" to="." method="_on_a_1_button_down"]
+[connection signal="button_up" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1" to="." method="_on_a_1_button_up"]
+[connection signal="button_down" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2" to="." method="_on_a_2_button_down"]
+[connection signal="button_up" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2" to="." method="_on_a_2_button_up"]
+[connection signal="button_down" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3" to="." method="_on_a_3_button_down"]
+[connection signal="button_up" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3" to="." method="_on_a_3_button_up"]
+[connection signal="button_down" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4" to="." method="_on_a_4_button_down"]
+[connection signal="button_up" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4" to="." method="_on_a_4_button_up"]

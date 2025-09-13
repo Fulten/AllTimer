@@ -72,7 +72,7 @@ func _mp_host_server(ip_address):
 	multiplayer.multiplayer_peer = peer
 
 	var playerData = GameState.Player.new()
-	playerData.initilize(UserProfiles._get_selected_profile_key(), 1)
+	playerData.initilize(UserProfiles.profiles[UserProfiles._get_selected_profile_key()], 1)
 	GameState.players[1] = playerData
 	
 	multiplayer_lobby_script._update_connected_players()
@@ -97,7 +97,7 @@ func _mp_join(ip_address):
 
 func _mp_on_peer_connected(id: int):
 	if !GameState.GameStarted:
-		_register_player.rpc_id(id, UserProfiles._get_selected_profile_key())
+		_register_player.rpc_id(id, UserProfiles.profiles[UserProfiles._get_selected_profile_key()])
 		print("peer %s to %s" % [id, multiplayer.get_unique_id()])
 		pass
 	elif multiplayer.is_server():
@@ -105,12 +105,12 @@ func _mp_on_peer_connected(id: int):
 		pass
 	
 @rpc("any_peer", "reliable")
-func _register_player(playerName):
+func _register_player(playerProfile):
 	# if the game is already in progress deny connection
 
 	var playerData = GameState.Player.new()
 	var newPlayerId = multiplayer.get_remote_sender_id()
-	playerData.initilize(playerName, newPlayerId)
+	playerData.initilize(playerProfile["name"], newPlayerId)
 	
 	GameState.players[newPlayerId] = playerData
 	
@@ -129,7 +129,7 @@ func _mp_on_peer_disconnected(id: int):
 # player has connected to server
 func _mp_on_connected_ok():
 	var playerData = GameState.Player.new()
-	playerData.initilize(UserProfiles._get_selected_profile_key(), multiplayer.get_unique_id())
+	playerData.initilize(UserProfiles.profiles[UserProfiles._get_selected_profile_key()], multiplayer.get_unique_id())
 	GameState.players[multiplayer.get_unique_id()] = playerData
 	multiplayer_lobby_instance._connected_to_server()
 	pass

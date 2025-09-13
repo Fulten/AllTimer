@@ -8,15 +8,17 @@ class Player:
 	var hasGuessed: bool
 	var correct: bool
 	var score: int
+	var profileData
 	
-	func initilize(i_name, i_uuid) :
-		name = i_name
+	func initilize(u_profile, i_uuid) :
+		name = u_profile["name"]
 		uuid = i_uuid
 		guess = -1
 		guessTime = 0
 		hasGuessed = false
 		correct = false
 		score = 0
+		profileData = u_profile
 		pass
 	func reset_player():
 		guess = -1

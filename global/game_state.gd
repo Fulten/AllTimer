@@ -9,6 +9,7 @@ class Player:
 	var correct: bool
 	var score: int
 	var profileData
+	var chances
 	
 	func initilize(u_profile, i_uuid) :
 		name = u_profile["name"]
@@ -19,6 +20,7 @@ class Player:
 		correct = false
 		score = 0
 		profileData = u_profile
+		chances = {}
 		pass
 	func reset_player():
 		guess = -1
@@ -26,7 +28,7 @@ class Player:
 		hasGuessed = false
 		correct = false
 		score = 0
-		
+		chances = {}
 		pass
 
 class QuizOptions:
@@ -134,6 +136,7 @@ func _add_chance_hits(question_index):
 			for i in range(PlayerCount):
 				if players[playerNumberToIds[i]]["correct"] == chance["correct"]:
 					chance["player_hits"][i] += 1
+					players[playerNumberToIds[i]]["chances"][chance["uuid"]] = 1
 					if chance["uuid"] in players[playerNumberToIds[i]]["profileData"]["questions_chances"]:
 						players[playerNumberToIds[i]]["profileData"]["questions_chances"][chance["uuid"]] += 1
 						pass

@@ -567,7 +567,7 @@ label_settings = ExtResource("19_f0nis")
 
 [node name="Score" type="Label" parent="quizEnd/PlayerStandingsOrg/1Placer/ScoreDisplay"]
 layout_mode = 2
-text = "1,000,000"
+text = "[error]"
 label_settings = ExtResource("18_m58qp")
 
 [node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/1Placer"]
@@ -580,7 +580,6 @@ label_settings = ExtResource("19_f0nis")
 
 [node name="Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/1Placer/MedalCase"]
 layout_mode = 2
-text = "Casual Gamer"
 label_settings = ExtResource("19_f0nis")
 
 [node name="2Placer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
@@ -606,7 +605,7 @@ label_settings = ExtResource("19_f0nis")
 
 [node name="Score" type="Label" parent="quizEnd/PlayerStandingsOrg/2Placer/ScoreDisplay"]
 layout_mode = 2
-text = "750,000"
+text = "[error]"
 label_settings = ExtResource("18_m58qp")
 
 [node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/2Placer"]
@@ -645,7 +644,7 @@ label_settings = ExtResource("19_f0nis")
 
 [node name="Score" type="Label" parent="quizEnd/PlayerStandingsOrg/3Placer/ScoreDisplay"]
 layout_mode = 2
-text = "100,000"
+text = "[error]"
 label_settings = ExtResource("18_m58qp")
 
 [node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/3Placer"]
@@ -658,7 +657,7 @@ label_settings = ExtResource("19_f0nis")
 
 [node name="Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/3Placer/MedalCase"]
 layout_mode = 2
-text = "Bad at math"
+text = "[error]"
 label_settings = ExtResource("19_f0nis")
 
 [node name="4Placer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
@@ -684,7 +683,7 @@ label_settings = ExtResource("19_f0nis")
 
 [node name="Score" type="Label" parent="quizEnd/PlayerStandingsOrg/4Placer/ScoreDisplay"]
 layout_mode = 2
-text = "-69,420"
+text = "[error]"
 label_settings = ExtResource("18_m58qp")
 
 [node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/4Placer"]
@@ -697,7 +696,7 @@ label_settings = ExtResource("19_f0nis")
 
 [node name="Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/4Placer/MedalCase"]
 layout_mode = 2
-text = "N/A"
+text = "[error]"
 label_settings = ExtResource("19_f0nis")
 
 [connection signal="button_down" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1" to="." method="_on_a_1_button_down"]

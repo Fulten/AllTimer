@@ -187,6 +187,7 @@ func _show_end_of_quiz_screen():
 		scoreOrder.append(key)
 		pass
 		
+	# create an index of the player entries thats sorted based on score
 	for n in range(GameState.PlayerCount):
 		var highestScore = GameState.players[scoreOrder[n]].score
 		var indexOfHighest = n
@@ -205,10 +206,24 @@ func _show_end_of_quiz_screen():
 		pass
 	
 	for n in range(GameState.PlayerCount):
+		var uiNum = n + 1
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/MedalCase/Awards" % uiNum)["text"] = "N/A"
+		pass
+		
+	for n in range(GameState.PlayerCount):
 		GameState.players[scoreOrder[n]]
 		var uiNum = n + 1
 		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/Name" % uiNum).text = GameState.players[scoreOrder[n]].name
 		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/ScoreDisplay/Score" % uiNum).text = "%s" % GameState.players[scoreOrder[n]].score
+		
+		for chanceKey in GameState.players[scoreOrder[n]]["chances"].keys():
+			var chanceStr = ""
+			chanceStr += "%s, " % chanceKey
+			
+			
+			get_node("quizEnd/PlayerStandingsOrg/%sPlacer/MedalCase/Awards" % uiNum)["text"] = chanceStr
+			
+		
 		get_node("quizEnd/PlayerStandingsOrg/%sPlacer" % uiNum).show()
 		pass
 	
@@ -219,6 +234,10 @@ func _show_end_of_quiz_screen():
 
 @rpc("authority", "call_local", "reliable")
 func _end_quiz():
+	get_node("quizEnd/PlayerStandingsOrg/1Placer").hide()
+	get_node("quizEnd/PlayerStandingsOrg/2Placer").hide()
+	get_node("quizEnd/PlayerStandingsOrg/3Placer").hide()
+	get_node("quizEnd/PlayerStandingsOrg/4Placer").hide()
 	$quizInterface.show()
 	$quizEnd.hide()
 	QuizEndScreen = false

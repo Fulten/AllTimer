@@ -74,7 +74,7 @@ func _ready():
 		print("server [%s] loaded" % multiplayer.get_unique_id())
 		pass
 	pass
-	
+
 func _process(_delta):
 	if GameState.GameStarted:
 		if multiplayer.is_server():
@@ -295,8 +295,10 @@ func _start_quiz_server():
 	pass
 
 func _end_of_quiz_phase():
+	var current_question = GameState.CurrentQuizQuestions[current_index]
 	GameState._player_correctness(correct_answer,1000)
 	GameState._add_chance_hits(current_index)
+	GameState._update_profile_statistics(current_question["uuid"])
 	#just end quesiton immediately for now
 	_next_question()
 	pass

@@ -92,20 +92,55 @@ func _reset_guesses():
 		players[playerNumberToIds[i]]["guess"] = -1
 		players[playerNumberToIds[i]]["guessTime"] = 0
 
-func _player_correctness(correct_answer,score):
+func _player_correctness(correct_answer, score):
 	for i in PlayerCount:
-		players[playerNumberToIds[i]]["correct"] = players[playerNumberToIds[i]]["guess"] == correct_answer
+		var playerGuess = players[playerNumberToIds[i]]["guess"]
+		players[playerNumberToIds[i]]["correct"] = playerGuess == correct_answer
 		if players[playerNumberToIds[i]]["correct"]:
 			_adjust_score(i,score)
 		else:
 			_adjust_score(i,-1*score)
 
+## updates the question answered and seen metrics section of the player profiles
+## this is called on the server, and only updates the profile data on the server side
+func _update_profile_statistics(current_question_uuid):
+	for i in PlayerCount:
+		var playerCorrectness = players[playerNumberToIds[i]]["correct"]
+		# questions_answered incremented when the user answers the question correctly
+		if playerCorrectness:
+			if current_question_uuid in players[playerNumberToIds[i]]["profileData"]["questions_answered"]:
+				players[playerNumberToIds[i]]["profileData"]["questions_answered"][current_question_uuid] += 1
+				pass
+			else:
+				players[playerNumberToIds[i]]["profileData"]["questions_answered"][current_question_uuid] = 1
+				pass
+			pass
+
+		# questions_seen incremented when the user sees a question
+		if current_question_uuid in players[playerNumberToIds[i]]["profileData"]["questions_seen"]:
+			players[playerNumberToIds[i]]["profileData"]["questions_seen"][current_question_uuid] += 1
+			pass
+		else:
+			players[playerNumberToIds[i]]["profileData"]["questions_seen"][current_question_uuid] = 1
+			pass
+			
+		pass
+	pass
+
+## checks which chances a user has scored
 func _add_chance_hits(question_index):
 	for chance in CurrentChances:
 		if chance["associated_questions"].has(question_index):
 			for i in range(PlayerCount):
 				if players[playerNumberToIds[i]]["correct"] == chance["correct"]:
 					chance["player_hits"][i] += 1
+					if chance["uuid"] in players[playerNumberToIds[i]]["profileData"]["questions_chances"]:
+						players[playerNumberToIds[i]]["profileData"]["questions_chances"][chance["uuid"]] += 1
+						pass
+					else:
+						players[playerNumberToIds[i]]["profileData"]["questions_chances"][chance["uuid"]] = 1
+						pass
+					pass
 	
 func _build_player_number_to_id_table():
 	playerNumberToIds = [-1,-1,-1,-1]

@@ -8,26 +8,28 @@ extends Control
 @onready var ui_questions_body = $quizInterface/session_organizer/question_body
 @onready var ui_post_question = $quizInterface/post_question
 @onready var ui_players = [$quizInterface/players_region/activePlayer1/player_case,
-	$quizInterface/players_region/activePlayer2/player_case2,
-	$quizInterface/players_region/activePlayer3/player_case3,
-	$quizInterface/players_region/activePlayer4/player_case4]
+	$quizInterface/players_region/activePlayer2/player_case,
+	$quizInterface/players_region/activePlayer3/player_case,
+	$quizInterface/players_region/activePlayer4/player_case]
 @onready var ui_answers = [$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1,
 	$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2,
 	$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3,
 	$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4]
-@onready var ui_player_names = [$quizInterface/players_region/activePlayer1/player_case/player1_name,
-	$quizInterface/players_region/activePlayer2/player_case2/player2_name,
-	$quizInterface/players_region/activePlayer3/player_case3/player3_name,
-	$quizInterface/players_region/activePlayer4/player_case4/player4_name]
+@onready var ui_player_names = [$quizInterface/players_region/activePlayer1/player_case/player_name,
+	$quizInterface/players_region/activePlayer2/player_case/player_name,
+	$quizInterface/players_region/activePlayer3/player_case/player_name,
+	$quizInterface/players_region/activePlayer4/player_case/player_name]
 @onready var ui_player_scores = [$quizInterface/players_region/activePlayer1/player_case/status_row/score,
-	$quizInterface/players_region/activePlayer2/player_case2/status_row/score,
-	$quizInterface/players_region/activePlayer3/player_case3/status_row/score,
-	$quizInterface/players_region/activePlayer4/player_case4/status_row/score]
+	$quizInterface/players_region/activePlayer2/player_case/status_row/score,
+	$quizInterface/players_region/activePlayer3/player_case/status_row/score,
+	$quizInterface/players_region/activePlayer4/player_case/status_row/score]
 @onready var ui_question_answer_buttons = [$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1,
 $quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2,
 $quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3,
 $quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4]
 
+var asset_player_pannel_locked
+var asset_player_pannel_default
 #endregion
 
 #region global variables
@@ -59,6 +61,9 @@ var QuizEndScreen = false
 ##Called when the node enters the scene tree for the first time.
 ##primarily used by the server to setup the quiz session
 func _ready():
+	asset_player_pannel_locked = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Locked.tres")
+	asset_player_pannel_default = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Default.tres")
+
 	if multiplayer.is_server():
 		_load_quiz_data()
 		_select_quiz_questions(QUIZ_SIZE)
@@ -220,7 +225,6 @@ func _show_end_of_quiz_screen():
 			var chanceStr = ""
 			chanceStr += "%s, " % chanceKey
 			
-			
 			get_node("quizEnd/PlayerStandingsOrg/%sPlacer/MedalCase/Awards" % uiNum)["text"] = chanceStr
 			
 		
@@ -246,6 +250,25 @@ func _end_quiz():
 	queue_free()
 	pass
 	
+	
+@rpc("authority", "reliable", "call_local")
+## accepts a bool, and tells the clients and server to switch a given players pannel between the locked and unlcoked states
+func _update_ui_player_pannel_locked(lock: bool, in_playerId):
+	var UIPlayerEntry = 0
+	for i in range(GameState.PlayerCount):
+		if GameState.playerNumberToIds[i] == in_playerId:
+			UIPlayerEntry = i + 1
+			break
+		pass
+	
+	if lock:
+		get_node("quizInterface/players_region/activePlayer%s/player_case/player_name" % UIPlayerEntry).set_label_settings(asset_player_pannel_locked)
+		pass
+	else:
+		get_node("quizInterface/players_region/activePlayer%s/player_case/player_name" % UIPlayerEntry).set_label_settings(asset_player_pannel_default)
+		pass
+	pass
+	
 #endregion
 
 #region RPC functions called by clients to communicate with the server
@@ -258,6 +281,7 @@ func _player_guess(playerId, guess):
 			if !GameState._player_has_guessed(playerId):
 				GameState._player_guess(playerId, guess, ui_countdown_timer.get_time_left())
 				players_answered += 1
+				_update_ui_player_pannel_locked.rpc(true, playerId)
 				if players_answered >= GameState.PlayerCount:
 					_end_of_quiz_phase()
 					pass
@@ -331,6 +355,11 @@ func _render_answers_track_correct(current_question, question_order):
 
 func _next_question():
 	# play animations?
+	# set player pannel graphics back to their unlocked state
+	for playerId in GameState.players.keys():
+		_update_ui_player_pannel_locked.rpc(false, playerId)
+		pass
+		
 	current_index += 1
 	var scores = {}
 	for key in GameState.players.keys():

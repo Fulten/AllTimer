@@ -130,6 +130,7 @@ func _update_profile_statistics(current_question_uuid):
 	pass
 
 ## checks which chances a user has scored
+## and stores them in the profile data
 func _add_chance_hits(question_index):
 	for chance in CurrentChances:
 		if chance["associated_questions"].has(question_index):

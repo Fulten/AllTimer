@@ -289,7 +289,7 @@ func _on_save_button_button_up():
 		
 		var new_profile = UserProfiles._new_profile(new_profile_name)
 		
-		UserProfiles._save_profile(new_profile)
+		UserProfiles._save_new_profile(new_profile)
 		_refresh_profiles_dropdown()
 		_update_current_profile_label()
 		get_node("Options_Profile/ProfileCreator").hide()

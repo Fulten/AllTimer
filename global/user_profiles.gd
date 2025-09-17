@@ -22,8 +22,9 @@ func _new_profile(profileName):
 	}
 	
 	return newProfile
-	
-func _save_profile(newProfile):
+
+## saves a new profile
+func _save_new_profile(newProfile):
 	if !profiles.has(newProfile.name):
 		print("!INFO: Saving New Profile: [%s]" % newProfile.name)
 		profiles[newProfile.name] = newProfile
@@ -31,6 +32,26 @@ func _save_profile(newProfile):
 		pass
 	else:
 		print("!INFO: Profile Name Collision [%s]" % newProfile.name)
+		pass
+	pass
+	
+## Updates an already existing profile with new statistics
+func _overwrite_profile_with_reference(updatedProfile):
+	if profiles.has(updatedProfile.name):
+		print("!INFO: Updating Profile With Name: [%s]" % updatedProfile.name)	
+		var newProfile = {
+			"name": updatedProfile["name"],
+			"id": updatedProfile["id"],
+			"selected": updatedProfile["selected"],
+			"questions_answered": updatedProfile["questions_answered"],
+			"questions_seen": updatedProfile["questions_seen"],
+			"questions_chances": updatedProfile["questions_chances"],
+		}
+		profiles[updatedProfile.name] = newProfile
+		_IO_write_profiles()
+		pass
+	else:
+		print("!INFO: Profile there is no profile with name [%s]" % updatedProfile.name)
 		pass
 	pass
 	
@@ -96,7 +117,7 @@ func _IO_write_profiles():
 		file.close()
 		pass
 	else:
-		print("!!ERROR: Failed to save profile at _save_profile")
+		print("!!ERROR: Failed to save profile at _save_new_profile")
 		pass
 	pass
 

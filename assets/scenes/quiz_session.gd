@@ -176,11 +176,6 @@ func _sync_update_scores_on_clients(scores):
 		pass
 	pass
 
-@rpc("authority", "reliable")
-func _sync_player_data(player_data):
-	
-	pass
-
 @rpc("authority", "call_local", "reliable")
 func _show_end_of_quiz_screen():
 	ui_countdown_timer.stop()
@@ -252,7 +247,7 @@ func _end_quiz():
 	
 	
 @rpc("authority", "reliable", "call_local")
-## accepts a bool, and tells the clients and server to switch a given players pannel between the locked and unlcoked states
+##RPC: accepts a bool, and tells the clients and server to switch a given players pannel between the locked and unlcoked states
 func _update_ui_player_pannel_locked(lock: bool, in_playerId):
 	var UIPlayerEntry = 0
 	for i in range(GameState.PlayerCount):
@@ -267,6 +262,15 @@ func _update_ui_player_pannel_locked(lock: bool, in_playerId):
 	else:
 		get_node("quizInterface/players_region/activePlayer%s/player_case/player_name" % UIPlayerEntry).set_label_settings(asset_player_pannel_default)
 		pass
+	pass
+
+##RPC: sends player statistics to clients and save them 
+@rpc("authority", "reliable", "call_local")
+func _sync_and_save_client_profile_statistics(playersData):
+	#gets the data only for the local player
+	var profileData = playersData[multiplayer.get_unique_id()]
+	
+	UserProfiles._overwrite_profile_with_reference(profileData)
 	pass
 	
 #endregion
@@ -377,6 +381,15 @@ func _next_question():
 		ui_countdown_timer.start(GameState.quizOptions.timer)
 	else:
 		_sync_update_scores_on_clients.rpc(scores)
+		
+		# we need to transcribe profile data into its own array to send using rpc
+		# as rpc will refuse to send typed objects for security reasons
+		var playersData = {}
+		for key in GameState.players.keys():
+			playersData[key] = GameState.players[key].profileData
+			pass
+		
+		_sync_and_save_client_profile_statistics.rpc(playersData)
 		_show_end_of_quiz_screen.rpc()
 	pass
 	

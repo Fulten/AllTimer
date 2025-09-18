@@ -1,14 +1,18 @@
-[gd_scene load_steps=39 format=3 uid="uid://c1ovqmumbqjdm"]
+[gd_scene load_steps=43 format=3 uid="uid://c1ovqmumbqjdm"]
 
 [ext_resource type="Script" path="res://assets/scenes/quiz_session.gd" id="1_mn3kg"]
 [ext_resource type="Texture2D" uid="uid://7rterpy3cejg" path="res://assets/uiux/session_themes/default/session_bg.tga" id="1_sfady"]
 [ext_resource type="FontFile" uid="uid://bdi68tslsma5m" path="res://assets/uiux/session_themes/default/chalk.ttf" id="2_3q4bo"]
 [ext_resource type="AudioStream" uid="uid://m7ekwmprjva7" path="res://assets/uiux/main_menu/bgm_quiz.mp3" id="2_5xm3w"]
 [ext_resource type="Texture2D" uid="uid://df0lm8u8qyetk" path="res://assets/uiux/session_themes/default/timer.tga" id="2_6twy7"]
+[ext_resource type="AudioStream" uid="uid://0nhm3be3vax8" path="res://assets/uiux/session_themes/default/Writing1.mp3" id="4_xp3by"]
 [ext_resource type="FontFile" uid="uid://ppcieu81eyur" path="res://assets/uiux/session_themes/default/TeachersStudent-Regular.ttf" id="5_4j7cf"]
 [ext_resource type="Texture2D" uid="uid://cw2ifheyia7xq" path="res://assets/uiux/session_themes/default/kb1.tga" id="5_axfhu"]
+[ext_resource type="AudioStream" uid="uid://b1t5lqhto2try" path="res://assets/uiux/session_themes/default/Writing2.mp3" id="5_j6out"]
+[ext_resource type="AudioStream" uid="uid://bkrq1t36fkih4" path="res://assets/uiux/session_themes/default/Writing3.mp3" id="6_58kj1"]
 [ext_resource type="Texture2D" uid="uid://dxk15c6q7pi14" path="res://assets/uiux/session_themes/default/kb2.tga" id="6_t6csj"]
 [ext_resource type="Texture2D" uid="uid://r44nkuxl80ia" path="res://assets/uiux/session_themes/default/kb3.tga" id="7_0240t"]
+[ext_resource type="AudioStream" uid="uid://dv8inm7h0uiaf" path="res://assets/uiux/session_themes/default/Clack.mp3" id="7_bt2h2"]
 [ext_resource type="Texture2D" uid="uid://dao52bedrv1we" path="res://assets/uiux/session_themes/default/kb4.tga" id="8_1xqpo"]
 [ext_resource type="Theme" uid="uid://bx4b57fds04q1" path="res://assets/uiux/session_themes/default/button_Chalk_Answer.tres" id="8_4d841"]
 [ext_resource type="Texture2D" uid="uid://b30t6fkulee1m" path="res://assets/uiux/session_themes/default/separator_v.tga" id="10_l37jf"]
@@ -161,6 +165,22 @@ stretch_mode = 1
 stream = ExtResource("2_5xm3w")
 autoplay = true
 bus = &"Music"
+
+[node name="SFX_Hover1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_xp3by")
+volume_db = -2.0
+
+[node name="SFX_Hover2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_j6out")
+volume_db = -3.0
+
+[node name="SFX_Hover3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_58kj1")
+volume_db = -3.0
+
+[node name="SFX_Press" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_bt2h2")
+volume_db = -5.0
 
 [node name="quizBegin" type="Control" parent="."]
 visible = false
@@ -771,8 +791,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.205117, 0.205117, 0.205117, 1)
 theme_override_fonts/font = ExtResource("23_ppdmi")
-theme_override_font_sizes/font_size = 60
-text = "Paused"
+theme_override_font_sizes/font_size = 54
+text = "Game menu"
 horizontal_alignment = 1
 
 [node name="resumeButton" type="Button" parent="pauseScreen/pauseCase/pauseBase"]

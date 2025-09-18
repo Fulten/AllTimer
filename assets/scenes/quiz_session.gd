@@ -593,79 +593,79 @@ func _on_a_4_button_up():
 
 
 func _on_resume_button_mouse_entered():
-	pass # Replace with function body.
+	$SFX_Hover1.play()
 func _on_resume_button_focus_entered():
-	pass # Replace with function body.
+	$SFX_Hover1.play()
 func _on_resume_button_button_down():
-	pass # Replace with function body.
+	$SFX_Press.play()
 func _on_resume_button_button_up():
 	get_node("pauseScreen").hide()
 
 func _on_options_button_focus_entered():
-	pass # Replace with function body.
+	$SFX_Hover2.play()
 func _on_options_button_mouse_entered():
-	pass # Replace with function body.
+	$SFX_Hover2.play()
 func _on_options_button_button_down():
-	pass # Replace with function body.
+	$SFX_Press.play()
 func _on_options_button_button_up():
 	get_node("pauseBase").hide()
 	get_node("pauseOptions").show()
 
 func _on_quit_button_focus_entered():
-	pass # Replace with function body.
+	$SFX_Hover3.play()
 func _on_quit_button_mouse_entered():
-	pass # Replace with function body.
+	$SFX_Hover3.play()
 func _on_quit_button_button_down():
-	pass # Replace with function body.
+	$SFX_Press.play()
 func _on_quit_button_button_up():
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://assets/scenes/loading_screen.tscn")
 
 func _on_options_back_button_focus_entered():
-	pass # Replace with function body.
+	$SFX_Hover3.play()
 func _on_options_back_button_mouse_entered():
-	pass # Replace with function body.
+	$SFX_Hover3.play()
 func _on_options_back_button_button_down():
-	pass # Replace with function body.
+	$SFX_Press.play()
 func _on_options_back_button_button_up():
 	get_node("pauseOptions").hide()
 	get_node("pauseBase").show()
 
 func _on_sound_button_focus_entered():
-	pass # Replace with function body.
+	$SFX_Hover1.play()
 func _on_sound_button_mouse_entered():
-	pass # Replace with function body.
+	$SFX_Hover1.play()
 func _on_sound_button_button_down():
-	pass # Replace with function body.
+	$SFX_Press.play()
 func _on_sound_button_button_up():
 	get_node("pauseOptions").hide()
 	get_node("pauseSound").show()
 
 func _on_sound_back_button_focus_entered():
-	pass # Replace with function body.
+	$SFX_Hover3.play()
 func _on_sound_back_button_mouse_entered():
-	pass # Replace with function body.
+	$SFX_Hover3.play()
 func _on_sound_back_button_button_down():
-	pass # Replace with function body.
+	$SFX_Press.play()
 func _on_sound_back_button_button_up():
 	get_node("pauseSound").hide()
 	get_node("pauseBase").show()
 
 func _on_display_button_focus_entered():
-	pass # Replace with function body.
+	$SFX_Hover2.play()
 func _on_display_button_mouse_entered():
-	pass # Replace with function body.
+	$SFX_Hover2.play()
 func _on_display_button_button_down():
-	pass # Replace with function body.
+	$SFX_Press.play()
 func _on_display_button_button_up():
 	get_node("pauseBase").hide()
 	get_node("pauseDisplay").show()
 
 func _on_display_back_button_focus_entered():
-	pass # Replace with function body.
+	$SFX_Hover3.play()
 func _on_display_back_button_mouse_entered():
-	pass # Replace with function body.
+	$SFX_Hover3.play()
 func _on_display_back_button_button_down():
-	pass # Replace with function body.
+	$SFX_Press.play()
 func _on_display_back_button_button_up():
 	get_node("pauseDisplay").hide()
 	get_node("pauseBase").show()

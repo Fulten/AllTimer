@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c1ovqmumbqjdm"]
+[gd_scene load_steps=39 format=3 uid="uid://c1ovqmumbqjdm"]
 
 [ext_resource type="Script" path="res://assets/scenes/quiz_session.gd" id="1_mn3kg"]
 [ext_resource type="Texture2D" uid="uid://7rterpy3cejg" path="res://assets/uiux/session_themes/default/session_bg.tga" id="1_sfady"]
@@ -21,6 +21,10 @@
 [ext_resource type="LabelSettings" uid="uid://brpx1b1yjl0qy" path="res://assets/uiux/session_themes/default/label_chalk_title.tres" id="17_ouv3k"]
 [ext_resource type="LabelSettings" uid="uid://dfxrujlxeiwk1" path="res://assets/uiux/session_themes/default/label_chalk_numbers.tres" id="18_m58qp"]
 [ext_resource type="LabelSettings" uid="uid://bxrfww81cwua1" path="res://assets/uiux/session_themes/default/label_chalk_body.tres" id="19_f0nis"]
+[ext_resource type="Texture2D" uid="uid://dw7l64rht8v8t" path="res://assets/uiux/session_themes/default/T_PausePaper_D.tga" id="22_dmd5o"]
+[ext_resource type="FontFile" uid="uid://b4nn47euaajnc" path="res://assets/uiux/session_themes/default/Chalkboard-Regular.ttf" id="23_ppdmi"]
+[ext_resource type="StyleBox" uid="uid://dcuqsqcektumy" path="res://assets/uiux/main_menu/volumeSlider.res" id="24_ivq2w"]
+[ext_resource type="Script" path="res://assets/scenes/MasterVolume.gd" id="25_171oh"]
 
 [sub_resource type="Animation" id="Animation_3me1p"]
 resource_name = "EndOfQuiz"
@@ -115,6 +119,12 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_d0wgl"]
 font = ExtResource("5_4j7cf")
 font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1osu"]
+bg_color = Color(0, 0.268568, 0.0202791, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_op0j7"]
+bg_color = Color(0.0433543, 0.973546, 0.518481, 1)
 
 [node name="quiz_session" type="Control"]
 clip_contents = true
@@ -699,6 +709,585 @@ layout_mode = 2
 text = "[error]"
 label_settings = ExtResource("19_f0nis")
 
+[node name="pauseScreen" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="screenShade" type="ColorRect" parent="pauseScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -6.297
+anchor_top = -6.667
+anchor_right = 6.622
+anchor_bottom = 8.222
+offset_left = -16.0439
+offset_top = -15.976
+offset_right = 7.94397
+offset_bottom = 8.01599
+color = Color(0, 0, 0, 0.784314)
+
+[node name="pauseCase" type="TextureRect" parent="pauseScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 704.0
+offset_top = 166.0
+offset_right = -704.0
+offset_bottom = -146.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("22_dmd5o")
+stretch_mode = 3
+
+[node name="pauseBase" type="Control" parent="pauseScreen/pauseCase"]
+layout_mode = 1
+anchor_left = 0.062
+anchor_top = 0.044
+anchor_right = 0.937
+anchor_bottom = 0.932
+offset_left = 0.255999
+offset_top = 0.207996
+offset_right = 0.255981
+offset_bottom = 0.223999
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PausedLabel" type="Label" parent="pauseScreen/pauseCase/pauseBase"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 88.0
+offset_top = 61.0
+offset_right = -83.0
+offset_bottom = -564.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.205117, 0.205117, 0.205117, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 60
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="resumeButton" type="Button" parent="pauseScreen/pauseCase/pauseBase"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 227.0
+offset_right = -96.0
+offset_bottom = -408.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 40
+text = "Resume"
+flat = true
+
+[node name="optionsButton" type="Button" parent="pauseScreen/pauseCase/pauseBase"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 332.0
+offset_right = -96.0
+offset_bottom = -303.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 40
+text = "Options"
+flat = true
+
+[node name="quitButton" type="Button" parent="pauseScreen/pauseCase/pauseBase"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 435.0
+offset_right = -102.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 40
+text = "Quit"
+flat = true
+
+[node name="pauseOptions" type="Control" parent="pauseScreen/pauseCase"]
+visible = false
+layout_mode = 1
+anchor_left = 0.062
+anchor_top = 0.044
+anchor_right = 0.937
+anchor_bottom = 0.93
+offset_left = 0.255999
+offset_top = 0.207996
+offset_right = 0.255981
+offset_bottom = 1.75995
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OptionsLabel" type="Label" parent="pauseScreen/pauseCase/pauseOptions"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 64.0
+offset_right = -96.0
+offset_bottom = -561.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 60
+text = "Options"
+horizontal_alignment = 1
+
+[node name="soundButton" type="Button" parent="pauseScreen/pauseCase/pauseOptions"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 224.0
+offset_right = -96.0
+offset_bottom = -411.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 40
+text = "Sound"
+flat = true
+
+[node name="displayButton" type="Button" parent="pauseScreen/pauseCase/pauseOptions"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 328.0
+offset_right = -96.0
+offset_bottom = -307.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 40
+text = "Display"
+flat = true
+
+[node name="optionsBackButton" type="Button" parent="pauseScreen/pauseCase/pauseOptions"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 432.0
+offset_right = -96.0
+offset_bottom = -203.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 40
+text = "Back"
+flat = true
+
+[node name="pauseSound" type="Control" parent="pauseScreen/pauseCase"]
+visible = false
+layout_mode = 1
+anchor_left = 0.062
+anchor_top = 0.044
+anchor_right = 0.937
+anchor_bottom = 0.919
+offset_left = 0.255999
+offset_top = 0.207996
+offset_right = 0.255981
+offset_bottom = 0.208008
+
+[node name="SoundLabel" type="Label" parent="pauseScreen/pauseCase/pauseSound"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 64.0
+offset_right = -96.0
+offset_bottom = -553.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 60
+text = "Sound"
+horizontal_alignment = 1
+
+[node name="VolumeLabel" type="Label" parent="pauseScreen/pauseCase/pauseSound"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 181.0
+offset_right = -96.0
+offset_bottom = -457.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 36
+text = "Volume Controls"
+horizontal_alignment = 1
+
+[node name="VolumeCase" type="VBoxContainer" parent="pauseScreen/pauseCase/pauseSound"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 234.0
+offset_right = -88.0
+offset_bottom = -206.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Master" type="Label" parent="pauseScreen/pauseCase/pauseSound/VolumeCase"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 31
+text = "Master"
+horizontal_alignment = 1
+
+[node name="VolumeControl" type="HSlider" parent="pauseScreen/pauseCase/pauseSound/VolumeCase"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/slider = ExtResource("24_ivq2w")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_s1osu")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_op0j7")
+max_value = 1.0
+step = 0.001
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+script = ExtResource("25_171oh")
+bus_name = "Master"
+
+[node name="Music" type="Label" parent="pauseScreen/pauseCase/pauseSound/VolumeCase"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 31
+text = "Music
+"
+horizontal_alignment = 1
+
+[node name="VolumeControl2" type="HSlider" parent="pauseScreen/pauseCase/pauseSound/VolumeCase"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/slider = ExtResource("24_ivq2w")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_s1osu")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_op0j7")
+max_value = 1.0
+step = 0.001
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+script = ExtResource("25_171oh")
+bus_name = "Music"
+
+[node name="SFX" type="Label" parent="pauseScreen/pauseCase/pauseSound/VolumeCase"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 31
+text = "Sound Effects
+"
+horizontal_alignment = 1
+
+[node name="VolumeControl3" type="HSlider" parent="pauseScreen/pauseCase/pauseSound/VolumeCase"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/slider = ExtResource("24_ivq2w")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_s1osu")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_op0j7")
+max_value = 1.0
+step = 0.001
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+script = ExtResource("25_171oh")
+bus_name = "SFX"
+
+[node name="VO" type="Label" parent="pauseScreen/pauseCase/pauseSound/VolumeCase"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 31
+text = "Voiceover
+"
+horizontal_alignment = 1
+
+[node name="VolumeControl4" type="HSlider" parent="pauseScreen/pauseCase/pauseSound/VolumeCase"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/slider = ExtResource("24_ivq2w")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_s1osu")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_op0j7")
+max_value = 1.0
+step = 0.001
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+script = ExtResource("25_171oh")
+bus_name = "VO"
+
+[node name="SoundDeviceCase" type="VBoxContainer" parent="pauseScreen/pauseCase/pauseSound"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 488.0
+offset_bottom = -116.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SoundDeviceCategoryLabel" type="Label" parent="pauseScreen/pauseCase/pauseSound/SoundDeviceCase"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 32
+text = "Sound device -"
+
+[node name="SoundDeviceOptions" type="OptionButton" parent="pauseScreen/pauseCase/pauseSound/SoundDeviceCase"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 24
+flat = true
+alignment = 1
+item_count = 3
+selected = 0
+fit_to_longest_item = false
+popup/item_0/text = "System Default"
+popup/item_0/id = 0
+popup/item_1/text = "Corsair VOID"
+popup/item_1/id = 1
+popup/item_2/text = "THQ Spatial Speakers"
+popup/item_2/id = 2
+
+[node name="soundBackButton" type="Button" parent="pauseScreen/pauseCase/pauseSound"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 92.0
+offset_top = 584.0
+offset_right = -267.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 40
+text = "Back"
+flat = true
+
+[node name="pauseDisplay" type="Control" parent="pauseScreen/pauseCase"]
+visible = false
+layout_mode = 1
+anchor_left = 0.062
+anchor_top = 0.044
+anchor_right = 0.937
+anchor_bottom = 0.919
+offset_left = 0.255999
+offset_top = 0.207996
+offset_right = 0.255981
+offset_bottom = 0.208008
+
+[node name="DisplayLabel" type="Label" parent="pauseScreen/pauseCase/pauseDisplay"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 64.0
+offset_right = -96.0
+offset_bottom = -553.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 60
+text = "Display"
+horizontal_alignment = 1
+
+[node name="DisplayModeCase" type="VBoxContainer" parent="pauseScreen/pauseCase/pauseDisplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 184.0
+offset_right = -199.0
+offset_bottom = -425.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DisplayModeLabel" type="Label" parent="pauseScreen/pauseCase/pauseDisplay/DisplayModeCase"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 30
+text = "Display Mode"
+
+[node name="DisplayList" type="OptionButton" parent="pauseScreen/pauseCase/pauseDisplay/DisplayModeCase"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 24
+flat = true
+alignment = 1
+item_count = 3
+selected = 1
+fit_to_longest_item = false
+allow_reselect = true
+popup/item_0/text = "Fullscreen"
+popup/item_0/id = 0
+popup/item_1/text = "Windowed"
+popup/item_1/id = 1
+popup/item_2/text = "Borderless Window"
+popup/item_2/id = 2
+
+[node name="resolutionsCase" type="VBoxContainer" parent="pauseScreen/pauseCase/pauseDisplay"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 288.0
+offset_right = 260.0
+offset_bottom = 384.0
+
+[node name="DisplayModeLabel" type="Label" parent="pauseScreen/pauseCase/pauseDisplay/resolutionsCase"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 30
+text = "Resolution"
+
+[node name="ResolutionsList" type="OptionButton" parent="pauseScreen/pauseCase/pauseDisplay/resolutionsCase"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 24
+flat = true
+item_count = 10
+selected = 0
+fit_to_longest_item = false
+popup/item_0/text = "648 X 648"
+popup/item_0/id = 0
+popup/item_1/text = "640 X 480"
+popup/item_1/id = 1
+popup/item_2/text = "720 X 480"
+popup/item_2/id = 2
+popup/item_3/text = "800 X 600"
+popup/item_3/id = 3
+popup/item_4/text = "1152 X 648"
+popup/item_4/id = 4
+popup/item_5/text = "1280 X 720"
+popup/item_5/id = 5
+popup/item_6/text = "1280 X 800"
+popup/item_6/id = 6
+popup/item_7/text = "1680 X 720"
+popup/item_7/id = 7
+popup/item_8/text = "1920 X 1080"
+popup/item_8/id = 8
+popup/item_9/text = "2560 X 1440"
+popup/item_9/id = 9
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pauseScreen/pauseCase/pauseDisplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 88.0
+offset_top = 392.0
+offset_right = -192.0
+offset_bottom = -208.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DisplayModeLabel" type="Label" parent="pauseScreen/pauseCase/pauseDisplay/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 30
+text = "Input Display"
+
+[node name="InputDisplayList" type="OptionButton" parent="pauseScreen/pauseCase/pauseDisplay/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 24
+flat = true
+alignment = 1
+item_count = 5
+selected = 0
+fit_to_longest_item = false
+popup/item_0/text = "Auto"
+popup/item_0/id = 0
+popup/item_1/text = "PC"
+popup/item_1/id = 1
+popup/item_2/text = "XBOX"
+popup/item_2/id = 2
+popup/item_3/text = "PlayStation"
+popup/item_3/id = 3
+popup/item_4/text = "Nintendo"
+popup/item_4/id = 4
+
+[node name="displayBackButton" type="Button" parent="pauseScreen/pauseCase/pauseDisplay"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 92.0
+offset_top = 584.0
+offset_right = -267.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("23_ppdmi")
+theme_override_font_sizes/font_size = 40
+text = "Back"
+flat = true
+
 [connection signal="button_down" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1" to="." method="_on_a_1_button_down"]
 [connection signal="button_up" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1" to="." method="_on_a_1_button_up"]
 [connection signal="button_down" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2" to="." method="_on_a_2_button_down"]
@@ -707,3 +1296,35 @@ label_settings = ExtResource("19_f0nis")
 [connection signal="button_up" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3" to="." method="_on_a_3_button_up"]
 [connection signal="button_down" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4" to="." method="_on_a_4_button_down"]
 [connection signal="button_up" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4" to="." method="_on_a_4_button_up"]
+[connection signal="button_down" from="pauseScreen/pauseCase/pauseBase/resumeButton" to="." method="_on_resume_button_button_down"]
+[connection signal="button_up" from="pauseScreen/pauseCase/pauseBase/resumeButton" to="." method="_on_resume_button_button_up"]
+[connection signal="focus_entered" from="pauseScreen/pauseCase/pauseBase/resumeButton" to="." method="_on_resume_button_focus_entered"]
+[connection signal="mouse_entered" from="pauseScreen/pauseCase/pauseBase/resumeButton" to="." method="_on_resume_button_mouse_entered"]
+[connection signal="button_down" from="pauseScreen/pauseCase/pauseBase/optionsButton" to="." method="_on_options_button_button_down"]
+[connection signal="button_up" from="pauseScreen/pauseCase/pauseBase/optionsButton" to="." method="_on_options_button_button_up"]
+[connection signal="focus_entered" from="pauseScreen/pauseCase/pauseBase/optionsButton" to="." method="_on_options_button_focus_entered"]
+[connection signal="mouse_entered" from="pauseScreen/pauseCase/pauseBase/optionsButton" to="." method="_on_options_button_mouse_entered"]
+[connection signal="button_down" from="pauseScreen/pauseCase/pauseBase/quitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="button_up" from="pauseScreen/pauseCase/pauseBase/quitButton" to="." method="_on_quit_button_button_up"]
+[connection signal="focus_entered" from="pauseScreen/pauseCase/pauseBase/quitButton" to="." method="_on_quit_button_focus_entered"]
+[connection signal="mouse_entered" from="pauseScreen/pauseCase/pauseBase/quitButton" to="." method="_on_quit_button_mouse_entered"]
+[connection signal="button_down" from="pauseScreen/pauseCase/pauseOptions/soundButton" to="." method="_on_sound_button_button_down"]
+[connection signal="button_up" from="pauseScreen/pauseCase/pauseOptions/soundButton" to="." method="_on_sound_button_button_up"]
+[connection signal="focus_entered" from="pauseScreen/pauseCase/pauseOptions/soundButton" to="." method="_on_sound_button_focus_entered"]
+[connection signal="mouse_entered" from="pauseScreen/pauseCase/pauseOptions/soundButton" to="." method="_on_sound_button_mouse_entered"]
+[connection signal="button_down" from="pauseScreen/pauseCase/pauseOptions/displayButton" to="." method="_on_display_button_button_down"]
+[connection signal="button_up" from="pauseScreen/pauseCase/pauseOptions/displayButton" to="." method="_on_display_button_button_up"]
+[connection signal="focus_entered" from="pauseScreen/pauseCase/pauseOptions/displayButton" to="." method="_on_display_button_focus_entered"]
+[connection signal="mouse_entered" from="pauseScreen/pauseCase/pauseOptions/displayButton" to="." method="_on_display_button_mouse_entered"]
+[connection signal="button_down" from="pauseScreen/pauseCase/pauseOptions/optionsBackButton" to="." method="_on_options_back_button_button_down"]
+[connection signal="button_up" from="pauseScreen/pauseCase/pauseOptions/optionsBackButton" to="." method="_on_options_back_button_button_up"]
+[connection signal="focus_entered" from="pauseScreen/pauseCase/pauseOptions/optionsBackButton" to="." method="_on_options_back_button_focus_entered"]
+[connection signal="mouse_entered" from="pauseScreen/pauseCase/pauseOptions/optionsBackButton" to="." method="_on_options_back_button_mouse_entered"]
+[connection signal="button_down" from="pauseScreen/pauseCase/pauseSound/soundBackButton" to="." method="_on_sound_back_button_button_down"]
+[connection signal="button_up" from="pauseScreen/pauseCase/pauseSound/soundBackButton" to="." method="_on_sound_back_button_button_up"]
+[connection signal="focus_entered" from="pauseScreen/pauseCase/pauseSound/soundBackButton" to="." method="_on_sound_back_button_focus_entered"]
+[connection signal="mouse_entered" from="pauseScreen/pauseCase/pauseSound/soundBackButton" to="." method="_on_sound_back_button_mouse_entered"]
+[connection signal="button_down" from="pauseScreen/pauseCase/pauseDisplay/displayBackButton" to="." method="_on_display_back_button_button_down"]
+[connection signal="button_up" from="pauseScreen/pauseCase/pauseDisplay/displayBackButton" to="." method="_on_display_back_button_button_up"]
+[connection signal="focus_entered" from="pauseScreen/pauseCase/pauseDisplay/displayBackButton" to="." method="_on_display_back_button_focus_entered"]
+[connection signal="mouse_entered" from="pauseScreen/pauseCase/pauseDisplay/displayBackButton" to="." method="_on_display_back_button_mouse_entered"]

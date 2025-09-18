@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bdi68tslsma5m"
-path="res://.godot/imported/chalk.ttf-ae86a1ef74ae50711fd3e1b15c41a001.fontdata"
+uid="uid://b4nn47euaajnc"
+path="res://.godot/imported/Chalkboard-Regular.ttf-d7e0b53b2c461c011d7aadc8611aa57c.fontdata"
 
 [deps]
 
-source_file="res://assets/uiux/session_themes/default/chalk.ttf"
-dest_files=["res://.godot/imported/chalk.ttf-ae86a1ef74ae50711fd3e1b15c41a001.fontdata"]
+source_file="res://assets/uiux/session_themes/default/Chalkboard-Regular.ttf"
+dest_files=["res://.godot/imported/Chalkboard-Regular.ttf-d7e0b53b2c461c011d7aadc8611aa57c.fontdata"]
 
 [params]
 

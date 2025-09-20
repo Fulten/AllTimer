@@ -49,6 +49,7 @@ var CHANCE_COUNT = 3
 var pre_question_delay_default = 3.0
 var flag_pre_question_time = false
 var post_question_delay_default = 5.0
+var flag_post_question_time = false
 var current_index = 0
 var correct_answer = 0
 var loaded = false
@@ -89,6 +90,8 @@ func _process(_delta):
 		if multiplayer.is_server():
 			if flag_pre_question_time:
 				local_clock_reading = pre_question_clock()
+			elif flag_post_question_time:
+				local_clock_reading = post_question_clock()
 			else:
 				local_clock_reading = countdown_clock()
 			_sync_server_client_clock_reading.rpc(local_clock_reading)
@@ -287,7 +290,15 @@ func _sync_and_save_client_profile_statistics(playersData):
 	
 	UserProfiles._overwrite_profile_with_reference(profileData)
 	pass
-	
+
+##RPC: enables and disabled the explainer text for the question based on a bool
+@rpc("authority", "reliable", "call_local")
+func _show_question_explainer(show: bool):
+	if show:
+		ui_post_question.show()
+	else:
+		ui_post_question.hide()
+	pass
 #endregion
 
 #region RPC functions called by clients to communicate with the server
@@ -302,7 +313,7 @@ func _player_guess(playerId, guess):
 				players_answered += 1
 				_update_ui_player_pannel_locked.rpc(true, playerId)
 				if players_answered >= GameState.PlayerCount:
-					_end_of_quiz_phase()
+					_postquestion_delay_phase()
 					pass
 			pass
 	pass
@@ -341,9 +352,11 @@ func _next_question_data_and_store_chances(questionIndex, selected_index):
 	return nextQuestion
 
 func _start_quiz_server():
-	# quiz data should already be loaded onto clients
-	ui_countdown_timer.timeout.connect(_end_of_quiz_phase)
+	# connect the functions for the delay timers
 	ui_prequestion_timer.timeout.connect(_answer_question_phase)
+	ui_countdown_timer.timeout.connect(_postquestion_delay_phase)
+	ui_postquestion_timer.timeout.connect(_end_of_quiz_phase)
+	
 	current_index = 0
 	GameState._reset_players()
 	for i in range(GameState.PlayerCount):
@@ -357,15 +370,6 @@ func _start_quiz_server():
 	_prequestion_delay_phase()
 	pass
 
-func _end_of_quiz_phase():
-	var current_question = GameState.CurrentQuizQuestions[current_index]
-	GameState._player_correctness(correct_answer,1000)
-	GameState._add_chance_hits(current_index)
-	GameState._update_profile_statistics(current_question["uuid"])
-	#just end quesiton immediately for now
-	_next_question()
-	pass
-	
 func _render_answers_track_correct(current_question, question_order):
 	correct_answer = question_order[0]
 	ui_answers[correct_answer].text = current_question["correct"]
@@ -392,6 +396,9 @@ func _prequestion_delay_phase():
 
 ## starts the timer for the answer phase, answer input is enabled
 func _answer_question_phase():
+
+	ui_prequestion_timer.stop()
+	
 	flag_accept_input = true
 	flag_pre_question_time = false
 	
@@ -400,9 +407,35 @@ func _answer_question_phase():
 	ui_countdown_timer.start(GameState.quizOptions.timer)
 	pass
 
+func _postquestion_delay_phase():
+	
+	ui_countdown_timer.stop()
+	flag_accept_input = false
+	flag_post_question_time = true
+	
+	# lock all player pannels during postphase
+	_update_ui_player_pannel_locked_all.rpc(true)
+	
+	_show_question_explainer.rpc(true)
+	
+	ui_postquestion_timer.start(post_question_delay_default)
+	pass
+	
+func _end_of_quiz_phase():
+	ui_postquestion_timer.stop()
+	flag_post_question_time = false
+	
+	_show_question_explainer.rpc(false)
+	
+	var current_question = GameState.CurrentQuizQuestions[current_index]
+	GameState._player_correctness(correct_answer,1000)
+	GameState._add_chance_hits(current_index)
+	GameState._update_profile_statistics(current_question["uuid"])
+	#just end quesiton immediately for now
+	_next_question()
+	pass
+	
 func _next_question():
-	# set the pre_question_time flag to false
-	flag_pre_question_time = false
 	
 	# set player pannel graphics back to their unlocked state
 	_update_ui_player_pannel_locked_all.rpc(false)
@@ -444,6 +477,12 @@ func _ui_hide_player_statuses(player_number):
 
 func pre_question_clock():
 	var time_left = ui_prequestion_timer.get_time_left()
+	var minute = floor(time_left / 60)
+	var second = int(time_left) % 60
+	return [minute, second]
+	
+func post_question_clock():
+	var time_left = ui_postquestion_timer.get_time_left()
 	var minute = floor(time_left / 60)
 	var second = int(time_left) % 60
 	return [minute, second]

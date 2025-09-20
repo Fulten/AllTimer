@@ -57,6 +57,10 @@ var players_answered = 0
 var player_input = "p_answer_%s"
 var flag_accept_input = false
 
+var flag_game_menu_shown = false
+var flag_in_options_menu = false
+var flag_in_options_submenu = false
+
 var local_clock_reading = [0,0]
 var local_answer_order = [0, 1, 2, 3]
 
@@ -70,6 +74,7 @@ func _ready():
 	asset_player_pannel_default = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Default.tres")
 
 	if multiplayer.is_server():
+		$pauseScreen/pauseCase/pauseBase/quitButton.text = "lobby"
 		_load_quiz_data()
 		_select_quiz_questions(QUIZ_SIZE)
 		_prepare_quiz_chances(CHANCE_COUNT)
@@ -109,7 +114,11 @@ func _input(event):
 	# ignore input until quiz starts
 	if !GameState.GameStarted:
 		return
-	if multiplayer.is_server() and QuizEndScreen and (event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE):
+	# opens game menu locally on client
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		_escape_game_menu()
+		pass
+	if multiplayer.is_server() and QuizEndScreen and (event is InputEventKey and event.pressed and event.keycode == KEY_SPACE):
 		_end_quiz.rpc()
 		pass
 	for i in range(4):
@@ -330,6 +339,31 @@ func _player_loaded(_peerId):
 #endregion
 
 #region local functions used by the server and clients
+
+func _escape_game_menu():
+	# back out of the submenu to the options menu
+	if flag_in_options_submenu:
+		$pauseScreen/pauseCase/pauseOptions.show()
+		$pauseScreen/pauseCase/pauseSound.hide()
+		$pauseScreen/pauseCase/pauseDisplay.hide()
+		flag_in_options_submenu = false
+		return
+		
+	if flag_in_options_menu:
+		$pauseScreen/pauseCase/pauseOptions.hide()
+		$pauseScreen/pauseCase/pauseBase.show()
+		flag_in_options_menu = false
+		return
+	
+	# if not in any submenus toggle between showing and closing the submenu
+	if !flag_game_menu_shown:
+		$pauseScreen.show()
+		flag_game_menu_shown = true
+	else:
+		$pauseScreen.hide()
+		flag_game_menu_shown = false
+	pass
+
 ##used by the server to decide on the order questions will be presented
 func _generate_answer_order():
 	var available_indexes = [0, 1, 2, 3]
@@ -396,7 +430,6 @@ func _prequestion_delay_phase():
 
 ## starts the timer for the answer phase, answer input is enabled
 func _answer_question_phase():
-
 	ui_prequestion_timer.stop()
 	
 	flag_accept_input = true
@@ -408,7 +441,6 @@ func _answer_question_phase():
 	pass
 
 func _postquestion_delay_phase():
-	
 	ui_countdown_timer.stop()
 	flag_accept_input = false
 	flag_post_question_time = true
@@ -436,7 +468,6 @@ func _end_of_quiz_phase():
 	pass
 	
 func _next_question():
-	
 	# set player pannel graphics back to their unlocked state
 	_update_ui_player_pannel_locked_all.rpc(false)
 		
@@ -475,6 +506,7 @@ func _ui_hide_player_statuses(player_number):
 	pass
 #endregion
 
+#region functions that translate the timers into minutes and seconds for the ui
 func pre_question_clock():
 	var time_left = ui_prequestion_timer.get_time_left()
 	var minute = floor(time_left / 60)
@@ -492,7 +524,9 @@ func countdown_clock():
 	var minute = floor(time_left / 60)
 	var second = int(time_left) % 60
 	return [minute, second]
-	
+
+#endregion
+
 func _load_question_refresh_scores():
 	if !loaded:
 		ui_questions_index.text = str(current_index + 1)
@@ -689,17 +723,17 @@ func _on_a_4_button_up():
 #endregion
 
 #region pause menu functionality 
-#Can somebody add a way to press escape and summon the pause menu?
-
-
 func _on_resume_button_mouse_entered():
 	$SFX_Hover1.play()
 func _on_resume_button_focus_entered():
 	$SFX_Hover1.play()
 func _on_resume_button_button_down():
 	$SFX_Press.play()
+## returns to the game
 func _on_resume_button_button_up():
-	get_node("pauseScreen").hide()
+	$pauseScreen.hide()
+	flag_game_menu_shown = false
+	flag_in_options_submenu = false
 
 func _on_options_button_focus_entered():
 	$SFX_Hover2.play()
@@ -707,9 +741,12 @@ func _on_options_button_mouse_entered():
 	$SFX_Hover2.play()
 func _on_options_button_button_down():
 	$SFX_Press.play()
+## opens the options menu
 func _on_options_button_button_up():
-	get_node("pauseBase").hide()
-	get_node("pauseOptions").show()
+	$pauseScreen/pauseCase/pauseBase.hide()
+	$pauseScreen/pauseCase/pauseOptions.show()
+	flag_in_options_menu = true
+	flag_in_options_submenu = false
 
 func _on_quit_button_focus_entered():
 	$SFX_Hover3.play()
@@ -717,8 +754,20 @@ func _on_quit_button_mouse_entered():
 	$SFX_Hover3.play()
 func _on_quit_button_button_down():
 	$SFX_Press.play()
+## returns to main menu if client, returns everyone to multiplayer lobby if host
 func _on_quit_button_button_up():
-	get_tree().change_scene_to_file("res://assets/scenes/loading_screen.tscn")
+	# if server exit to multiplayer lobby
+	if multiplayer.is_server():
+		_end_quiz.rpc()
+		pass
+	# if client, exit multiplayer session and return to main menu
+	else: 
+		# we need to signal to the server that we're disconnecting, and leave the session
+		
+		#_end_quiz()
+		pass
+		
+	pass
 
 func _on_options_back_button_focus_entered():
 	$SFX_Hover3.play()
@@ -726,9 +775,12 @@ func _on_options_back_button_mouse_entered():
 	$SFX_Hover3.play()
 func _on_options_back_button_button_down():
 	$SFX_Press.play()
+## backs out of options menu to pause menu
 func _on_options_back_button_button_up():
-	get_node("pauseOptions").hide()
-	get_node("pauseBase").show()
+	$pauseScreen/pauseCase/pauseOptions.hide()
+	$pauseScreen/pauseCase/pauseBase.show()
+	flag_in_options_menu = false
+	flag_in_options_submenu = false
 
 func _on_sound_button_focus_entered():
 	$SFX_Hover1.play()
@@ -736,9 +788,12 @@ func _on_sound_button_mouse_entered():
 	$SFX_Hover1.play()
 func _on_sound_button_button_down():
 	$SFX_Press.play()
+## opens the sound options submenu
 func _on_sound_button_button_up():
-	get_node("pauseOptions").hide()
-	get_node("pauseSound").show()
+	$pauseScreen/pauseCase/pauseOptions.hide()
+	$pauseScreen/pauseCase/pauseSound.show()
+	flag_in_options_menu = true
+	flag_in_options_submenu = true
 
 func _on_sound_back_button_focus_entered():
 	$SFX_Hover3.play()
@@ -746,9 +801,12 @@ func _on_sound_back_button_mouse_entered():
 	$SFX_Hover3.play()
 func _on_sound_back_button_button_down():
 	$SFX_Press.play()
+## closes the sound options submenu
 func _on_sound_back_button_button_up():
-	get_node("pauseSound").hide()
-	get_node("pauseBase").show()
+	$pauseScreen/pauseCase/pauseSound.hide()
+	$pauseScreen/pauseCase/pauseOptions.show()
+	flag_in_options_menu = true
+	flag_in_options_submenu = false
 
 func _on_display_button_focus_entered():
 	$SFX_Hover2.play()
@@ -756,9 +814,12 @@ func _on_display_button_mouse_entered():
 	$SFX_Hover2.play()
 func _on_display_button_button_down():
 	$SFX_Press.play()
+## opens the display options submenu
 func _on_display_button_button_up():
-	get_node("pauseBase").hide()
-	get_node("pauseDisplay").show()
+	$pauseScreen/pauseCase/pauseOptions.hide()
+	$pauseScreen/pauseCase/pauseDisplay.show()
+	flag_in_options_menu = true
+	flag_in_options_submenu = true
 
 func _on_display_back_button_focus_entered():
 	$SFX_Hover3.play()
@@ -766,7 +827,10 @@ func _on_display_back_button_mouse_entered():
 	$SFX_Hover3.play()
 func _on_display_back_button_button_down():
 	$SFX_Press.play()
+## closes the display options submenu
 func _on_display_back_button_button_up():
-	get_node("pauseDisplay").hide()
-	get_node("pauseBase").show()
+	$pauseScreen/pauseCase/pauseDisplay.hide()
+	$pauseScreen/pauseCase/pauseOptions.show()
+	flag_in_options_menu = true
+	flag_in_options_submenu = false
 #endregion

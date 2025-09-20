@@ -4,6 +4,8 @@ extends Control
 @onready var ui_questions_name = $quizInterface/session_organizer/question_header/question_name
 @onready var ui_questions_index = $quizInterface/session_organizer/question_header/question_index
 @onready var ui_countdown_timer = $quizInterface/session_organizer/question_header/Countdown
+@onready var ui_prequestion_timer = $quizInterface/session_organizer/question_header/Prequestion_timer
+@onready var ui_postquestion_timer = $quizInterface/session_organizer/question_header/Postquestion_timer
 @onready var ui_countdown_text = $quizInterface/session_organizer/CountdownLabel
 @onready var ui_questions_body = $quizInterface/session_organizer/question_body
 @onready var ui_post_question = $quizInterface/post_question
@@ -44,13 +46,15 @@ signal end_of_quiz
 var QUIZ_SIZE = 10
 var CHANCE_COUNT = 3
 
-var pre_timer = 10.0
-var post_timer = 10.0
+var pre_question_delay_default = 3.0
+var flag_pre_question_time = false
+var post_question_delay_default = 5.0
 var current_index = 0
 var correct_answer = 0
 var loaded = false
 var players_answered = 0
 var player_input = "p_answer_%s"
+var flag_accept_input = false
 
 var local_clock_reading = [0,0]
 var local_answer_order = [0, 1, 2, 3]
@@ -83,7 +87,10 @@ func _ready():
 func _process(_delta):
 	if GameState.GameStarted:
 		if multiplayer.is_server():
-			local_clock_reading =  countdown_clock()
+			if flag_pre_question_time:
+				local_clock_reading = pre_question_clock()
+			else:
+				local_clock_reading = countdown_clock()
 			_sync_server_client_clock_reading.rpc(local_clock_reading)
 			_load_question_refresh_scores()
 			ui_countdown_text.text = "%02d:%02d" % local_clock_reading
@@ -245,9 +252,17 @@ func _end_quiz():
 	queue_free()
 	pass
 	
-	
+
 @rpc("authority", "reliable", "call_local")
-##RPC: accepts a bool, and tells the clients and server to switch a given players pannel between the locked and unlcoked states
+##RPC: accepts a bool, and tells the clients and server to switch all player pannels between the locked and unlocked states
+func _update_ui_player_pannel_locked_all(lock: bool):
+	for i in range(GameState.PlayerCount):
+		_update_ui_player_pannel_locked(lock, GameState.playerNumberToIds[i])
+		pass
+	pass
+
+@rpc("authority", "reliable", "call_local")
+##RPC: accepts a bool, and tells the clients and server to switch a given player's pannel between the locked and unlocked states
 func _update_ui_player_pannel_locked(lock: bool, in_playerId):
 	var UIPlayerEntry = 0
 	for i in range(GameState.PlayerCount):
@@ -279,8 +294,8 @@ func _sync_and_save_client_profile_statistics(playersData):
 ##RPC: called by clients on the server whenever a player inputs a guess
 @rpc("any_peer", "reliable")
 func _player_guess(playerId, guess):
-	# proccess answer then send updated result to players
-	if multiplayer.is_server():
+	# proccess answer then send updated result to players, don't accept input during pre and post question time
+	if multiplayer.is_server() && flag_accept_input:
 		if !ui_countdown_timer.is_stopped():
 			if !GameState._player_has_guessed(playerId):
 				GameState._player_guess(playerId, guess, ui_countdown_timer.get_time_left())
@@ -327,8 +342,8 @@ func _next_question_data_and_store_chances(questionIndex, selected_index):
 
 func _start_quiz_server():
 	# quiz data should already be loaded onto clients
-	ui_countdown_timer.start(GameState.quizOptions.timer)
 	ui_countdown_timer.timeout.connect(_end_of_quiz_phase)
+	ui_prequestion_timer.timeout.connect(_answer_question_phase)
 	current_index = 0
 	GameState._reset_players()
 	for i in range(GameState.PlayerCount):
@@ -339,6 +354,7 @@ func _start_quiz_server():
 		pass
 	
 	GameState.GameStarted = true
+	_prequestion_delay_phase()
 	pass
 
 func _end_of_quiz_phase():
@@ -357,29 +373,55 @@ func _render_answers_track_correct(current_question, question_order):
 	ui_answers[question_order[2]].text = current_question["wrong"][1]
 	ui_answers[question_order[3]].text = current_question["wrong"][2]
 
+## starts the pre_question timer, and halts accepting answer input from players
+func _prequestion_delay_phase():
+	# add aditional delay depending on how long the question is to read,
+	# currently one extra second per 40 characters ( * 1/40 = 0.025)
+	var current_question = GameState.CurrentQuizQuestions[current_index]
+	var extra_seconds : int = roundf(current_question["question"].length() * 0.025)
+	
+	flag_accept_input = false
+	flag_pre_question_time = true
+	
+	# lock all player pannels during prephase
+	_update_ui_player_pannel_locked_all.rpc(true)
+	
+	# following the timers experation it will move to the answer_question_phase
+	ui_prequestion_timer.start(pre_question_delay_default + extra_seconds)
+	pass
+
+## starts the timer for the answer phase, answer input is enabled
+func _answer_question_phase():
+	flag_accept_input = true
+	flag_pre_question_time = false
+	
+	_update_ui_player_pannel_locked_all.rpc(false)
+	
+	ui_countdown_timer.start(GameState.quizOptions.timer)
+	pass
+
 func _next_question():
-	# play animations?
+	# set the pre_question_time flag to false
+	flag_pre_question_time = false
+	
 	# set player pannel graphics back to their unlocked state
-	for playerId in GameState.players.keys():
-		_update_ui_player_pannel_locked.rpc(false, playerId)
-		pass
+	_update_ui_player_pannel_locked_all.rpc(false)
 		
 	current_index += 1
 	var scores = {}
 	for key in GameState.players.keys():
 		scores[key] = GameState.players[key]["score"]
 		pass
-	if current_index < GameState.CurrentQuizQuestions.size():
+	if current_index < GameState.CurrentQuizQuestions.size(): # still questions in the quiz
 		_sync_update_scores_on_clients.rpc(scores)
 		_sync_update_question_on_clients.rpc(current_index)
-		post_timer = 10.0
 		players_answered = 0
 		GameState._reset_guesses()
 		loaded = false
 		_generate_answer_order()
 		_sync_answer_order.rpc(local_answer_order)
-		ui_countdown_timer.start(GameState.quizOptions.timer)
-	else:
+		_prequestion_delay_phase()
+	else: # no more questions in the quiz
 		_sync_update_scores_on_clients.rpc(scores)
 		
 		# we need to transcribe profile data into its own array to send using rpc
@@ -399,6 +441,12 @@ func _ui_hide_player_statuses(player_number):
 	ui_players[player_number].player_case.status_row.status_c.visible = false
 	pass
 #endregion
+
+func pre_question_clock():
+	var time_left = ui_prequestion_timer.get_time_left()
+	var minute = floor(time_left / 60)
+	var second = int(time_left) % 60
+	return [minute, second]
 
 func countdown_clock():
 	var time_left = ui_countdown_timer.get_time_left()

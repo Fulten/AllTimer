@@ -216,6 +216,14 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_constants/separation = 30
 
+[node name="Prequestion_timer" type="Timer" parent="quizInterface/session_organizer/question_header"]
+wait_time = 10.0
+one_shot = true
+
+[node name="Postquestion_timer" type="Timer" parent="quizInterface/session_organizer/question_header"]
+wait_time = 10.0
+one_shot = true
+
 [node name="clock" type="TextureRect" parent="quizInterface/session_organizer/question_header"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2

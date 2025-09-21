@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameState="*res://global/game_state.gd"
 UserProfiles="*res://global/user_profiles.gd"
+AudioMaster="*res://global/audio_master.gd"
 
 [display]
 

@@ -119,9 +119,6 @@ func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		_escape_game_menu()
 		pass
-	if multiplayer.is_server() and QuizEndScreen and (event is InputEventKey and event.pressed and event.keycode == KEY_SPACE):
-		_end_quiz.rpc()
-		pass
 	for i in range(4):
 		if event.is_action_pressed(player_input % i):
 			if multiplayer.is_server(): # call locally if server

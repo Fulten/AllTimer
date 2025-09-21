@@ -42,6 +42,7 @@ var chances_set = {}
 var local_question_set_uuids = []
 
 signal end_of_quiz
+signal exit_quiz
 
 var QUIZ_SIZE = 10
 var CHANCE_COUNT = 3
@@ -263,7 +264,6 @@ func _end_quiz():
 	end_of_quiz.emit()
 	queue_free()
 	pass
-	
 
 @rpc("authority", "reliable", "call_local")
 ##RPC: accepts a bool, and tells the clients and server to switch all player pannels between the locked and unlocked states
@@ -308,6 +308,24 @@ func _show_question_explainer(show: bool):
 	else:
 		ui_post_question.hide()
 	pass
+
+## called by master scene when a player disconnects from the game, updating ui graphics
+@rpc("authority", "reliable", "call_local")
+func _player_dropped():
+	GameState._build_player_number_to_id_table()
+	
+	for i in range(4):
+		get_node("quizInterface/players_region/activePlayer%s" % (i + 1)).hide()
+		pass
+	
+	for i in range(GameState.PlayerCount):
+		var player = GameState.players[GameState.playerNumberToIds[i]]
+		ui_player_names[i].text = player["name"]
+		ui_player_scores[i].text = str(player["score"])
+		get_node("quizInterface/players_region/activePlayer%s" % (i + 1)).show()
+		pass
+	pass
+
 #endregion
 
 #region RPC functions called by clients to communicate with the server
@@ -504,6 +522,21 @@ func _ui_hide_player_statuses(player_number):
 	ui_players[player_number].player_case.status_row.status_b.visible = false
 	ui_players[player_number].player_case.status_row.status_c.visible = false
 	pass
+	
+## called by quit option on local clients exits the multiplayer session completely
+func _exit_quiz():
+	get_node("quizEnd/PlayerStandingsOrg/1Placer").hide()
+	get_node("quizEnd/PlayerStandingsOrg/2Placer").hide()
+	get_node("quizEnd/PlayerStandingsOrg/3Placer").hide()
+	get_node("quizEnd/PlayerStandingsOrg/4Placer").hide()
+	$quizInterface.show()
+	$quizEnd.hide()
+	QuizEndScreen = false
+	GameState._reset_quiz_state()
+	exit_quiz.emit()
+	queue_free()
+	pass
+
 #endregion
 
 #region functions that translate the timers into minutes and seconds for the ui
@@ -762,9 +795,7 @@ func _on_quit_button_button_up():
 		pass
 	# if client, exit multiplayer session and return to main menu
 	else: 
-		# we need to signal to the server that we're disconnecting, and leave the session
-		
-		#_end_quiz()
+		_exit_quiz()
 		pass
 		
 	pass

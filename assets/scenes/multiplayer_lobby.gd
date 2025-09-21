@@ -152,12 +152,12 @@ func _update_connected_players():
 		playerLabel.show()
 		n += 1
 	pass
-	
+
 func _exit_menu():
 	multiplayer_disconnect.emit()
 	get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
 	queue_free()
-	
+
 func _connected_to_server():
 	$JoiningLabel.hide()
 	$JoinedLabel.show()
@@ -206,3 +206,20 @@ func _refresh_profiles_dropdown():
 		pass
 	pass
 
+func _reset_menu():
+	$HostingLabel.hide()
+	$JoiningLabel.hide()
+	$JoinedLabel.hide()
+	$CancelConnectionButton.hide()
+	$PeerConnectors.show()
+	
+	$ProfileCase/ProfilesList.disabled = false
+	
+	$CancelConnectionButton.disabled = true
+	$PeerConnectors/HostButton.disabled = false
+	$PeerConnectors/JoinButton.disabled = false
+	$StateChangers/LaunchButton.disabled = true
+	
+	multiplayer_disconnect.emit()
+	_update_connected_players()
+	pass

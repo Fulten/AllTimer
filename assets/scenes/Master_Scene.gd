@@ -123,6 +123,11 @@ func _mp_on_peer_disconnected(id: int):
 	GameState.players.erase(id)
 	GameState.PlayerCount -= 1
 	multiplayer_lobby_script._update_connected_players()
+	
+	if GameState.GameStarted:
+		quiz_session_instance._player_dropped()
+		pass
+		
 	print("player %s disconneted" % id)
 	pass
 
@@ -140,6 +145,7 @@ func _mp_on_connected_fail():
 	multiplayer_lobby_instance._connection_reset("connection failed")
 	pass
 
+# player has been disconnected from server
 func _mp_on_server_disconnected():
 	multiplayer.multiplayer_peer = null
 	GameState.players.clear()
@@ -160,6 +166,7 @@ func _launch_quiz():
 func load_quiz():
 	quiz_session_instance = quiz_session_scene.instantiate()
 	quiz_session_instance.end_of_quiz.connect(_end_of_quiz_handler)
+	quiz_session_instance.exit_quiz.connect(_exit_quiz_handler)
 	get_tree().root.add_child(quiz_session_instance)
 	pass
 
@@ -174,9 +181,11 @@ func _end_of_quiz_handler():
 	if multiplayer.is_server():
 		multiplayer_lobby_instance._enable_launch_button()
 		pass
-	else:
-		
-		pass
+	pass
+	
+func _exit_quiz_handler():
+	multiplayer.multiplayer_peer = null
+	multiplayer_lobby_instance._reset_menu()
 	pass
 
 func _exit_quiz():

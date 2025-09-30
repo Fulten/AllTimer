@@ -14,6 +14,7 @@ var flag_profiles_menu_sub = false
 
 func _ready():
 	$StackAnimator.play("Anim_Stack0_Init")
+	await get_tree().create_timer(0.1).timeout
 	$Stack_0/TitleHeader2.grab_focus()
 	load_settings()
 	UserProfiles._IO_read_profiles()
@@ -218,8 +219,9 @@ func _on_options_button_button_up():
 	$StackAnimator/Timer_Stack0_to_Options.start()
 	$StackAnimator.play("Anim_Stack0_FadeOut")
 func _on_timer_stack_0_to_options_categories_timeout():
-		$StackAnimator.play("Anim_OptionsCategories_FadeIn")
 		get_node("Stack_0").hide()
+		$StackAnimator.play("Anim_OptionsCategories_FadeIn")
+		await get_tree().create_timer(0.1).timeout
 		get_node("Options_2").show()
 		$Options_2/OptionsCategories/DisplayButton.grab_focus()
 		flag_options_menu = true
@@ -246,6 +248,7 @@ func _on_profile_button_button_up():
 	$StackAnimator.play("Anim_Stack0_FadeOut")
 func _on_timer_stack_0_to_profile_timeout():
 	$StackAnimator.play("Anim_Profile_FadeIn")
+	await get_tree().create_timer(0.1).timeout
 	get_node("Stack_0").hide()
 	get_node("Options_Profile").show()
 	flag_profiles_menu = true
@@ -262,6 +265,7 @@ func _on_options_profile_return_button_up():
 	$StackAnimator.play("Anim_Profile_FadeOut")
 func _on_timer_profile_to_stack_0_timeout():
 	$StackAnimator.play("Anim_Stack0_FadeIn")
+	await get_tree().create_timer(0.1).timeout
 	get_node("Options_Profile").hide()
 	get_node("Stack_0").show()
 	flag_profiles_menu = false
@@ -374,6 +378,7 @@ func _on_options_categories_return_button_up():
 	$StackAnimator.play("Anim_OptionCategories_FadeOut")
 func _on_timer_options_categories_to_stack_0_timeout():
 	$StackAnimator.play("Anim_Stack0_FadeIn")
+	await get_tree().create_timer(0.1).timeout
 	get_node("Options_2").hide()
 	get_node("Stack_0").show()
 	$Stack_0/MainMenuButtons/PlayButton.grab_focus()
@@ -390,6 +395,7 @@ func _on_display_button_button_up():
 	$StackAnimator.play("Anim_OptionCategories_FadeOut")
 func _on_timer_options_to_display_timeout():
 	$StackAnimator.play("Anim_Display_FadeIn")
+	await get_tree().create_timer(0.1).timeout
 	get_node("Options_2").hide()
 	get_node("Options_Display2").show()
 	flag_options_menu_display = true
@@ -405,6 +411,7 @@ func _on_sound_button_button_up():
 	$StackAnimator.play("Anim_OptionCategories_FadeOut")
 func _on_timer_options_to_sound_timeout():
 	$StackAnimator.play("Anim_Sound_FadeIn")
+	await get_tree().create_timer(0.1).timeout
 	get_node("Options_2").hide()
 	get_node("Options_Sound2").show()
 	flag_options_menu_sound = true
@@ -421,6 +428,7 @@ func _on_game_button_button_up():
 	$StackAnimator.play("Anim_OptionCategories_FadeOut")
 func _on_timer_options_to_game_timeout():
 	$StackAnimator.play("Anim_Game_FadeIn")
+	await get_tree().create_timer(0.1).timeout
 	get_node("Options_2").hide()
 	get_node("Options_Game2").show()
 	flag_options_menu_game = true
@@ -439,6 +447,7 @@ func _on_timer_display_to_options_timeout():
 	get_node("Options_Display2").hide()
 	get_node("Options_2").show()
 	$StackAnimator.play("Anim_OptionsCategories_FadeIn")	
+	await get_tree().create_timer(0.1).timeout
 	$Options_2/OptionsCategories/DisplayButton.grab_focus()
 	flag_options_menu_display = false
 
@@ -454,6 +463,7 @@ func _on_options_sound_return_button_up():
 	$StackAnimator.play("Anim_Sound_FadeOut")
 func _on_timer_sound_to_options_timeout():
 	$StackAnimator.play("Anim_OptionsCategories_FadeIn")
+	await get_tree().create_timer(0.1).timeout
 	get_node("Options_Sound2").hide()
 	get_node("Options_2").show()
 	$Options_2/OptionsCategories/SoundButton.grab_focus()
@@ -472,6 +482,7 @@ func _on_options_game_return_button_up():
 	$StackAnimator.play("Anim_Game_FadeOut")
 func _on_timer_game_to_options_timeout():
 	$StackAnimator.play("Anim_OptionsCategories_FadeIn")
+	await get_tree().create_timer(0.1).timeout
 	get_node("Options_Game2").hide()
 	get_node("Options_2").show()
 	$Options_2/OptionsCategories/GameButton.grab_focus()
@@ -519,11 +530,13 @@ func _escape_game_menu():
 			get_node("Options_Display2").hide()
 			get_node("Options_2").show()
 			$StackAnimator.play("Anim_OptionsCategories_FadeIn")	
+			await get_tree().create_timer(0.1).timeout
 			$Options_2/OptionsCategories/DisplayButton.grab_focus()
 			flag_options_menu_display = false
 			return
 		if flag_options_menu_sound:
 			$StackAnimator.play("Anim_OptionsCategories_FadeIn")
+			await get_tree().create_timer(0.1).timeout
 			get_node("Options_Sound2").hide()
 			get_node("Options_2").show()
 			$Options_2/OptionsCategories/SoundButton.grab_focus()
@@ -531,12 +544,14 @@ func _escape_game_menu():
 			return
 		if flag_options_menu_game:
 			$StackAnimator.play("Anim_OptionsCategories_FadeIn")
+			await get_tree().create_timer(0.1).timeout
 			get_node("Options_Game2").hide()
 			get_node("Options_2").show()
 			$Options_2/OptionsCategories/GameButton.grab_focus()
 			flag_options_menu_game = false
 			return
 		$StackAnimator.play("Anim_Stack0_FadeIn")
+		await get_tree().create_timer(0.1).timeout
 		get_node("Options_2").hide()
 		get_node("Stack_0").show()
 		$Stack_0/MainMenuButtons/PlayButton.grab_focus()
@@ -551,6 +566,7 @@ func _escape_game_menu():
 			get_node("Options_Profile/ProfileDestroyer").hide()
 			return
 		$StackAnimator.play("Anim_Stack0_FadeIn")
+		await get_tree().create_timer(0.1).timeout
 		get_node("Options_Profile").hide()
 		get_node("Stack_0").show()
 		flag_profiles_menu = false

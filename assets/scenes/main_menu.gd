@@ -5,6 +5,13 @@ var config_path = "user://settings.cfg"
 
 var profiles_list_id_to_name = {}
 
+var flag_options_menu = false
+var flag_options_menu_display = false
+var flag_options_menu_sound = false
+var flag_options_menu_game = false
+var flag_profiles_menu = false
+var flag_profiles_menu_sub = false
+
 func _ready():
 	$StackAnimator.play("Anim_Stack0_Init")
 	$Stack_0/TitleHeader2.grab_focus()
@@ -182,7 +189,11 @@ func _update_current_profile_label():
 	pass
 	
 
-func _input(_event):
+func _input(event):
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		_escape_game_menu()
+		pass
+	
 	pass
 
 
@@ -211,6 +222,7 @@ func _on_timer_stack_0_to_options_categories_timeout():
 		get_node("Stack_0").hide()
 		get_node("Options_2").show()
 		$Options_2/OptionsCategories/DisplayButton.grab_focus()
+		flag_options_menu = true
 
 
 func _on_quit_button_focus_entered():
@@ -236,6 +248,7 @@ func _on_timer_stack_0_to_profile_timeout():
 	$StackAnimator.play("Anim_Profile_FadeIn")
 	get_node("Stack_0").hide()
 	get_node("Options_Profile").show()
+	flag_profiles_menu = true
 
 
 func _on_options_profile_return_focus_entered():
@@ -251,6 +264,7 @@ func _on_timer_profile_to_stack_0_timeout():
 	$StackAnimator.play("Anim_Stack0_FadeIn")
 	get_node("Options_Profile").hide()
 	get_node("Stack_0").show()
+	flag_profiles_menu = false
 
 func _on_profile_creator_button_mouse_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
@@ -261,6 +275,7 @@ func _on_profile_creator_button_button_down():
 func _on_profile_creator_button_button_up():
 	get_node("Options_Profile/ProfileDestroyer").hide()
 	get_node("Options_Profile/ProfileCreator").show()
+	flag_profiles_menu_sub = true
 
 
 func _on_profiles_list_item_selected(index):
@@ -293,6 +308,8 @@ func _on_save_button_button_up():
 		_refresh_profiles_dropdown()
 		_update_current_profile_label()
 		get_node("Options_Profile/ProfileCreator").hide()
+		$Options_Profile/ProfileCreator/ProfileNamer/ProfileEntryField.text = ""
+		flag_profiles_menu_sub = false
 		pass
 	
 func _on_cancel_profile_button_mouse_entered():
@@ -303,6 +320,8 @@ func _on_cancel_profile_button_button_down():
 	$Stack_0/MainMenuButtons/SFX_Press.play()
 func _on_cancel_profile_button_button_up():
 	get_node("Options_Profile/ProfileCreator").hide()
+	$Options_Profile/ProfileCreator/ProfileNamer/ProfileEntryField.text = ""
+	flag_profiles_menu_sub = false
 
 func _on_profile_deleter_button_mouse_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
@@ -312,7 +331,9 @@ func _on_profile_deleter_button_button_down():
 	$Stack_0/MainMenuButtons/SFX_Press.play()
 func _on_profile_deleter_button_button_up():
 	get_node("Options_Profile/ProfileCreator").hide()
+	$Options_Profile/ProfileCreator/ProfileNamer/ProfileEntryField.text = ""
 	get_node("Options_Profile/ProfileDestroyer").show()
+	flag_profiles_menu_sub = true
 	
 func _on_delete_button_mouse_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
@@ -329,7 +350,8 @@ func _on_delete_button_button_up():
 	_refresh_profiles_dropdown()
 	_update_current_profile_label()
 	get_node("Options_Profile/ProfileDestroyer").hide()
-	pass # This button should read the currently selected profile in ProfilesList and then  D E L E T E  it
+	flag_profiles_menu_sub = false
+	pass
 
 func _on_cancel_deletion_button_mouse_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
@@ -339,6 +361,7 @@ func _on_cancel_deletion_button_button_down():
 	$Stack_0/MainMenuButtons/SFX_Press.play()
 func _on_cancel_deletion_button_button_up():
 	get_node("Options_Profile/ProfileDestroyer").hide()
+	flag_profiles_menu_sub = false
 
 func _on_options_categories_return_focus_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
@@ -354,6 +377,7 @@ func _on_timer_options_categories_to_stack_0_timeout():
 	get_node("Options_2").hide()
 	get_node("Stack_0").show()
 	$Stack_0/MainMenuButtons/PlayButton.grab_focus()
+	flag_options_menu = false
 
 func _on_display_button_focus_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
@@ -368,6 +392,7 @@ func _on_timer_options_to_display_timeout():
 	$StackAnimator.play("Anim_Display_FadeIn")
 	get_node("Options_2").hide()
 	get_node("Options_Display2").show()
+	flag_options_menu_display = true
 
 func _on_sound_button_focus_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
@@ -382,6 +407,7 @@ func _on_timer_options_to_sound_timeout():
 	$StackAnimator.play("Anim_Sound_FadeIn")
 	get_node("Options_2").hide()
 	get_node("Options_Sound2").show()
+	flag_options_menu_sound = true
 
 
 func _on_game_button_focus_entered():
@@ -397,7 +423,7 @@ func _on_timer_options_to_game_timeout():
 	$StackAnimator.play("Anim_Game_FadeIn")
 	get_node("Options_2").hide()
 	get_node("Options_Game2").show()
-
+	flag_options_menu_game = true
 
 func _on_options_display_return_focus_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
@@ -414,7 +440,7 @@ func _on_timer_display_to_options_timeout():
 	get_node("Options_2").show()
 	$StackAnimator.play("Anim_OptionsCategories_FadeIn")	
 	$Options_2/OptionsCategories/DisplayButton.grab_focus()
-
+	flag_options_menu_display = false
 
 func _on_options_sound_return_focus_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
@@ -431,12 +457,11 @@ func _on_timer_sound_to_options_timeout():
 	get_node("Options_Sound2").hide()
 	get_node("Options_2").show()
 	$Options_2/OptionsCategories/SoundButton.grab_focus()
+	flag_options_menu_sound = false
 
 
 func _on_options_game_return_focus_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
-
-
 func _on_options_game_return_mouse_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
 func _on_options_game_return_button_down():
@@ -450,6 +475,7 @@ func _on_timer_game_to_options_timeout():
 	get_node("Options_Game2").hide()
 	get_node("Options_2").show()
 	$Options_2/OptionsCategories/GameButton.grab_focus()
+	flag_options_menu_game = false
 #endregion
 
 
@@ -486,3 +512,48 @@ func _on_resolutions_list_item_selected(index: int) -> void:
 func _on_sound_device_options_item_selected(index: int) -> void:
 	AudioServer.set_output_device(%SoundDeviceOptions.get_item_text(index))
 
+## backs out of nested menus, handles both the options and profiles menus
+func _escape_game_menu():
+	if flag_options_menu:
+		if flag_options_menu_display:
+			get_node("Options_Display2").hide()
+			get_node("Options_2").show()
+			$StackAnimator.play("Anim_OptionsCategories_FadeIn")	
+			$Options_2/OptionsCategories/DisplayButton.grab_focus()
+			flag_options_menu_display = false
+			return
+		if flag_options_menu_sound:
+			$StackAnimator.play("Anim_OptionsCategories_FadeIn")
+			get_node("Options_Sound2").hide()
+			get_node("Options_2").show()
+			$Options_2/OptionsCategories/SoundButton.grab_focus()
+			flag_options_menu_sound = false
+			return
+		if flag_options_menu_game:
+			$StackAnimator.play("Anim_OptionsCategories_FadeIn")
+			get_node("Options_Game2").hide()
+			get_node("Options_2").show()
+			$Options_2/OptionsCategories/GameButton.grab_focus()
+			flag_options_menu_game = false
+			return
+		$StackAnimator.play("Anim_Stack0_FadeIn")
+		get_node("Options_2").hide()
+		get_node("Stack_0").show()
+		$Stack_0/MainMenuButtons/PlayButton.grab_focus()
+		flag_options_menu = false
+		return
+	pass
+
+	if flag_profiles_menu:
+		if flag_profiles_menu_sub:
+			get_node("Options_Profile/ProfileCreator").hide()
+			$Options_Profile/ProfileCreator/ProfileNamer/ProfileEntryField.text = ""
+			get_node("Options_Profile/ProfileDestroyer").hide()
+			return
+		$StackAnimator.play("Anim_Stack0_FadeIn")
+		get_node("Options_Profile").hide()
+		get_node("Stack_0").show()
+		flag_profiles_menu = false
+	pass
+	
+	

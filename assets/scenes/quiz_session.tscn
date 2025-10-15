@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://c1ovqmumbqjdm"]
+[gd_scene load_steps=49 format=3 uid="uid://c1ovqmumbqjdm"]
 
 [ext_resource type="Script" path="res://assets/scenes/quiz_session.gd" id="1_mn3kg"]
 [ext_resource type="Texture2D" uid="uid://7rterpy3cejg" path="res://assets/uiux/session_themes/default/session_bg.tga" id="1_sfady"]
@@ -84,11 +84,149 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/status_a:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.235294)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/status_b:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.235294)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/status_c:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.235294)]
+}
+
+[sub_resource type="Animation" id="Animation_kwxtm"]
+resource_name = "p1Status_SkipShow"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/status_a:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0.235294), Color(0.39, 0.796667, 1, 1), Color(1, 1, 1, 0.235294), Color(0.39, 0.796667, 1, 1), Color(1, 1, 1, 0.235294), Color(0.39, 0.796667, 1, 1), Color(0.39, 0.796667, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8yal7"]
+resource_name = "p1Status_SkipHide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/status_a:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.39, 0.796667, 1, 1), Color(1, 1, 1, 0.235294)]
+}
+
+[sub_resource type="Animation" id="Animation_hohoc"]
+resource_name = "p1Status_WrongShow"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/status_b:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.9, 1.4, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0.235294), Color(1, 0.14, 0.14, 1), Color(1, 1, 1, 0.235294), Color(1, 0.14, 0.14, 1), Color(1, 0.14, 0.14, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_m3oc8"]
+resource_name = "p1Status_WrongHide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/status_b:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.14, 0.14, 1), Color(1, 1, 1, 0.235294)]
+}
+
+[sub_resource type="Animation" id="Animation_1mgoh"]
+resource_name = "p1Status_RightShow"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/status_c:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.235294), Color(0.647059, 1, 0.364706, 1), Color(0, 1, 0.666667, 1), Color(0, 1, 0.366667, 1), Color(0.647059, 1, 0.364706, 1), Color(0, 1, 0.623529, 1), Color(0, 1, 0.366667, 1), Color(0, 1, 0.366667, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_v3c8i"]
+resource_name = "p1Status_RightHide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/status_c:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 1, 0.366667, 1), Color(1, 1, 1, 0.235294)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2s641"]
 _data = {
 "EndOfQuiz": SubResource("Animation_3me1p"),
-"RESET": SubResource("Animation_87374")
+"RESET": SubResource("Animation_87374"),
+"p1Status_RightHide": SubResource("Animation_v3c8i"),
+"p1Status_RightShow": SubResource("Animation_1mgoh"),
+"p1Status_SkipHide": SubResource("Animation_8yal7"),
+"p1Status_SkipShow": SubResource("Animation_kwxtm"),
+"p1Status_WrongHide": SubResource("Animation_m3oc8"),
+"p1Status_WrongShow": SubResource("Animation_hohoc")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_35yei"]
@@ -360,14 +498,17 @@ theme_override_constants/separation = 15
 layout_mode = 2
 
 [node name="status_a" type="TextureRect" parent="quizInterface/players_region/activePlayer1/player_case/status_row"]
+self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
 texture = ExtResource("11_kn28g")
 
 [node name="status_b" type="TextureRect" parent="quizInterface/players_region/activePlayer1/player_case/status_row"]
+self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
 texture = ExtResource("12_ad8nh")
 
 [node name="status_c" type="TextureRect" parent="quizInterface/players_region/activePlayer1/player_case/status_row"]
+self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
 texture = ExtResource("13_rsqes")
 

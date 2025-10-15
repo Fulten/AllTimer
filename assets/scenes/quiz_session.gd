@@ -323,6 +323,23 @@ func _player_dropped():
 		pass
 	pass
 
+## called by server to sync the player statuses, statuses is expected to be a 2d array 
+@rpc("authority", "reliable", "call_local")
+func _sync_player_statuses(statuses):
+	for player_number in range(GameState.PlayerCount):
+		ui_players[player_number].player_case.status_row.status_a.visible = statuses[player_number][0]
+		ui_players[player_number].player_case.status_row.status_b.visible = statuses[player_number][1]
+		ui_players[player_number].player_case.status_row.status_c.visible = statuses[player_number][2]
+		pass
+
+## called by the server to reset all player statuses to be hidden
+@rpc("authority", "reliable", "call_local")
+func _reset_player_statuses():
+	for player_number in range(4):
+		ui_players[player_number].player_case.status_row.status_a.visible = false
+		ui_players[player_number].player_case.status_row.status_b.visible = false
+		ui_players[player_number].player_case.status_row.status_c.visible = false
+		pass
 #endregion
 
 #region RPC functions called by clients to communicate with the server
@@ -454,7 +471,8 @@ func _answer_question_phase():
 	
 	ui_countdown_timer.start(GameState.quizOptions.timer)
 	pass
-
+	
+## strarts the timer for the post question phase, answer input is disabled
 func _postquestion_delay_phase():
 	ui_countdown_timer.stop()
 	flag_accept_input = false
@@ -468,6 +486,7 @@ func _postquestion_delay_phase():
 	ui_postquestion_timer.start(post_question_delay_default)
 	pass
 	
+## end of question phase occurs after each question
 func _end_of_quiz_phase():
 	ui_postquestion_timer.stop()
 	flag_post_question_time = false
@@ -512,12 +531,6 @@ func _next_question():
 		
 		_sync_and_save_client_profile_statistics.rpc(playersData)
 		_show_end_of_quiz_screen.rpc()
-	pass
-	
-func _ui_hide_player_statuses(player_number):
-	ui_players[player_number].player_case.status_row.status_a.visible = false
-	ui_players[player_number].player_case.status_row.status_b.visible = false
-	ui_players[player_number].player_case.status_row.status_c.visible = false
 	pass
 	
 ## called by quit option on local clients exits the multiplayer session completely

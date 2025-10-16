@@ -58,6 +58,8 @@ var players_answered = 0
 var player_input = "p_answer_%s"
 var flag_accept_input = false
 
+var player_statuses_ui_2d: Array[Array]
+
 var flag_game_menu_shown = false
 var flag_in_options_menu = false
 var flag_in_options_submenu = false
@@ -170,6 +172,7 @@ func _sync_answer_order(server_answer_order):
 @rpc("authority", "reliable")
 func _start_quiz_client():
 	GameState._reset_players()
+	_reset_player_statuses()
 	for i in range(GameState.PlayerCount):
 		var player = GameState.players[GameState.playerNumberToIds[i]]
 		ui_player_names[i].text = player["name"]
@@ -327,18 +330,18 @@ func _player_dropped():
 @rpc("authority", "reliable", "call_local")
 func _sync_player_statuses(statuses):
 	for player_number in range(GameState.PlayerCount):
-		ui_players[player_number].player_case.status_row.status_a.visible = statuses[player_number][0]
-		ui_players[player_number].player_case.status_row.status_b.visible = statuses[player_number][1]
-		ui_players[player_number].player_case.status_row.status_c.visible = statuses[player_number][2]
+		ui_players[player_number].get_node("status_row/status_a").visible = statuses[player_number][0]
+		ui_players[player_number].get_node("status_row/status_b").visible = statuses[player_number][1]
+		ui_players[player_number].get_node("status_row/status_c").visible = statuses[player_number][2]
 		pass
 
 ## called by the server to reset all player statuses to be hidden
 @rpc("authority", "reliable", "call_local")
 func _reset_player_statuses():
 	for player_number in range(4):
-		ui_players[player_number].player_case.status_row.status_a.visible = false
-		ui_players[player_number].player_case.status_row.status_b.visible = false
-		ui_players[player_number].player_case.status_row.status_c.visible = false
+		ui_players[player_number].get_node("status_row/status_a").visible = false
+		ui_players[player_number].get_node("status_row/status_b").visible = false
+		ui_players[player_number].get_node("status_row/status_c").visible = false
 		pass
 #endregion
 
@@ -423,6 +426,8 @@ func _start_quiz_server():
 	ui_countdown_timer.timeout.connect(_postquestion_delay_phase)
 	ui_postquestion_timer.timeout.connect(_end_of_quiz_phase)
 	
+	_reset_player_statuses()
+	
 	current_index = 0
 	GameState._reset_players()
 	for i in range(GameState.PlayerCount):
@@ -478,6 +483,9 @@ func _postquestion_delay_phase():
 	flag_accept_input = false
 	flag_post_question_time = true
 	
+	_create_player_statuses_table()
+	_sync_player_statuses.rpc(player_statuses_ui_2d)
+	
 	# lock all player pannels during postphase
 	_update_ui_player_pannel_locked_all.rpc(true)
 	
@@ -492,6 +500,8 @@ func _end_of_quiz_phase():
 	flag_post_question_time = false
 	
 	_show_question_explainer.rpc(false)
+	
+	_reset_player_statuses.rpc()
 	
 	var current_question = GameState.CurrentQuizQuestions[current_index]
 	GameState._player_correctness(correct_answer,1000)
@@ -545,6 +555,31 @@ func _exit_quiz():
 	GameState._reset_quiz_state()
 	exit_quiz.emit()
 	queue_free()
+	pass
+
+## uses info in GameState to create a table representing which player statuses should be on
+func _create_player_statuses_table():
+	player_statuses_ui_2d.clear()
+	player_statuses_ui_2d.resize(GameState.PlayerCount)
+	
+	for playerNumber in range(GameState.PlayerCount):
+		var playerCorrectness = GameState.players[GameState.playerNumberToIds[playerNumber]]["correct"]
+		var playerAnswered = GameState.players[GameState.playerNumberToIds[playerNumber]]["hasGuessed"]
+		
+		# if player has not answered
+		if !playerAnswered:
+			player_statuses_ui_2d[playerNumber] = [true, false, false]
+			continue
+		
+		# if player's answer is correct
+		if playerCorrectness:
+			player_statuses_ui_2d[playerNumber] = [false, false, true]
+			continue
+		# if player's answer is wrong
+		else:
+			player_statuses_ui_2d[playerNumber] = [false, true, false]
+			continue
+	
 	pass
 
 #endregion

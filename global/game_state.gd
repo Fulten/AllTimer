@@ -88,11 +88,13 @@ func _player_has_guessed(player_id):
 func _player_guess(player_id,guess,current_time):
 	players[player_id]["guess"] = guess
 	players[player_id]["guessTime"] = current_time
+	players[player_id]["hasGuessed"] = true
 	
 func _reset_guesses():
 	for i in range(PlayerCount):
 		players[playerNumberToIds[i]]["guess"] = -1
 		players[playerNumberToIds[i]]["guessTime"] = 0
+		players[playerNumberToIds[i]]["hasGuessed"] = false
 
 func _player_correctness(correct_answer, score):
 	for i in PlayerCount:

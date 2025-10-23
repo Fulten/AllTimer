@@ -1,0 +1,12 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://d08iff5t0f6hp"]
+
+[ext_resource type="FontFile" uid="uid://ppcieu81eyur" path="res://assets/uiux/session_themes/default/TeachersStudent-Regular.ttf" id="1_pfus8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4yyo5"]
+
+[resource]
+default_font_size = 32
+Button/colors/font_outline_color = Color(1, 0, 0.0166664, 0.635294)
+Button/constants/outline_size = 3
+Button/fonts/font = ExtResource("1_pfus8")
+Button/styles/normal = SubResource("StyleBoxEmpty_4yyo5")

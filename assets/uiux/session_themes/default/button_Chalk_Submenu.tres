@@ -1,0 +1,13 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cf8u3obo5dfya"]
+
+[ext_resource type="FontFile" uid="uid://b4nn47euaajnc" path="res://assets/uiux/session_themes/default/Chalkboard-Regular.ttf" id="1_oqg54"]
+
+[resource]
+Button/colors/font_color = Color(0.160784, 0.160784, 0.160784, 1)
+Button/colors/font_focus_color = Color(0.6, 0.6, 0.6, 1)
+Button/colors/font_hover_color = Color(0.6, 0.6, 0.6, 1)
+Button/colors/font_hover_pressed_color = Color(0.6, 0.6, 0.6, 0.235294)
+Button/colors/font_outline_color = Color(0.160784, 0.160784, 0.160784, 1)
+Button/colors/font_pressed_color = Color(0.6, 0.6, 0.6, 0.235294)
+Button/font_sizes/font_size = 40
+Button/fonts/font = ExtResource("1_oqg54")

@@ -86,7 +86,7 @@ func _ready():
 		_sync_server_client_data.rpc(local_question_set_uuids, GameState.playerNumberToIds)
 		_clean_master_questions()
 		_clean_chance_set_and_master()
-		_generate_answer_order()
+		_generate_answer_order(4)
 		_sync_answer_order.rpc(local_answer_order)
 		_player_loaded(multiplayer.get_unique_id())
 		print("server [%s] loaded" % multiplayer.get_unique_id())
@@ -400,13 +400,11 @@ func _escape_game_menu():
 	pass
 
 ##used by the server to decide on the order questions will be presented
-func _generate_answer_order():
-	var available_indexes = [0, 1, 2, 3]
-	local_answer_order = [0, 1, 2, 3]
-	local_answer_order[0] = available_indexes.pop_at(randi() % available_indexes.size())
-	local_answer_order[1] = available_indexes.pop_at(randi() % available_indexes.size())
-	local_answer_order[2] = available_indexes.pop_at(randi() % available_indexes.size())
-	local_answer_order[3] = available_indexes.pop_at(randi() % available_indexes.size())
+func _generate_answer_order(answer_count):
+	var available_indexes = range(0, answer_count)
+	local_answer_order = range(0, answer_count)
+	for i in local_answer_order:
+		local_answer_order[i] = available_indexes.pop_at(randi() % available_indexes.size())
 	pass
 	
 ##uses the given questionIndex to find the corrisponding question in the master_question_data array
@@ -526,7 +524,7 @@ func _next_question():
 		players_answered = 0
 		GameState._reset_guesses()
 		loaded = false
-		_generate_answer_order()
+		_generate_answer_order(4)
 		_sync_answer_order.rpc(local_answer_order)
 		_prequestion_delay_phase()
 	else: # no more questions in the quiz

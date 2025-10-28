@@ -7,6 +7,7 @@ signal multiplayer_disconnect
 
 var ip_address = "127.0.0.1"
 var IpInputTextNode
+const SECURITY_KEY = "0851DSADDTYA84571ARE"
 
 var profiles_list_id_to_name = {}
 
@@ -24,6 +25,26 @@ func _process(_delta):
 func _on_text_edit_text_changed():
 	ip_address = IpInputTextNode.get("text")
 	pass
+
+
+func _encrypt_ip(ip_to_encrypt):
+	var key_bytes = SECURITY_KEY.to_utf8_buffer()
+	var plaintext_bytes = ip_to_encrypt.to_utf8_buffer()
+	var aes = AESContext.new()
+	aes.start(AESContext.MODE_ECB_ENCRYPT, key_bytes)
+	var encrypted_bytes = aes.update(plaintext_bytes)
+	aes.finish()
+	return encrypted_bytes
+
+
+func _decrypt_ip(encrypted_bytes):
+	var key_bytes = SECURITY_KEY.to_utf8_buffer()
+	var aes_decrypt = AESContext.new()
+	aes_decrypt.start(AESContext.MODE_ECB_DECRYPT, key_bytes)
+	var decrypted_bytes = aes_decrypt.update(encrypted_bytes)
+	aes_decrypt.finish()
+	var decrypted_text = decrypted_bytes.get_string_from_utf8()
+
 
 ##called when the Profiles List drop down's selection is changed
 func _on_profiles_list_item_selected(index):

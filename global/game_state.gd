@@ -8,6 +8,8 @@ class Player:
 	var hasGuessed: bool
 	var correct: bool
 	var score: int
+	var score_old: int
+	var score_increase: int
 	var profileData
 	var chances
 	
@@ -19,6 +21,8 @@ class Player:
 		hasGuessed = false
 		correct = false
 		score = 0
+		score_old = 0
+		score_increase = 0
 		profileData = u_profile
 		chances = {}
 		pass
@@ -28,17 +32,21 @@ class Player:
 		hasGuessed = false
 		correct = false
 		score = 0
+		score_old = 0
+		score_increase = 0
 		chances = {}
 		pass
 
 class QuizOptions:
 	var timer: int
+	var post_timer: int
 	var win_con: String
 	var tallies: bool
 	var skipping_losses: bool
 	var gambling_modes: bool
 	
-	func initilize(i_timer = 30, i_win_con = "default", i_tallies = false, i_skipping_losses = false, i_gambling_modes = false) :
+	func initilize(i_post_timer = 5, i_timer = 30, i_win_con = "default", i_tallies = false, i_skipping_losses = false, i_gambling_modes = false) :
+		post_timer = i_post_timer
 		timer = i_timer
 		win_con = i_win_con
 		tallies = i_tallies
@@ -78,9 +86,23 @@ func _add_chance(chance_name, description, type, uuid, value, associated_questio
 		"player_hits": [0,0,0,0],
 	})
 
-func _adjust_score(player_index,score):
+func _prep_score_increase(player_index, score):
 	var playerId = playerNumberToIds[player_index]
-	players[playerId]["score"] += roundf(score * players[playerId]["guessTime"]/30)
+	players[playerId]["score_increase"] += roundf(score * players[playerId]["guessTime"]/30)
+
+func _roll_up_scores(player_index, time_remaining):
+	for i in range(PlayerCount):
+		var playerId = playerNumberToIds[player_index]
+		var percent_left = (quizOptions.post_timer-time_remaining)/quizOptions.post_timer
+		players[playerId]["score"] = players[playerId]["score_old"] + roundf(players[playerId]["score_increase"] * percent_left)
+
+func _complete_roll_up(player_index):
+	for i in range(PlayerCount):
+		var playerId = playerNumberToIds[player_index]
+		var current_score = players[playerId]["score_old"] + roundf(players[playerId]["score_increase"])
+		players[playerId]["score"] = current_score
+		players[playerId]["score_old"] = current_score
+		players[playerId]["score_increase"] = 0
 
 func _player_has_guessed(player_id):
 	return players[player_id]["guess"] >= 0
@@ -97,13 +119,13 @@ func _reset_guesses():
 		players[playerNumberToIds[i]]["hasGuessed"] = false
 
 func _player_correctness(correct_answer, score):
-	for i in PlayerCount:
+	for i in range(PlayerCount):
 		var playerGuess = players[playerNumberToIds[i]]["guess"]
 		players[playerNumberToIds[i]]["correct"] = playerGuess == correct_answer
 		if players[playerNumberToIds[i]]["correct"]:
-			_adjust_score(i,score)
+			_prep_score_increase(i,score)
 		else:
-			_adjust_score(i,-1*score)
+			_prep_score_increase(i,-1*score)
 
 ## updates the question answered and seen metrics section of the player profiles
 ## this is called on the server, and only updates the profile data on the server side

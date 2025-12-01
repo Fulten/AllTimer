@@ -79,7 +79,7 @@ length = 1.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1_icon:self_modulate")
+tracks/0/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1_icon:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -91,7 +91,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1:self_modulate")
+tracks/1/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -103,7 +103,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2_icon:self_modulate")
+tracks/2/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2_icon:self_modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -115,7 +115,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2:self_modulate")
+tracks/3/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2:self_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -127,7 +127,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3_icon:self_modulate")
+tracks/4/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3_icon:self_modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -139,7 +139,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3:self_modulate")
+tracks/5/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3:self_modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -151,7 +151,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4_icon:self_modulate")
+tracks/6/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4_icon:self_modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -163,11 +163,83 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4:self_modulate")
+tracks/7/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4:self_modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0.6, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/TrueButton:self_modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/Cat1Button:self_modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/orLabel:self_modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/orLabel:self_modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/FalseButton:self_modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0.7, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/Cat2Button:self_modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0.7, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -215,7 +287,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1_icon:self_modulate")
+tracks/3/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1_icon:self_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -227,7 +299,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1:self_modulate")
+tracks/4/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1:self_modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -239,7 +311,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2_icon:self_modulate")
+tracks/5/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2_icon:self_modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -251,7 +323,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2:self_modulate")
+tracks/6/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2:self_modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -263,7 +335,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3_icon:self_modulate")
+tracks/7/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3_icon:self_modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -275,7 +347,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3:self_modulate")
+tracks/8/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3:self_modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -287,7 +359,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4_icon:self_modulate")
+tracks/9/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4_icon:self_modulate")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -299,11 +371,83 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4:self_modulate")
+tracks/10/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4:self_modulate")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/TrueButton:self_modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(-0.01, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/Cat1Button:self_modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(-0.01, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/orLabel:self_modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(-0.01, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/orLabel:self_modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(-0.01, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/FalseButton:self_modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(-0.01, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/Cat2Button:self_modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(-0.01, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -1223,7 +1367,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1_icon:self_modulate")
+tracks/5/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1_icon:self_modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -1235,7 +1379,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1:self_modulate")
+tracks/6/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1:self_modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1247,7 +1391,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2_icon:self_modulate")
+tracks/7/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2_icon:self_modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -1259,7 +1403,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2:self_modulate")
+tracks/8/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2:self_modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -1271,7 +1415,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3_icon:self_modulate")
+tracks/9/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3_icon:self_modulate")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -1283,7 +1427,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3:self_modulate")
+tracks/10/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3:self_modulate")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -1295,7 +1439,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4_icon:self_modulate")
+tracks/11/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4_icon:self_modulate")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -1307,7 +1451,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4:self_modulate")
+tracks/12/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4:self_modulate")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -1319,79 +1463,79 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("preQuiz/preSessionOrganizer/PreSessionTitle:self_modulate")
+tracks/13/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/TrueButton:self_modulate")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ObjectiveTitle:self_modulate")
+tracks/14/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/orLabel:self_modulate")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Rounds:self_modulate")
+tracks/15/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/FalseButton:self_modulate")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Rounds2:self_modulate")
+tracks/16/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/Cat1Button:self_modulate")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Score:self_modulate")
+tracks/17/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/orLabel:self_modulate")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Score2:self_modulate")
+tracks/18/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/Cat2Button:self_modulate")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Answers:self_modulate")
+tracks/19/path = NodePath("preQuiz/preSessionOrganizer/PreSessionTitle:self_modulate")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
@@ -1403,7 +1547,7 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Answers2:self_modulate")
+tracks/20/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ObjectiveTitle:self_modulate")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
@@ -1415,7 +1559,7 @@ tracks/20/keys = {
 tracks/21/type = "value"
 tracks/21/imported = false
 tracks/21/enabled = true
-tracks/21/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Timer:self_modulate")
+tracks/21/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Rounds:self_modulate")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
@@ -1427,7 +1571,7 @@ tracks/21/keys = {
 tracks/22/type = "value"
 tracks/22/imported = false
 tracks/22/enabled = true
-tracks/22/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Timer2:self_modulate")
+tracks/22/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Rounds2:self_modulate")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
@@ -1439,7 +1583,7 @@ tracks/22/keys = {
 tracks/23/type = "value"
 tracks/23/imported = false
 tracks/23/enabled = true
-tracks/23/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Flavor:self_modulate")
+tracks/23/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Score:self_modulate")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/keys = {
@@ -1451,103 +1595,103 @@ tracks/23/keys = {
 tracks/24/type = "value"
 tracks/24/imported = false
 tracks/24/enabled = true
-tracks/24/path = NodePath("quizInterface/session_organizer/question_header/clock:self_modulate")
+tracks/24/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Score2:self_modulate")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/keys = {
-"times": PackedFloat32Array(0.8, 1, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/25/type = "value"
 tracks/25/imported = false
 tracks/25/enabled = true
-tracks/25/path = NodePath("quizInterface/session_organizer/CountdownLabel:self_modulate")
+tracks/25/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Answers:self_modulate")
 tracks/25/interp = 1
 tracks/25/loop_wrap = true
 tracks/25/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Answers2:self_modulate")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Timer:self_modulate")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Timer2:self_modulate")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/29/type = "value"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Flavor:self_modulate")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/30/type = "value"
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/path = NodePath("quizInterface/session_organizer/question_header/clock:self_modulate")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/keys = {
 "times": PackedFloat32Array(0.8, 1, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
-tracks/26/type = "value"
-tracks/26/imported = false
-tracks/26/enabled = true
-tracks/26/path = NodePath("quizInterface/players_region/activePlayer1/spacer_v2:self_modulate")
-tracks/26/interp = 1
-tracks/26/loop_wrap = true
-tracks/26/keys = {
-"times": PackedFloat32Array(1.5, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/27/type = "value"
-tracks/27/imported = false
-tracks/27/enabled = true
-tracks/27/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/status_a:self_modulate")
-tracks/27/interp = 1
-tracks/27/loop_wrap = true
-tracks/27/keys = {
-"times": PackedFloat32Array(1.5, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
-}
-tracks/28/type = "value"
-tracks/28/imported = false
-tracks/28/enabled = true
-tracks/28/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/status_b:self_modulate")
-tracks/28/interp = 1
-tracks/28/loop_wrap = true
-tracks/28/keys = {
-"times": PackedFloat32Array(1.5, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
-}
-tracks/29/type = "value"
-tracks/29/imported = false
-tracks/29/enabled = true
-tracks/29/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/status_c:self_modulate")
-tracks/29/interp = 1
-tracks/29/loop_wrap = true
-tracks/29/keys = {
-"times": PackedFloat32Array(1.5, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
-}
-tracks/30/type = "value"
-tracks/30/imported = false
-tracks/30/enabled = true
-tracks/30/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/score:self_modulate")
-tracks/30/interp = 1
-tracks/30/loop_wrap = true
-tracks/30/keys = {
-"times": PackedFloat32Array(1.5, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
 tracks/31/type = "value"
 tracks/31/imported = false
 tracks/31/enabled = true
-tracks/31/path = NodePath("quizInterface/players_region/activePlayer1/player_case/spacer_h:self_modulate")
+tracks/31/path = NodePath("quizInterface/session_organizer/CountdownLabel:self_modulate")
 tracks/31/interp = 1
 tracks/31/loop_wrap = true
 tracks/31/keys = {
-"times": PackedFloat32Array(1.5, 2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.8, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/32/type = "value"
 tracks/32/imported = false
 tracks/32/enabled = true
-tracks/32/path = NodePath("quizInterface/players_region/activePlayer1/player_case/player_name:self_modulate")
+tracks/32/path = NodePath("quizInterface/players_region/activePlayer1/spacer_v2:self_modulate")
 tracks/32/interp = 1
 tracks/32/loop_wrap = true
 tracks/32/keys = {
@@ -1559,23 +1703,23 @@ tracks/32/keys = {
 tracks/33/type = "value"
 tracks/33/imported = false
 tracks/33/enabled = true
-tracks/33/path = NodePath("quizInterface/players_region/activePlayer1/spacer_v:self_modulate")
+tracks/33/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/status_a:self_modulate")
 tracks/33/interp = 1
 tracks/33/loop_wrap = true
 tracks/33/keys = {
 "times": PackedFloat32Array(1.5, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
 }
 tracks/34/type = "value"
 tracks/34/imported = false
 tracks/34/enabled = true
-tracks/34/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_a:self_modulate")
+tracks/34/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/status_b:self_modulate")
 tracks/34/interp = 1
 tracks/34/loop_wrap = true
 tracks/34/keys = {
-"times": PackedFloat32Array(2, 2.5),
+"times": PackedFloat32Array(1.5, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
@@ -1583,11 +1727,11 @@ tracks/34/keys = {
 tracks/35/type = "value"
 tracks/35/imported = false
 tracks/35/enabled = true
-tracks/35/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_b:self_modulate")
+tracks/35/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/status_c:self_modulate")
 tracks/35/interp = 1
 tracks/35/loop_wrap = true
 tracks/35/keys = {
-"times": PackedFloat32Array(2, 2.5),
+"times": PackedFloat32Array(1.5, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
@@ -1595,23 +1739,23 @@ tracks/35/keys = {
 tracks/36/type = "value"
 tracks/36/imported = false
 tracks/36/enabled = true
-tracks/36/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_c:self_modulate")
+tracks/36/path = NodePath("quizInterface/players_region/activePlayer1/player_case/status_row/score:self_modulate")
 tracks/36/interp = 1
 tracks/36/loop_wrap = true
 tracks/36/keys = {
-"times": PackedFloat32Array(2, 2.5),
+"times": PackedFloat32Array(1.5, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/37/type = "value"
 tracks/37/imported = false
 tracks/37/enabled = true
-tracks/37/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/score:self_modulate")
+tracks/37/path = NodePath("quizInterface/players_region/activePlayer1/player_case/spacer_h:self_modulate")
 tracks/37/interp = 1
 tracks/37/loop_wrap = true
 tracks/37/keys = {
-"times": PackedFloat32Array(2, 2.5),
+"times": PackedFloat32Array(1.5, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1619,11 +1763,11 @@ tracks/37/keys = {
 tracks/38/type = "value"
 tracks/38/imported = false
 tracks/38/enabled = true
-tracks/38/path = NodePath("quizInterface/players_region/activePlayer2/player_case/spacer_h:self_modulate")
+tracks/38/path = NodePath("quizInterface/players_region/activePlayer1/player_case/player_name:self_modulate")
 tracks/38/interp = 1
 tracks/38/loop_wrap = true
 tracks/38/keys = {
-"times": PackedFloat32Array(2, 2.5),
+"times": PackedFloat32Array(1.5, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1631,11 +1775,11 @@ tracks/38/keys = {
 tracks/39/type = "value"
 tracks/39/imported = false
 tracks/39/enabled = true
-tracks/39/path = NodePath("quizInterface/players_region/activePlayer2/player_case/player_name:self_modulate")
+tracks/39/path = NodePath("quizInterface/players_region/activePlayer1/spacer_v:self_modulate")
 tracks/39/interp = 1
 tracks/39/loop_wrap = true
 tracks/39/keys = {
-"times": PackedFloat32Array(2, 2.5),
+"times": PackedFloat32Array(1.5, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1643,23 +1787,23 @@ tracks/39/keys = {
 tracks/40/type = "value"
 tracks/40/imported = false
 tracks/40/enabled = true
-tracks/40/path = NodePath("quizInterface/players_region/activePlayer2/spacer_v3:self_modulate")
+tracks/40/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_a:self_modulate")
 tracks/40/interp = 1
 tracks/40/loop_wrap = true
 tracks/40/keys = {
 "times": PackedFloat32Array(2, 2.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
 }
 tracks/41/type = "value"
 tracks/41/imported = false
 tracks/41/enabled = true
-tracks/41/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_a:self_modulate")
+tracks/41/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_b:self_modulate")
 tracks/41/interp = 1
 tracks/41/loop_wrap = true
 tracks/41/keys = {
-"times": PackedFloat32Array(2.5, 3),
+"times": PackedFloat32Array(2, 2.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
@@ -1667,11 +1811,11 @@ tracks/41/keys = {
 tracks/42/type = "value"
 tracks/42/imported = false
 tracks/42/enabled = true
-tracks/42/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_b:self_modulate")
+tracks/42/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_c:self_modulate")
 tracks/42/interp = 1
 tracks/42/loop_wrap = true
 tracks/42/keys = {
-"times": PackedFloat32Array(2.5, 3),
+"times": PackedFloat32Array(2, 2.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
@@ -1679,23 +1823,23 @@ tracks/42/keys = {
 tracks/43/type = "value"
 tracks/43/imported = false
 tracks/43/enabled = true
-tracks/43/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_c:self_modulate")
+tracks/43/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/score:self_modulate")
 tracks/43/interp = 1
 tracks/43/loop_wrap = true
 tracks/43/keys = {
-"times": PackedFloat32Array(2.5, 3),
+"times": PackedFloat32Array(2, 2.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/44/type = "value"
 tracks/44/imported = false
 tracks/44/enabled = true
-tracks/44/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/score:self_modulate")
+tracks/44/path = NodePath("quizInterface/players_region/activePlayer2/player_case/spacer_h:self_modulate")
 tracks/44/interp = 1
 tracks/44/loop_wrap = true
 tracks/44/keys = {
-"times": PackedFloat32Array(2.5, 3),
+"times": PackedFloat32Array(2, 2.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1703,11 +1847,11 @@ tracks/44/keys = {
 tracks/45/type = "value"
 tracks/45/imported = false
 tracks/45/enabled = true
-tracks/45/path = NodePath("quizInterface/players_region/activePlayer3/player_case/spacer_h:self_modulate")
+tracks/45/path = NodePath("quizInterface/players_region/activePlayer2/player_case/player_name:self_modulate")
 tracks/45/interp = 1
 tracks/45/loop_wrap = true
 tracks/45/keys = {
-"times": PackedFloat32Array(2.5, 3),
+"times": PackedFloat32Array(2, 2.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1715,11 +1859,11 @@ tracks/45/keys = {
 tracks/46/type = "value"
 tracks/46/imported = false
 tracks/46/enabled = true
-tracks/46/path = NodePath("quizInterface/players_region/activePlayer3/player_case/player_name:self_modulate")
+tracks/46/path = NodePath("quizInterface/players_region/activePlayer2/spacer_v3:self_modulate")
 tracks/46/interp = 1
 tracks/46/loop_wrap = true
 tracks/46/keys = {
-"times": PackedFloat32Array(2.5, 3),
+"times": PackedFloat32Array(2, 2.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1727,23 +1871,23 @@ tracks/46/keys = {
 tracks/47/type = "value"
 tracks/47/imported = false
 tracks/47/enabled = true
-tracks/47/path = NodePath("quizInterface/players_region/activePlayer3/spacer_v4:self_modulate")
+tracks/47/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_a:self_modulate")
 tracks/47/interp = 1
 tracks/47/loop_wrap = true
 tracks/47/keys = {
 "times": PackedFloat32Array(2.5, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
 }
 tracks/48/type = "value"
 tracks/48/imported = false
 tracks/48/enabled = true
-tracks/48/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_a:self_modulate")
+tracks/48/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_b:self_modulate")
 tracks/48/interp = 1
 tracks/48/loop_wrap = true
 tracks/48/keys = {
-"times": PackedFloat32Array(3, 3.5),
+"times": PackedFloat32Array(2.5, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
@@ -1751,11 +1895,11 @@ tracks/48/keys = {
 tracks/49/type = "value"
 tracks/49/imported = false
 tracks/49/enabled = true
-tracks/49/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_b:self_modulate")
+tracks/49/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_c:self_modulate")
 tracks/49/interp = 1
 tracks/49/loop_wrap = true
 tracks/49/keys = {
-"times": PackedFloat32Array(3, 3.5),
+"times": PackedFloat32Array(2.5, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
@@ -1763,23 +1907,23 @@ tracks/49/keys = {
 tracks/50/type = "value"
 tracks/50/imported = false
 tracks/50/enabled = true
-tracks/50/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_c:self_modulate")
+tracks/50/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/score:self_modulate")
 tracks/50/interp = 1
 tracks/50/loop_wrap = true
 tracks/50/keys = {
-"times": PackedFloat32Array(3, 3.5),
+"times": PackedFloat32Array(2.5, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/51/type = "value"
 tracks/51/imported = false
 tracks/51/enabled = true
-tracks/51/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/score:self_modulate")
+tracks/51/path = NodePath("quizInterface/players_region/activePlayer3/player_case/spacer_h:self_modulate")
 tracks/51/interp = 1
 tracks/51/loop_wrap = true
 tracks/51/keys = {
-"times": PackedFloat32Array(3, 3.5),
+"times": PackedFloat32Array(2.5, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1787,11 +1931,11 @@ tracks/51/keys = {
 tracks/52/type = "value"
 tracks/52/imported = false
 tracks/52/enabled = true
-tracks/52/path = NodePath("quizInterface/players_region/activePlayer4/player_case/spacer_h:self_modulate")
+tracks/52/path = NodePath("quizInterface/players_region/activePlayer3/player_case/player_name:self_modulate")
 tracks/52/interp = 1
 tracks/52/loop_wrap = true
 tracks/52/keys = {
-"times": PackedFloat32Array(3, 3.5),
+"times": PackedFloat32Array(2.5, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1799,11 +1943,11 @@ tracks/52/keys = {
 tracks/53/type = "value"
 tracks/53/imported = false
 tracks/53/enabled = true
-tracks/53/path = NodePath("quizInterface/players_region/activePlayer4/player_case/player_name:self_modulate")
+tracks/53/path = NodePath("quizInterface/players_region/activePlayer3/spacer_v4:self_modulate")
 tracks/53/interp = 1
 tracks/53/loop_wrap = true
 tracks/53/keys = {
-"times": PackedFloat32Array(3, 3.5),
+"times": PackedFloat32Array(2.5, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1811,10 +1955,82 @@ tracks/53/keys = {
 tracks/54/type = "value"
 tracks/54/imported = false
 tracks/54/enabled = true
-tracks/54/path = NodePath("quizInterface/players_region/activePlayer4/spacer_v5:self_modulate")
+tracks/54/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_a:self_modulate")
 tracks/54/interp = 1
 tracks/54/loop_wrap = true
 tracks/54/keys = {
+"times": PackedFloat32Array(3, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
+}
+tracks/55/type = "value"
+tracks/55/imported = false
+tracks/55/enabled = true
+tracks/55/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_b:self_modulate")
+tracks/55/interp = 1
+tracks/55/loop_wrap = true
+tracks/55/keys = {
+"times": PackedFloat32Array(3, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
+}
+tracks/56/type = "value"
+tracks/56/imported = false
+tracks/56/enabled = true
+tracks/56/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_c:self_modulate")
+tracks/56/interp = 1
+tracks/56/loop_wrap = true
+tracks/56/keys = {
+"times": PackedFloat32Array(3, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
+}
+tracks/57/type = "value"
+tracks/57/imported = false
+tracks/57/enabled = true
+tracks/57/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/score:self_modulate")
+tracks/57/interp = 1
+tracks/57/loop_wrap = true
+tracks/57/keys = {
+"times": PackedFloat32Array(3, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/58/type = "value"
+tracks/58/imported = false
+tracks/58/enabled = true
+tracks/58/path = NodePath("quizInterface/players_region/activePlayer4/player_case/spacer_h:self_modulate")
+tracks/58/interp = 1
+tracks/58/loop_wrap = true
+tracks/58/keys = {
+"times": PackedFloat32Array(3, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/59/type = "value"
+tracks/59/imported = false
+tracks/59/enabled = true
+tracks/59/path = NodePath("quizInterface/players_region/activePlayer4/player_case/player_name:self_modulate")
+tracks/59/interp = 1
+tracks/59/loop_wrap = true
+tracks/59/keys = {
+"times": PackedFloat32Array(3, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/60/type = "value"
+tracks/60/imported = false
+tracks/60/enabled = true
+tracks/60/path = NodePath("quizInterface/players_region/activePlayer4/spacer_v5:self_modulate")
+tracks/60/interp = 1
+tracks/60/loop_wrap = true
+tracks/60/keys = {
 "times": PackedFloat32Array(3, 3.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -2258,7 +2474,7 @@ tracks/35/keys = {
 tracks/36/type = "value"
 tracks/36/imported = false
 tracks/36/enabled = true
-tracks/36/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1_icon:self_modulate")
+tracks/36/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1_icon:self_modulate")
 tracks/36/interp = 1
 tracks/36/loop_wrap = true
 tracks/36/keys = {
@@ -2270,7 +2486,7 @@ tracks/36/keys = {
 tracks/37/type = "value"
 tracks/37/imported = false
 tracks/37/enabled = true
-tracks/37/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1:self_modulate")
+tracks/37/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1:self_modulate")
 tracks/37/interp = 1
 tracks/37/loop_wrap = true
 tracks/37/keys = {
@@ -2282,7 +2498,7 @@ tracks/37/keys = {
 tracks/38/type = "value"
 tracks/38/imported = false
 tracks/38/enabled = true
-tracks/38/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2_icon:self_modulate")
+tracks/38/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2_icon:self_modulate")
 tracks/38/interp = 1
 tracks/38/loop_wrap = true
 tracks/38/keys = {
@@ -2294,7 +2510,7 @@ tracks/38/keys = {
 tracks/39/type = "value"
 tracks/39/imported = false
 tracks/39/enabled = true
-tracks/39/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2:self_modulate")
+tracks/39/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2:self_modulate")
 tracks/39/interp = 1
 tracks/39/loop_wrap = true
 tracks/39/keys = {
@@ -2306,7 +2522,7 @@ tracks/39/keys = {
 tracks/40/type = "value"
 tracks/40/imported = false
 tracks/40/enabled = true
-tracks/40/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3_icon:self_modulate")
+tracks/40/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3_icon:self_modulate")
 tracks/40/interp = 1
 tracks/40/loop_wrap = true
 tracks/40/keys = {
@@ -2318,7 +2534,7 @@ tracks/40/keys = {
 tracks/41/type = "value"
 tracks/41/imported = false
 tracks/41/enabled = true
-tracks/41/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3:self_modulate")
+tracks/41/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3:self_modulate")
 tracks/41/interp = 1
 tracks/41/loop_wrap = true
 tracks/41/keys = {
@@ -2330,7 +2546,7 @@ tracks/41/keys = {
 tracks/42/type = "value"
 tracks/42/imported = false
 tracks/42/enabled = true
-tracks/42/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4_icon:self_modulate")
+tracks/42/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4_icon:self_modulate")
 tracks/42/interp = 1
 tracks/42/loop_wrap = true
 tracks/42/keys = {
@@ -2342,7 +2558,7 @@ tracks/42/keys = {
 tracks/43/type = "value"
 tracks/43/imported = false
 tracks/43/enabled = true
-tracks/43/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4:self_modulate")
+tracks/43/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4:self_modulate")
 tracks/43/interp = 1
 tracks/43/loop_wrap = true
 tracks/43/keys = {
@@ -2782,6 +2998,78 @@ tracks/79/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/80/type = "value"
+tracks/80/imported = false
+tracks/80/enabled = true
+tracks/80/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/TrueButton:self_modulate")
+tracks/80/interp = 1
+tracks/80/loop_wrap = true
+tracks/80/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/81/type = "value"
+tracks/81/imported = false
+tracks/81/enabled = true
+tracks/81/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/orLabel:self_modulate")
+tracks/81/interp = 1
+tracks/81/loop_wrap = true
+tracks/81/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/82/type = "value"
+tracks/82/imported = false
+tracks/82/enabled = true
+tracks/82/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/FalseButton:self_modulate")
+tracks/82/interp = 1
+tracks/82/loop_wrap = true
+tracks/82/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/83/type = "value"
+tracks/83/imported = false
+tracks/83/enabled = true
+tracks/83/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/Cat1Button:self_modulate")
+tracks/83/interp = 1
+tracks/83/loop_wrap = true
+tracks/83/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/84/type = "value"
+tracks/84/imported = false
+tracks/84/enabled = true
+tracks/84/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/orLabel:self_modulate")
+tracks/84/interp = 1
+tracks/84/loop_wrap = true
+tracks/84/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/85/type = "value"
+tracks/85/imported = false
+tracks/85/enabled = true
+tracks/85/path = NodePath("quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/Cat2Button:self_modulate")
+tracks/85/interp = 1
+tracks/85/loop_wrap = true
+tracks/85/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_v3c8i"]
@@ -3477,24 +3765,25 @@ autowrap_mode = 2
 [node name="spacer - leave blank" type="Label" parent="quizInterface/session_organizer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="quizInterface/session_organizer"]
+[node name="VerticalAnswerCategories" type="HBoxContainer" parent="quizInterface/session_organizer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 420
 
-[node name="answer_organizer" type="VBoxContainer" parent="quizInterface/session_organizer/HBoxContainer"]
+[node name="MultipleChoice" type="VBoxContainer" parent="quizInterface/session_organizer/VerticalAnswerCategories"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="answer_pair1" type="HBoxContainer" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer"]
+[node name="answer_pair1" type="HBoxContainer" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice"]
 layout_mode = 2
 
-[node name="a1_icon" type="TextureRect" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1"]
+[node name="a1_icon" type="TextureRect" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("5_axfhu")
 expand_mode = 1
 
-[node name="a1" type="Button" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1"]
+[node name="a1" type="Button" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../answer_pair4/a4")
 focus_neighbor_top = NodePath("../../answer_pair4/a4")
@@ -3503,16 +3792,16 @@ focus_neighbor_bottom = NodePath("../../answer_pair2/a2")
 theme = ExtResource("8_4d841")
 text = "answer_one"
 
-[node name="answer_pair2" type="HBoxContainer" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer"]
+[node name="answer_pair2" type="HBoxContainer" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice"]
 layout_mode = 2
 
-[node name="a2_icon" type="TextureRect" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2"]
+[node name="a2_icon" type="TextureRect" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("6_t6csj")
 expand_mode = 1
 
-[node name="a2" type="Button" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2"]
+[node name="a2" type="Button" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../answer_pair1/a1")
 focus_neighbor_top = NodePath("../../answer_pair1/a1")
@@ -3521,16 +3810,16 @@ focus_neighbor_bottom = NodePath("../../answer_pair3/a3")
 theme = ExtResource("8_4d841")
 text = "answer_two"
 
-[node name="answer_pair3" type="HBoxContainer" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer"]
+[node name="answer_pair3" type="HBoxContainer" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice"]
 layout_mode = 2
 
-[node name="a3_icon" type="TextureRect" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3"]
+[node name="a3_icon" type="TextureRect" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("7_0240t")
 expand_mode = 1
 
-[node name="a3" type="Button" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3"]
+[node name="a3" type="Button" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../answer_pair2/a2")
 focus_neighbor_top = NodePath("../../answer_pair2/a2")
@@ -3540,16 +3829,16 @@ theme = ExtResource("8_4d841")
 text = "answer_three
 "
 
-[node name="answer_pair4" type="HBoxContainer" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer"]
+[node name="answer_pair4" type="HBoxContainer" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice"]
 layout_mode = 2
 
-[node name="a4_icon" type="TextureRect" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4"]
+[node name="a4_icon" type="TextureRect" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("8_1xqpo")
 expand_mode = 1
 
-[node name="a4" type="Button" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4"]
+[node name="a4" type="Button" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../answer_pair3/a3")
 focus_neighbor_top = NodePath("../../answer_pair3/a3")
@@ -3558,6 +3847,65 @@ focus_neighbor_bottom = NodePath("../../answer_pair1/a1")
 theme = ExtResource("8_4d841")
 text = "answer_four
 "
+
+[node name="CenteredAnswerCategories" type="HBoxContainer" parent="quizInterface/session_organizer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TrueOrFalse" type="HBoxContainer" parent="quizInterface/session_organizer/CenteredAnswerCategories"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="TrueButton" type="Button" parent="quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("8_4d841")
+theme_override_font_sizes/font_size = 120
+text = "True"
+
+[node name="orLabel" type="Label" parent="quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "or"
+label_settings = ExtResource("9_a8618")
+horizontal_alignment = 1
+
+[node name="FalseButton" type="Button" parent="quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("8_4d841")
+theme_override_font_sizes/font_size = 120
+text = "False"
+
+[node name="ThisOrThat" type="HBoxContainer" parent="quizInterface/session_organizer/CenteredAnswerCategories"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Cat1Button" type="Button" parent="quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("8_4d841")
+theme_override_font_sizes/font_size = 120
+text = "Cat1"
+
+[node name="orLabel" type="Label" parent="quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "or"
+label_settings = ExtResource("9_a8618")
+horizontal_alignment = 1
+
+[node name="Cat2Button" type="Button" parent="quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("8_4d841")
+theme_override_font_sizes/font_size = 120
+text = "Cat2"
 
 [node name="players_region" type="HBoxContainer" parent="quizInterface"]
 layout_mode = 1
@@ -4525,14 +4873,14 @@ theme = ExtResource("28_5vqqq")
 text = "Back"
 flat = true
 
-[connection signal="button_down" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1" to="." method="_on_a_1_button_down"]
-[connection signal="button_up" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1" to="." method="_on_a_1_button_up"]
-[connection signal="button_down" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2" to="." method="_on_a_2_button_down"]
-[connection signal="button_up" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2" to="." method="_on_a_2_button_up"]
-[connection signal="button_down" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3" to="." method="_on_a_3_button_down"]
-[connection signal="button_up" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3" to="." method="_on_a_3_button_up"]
-[connection signal="button_down" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4" to="." method="_on_a_4_button_down"]
-[connection signal="button_up" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4" to="." method="_on_a_4_button_up"]
+[connection signal="button_down" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1" to="." method="_on_a_1_button_down"]
+[connection signal="button_up" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1" to="." method="_on_a_1_button_up"]
+[connection signal="button_down" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2" to="." method="_on_a_2_button_down"]
+[connection signal="button_up" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2" to="." method="_on_a_2_button_up"]
+[connection signal="button_down" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3" to="." method="_on_a_3_button_down"]
+[connection signal="button_up" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3" to="." method="_on_a_3_button_up"]
+[connection signal="button_down" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4" to="." method="_on_a_4_button_down"]
+[connection signal="button_up" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4" to="." method="_on_a_4_button_up"]
 [connection signal="button_down" from="pauseScreen/pauseCase/pauseBase/resumeButton" to="." method="_on_resume_button_button_down"]
 [connection signal="button_up" from="pauseScreen/pauseCase/pauseBase/resumeButton" to="." method="_on_resume_button_button_up"]
 [connection signal="focus_entered" from="pauseScreen/pauseCase/pauseBase/resumeButton" to="." method="_on_resume_button_focus_entered"]

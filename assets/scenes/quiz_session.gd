@@ -13,10 +13,11 @@ extends Control
 	$quizInterface/players_region/activePlayer2/player_case,
 	$quizInterface/players_region/activePlayer3/player_case,
 	$quizInterface/players_region/activePlayer4/player_case]
-@onready var ui_answers = [$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1,
-	$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2,
-	$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3,
-	$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4]
+@onready var ui_multiple_choice_answers = [$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1,
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2,
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3,
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4]
+
 @onready var ui_player_names = [$quizInterface/players_region/activePlayer1/player_case/player_name,
 	$quizInterface/players_region/activePlayer2/player_case/player_name,
 	$quizInterface/players_region/activePlayer3/player_case/player_name,
@@ -443,10 +444,10 @@ func _start_quiz_server():
 
 func _render_answers_track_correct(current_question, question_order):
 	correct_answer = question_order[0]
-	ui_answers[correct_answer].text = current_question["correct"]
-	ui_answers[question_order[1]].text = current_question["wrong"][0]
-	ui_answers[question_order[2]].text = current_question["wrong"][1]
-	ui_answers[question_order[3]].text = current_question["wrong"][2]
+	ui_multiple_choice_answers[correct_answer].text = current_question["correct"]
+	ui_multiple_choice_answers[question_order[1]].text = current_question["wrong"][0]
+	ui_multiple_choice_answers[question_order[2]].text = current_question["wrong"][1]
+	ui_multiple_choice_answers[question_order[3]].text = current_question["wrong"][2]
 
 ## starts the pre_question timer, and halts accepting answer input from players
 func _prequestion_delay_phase():

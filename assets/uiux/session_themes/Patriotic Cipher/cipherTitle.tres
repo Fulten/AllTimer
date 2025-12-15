@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bm4ie8wbkp2e0"]
+
+[ext_resource type="FontFile" uid="uid://cym6i4q1acjy7" path="res://assets/uiux/session_themes/Patriotic Cipher/Square.ttf" id="1_od4k4"]
+
+[resource]
+font = ExtResource("1_od4k4")
+font_size = 64
+font_color = Color(0, 1, 0.623529, 1)

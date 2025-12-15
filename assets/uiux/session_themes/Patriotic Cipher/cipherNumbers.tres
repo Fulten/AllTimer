@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://h5ouy4y7120k"]
+
+[ext_resource type="FontFile" uid="uid://c6vg4qkha7rn1" path="res://assets/uiux/session_themes/Patriotic Cipher/alarm clock.ttf" id="1_44wfi"]
+
+[resource]
+font = ExtResource("1_44wfi")
+font_size = 32
+font_color = Color(0, 1, 0.623529, 1)

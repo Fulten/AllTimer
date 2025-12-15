@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://fokwou4ul35"]
+
+[ext_resource type="FontFile" uid="uid://cs4udf4j1csua" path="res://assets/uiux/session_themes/Patriotic Cipher/Conthrax-SemiBold.otf" id="1_wllg0"]
+
+[resource]
+font = ExtResource("1_wllg0")
+font_size = 28
+font_color = Color(0.3445, 0.65, 0.532892, 1)

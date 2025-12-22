@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://di56bs4ycntxw"]
+[gd_scene load_steps=74 format=3 uid="uid://di56bs4ycntxw"]
 
 [ext_resource type="Script" path="res://assets/scenes/quiz_session.gd" id="1_khyfr"]
 [ext_resource type="Texture2D" uid="uid://dq2hnijwt0hlh" path="res://assets/uiux/session_themes/Patriotic Cipher/session_bg.tga" id="2_mj6gr"]
@@ -10,7 +10,7 @@
 [ext_resource type="LabelSettings" uid="uid://bm4ie8wbkp2e0" path="res://assets/uiux/session_themes/Patriotic Cipher/cipherTitle.tres" id="8_d5au1"]
 [ext_resource type="LabelSettings" uid="uid://bhmvyhp31on3d" path="res://assets/uiux/session_themes/Patriotic Cipher/label_cipher_section.tres" id="9_kn6fp"]
 [ext_resource type="LabelSettings" uid="uid://fokwou4ul35" path="res://assets/uiux/session_themes/Patriotic Cipher/label_cipher_body.tres" id="10_2070n"]
-[ext_resource type="Texture2D" uid="uid://df0lm8u8qyetk" path="res://assets/uiux/session_themes/default/timer.tga" id="11_mhhtu"]
+[ext_resource type="Texture2D" uid="uid://c8vqlwu2p8dl7" path="res://assets/uiux/session_themes/Patriotic Cipher/T_timer_patcip.tga" id="11_qkoei"]
 [ext_resource type="FontFile" uid="uid://bdi68tslsma5m" path="res://assets/uiux/session_themes/default/chalk.ttf" id="12_fik1c"]
 [ext_resource type="FontFile" uid="uid://c6vg4qkha7rn1" path="res://assets/uiux/session_themes/Patriotic Cipher/alarm clock.ttf" id="12_g285j"]
 [ext_resource type="FontFile" uid="uid://ppcieu81eyur" path="res://assets/uiux/session_themes/default/TeachersStudent-Regular.ttf" id="13_46j0n"]
@@ -22,11 +22,12 @@
 [ext_resource type="Theme" uid="uid://y23gbxkkoip4" path="res://assets/uiux/session_themes/Patriotic Cipher/cipher_button.tres" id="17_0bpq4"]
 [ext_resource type="Texture2D" uid="uid://r44nkuxl80ia" path="res://assets/uiux/session_themes/default/kb3.tga" id="17_fag03"]
 [ext_resource type="Texture2D" uid="uid://dao52bedrv1we" path="res://assets/uiux/session_themes/default/kb4.tga" id="18_4s6r2"]
-[ext_resource type="Texture2D" uid="uid://b30t6fkulee1m" path="res://assets/uiux/session_themes/default/separator_v.tga" id="19_hrf7k"]
-[ext_resource type="Texture2D" uid="uid://bkavjh7fqr2jg" path="res://assets/uiux/session_themes/default/status_skip_icon.tga" id="20_hkavh"]
-[ext_resource type="Texture2D" uid="uid://lieock11ltvl" path="res://assets/uiux/session_themes/default/status_incorrect_icon.tga" id="21_bldjd"]
-[ext_resource type="Texture2D" uid="uid://bp12k6v5jugjd" path="res://assets/uiux/session_themes/default/status_correct_icon.tga" id="22_bvbfj"]
+[ext_resource type="Texture2D" uid="uid://4rygepjufl3b" path="res://assets/uiux/session_themes/Patriotic Cipher/T_seperator_v_patcip.tga" id="21_cdrkd"]
+[ext_resource type="Texture2D" uid="uid://b8inje8jjrna3" path="res://assets/uiux/session_themes/Patriotic Cipher/T_status_skip_patcip.tga" id="22_x7m56"]
 [ext_resource type="Texture2D" uid="uid://sib7pjpdkuax" path="res://assets/uiux/session_themes/default/separator_h.tga" id="23_1ftj0"]
+[ext_resource type="Texture2D" uid="uid://d3d8drdimuvjd" path="res://assets/uiux/session_themes/Patriotic Cipher/T_status_incorrect_patcip.tga" id="23_x0u7c"]
+[ext_resource type="Texture2D" uid="uid://b2eg3oa2waadg" path="res://assets/uiux/session_themes/Patriotic Cipher/T_status_correct_patcip.tga" id="24_irilu"]
+[ext_resource type="Texture2D" uid="uid://c2glpvkloux56" path="res://assets/uiux/session_themes/Patriotic Cipher/T_seperator_h_patcip.tga" id="25_owt3k"]
 [ext_resource type="Texture2D" uid="uid://dw7l64rht8v8t" path="res://assets/uiux/session_themes/default/T_PausePaper_D.tga" id="27_exhyd"]
 [ext_resource type="Theme" uid="uid://b5rkf616hrq6k" path="res://assets/uiux/session_themes/default/label_Chalk_Pause.tres" id="28_rumc8"]
 [ext_resource type="Theme" uid="uid://cf8u3obo5dfya" path="res://assets/uiux/session_themes/default/button_Chalk_Submenu.tres" id="29_64rju"]
@@ -1459,7 +1460,7 @@ tracks/24/keys = {
 "times": PackedFloat32Array(0.8, 1, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(0, 1, 0.623529, 1)]
 }
 tracks/25/type = "value"
 tracks/25/imported = false
@@ -1483,7 +1484,7 @@ tracks/26/keys = {
 "times": PackedFloat32Array(1.5, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(0.3055, 0.592583, 0.65, 1)]
 }
 tracks/27/type = "value"
 tracks/27/imported = false
@@ -1543,7 +1544,7 @@ tracks/31/keys = {
 "times": PackedFloat32Array(1.5, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(0.3055, 0.592583, 0.65, 1)]
 }
 tracks/32/type = "value"
 tracks/32/imported = false
@@ -1567,7 +1568,7 @@ tracks/33/keys = {
 "times": PackedFloat32Array(1.5, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(0.3055, 0.592583, 0.65, 1)]
 }
 tracks/34/type = "value"
 tracks/34/imported = false
@@ -1627,7 +1628,7 @@ tracks/38/keys = {
 "times": PackedFloat32Array(2, 2.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(0.3055, 0.592583, 0.65, 1)]
 }
 tracks/39/type = "value"
 tracks/39/imported = false
@@ -1651,7 +1652,7 @@ tracks/40/keys = {
 "times": PackedFloat32Array(2, 2.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(0.3055, 0.592583, 0.65, 1)]
 }
 tracks/41/type = "value"
 tracks/41/imported = false
@@ -1711,7 +1712,7 @@ tracks/45/keys = {
 "times": PackedFloat32Array(2.5, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(0.3055, 0.592583, 0.65, 1)]
 }
 tracks/46/type = "value"
 tracks/46/imported = false
@@ -1735,7 +1736,7 @@ tracks/47/keys = {
 "times": PackedFloat32Array(2.5, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(0.3055, 0.592583, 0.65, 1)]
 }
 tracks/48/type = "value"
 tracks/48/imported = false
@@ -1795,7 +1796,7 @@ tracks/52/keys = {
 "times": PackedFloat32Array(3, 3.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(0.3055, 0.592583, 0.65, 1)]
 }
 tracks/53/type = "value"
 tracks/53/imported = false
@@ -1819,7 +1820,7 @@ tracks/54/keys = {
 "times": PackedFloat32Array(3, 3.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(0.3055, 0.592583, 0.65, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_87374"]
@@ -3222,7 +3223,10 @@ font_color = Color(0, 1, 0.623529, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_ikm35"]
 font = ExtResource("13_li2k4")
 font_size = 24
-font_color = Color(0.3055, 0.592583, 0.65, 1)
+font_color = Color(0.605717, 0.853191, 0.905619, 1)
+shadow_size = 3
+shadow_color = Color(1.27065e-05, 0.728506, 0.984463, 1)
+shadow_offset = Vector2(0, 0)
 
 [sub_resource type="LabelSettings" id="LabelSettings_d0wgl"]
 font = ExtResource("13_46j0n")
@@ -3433,7 +3437,7 @@ one_shot = true
 [node name="clock" type="TextureRect" parent="quizInterface/session_organizer/question_header"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-texture = ExtResource("11_mhhtu")
+texture = ExtResource("11_qkoei")
 expand_mode = 1
 
 [node name="Countdown" type="Timer" parent="quizInterface/session_organizer/question_header"]
@@ -3559,6 +3563,7 @@ offset_top = -137.0
 offset_right = 671.0
 grow_horizontal = 2
 grow_vertical = 0
+alignment = 1
 
 [node name="activePlayer1" type="HBoxContainer" parent="quizInterface/players_region"]
 self_modulate = Color(1, 1, 1, 0)
@@ -3566,7 +3571,7 @@ layout_mode = 2
 
 [node name="spacer_v2" type="TextureRect" parent="quizInterface/players_region/activePlayer1"]
 layout_mode = 2
-texture = ExtResource("19_hrf7k")
+texture = ExtResource("21_cdrkd")
 
 [node name="player_case" type="VBoxContainer" parent="quizInterface/players_region/activePlayer1"]
 self_modulate = Color(1, 1, 1, 0)
@@ -3575,21 +3580,25 @@ theme_override_constants/separation = 15
 
 [node name="status_row" type="HBoxContainer" parent="quizInterface/players_region/activePlayer1/player_case"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="status_a" type="TextureRect" parent="quizInterface/players_region/activePlayer1/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("20_hkavh")
+texture = ExtResource("22_x7m56")
+stretch_mode = 3
 
 [node name="status_b" type="TextureRect" parent="quizInterface/players_region/activePlayer1/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("21_bldjd")
+texture = ExtResource("23_x0u7c")
+stretch_mode = 3
 
 [node name="status_c" type="TextureRect" parent="quizInterface/players_region/activePlayer1/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("22_bvbfj")
+texture = ExtResource("24_irilu")
+stretch_mode = 3
 
 [node name="score" type="Label" parent="quizInterface/players_region/activePlayer1/player_case/status_row"]
 layout_mode = 2
@@ -3599,7 +3608,7 @@ label_settings = ExtResource("14_eimd3")
 
 [node name="spacer_h" type="TextureRect" parent="quizInterface/players_region/activePlayer1/player_case"]
 layout_mode = 2
-texture = ExtResource("23_1ftj0")
+texture = ExtResource("25_owt3k")
 
 [node name="player_name" type="Label" parent="quizInterface/players_region/activePlayer1/player_case"]
 layout_mode = 2
@@ -3611,7 +3620,7 @@ label_settings = SubResource("LabelSettings_ikm35")
 
 [node name="spacer_v" type="TextureRect" parent="quizInterface/players_region/activePlayer1"]
 layout_mode = 2
-texture = ExtResource("19_hrf7k")
+texture = ExtResource("21_cdrkd")
 
 [node name="activePlayer2" type="HBoxContainer" parent="quizInterface/players_region"]
 self_modulate = Color(1, 1, 1, 0)
@@ -3623,21 +3632,25 @@ theme_override_constants/separation = 15
 
 [node name="status_row" type="HBoxContainer" parent="quizInterface/players_region/activePlayer2/player_case"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="status_a" type="TextureRect" parent="quizInterface/players_region/activePlayer2/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("20_hkavh")
+texture = ExtResource("22_x7m56")
+stretch_mode = 3
 
 [node name="status_b" type="TextureRect" parent="quizInterface/players_region/activePlayer2/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("21_bldjd")
+texture = ExtResource("23_x0u7c")
+stretch_mode = 3
 
 [node name="status_c" type="TextureRect" parent="quizInterface/players_region/activePlayer2/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("22_bvbfj")
+texture = ExtResource("24_irilu")
+stretch_mode = 3
 
 [node name="score" type="Label" parent="quizInterface/players_region/activePlayer2/player_case/status_row"]
 layout_mode = 2
@@ -3647,7 +3660,7 @@ label_settings = ExtResource("14_eimd3")
 
 [node name="spacer_h" type="TextureRect" parent="quizInterface/players_region/activePlayer2/player_case"]
 layout_mode = 2
-texture = ExtResource("23_1ftj0")
+texture = ExtResource("25_owt3k")
 
 [node name="player_name" type="Label" parent="quizInterface/players_region/activePlayer2/player_case"]
 layout_mode = 2
@@ -3658,7 +3671,7 @@ label_settings = SubResource("LabelSettings_ikm35")
 
 [node name="spacer_v3" type="TextureRect" parent="quizInterface/players_region/activePlayer2"]
 layout_mode = 2
-texture = ExtResource("19_hrf7k")
+texture = ExtResource("21_cdrkd")
 
 [node name="activePlayer3" type="HBoxContainer" parent="quizInterface/players_region"]
 self_modulate = Color(1, 1, 1, 0)
@@ -3670,21 +3683,25 @@ theme_override_constants/separation = 15
 
 [node name="status_row" type="HBoxContainer" parent="quizInterface/players_region/activePlayer3/player_case"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="status_a" type="TextureRect" parent="quizInterface/players_region/activePlayer3/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("20_hkavh")
+texture = ExtResource("22_x7m56")
+stretch_mode = 3
 
 [node name="status_b" type="TextureRect" parent="quizInterface/players_region/activePlayer3/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("21_bldjd")
+texture = ExtResource("23_x0u7c")
+stretch_mode = 3
 
 [node name="status_c" type="TextureRect" parent="quizInterface/players_region/activePlayer3/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("22_bvbfj")
+texture = ExtResource("24_irilu")
+stretch_mode = 3
 
 [node name="score" type="Label" parent="quizInterface/players_region/activePlayer3/player_case/status_row"]
 layout_mode = 2
@@ -3694,7 +3711,7 @@ label_settings = ExtResource("14_eimd3")
 
 [node name="spacer_h" type="TextureRect" parent="quizInterface/players_region/activePlayer3/player_case"]
 layout_mode = 2
-texture = ExtResource("23_1ftj0")
+texture = ExtResource("25_owt3k")
 
 [node name="player_name" type="Label" parent="quizInterface/players_region/activePlayer3/player_case"]
 layout_mode = 2
@@ -3705,7 +3722,7 @@ label_settings = SubResource("LabelSettings_ikm35")
 
 [node name="spacer_v4" type="TextureRect" parent="quizInterface/players_region/activePlayer3"]
 layout_mode = 2
-texture = ExtResource("19_hrf7k")
+texture = ExtResource("21_cdrkd")
 
 [node name="activePlayer4" type="HBoxContainer" parent="quizInterface/players_region"]
 self_modulate = Color(1, 1, 1, 0)
@@ -3717,21 +3734,25 @@ theme_override_constants/separation = 15
 
 [node name="status_row" type="HBoxContainer" parent="quizInterface/players_region/activePlayer4/player_case"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="status_a" type="TextureRect" parent="quizInterface/players_region/activePlayer4/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("20_hkavh")
+texture = ExtResource("22_x7m56")
+stretch_mode = 3
 
 [node name="status_b" type="TextureRect" parent="quizInterface/players_region/activePlayer4/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("21_bldjd")
+texture = ExtResource("23_x0u7c")
+stretch_mode = 3
 
 [node name="status_c" type="TextureRect" parent="quizInterface/players_region/activePlayer4/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("22_bvbfj")
+texture = ExtResource("24_irilu")
+stretch_mode = 3
 
 [node name="score" type="Label" parent="quizInterface/players_region/activePlayer4/player_case/status_row"]
 layout_mode = 2
@@ -3741,7 +3762,7 @@ label_settings = ExtResource("14_eimd3")
 
 [node name="spacer_h" type="TextureRect" parent="quizInterface/players_region/activePlayer4/player_case"]
 layout_mode = 2
-texture = ExtResource("23_1ftj0")
+texture = ExtResource("25_owt3k")
 
 [node name="player_name" type="Label" parent="quizInterface/players_region/activePlayer4/player_case"]
 layout_mode = 2
@@ -3752,7 +3773,7 @@ label_settings = SubResource("LabelSettings_ikm35")
 
 [node name="spacer_v5" type="TextureRect" parent="quizInterface/players_region/activePlayer4"]
 layout_mode = 2
-texture = ExtResource("19_hrf7k")
+texture = ExtResource("21_cdrkd")
 
 [node name="post_question" type="Label" parent="quizInterface"]
 visible = false

@@ -3914,6 +3914,7 @@ offset_top = -137.0
 offset_right = 671.0
 grow_horizontal = 2
 grow_vertical = 0
+alignment = 1
 
 [node name="activePlayer1" type="HBoxContainer" parent="quizInterface/players_region"]
 self_modulate = Color(1, 1, 1, 0)

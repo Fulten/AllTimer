@@ -9,27 +9,32 @@ extends Control
 @onready var ui_countdown_text = $quizInterface/session_organizer/CountdownLabel
 @onready var ui_questions_body = $quizInterface/session_organizer/question_body
 @onready var ui_post_question = $quizInterface/post_question
-@onready var ui_players = [$quizInterface/players_region/activePlayer1/player_case,
+@onready var ui_players = [
+	$quizInterface/players_region/activePlayer1/player_case,
 	$quizInterface/players_region/activePlayer2/player_case,
 	$quizInterface/players_region/activePlayer3/player_case,
 	$quizInterface/players_region/activePlayer4/player_case]
-@onready var ui_multiple_choice_answers = [$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1,
+@onready var ui_multiple_choice_answers = [
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1,
 	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2,
 	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3,
 	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4]
 
-@onready var ui_player_names = [$quizInterface/players_region/activePlayer1/player_case/player_name,
+@onready var ui_player_names = [
+	$quizInterface/players_region/activePlayer1/player_case/player_name,
 	$quizInterface/players_region/activePlayer2/player_case/player_name,
 	$quizInterface/players_region/activePlayer3/player_case/player_name,
 	$quizInterface/players_region/activePlayer4/player_case/player_name]
-@onready var ui_player_scores = [$quizInterface/players_region/activePlayer1/player_case/status_row/score,
+@onready var ui_player_scores = [
+	$quizInterface/players_region/activePlayer1/player_case/status_row/score,
 	$quizInterface/players_region/activePlayer2/player_case/status_row/score,
 	$quizInterface/players_region/activePlayer3/player_case/status_row/score,
 	$quizInterface/players_region/activePlayer4/player_case/status_row/score]
-@onready var ui_question_answer_buttons = [$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1,
-$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2,
-$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3,
-$quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4]
+@onready var ui_question_answer_buttons = [
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1,
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2,
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3,
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4]
 
 var asset_player_pannel_locked
 var asset_player_pannel_default
@@ -448,6 +453,12 @@ func _render_answers_track_correct(current_question, question_order):
 	ui_multiple_choice_answers[question_order[1]].text = current_question["wrong"][0]
 	ui_multiple_choice_answers[question_order[2]].text = current_question["wrong"][1]
 	ui_multiple_choice_answers[question_order[3]].text = current_question["wrong"][2]
+
+## starts the pre_quiz_rules timer, this phase displays the rules for 1 minute, or until input is recived from all players
+func _prequiz_rules_phase():
+	
+	
+	pass
 
 ## starts the pre_question timer, and halts accepting answer input from players
 func _prequestion_delay_phase():

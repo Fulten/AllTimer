@@ -3621,7 +3621,6 @@ label_settings = ExtResource("9_a8618")
 horizontal_alignment = 1
 
 [node name="Rounds" type="Label" parent="preQuiz/preSessionOrganizer/RulesText"]
-visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 text = "The player with the highest score after X rounds wins."
@@ -3629,7 +3628,6 @@ label_settings = ExtResource("19_f0nis")
 horizontal_alignment = 1
 
 [node name="Rounds2" type="Label" parent="preQuiz/preSessionOrganizer/RulesText"]
-visible = false
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
@@ -3653,7 +3651,6 @@ label_settings = ExtResource("19_f0nis")
 horizontal_alignment = 1
 
 [node name="Answers" type="Label" parent="preQuiz/preSessionOrganizer/RulesText"]
-visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 text = "The first player to correctly answer X questions wins."
@@ -3661,7 +3658,6 @@ label_settings = ExtResource("19_f0nis")
 horizontal_alignment = 1
 
 [node name="Answers2" type="Label" parent="preQuiz/preSessionOrganizer/RulesText"]
-visible = false
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
@@ -3766,7 +3762,6 @@ autowrap_mode = 2
 layout_mode = 2
 
 [node name="VerticalAnswerCategories" type="HBoxContainer" parent="quizInterface/session_organizer"]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 420
 

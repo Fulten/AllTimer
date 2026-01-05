@@ -53,10 +53,13 @@ signal exit_quiz
 var QUIZ_SIZE = 10
 var CHANCE_COUNT = 3
 
+
+var flag_pre_quiz_rules = false
 var pre_question_delay_default = 3.0
 var flag_pre_question_time = false
 var post_question_delay_default = 5.0
 var flag_post_question_time = false
+
 var current_index = 0
 var correct_answer = 0
 var loaded = false
@@ -349,7 +352,26 @@ func _reset_player_statuses():
 		ui_players[player_number].get_node("status_row/status_b").visible = false
 		ui_players[player_number].get_node("status_row/status_c").visible = false
 		pass
+
+## hides the quiz interface and shows the prequiz rules interface
+@rpc("authority", "reliable", "call_local")
+func _display_prequiz_rules():
+	$preQuiz.show()
+	$quizInterface/session_organizer.hide()
+	
+	$ControlSwapper.play("QuizIntro")
+	
+	pass
+
+
+@rpc("authority", "reliable", "call_local")
+func _sync_prequiz_rules_text():
+	
+	pass
+
+
 #endregion
+
 
 #region RPC functions called by clients to communicate with the server
 ##RPC: called by clients on the server whenever a player inputs a guess
@@ -444,7 +466,7 @@ func _start_quiz_server():
 		pass
 	
 	GameState.GameStarted = true
-	_prequestion_delay_phase()
+	_prequiz_rules_phase()
 	pass
 
 func _render_answers_track_correct(current_question, question_order):
@@ -457,7 +479,12 @@ func _render_answers_track_correct(current_question, question_order):
 ## starts the pre_quiz_rules timer, this phase displays the rules for 1 minute, or until input is recived from all players
 func _prequiz_rules_phase():
 	
+	flag_accept_input = true
+	flag_pre_quiz_rules = true
+	_sync_prequiz_rules_text.rpc()
+	_display_prequiz_rules.rpc()
 	
+	## TODO: setup logic for moving to the first _prequestion_delay_phase()
 	pass
 
 ## starts the pre_question timer, and halts accepting answer input from players

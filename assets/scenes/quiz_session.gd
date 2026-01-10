@@ -355,20 +355,18 @@ func _reset_player_statuses():
 
 ## hides the quiz interface and shows the prequiz rules interface
 @rpc("authority", "reliable", "call_local")
-func _display_prequiz_rules():
+func _display_prequiz_rules(rules):
+	
+	$preQuiz/preSessionOrganizer/RulesText/Rounds
+	$preQuiz/preSessionOrganizer/RulesText/Rounds2
+	
+	
 	$preQuiz.show()
 	$quizInterface/session_organizer.hide()
 	
 	$ControlSwapper.play("QuizIntro")
 	
 	pass
-
-
-@rpc("authority", "reliable", "call_local")
-func _sync_prequiz_rules_text():
-	
-	pass
-
 
 #endregion
 
@@ -481,8 +479,7 @@ func _prequiz_rules_phase():
 	
 	flag_accept_input = true
 	flag_pre_quiz_rules = true
-	_sync_prequiz_rules_text.rpc()
-	_display_prequiz_rules.rpc()
+	_display_prequiz_rules.rpc(GameState.quizOptions)
 	
 	## TODO: setup logic for moving to the first _prequestion_delay_phase()
 	pass

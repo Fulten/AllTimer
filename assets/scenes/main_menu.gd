@@ -45,11 +45,13 @@ func save_video_settings():
 func save_game_settings():
 	update_game_state(int(%TimerSettingList.get_item_text(%TimerSettingList.get_selected_id())),
 		%WinConList.get_item_text(%WinConList.get_selected_id()),
+		%WinConList.get_selected_id(),
 		%TalliesCheckBox.is_pressed(),
 		%Lose4SkipCheckBox.is_pressed(),
 		%GamblingOnCheckBox.is_pressed())
 	config.set_value("game", "timer", GameState.quizOptions.timer)
 	config.set_value("game", "win_con", GameState.quizOptions.win_con)
+	config.set_value("game", "win_con_int", GameState.quizOptions.win_con_int)
 	config.set_value("game", "tallies", GameState.quizOptions.tallies)
 	config.set_value("game", "skipping_losses", GameState.quizOptions.skipping_losses)
 	config.set_value("game", "gambling_modes", GameState.quizOptions.gambling_modes)
@@ -73,13 +75,14 @@ func load_settings():
 #		GAME
 		var timer = config.get_value("game", "timer", 30)
 		var win_con = config.get_value("game", "win_con", "default")
+		var win_con_int = config.get_value("game", "win_con_int", 0)
 		var tallies = config.get_value("game", "tallies", false)
 		var skipping_losses = config.get_value("game", "skipping_losses", false)
 		var gambling_modes = config.get_value("game", "gambling_modes", false)
 #		APPLY
 		apply_audio_settings(sound_device, master, music, sfx, voiceover)
 		apply_video_settings(display_type, resolution, input_display, theme)
-		apply_game_settings(timer, win_con, tallies, skipping_losses, gambling_modes)
+		apply_game_settings(timer, win_con, win_con_int, tallies, skipping_losses, gambling_modes)
 	else:
 		print("No settings file found. Using defaults.")
 
@@ -129,20 +132,21 @@ func apply_video_settings(display_type: int, resolution: int, input_display: Str
 	select_option_by_text(%SessionThemesList,theme)
 
 
-func apply_game_settings(timer: int, win_con: String, tallies: bool, skipping_losses: bool, gambling_modes: bool):
+func apply_game_settings(timer: int, win_con: String, win_con_int: int,  tallies: bool, skipping_losses: bool, gambling_modes: bool):
 	select_option_by_int(%TimerSettingList, timer)
 	select_option_by_text(%WinConList, win_con)
 	%TalliesCheckBox.set_pressed_no_signal(tallies)
 	%Lose4SkipCheckBox.set_pressed_no_signal(skipping_losses)
 	%GamblingOnCheckBox.set_pressed_no_signal(gambling_modes)
-	update_game_state(timer, win_con, tallies, skipping_losses, gambling_modes)
+	update_game_state(timer, win_con, win_con_int, tallies, skipping_losses, gambling_modes)
 	return
 #endregion
 
 
-func update_game_state(timer: int, win_con: String, tallies: bool, skipping_losses: bool, gambling_modes: bool):
+func update_game_state(timer: int, win_con: String, win_con_int: int, tallies: bool, skipping_losses: bool, gambling_modes: bool):
 	GameState.quizOptions.timer = timer
 	GameState.quizOptions.win_con = win_con
+	GameState.quizOptions.win_con_int = win_con_int
 	GameState.quizOptions.tallies = tallies
 	GameState.quizOptions.skipping_losses = skipping_losses
 	GameState.quizOptions.gambling_modes = gambling_modes

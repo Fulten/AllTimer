@@ -3623,7 +3623,7 @@ horizontal_alignment = 1
 [node name="Rounds" type="Label" parent="preQuiz/preSessionOrganizer/RulesText"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-text = "The player with the highest score after X rounds wins."
+text = "The player with the highest score after %s rounds wins."
 label_settings = ExtResource("19_f0nis")
 horizontal_alignment = 1
 

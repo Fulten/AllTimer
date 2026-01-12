@@ -381,7 +381,7 @@ func _display_prequiz_rules(rules: GameState.QuizOptions):
 	# hide the normal quiz interface
 	$quizInterface.hide()
 	
-	#$ControlSwapper.play("QuizIntro")
+	$ControlSwapper.play("QuizIntro")
 	
 	pass
 
@@ -401,9 +401,9 @@ func _hide_prequiz_rules():
 	$preQuiz.hide()
 	
 	$quizInterface.show()
-	#$ControlSwapper.play("QuizStart")
-	#$ControlSwapper.play("QuestionLoad_A")
-	#$ControlSwapper.play("QuestionLoad_B")
+	$ControlSwapper.play("QuizStart")
+	$ControlSwapper.play("QuestionLoad_A")
+	$ControlSwapper.play("QuestionLoad_B")
 	pass
 
 

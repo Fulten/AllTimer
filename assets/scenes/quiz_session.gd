@@ -379,9 +379,9 @@ func _display_prequiz_rules(rules: GameState.QuizOptions):
 	
 	$preQuiz.show()
 	# hide the normal quiz interface
-	$quizInterface/session_organizer.hide()
+	$quizInterface.hide()
 	
-	$ControlSwapper.play("QuizIntro")
+	#$ControlSwapper.play("QuizIntro")
 	
 	pass
 
@@ -399,7 +399,11 @@ func _hide_prequiz_rules():
 	$preQuiz/preSessionOrganizer/RulesText/Answers2.hide()
 	
 	$preQuiz.hide()
-	$quizInterface/session_organizer.show()
+	
+	$quizInterface.show()
+	#$ControlSwapper.play("QuizStart")
+	#$ControlSwapper.play("QuestionLoad_A")
+	#$ControlSwapper.play("QuestionLoad_B")
 	pass
 
 
@@ -407,11 +411,21 @@ func _hide_prequiz_rules():
 
 
 #region RPC functions called by clients to communicate with the server
-##RPC: called by clients on the server whenever a player inputs a guess
+##RPC: called by clients on the server whenever a player provides input
 @rpc("any_peer", "reliable")
 func _player_guess(playerId, guess):
 	# proccess answer then send updated result to players, don't accept input during pre and post question time
 	if multiplayer.is_server() && flag_accept_input:
+		if flag_pre_quiz_rules:
+			if !GameState._player_has_guessed(playerId):
+				GameState._player_guess(playerId, guess, ui_countdown_timer.get_time_left())
+				players_answered += 1
+				if players_answered >= GameState.PlayerCount:
+					GameState._reset_guesses()
+					_hide_prequiz_rules.rpc()
+					_prequestion_delay_phase()
+					pass
+			return
 		if !ui_countdown_timer.is_stopped():
 			if !GameState._player_has_guessed(playerId):
 				GameState._player_guess(playerId, guess, ui_countdown_timer.get_time_left())
@@ -511,12 +525,10 @@ func _render_answers_track_correct(current_question, question_order):
 
 ## starts the pre_quiz_rules timer, this phase displays the rules for 1 minute, or until input is recived from all players
 func _prequiz_rules_phase():
-	
 	flag_accept_input = true
 	flag_pre_quiz_rules = true
 	_display_prequiz_rules.rpc(GameState.quizOptions)
 	
-	## TODO: setup logic for moving to the first _prequestion_delay_phase()
 	pass
 
 ## starts the pre_question timer, and halts accepting answer input from players
@@ -525,6 +537,8 @@ func _prequestion_delay_phase():
 	# currently one extra second per 40 characters ( * 1/40 = 0.025)
 	var current_question = GameState.CurrentQuizQuestions[current_index]
 	var extra_seconds : int = roundf(current_question["question"].length() * 0.025)
+	
+	flag_pre_quiz_rules = false
 	
 	flag_accept_input = false
 	flag_pre_question_time = true

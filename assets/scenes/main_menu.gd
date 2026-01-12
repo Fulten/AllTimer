@@ -16,6 +16,7 @@ func _ready():
 	$StackAnimator.play("Anim_Stack0_Init")
 	await get_tree().create_timer(0.1).timeout
 	$Stack_0/TitleHeader2.grab_focus()
+	GameState.quizOptions.initilize()
 	load_settings()
 	UserProfiles._IO_read_profiles()
 	_refresh_profiles_dropdown()

@@ -35,6 +35,10 @@ class QuizOptions:
 	var timer: int
 	var win_con: String
 	var win_con_int: int
+
+	var win_questions: int
+	var win_points: int
+
 	var tallies: bool
 	var skipping_losses: bool
 	var gambling_modes: bool
@@ -44,10 +48,14 @@ class QuizOptions:
 	# 1 : First to answer 10 questions correctly
 	# 2 : First to reach 1000 points
 
-	func initilize(i_timer = 30, i_win_con = "default", i_win_con_int = 0, i_tallies = false, i_skipping_losses = false, i_gambling_modes = false) :
+	func initilize(i_timer = 30, i_win_con = "default", i_win_con_int = 0, i_win_questions = 10, i_win_points = 1000, i_tallies = false, i_skipping_losses = false, i_gambling_modes = false) :
 		timer = i_timer
 		win_con = i_win_con # textual representation of wincondition
 		win_con_int = i_win_con_int #integer representation of windcondition
+		
+		win_questions = i_win_questions
+		win_points = i_win_points
+
 		tallies = i_tallies
 		skipping_losses = i_skipping_losses
 		gambling_modes = i_gambling_modes

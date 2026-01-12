@@ -3621,6 +3621,7 @@ label_settings = ExtResource("9_a8618")
 horizontal_alignment = 1
 
 [node name="Rounds" type="Label" parent="preQuiz/preSessionOrganizer/RulesText"]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 text = "The player with the highest score after %s rounds wins."
@@ -3628,14 +3629,16 @@ label_settings = ExtResource("19_f0nis")
 horizontal_alignment = 1
 
 [node name="Rounds2" type="Label" parent="preQuiz/preSessionOrganizer/RulesText"]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
-text = "The quiz will end after # round(s)"
+text = "The quiz will end after %s round(s)"
 label_settings = ExtResource("19_f0nis")
 horizontal_alignment = 1
 
 [node name="Score" type="Label" parent="preQuiz/preSessionOrganizer/RulesText"]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 text = "The first player to reach the high score wins."
@@ -3643,32 +3646,35 @@ label_settings = ExtResource("19_f0nis")
 horizontal_alignment = 1
 
 [node name="Score2" type="Label" parent="preQuiz/preSessionOrganizer/RulesText"]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
-text = "The quiz will end when a player achieves a score of #"
+text = "The quiz will end when a player achieves a score of %s"
 label_settings = ExtResource("19_f0nis")
 horizontal_alignment = 1
 
 [node name="Answers" type="Label" parent="preQuiz/preSessionOrganizer/RulesText"]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-text = "The first player to correctly answer X questions wins."
+text = "The first player to correctly answer %s questions wins."
 label_settings = ExtResource("19_f0nis")
 horizontal_alignment = 1
 
 [node name="Answers2" type="Label" parent="preQuiz/preSessionOrganizer/RulesText"]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
-text = "The quiz will end when a player correctly answers # questions"
+text = "The quiz will end when a player correctly answers %s questions"
 label_settings = ExtResource("19_f0nis")
 horizontal_alignment = 1
 
 [node name="Timer" type="Label" parent="preQuiz/preSessionOrganizer/RulesText"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-text = "Players will have # seconds to answer each question."
+text = "Players will have %s seconds to answer each question."
 label_settings = ExtResource("19_f0nis")
 horizontal_alignment = 1
 

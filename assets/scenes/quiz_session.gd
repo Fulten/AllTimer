@@ -355,18 +355,53 @@ func _reset_player_statuses():
 
 ## hides the quiz interface and shows the prequiz rules interface
 @rpc("authority", "reliable", "call_local")
-func _display_prequiz_rules(rules):
+func _display_prequiz_rules(rules: GameState.QuizOptions):
 	
-	$preQuiz/preSessionOrganizer/RulesText/Rounds
-	$preQuiz/preSessionOrganizer/RulesText/Rounds2
+	if rules.win_con_int == 0: # 0 : Highest score after x questions
+		$preQuiz/preSessionOrganizer/RulesText/Rounds.text %= rules.win_questions
+		$preQuiz/preSessionOrganizer/RulesText/Rounds2.text %= rules.win_questions
+		$preQuiz/preSessionOrganizer/RulesText/Rounds.show()
+		$preQuiz/preSessionOrganizer/RulesText/Rounds2.show()
+		pass
+	elif rules.win_con_int == 1: # 1 : First to answer x questions correctly
+		$preQuiz/preSessionOrganizer/RulesText/Answers.text %= rules.win_questions
+		$preQuiz/preSessionOrganizer/RulesText/Answers2.text %= rules.win_questions
+		$preQuiz/preSessionOrganizer/RulesText/Answers.show()
+		$preQuiz/preSessionOrganizer/RulesText/Answers2.show()
+		pass
+	elif rules.win_con_int == 2: # 2 : First to reach x points
+		$preQuiz/preSessionOrganizer/RulesText/Score2.text %= rules.win_points
+		$preQuiz/preSessionOrganizer/RulesText/Score.show()
+		$preQuiz/preSessionOrganizer/RulesText/Score2.show()
+		pass
 	
+	$preQuiz/preSessionOrganizer/RulesText/Timer.text %= rules.timer
 	
 	$preQuiz.show()
+	# hide the normal quiz interface
 	$quizInterface/session_organizer.hide()
 	
 	$ControlSwapper.play("QuizIntro")
 	
 	pass
+
+## shows the prequiz rules interface and hides the quiz interface
+@rpc("authority", "reliable", "call_local")
+func _hide_prequiz_rules():
+	# set the rules dependent elements to hide
+	$preQuiz/preSessionOrganizer/RulesText/Rounds.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Rounds2.hide()
+	
+	$preQuiz/preSessionOrganizer/RulesText/Score.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Score2.hide()
+	
+	$preQuiz/preSessionOrganizer/RulesText/Answers.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Answers2.hide()
+	
+	$preQuiz.hide()
+	$quizInterface/session_organizer.show()
+	pass
+
 
 #endregion
 

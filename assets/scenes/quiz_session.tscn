@@ -3850,6 +3850,7 @@ text = "answer_four
 "
 
 [node name="CenteredAnswerCategories" type="HBoxContainer" parent="quizInterface/session_organizer"]
+visible = false
 layout_mode = 2
 alignment = 1
 

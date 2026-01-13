@@ -53,6 +53,7 @@ signal exit_quiz
 var QUIZ_SIZE = 10
 var CHANCE_COUNT = 3
 
+var flag_DEBUG = true
 
 var flag_pre_quiz_rules = false
 var pre_question_delay_default = 3.0
@@ -130,6 +131,11 @@ func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		_escape_game_menu()
 		pass
+	
+	if (flag_DEBUG and multiplayer.is_server() and not flag_pre_quiz_rules) and (event is InputEventKey and event.pressed and event.keycode == KEY_P):
+		_debug_advance_to_next_question()
+		pass	
+	
 	for i in range(4):
 		if event.is_action_pressed(player_input % i):
 			if multiplayer.is_server(): # call locally if server
@@ -212,6 +218,10 @@ func _show_end_of_quiz_screen():
 	
 	var scoreOrder = []
 	
+	for n in range(4):
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer" % (n + 1)).hide()
+		pass
+	
 	for key in GameState.players.keys():
 		scoreOrder.append(key)
 		pass
@@ -255,9 +265,7 @@ func _show_end_of_quiz_screen():
 		get_node("quizEnd/PlayerStandingsOrg/%sPlacer" % uiNum).show()
 		pass
 	
-	
-	$quizInterface.hide()
-	$quizEnd.show()
+	$ControlSwapper.play("QuizFinish")
 	pass
 
 @rpc("authority", "call_local", "reliable")
@@ -804,6 +812,17 @@ func _debug_score_order_testing():
 		print(test)
 	
 	pass
+
+func _debug_advance_to_next_question():
+	print("!Debug: Skipping question")
+	flag_pre_quiz_rules = false
+	flag_pre_question_time = false
+	flag_post_question_time = false
+	flag_accept_input = false
+	
+	_end_of_quiz_phase()
+	pass
+
 #endregion
 
 #region buttons for inputing question answers via ui

@@ -620,6 +620,12 @@ func _postquestion_delay_phase():
 	flag_accept_input = false
 	flag_post_question_time = true
 	
+	# determine player correctness
+	var current_question = GameState.CurrentQuizQuestions[current_index]
+	GameState._player_correctness(correct_answer,1000)
+	GameState._add_chance_hits(current_index)
+	GameState._update_profile_statistics(current_question["uuid"])
+	
 	_create_player_statuses_table()
 	_sync_player_statuses.rpc(player_statuses_ui_2d)
 	
@@ -637,13 +643,8 @@ func _end_of_quiz_phase():
 	flag_post_question_time = false
 	
 	_show_question_explainer.rpc(false)
-	
 	_reset_player_statuses.rpc()
 	
-	var current_question = GameState.CurrentQuizQuestions[current_index]
-	GameState._player_correctness(correct_answer,1000)
-	GameState._add_chance_hits(current_index)
-	GameState._update_profile_statistics(current_question["uuid"])
 	#just end quesiton immediately for now
 	_next_question()
 	pass

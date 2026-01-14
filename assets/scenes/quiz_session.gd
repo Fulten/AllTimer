@@ -744,6 +744,8 @@ func countdown_clock():
 
 func _load_question_refresh_scores():
 	if !loaded:
+		for i in range(4):
+			get_node("quizInterface/players_region/activePlayer%s" % (i + 1)).hide()
 		ui_questions_index.text = str(current_index + 1)
 		var current_question = GameState.CurrentQuizQuestions[current_index]
 		ui_questions_name.text = current_question["name"]

@@ -3540,7 +3540,22 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mn3kg")
 
-[node name="ControlSwapper" type="AnimationPlayer" parent="."]
+[node name="ControlSwapper0" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2s641")
+}
+
+[node name="ControlSwapper1" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2s641")
+}
+
+[node name="ControlSwapper2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2s641")
+}
+
+[node name="ControlSwapper3" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_2s641")
 }

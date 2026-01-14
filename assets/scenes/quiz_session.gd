@@ -94,6 +94,15 @@ func _ready():
 		_store_quiz_questions_locally()
 		GameState._build_player_number_to_id_table()
 		_sync_server_client_data.rpc(local_question_set_uuids, GameState.playerNumberToIds)
+		_sync_server_client_game_rules.rpc(
+			GameState.quizOptions.timer, 
+			GameState.quizOptions.win_con, 
+			GameState.quizOptions.win_con_int, 
+			GameState.quizOptions.win_questions, 
+			GameState.quizOptions.win_points,
+			GameState.quizOptions.tallies,
+			GameState.quizOptions.skipping_losses,
+			GameState.quizOptions.gambling_modes)
 		_clean_master_questions()
 		_clean_chance_set_and_master()
 		_generate_answer_order()
@@ -132,7 +141,7 @@ func _input(event):
 		_escape_game_menu()
 		pass
 	
-	if (flag_DEBUG and multiplayer.is_server() and not flag_pre_quiz_rules) and (event is InputEventKey and event.pressed and event.keycode == KEY_P):
+	if (flag_DEBUG and multiplayer.is_server() and !flag_pre_quiz_rules) and (event is InputEventKey and event.pressed and event.keycode == KEY_P):
 		_debug_advance_to_next_question()
 		pass	
 	
@@ -180,6 +189,29 @@ func _sync_server_client_data(question_set_uuids, playerNumToIds):
 	pass
 	
 @rpc("authority", "reliable")
+func _sync_server_client_game_rules(
+	i_timer: int, 
+	i_win_con: String, 
+	i_win_con_int: int, 
+	i_win_questions: int, 
+	i_win_points: int, 
+	i_tallies: bool, 
+	i_skipping_losses: bool, 
+	i_gambling_modes: bool):
+		
+	GameState.quizOptions.timer = i_timer
+	GameState.quizOptions.win_con = i_win_con
+	GameState.quizOptions.win_con_int = i_win_con_int
+
+	GameState.quizOptions.win_questions = i_win_questions
+	GameState.quizOptions.win_points = i_win_points
+
+	GameState.quizOptions.tallies = i_tallies
+	GameState.quizOptions.skipping_losses = i_skipping_losses
+	GameState.quizOptions.gambling_modes = i_gambling_modes
+	pass
+
+@rpc("authority", "reliable")
 func _sync_answer_order(server_answer_order):
 	local_answer_order = server_answer_order
 	pass
@@ -187,7 +219,6 @@ func _sync_answer_order(server_answer_order):
 @rpc("authority", "reliable")
 func _start_quiz_client():
 	GameState._reset_players()
-	_reset_player_statuses()
 	for i in range(GameState.PlayerCount):
 		var player = GameState.players[GameState.playerNumberToIds[i]]
 		ui_player_names[i].text = player["name"]
@@ -265,7 +296,7 @@ func _show_end_of_quiz_screen():
 		get_node("quizEnd/PlayerStandingsOrg/%sPlacer" % uiNum).show()
 		pass
 	
-	$ControlSwapper.play("QuizFinish")
+	$ControlSwapper0.play("QuizFinish")
 	pass
 
 @rpc("authority", "call_local", "reliable")
@@ -343,53 +374,70 @@ func _player_dropped():
 		pass
 	pass
 
+# refrence, status_a: skip, status_b: wrong, status_c, right
 ## called by server to sync the player statuses, statuses is expected to be a 2d array 
 @rpc("authority", "reliable", "call_local")
 func _sync_player_statuses(statuses):
+	
+	if not multiplayer.is_server():	
+		player_statuses_ui_2d.resize(GameState.PlayerCount)
+		for player_number in range(GameState.PlayerCount):
+			player_statuses_ui_2d[player_number].resize(3)
+			player_statuses_ui_2d[player_number][0] = statuses[player_number][0]
+			player_statuses_ui_2d[player_number][1] = statuses[player_number][1]
+			player_statuses_ui_2d[player_number][2] = statuses[player_number][2]
+			pass
+	
 	for player_number in range(GameState.PlayerCount):
-		ui_players[player_number].get_node("status_row/status_a").visible = statuses[player_number][0]
-		ui_players[player_number].get_node("status_row/status_b").visible = statuses[player_number][1]
-		ui_players[player_number].get_node("status_row/status_c").visible = statuses[player_number][2]
+		if statuses[player_number][0]: # status_a
+			get_node("ControlSwapper%s" % player_number).play("p%sStatus_SkipShow" % (player_number + 1))
+		if statuses[player_number][1]: # status_b
+			get_node("ControlSwapper%s" % player_number).play("p%sStatus_WrongShow" % (player_number + 1))
+		if statuses[player_number][2]: # status_c
+			get_node("ControlSwapper%s" % player_number).play("p%sStatus_RightShow" % (player_number + 1))
 		pass
 
 ## called by the server to reset all player statuses to be hidden
 @rpc("authority", "reliable", "call_local")
 func _reset_player_statuses():
-	for player_number in range(4):
-		ui_players[player_number].get_node("status_row/status_a").visible = false
-		ui_players[player_number].get_node("status_row/status_b").visible = false
-		ui_players[player_number].get_node("status_row/status_c").visible = false
+	for player_number in range(GameState.PlayerCount):
+		if player_statuses_ui_2d[player_number][0]:
+			get_node("ControlSwapper%s" % player_number).play("p%sStatus_SkipHide" % (player_number + 1))
+			player_statuses_ui_2d[player_number][0] = false
+		if player_statuses_ui_2d[player_number][1]:
+			get_node("ControlSwapper%s" % player_number).play("p%sStatus_WrongHide" % (player_number + 1))
+			player_statuses_ui_2d[player_number][1] = false
+		if player_statuses_ui_2d[player_number][2]:
+			get_node("ControlSwapper%s" % player_number).play("p%sStatus_RightHide" % (player_number + 1))
+			player_statuses_ui_2d[player_number][2] = false
 		pass
 
 ## hides the quiz interface and shows the prequiz rules interface
 @rpc("authority", "reliable", "call_local")
-func _display_prequiz_rules(rules: GameState.QuizOptions):
-	
-	if rules.win_con_int == 0: # 0 : Highest score after x questions
-		$preQuiz/preSessionOrganizer/RulesText/Rounds.text %= rules.win_questions
-		$preQuiz/preSessionOrganizer/RulesText/Rounds2.text %= rules.win_questions
+func _display_prequiz_rules():
+	if GameState.quizOptions.win_con_int == 0: # 0 : Highest score after x questions
+		$preQuiz/preSessionOrganizer/RulesText/Rounds.text %= GameState.quizOptions.win_questions
+		$preQuiz/preSessionOrganizer/RulesText/Rounds2.text %= GameState.quizOptions.win_questions
 		$preQuiz/preSessionOrganizer/RulesText/Rounds.show()
 		$preQuiz/preSessionOrganizer/RulesText/Rounds2.show()
 		pass
-	elif rules.win_con_int == 1: # 1 : First to answer x questions correctly
-		$preQuiz/preSessionOrganizer/RulesText/Answers.text %= rules.win_questions
-		$preQuiz/preSessionOrganizer/RulesText/Answers2.text %= rules.win_questions
+	elif GameState.quizOptions.win_con_int == 1: # 1 : First to answer x questions correctly
+		$preQuiz/preSessionOrganizer/RulesText/Answers.text %= GameState.quizOptions.win_questions
+		$preQuiz/preSessionOrganizer/RulesText/Answers2.text %= GameState.quizOptions.win_questions
 		$preQuiz/preSessionOrganizer/RulesText/Answers.show()
 		$preQuiz/preSessionOrganizer/RulesText/Answers2.show()
 		pass
-	elif rules.win_con_int == 2: # 2 : First to reach x points
-		$preQuiz/preSessionOrganizer/RulesText/Score2.text %= rules.win_points
+	elif GameState.quizOptions.win_con_int == 2: # 2 : First to reach x points
+		$preQuiz/preSessionOrganizer/RulesText/Score2.text %= GameState.quizOptions.win_points
 		$preQuiz/preSessionOrganizer/RulesText/Score.show()
 		$preQuiz/preSessionOrganizer/RulesText/Score2.show()
 		pass
 	
-	$preQuiz/preSessionOrganizer/RulesText/Timer.text %= rules.timer
-	
+	$preQuiz/preSessionOrganizer/RulesText/Timer.text %= GameState.quizOptions.timer
+
 	$preQuiz.show()
-	# hide the normal quiz interface
 	$quizInterface.hide()
-	
-	$ControlSwapper.play("QuizIntro")
+	$ControlSwapper0.play("QuizIntro")
 	
 	pass
 
@@ -409,14 +457,12 @@ func _hide_prequiz_rules():
 	$preQuiz.hide()
 	
 	$quizInterface.show()
-	$ControlSwapper.play("QuizStart")
-	$ControlSwapper.play("QuestionLoad_A")
-	$ControlSwapper.play("QuestionLoad_B")
+	$ControlSwapper0.play("QuizStart")
+	$ControlSwapper0.play("QuestionLoad_A")
+	$ControlSwapper0.play("QuestionLoad_B")
 	pass
 
-
 #endregion
-
 
 #region RPC functions called by clients to communicate with the server
 ##RPC: called by clients on the server whenever a player provides input
@@ -431,6 +477,7 @@ func _player_guess(playerId, guess):
 				if players_answered >= GameState.PlayerCount:
 					GameState._reset_guesses()
 					_hide_prequiz_rules.rpc()
+					players_answered = 0
 					_prequestion_delay_phase()
 					pass
 			return
@@ -509,8 +556,6 @@ func _start_quiz_server():
 	ui_countdown_timer.timeout.connect(_postquestion_delay_phase)
 	ui_postquestion_timer.timeout.connect(_end_of_quiz_phase)
 	
-	_reset_player_statuses()
-	
 	current_index = 0
 	GameState._reset_players()
 	for i in range(GameState.PlayerCount):
@@ -535,8 +580,7 @@ func _render_answers_track_correct(current_question, question_order):
 func _prequiz_rules_phase():
 	flag_accept_input = true
 	flag_pre_quiz_rules = true
-	_display_prequiz_rules.rpc(GameState.quizOptions)
-	
+	_display_prequiz_rules.rpc()
 	pass
 
 ## starts the pre_question timer, and halts accepting answer input from players

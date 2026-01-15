@@ -89,9 +89,15 @@ func _add_chance(chance_name, description, type, uuid, value, associated_questio
 		"type": type,
 		"uuid": uuid,
 		"correct": value,
-		"associated_questions": [],
+		"associated_questions": associated_questions,
 		"player_hits": [0,0,0,0],
 	})
+
+func _get_chance_from_uuid(chance_uuid):
+	for chance in CurrentChances:
+		if chance["uuid"] == chance_uuid:
+			return chance
+	pass
 
 func _adjust_score(player_index,score):
 	var playerId = playerNumberToIds[player_index]

@@ -288,7 +288,7 @@ func _show_end_of_quiz_screen():
 		
 		for chanceKey in GameState.players[scoreOrder[n]]["chances"].keys():
 			var chanceStr = ""
-			chanceStr += "%s, " % chanceKey
+			chanceStr += "%s, " % (GameState._get_chance_from_uuid(chanceKey)["name"])
 			
 			get_node("quizEnd/PlayerStandingsOrg/%sPlacer/MedalCase/Awards" % uiNum)["text"] = chanceStr
 			

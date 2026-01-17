@@ -88,6 +88,7 @@ func _ready():
 
 	if multiplayer.is_server():
 		$pauseScreen/pauseCase/pauseBase/quitButton.text = "lobby"
+		QUIZ_SIZE = GameState.quizOptions.win_questions
 		_load_quiz_data()
 		_select_quiz_questions(QUIZ_SIZE)
 		_prepare_quiz_chances(CHANCE_COUNT)

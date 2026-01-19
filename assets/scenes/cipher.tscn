@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://di56bs4ycntxw"]
+[gd_scene load_steps=75 format=3 uid="uid://di56bs4ycntxw"]
 
 [ext_resource type="Script" path="res://assets/scenes/quiz_session.gd" id="1_khyfr"]
 [ext_resource type="Texture2D" uid="uid://dq2hnijwt0hlh" path="res://assets/uiux/session_themes/Patriotic Cipher/session_bg.tga" id="2_mj6gr"]
@@ -28,11 +28,12 @@
 [ext_resource type="Texture2D" uid="uid://d3d8drdimuvjd" path="res://assets/uiux/session_themes/Patriotic Cipher/T_status_incorrect_patcip.tga" id="23_x0u7c"]
 [ext_resource type="Texture2D" uid="uid://b2eg3oa2waadg" path="res://assets/uiux/session_themes/Patriotic Cipher/T_status_correct_patcip.tga" id="24_irilu"]
 [ext_resource type="Texture2D" uid="uid://c2glpvkloux56" path="res://assets/uiux/session_themes/Patriotic Cipher/T_seperator_h_patcip.tga" id="25_owt3k"]
-[ext_resource type="Texture2D" uid="uid://dw7l64rht8v8t" path="res://assets/uiux/session_themes/default/T_PausePaper_D.tga" id="27_exhyd"]
-[ext_resource type="Theme" uid="uid://b5rkf616hrq6k" path="res://assets/uiux/session_themes/default/label_Chalk_Pause.tres" id="28_rumc8"]
 [ext_resource type="Theme" uid="uid://cf8u3obo5dfya" path="res://assets/uiux/session_themes/default/button_Chalk_Submenu.tres" id="29_64rju"]
-[ext_resource type="FontFile" uid="uid://b4nn47euaajnc" path="res://assets/uiux/session_themes/default/Chalkboard-Regular.ttf" id="30_rbq42"]
+[ext_resource type="Texture2D" uid="uid://bcgcahuyuynp3" path="res://assets/uiux/session_themes/Patriotic Cipher/T_PauseCase_D.tga" id="29_ojduq"]
+[ext_resource type="Theme" uid="uid://bwv0duhsrgd41" path="res://assets/uiux/session_themes/Patriotic Cipher/label_PatCip_Pause.tres" id="30_7mgqq"]
 [ext_resource type="StyleBox" uid="uid://dcuqsqcektumy" path="res://assets/uiux/main_menu/volumeSlider.res" id="31_6nd3k"]
+[ext_resource type="Theme" uid="uid://d0ghg7yomth8d" path="res://assets/uiux/session_themes/Patriotic Cipher/cipherMenuOption.tres" id="31_x3bli"]
+[ext_resource type="FontFile" uid="uid://byhg6togfihnm" path="res://assets/uiux/session_themes/Patriotic Cipher/UAV-OSD-Sans-Mono.ttf" id="32_0qjd0"]
 [ext_resource type="Script" path="res://assets/scenes/MasterVolume.gd" id="32_ipm8v"]
 
 [sub_resource type="Animation" id="Animation_3txj5"]
@@ -3233,10 +3234,10 @@ font = ExtResource("13_46j0n")
 font_size = 24
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1osu"]
-bg_color = Color(0, 0.268568, 0.0202791, 1)
+bg_color = Color(0, 1, 0.623529, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_op0j7"]
-bg_color = Color(0.0433543, 0.973546, 0.518481, 1)
+bg_color = Color(0, 1, 1, 1)
 
 [node name="quiz_session" type="Control"]
 clip_contents = true
@@ -4001,7 +4002,7 @@ offset_left = -16.0439
 offset_top = -15.976
 offset_right = 7.94397
 offset_bottom = 8.01599
-color = Color(0, 0, 0, 0.784314)
+color = Color(0.0784314, 0.0784314, 0.0784314, 0.784314)
 
 [node name="pauseCase" type="TextureRect" parent="pauseScreen"]
 layout_mode = 1
@@ -4014,7 +4015,7 @@ offset_right = -704.0
 offset_bottom = -146.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("27_exhyd")
+texture = ExtResource("29_ojduq")
 stretch_mode = 3
 
 [node name="pauseBase" type="Control" parent="pauseScreen/pauseCase"]
@@ -4041,7 +4042,7 @@ offset_right = -83.0
 offset_bottom = -564.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("28_rumc8")
+theme = ExtResource("30_7mgqq")
 text = "Game menu"
 horizontal_alignment = 1
 
@@ -4056,7 +4057,7 @@ offset_right = -96.0
 offset_bottom = -408.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("29_64rju")
+theme = ExtResource("31_x3bli")
 text = "Resume"
 flat = true
 
@@ -4071,7 +4072,7 @@ offset_right = -96.0
 offset_bottom = -303.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("29_64rju")
+theme = ExtResource("31_x3bli")
 text = "Options"
 flat = true
 
@@ -4086,7 +4087,7 @@ offset_right = -102.0
 offset_bottom = -200.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("29_64rju")
+theme = ExtResource("31_x3bli")
 text = "Quit"
 flat = true
 
@@ -4115,7 +4116,7 @@ offset_right = -96.0
 offset_bottom = -561.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("28_rumc8")
+theme = ExtResource("30_7mgqq")
 text = "Options"
 horizontal_alignment = 1
 
@@ -4130,7 +4131,7 @@ offset_right = -96.0
 offset_bottom = -411.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("29_64rju")
+theme = ExtResource("31_x3bli")
 text = "Sound"
 flat = true
 
@@ -4145,7 +4146,7 @@ offset_right = -96.0
 offset_bottom = -307.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("29_64rju")
+theme = ExtResource("31_x3bli")
 text = "Display"
 flat = true
 
@@ -4160,7 +4161,7 @@ offset_right = -96.0
 offset_bottom = -203.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("29_64rju")
+theme = ExtResource("31_x3bli")
 text = "Back"
 flat = true
 
@@ -4187,7 +4188,7 @@ offset_right = -96.0
 offset_bottom = -553.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("28_rumc8")
+theme = ExtResource("30_7mgqq")
 text = "Sound"
 horizontal_alignment = 1
 
@@ -4202,9 +4203,9 @@ offset_right = -96.0
 offset_bottom = -457.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
-theme_override_fonts/font = ExtResource("30_rbq42")
-theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 24
 text = "Volume Controls"
 horizontal_alignment = 1
 
@@ -4222,9 +4223,9 @@ grow_vertical = 2
 
 [node name="Master" type="Label" parent="pauseScreen/pauseCase/pauseSound/VolumeCase"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
-theme_override_fonts/font = ExtResource("30_rbq42")
-theme_override_font_sizes/font_size = 31
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 18
 text = "Master"
 horizontal_alignment = 1
 
@@ -4245,9 +4246,9 @@ bus_name = "Master"
 
 [node name="Music" type="Label" parent="pauseScreen/pauseCase/pauseSound/VolumeCase"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
-theme_override_fonts/font = ExtResource("30_rbq42")
-theme_override_font_sizes/font_size = 31
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 18
 text = "Music
 "
 horizontal_alignment = 1
@@ -4269,9 +4270,9 @@ bus_name = "Music"
 
 [node name="SFX" type="Label" parent="pauseScreen/pauseCase/pauseSound/VolumeCase"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
-theme_override_fonts/font = ExtResource("30_rbq42")
-theme_override_font_sizes/font_size = 31
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 18
 text = "Sound Effects
 "
 horizontal_alignment = 1
@@ -4293,9 +4294,9 @@ bus_name = "SFX"
 
 [node name="VO" type="Label" parent="pauseScreen/pauseCase/pauseSound/VolumeCase"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
-theme_override_fonts/font = ExtResource("30_rbq42")
-theme_override_font_sizes/font_size = 31
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 18
 text = "Voiceover
 "
 horizontal_alignment = 1
@@ -4328,18 +4329,18 @@ grow_vertical = 2
 
 [node name="SoundDeviceCategoryLabel" type="Label" parent="pauseScreen/pauseCase/pauseSound/SoundDeviceCase"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
-theme_override_fonts/font = ExtResource("30_rbq42")
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 24
 text = "Sound device -"
 
 [node name="SoundDeviceOptions" type="OptionButton" parent="pauseScreen/pauseCase/pauseSound/SoundDeviceCase"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
-theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
-theme_override_fonts/font = ExtResource("30_rbq42")
-theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0, 1, 0.623529, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 18
 flat = true
 alignment = 1
 item_count = 3
@@ -4363,9 +4364,9 @@ offset_right = -267.0
 offset_bottom = -43.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
-theme_override_fonts/font = ExtResource("30_rbq42")
-theme_override_font_sizes/font_size = 40
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 28
 text = "Back"
 flat = true
 
@@ -4392,7 +4393,7 @@ offset_right = -96.0
 offset_bottom = -553.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("28_rumc8")
+theme = ExtResource("30_7mgqq")
 text = "Display"
 horizontal_alignment = 1
 
@@ -4410,18 +4411,18 @@ grow_vertical = 2
 
 [node name="DisplayModeLabel" type="Label" parent="pauseScreen/pauseCase/pauseDisplay/DisplayModeCase"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
-theme_override_fonts/font = ExtResource("30_rbq42")
-theme_override_font_sizes/font_size = 30
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 24
 text = "Display Mode"
 
 [node name="DisplayList" type="OptionButton" parent="pauseScreen/pauseCase/pauseDisplay/DisplayModeCase"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
-theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
-theme_override_fonts/font = ExtResource("30_rbq42")
-theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0, 1, 0.623529, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 20
 flat = true
 alignment = 1
 item_count = 3
@@ -4444,18 +4445,18 @@ offset_bottom = 384.0
 
 [node name="DisplayModeLabel" type="Label" parent="pauseScreen/pauseCase/pauseDisplay/resolutionsCase"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
-theme_override_fonts/font = ExtResource("30_rbq42")
-theme_override_font_sizes/font_size = 30
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 24
 text = "Resolution"
 
 [node name="ResolutionsList" type="OptionButton" parent="pauseScreen/pauseCase/pauseDisplay/resolutionsCase"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
-theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
-theme_override_fonts/font = ExtResource("30_rbq42")
-theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0, 1, 0.623529, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 20
 flat = true
 item_count = 10
 selected = 0
@@ -4495,18 +4496,18 @@ grow_vertical = 2
 
 [node name="DisplayModeLabel" type="Label" parent="pauseScreen/pauseCase/pauseDisplay/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
-theme_override_fonts/font = ExtResource("30_rbq42")
-theme_override_font_sizes/font_size = 30
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 24
 text = "Input Display"
 
 [node name="InputDisplayList" type="OptionButton" parent="pauseScreen/pauseCase/pauseDisplay/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
-theme_override_colors/font_color = Color(0.162066, 0.162066, 0.162066, 1)
-theme_override_fonts/font = ExtResource("30_rbq42")
-theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0, 1, 0.623529, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 20
 flat = true
 alignment = 1
 item_count = 5
@@ -4535,6 +4536,9 @@ offset_bottom = -43.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("29_64rju")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 28
 text = "Back"
 flat = true
 

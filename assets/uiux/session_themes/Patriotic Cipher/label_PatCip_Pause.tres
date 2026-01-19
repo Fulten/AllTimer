@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bwv0duhsrgd41"]
+
+[ext_resource type="FontFile" uid="uid://byhg6togfihnm" path="res://assets/uiux/session_themes/Patriotic Cipher/UAV-OSD-Sans-Mono.ttf" id="1_qhr28"]
+
+[resource]
+Label/font_sizes/font_size = 48
+Label/fonts/font = ExtResource("1_qhr28")

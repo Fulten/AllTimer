@@ -1,9 +1,8 @@
-[gd_scene load_steps=75 format=3 uid="uid://c1ovqmumbqjdm"]
+[gd_scene load_steps=74 format=3 uid="uid://c1ovqmumbqjdm"]
 
 [ext_resource type="Script" path="res://assets/scenes/quiz_session.gd" id="1_mn3kg"]
 [ext_resource type="Texture2D" uid="uid://7rterpy3cejg" path="res://assets/uiux/session_themes/default/session_bg.tga" id="1_sfady"]
 [ext_resource type="FontFile" uid="uid://bdi68tslsma5m" path="res://assets/uiux/session_themes/default/chalk.ttf" id="2_3q4bo"]
-[ext_resource type="AudioStream" uid="uid://m7ekwmprjva7" path="res://assets/uiux/main_menu/bgm_quiz.mp3" id="2_5xm3w"]
 [ext_resource type="Texture2D" uid="uid://df0lm8u8qyetk" path="res://assets/uiux/session_themes/default/timer.tga" id="2_6twy7"]
 [ext_resource type="AudioStream" uid="uid://0nhm3be3vax8" path="res://assets/uiux/session_themes/default/Writing1.mp3" id="4_xp3by"]
 [ext_resource type="FontFile" uid="uid://ppcieu81eyur" path="res://assets/uiux/session_themes/default/TeachersStudent-Regular.ttf" id="5_4j7cf"]
@@ -3575,11 +3574,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_sfady")
 stretch_mode = 1
-
-[node name="Quiz_BGM" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_5xm3w")
-autoplay = true
-bus = &"Music"
 
 [node name="SFX_Hover1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_xp3by")

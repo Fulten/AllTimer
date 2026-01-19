@@ -120,7 +120,7 @@ func apply_audio_settings(sound_device: String, master: float, music: float, sfx
 	%VolumeControl2.set_value_no_signal(music)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(sfx))
 	%VolumeControl3.set_value_no_signal(sfx)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Voice"), linear_to_db(voiceover))
+	#AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Voice"), linear_to_db(voiceover))
 	%VolumeControl4.set_value_no_signal(voiceover)
 
 

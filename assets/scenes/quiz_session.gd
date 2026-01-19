@@ -85,7 +85,8 @@ var QuizEndScreen = false
 func _ready():
 	asset_player_pannel_locked = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Locked.tres")
 	asset_player_pannel_default = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Default.tres")
-
+	SoundMaster._play_music_track("main_menu3")
+	
 	if multiplayer.is_server():
 		$pauseScreen/pauseCase/pauseBase/quitButton.text = "lobby"
 		QUIZ_SIZE = GameState.quizOptions.win_questions

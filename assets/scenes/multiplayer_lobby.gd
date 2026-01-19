@@ -11,11 +11,11 @@ var IpInputTextNode
 var profiles_list_id_to_name = {}
 
 func _ready():
-	$BGM_Lobby.play()
 	$StateChangers/LaunchButton.grab_focus()
 	IpInputTextNode = $PeerConnectors/TextEdit
 	IpInputTextNode.set("text", ip_address)
 	_refresh_profiles_dropdown()
+	SoundMaster._play_music_track("main_menu1")
 
 func _process(_delta):
 	pass
@@ -109,7 +109,6 @@ func _on_launch_button_focus_entered():
 func _on_launch_button_button_down():
 	$SFX_Press.play()
 func _on_launch_button_button_up():
-	$BGM_Lobby.stop()
 	$StateChangers/LaunchButton.disabled = true
 	launch_quiz.emit()
 	pass

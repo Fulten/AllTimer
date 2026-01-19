@@ -178,6 +178,7 @@ func _kick_peer(reason):
 	pass
 
 func _end_of_quiz_handler():
+	SoundMaster._play_music_track("main_menu1")
 	if multiplayer.is_server():
 		multiplayer_lobby_instance._enable_launch_button()
 		pass

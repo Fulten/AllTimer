@@ -28,7 +28,7 @@ func _ready():
 	audioStreamPlayerMusic.max_polyphony = 1
 	#audio stream effects
 	audioStreamPlayerEffects.bus = "SFX"
-	audioStreamPlayerEffects.max_polyphony = 4
+	audioStreamPlayerEffects.max_polyphony = 1
 	#timer
 	songDelayTimer.timeout.connect(_private_next_track)
 	songDelayTimer.one_shot = true

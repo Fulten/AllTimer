@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bjrqcx0k7scpa"]
+[gd_scene load_steps=37 format=3 uid="uid://bjrqcx0k7scpa"]
 
 [ext_resource type="Theme" uid="uid://j8encu3x20ng" path="res://assets/uiux/main_menu/default_theme.tres" id="1_nvabs"]
 [ext_resource type="Shader" path="res://assets/uiux/main_menu/scrolling_background.gdshader" id="2_40555"]
@@ -8,7 +8,6 @@
 [ext_resource type="FontFile" uid="uid://c70rl4plqsm7n" path="res://assets/uiux/main_menu/NeonSans.otf" id="7_h5m3g"]
 [ext_resource type="FontFile" uid="uid://bc01r67d5wp2w" path="res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf" id="7_ixy01"]
 [ext_resource type="LabelSettings" uid="uid://dtxn1h8dpa0pi" path="res://assets/scenes/Label_Title.tres" id="8_3ymww"]
-[ext_resource type="AudioStream" uid="uid://b0ptosh66cxrl" path="res://assets/uiux/main_menu/bgm_main.mp3" id="8_jrbwk"]
 [ext_resource type="Theme" uid="uid://bs1imbtgf7dr4" path="res://assets/scenes/Button_Clickable.tres" id="9_sym4l"]
 [ext_resource type="Script" path="res://assets/scenes/MasterVolume.gd" id="11_e6ba1"]
 [ext_resource type="StyleBox" uid="uid://dcuqsqcektumy" path="res://assets/uiux/main_menu/volumeSlider.res" id="11_sycm3"]
@@ -851,12 +850,6 @@ size_flags_vertical = 3
 theme = ExtResource("1_nvabs")
 script = ExtResource("2_fcx7b")
 metadata/_edit_horizontal_guides_ = [-136.0]
-
-[node name="Menu_BGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_jrbwk")
-volume_db = -30.0
-autoplay = true
-bus = &"Music"
 
 [node name="StackAnimator" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Stack_0")

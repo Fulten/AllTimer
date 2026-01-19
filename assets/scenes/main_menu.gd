@@ -21,6 +21,7 @@ func _ready():
 	UserProfiles._IO_read_profiles()
 	_refresh_profiles_dropdown()
 	_update_current_profile_label()
+	SoundMaster._play_music_track("main_menu2")
 
 func _process(_delta):
 	pass
@@ -538,6 +539,7 @@ func _escape_game_menu():
 			await get_tree().create_timer(0.1).timeout
 			$Options_2/OptionsCategories/DisplayButton.grab_focus()
 			flag_options_menu_display = false
+			save_video_settings()
 			return
 		if flag_options_menu_sound:
 			$StackAnimator.play("Anim_OptionsCategories_FadeIn")
@@ -546,6 +548,7 @@ func _escape_game_menu():
 			get_node("Options_2").show()
 			$Options_2/OptionsCategories/SoundButton.grab_focus()
 			flag_options_menu_sound = false
+			save_audio_settings()
 			return
 		if flag_options_menu_game:
 			$StackAnimator.play("Anim_OptionsCategories_FadeIn")
@@ -554,6 +557,7 @@ func _escape_game_menu():
 			get_node("Options_2").show()
 			$Options_2/OptionsCategories/GameButton.grab_focus()
 			flag_options_menu_game = false
+			save_game_settings()
 			return
 		$StackAnimator.play("Anim_Stack0_FadeIn")
 		await get_tree().create_timer(0.1).timeout

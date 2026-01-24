@@ -460,9 +460,19 @@ func _hide_prequiz_rules():
 	
 	$quizInterface.show()
 	$ControlSwapper0.play("QuizStart")
-	$ControlSwapper0.play("QuestionLoad_A")
-	$ControlSwapper0.play("QuestionLoad_B")
 	pass
+
+@rpc("authority", "reliable", "call_local")
+func _animate_question_load_a():
+	$ControlSwapper0.queue("QuestionLoad_A")
+	
+@rpc("authority", "reliable", "call_local")
+func _animate_question_load_b():
+	$ControlSwapper0.queue("QuestionLoad_B")
+	
+@rpc("authority", "reliable", "call_local")
+func _animate_question_unload():
+	$ControlSwapper0.queue("QuestionUnload")
 
 #endregion
 
@@ -480,7 +490,8 @@ func _player_guess(playerId, guess):
 					GameState._reset_guesses()
 					_hide_prequiz_rules.rpc()
 					players_answered = 0
-					_prequestion_delay_phase()
+					#delay so _hide_prequiz_rules has time to play its animation
+					get_tree().create_timer(4.2).timeout.connect(_prequestion_delay_phase)
 					pass
 			return
 		if !ui_countdown_timer.is_stopped():
@@ -586,6 +597,7 @@ func _prequiz_rules_phase():
 	pass
 
 ## starts the pre_question timer, and halts accepting answer input from players
+## variable delay to give players time to read the question before allowing them to answer
 func _prequestion_delay_phase():
 	# add aditional delay depending on how long the question is to read,
 	# currently one extra second per 40 characters ( * 1/40 = 0.025)
@@ -600,11 +612,14 @@ func _prequestion_delay_phase():
 	# lock all player pannels during prephase
 	_update_ui_player_pannel_locked_all.rpc(true)
 	
+	_animate_question_load_a.rpc()
+	
 	# following the timers experation it will move to the answer_question_phase
 	ui_prequestion_timer.start(pre_question_delay_default + extra_seconds)
 	pass
 
 ## starts the timer for the answer phase, answer input is enabled
+## shows the players the possible question answers
 func _answer_question_phase():
 	ui_prequestion_timer.stop()
 	
@@ -613,10 +628,13 @@ func _answer_question_phase():
 	
 	_update_ui_player_pannel_locked_all.rpc(false)
 	
+	_animate_question_load_b.rpc()
+	
 	ui_countdown_timer.start(GameState.quizOptions.timer)
 	pass
 	
 ## strarts the timer for the post question phase, answer input is disabled
+## shows answer e
 func _postquestion_delay_phase():
 	ui_countdown_timer.stop()
 	flag_accept_input = false
@@ -647,8 +665,9 @@ func _end_of_quiz_phase():
 	_show_question_explainer.rpc(false)
 	_reset_player_statuses.rpc()
 	
-	#just end quesiton immediately for now
-	_next_question()
+	_animate_question_unload.rpc()
+	
+	get_tree().create_timer(1.2).timeout.connect(_next_question)
 	pass
 	
 func _next_question():

@@ -1,12 +1,10 @@
-[gd_scene load_steps=75 format=3 uid="uid://di56bs4ycntxw"]
+[gd_scene load_steps=73 format=3 uid="uid://di56bs4ycntxw"]
 
 [ext_resource type="Script" path="res://assets/scenes/quiz_session.gd" id="1_khyfr"]
 [ext_resource type="Texture2D" uid="uid://dq2hnijwt0hlh" path="res://assets/uiux/session_themes/Patriotic Cipher/session_bg.tga" id="2_mj6gr"]
-[ext_resource type="AudioStream" uid="uid://m7ekwmprjva7" path="res://assets/uiux/main_menu/bgm_quiz.mp3" id="3_p2wgh"]
-[ext_resource type="AudioStream" uid="uid://0nhm3be3vax8" path="res://assets/uiux/session_themes/default/Writing1.mp3" id="4_8v4uk"]
-[ext_resource type="AudioStream" uid="uid://b1t5lqhto2try" path="res://assets/uiux/session_themes/default/Writing2.mp3" id="5_t5m0a"]
-[ext_resource type="AudioStream" uid="uid://bkrq1t36fkih4" path="res://assets/uiux/session_themes/default/Writing3.mp3" id="6_8b3hu"]
-[ext_resource type="AudioStream" uid="uid://dv8inm7h0uiaf" path="res://assets/uiux/session_themes/default/Clack.mp3" id="7_wabe4"]
+[ext_resource type="AudioStream" uid="uid://cpfefof4ig408" path="res://assets/uiux/session_themes/Patriotic Cipher/MGS3 OST - Battle in the Base.mp3" id="3_5flk1"]
+[ext_resource type="AudioStream" uid="uid://bxtn8v7khwtji" path="res://assets/uiux/session_themes/Patriotic Cipher/PatCipBlip.mp3" id="4_wos5v"]
+[ext_resource type="AudioStream" uid="uid://cfadx67p30yfu" path="res://assets/uiux/session_themes/Patriotic Cipher/PatCipClick.mp3" id="5_hp5s0"]
 [ext_resource type="LabelSettings" uid="uid://bm4ie8wbkp2e0" path="res://assets/uiux/session_themes/Patriotic Cipher/cipherTitle.tres" id="8_d5au1"]
 [ext_resource type="LabelSettings" uid="uid://bhmvyhp31on3d" path="res://assets/uiux/session_themes/Patriotic Cipher/label_cipher_section.tres" id="9_kn6fp"]
 [ext_resource type="LabelSettings" uid="uid://fokwou4ul35" path="res://assets/uiux/session_themes/Patriotic Cipher/label_cipher_body.tres" id="10_2070n"]
@@ -3271,25 +3269,23 @@ texture = ExtResource("2_mj6gr")
 stretch_mode = 1
 
 [node name="Quiz_BGM" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_p2wgh")
+stream = ExtResource("3_5flk1")
+volume_db = -10.0
 autoplay = true
 bus = &"Music"
 
 [node name="SFX_Hover1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_8v4uk")
-volume_db = -2.0
+stream = ExtResource("4_wos5v")
 
 [node name="SFX_Hover2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_t5m0a")
-volume_db = -3.0
+stream = ExtResource("4_wos5v")
 
 [node name="SFX_Hover3" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_8b3hu")
-volume_db = -3.0
+stream = ExtResource("4_wos5v")
 
 [node name="SFX_Press" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_wabe4")
-volume_db = -5.0
+stream = ExtResource("5_hp5s0")
+volume_db = 3.0
 
 [node name="preQuiz" type="Control" parent="."]
 layout_mode = 1

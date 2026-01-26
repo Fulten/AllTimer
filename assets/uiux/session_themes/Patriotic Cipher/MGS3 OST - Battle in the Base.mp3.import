@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cpfefof4ig408"
+path="res://.godot/imported/MGS3 OST - Battle in the Base.mp3-e6e97d8db237e5ec1f09d64ce27f34a8.mp3str"
+
+[deps]
+
+source_file="res://assets/uiux/session_themes/Patriotic Cipher/MGS3 OST - Battle in the Base.mp3"
+dest_files=["res://.godot/imported/MGS3 OST - Battle in the Base.mp3-e6e97d8db237e5ec1f09d64ce27f34a8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

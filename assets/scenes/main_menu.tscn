@@ -290,7 +290,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(592, 1160), Vector2(592, 560)]
+"values": [Vector2(232, 1160), Vector2(232, 560)]
 }
 
 [sub_resource type="Animation" id="Animation_yjq64"]
@@ -370,7 +370,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(608, 1096), Vector2(608, 515)]
+"values": [Vector2(328, 1096), Vector2(328, 515)]
 }
 
 [sub_resource type="Animation" id="Animation_lbqsi"]
@@ -963,10 +963,10 @@ anchor_left = 0.467
 anchor_top = 0.664
 anchor_right = 0.533
 anchor_bottom = 0.82
-offset_left = 594.0
-offset_top = 373.0
-offset_right = 1318.0
-offset_bottom = 573.0
+offset_left = 573.32
+offset_top = 346.44
+offset_right = 1297.32
+offset_bottom = 546.44
 grow_horizontal = 2
 grow_vertical = 2
 focus_neighbor_left = NodePath("../MainMenuButtons/PlayButton")
@@ -1085,7 +1085,7 @@ anchor_bottom = 0.5
 offset_left = -351.5
 offset_top = -168.0
 offset_right = 351.5
-offset_bottom = 32.0002
+offset_bottom = 32.0001
 grow_horizontal = 2
 grow_vertical = 2
 text = "Options"
@@ -1107,7 +1107,7 @@ anchor_bottom = 0.5
 offset_left = -377.0
 offset_top = 22.0
 offset_right = 369.0
-offset_bottom = 80.0001
+offset_bottom = 80.0003
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 145
@@ -1184,10 +1184,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 579.5
-offset_top = 309.0
-offset_right = 1197.5
-offset_bottom = 509.0
+offset_left = -308.5
+offset_top = -163.0
+offset_right = 309.5
+offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Display"
@@ -1206,10 +1206,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 568.0
-offset_top = 501.0
-offset_right = 1208.0
-offset_bottom = 845.006
+offset_left = -320.0
+offset_top = 29.0
+offset_right = 320.0
+offset_bottom = 373.006
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -1375,10 +1375,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 657.0
-offset_top = 309.0
-offset_right = 1119.0
-offset_bottom = 509.0
+offset_left = -231.0
+offset_top = -163.0
+offset_right = 231.0
+offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Game"
@@ -1397,10 +1397,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 533.0
-offset_top = 500.0
-offset_right = 1243.0
-offset_bottom = 923.999
+offset_left = -355.0
+offset_top = 28.0
+offset_right = 355.0
+offset_bottom = 451.999
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -1554,10 +1554,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 606.0
-offset_top = 309.0
-offset_right = 1171.0
-offset_bottom = 509.0
+offset_left = -282.0
+offset_top = -163.0
+offset_right = 283.0
+offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Sound
@@ -1577,10 +1577,10 @@ anchor_left = 0.342
 anchor_top = 0.525
 anchor_right = 0.658
 anchor_bottom = 0.898
-offset_left = 608.0
-offset_top = 512.0
-offset_right = 1168.0
-offset_bottom = 852.0
+offset_left = 0.607971
+offset_top = 16.4
+offset_right = 560.608
+offset_bottom = 356.4
 
 [node name="SoundDeviceSetter" type="HBoxContainer" parent="Options_Sound2/SettingsCase"]
 layout_mode = 2
@@ -1747,10 +1747,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 645.0
-offset_top = 373.0
-offset_right = 1277.0
-offset_bottom = 573.0
+offset_left = -315.0
+offset_top = -167.0
+offset_right = 317.0
+offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Profile"
@@ -1769,10 +1769,10 @@ anchor_left = 0.308
 anchor_top = 0.511
 anchor_right = 0.687
 anchor_bottom = 0.83
-offset_left = 592.0
-offset_top = 560.0
-offset_right = 1320.0
-offset_bottom = 715.0
+offset_left = 0.640015
+offset_top = 8.12
+offset_right = 728.64
+offset_bottom = 163.12
 grow_horizontal = 2
 grow_vertical = 2
 

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cfadx67p30yfu"
+path="res://.godot/imported/PatCipClick.mp3-4d0ddc00faff7573ed369eae183d2648.mp3str"
+
+[deps]
+
+source_file="res://assets/uiux/session_themes/Patriotic Cipher/PatCipClick.mp3"
+dest_files=["res://.godot/imported/PatCipClick.mp3-4d0ddc00faff7573ed369eae183d2648.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

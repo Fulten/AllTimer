@@ -1,8 +1,7 @@
-[gd_scene load_steps=73 format=3 uid="uid://di56bs4ycntxw"]
+[gd_scene load_steps=72 format=3 uid="uid://di56bs4ycntxw"]
 
 [ext_resource type="Script" path="res://assets/scenes/quiz_session.gd" id="1_khyfr"]
 [ext_resource type="Texture2D" uid="uid://dq2hnijwt0hlh" path="res://assets/uiux/session_themes/Patriotic Cipher/session_bg.tga" id="2_mj6gr"]
-[ext_resource type="AudioStream" uid="uid://cpfefof4ig408" path="res://assets/uiux/session_themes/Patriotic Cipher/MGS3 OST - Battle in the Base.mp3" id="3_5flk1"]
 [ext_resource type="AudioStream" uid="uid://bxtn8v7khwtji" path="res://assets/uiux/session_themes/Patriotic Cipher/PatCipBlip.mp3" id="4_wos5v"]
 [ext_resource type="AudioStream" uid="uid://cfadx67p30yfu" path="res://assets/uiux/session_themes/Patriotic Cipher/PatCipClick.mp3" id="5_hp5s0"]
 [ext_resource type="LabelSettings" uid="uid://bm4ie8wbkp2e0" path="res://assets/uiux/session_themes/Patriotic Cipher/cipherTitle.tres" id="8_d5au1"]
@@ -3247,7 +3246,22 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_khyfr")
 
-[node name="ControlSwapper" type="AnimationPlayer" parent="."]
+[node name="ControlSwapper0" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2s641")
+}
+
+[node name="ControlSwapper1" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2s641")
+}
+
+[node name="ControlSwapper2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2s641")
+}
+
+[node name="ControlSwapper3" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_2s641")
 }
@@ -3267,12 +3281,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_mj6gr")
 stretch_mode = 1
-
-[node name="Quiz_BGM" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_5flk1")
-volume_db = -10.0
-autoplay = true
-bus = &"Music"
 
 [node name="SFX_Hover1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_wos5v")
@@ -3329,7 +3337,7 @@ horizontal_alignment = 1
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-text = "The player with the highest score after X rounds wins."
+text = "The player with the highest score after %s rounds wins."
 label_settings = ExtResource("10_2070n")
 horizontal_alignment = 1
 
@@ -3338,7 +3346,7 @@ visible = false
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
-text = "The quiz will end after # round(s)"
+text = "The quiz will end after %s round(s)"
 label_settings = ExtResource("10_2070n")
 horizontal_alignment = 1
 
@@ -3353,7 +3361,7 @@ horizontal_alignment = 1
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
-text = "The quiz will end when an agent achieves a score of #"
+text = "The quiz will end when an agent achieves a score of %s"
 label_settings = ExtResource("10_2070n")
 horizontal_alignment = 1
 
@@ -3361,7 +3369,7 @@ horizontal_alignment = 1
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-text = "The first agent to correctly answer X questions wins."
+text = "The first agent to correctly answer %s questions wins."
 label_settings = ExtResource("10_2070n")
 horizontal_alignment = 1
 
@@ -3370,14 +3378,14 @@ visible = false
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
-text = "The quiz will end when an agent correctly answers # questions"
+text = "The quiz will end when an agent correctly answers %s questions"
 label_settings = ExtResource("10_2070n")
 horizontal_alignment = 1
 
 [node name="Timer" type="Label" parent="preQuiz/preSessionOrganizer/RulesText"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-text = "Agents will have # seconds to answer each question."
+text = "Agents will have %s seconds to answer each question."
 label_settings = ExtResource("10_2070n")
 horizontal_alignment = 1
 

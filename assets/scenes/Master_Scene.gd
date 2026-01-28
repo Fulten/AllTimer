@@ -36,6 +36,8 @@ func _ready():
 	multiplayer.connection_failed.connect(_mp_on_connected_fail)
 	multiplayer.server_disconnected.connect(_mp_on_server_disconnected)
 	
+	_local_update_selected_scene()
+	
 	GameState.PlayerCount = 1;
 	pass
 
@@ -191,4 +193,10 @@ func _exit_quiz_handler():
 
 func _exit_quiz():
 	get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
+	pass
+
+func _local_update_selected_scene():
+	var test = "res://assets/scenes/cipher.tscn"
+	
+	#quiz_session_scene = load(test)
 	pass

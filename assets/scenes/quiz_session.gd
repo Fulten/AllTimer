@@ -517,7 +517,6 @@ func _player_loaded(_peerId):
 #endregion
 
 #region local functions used by the server and clients
-
 func _escape_game_menu():
 	# back out of the submenu to the options menu
 	if flag_in_options_submenu:

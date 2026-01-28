@@ -79,7 +79,7 @@ length = 1.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1_icon:self_modulate")
+tracks/0/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1_icon:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -91,7 +91,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1:self_modulate")
+tracks/1/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -103,7 +103,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2_icon:self_modulate")
+tracks/2/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2_icon:self_modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -115,7 +115,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2:self_modulate")
+tracks/3/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2:self_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -127,7 +127,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3_icon:self_modulate")
+tracks/4/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3_icon:self_modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -139,7 +139,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3:self_modulate")
+tracks/5/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3:self_modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -151,7 +151,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4_icon:self_modulate")
+tracks/6/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4_icon:self_modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -163,7 +163,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4:self_modulate")
+tracks/7/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4:self_modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -215,7 +215,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1_icon:self_modulate")
+tracks/3/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1_icon:self_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -227,7 +227,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1:self_modulate")
+tracks/4/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1:self_modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -239,7 +239,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2_icon:self_modulate")
+tracks/5/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2_icon:self_modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -251,7 +251,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2:self_modulate")
+tracks/6/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2:self_modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -263,7 +263,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3_icon:self_modulate")
+tracks/7/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3_icon:self_modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -275,7 +275,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3:self_modulate")
+tracks/8/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3:self_modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -287,7 +287,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4_icon:self_modulate")
+tracks/9/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4_icon:self_modulate")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -299,7 +299,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4:self_modulate")
+tracks/10/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4:self_modulate")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -1223,7 +1223,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1_icon:self_modulate")
+tracks/5/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1_icon:self_modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -1235,7 +1235,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1:self_modulate")
+tracks/6/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1:self_modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1247,7 +1247,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2_icon:self_modulate")
+tracks/7/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2_icon:self_modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -1259,7 +1259,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2:self_modulate")
+tracks/8/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2:self_modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -1271,7 +1271,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3_icon:self_modulate")
+tracks/9/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3_icon:self_modulate")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -1283,7 +1283,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3:self_modulate")
+tracks/10/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3:self_modulate")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -1295,7 +1295,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4_icon:self_modulate")
+tracks/11/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4_icon:self_modulate")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -1307,7 +1307,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4:self_modulate")
+tracks/12/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4:self_modulate")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -2258,7 +2258,7 @@ tracks/35/keys = {
 tracks/36/type = "value"
 tracks/36/imported = false
 tracks/36/enabled = true
-tracks/36/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1_icon:self_modulate")
+tracks/36/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1_icon:self_modulate")
 tracks/36/interp = 1
 tracks/36/loop_wrap = true
 tracks/36/keys = {
@@ -2270,7 +2270,7 @@ tracks/36/keys = {
 tracks/37/type = "value"
 tracks/37/imported = false
 tracks/37/enabled = true
-tracks/37/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1:self_modulate")
+tracks/37/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1:self_modulate")
 tracks/37/interp = 1
 tracks/37/loop_wrap = true
 tracks/37/keys = {
@@ -2282,7 +2282,7 @@ tracks/37/keys = {
 tracks/38/type = "value"
 tracks/38/imported = false
 tracks/38/enabled = true
-tracks/38/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2_icon:self_modulate")
+tracks/38/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2_icon:self_modulate")
 tracks/38/interp = 1
 tracks/38/loop_wrap = true
 tracks/38/keys = {
@@ -2294,7 +2294,7 @@ tracks/38/keys = {
 tracks/39/type = "value"
 tracks/39/imported = false
 tracks/39/enabled = true
-tracks/39/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2:self_modulate")
+tracks/39/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2:self_modulate")
 tracks/39/interp = 1
 tracks/39/loop_wrap = true
 tracks/39/keys = {
@@ -2306,7 +2306,7 @@ tracks/39/keys = {
 tracks/40/type = "value"
 tracks/40/imported = false
 tracks/40/enabled = true
-tracks/40/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3_icon:self_modulate")
+tracks/40/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3_icon:self_modulate")
 tracks/40/interp = 1
 tracks/40/loop_wrap = true
 tracks/40/keys = {
@@ -2318,7 +2318,7 @@ tracks/40/keys = {
 tracks/41/type = "value"
 tracks/41/imported = false
 tracks/41/enabled = true
-tracks/41/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3:self_modulate")
+tracks/41/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3:self_modulate")
 tracks/41/interp = 1
 tracks/41/loop_wrap = true
 tracks/41/keys = {
@@ -2330,7 +2330,7 @@ tracks/41/keys = {
 tracks/42/type = "value"
 tracks/42/imported = false
 tracks/42/enabled = true
-tracks/42/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4_icon:self_modulate")
+tracks/42/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4_icon:self_modulate")
 tracks/42/interp = 1
 tracks/42/loop_wrap = true
 tracks/42/keys = {
@@ -2342,7 +2342,7 @@ tracks/42/keys = {
 tracks/43/type = "value"
 tracks/43/imported = false
 tracks/43/enabled = true
-tracks/43/path = NodePath("quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4:self_modulate")
+tracks/43/path = NodePath("quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4:self_modulate")
 tracks/43/interp = 1
 tracks/43/loop_wrap = true
 tracks/43/keys = {
@@ -3474,24 +3474,25 @@ autowrap_mode = 2
 [node name="spacer - leave blank" type="Label" parent="quizInterface/session_organizer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="quizInterface/session_organizer"]
+[node name="VerticalAnswerCategories" type="HBoxContainer" parent="quizInterface/session_organizer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 420
 
-[node name="answer_organizer" type="VBoxContainer" parent="quizInterface/session_organizer/HBoxContainer"]
+[node name="MultipleChoice" type="VBoxContainer" parent="quizInterface/session_organizer/VerticalAnswerCategories"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="answer_pair1" type="HBoxContainer" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer"]
+[node name="answer_pair1" type="HBoxContainer" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice"]
 layout_mode = 2
 
-[node name="a1_icon" type="TextureRect" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1"]
+[node name="a1_icon" type="TextureRect" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("14_bj7b2")
 expand_mode = 1
 
-[node name="a1" type="Button" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1"]
+[node name="a1" type="Button" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../answer_pair4/a4")
 focus_neighbor_top = NodePath("../../answer_pair4/a4")
@@ -3500,16 +3501,16 @@ focus_neighbor_bottom = NodePath("../../answer_pair2/a2")
 theme = ExtResource("17_0bpq4")
 text = "answer_one"
 
-[node name="answer_pair2" type="HBoxContainer" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer"]
+[node name="answer_pair2" type="HBoxContainer" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice"]
 layout_mode = 2
 
-[node name="a2_icon" type="TextureRect" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2"]
+[node name="a2_icon" type="TextureRect" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("16_5coas")
 expand_mode = 1
 
-[node name="a2" type="Button" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2"]
+[node name="a2" type="Button" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../answer_pair1/a1")
 focus_neighbor_top = NodePath("../../answer_pair1/a1")
@@ -3518,16 +3519,16 @@ focus_neighbor_bottom = NodePath("../../answer_pair3/a3")
 theme = ExtResource("17_0bpq4")
 text = "answer_two"
 
-[node name="answer_pair3" type="HBoxContainer" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer"]
+[node name="answer_pair3" type="HBoxContainer" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice"]
 layout_mode = 2
 
-[node name="a3_icon" type="TextureRect" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3"]
+[node name="a3_icon" type="TextureRect" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("17_fag03")
 expand_mode = 1
 
-[node name="a3" type="Button" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3"]
+[node name="a3" type="Button" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../answer_pair2/a2")
 focus_neighbor_top = NodePath("../../answer_pair2/a2")
@@ -3537,16 +3538,16 @@ theme = ExtResource("17_0bpq4")
 text = "answer_three
 "
 
-[node name="answer_pair4" type="HBoxContainer" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer"]
+[node name="answer_pair4" type="HBoxContainer" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice"]
 layout_mode = 2
 
-[node name="a4_icon" type="TextureRect" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4"]
+[node name="a4_icon" type="TextureRect" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("18_4s6r2")
 expand_mode = 1
 
-[node name="a4" type="Button" parent="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4"]
+[node name="a4" type="Button" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../answer_pair3/a3")
 focus_neighbor_top = NodePath("../../answer_pair3/a3")
@@ -3555,6 +3556,128 @@ focus_neighbor_bottom = NodePath("../../answer_pair1/a1")
 theme = ExtResource("17_0bpq4")
 text = "answer_four
 "
+
+[node name="CenteredAnswerCategories" type="HBoxContainer" parent="quizInterface/session_organizer"]
+layout_mode = 2
+theme_override_constants/separation = 420
+alignment = 1
+
+[node name="TrueOrFalse" type="HBoxContainer" parent="quizInterface/session_organizer/CenteredAnswerCategories"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="True" type="VBoxContainer" parent="quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse"]
+layout_mode = 2
+alignment = 1
+
+[node name="a1_icon" type="TextureRect" parent="quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/True"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("14_bj7b2")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="TrueButton" type="Button" parent="quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/True"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+focus_neighbor_right = NodePath("../../False/FalseButton")
+focus_neighbor_bottom = NodePath("../../False/FalseButton")
+theme = ExtResource("17_0bpq4")
+theme_override_font_sizes/font_size = 40
+text = "True"
+
+[node name="spacer - leave blank" type="Label" parent="quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/True"]
+layout_mode = 2
+
+[node name="orLabel" type="Label" parent="quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3055, 0.592583, 0.65, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 24
+text = "
+ OR "
+
+[node name="False" type="VBoxContainer" parent="quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse"]
+layout_mode = 2
+
+[node name="a2_icon" type="TextureRect" parent="quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/False"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("16_5coas")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="FalseButton" type="Button" parent="quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/False"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+focus_neighbor_left = NodePath("../../True/TrueButton")
+focus_neighbor_top = NodePath("../../True/TrueButton")
+theme = ExtResource("17_0bpq4")
+theme_override_font_sizes/font_size = 40
+text = "False"
+
+[node name="spacer - leave blank" type="Label" parent="quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/False"]
+layout_mode = 2
+
+[node name="ThisOrThat" type="HBoxContainer" parent="quizInterface/session_organizer/CenteredAnswerCategories"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="This" type="VBoxContainer" parent="quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat"]
+layout_mode = 2
+alignment = 1
+
+[node name="a1_icon" type="TextureRect" parent="quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/This"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("14_bj7b2")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Cat1Button" type="Button" parent="quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/This"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+focus_neighbor_right = NodePath("../../That/Cat2Button")
+focus_neighbor_bottom = NodePath("../../That/Cat2Button")
+theme = ExtResource("17_0bpq4")
+theme_override_font_sizes/font_size = 40
+text = "This"
+
+[node name="spacer - leave blank" type="Label" parent="quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/This"]
+layout_mode = 2
+
+[node name="orLabel" type="Label" parent="quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3055, 0.592583, 0.65, 1)
+theme_override_fonts/font = ExtResource("32_0qjd0")
+theme_override_font_sizes/font_size = 24
+text = "
+ OR "
+
+[node name="That" type="VBoxContainer" parent="quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat"]
+layout_mode = 2
+
+[node name="a2_icon" type="TextureRect" parent="quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/That"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("16_5coas")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Cat2Button" type="Button" parent="quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/That"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+focus_neighbor_left = NodePath("../../This/Cat1Button")
+focus_neighbor_top = NodePath("../../This/Cat1Button")
+theme = ExtResource("17_0bpq4")
+theme_override_font_sizes/font_size = 40
+text = "That"
+
+[node name="spacer - leave blank" type="Label" parent="quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/That"]
+layout_mode = 2
 
 [node name="players_region" type="HBoxContainer" parent="quizInterface"]
 layout_mode = 1
@@ -4546,14 +4669,22 @@ theme_override_font_sizes/font_size = 28
 text = "Back"
 flat = true
 
-[connection signal="button_down" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1" to="." method="_on_a_1_button_down"]
-[connection signal="button_up" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair1/a1" to="." method="_on_a_1_button_up"]
-[connection signal="button_down" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2" to="." method="_on_a_2_button_down"]
-[connection signal="button_up" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair2/a2" to="." method="_on_a_2_button_up"]
-[connection signal="button_down" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3" to="." method="_on_a_3_button_down"]
-[connection signal="button_up" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair3/a3" to="." method="_on_a_3_button_up"]
-[connection signal="button_down" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4" to="." method="_on_a_4_button_down"]
-[connection signal="button_up" from="quizInterface/session_organizer/HBoxContainer/answer_organizer/answer_pair4/a4" to="." method="_on_a_4_button_up"]
+[connection signal="button_down" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1" to="." method="_on_a_1_button_down"]
+[connection signal="button_up" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1" to="." method="_on_a_1_button_up"]
+[connection signal="button_down" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2" to="." method="_on_a_2_button_down"]
+[connection signal="button_up" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2" to="." method="_on_a_2_button_up"]
+[connection signal="button_down" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3" to="." method="_on_a_3_button_down"]
+[connection signal="button_up" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3" to="." method="_on_a_3_button_up"]
+[connection signal="button_down" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4" to="." method="_on_a_4_button_down"]
+[connection signal="button_up" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4" to="." method="_on_a_4_button_up"]
+[connection signal="button_down" from="quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/True/TrueButton" to="." method="_on_a_1_button_down"]
+[connection signal="button_up" from="quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/True/TrueButton" to="." method="_on_a_1_button_up"]
+[connection signal="button_down" from="quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/False/FalseButton" to="." method="_on_a_2_button_down"]
+[connection signal="button_up" from="quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse/False/FalseButton" to="." method="_on_a_2_button_up"]
+[connection signal="button_down" from="quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/This/Cat1Button" to="." method="_on_a_1_button_down"]
+[connection signal="button_up" from="quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/This/Cat1Button" to="." method="_on_a_1_button_up"]
+[connection signal="button_down" from="quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/That/Cat2Button" to="." method="_on_a_2_button_down"]
+[connection signal="button_up" from="quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/That/Cat2Button" to="." method="_on_a_2_button_up"]
 [connection signal="button_down" from="pauseScreen/pauseCase/pauseBase/resumeButton" to="." method="_on_resume_button_button_down"]
 [connection signal="button_up" from="pauseScreen/pauseCase/pauseBase/resumeButton" to="." method="_on_resume_button_button_up"]
 [connection signal="focus_entered" from="pauseScreen/pauseCase/pauseBase/resumeButton" to="." method="_on_resume_button_focus_entered"]

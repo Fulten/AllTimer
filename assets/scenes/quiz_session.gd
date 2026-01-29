@@ -86,6 +86,7 @@ func _ready():
 	asset_player_pannel_locked = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Locked.tres")
 	asset_player_pannel_default = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Default.tres")
 	
+	_load_sound_settings()
 	_select_music_track()
 	
 	if multiplayer.is_server():
@@ -523,6 +524,20 @@ func _select_music_track():
 		SoundMaster._play_music_track("msg_theme")
 	else:
 		SoundMaster._play_music_track("default_theme")
+
+func _load_sound_settings():
+	var config = ConfigFile.new()
+	var err = config.load("user://settings.cfg")
+	if err == OK:
+		var master = config.get_value("audio", "master", 1.0)
+		var music = config.get_value("audio", "music", 1.0)
+		var sfx = config.get_value("audio", "sfx", 1.0)
+		var voiceover = config.get_value("audio", "voiceover", 1.0)
+		%VolumeControl.set_value_no_signal(master)
+		%VolumeControl2.set_value_no_signal(music)
+		%VolumeControl3.set_value_no_signal(sfx)
+		%VolumeControl4.set_value_no_signal(voiceover)
+	pass
 
 func _escape_game_menu():
 	# back out of the submenu to the options menu

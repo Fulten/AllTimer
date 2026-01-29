@@ -519,8 +519,10 @@ func _player_loaded(_peerId):
 
 #region local functions used by the server and clients
 func _select_music_track():
-	#SoundMaster._play_music_track("default_theme")
-	SoundMaster._play_music_track("msg_theme")
+	if GameState.CurrentTheme == "MGS Radio":
+		SoundMaster._play_music_track("msg_theme")
+	else:
+		SoundMaster._play_music_track("default_theme")
 
 func _escape_game_menu():
 	# back out of the submenu to the options menu

@@ -37,6 +37,7 @@ func save_audio_settings():
 
 
 func save_video_settings():
+	update_game_state_theme(%SessionThemesList.get_item_text(%SessionThemesList.get_selected_id()))
 	config.set_value("video", "type", %DisplayList.get_selected_id())
 	config.set_value("video", "resolution", %ResolutionsList.get_selected_id())
 	config.set_value("video", "input", %InputDisplayList.get_item_text(%InputDisplayList.get_selected_id()))
@@ -132,6 +133,7 @@ func apply_video_settings(display_type: int, resolution: int, input_display: Str
 	_on_resolutions_list_item_selected(resolution)
 	select_option_by_text(%InputDisplayList,input_display)
 	select_option_by_text(%SessionThemesList,theme)
+	update_game_state_theme(theme)
 
 
 func apply_game_settings(timer: int, win_con: String, win_con_int: int,  tallies: bool, skipping_losses: bool, gambling_modes: bool):
@@ -153,7 +155,9 @@ func update_game_state(timer: int, win_con: String, win_con_int: int, tallies: b
 	GameState.quizOptions.skipping_losses = skipping_losses
 	GameState.quizOptions.gambling_modes = gambling_modes
 
-
+func update_game_state_theme(theme: String):
+	GameState.CurrentTheme = theme
+	
 func _refresh_profiles_dropdown():
 	var profile_list = $Options_Profile/ProfileSettingsCase/DimensionFrame/CurrentProfileCase/ProfilesList
 	var id = 0

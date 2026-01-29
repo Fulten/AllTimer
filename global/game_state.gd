@@ -78,7 +78,10 @@ var CurrentQuestionIndex = 0 #The index of question currently on in quiz
 var TagsToExclude = [] #The list of tags to be excluded from quizes
 var CurrentChances = [] #The list of chance stars to track for the game
 
-var CurrentTheme = "default" #The current quiz theme
+## currently avalible themes
+## Chalkboard - default
+## MGS Radio - cipher
+var CurrentTheme = "Chalkboard" #The current quiz theme
 
 var GameStarted = false
 

@@ -196,7 +196,12 @@ func _exit_quiz():
 	pass
 
 func _local_update_selected_scene():
-	var test = "res://assets/scenes/cipher.tscn"
+	#load chalkboard scene by default incase of bad input
+	var selectedtheme = "res://assets/scenes/quiz_session.tscn"
+
+	if GameState.CurrentTheme == "MGS Radio":
+		selectedtheme = "res://assets/scenes/cipher.tscn"
+		pass
 	
-	quiz_session_scene = load(test)
+	quiz_session_scene = load(selectedtheme)
 	pass

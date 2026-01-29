@@ -39,10 +39,10 @@ func _ready():
 # loads music tracks to be played
 func _private_music_to_load():
 	# main menu music
-	_load_music_track("res://assets/uiux/main_menu/bgm_lobby.mp3", "main_menu1")
-	_load_music_track("res://assets/uiux/main_menu/bgm_main.mp3", "main_menu2")
-	_load_music_track("res://assets/uiux/main_menu/bgm_quiz.mp3", "main_menu3")
-	
+	_load_music_track("res://assets/uiux/main_menu/bgm_main.mp3", "main_menu")
+	_load_music_track("res://assets/uiux/main_menu/bgm_lobby.mp3", "mp_lobby")
+	_load_music_track("res://assets/uiux/main_menu/bgm_quiz.mp3", "default_theme")
+	_load_music_track("res://assets/uiux/session_themes/Patriotic Cipher/MGS3 OST - Battle in the Base.mp3", "msg_theme")
 	# quiz session music
 
 # loads sound effects to be played

@@ -21,7 +21,7 @@ func _ready():
 	UserProfiles._IO_read_profiles()
 	_refresh_profiles_dropdown()
 	_update_current_profile_label()
-	SoundMaster._play_music_track("main_menu2")
+	SoundMaster._play_music_track("main_menu")
 
 func _process(_delta):
 	pass

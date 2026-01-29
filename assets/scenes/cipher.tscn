@@ -3979,7 +3979,6 @@ autowrap_mode = 2
 layout_mode = 2
 
 [node name="VerticalAnswerCategories" type="HBoxContainer" parent="quizInterface/session_organizer"]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 420
 
@@ -4062,6 +4061,7 @@ text = "answer_four
 "
 
 [node name="CenteredAnswerCategories" type="HBoxContainer" parent="quizInterface/session_organizer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 420
 alignment = 1

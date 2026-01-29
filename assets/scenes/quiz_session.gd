@@ -85,7 +85,8 @@ var QuizEndScreen = false
 func _ready():
 	asset_player_pannel_locked = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Locked.tres")
 	asset_player_pannel_default = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Default.tres")
-	SoundMaster._play_music_track("main_menu3")
+	
+	_select_music_track()
 	
 	if multiplayer.is_server():
 		$pauseScreen/pauseCase/pauseBase/quitButton.text = "lobby"
@@ -517,6 +518,10 @@ func _player_loaded(_peerId):
 #endregion
 
 #region local functions used by the server and clients
+func _select_music_track():
+	#SoundMaster._play_music_track("default_theme")
+	SoundMaster._play_music_track("msg_theme")
+
 func _escape_game_menu():
 	# back out of the submenu to the options menu
 	if flag_in_options_submenu:

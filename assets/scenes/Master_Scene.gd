@@ -180,7 +180,7 @@ func _kick_peer(reason):
 	pass
 
 func _end_of_quiz_handler():
-	SoundMaster._play_music_track("main_menu1")
+	SoundMaster._play_music_track("mp_lobby")
 	if multiplayer.is_server():
 		multiplayer_lobby_instance._enable_launch_button()
 		pass
@@ -198,5 +198,5 @@ func _exit_quiz():
 func _local_update_selected_scene():
 	var test = "res://assets/scenes/cipher.tscn"
 	
-	#quiz_session_scene = load(test)
+	quiz_session_scene = load(test)
 	pass

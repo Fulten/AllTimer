@@ -215,14 +215,14 @@ flat = true
 [node name="PeerCase" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.282
-anchor_top = 0.48
-anchor_right = 0.467
-anchor_bottom = 0.653
-offset_left = 0.559998
-offset_top = -0.400024
-offset_right = -0.640015
-offset_bottom = -0.240051
+anchor_left = 0.137
+anchor_top = 0.363
+anchor_right = 0.333
+anchor_bottom = 0.637
+offset_left = 16.96
+offset_top = -0.0400085
+offset_right = -5.35999
+offset_bottom = -108.96
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -262,14 +262,12 @@ horizontal_alignment = 1
 [node name="ProfileCase" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.533
-anchor_top = 0.481
-anchor_right = 0.733
-anchor_bottom = 0.652
-offset_left = 0.639893
-offset_top = 0.519958
-offset_right = 0.639893
-offset_bottom = -0.160034
+anchor_left = 0.4
+anchor_top = 0.43
+anchor_right = 0.6
+anchor_bottom = 0.6
+offset_top = -0.399994
+offset_bottom = 6.10352e-05
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -287,6 +285,40 @@ item_count = 1
 selected = 0
 popup/item_0/text = "N/A"
 popup/item_0/id = 0
+
+[node name="ThemeCase" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.43
+anchor_right = 0.6
+anchor_bottom = 0.6
+offset_left = 518.0
+offset_top = -74.4
+offset_right = 518.0
+offset_bottom = -73.9999
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ThemeCase"]
+layout_mode = 2
+text = "Quiz Skin"
+label_settings = ExtResource("5_wtxry")
+
+[node name="ThemesList" type="OptionButton" parent="ThemeCase"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
+flat = true
+item_count = 3
+selected = 0
+popup/item_0/text = "Default"
+popup/item_0/id = 0
+popup/item_1/text = "Chalkboard"
+popup/item_1/id = 1
+popup/item_2/text = "Patriotic Cipher"
+popup/item_2/id = 2
 
 [node name="ConnectionFailedPopupCase" type="Control" parent="."]
 visible = false

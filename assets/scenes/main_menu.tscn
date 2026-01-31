@@ -1433,16 +1433,16 @@ popup/item_2/id = 2
 popup/item_3/text = "1 min"
 popup/item_3/id = 3
 
-[node name="WinConditions" type="HBoxContainer" parent="Options_Game2/SettingsList"]
+[node name="ThemeSelection" type="HBoxContainer" parent="Options_Game2/SettingsList"]
 layout_mode = 2
 alignment = 1
 
-[node name="Tag_WinCondition" type="Label" parent="Options_Game2/SettingsList/WinConditions"]
+[node name="Tag_Theme" type="Label" parent="Options_Game2/SettingsList/ThemeSelection"]
 layout_mode = 2
-text = "Win condition:"
+text = "Quiz Skin:"
 label_settings = ExtResource("12_fat6d")
 
-[node name="WinConList" type="OptionButton" parent="Options_Game2/SettingsList/WinConditions"]
+[node name="ThemeList" type="OptionButton" parent="Options_Game2/SettingsList/ThemeSelection"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
@@ -1453,11 +1453,11 @@ alignment = 1
 item_count = 3
 selected = 0
 fit_to_longest_item = false
-popup/item_0/text = "Highest score after 10 questions"
+popup/item_0/text = "Default"
 popup/item_0/id = 0
-popup/item_1/text = "First to answer 10 questions correctly"
+popup/item_1/text = "Chalkboard"
 popup/item_1/id = 1
-popup/item_2/text = "First to reach 1000 points"
+popup/item_2/text = "Patriotic Cipher"
 popup/item_2/id = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Options_Game2/SettingsList"]

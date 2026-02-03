@@ -83,9 +83,7 @@ var QuizEndScreen = false
 ##Called when the node enters the scene tree for the first time.
 ##primarily used by the server to setup the quiz session
 func _ready():
-	asset_player_pannel_locked = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Locked.tres")
-	asset_player_pannel_default = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Default.tres")
-	
+	_set_theme_specific_graphics()
 	_load_sound_settings()
 	_select_music_track()
 	
@@ -538,6 +536,15 @@ func _load_sound_settings():
 		%VolumeControl3.set_value_no_signal(sfx)
 		%VolumeControl4.set_value_no_signal(voiceover)
 	pass
+
+
+func _set_theme_specific_graphics():
+	if GameState.CurrentTheme == "MGS Radio":
+		asset_player_pannel_locked = load("res://assets/uiux/session_themes/Patriotic Cipher/label_cipher_section.tres")
+		asset_player_pannel_default = load("res://assets/uiux/session_themes/Patriotic Cipher/label_cipher_section.tres")
+	else:
+		asset_player_pannel_locked = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Locked.tres")
+		asset_player_pannel_default = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Default.tres")
 
 func _escape_game_menu():
 	# back out of the submenu to the options menu

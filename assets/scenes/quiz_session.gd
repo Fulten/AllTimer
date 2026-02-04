@@ -347,6 +347,13 @@ func _update_ui_player_pannel_locked(lock: bool, in_playerId):
 func _sync_and_save_client_profile_statistics(playersData):
 	#gets the data only for the local player
 	var profileData = playersData[multiplayer.get_unique_id()]
+	var gameScore = GameState.players[multiplayer.get_unique_id()].score
+	
+	if profileData["score_highest"] < gameScore:
+		profileData["score_highest"] = gameScore
+		
+	if profileData["score_lowest"] > gameScore:
+		profileData["score_lowest"] = gameScore
 	
 	UserProfiles._overwrite_profile_with_reference(profileData)
 	pass

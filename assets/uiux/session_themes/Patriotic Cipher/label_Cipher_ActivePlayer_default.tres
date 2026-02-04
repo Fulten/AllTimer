@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://y3ulyabu6hex"]
+
+[ext_resource type="FontFile" uid="uid://ert0t4ov8cqh" path="res://assets/uiux/session_themes/Patriotic Cipher/ARCADE_N.TTF" id="1_5f12a"]
+
+[resource]
+font = ExtResource("1_5f12a")
+font_size = 24
+font_color = Color(0.605717, 0.853191, 0.905619, 1)
+shadow_size = 3
+shadow_color = Color(1.27065e-05, 0.728506, 0.984463, 1)
+shadow_offset = Vector2(0, 0)

@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://sib7pjpdkuax" path="res://assets/uiux/session_themes/default/separator_h.tga" id="23_1ftj0"]
 [ext_resource type="Texture2D" uid="uid://d3d8drdimuvjd" path="res://assets/uiux/session_themes/Patriotic Cipher/T_status_incorrect_patcip.tga" id="23_x0u7c"]
 [ext_resource type="Texture2D" uid="uid://b2eg3oa2waadg" path="res://assets/uiux/session_themes/Patriotic Cipher/T_status_correct_patcip.tga" id="24_irilu"]
+[ext_resource type="LabelSettings" uid="uid://y3ulyabu6hex" path="res://assets/uiux/session_themes/Patriotic Cipher/label_Cipher_ActivePlayer_default.tres" id="25_axd0y"]
 [ext_resource type="Texture2D" uid="uid://c2glpvkloux56" path="res://assets/uiux/session_themes/Patriotic Cipher/T_seperator_h_patcip.tga" id="25_owt3k"]
 [ext_resource type="Theme" uid="uid://cf8u3obo5dfya" path="res://assets/uiux/session_themes/default/button_Chalk_Submenu.tres" id="29_64rju"]
 [ext_resource type="Texture2D" uid="uid://bcgcahuyuynp3" path="res://assets/uiux/session_themes/Patriotic Cipher/T_PauseCase_D.tga" id="29_ojduq"]
@@ -3722,14 +3723,6 @@ font = ExtResource("15_ppw4u")
 font_size = 20
 font_color = Color(0, 1, 0.623529, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_ikm35"]
-font = ExtResource("13_li2k4")
-font_size = 24
-font_color = Color(0.605717, 0.853191, 0.905619, 1)
-shadow_size = 3
-shadow_color = Color(1.27065e-05, 0.728506, 0.984463, 1)
-shadow_offset = Vector2(0, 0)
-
 [sub_resource type="LabelSettings" id="LabelSettings_d0wgl"]
 font = ExtResource("13_46j0n")
 font_size = 24
@@ -4248,7 +4241,7 @@ theme_override_fonts/font = ExtResource("12_fik1c")
 theme_override_font_sizes/font_size = 48
 text = "p1Name
 "
-label_settings = SubResource("LabelSettings_ikm35")
+label_settings = ExtResource("25_axd0y")
 
 [node name="spacer_v" type="TextureRect" parent="quizInterface/players_region/activePlayer1"]
 layout_mode = 2
@@ -4299,7 +4292,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("12_fik1c")
 theme_override_font_sizes/font_size = 48
 text = "p2Name"
-label_settings = SubResource("LabelSettings_ikm35")
+label_settings = ExtResource("25_axd0y")
 
 [node name="spacer_v3" type="TextureRect" parent="quizInterface/players_region/activePlayer2"]
 layout_mode = 2
@@ -4350,7 +4343,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("12_fik1c")
 theme_override_font_sizes/font_size = 48
 text = "p3Name"
-label_settings = SubResource("LabelSettings_ikm35")
+label_settings = ExtResource("25_axd0y")
 
 [node name="spacer_v4" type="TextureRect" parent="quizInterface/players_region/activePlayer3"]
 layout_mode = 2
@@ -4401,7 +4394,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("12_fik1c")
 theme_override_font_sizes/font_size = 48
 text = "p4Name"
-label_settings = SubResource("LabelSettings_ikm35")
+label_settings = ExtResource("25_axd0y")
 
 [node name="spacer_v5" type="TextureRect" parent="quizInterface/players_region/activePlayer4"]
 layout_mode = 2

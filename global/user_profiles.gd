@@ -15,6 +15,8 @@ func _new_profile(profileName):
 	var newProfile = {
 		"name": profileName,
 		"id": newID,
+		"score_lowest": 0,
+		"score_highest": 0,
 		"selected": false,
 		"questions_answered": {},
 		"questions_seen": {},
@@ -42,6 +44,8 @@ func _overwrite_profile_with_reference(updatedProfile):
 		var newProfile = {
 			"name": updatedProfile["name"],
 			"id": updatedProfile["id"],
+			"score_lowest": updatedProfile["score_lowest"],
+			"score_highest": updatedProfile["score_highest"],
 			"selected": updatedProfile["selected"],
 			"questions_answered": updatedProfile["questions_answered"],
 			"questions_seen": updatedProfile["questions_seen"],
@@ -82,26 +86,30 @@ func _IO_read_profiles():
 			profiles.erase(key)
 			print("!!Error: Profile [%s] in JSON failed Validation, deleting corrupted entry." % key)
 			saveProfilesChanges = true
-			pass
 			
 		if !"questions_answered" in profiles[key]:
 			print("!INFO: older profile detected, adding \"questions_answered\" member")
 			profiles[key]["questions_answered"] = {}
 			saveProfilesChanges = true
-			pass
 			
 		if !"questions_seen" in profiles[key]:
 			print("!INFO: older profile detected, adding \"questions_seen\" member")
 			profiles[key]["questions_seen"] = {}
 			saveProfilesChanges = true
-			pass
 			
 		if !"questions_chances" in profiles[key]:
 			print("!INFO: older profile detected, adding \"questions_chances\" member")
 			profiles[key]["questions_chances"] = {}
 			saveProfilesChanges = true
-			pass
 			
+		# add new lowest highest score value
+		if !"score_lowest" in profiles[key]:
+			profiles[key]["score_lowest"] = 0
+			saveProfilesChanges = true
+			
+		if !"score_highest" in profiles[key]:
+			profiles[key]["score_highest"] = 0
+			saveProfilesChanges = true
 			
 		pass
 		

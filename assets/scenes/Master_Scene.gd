@@ -196,10 +196,10 @@ func _exit_quiz():
 	pass
 
 func _local_update_selected_scene():
-	#load chalkboard scene by default incase of bad input
+	#load chalkboard scene by default in the case of bad input
 	var selectedtheme = "res://assets/scenes/quiz_session.tscn"
 
-	if GameState.CurrentTheme == "MGS Radio":
+	if GameState.CurrentTheme == "Patriotic Cipher":
 		selectedtheme = "res://assets/scenes/cipher.tscn"
 		pass
 	

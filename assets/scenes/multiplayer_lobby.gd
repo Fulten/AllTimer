@@ -35,6 +35,11 @@ func _on_profiles_list_item_selected(index):
 	UserProfiles._IO_write_profiles()
 	pass 
 	
+##called when the Themes List drop down's selection is changed
+func _on_themes_list_item_selected(index):
+	GameState.CurrentTheme
+	pass
+	
 #region Host Button
 func _on_host_button_mouse_entered():
 	$SFX_Hover.play()

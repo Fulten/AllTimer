@@ -418,6 +418,7 @@ flat = true
 [connection signal="focus_entered" from="StateChangers/BackToMainButton" to="." method="_on_back_to_main_button_focus_entered"]
 [connection signal="mouse_entered" from="StateChangers/BackToMainButton" to="." method="_on_back_to_main_button_mouse_entered"]
 [connection signal="item_selected" from="ProfileCase/ProfilesList" to="." method="_on_profiles_list_item_selected"]
+[connection signal="item_selected" from="ThemeCase/ThemesList" to="." method="_on_themes_list_item_selected"]
 [connection signal="button_down" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_button_down"]
 [connection signal="button_up" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_button_up"]
 [connection signal="focus_entered" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_focus_entered"]

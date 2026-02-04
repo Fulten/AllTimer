@@ -518,7 +518,7 @@ func _player_loaded(_peerId):
 
 #region local functions used by the server and clients
 func _select_music_track():
-	if GameState.CurrentTheme == "MGS Radio":
+	if GameState.CurrentTheme == "Patriotic Cipher":
 		SoundMaster._play_music_track("msg_theme")
 	else:
 		SoundMaster._play_music_track("default_theme")
@@ -539,7 +539,7 @@ func _load_sound_settings():
 
 
 func _set_theme_specific_graphics():
-	if GameState.CurrentTheme == "MGS Radio":
+	if GameState.CurrentTheme == "Patriotic Cipher":
 		asset_player_pannel_locked = load("res://assets/uiux/session_themes/Patriotic Cipher/label_cipher_section.tres")
 		asset_player_pannel_default = load("res://assets/uiux/session_themes/Patriotic Cipher/label_cipher_section.tres")
 	else:

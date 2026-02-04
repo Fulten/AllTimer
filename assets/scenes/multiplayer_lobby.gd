@@ -15,6 +15,7 @@ func _ready():
 	IpInputTextNode = $PeerConnectors/TextEdit
 	IpInputTextNode.set("text", ip_address)
 	_refresh_profiles_dropdown()
+	select_option_by_text($ThemeCase/ThemesList, GameState.CurrentTheme)
 	SoundMaster._play_music_track("main_menu1")
 
 func _process(_delta):
@@ -37,8 +38,21 @@ func _on_profiles_list_item_selected(index):
 	
 ##called when the Themes List drop down's selection is changed
 func _on_themes_list_item_selected(index):
-	GameState.CurrentTheme
+	GameState.CurrentTheme = $ThemeCase/ThemesList.get_item_text(index)
+	# save change to theme to file
+	var config = ConfigFile.new()
+	var err = config.load("user://settings.cfg")
+	if err == OK:
+		config.set_value("video", "theme", $ThemeCase/ThemesList.get_item_text($ThemeCase/ThemesList.get_selected_id()))
+		config.save("user://settings.cfg")
 	pass
+	
+func select_option_by_text(option_button: OptionButton, target_text: String) -> void:
+	for i in range(option_button.item_count):
+		if option_button.get_item_text(i) == str(target_text):
+			option_button.select(i)
+			return
+	print("Text not found in OptionButton:", target_text)
 	
 #region Host Button
 func _on_host_button_mouse_entered():

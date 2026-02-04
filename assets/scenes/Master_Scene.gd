@@ -35,9 +35,6 @@ func _ready():
 	multiplayer.connected_to_server.connect(_mp_on_connected_ok)
 	multiplayer.connection_failed.connect(_mp_on_connected_fail)
 	multiplayer.server_disconnected.connect(_mp_on_server_disconnected)
-	
-	_local_update_selected_scene()
-	
 	GameState.PlayerCount = 1;
 	pass
 
@@ -166,6 +163,7 @@ func _launch_quiz():
 # do Lobby.load_game.rpc(filepath)
 @rpc("authority", "call_local", "reliable")
 func load_quiz():
+	_local_update_selected_scene()
 	quiz_session_instance = quiz_session_scene.instantiate()
 	quiz_session_instance.end_of_quiz.connect(_end_of_quiz_handler)
 	quiz_session_instance.exit_quiz.connect(_exit_quiz_handler)

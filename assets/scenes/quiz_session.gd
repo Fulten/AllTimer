@@ -83,6 +83,7 @@ var QuizEndScreen = false
 ##Called when the node enters the scene tree for the first time.
 ##primarily used by the server to setup the quiz session
 func _ready():
+	_reset_question_rules_visibility()
 	_set_theme_specific_graphics()
 	_load_sound_settings()
 	_select_music_track()
@@ -98,9 +99,9 @@ func _ready():
 		_sync_server_client_data.rpc(local_question_set_uuids, GameState.playerNumberToIds)
 		_sync_server_client_game_rules.rpc(
 			GameState.quizOptions.timer, 
-			GameState.quizOptions.win_con, 
-			GameState.quizOptions.win_con_int, 
-			GameState.quizOptions.win_questions, 
+			"Highest score after 10 questions", 
+			0,  # cut feature, always use "highest score after x question"
+			10, # 10 questions
 			GameState.quizOptions.win_points,
 			GameState.quizOptions.tallies,
 			GameState.quizOptions.skipping_losses,
@@ -517,6 +518,23 @@ func _player_loaded(_peerId):
 #endregion
 
 #region local functions used by the server and clients
+
+func _reset_question_rules_visibility():
+	# hide all rules text
+	$preQuiz/preSessionOrganizer/RulesText/Rounds.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Rounds2.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Score.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Score2.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Answers.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Answers2.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Timer.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Timer2.hide()
+	
+	#show default question layout, hide 2 question layout
+	$quizInterface/session_organizer/CenteredAnswerCategories.hide()
+	$quizInterface/session_organizer/VerticalAnswerCategories.show()
+	pass
+	
 func _select_music_track():
 	if GameState.CurrentTheme == "Patriotic Cipher":
 		SoundMaster._play_music_track("msg_theme")

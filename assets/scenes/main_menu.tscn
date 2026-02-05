@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bjrqcx0k7scpa"]
+[gd_scene load_steps=39 format=3 uid="uid://bjrqcx0k7scpa"]
 
 [ext_resource type="Theme" uid="uid://j8encu3x20ng" path="res://assets/uiux/main_menu/default_theme.tres" id="1_nvabs"]
 [ext_resource type="Shader" path="res://assets/uiux/main_menu/scrolling_background.gdshader" id="2_40555"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://b7uw13gw7eym7" path="res://assets/uiux/main_menu/SFX_ButtonHover.mp3" id="12_evs6x"]
 [ext_resource type="LabelSettings" uid="uid://mv8bcxsbvof1" path="res://assets/scenes/Label_TagW.tres" id="12_fat6d"]
 [ext_resource type="AudioStream" uid="uid://crk8ui184joxw" path="res://assets/uiux/main_menu/SFX_ButtonPress.mp3" id="13_w17qx"]
+[ext_resource type="Texture2D" uid="uid://h0ngjad4u0fn" path="res://assets/uiux/main_menu/T_BadAtMath_D.tga" id="17_iljph"]
 [ext_resource type="LabelSettings" uid="uid://b8rucp80rws68" path="res://assets/scenes/Label_Subsection.tres" id="18_f5q02"]
 [ext_resource type="LabelSettings" uid="uid://bga51ml3vvwne" path="res://assets/scenes/Label_SubTag.tres" id="19_ihq36"]
 
@@ -255,7 +256,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_qoe65"]
 resource_name = "Anim_Profile_FadeIn"
-length = 0.5
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -275,10 +276,10 @@ tracks/1/path = NodePath("%Options_Profile/Profile:position")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.5, 0.6, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(645, -200), Vector2(645, 373)]
+"values": [Vector2(645, -200), Vector2(645, 373), Vector2(645, 373), Vector2(645, 33)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -287,10 +288,46 @@ tracks/2/path = NodePath("%Options_Profile/ProfileSettingsCase:position")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.5, 0.6, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(611, 1160), Vector2(611, 560), Vector2(611, 560), Vector2(611, 220)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Options_Profile/Underline:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-6.10352e-05, 10), Vector2(-6.10352e-05, 10), Vector2(-6.10352e-05, 10), Vector2(0, -330)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Options_Profile/AwardsSection:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(232, 1160), Vector2(232, 560)]
+"values": [Vector2(-750, 432), Vector2(456, 432)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Options_Profile/ProfileStatsCase:position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2000, 472), Vector2(1152, 472)]
 }
 
 [sub_resource type="Animation" id="Animation_yjq64"]
@@ -318,7 +355,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(645, 373), Vector2(645, -200)]
+"values": [Vector2(645, 33), Vector2(645, -200)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -330,7 +367,43 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(592, 560), Vector2(592, 1160)]
+"values": [Vector2(611, 220), Vector2(611, 1160)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Options_Profile/Underline:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -330), Vector2(0, 10)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Options_Profile/AwardsSection:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(456, 432), Vector2(-750, 432)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Options_Profile/ProfileStatsCase:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1152, 472), Vector2(2000, 472)]
 }
 
 [sub_resource type="Animation" id="Animation_5jqqd"]
@@ -370,7 +443,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(328, 1096), Vector2(328, 515)]
+"values": [Vector2(533, 1096), Vector2(533, 515)]
 }
 
 [sub_resource type="Animation" id="Animation_lbqsi"]
@@ -410,7 +483,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(608, 512), Vector2(608, 1100)]
+"values": [Vector2(533, 512), Vector2(533, 1100)]
 }
 
 [sub_resource type="Animation" id="Animation_8vv60"]
@@ -803,6 +876,42 @@ tracks/18/keys = {
 "update": 0,
 "values": [Vector2(608, 512)]
 }
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("%Options_Profile/Underline:position")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-6.10352e-05, 10)]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("%Options_Profile/ProfileStatsCase:position")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1152, 472)]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("%Options_Profile/AwardsSection:position")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(456, 432)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hplv1"]
 _data = {
@@ -836,6 +945,8 @@ bg_color = Color(0.670588, 0.54902, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcyc0"]
 bg_color = Color(0.67, 0.55, 1, 1)
+
+[sub_resource type="Theme" id="Theme_d4m5o"]
 
 [node name="MainMenu" type="Control"]
 clip_contents = true
@@ -999,7 +1110,7 @@ anchor_right = 33.6
 anchor_bottom = 15.6
 offset_top = 3.0
 offset_right = -0.00012207
-offset_bottom = 2.99902
+offset_bottom = 2.99884
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_wr4x0")
@@ -1555,7 +1666,7 @@ anchor_bottom = 0.5
 offset_left = -282.0
 offset_top = -163.0
 offset_right = 283.0
-offset_bottom = 37.0
+offset_bottom = 37.0001
 grow_horizontal = 2
 grow_vertical = 2
 text = "Sound
@@ -1563,7 +1674,8 @@ text = "Sound
 label_settings = ExtResource("8_3ymww")
 
 [node name="Underline" type="Line2D" parent="Options_Sound2"]
-position = Vector2(-72, -54)
+position = Vector2(-53.9399, -54)
+scale = Vector2(0.986339, 1)
 points = PackedVector2Array(592, 544, 1320, 544)
 width = 2.0
 default_color = Color(0, 0, 0, 1)
@@ -1577,8 +1689,9 @@ anchor_right = 0.658
 anchor_bottom = 0.898
 offset_left = 0.607971
 offset_top = 16.4
-offset_right = 560.608
-offset_bottom = 356.4
+offset_right = 151.392
+offset_bottom = -246.711
+alignment = 1
 
 [node name="SoundDeviceSetter" type="HBoxContainer" parent="Options_Sound2/SettingsCase"]
 layout_mode = 2
@@ -1609,6 +1722,7 @@ popup/item_2/id = 2
 
 [node name="SettingsList" type="VBoxContainer" parent="Options_Sound2/SettingsCase"]
 layout_mode = 2
+alignment = 1
 
 [node name="VolumeControlHeader" type="Label" parent="Options_Sound2/SettingsCase/SettingsList"]
 layout_mode = 2
@@ -1619,13 +1733,14 @@ horizontal_alignment = 1
 [node name="VolumeSlidersCase" type="VBoxContainer" parent="Options_Sound2/SettingsCase/SettingsList/VolumeControlHeader"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 1.733
-anchor_right = 1.032
-anchor_bottom = 6.8
-offset_left = -7.0
-offset_top = -31.985
-offset_right = -6.90402
-offset_bottom = -21.866
+anchor_left = 0.157
+anchor_top = 1.0
+anchor_right = 0.842
+anchor_bottom = 6.372
+offset_left = -103.784
+offset_right = 112.496
+offset_bottom = -2.996
+alignment = 1
 
 [node name="Master" type="Label" parent="Options_Sound2/SettingsCase/SettingsList/VolumeControlHeader/VolumeSlidersCase"]
 layout_mode = 2
@@ -1748,7 +1863,7 @@ anchor_bottom = 0.5
 offset_left = -315.0
 offset_top = -167.0
 offset_right = 317.0
-offset_bottom = 33.0
+offset_bottom = 33.0007
 grow_horizontal = 2
 grow_vertical = 2
 text = "Profile"
@@ -1763,15 +1878,14 @@ default_color = Color(0, 0, 0, 1)
 [node name="ProfileSettingsCase" type="VBoxContainer" parent="Options_Profile"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.308
-anchor_top = 0.511
-anchor_right = 0.687
-anchor_bottom = 0.83
-offset_left = 0.640015
-offset_top = 8.12
-offset_right = 728.64
-offset_bottom = 163.12
-grow_horizontal = 2
+anchor_left = 0.312
+anchor_top = 0.204
+anchor_right = 0.683
+anchor_bottom = 0.4
+offset_left = -7.04004
+offset_top = 339.68
+offset_right = -15.3602
+offset_bottom = 339.999
 grow_vertical = 2
 
 [node name="DimensionFrame" type="VBoxContainer" parent="Options_Profile/ProfileSettingsCase"]
@@ -1812,15 +1926,15 @@ flat = true
 [node name="ProfileCreator" type="VBoxContainer" parent="Options_Profile"]
 visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -360.0
-offset_top = 196.0
-offset_right = 360.0
-offset_bottom = 293.0
+anchors_preset = -1
+anchor_left = 0.308
+anchor_top = 0.2
+anchor_right = 0.687
+anchor_bottom = 0.39
+offset_left = 8.63995
+offset_top = 108.0
+offset_right = 0.959839
+offset_bottom = -0.200043
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -1864,13 +1978,13 @@ visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.308
-anchor_top = 0.615
+anchor_top = 0.2
 anchor_right = 0.687
-anchor_bottom = 0.815
+anchor_bottom = 0.415
 offset_left = 112.64
-offset_top = 63.8
+offset_top = 108.0
 offset_right = -103.04
-offset_bottom = -48.2001
+offset_bottom = -20.2001
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -1918,14 +2032,13 @@ flat = true
 [node name="ProfileStatsCase" type="VBoxContainer" parent="Options_Profile"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.7
-anchor_top = 0.519
-anchor_right = 0.933
-anchor_bottom = 0.83
-offset_left = 7.99988
-offset_top = 7.47992
-offset_right = -7.36011
-offset_bottom = -8.40002
+anchor_left = 0.6
+anchor_top = 0.437
+anchor_right = 0.825
+anchor_bottom = 0.733
+offset_top = 0.039978
+offset_right = -0.000366211
+offset_bottom = 0.359985
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/separation = 25
@@ -1934,7 +2047,6 @@ theme_override_constants/separation = 25
 layout_mode = 2
 text = "Profile Stats"
 label_settings = ExtResource("18_f5q02")
-horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Options_Profile/ProfileStatsCase"]
 layout_mode = 2
@@ -1987,6 +2099,52 @@ label_settings = ExtResource("12_fat6d")
 layout_mode = 2
 text = "#"
 label_settings = ExtResource("12_fat6d")
+
+[node name="AwardsSection" type="VBoxContainer" parent="Options_Profile"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.237
+anchor_top = 0.4
+anchor_right = 0.587
+anchor_bottom = 0.83
+offset_left = 0.959961
+offset_right = 0.959839
+offset_bottom = -0.400024
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Options_Profile/AwardsSection"]
+layout_mode = 2
+text = "Awards"
+label_settings = ExtResource("18_f5q02")
+
+[node name="AwardsCase" type="GridContainer" parent="Options_Profile/AwardsSection"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+theme = SubResource("Theme_d4m5o")
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 10
+columns = 5
+
+[node name="Award1" type="TextureRect" parent="Options_Profile/AwardsSection/AwardsCase"]
+layout_mode = 2
+texture = ExtResource("17_iljph")
+
+[node name="Award2" type="TextureRect" parent="Options_Profile/AwardsSection/AwardsCase"]
+layout_mode = 2
+texture = ExtResource("17_iljph")
+
+[node name="Award3" type="TextureRect" parent="Options_Profile/AwardsSection/AwardsCase"]
+layout_mode = 2
+texture = ExtResource("17_iljph")
+
+[node name="Award4" type="TextureRect" parent="Options_Profile/AwardsSection/AwardsCase"]
+layout_mode = 2
+texture = ExtResource("17_iljph")
+
+[node name="Award5" type="TextureRect" parent="Options_Profile/AwardsSection/AwardsCase"]
+layout_mode = 2
+texture = ExtResource("17_iljph")
 
 [connection signal="animation_finished" from="StackAnimator" to="." method="_on_stack_animator_animation_finished"]
 [connection signal="timeout" from="StackAnimator/Timer_Stack0_to_Options" to="." method="_on_timer_stack_0_to_options_categories_timeout"]

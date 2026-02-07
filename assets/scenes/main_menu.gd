@@ -21,6 +21,7 @@ func _ready():
 	UserProfiles._IO_read_profiles()
 	_refresh_profiles_dropdown()
 	_update_current_profile_label()
+	_update_profile_statistics()
 	SoundMaster._play_music_track("main_menu")
 
 func _process(_delta):
@@ -290,6 +291,7 @@ func _on_profiles_list_item_selected(index):
 		
 	UserProfiles.profiles[profiles_list_id_to_name[index]]["selected"] = true
 	_update_current_profile_label()
+	_update_profile_statistics()
 	UserProfiles._IO_write_profiles()
 	pass 
 
@@ -577,3 +579,26 @@ func _escape_game_menu():
 	pass
 	
 	
+
+#region functions for displaying profile statistics
+func _update_profile_statistics():
+	var selectedProfile = UserProfiles.profiles[UserProfiles._get_selected_profile_key()]
+	
+	# correct answers
+	$Options_Profile/ProfileStatsCase/HBoxContainer/ProfileUniqueAnswerCounter
+	# answer accuracy
+	$Options_Profile/ProfileStatsCase/HBoxContainer2/ProfileAnswerAccuracyCounter
+	# Highest Score
+	$Options_Profile/ProfileStatsCase/HBoxContainer3/ProfileHighestScoreCounter.text = "%s" % selectedProfile["score_highest"]
+	# lowest Score
+	$Options_Profile/ProfileStatsCase/HBoxContainer4/ProfileLowestScoreCounter.text = "%s" % selectedProfile["score_lowest"]
+	_update_profile_awards()
+	pass
+	
+func _update_profile_awards():
+	# hide awards
+	for i in range(5):
+		get_node("Options_Profile/AwardsSection/AwardsCase/Award%s" % (i + 1)).hide()
+	
+	pass
+#endregion

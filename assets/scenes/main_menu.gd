@@ -582,12 +582,39 @@ func _escape_game_menu():
 
 #region functions for displaying profile statistics
 func _update_profile_statistics():
+	var questions_correct = 0
+	var questions_seen = 0
+	var percentage_correct = 0
+	
+	# in the case that there are no profiles at all
+	if UserProfiles.profiles.size() < 1:
+		# correct answers
+		$Options_Profile/ProfileStatsCase/HBoxContainer/ProfileUniqueAnswerCounter.text = "0/0"
+		# answer accuracy
+		$Options_Profile/ProfileStatsCase/HBoxContainer2/ProfileAnswerAccuracyCounter.text = "N/A"
+		# Highest Score
+		$Options_Profile/ProfileStatsCase/HBoxContainer3/ProfileHighestScoreCounter.text = "0"
+		# lowest Score
+		$Options_Profile/ProfileStatsCase/HBoxContainer4/ProfileLowestScoreCounter.text = "0"
+		_update_profile_awards()
+		return
+	
 	var selectedProfile = UserProfiles.profiles[UserProfiles._get_selected_profile_key()]
 	
+	for key in selectedProfile["questions_answered"]:
+		questions_correct += selectedProfile["questions_answered"][key]
+	for key in selectedProfile["questions_seen"]:
+		questions_seen += selectedProfile["questions_seen"][key]
+
+	if questions_seen != 0:
+		percentage_correct = "%0.1f%%" % (100*(questions_correct / questions_seen))
+	else:
+		percentage_correct = "N/A"
+	
 	# correct answers
-	$Options_Profile/ProfileStatsCase/HBoxContainer/ProfileUniqueAnswerCounter
+	$Options_Profile/ProfileStatsCase/HBoxContainer/ProfileUniqueAnswerCounter.text = "%s/%s" % [questions_correct, questions_seen]
 	# answer accuracy
-	$Options_Profile/ProfileStatsCase/HBoxContainer2/ProfileAnswerAccuracyCounter
+	$Options_Profile/ProfileStatsCase/HBoxContainer2/ProfileAnswerAccuracyCounter.text = "%s" % percentage_correct
 	# Highest Score
 	$Options_Profile/ProfileStatsCase/HBoxContainer3/ProfileHighestScoreCounter.text = "%s" % selectedProfile["score_highest"]
 	# lowest Score

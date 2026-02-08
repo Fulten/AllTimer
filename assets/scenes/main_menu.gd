@@ -12,6 +12,9 @@ var flag_options_menu_game = false
 var flag_profiles_menu = false
 var flag_profiles_menu_sub = false
 
+var node_hover_text
+var show_award_hover = false
+
 func _ready():
 	$StackAnimator.play("Anim_Stack0_Init")
 	await get_tree().create_timer(0.1).timeout
@@ -23,6 +26,7 @@ func _ready():
 	_update_current_profile_label()
 	_update_profile_statistics()
 	SoundMaster._play_music_track("main_menu")
+	_create_hover_text_node()
 
 func _process(_delta):
 	pass
@@ -197,6 +201,8 @@ func _input(event):
 		_escape_game_menu()
 		pass
 	
+	if show_award_hover and event is InputEventMouse:
+		node_hover_text.set_position(get_viewport().get_mouse_position() + Vector2(20.0,0.0))
 	pass
 
 
@@ -639,7 +645,6 @@ func _update_profile_awards():
 		
 	pass
 	
-	
 ## creates new nodes that represent a single chance using the chances hash id
 func create_new_award(awardHash: String):
 	if !UserProfiles._has_chance_hash(awardHash):
@@ -670,6 +675,20 @@ func create_new_award(awardHash: String):
 	node_texture.stretch_mode = TextureRect.STRETCH_SCALE
 	
 	#TODO: add hover text to award texture containing detailed description
+	node_texture.mouse_entered.connect(
+		func(): 
+			node_hover_text.text = UserProfiles.chance_descriptors[awardHash]["description"]
+			node_hover_text.set_position(get_viewport().get_mouse_position())
+			show_award_hover = true
+			node_hover_text.show()
+			)
+	node_texture.mouse_exited.connect(
+		func(): 
+			show_award_hover = false
+			node_hover_text.text = ""
+			node_hover_text.hide()
+			)
+	
 	
 	node_vbox_container.add_child(node_texture)
 	node_vbox_container.add_child(node_label)
@@ -681,5 +700,24 @@ func _select_award_outline_color(awardType: String):
 	if awardType == "QUESTION":
 		return "2200bb"
 	return "000000"
+
+func _create_hover_text_node():
+	var node_lable_settings = LabelSettings.new()
+	var node_style_box = StyleBoxFlat.new()
+	node_hover_text = Label.new()
 	
+	node_style_box.set_border_width_all(5)
+	node_style_box.border_color = "313131"
+	node_style_box.bg_color = "212121"
+	
+	node_lable_settings.font_size = 18
+	
+	node_hover_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	node_hover_text.label_settings = node_lable_settings
+	node_hover_text.text = ""
+	node_hover_text.set_size(Vector2(200.0,20.0))
+	node_hover_text.add_theme_stylebox_override("normal", node_style_box)
+	node_hover_text.hide()
+	
+	get_tree().root.add_child(node_hover_text)
 #endregion

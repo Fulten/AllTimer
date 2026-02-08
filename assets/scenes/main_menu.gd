@@ -649,23 +649,37 @@ func create_new_award(awardHash: String):
 	var node_awards_case = get_node("Options_Profile/AwardsSection/AwardsCase")
 	var node_texture = TextureRect.new()
 	var node_label = Label.new()
+	var node_label_settings = LabelSettings.new()
 	var node_vbox_container = VBoxContainer.new()
 	
+	# TODO: multiple different icons for the different awards
 	var award_texture = load("res://assets/uiux/main_menu/T_BadAtMath_D.tga")
-	var award_text = awardHash
+	
+	node_label_settings.outline_size = 4
+	node_label_settings.outline_color = _select_award_outline_color(UserProfiles.chance_descriptors[awardHash]["type"])
+	node_label_settings.font_size = 20
 	
 	node_label.text = UserProfiles.chance_descriptors[awardHash]["name"]
 	node_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	node_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	node_label.label_settings = node_label_settings
+	
 	
 	node_texture.texture = award_texture
 	node_texture.expand_mode = TextureRect.EXPAND_KEEP_SIZE
 	node_texture.stretch_mode = TextureRect.STRETCH_SCALE
+	
+	#TODO: add hover text to award texture containing detailed description
 	
 	node_vbox_container.add_child(node_texture)
 	node_vbox_container.add_child(node_label)
 	
 	node_awards_case.add_child(node_vbox_container)
 	pass
+	
+func _select_award_outline_color(awardType: String):
+	if awardType == "QUESTION":
+		return "2200bb"
+	return "000000"
 	
 #endregion

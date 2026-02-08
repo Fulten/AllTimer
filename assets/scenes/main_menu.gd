@@ -647,7 +647,7 @@ func create_new_award(awardHash: String):
 		return
 	
 	var node_awards_case = get_node("Options_Profile/AwardsSection/AwardsCase")
-	var node_new_award = TextureRect.new()
+	var node_texture = TextureRect.new()
 	var node_label = Label.new()
 	var node_vbox_container = VBoxContainer.new()
 	
@@ -655,9 +655,14 @@ func create_new_award(awardHash: String):
 	var award_text = awardHash
 	
 	node_label.text = UserProfiles.chance_descriptors[awardHash]["name"]
-	node_new_award.texture = award_texture
+	node_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	node_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	
-	node_vbox_container.add_child(node_new_award)
+	node_texture.texture = award_texture
+	node_texture.expand_mode = TextureRect.EXPAND_KEEP_SIZE
+	node_texture.stretch_mode = TextureRect.STRETCH_SCALE
+	
+	node_vbox_container.add_child(node_texture)
 	node_vbox_container.add_child(node_label)
 	
 	node_awards_case.add_child(node_vbox_container)

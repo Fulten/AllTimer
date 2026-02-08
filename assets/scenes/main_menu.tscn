@@ -2110,6 +2110,7 @@ anchor_bottom = 0.83
 offset_left = 0.959991
 offset_right = 0.959839
 offset_bottom = -0.400024
+mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="Options_Profile/AwardsSection"]

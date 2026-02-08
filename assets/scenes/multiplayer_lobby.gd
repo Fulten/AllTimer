@@ -16,7 +16,7 @@ func _ready():
 	IpInputTextNode.set("text", ip_address)
 	_refresh_profiles_dropdown()
 	select_option_by_text($ThemeCase/ThemesList, GameState.CurrentTheme)
-	SoundMaster._play_music_track("main_menu1")
+	SoundMaster._play_music_track("mp_lobby")
 
 func _process(_delta):
 	pass

@@ -623,9 +623,44 @@ func _update_profile_statistics():
 	pass
 	
 func _update_profile_awards():
-	# hide awards
-	for i in range(5):
-		get_node("Options_Profile/AwardsSection/AwardsCase/Award%s" % (i + 1)).hide()
+	var node_awards_case = $Options_Profile/AwardsSection/AwardsCase
+	# remove any previous awards
+	for node in node_awards_case.get_children():
+		node_awards_case.remove_child(node)
+		node.queue_free()
 	
+	if UserProfiles.profiles.size() < 1:
+		return # just return if there is no profile
+		
+	var selectedProfile = UserProfiles.profiles[UserProfiles._get_selected_profile_key()]
+	
+	for key in selectedProfile["questions_chances"]:
+		create_new_award(key)
+		
 	pass
+	
+	
+## creates new nodes that represent a single chance using the chances hash id
+func create_new_award(awardHash: String):
+	if !UserProfiles._has_chance_hash(awardHash):
+		print("!Warning: Award Hash:[\"%s\"]" % awardHash)
+		return
+	
+	var node_awards_case = get_node("Options_Profile/AwardsSection/AwardsCase")
+	var node_new_award = TextureRect.new()
+	var node_label = Label.new()
+	var node_vbox_container = VBoxContainer.new()
+	
+	var award_texture = load("res://assets/uiux/main_menu/T_BadAtMath_D.tga")
+	var award_text = awardHash
+	
+	node_label.text = UserProfiles.chance_descriptors[awardHash]["name"]
+	node_new_award.texture = award_texture
+	
+	node_vbox_container.add_child(node_new_award)
+	node_vbox_container.add_child(node_label)
+	
+	node_awards_case.add_child(node_vbox_container)
+	pass
+	
 #endregion

@@ -1,6 +1,10 @@
 extends Node
 
 var profiles = {}
+var chance_descriptors = {}
+
+func _ready():
+	_load_chance_data()
 
 func _new_profile(profileName):
 	var newID = 0
@@ -141,3 +145,33 @@ func _get_selected_profile_key():
 	
 	print("!!ERROR: it shouldn't be possible there to be no selected profile")
 	return "Profile not found"
+
+## load name, description, and type into a refrence dictionary
+func _load_chance_data():
+	var file = FileAccess.open("res://data/chance_data.json", FileAccess.READ)
+	var raw_chance_data
+	if file:
+		raw_chance_data = JSON.parse_string(file.get_as_text())
+		file.close()
+		
+		
+		for entry in raw_chance_data:
+			var chance = {
+				"name": entry["name"],
+				"description": entry["description"],
+				"type": entry["type"],
+			}
+			chance_descriptors[entry["uuid"]] = chance
+		
+	pass
+
+## check if the chance uuid passed is valid
+func _has_chance_hash(chance_uuid: String):
+	if chance_uuid in chance_descriptors:
+		return true
+	return false
+	
+	
+	
+	
+	

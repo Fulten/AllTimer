@@ -136,10 +136,12 @@ horizontal_alignment = 1
 [node name="Header" type="VBoxContainer" parent="HBoxParent/VBoxQuestionEditor"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
 
 [node name="HBoxName" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Header"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
 
 [node name="Label" type="Label" parent="HBoxParent/VBoxQuestionEditor/Header/HBoxName"]
 custom_minimum_size = Vector2(125, 0)
@@ -154,11 +156,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 16.0
-placeholder_text = "Name"
+placeholder_text = " Name"
 
 [node name="HBoxTags" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Header"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
 
 [node name="Label" type="Label" parent="HBoxParent/VBoxQuestionEditor/Header/HBoxTags"]
 custom_minimum_size = Vector2(125, 0)
@@ -173,7 +176,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 16.0
-placeholder_text = "Tags"
+placeholder_text = " Tags... (comma seperated list)"
 
 [node name="HBoxQuestionText" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Header"]
 layout_mode = 2
@@ -195,6 +198,27 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 16.0
 placeholder_text = " Question Body"
+
+[node name="HBoxPostText" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Header"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Label" type="Label" parent="HBoxParent/VBoxQuestionEditor/Header/HBoxPostText"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Post Text:"
+label_settings = ExtResource("11_iy5vm")
+autowrap_mode = 2
+
+[node name="Text" type="TextEdit" parent="HBoxParent/VBoxQuestionEditor/Header/HBoxPostText"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 16.0
+placeholder_text = " Post Question Text"
 
 [node name="QuestionAnswers" type="Label" parent="HBoxParent/VBoxQuestionEditor"]
 layout_mode = 2
@@ -226,7 +250,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 16.0
-placeholder_text = "Correct Answer"
+placeholder_text = " Correct Answer"
 
 [node name="HBoxWrong1" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Answers"]
 layout_mode = 2
@@ -247,7 +271,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 16.0
-placeholder_text = "Wrong Answer One"
+placeholder_text = " Wrong Answer One"
 
 [node name="HBoxWrong2" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Answers"]
 layout_mode = 2
@@ -259,7 +283,7 @@ custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-text = "Question Text:"
+text = "Wrong Answer 2:"
 label_settings = ExtResource("11_iy5vm")
 autowrap_mode = 2
 
@@ -268,7 +292,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 16.0
-placeholder_text = "Wrong Answer Two"
+placeholder_text = " Wrong Answer Two"
 
 [node name="HBoxWrong3" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Answers"]
 layout_mode = 2
@@ -289,7 +313,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 16.0
-placeholder_text = "Wrong Answer Three"
+placeholder_text = " Wrong Answer Three"
 
 [node name="QuestionChances" type="Label" parent="HBoxParent/VBoxQuestionEditor"]
 layout_mode = 2
@@ -307,7 +331,7 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
 
-[node name="ItemList" type="ItemList" parent="HBoxParent/VBoxQuestionEditor/Chances/ScrollContainer"]
+[node name="Chances" type="ItemList" parent="HBoxParent/VBoxQuestionEditor/Chances/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0

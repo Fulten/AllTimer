@@ -1,5 +1,7 @@
 extends Control
 
+const uuid_util = preload('res://addons/uuid/uuid.gd')
+
 var chances_raw = []
 var questions_raw = []
 
@@ -8,7 +10,6 @@ var chances = {}
 
 var delete_popup = false
 var current_question_uuid: String
-var new_question: bool
 var current_question_chances_uuid = []
 
 var file_path_questions_data = "res://question_data.json"
@@ -73,6 +74,7 @@ class Question:
 	## checks for invalid entry data and record it in error entries
 	func _check_error_state():
 		errorState = 0
+		errorEntries.clear()
 		# optional
 		if !tags:
 			errorState = 1
@@ -158,7 +160,11 @@ func _select_question(question_uuid):
 	pass
 
 func _save_question(question_uuid):
-	#simple entries
+	#check if the uuid exists, if not assume a new entry
+	if !questions.has(question_uuid):
+		questions[question_uuid] = Question.new()
+		pass
+		
 	var tags_raw: String = $HBoxParent/VBoxQuestionEditor/Header/HBoxTags/Text.text
 	var wrong_questions = []
 	var tags_array = []
@@ -174,7 +180,6 @@ func _save_question(question_uuid):
 	questions[question_uuid].correct = $HBoxParent/VBoxQuestionEditor/Answers/HBoxCorrect/Text.text
 	questions[question_uuid].wrong = wrong_questions
 	
-	# complex entries
 	for tag in tags_raw.split(",", false):
 		var tag_f = tag.strip_edges()
 		tags_array.push_back(tag_f)
@@ -186,7 +191,10 @@ func _save_question(question_uuid):
 		
 	questions[question_uuid].chances = chances_array
 	
+	
 	_io_write_questions(file_path_questions_data)
+	questions[question_uuid]._check_error_state()
+	_UI_update_question_list()
 	pass
 
 func _delete_question(question_uuid):
@@ -198,11 +206,18 @@ func _delete_question(question_uuid):
 	_UI_clear_question_data()
 	pass
 
+func _new_question():
+	current_question_uuid = uuid_util.v4()
+	current_question_chances_uuid.clear()
+	_UI_clear_question_data()
+	$"HBoxParent/VBoxQuestionEditor/Question Hash/Text".text = current_question_uuid
+	_UI_toggle_ui_that_needs_selected_question(true)
+	pass
+
 #region UI functions
 ## updates the item list "QuestionList"
 func _UI_update_question_list():
 	%QuestionList.clear()
-	
 	for key in questions:
 		questions[key].listIndex = (%QuestionList.add_item(questions[key].name, ui_question_state_icons[questions[key].errorState]))
 	pass
@@ -265,7 +280,6 @@ func _UI_highlight_error_state(errorEntries):
 	pass
 	
 func _UI_toggle_ui_that_needs_selected_question(enable: bool):
-	$HBoxParent/VBoxQuestionBrowser/VBoxIputButtons/BtnNew.disabled = !enable
 	$HBoxParent/VBoxQuestionBrowser/VBoxIputButtons/BtnDelete.disabled = !enable
 	$HBoxParent/VBoxQuestionEditor/BtnSave.disabled = !enable
 	$HBoxParent/VBoxQuestionEditor/BtnDiscard.disabled = !enable
@@ -344,8 +358,7 @@ func _on_btn_reload_button_up():
 
 ## create new blank question entry
 func _on_btn_new_button_up():
-	#TODO: initalize blank question entry, generate hash for new question
-	# only add it to questions after save is used
+	_new_question()
 	pass
 
 func _on_btn_delete_button_up():

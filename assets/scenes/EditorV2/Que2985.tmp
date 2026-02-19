@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dgkyt8vikwwn6"]
+[gd_scene load_steps=15 format=3 uid="uid://dgkyt8vikwwn6"]
 
 [ext_resource type="StyleBox" uid="uid://clt67rot44qgn" path="res://assets/scenes/EditorV2/Style/StyleB_Editor_btn_disabled.tres" id="1_2o521"]
 [ext_resource type="StyleBox" uid="uid://drfhb5723mfe7" path="res://assets/scenes/EditorV2/Style/StyleB_Editor_btn_hover.tres" id="1_876sx"]
@@ -26,24 +26,6 @@ ItemList/font_sizes/font_size = 24
 ItemList/styles/focus = SubResource("StyleBoxEmpty_3mntt")
 Label/styles/normal = ExtResource("3_uijjo")
 TextEdit/font_sizes/font_size = 18
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7qbm2"]
-bg_color = Color(0.101961, 0.129412, 0.219608, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_color = Color(0.3021, 0.321092, 0.53, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_sbul5"]
-font_size = 32
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c88md"]
-bg_color = Color(0.101961, 0.129412, 0.219608, 1)
-border_width_left = 5
-border_width_top = 3
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.3021, 0.321092, 0.53, 1)
 
 [node name="QuestionEditorV2" type="Control"]
 layout_mode = 3
@@ -422,75 +404,9 @@ text = "Save Question"
 layout_mode = 2
 text = "Discard Changes"
 
-[node name="Popup" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.505882)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Popup"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Header" type="Label" parent="Popup/VBoxContainer"]
-custom_minimum_size = Vector2(400, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_styles/normal = SubResource("StyleBoxFlat_7qbm2")
-text = "Are you sure?"
-label_settings = SubResource("LabelSettings_sbul5")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Warning" type="Label" parent="Popup/VBoxContainer"]
-custom_minimum_size = Vector2(400, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_styles/normal = SubResource("StyleBoxFlat_c88md")
-text = "about to delete selected question entry"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Popup/VBoxContainer/Warning"]
-layout_mode = 2
-offset_left = 126.0
-offset_top = 33.0
-offset_right = 274.0
-offset_bottom = 79.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BtnPopupYes" type="Button" parent="Popup/VBoxContainer/Warning/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Yes"
-
-[node name="ColorRect" type="ColorRect" parent="Popup/VBoxContainer/Warning/HBoxContainer"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(1, 1, 1, 0)
-
-[node name="BtnPopupNo" type="Button" parent="Popup/VBoxContainer/Warning/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "No"
-
 [connection signal="button_up" from="HBoxParent/VBoxQuestionBrowser/VBoxQuestions/HBoxContainer/BtnReload" to="." method="_on_btn_reload_button_up"]
 [connection signal="item_selected" from="HBoxParent/VBoxQuestionBrowser/VBoxQuestions/ScrollContainer/QuestionList" to="." method="_on_question_list_item_selected"]
 [connection signal="button_up" from="HBoxParent/VBoxQuestionBrowser/VBoxIputButtons/BtnNew" to="." method="_on_btn_new_button_up"]
 [connection signal="button_up" from="HBoxParent/VBoxQuestionBrowser/VBoxIputButtons/BtnDelete" to="." method="_on_btn_delete_button_up"]
 [connection signal="button_up" from="HBoxParent/VBoxQuestionEditor/BtnSave" to="." method="_on_btn_save_button_up"]
 [connection signal="button_up" from="HBoxParent/VBoxQuestionEditor/BtnDiscard" to="." method="_on_btn_discard_button_up"]
-[connection signal="button_up" from="Popup/VBoxContainer/Warning/HBoxContainer/BtnPopupYes" to="." method="_on_btn_popup_yes_button_up"]
-[connection signal="button_up" from="Popup/VBoxContainer/Warning/HBoxContainer/BtnPopupNo" to="." method="_on_btn_popup_no_button_up"]

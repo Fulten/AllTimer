@@ -16,6 +16,8 @@ var searchedQuestionsUuid = []
 var delete_popup = false
 var is_new_question = false
 var can_select_chances = false
+var show_questions_menu = true
+var show_chances_menu = false
 var current_question_uuid: String
 var selected_chance_local_uuid: String
 var selected_chance_global_uuid: String
@@ -175,6 +177,7 @@ func _ready():
 	DisplayServer.window_set_size(Vector2i(1240,700))
 	
 	$Popup.hide()
+	$HBoxParent/Control/HBoxContainer/BtnQuestions.disabled = true
 	$HBoxParent/VBoxQuestionEditor/Chances/HBoxButtons/BtnChanceAdd.disabled = true
 	$HBoxParent/VBoxQuestionEditor/Chances/HBoxButtons/BtnChanceRemove.disabled = true
 	_UI_toggle_ui_that_needs_selected_question(false)
@@ -562,4 +565,17 @@ func _on_chances_list_question_item_selected(index):
 func _on_search_bar_text_changed():
 	_generate_question_list()
 	_UI_update_question_list()
+	
+func _on_btn_questions_button_up():
+	show_questions_menu = true
+	show_chances_menu = false
+	pass
+
+
+func _on_btn_chances_button_up():
+	show_questions_menu = false
+	show_chances_menu = true
+	pass
 #endregion
+
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dgkyt8vikwwn6"]
+[gd_scene load_steps=20 format=3 uid="uid://dgkyt8vikwwn6"]
 
 [ext_resource type="StyleBox" uid="uid://clt67rot44qgn" path="res://assets/scenes/EditorV2/Style/StyleB_Editor_btn_disabled.tres" id="1_2o521"]
 [ext_resource type="StyleBox" uid="uid://drfhb5723mfe7" path="res://assets/scenes/EditorV2/Style/StyleB_Editor_btn_hover.tres" id="1_876sx"]
@@ -7,11 +7,14 @@
 [ext_resource type="StyleBox" uid="uid://dtc42mdl8lgne" path="res://assets/scenes/EditorV2/Style/StyleB_Editor_Flat_Label.tres" id="3_uijjo"]
 [ext_resource type="Texture2D" uid="uid://d3c1k2a3xkun5" path="res://assets/scenes/EditorV2/Style/RefreshIcon.png" id="6_1uk36"]
 [ext_resource type="LabelSettings" uid="uid://chqtcjs3tayx3" path="res://assets/scenes/EditorV2/Style/Question_List_Header.tres" id="6_851cc"]
+[ext_resource type="StyleBox" uid="uid://b1esckrpcny8x" path="res://assets/scenes/EditorV2/Style/StyleB_Editor_btn_pale.tres" id="6_stbnt"]
 [ext_resource type="LabelSettings" uid="uid://dpv3tm8xybld3" path="res://assets/scenes/EditorV2/Style/Question_Editor_dividers.tres" id="7_7dy80"]
 [ext_resource type="Texture2D" uid="uid://dgak4kr4bdxs1" path="res://assets/scenes/EditorV2/Style/RedX.png" id="7_ncku1"]
 [ext_resource type="Texture2D" uid="uid://qwe1ynkdknjm" path="res://assets/scenes/EditorV2/Style/GreenO.png" id="8_5qrwy"]
 [ext_resource type="Texture2D" uid="uid://ck8xbcr6f1r0t" path="res://assets/scenes/EditorV2/Style/YellowDash.png" id="9_u300d"]
 [ext_resource type="LabelSettings" uid="uid://ok3gc7wnerpl" path="res://assets/scenes/EditorV2/Style/Question_Editor_Labels.tres" id="11_iy5vm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t1mt4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3mntt"]
 
@@ -20,6 +23,7 @@ BoxContainer/constants/separation = 0
 Button/colors/font_hover_color = Color(0.524558, 0.932946, 0.775818, 1)
 Button/font_sizes/font_size = 24
 Button/styles/disabled = ExtResource("1_2o521")
+Button/styles/focus = SubResource("StyleBoxEmpty_t1mt4")
 Button/styles/hover = ExtResource("1_876sx")
 Button/styles/normal = ExtResource("2_248gj")
 ItemList/font_sizes/font_size = 24
@@ -74,9 +78,47 @@ layout_mode = 0
 offset_right = 1917.0
 offset_bottom = 1081.0
 
+[node name="Control" type="Control" parent="HBoxParent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxParent/Control"]
+layout_mode = 0
+offset_top = 1081.0
+offset_right = 1081.0
+offset_bottom = 1142.0
+rotation = 4.71239
+
+[node name="BtnQuestions" type="Button" parent="HBoxParent/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("6_stbnt")
+theme_override_styles/disabled = ExtResource("2_248gj")
+text = "Questions"
+
+[node name="BtnChances" type="Button" parent="HBoxParent/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("6_stbnt")
+theme_override_styles/disabled = ExtResource("2_248gj")
+text = "Chances"
+
+[node name="VDivider2" type="ColorRect" parent="HBoxParent"]
+clip_contents = true
+custom_minimum_size = Vector2(10, 50)
+layout_mode = 2
+color = Color(0.0823529, 0.0901961, 0.188235, 1)
+
 [node name="VBoxQuestionBrowser" type="VBoxContainer" parent="HBoxParent"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 10.0
 alignment = 1
 
 [node name="VBoxQuestions" type="VBoxContainer" parent="HBoxParent/VBoxQuestionBrowser"]
@@ -163,7 +205,7 @@ color = Color(0.0823529, 0.0901961, 0.188235, 1)
 [node name="VBoxQuestionEditor" type="VBoxContainer" parent="HBoxParent"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
+size_flags_stretch_ratio = 20.0
 
 [node name="Header" type="VBoxContainer" parent="HBoxParent/VBoxQuestionEditor"]
 layout_mode = 2
@@ -537,6 +579,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "No"
 
+[connection signal="button_up" from="HBoxParent/Control/HBoxContainer/BtnQuestions" to="." method="_on_btn_questions_button_up"]
+[connection signal="button_up" from="HBoxParent/Control/HBoxContainer/BtnChances" to="." method="_on_btn_chances_button_up"]
 [connection signal="button_up" from="HBoxParent/VBoxQuestionBrowser/VBoxQuestions/HBoxContainer/BtnReload" to="." method="_on_btn_reload_button_up"]
 [connection signal="text_changed" from="HBoxParent/VBoxQuestionBrowser/VBoxQuestions/SearchBar" to="." method="_on_search_bar_text_changed"]
 [connection signal="item_selected" from="HBoxParent/VBoxQuestionBrowser/VBoxQuestions/ScrollContainer/QuestionList" to="." method="_on_question_list_item_selected"]

@@ -107,7 +107,7 @@ horizontal_alignment = 1
 [node name="SearchBar" type="TextEdit" parent="HBoxParent/VBoxQuestionBrowser/VBoxQuestions"]
 layout_mode = 2
 size_flags_vertical = 3
-placeholder_text = "Search... (Name, Tags)"
+placeholder_text = "Search... (Name, Tags, chances)"
 
 [node name="HDivider" type="ColorRect" parent="HBoxParent/VBoxQuestionBrowser/VBoxQuestions"]
 clip_contents = true
@@ -538,6 +538,7 @@ size_flags_vertical = 4
 text = "No"
 
 [connection signal="button_up" from="HBoxParent/VBoxQuestionBrowser/VBoxQuestions/HBoxContainer/BtnReload" to="." method="_on_btn_reload_button_up"]
+[connection signal="text_changed" from="HBoxParent/VBoxQuestionBrowser/VBoxQuestions/SearchBar" to="." method="_on_search_bar_text_changed"]
 [connection signal="item_selected" from="HBoxParent/VBoxQuestionBrowser/VBoxQuestions/ScrollContainer/QuestionList" to="." method="_on_question_list_item_selected"]
 [connection signal="button_up" from="HBoxParent/VBoxQuestionBrowser/VBoxIputButtons/BtnNew" to="." method="_on_btn_new_button_up"]
 [connection signal="button_up" from="HBoxParent/VBoxQuestionBrowser/VBoxIputButtons/BtnDelete" to="." method="_on_btn_delete_button_up"]

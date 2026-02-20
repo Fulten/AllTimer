@@ -11,6 +11,8 @@ var questions_raw = []
 var questions = {}
 var chances = {}
 
+var searchedQuestionsUuid = []
+
 var delete_popup = false
 var is_new_question = false
 var can_select_chances = false
@@ -181,14 +183,45 @@ func _ready():
 	_io_read_questions(file_path_questions_data)
 	_io_read_chances(file_path_chances_data)
 	
+	_generate_question_list()
+	
 	_UI_update_question_list()
 	_UI_update_global_chances_list()
 	pass
 
+func _generate_question_list():
+	var searchKey = $HBoxParent/VBoxQuestionBrowser/VBoxQuestions/SearchBar.text
+	searchedQuestionsUuid.clear()
+	# if search query empty just pass the complete list of questions
+	if searchKey == "":
+		for uuid in questions:
+			searchedQuestionsUuid.append(uuid)
+		return
+	
+	for uuid in questions:
+		var escape = false
+		# search name first, if it has a match move to the next entry as theres no reason to append twice
+		if questions[uuid].name.to_lower().contains(searchKey.to_lower()):
+			searchedQuestionsUuid.append(uuid)
+			continue
+		
+		for tag in questions[uuid].tags:
+			if tag.to_lower().contains(searchKey.to_lower()):
+				searchedQuestionsUuid.append(uuid)
+				escape = true
+				break
+		
+		if escape == true:
+			continue
+		
+		for chance_uuid in questions[uuid].chances:
+			if chances[chance_uuid].name.to_lower().contains(searchKey.to_lower()):
+				searchedQuestionsUuid.append(uuid)
+				break
+	pass
+
 func _select_question(question_uuid):
-	
 	var chancetest = Chance.new()
-	
 	
 	is_new_question = false
 	current_question_chances.clear()
@@ -299,7 +332,7 @@ func _remove_current_question_chance():
 ## updates the item list "QuestionList"
 func _UI_update_question_list():
 	%QuestionList.clear()
-	for uuid in questions:
+	for uuid in searchedQuestionsUuid:
 		questions[uuid].listIndex = (%QuestionList.add_item(questions[uuid].name, ui_question_state_icons[questions[uuid].errorState]))
 	pass
  
@@ -525,4 +558,8 @@ func _on_chances_list_question_item_selected(index):
 		for uuid in current_question_chances:
 			if current_question_chances[uuid].listIndex == index:
 				selected_chance_local_uuid = uuid
+
+func _on_search_bar_text_changed():
+	_generate_question_list()
+	_UI_update_question_list()
 #endregion

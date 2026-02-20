@@ -12,6 +12,8 @@ var delete_popup = false
 var current_question_uuid: String
 var current_question_chances_uuid = []
 
+var is_new_question = false
+
 var file_path_questions_data = "res://question_data_test.json"
 var file_path_chances_data = "res://chance_data_test.json"
 
@@ -27,7 +29,7 @@ var ui_label_settings = [
 	
 var ui_entry_node_refrence = {
 	"tags": ["HBoxParent/VBoxQuestionEditor/Header/HBoxTags/Label", 1],
-	"chances": ["HBoxParent/VBoxQuestionEditor/QuestionChances", 1],
+	"chances": ["HBoxParent/VBoxQuestionEditor/Chances/QuestionChances", 1],
 	"explainer": ["HBoxParent/VBoxQuestionEditor/Header/HBoxPostText/Label", 1],
 	"name": ["HBoxParent/VBoxQuestionEditor/Header/HBoxName/Label", 2],
 	"body": ["HBoxParent/VBoxQuestionEditor/Header/HBoxQuestionText/Label", 2],
@@ -165,6 +167,7 @@ func _ready():
 	pass
 
 func _select_question(question_uuid):
+	is_new_question = false
 	current_question_uuid = question_uuid
 	current_question_chances_uuid = questions[question_uuid].chances.duplicate()
 	_UI_toggle_ui_that_needs_selected_question(true)
@@ -172,6 +175,7 @@ func _select_question(question_uuid):
 	pass
 
 func _save_question(question_uuid):
+	is_new_question = false
 	#check if the uuid exists, if not assume a new entry
 	if !questions.has(question_uuid):
 		questions[question_uuid] = Question.new()
@@ -210,6 +214,7 @@ func _save_question(question_uuid):
 	pass
 
 func _delete_question(question_uuid):
+	is_new_question = false
 	questions.erase(question_uuid)
 	_io_write_questions(file_path_questions_data)
 	current_question_uuid = ""
@@ -219,11 +224,22 @@ func _delete_question(question_uuid):
 	pass
 
 func _new_question():
+	is_new_question = true
 	current_question_uuid = uuid_util.v4()
 	current_question_chances_uuid.clear()
 	_UI_clear_question_data()
-	$"HBoxParent/VBoxQuestionEditor/Question Hash/Text".text = current_question_uuid
+	$HBoxParent/VBoxQuestionEditor/Header/QuestionHash/Text.text = current_question_uuid
 	_UI_toggle_ui_that_needs_selected_question(true)
+	$HBoxParent/VBoxQuestionBrowser/VBoxQuestions/ScrollContainer/QuestionList.deselect_all()
+	pass
+
+func _discard_new_question():
+	is_new_question = false
+	current_question_uuid = ""
+	current_question_chances_uuid.clear()
+	_UI_clear_question_data()
+	$HBoxParent/VBoxQuestionEditor/Header/QuestionHash/Text.text = ""
+	_UI_toggle_ui_that_needs_selected_question(false)
 	pass
 
 #region UI functions
@@ -237,7 +253,7 @@ func _UI_update_question_list():
 ## fill out the detailed question information in the ui
 func _UI_present_question_data(uuid):
 	#simple information
-	$"HBoxParent/VBoxQuestionEditor/Question Hash/Text".text = uuid
+	$HBoxParent/VBoxQuestionEditor/Header/QuestionHash/Text.text = uuid
 	$HBoxParent/VBoxQuestionEditor/Header/HBoxName/Text.text = questions[uuid].name
 	$HBoxParent/VBoxQuestionEditor/Header/HBoxQuestionText/Text.text = questions[uuid].body
 	$HBoxParent/VBoxQuestionEditor/Header/HBoxPostText/Text.text = questions[uuid].explainer
@@ -259,7 +275,7 @@ func _UI_present_question_data(uuid):
 	
 func _UI_clear_question_data():
 	#simple information
-	$"HBoxParent/VBoxQuestionEditor/Question Hash/Text".text = ""
+	$HBoxParent/VBoxQuestionEditor/Header/QuestionHash/Text.text = ""
 	$HBoxParent/VBoxQuestionEditor/Header/HBoxName/Text.text = ""
 	$HBoxParent/VBoxQuestionEditor/Header/HBoxQuestionText/Text.text = ""
 	$HBoxParent/VBoxQuestionEditor/Header/HBoxPostText/Text.text = ""
@@ -270,16 +286,16 @@ func _UI_clear_question_data():
 	$HBoxParent/VBoxQuestionEditor/Answers/HBoxWrong2/Text.text = ""
 	$HBoxParent/VBoxQuestionEditor/Answers/HBoxWrong3/Text.text = ""
 	
-	%ChancesList.clear()
+	%ChancesListQuestion.clear()
 	for key in ui_entry_node_refrence:
 		get_node(ui_entry_node_refrence[key][0]).label_settings = ui_label_settings[0]
 		
 	_UI_toggle_ui_that_needs_selected_question(false)
  
 func _UI_update_chances_list(question_uuid):
-	%ChancesList.clear()
+	%ChancesListQuestion.clear()
 	for chance_uuid in questions[question_uuid].chances:
-		%ChancesList.add_item(chances[chance_uuid].name)
+		%ChancesListQuestion.add_item(chances[chance_uuid].name)
 	pass
 
 func _UI_highlight_error_state(errorEntries):
@@ -295,8 +311,8 @@ func _UI_toggle_ui_that_needs_selected_question(enable: bool):
 	$HBoxParent/VBoxQuestionBrowser/VBoxIputButtons/BtnDelete.disabled = !enable
 	$HBoxParent/VBoxQuestionEditor/BtnSave.disabled = !enable
 	$HBoxParent/VBoxQuestionEditor/BtnDiscard.disabled = !enable
-	$HBoxParent/VBoxQuestionEditor/Chances/HBoxContainer/BtnChanceAdd.disabled = !enable
-	$HBoxParent/VBoxQuestionEditor/Chances/HBoxContainer/BtnChanceRemove.disabled = !enable
+	$HBoxParent/VBoxQuestionEditor/Chances/HBoxButtons/BtnChanceAdd.disabled = !enable
+	$HBoxParent/VBoxQuestionEditor/Chances/HBoxButtons/BtnChanceRemove.disabled = !enable
 	$Popup/VBoxContainer/Warning/HBoxContainer/BtnPopupYes.disabled = !enable
 	$HBoxParent/VBoxQuestionEditor/Header/HBoxName/Text.editable = enable
 	$HBoxParent/VBoxQuestionEditor/Header/HBoxTags/Text.editable = enable
@@ -407,13 +423,19 @@ func _on_btn_save_button_up():
 	_save_question(current_question_uuid)
 	
 func _on_btn_discard_button_up():
-	_UI_present_question_data(current_question_uuid)
-	pass
+	if is_new_question:
+		_discard_new_question()
+	else:
+		_UI_present_question_data(current_question_uuid)
+	
 
 func _on_btn_popup_yes_button_up():
 	$Popup.hide()
 	if delete_popup: # prevent weirdness with ui selection
-		_delete_question(current_question_uuid)
+		if is_new_question:
+			_discard_new_question()
+		else:
+			_delete_question(current_question_uuid)
 	delete_popup = false
 	pass # Replace with function body.
 

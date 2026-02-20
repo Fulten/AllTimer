@@ -12,8 +12,8 @@ var delete_popup = false
 var current_question_uuid: String
 var current_question_chances_uuid = []
 
-var file_path_questions_data = "res://question_data.json"
-var file_path_chances_data = "res://chance_data.json"
+var file_path_questions_data = "res://question_data_test.json"
+var file_path_chances_data = "res://chance_data_test.json"
 
 var ui_question_state_icons = [
 	preload("res://assets/scenes/EditorV2/Style/GreenO.png"),
@@ -109,9 +109,17 @@ class Question:
 		pass
 		
 	## converts formatted object into raw data
-	func _convert_to_raw():
-		#TODO
-		pass
+	func _convert_to_raw(question_uuid):
+		var question_raw = {}
+		question_raw["chances"] = chances # array
+		question_raw["correct"] = correct
+		question_raw["explainer"] = explainer
+		question_raw["name"] = name
+		question_raw["question"] = body
+		question_raw["tags"] = tags # array
+		question_raw["uuid"] = question_uuid
+		question_raw["wrong"] = wrong # array
+		return question_raw
 	pass
 	
 class Chance:
@@ -131,10 +139,14 @@ class Chance:
 		type = i_type
 		correct = i_correct
 	
-	func _convert_to_raw():
-		#TODO
-		pass
-	
+	func _convert_to_raw(chance_uuid):
+		var chance_raw = {}
+		chance_raw["correct"] = correct
+		chance_raw["description"] = description
+		chance_raw["name"] = name
+		chance_raw["type"] = type
+		chance_raw["uuid"] = chance_uuid
+		return chance_raw
 	pass
 
 # Called when the node enters the scene tree for the first time.
@@ -323,7 +335,16 @@ func _io_read_questions(file_name: String):
 	
 func _io_write_questions(file_name: String):
 	print("!INFO: Writing Questions Data")
-	#TODO
+	var raw_data = []
+	
+	for uuid in questions:
+		raw_data.append(questions[uuid]._convert_to_raw(uuid))
+		pass
+	
+	var json_string = JSON.stringify(raw_data, "\t")
+	var file = FileAccess.open(file_name, FileAccess.WRITE)
+	file.store_string(json_string)
+	file.close()
 	pass
 
 func _io_read_chances(file_name: String):
@@ -345,7 +366,18 @@ func _io_read_chances(file_name: String):
 	pass
 	
 func _io_write_chances(file_name: String):
-	#TODO
+	print("!INFO: Writing chances Data")
+	var raw_data = []
+	
+	for uuid in chances:
+		raw_data.append(chances[uuid]._convert_to_raw(uuid))
+		pass
+	
+	var json_string = JSON.stringify(raw_data, "\t")
+	var file = FileAccess.open(file_name, FileAccess.WRITE)
+	file.store_string(json_string)
+	file.close()
+	pass
 	pass
 #endregion
 
@@ -391,5 +423,3 @@ func _on_btn_popup_no_button_up():
 	pass
 	
 #endregion
-
-

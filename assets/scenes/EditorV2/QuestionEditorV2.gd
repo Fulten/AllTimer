@@ -29,7 +29,7 @@ var ui_label_settings = [
 	
 var ui_entry_node_refrence = {
 	"tags": ["HBoxParent/VBoxQuestionEditor/Header/HBoxTags/Label", 1],
-	"chances": ["HBoxParent/VBoxQuestionEditor/Chances/QuestionChances", 1],
+	"chances": ["HBoxParent/VBoxQuestionEditor/Chances/HBoxLabels/QuestionChances", 1],
 	"explainer": ["HBoxParent/VBoxQuestionEditor/Header/HBoxPostText/Label", 1],
 	"name": ["HBoxParent/VBoxQuestionEditor/Header/HBoxName/Label", 2],
 	"body": ["HBoxParent/VBoxQuestionEditor/Header/HBoxQuestionText/Label", 2],
@@ -164,6 +164,7 @@ func _ready():
 	_io_read_chances(file_path_chances_data)
 	
 	_UI_update_question_list()
+	_UI_update_global_chances_list()
 	pass
 
 func _select_question(question_uuid):
@@ -270,7 +271,7 @@ func _UI_present_question_data(uuid):
 		tagsText += tag + ", "
 	tagsText = tagsText.erase(tagsText.length()-2,2)
 	$HBoxParent/VBoxQuestionEditor/Header/HBoxTags/Text.text = tagsText
-	_UI_update_chances_list(uuid)
+	_UI_update_question_chances_list(uuid)
 	_UI_highlight_error_state(questions[uuid].errorEntries)
 	
 func _UI_clear_question_data():
@@ -292,11 +293,15 @@ func _UI_clear_question_data():
 		
 	_UI_toggle_ui_that_needs_selected_question(false)
  
-func _UI_update_chances_list(question_uuid):
+func _UI_update_question_chances_list(question_uuid):
 	%ChancesListQuestion.clear()
 	for chance_uuid in questions[question_uuid].chances:
 		%ChancesListQuestion.add_item(chances[chance_uuid].name)
-	pass
+
+func _UI_update_global_chances_list():
+	%ChancesListGlobal.clear()
+	for chance_uuid in chances:
+		%ChancesListGlobal.add_item(chances[chance_uuid].name)
 
 func _UI_highlight_error_state(errorEntries):
 	for key in ui_entry_node_refrence:
@@ -443,5 +448,9 @@ func _on_btn_popup_no_button_up():
 	$Popup.hide()
 	delete_popup = false
 	pass
-	
+
+func _on_btn_reload_chances_button_up():
+	_io_read_chances(file_path_chances_data)
+	_UI_update_global_chances_list()
+	pass
 #endregion

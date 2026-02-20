@@ -381,9 +381,32 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.25
 
-[node name="QuestionChances" type="Label" parent="HBoxParent/VBoxQuestionEditor/Chances"]
+[node name="HBoxLabels" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Chances"]
 layout_mode = 2
-text = "Chances"
+
+[node name="BtnReloadChances" type="Button" parent="HBoxParent/VBoxQuestionEditor/Chances/HBoxLabels"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = ExtResource("6_1uk36")
+icon_alignment = 1
+expand_icon = true
+
+[node name="AllChances" type="Label" parent="HBoxParent/VBoxQuestionEditor/Chances/HBoxLabels"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 10.0
+text = "All Chances"
+label_settings = ExtResource("11_iy5vm")
+horizontal_alignment = 1
+
+[node name="QuestionChances" type="Label" parent="HBoxParent/VBoxQuestionEditor/Chances/HBoxLabels"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 11.0
+text = "Question Chances"
 label_settings = ExtResource("11_iy5vm")
 horizontal_alignment = 1
 
@@ -399,6 +422,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
 
 [node name="ChancesListGlobal" type="ItemList" parent="HBoxParent/VBoxQuestionEditor/Chances/HBoxLists/ScrollContainerL"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -517,6 +541,7 @@ text = "No"
 [connection signal="item_selected" from="HBoxParent/VBoxQuestionBrowser/VBoxQuestions/ScrollContainer/QuestionList" to="." method="_on_question_list_item_selected"]
 [connection signal="button_up" from="HBoxParent/VBoxQuestionBrowser/VBoxIputButtons/BtnNew" to="." method="_on_btn_new_button_up"]
 [connection signal="button_up" from="HBoxParent/VBoxQuestionBrowser/VBoxIputButtons/BtnDelete" to="." method="_on_btn_delete_button_up"]
+[connection signal="button_up" from="HBoxParent/VBoxQuestionEditor/Chances/HBoxLabels/BtnReloadChances" to="." method="_on_btn_reload_chances_button_up"]
 [connection signal="button_up" from="HBoxParent/VBoxQuestionEditor/BtnSave" to="." method="_on_btn_save_button_up"]
 [connection signal="button_up" from="HBoxParent/VBoxQuestionEditor/BtnDiscard" to="." method="_on_btn_discard_button_up"]
 [connection signal="button_up" from="Popup/VBoxContainer/Warning/HBoxContainer/BtnPopupYes" to="." method="_on_btn_popup_yes_button_up"]

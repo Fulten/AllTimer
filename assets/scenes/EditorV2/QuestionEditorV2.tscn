@@ -112,16 +112,16 @@ theme_override_styles/normal = ExtResource("6_stbnt")
 theme_override_styles/disabled = ExtResource("2_248gj")
 text = "Chances"
 
-[node name="HBoxQuestions" type="HBoxContainer" parent="HBoxParent"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 30.0
-
-[node name="VDivider2" type="ColorRect" parent="HBoxParent/HBoxQuestions"]
+[node name="VDivider2" type="ColorRect" parent="HBoxParent"]
 clip_contents = true
 custom_minimum_size = Vector2(10, 50)
 layout_mode = 2
 color = Color(0.0823529, 0.0901961, 0.188235, 1)
+
+[node name="HBoxQuestions" type="HBoxContainer" parent="HBoxParent"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 30.0
 
 [node name="VBoxQuestionBrowser" type="VBoxContainer" parent="HBoxParent/HBoxQuestions"]
 layout_mode = 2
@@ -528,6 +528,225 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 30.0
+
+[node name="VBoxChancesBrowser" type="VBoxContainer" parent="HBoxParent/HBoxChances"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 10.0
+alignment = 1
+
+[node name="VBoxChances" type="VBoxContainer" parent="HBoxParent/HBoxChances/VBoxChancesBrowser"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxChances"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BtnReloadChances" type="Button" parent="HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxChances/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = ExtResource("6_1uk36")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ChancesListHeader" type="Label" parent="HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxChances/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 10.0
+text = "Chances"
+label_settings = ExtResource("6_851cc")
+horizontal_alignment = 1
+
+[node name="ChanceSearchBar" type="TextEdit" parent="HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxChances"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Search... (Name, Type)"
+
+[node name="HDivider" type="ColorRect" parent="HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxChances"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+color = Color(0.0823529, 0.0901961, 0.188235, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxChances"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="ChancesList" type="ItemList" parent="HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxChances/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+allow_search = false
+auto_height = true
+item_count = 3
+item_0/text = "Dummy1"
+item_0/icon = ExtResource("7_ncku1")
+item_1/text = "Dummy2"
+item_1/icon = ExtResource("8_5qrwy")
+item_2/text = "Dummy3"
+item_2/icon = ExtResource("9_u300d")
+
+[node name="VBoxIputButtons" type="VBoxContainer" parent="HBoxParent/HBoxChances/VBoxChancesBrowser"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="BtnChancesNew" type="Button" parent="HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxIputButtons"]
+layout_mode = 2
+text = "New"
+
+[node name="BtnChancesDelete" type="Button" parent="HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxIputButtons"]
+layout_mode = 2
+text = "Delete"
+
+[node name="VDivider" type="ColorRect" parent="HBoxParent/HBoxChances"]
+clip_contents = true
+custom_minimum_size = Vector2(10, 50)
+layout_mode = 2
+color = Color(0.0823529, 0.0901961, 0.188235, 1)
+
+[node name="VBoxQuestionEditor" type="VBoxContainer" parent="HBoxParent/HBoxChances"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="ChanceData" type="VBoxContainer" parent="HBoxParent/HBoxChances/VBoxQuestionEditor"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="ChanceHash" type="HBoxContainer" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Label" type="Label" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/ChanceHash"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Chance Hash:"
+label_settings = ExtResource("7_7dy80")
+horizontal_alignment = 1
+
+[node name="Text" type="Label" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/ChanceHash"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+text = "N/A"
+label_settings = ExtResource("7_7dy80")
+
+[node name="HBoxName" type="HBoxContainer" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxName"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = " Name:"
+label_settings = ExtResource("11_iy5vm")
+
+[node name="Text" type="TextEdit" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxName"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 16.0
+placeholder_text = " Name"
+wrap_mode = 1
+
+[node name="HBoxType" type="HBoxContainer" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxType"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Type:"
+label_settings = ExtResource("11_iy5vm")
+autowrap_mode = 2
+
+[node name="Text" type="TextEdit" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxType"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 16.0
+placeholder_text = " Question Body"
+wrap_mode = 1
+
+[node name="HBoxDescription" type="HBoxContainer" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/VBoxContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+text = " Description:"
+label_settings = ExtResource("11_iy5vm")
+
+[node name="HBoxCorrect" type="HBoxContainer" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CheckButton" type="CheckButton" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/VBoxContainer/HBoxCorrect"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Correct: "
+alignment = 1
+icon_alignment = 1
+
+[node name="Text" type="TextEdit" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 16.0
+placeholder_text = " Tags... (comma seperated list)"
+wrap_mode = 1
+
+[node name="VBoxQuestionsFoundIn" type="VBoxContainer" parent="HBoxParent/HBoxChances/VBoxQuestionEditor"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="Label" type="Label" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/VBoxQuestionsFoundIn"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Questions Chance is Found In"
+label_settings = ExtResource("7_7dy80")
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/VBoxQuestionsFoundIn"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 8.0
+
+[node name="QuestionList" type="ItemList" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/VBoxQuestionsFoundIn/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+auto_height = true
+
+[node name="BtnSave" type="Button" parent="HBoxParent/HBoxChances/VBoxQuestionEditor"]
+layout_mode = 2
+text = "Save Chance"
+
+[node name="BtnDiscard" type="Button" parent="HBoxParent/HBoxChances/VBoxQuestionEditor"]
+layout_mode = 2
+text = "Discard Changes"
 
 [node name="Popup" type="ColorRect" parent="."]
 visible = false

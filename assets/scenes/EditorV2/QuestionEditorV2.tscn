@@ -74,9 +74,12 @@ grow_vertical = 2
 color = Color(0.176972, 0.197504, 0.247845, 1)
 
 [node name="HBoxParent" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 1917.0
-offset_bottom = 1081.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Control" type="Control" parent="HBoxParent"]
 layout_mode = 2
@@ -109,27 +112,32 @@ theme_override_styles/normal = ExtResource("6_stbnt")
 theme_override_styles/disabled = ExtResource("2_248gj")
 text = "Chances"
 
-[node name="VDivider2" type="ColorRect" parent="HBoxParent"]
+[node name="HBoxQuestions" type="HBoxContainer" parent="HBoxParent"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 30.0
+
+[node name="VDivider2" type="ColorRect" parent="HBoxParent/HBoxQuestions"]
 clip_contents = true
 custom_minimum_size = Vector2(10, 50)
 layout_mode = 2
 color = Color(0.0823529, 0.0901961, 0.188235, 1)
 
-[node name="VBoxQuestionBrowser" type="VBoxContainer" parent="HBoxParent"]
+[node name="VBoxQuestionBrowser" type="VBoxContainer" parent="HBoxParent/HBoxQuestions"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 10.0
 alignment = 1
 
-[node name="VBoxQuestions" type="VBoxContainer" parent="HBoxParent/VBoxQuestionBrowser"]
+[node name="VBoxQuestions" type="VBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionBrowser"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxParent/VBoxQuestionBrowser/VBoxQuestions"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxQuestions"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="BtnReload" type="Button" parent="HBoxParent/VBoxQuestionBrowser/VBoxQuestions/HBoxContainer"]
+[node name="BtnReload" type="Button" parent="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxQuestions/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -137,7 +145,7 @@ icon = ExtResource("6_1uk36")
 icon_alignment = 1
 expand_icon = true
 
-[node name="QuestionListHeader" type="Label" parent="HBoxParent/VBoxQuestionBrowser/VBoxQuestions/HBoxContainer"]
+[node name="QuestionListHeader" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxQuestions/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -146,26 +154,26 @@ text = "Questions"
 label_settings = ExtResource("6_851cc")
 horizontal_alignment = 1
 
-[node name="SearchBar" type="TextEdit" parent="HBoxParent/VBoxQuestionBrowser/VBoxQuestions"]
+[node name="SearchBar" type="TextEdit" parent="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxQuestions"]
 layout_mode = 2
 size_flags_vertical = 3
 placeholder_text = "Search... (Name, Tags, chances)"
 
-[node name="HDivider" type="ColorRect" parent="HBoxParent/VBoxQuestionBrowser/VBoxQuestions"]
+[node name="HDivider" type="ColorRect" parent="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxQuestions"]
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 color = Color(0.0823529, 0.0901961, 0.188235, 1)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxParent/VBoxQuestionBrowser/VBoxQuestions"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxQuestions"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 20.0
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="QuestionList" type="ItemList" parent="HBoxParent/VBoxQuestionBrowser/VBoxQuestions/ScrollContainer"]
+[node name="QuestionList" type="ItemList" parent="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxQuestions/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -179,45 +187,45 @@ item_1/icon = ExtResource("8_5qrwy")
 item_2/text = "Dummy3"
 item_2/icon = ExtResource("9_u300d")
 
-[node name="VBoxIputButtons" type="VBoxContainer" parent="HBoxParent/VBoxQuestionBrowser"]
+[node name="VBoxIputButtons" type="VBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionBrowser"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="BtnEdit" type="Button" parent="HBoxParent/VBoxQuestionBrowser/VBoxIputButtons"]
+[node name="BtnEdit" type="Button" parent="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxIputButtons"]
 visible = false
 layout_mode = 2
 text = "Edit"
 
-[node name="BtnNew" type="Button" parent="HBoxParent/VBoxQuestionBrowser/VBoxIputButtons"]
+[node name="BtnNew" type="Button" parent="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxIputButtons"]
 layout_mode = 2
 text = "New"
 
-[node name="BtnDelete" type="Button" parent="HBoxParent/VBoxQuestionBrowser/VBoxIputButtons"]
+[node name="BtnDelete" type="Button" parent="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxIputButtons"]
 layout_mode = 2
 text = "Delete"
 
-[node name="VDivider" type="ColorRect" parent="HBoxParent"]
+[node name="VDivider" type="ColorRect" parent="HBoxParent/HBoxQuestions"]
 clip_contents = true
 custom_minimum_size = Vector2(10, 50)
 layout_mode = 2
 color = Color(0.0823529, 0.0901961, 0.188235, 1)
 
-[node name="VBoxQuestionEditor" type="VBoxContainer" parent="HBoxParent"]
+[node name="VBoxQuestionEditor" type="VBoxContainer" parent="HBoxParent/HBoxQuestions"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 20.0
 
-[node name="Header" type="VBoxContainer" parent="HBoxParent/VBoxQuestionEditor"]
+[node name="Header" type="VBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="QuestionHash" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Header"]
+[node name="QuestionHash" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="Label" type="Label" parent="HBoxParent/VBoxQuestionEditor/Header/QuestionHash"]
+[node name="Label" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/QuestionHash"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -225,7 +233,7 @@ text = "Question Hash:"
 label_settings = ExtResource("7_7dy80")
 horizontal_alignment = 1
 
-[node name="Text" type="Label" parent="HBoxParent/VBoxQuestionEditor/Header/QuestionHash"]
+[node name="Text" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/QuestionHash"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -233,12 +241,12 @@ size_flags_stretch_ratio = 4.0
 text = "N/A"
 label_settings = ExtResource("7_7dy80")
 
-[node name="HBoxName" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Header"]
+[node name="HBoxName" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
 
-[node name="Label" type="Label" parent="HBoxParent/VBoxQuestionEditor/Header/HBoxName"]
+[node name="Label" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxName"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -246,7 +254,7 @@ size_flags_vertical = 1
 text = " Name:"
 label_settings = ExtResource("11_iy5vm")
 
-[node name="Text" type="TextEdit" parent="HBoxParent/VBoxQuestionEditor/Header/HBoxName"]
+[node name="Text" type="TextEdit" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxName"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -254,12 +262,12 @@ size_flags_stretch_ratio = 16.0
 placeholder_text = " Name"
 wrap_mode = 1
 
-[node name="HBoxTags" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Header"]
+[node name="HBoxTags" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
 
-[node name="Label" type="Label" parent="HBoxParent/VBoxQuestionEditor/Header/HBoxTags"]
+[node name="Label" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxTags"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -267,7 +275,7 @@ size_flags_vertical = 1
 text = " Tags:"
 label_settings = ExtResource("11_iy5vm")
 
-[node name="Text" type="TextEdit" parent="HBoxParent/VBoxQuestionEditor/Header/HBoxTags"]
+[node name="Text" type="TextEdit" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxTags"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -275,12 +283,12 @@ size_flags_stretch_ratio = 16.0
 placeholder_text = " Tags... (comma seperated list)"
 wrap_mode = 1
 
-[node name="HBoxQuestionText" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Header"]
+[node name="HBoxQuestionText" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="Label" type="Label" parent="HBoxParent/VBoxQuestionEditor/Header/HBoxQuestionText"]
+[node name="Label" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxQuestionText"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -289,7 +297,7 @@ text = "Question Text:"
 label_settings = ExtResource("11_iy5vm")
 autowrap_mode = 2
 
-[node name="Text" type="TextEdit" parent="HBoxParent/VBoxQuestionEditor/Header/HBoxQuestionText"]
+[node name="Text" type="TextEdit" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxQuestionText"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -297,12 +305,12 @@ size_flags_stretch_ratio = 16.0
 placeholder_text = " Question Body"
 wrap_mode = 1
 
-[node name="HBoxPostText" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Header"]
+[node name="HBoxPostText" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="Label" type="Label" parent="HBoxParent/VBoxQuestionEditor/Header/HBoxPostText"]
+[node name="Label" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxPostText"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -311,7 +319,7 @@ text = "Post Text:"
 label_settings = ExtResource("11_iy5vm")
 autowrap_mode = 2
 
-[node name="Text" type="TextEdit" parent="HBoxParent/VBoxQuestionEditor/Header/HBoxPostText"]
+[node name="Text" type="TextEdit" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxPostText"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -319,23 +327,23 @@ size_flags_stretch_ratio = 16.0
 placeholder_text = " Post Question Text"
 wrap_mode = 1
 
-[node name="Answers" type="VBoxContainer" parent="HBoxParent/VBoxQuestionEditor"]
+[node name="Answers" type="VBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="QuestionAnswers" type="Label" parent="HBoxParent/VBoxQuestionEditor/Answers"]
+[node name="QuestionAnswers" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers"]
 layout_mode = 2
 text = "Answers"
 label_settings = ExtResource("11_iy5vm")
 horizontal_alignment = 1
 
-[node name="HBoxCorrect" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Answers"]
+[node name="HBoxCorrect" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="Label" type="Label" parent="HBoxParent/VBoxQuestionEditor/Answers/HBoxCorrect"]
+[node name="Label" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxCorrect"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -344,7 +352,7 @@ text = "Correct Answer:"
 label_settings = ExtResource("11_iy5vm")
 autowrap_mode = 2
 
-[node name="Text" type="TextEdit" parent="HBoxParent/VBoxQuestionEditor/Answers/HBoxCorrect"]
+[node name="Text" type="TextEdit" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxCorrect"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -352,12 +360,12 @@ size_flags_stretch_ratio = 16.0
 placeholder_text = " Correct Answer"
 wrap_mode = 1
 
-[node name="HBoxWrong1" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Answers"]
+[node name="HBoxWrong1" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="Label" type="Label" parent="HBoxParent/VBoxQuestionEditor/Answers/HBoxWrong1"]
+[node name="Label" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong1"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -366,7 +374,7 @@ text = "Wrong Answer 1:"
 label_settings = ExtResource("11_iy5vm")
 autowrap_mode = 2
 
-[node name="Text" type="TextEdit" parent="HBoxParent/VBoxQuestionEditor/Answers/HBoxWrong1"]
+[node name="Text" type="TextEdit" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong1"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -374,12 +382,12 @@ size_flags_stretch_ratio = 16.0
 placeholder_text = " Wrong Answer One"
 wrap_mode = 1
 
-[node name="HBoxWrong2" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Answers"]
+[node name="HBoxWrong2" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="Label" type="Label" parent="HBoxParent/VBoxQuestionEditor/Answers/HBoxWrong2"]
+[node name="Label" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong2"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -388,7 +396,7 @@ text = "Wrong Answer 2:"
 label_settings = ExtResource("11_iy5vm")
 autowrap_mode = 2
 
-[node name="Text" type="TextEdit" parent="HBoxParent/VBoxQuestionEditor/Answers/HBoxWrong2"]
+[node name="Text" type="TextEdit" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -396,12 +404,12 @@ size_flags_stretch_ratio = 16.0
 placeholder_text = " Wrong Answer Two"
 wrap_mode = 1
 
-[node name="HBoxWrong3" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Answers"]
+[node name="HBoxWrong3" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="Label" type="Label" parent="HBoxParent/VBoxQuestionEditor/Answers/HBoxWrong3"]
+[node name="Label" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong3"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -410,7 +418,7 @@ text = "Wrong Answer 3:"
 label_settings = ExtResource("11_iy5vm")
 autowrap_mode = 2
 
-[node name="Text" type="TextEdit" parent="HBoxParent/VBoxQuestionEditor/Answers/HBoxWrong3"]
+[node name="Text" type="TextEdit" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong3"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -418,15 +426,15 @@ size_flags_stretch_ratio = 16.0
 placeholder_text = " Wrong Answer Three"
 wrap_mode = 1
 
-[node name="Chances" type="VBoxContainer" parent="HBoxParent/VBoxQuestionEditor"]
+[node name="Chances" type="VBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.25
 
-[node name="HBoxLabels" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Chances"]
+[node name="HBoxLabels" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances"]
 layout_mode = 2
 
-[node name="BtnReloadChances" type="Button" parent="HBoxParent/VBoxQuestionEditor/Chances/HBoxLabels"]
+[node name="BtnReloadChances" type="Button" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxLabels"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -434,7 +442,7 @@ icon = ExtResource("6_1uk36")
 icon_alignment = 1
 expand_icon = true
 
-[node name="AllChances" type="Label" parent="HBoxParent/VBoxQuestionEditor/Chances/HBoxLabels"]
+[node name="AllChances" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxLabels"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -443,7 +451,7 @@ text = "All Chances"
 label_settings = ExtResource("11_iy5vm")
 horizontal_alignment = 1
 
-[node name="QuestionChances" type="Label" parent="HBoxParent/VBoxQuestionEditor/Chances/HBoxLabels"]
+[node name="QuestionChances" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxLabels"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -452,18 +460,18 @@ text = "Question Chances"
 label_settings = ExtResource("11_iy5vm")
 horizontal_alignment = 1
 
-[node name="HBoxLists" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Chances"]
+[node name="HBoxLists" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
 
-[node name="ScrollContainerL" type="ScrollContainer" parent="HBoxParent/VBoxQuestionEditor/Chances/HBoxLists"]
+[node name="ScrollContainerL" type="ScrollContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxLists"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
 
-[node name="ChancesListGlobal" type="ItemList" parent="HBoxParent/VBoxQuestionEditor/Chances/HBoxLists/ScrollContainerL"]
+[node name="ChancesListGlobal" type="ItemList" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxLists/ScrollContainerL"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -472,19 +480,19 @@ size_flags_stretch_ratio = 4.0
 allow_search = false
 auto_height = true
 
-[node name="VDivider" type="ColorRect" parent="HBoxParent/VBoxQuestionEditor/Chances/HBoxLists"]
+[node name="VDivider" type="ColorRect" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxLists"]
 clip_contents = true
 custom_minimum_size = Vector2(10, 50)
 layout_mode = 2
 color = Color(0.0823529, 0.0901961, 0.188235, 1)
 
-[node name="ScrollContainerR" type="ScrollContainer" parent="HBoxParent/VBoxQuestionEditor/Chances/HBoxLists"]
+[node name="ScrollContainerR" type="ScrollContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxLists"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
 
-[node name="ChancesListQuestion" type="ItemList" parent="HBoxParent/VBoxQuestionEditor/Chances/HBoxLists/ScrollContainerR"]
+[node name="ChancesListQuestion" type="ItemList" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxLists/ScrollContainerR"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -493,27 +501,33 @@ size_flags_stretch_ratio = 4.0
 allow_search = false
 auto_height = true
 
-[node name="HBoxButtons" type="HBoxContainer" parent="HBoxParent/VBoxQuestionEditor/Chances"]
+[node name="HBoxButtons" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="BtnChanceAdd" type="Button" parent="HBoxParent/VBoxQuestionEditor/Chances/HBoxButtons"]
+[node name="BtnChanceAdd" type="Button" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxButtons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Add Chance -->"
 
-[node name="BtnChanceRemove" type="Button" parent="HBoxParent/VBoxQuestionEditor/Chances/HBoxButtons"]
+[node name="BtnChanceRemove" type="Button" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxButtons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "<-- Remove Chance"
 
-[node name="BtnSave" type="Button" parent="HBoxParent/VBoxQuestionEditor"]
+[node name="BtnSave" type="Button" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor"]
 layout_mode = 2
 text = "Save Question"
 
-[node name="BtnDiscard" type="Button" parent="HBoxParent/VBoxQuestionEditor"]
+[node name="BtnDiscard" type="Button" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor"]
 layout_mode = 2
 text = "Discard Changes"
+
+[node name="HBoxChances" type="HBoxContainer" parent="HBoxParent"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 30.0
 
 [node name="Popup" type="ColorRect" parent="."]
 visible = false
@@ -581,17 +595,17 @@ text = "No"
 
 [connection signal="button_up" from="HBoxParent/Control/HBoxContainer/BtnQuestions" to="." method="_on_btn_questions_button_up"]
 [connection signal="button_up" from="HBoxParent/Control/HBoxContainer/BtnChances" to="." method="_on_btn_chances_button_up"]
-[connection signal="button_up" from="HBoxParent/VBoxQuestionBrowser/VBoxQuestions/HBoxContainer/BtnReload" to="." method="_on_btn_reload_button_up"]
-[connection signal="text_changed" from="HBoxParent/VBoxQuestionBrowser/VBoxQuestions/SearchBar" to="." method="_on_search_bar_text_changed"]
-[connection signal="item_selected" from="HBoxParent/VBoxQuestionBrowser/VBoxQuestions/ScrollContainer/QuestionList" to="." method="_on_question_list_item_selected"]
-[connection signal="button_up" from="HBoxParent/VBoxQuestionBrowser/VBoxIputButtons/BtnNew" to="." method="_on_btn_new_button_up"]
-[connection signal="button_up" from="HBoxParent/VBoxQuestionBrowser/VBoxIputButtons/BtnDelete" to="." method="_on_btn_delete_button_up"]
-[connection signal="button_up" from="HBoxParent/VBoxQuestionEditor/Chances/HBoxLabels/BtnReloadChances" to="." method="_on_btn_reload_chances_button_up"]
-[connection signal="item_selected" from="HBoxParent/VBoxQuestionEditor/Chances/HBoxLists/ScrollContainerL/ChancesListGlobal" to="." method="_on_chances_list_global_item_selected"]
-[connection signal="item_selected" from="HBoxParent/VBoxQuestionEditor/Chances/HBoxLists/ScrollContainerR/ChancesListQuestion" to="." method="_on_chances_list_question_item_selected"]
-[connection signal="button_up" from="HBoxParent/VBoxQuestionEditor/Chances/HBoxButtons/BtnChanceAdd" to="." method="_on_btn_chance_add_button_up"]
-[connection signal="pressed" from="HBoxParent/VBoxQuestionEditor/Chances/HBoxButtons/BtnChanceRemove" to="." method="_on_btn_chance_remove_pressed"]
-[connection signal="button_up" from="HBoxParent/VBoxQuestionEditor/BtnSave" to="." method="_on_btn_save_button_up"]
-[connection signal="button_up" from="HBoxParent/VBoxQuestionEditor/BtnDiscard" to="." method="_on_btn_discard_button_up"]
+[connection signal="button_up" from="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxQuestions/HBoxContainer/BtnReload" to="." method="_on_btn_reload_button_up"]
+[connection signal="text_changed" from="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxQuestions/SearchBar" to="." method="_on_search_bar_text_changed"]
+[connection signal="item_selected" from="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxQuestions/ScrollContainer/QuestionList" to="." method="_on_question_list_item_selected"]
+[connection signal="button_up" from="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxIputButtons/BtnNew" to="." method="_on_btn_new_button_up"]
+[connection signal="button_up" from="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxIputButtons/BtnDelete" to="." method="_on_btn_delete_button_up"]
+[connection signal="button_up" from="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxLabels/BtnReloadChances" to="." method="_on_btn_reload_chances_button_up"]
+[connection signal="item_selected" from="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxLists/ScrollContainerL/ChancesListGlobal" to="." method="_on_chances_list_global_item_selected"]
+[connection signal="item_selected" from="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxLists/ScrollContainerR/ChancesListQuestion" to="." method="_on_chances_list_question_item_selected"]
+[connection signal="button_up" from="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxButtons/BtnChanceAdd" to="." method="_on_btn_chance_add_button_up"]
+[connection signal="pressed" from="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxButtons/BtnChanceRemove" to="." method="_on_btn_chance_remove_pressed"]
+[connection signal="button_up" from="HBoxParent/HBoxQuestions/VBoxQuestionEditor/BtnSave" to="." method="_on_btn_save_button_up"]
+[connection signal="button_up" from="HBoxParent/HBoxQuestions/VBoxQuestionEditor/BtnDiscard" to="." method="_on_btn_discard_button_up"]
 [connection signal="button_up" from="Popup/VBoxContainer/Warning/HBoxContainer/BtnPopupYes" to="." method="_on_btn_popup_yes_button_up"]
 [connection signal="button_up" from="Popup/VBoxContainer/Warning/HBoxContainer/BtnPopupNo" to="." method="_on_btn_popup_no_button_up"]

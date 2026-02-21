@@ -119,6 +119,7 @@ layout_mode = 2
 color = Color(0.0823529, 0.0901961, 0.188235, 1)
 
 [node name="HBoxQuestions" type="HBoxContainer" parent="HBoxParent"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 30.0
@@ -524,7 +525,6 @@ layout_mode = 2
 text = "Discard Changes"
 
 [node name="HBoxChances" type="HBoxContainer" parent="HBoxParent"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 30.0
@@ -679,7 +679,27 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 16.0
-placeholder_text = " Question Body"
+placeholder_text = " Chance type"
+wrap_mode = 1
+
+[node name="HBoxIcon" type="HBoxContainer" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = " Icon:"
+label_settings = ExtResource("11_iy5vm")
+
+[node name="Text" type="TextEdit" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 16.0
+placeholder_text = " Icon Path (\"res://assets/uiux/main_menu/T_BadAtMath_D.tga\")"
 wrap_mode = 1
 
 [node name="HBoxDescription" type="HBoxContainer" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData"]
@@ -715,7 +735,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 16.0
-placeholder_text = " Tags... (comma seperated list)"
+placeholder_text = " Detailed Description"
 wrap_mode = 1
 
 [node name="VBoxQuestionsFoundIn" type="VBoxContainer" parent="HBoxParent/HBoxChances/VBoxQuestionEditor"]

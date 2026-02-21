@@ -176,7 +176,7 @@ func _ready():
 	DisplayServer.window_set_position(Vector2i(300,100))
 	DisplayServer.window_set_size(Vector2i(1240,700))
 	
-	$Popup.hide()
+	$QuestionPopup.hide()
 	$HBoxParent/Control/HBoxContainer/BtnQuestions.disabled = true
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxButtons/BtnChanceAdd.disabled = true
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxButtons/BtnChanceRemove.disabled = true
@@ -409,7 +409,7 @@ func _UI_toggle_ui_that_needs_selected_question(enable: bool):
 	$HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxIputButtons/BtnDelete.disabled = !enable
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/BtnSave.disabled = !enable
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/BtnDiscard.disabled = !enable
-	$Popup/VBoxContainer/Warning/HBoxContainer/BtnPopupYes.disabled = !enable
+	$QuestionPopup/VBoxContainer/Warning/HBoxContainer/BtnPopupYes.disabled = !enable
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxName/Text.editable = enable
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxTags/Text.editable = enable
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxQuestionText/Text.editable = enable
@@ -507,7 +507,7 @@ func _on_btn_new_button_up():
 	pass
 
 func _on_btn_delete_button_up():
-	$Popup.show()
+	$QuestionPopup.show()
 	delete_popup = true
 	pass
 
@@ -521,7 +521,7 @@ func _on_btn_discard_button_up():
 		_UI_present_question_data(current_question_uuid)
 
 func _on_btn_popup_yes_button_up():
-	$Popup.hide()
+	$QuestionPopup.hide()
 	if delete_popup: # prevent weirdness with ui selection
 		if is_new_question:
 			_discard_new_question()
@@ -531,7 +531,7 @@ func _on_btn_popup_yes_button_up():
 	pass # Replace with function body.
 
 func _on_btn_popup_no_button_up():
-	$Popup.hide()
+	$QuestionPopup.hide()
 	delete_popup = false
 	pass
 

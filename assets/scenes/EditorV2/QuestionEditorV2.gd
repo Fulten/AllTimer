@@ -195,6 +195,7 @@ func _ready():
 	$HBoxParent/HBoxQuestions.show()
 	$HBoxParent/HBoxChances.hide()
 	_UI_toggle_ui_that_needs_selected_question(false)
+	_UI_toggle_ui_that_needs_selected_chance(false)
 	can_select_chances = false
 	
 	_io_read_questions(file_path_questions_data)
@@ -274,7 +275,7 @@ func _select_chance(chance_uuid):
 	is_new_chance = false
 	current_chance_uuid = chance_uuid
 	_UI_toggle_ui_that_needs_selected_chance(true)
-	_UI_present_chances_data(chance_uuid)
+	_UI_present_chance_data(chance_uuid)
 
 func _save_question(question_uuid):
 	is_new_question = false
@@ -314,7 +315,23 @@ func _save_question(question_uuid):
 	questions[question_uuid]._check_error_state()
 	_generate_question_list()
 	_UI_update_question_list()
-	pass
+
+func _save_chance(chance_uuid):
+	is_new_chance = false
+	#check if the uuid exists, if not assume a new entry
+	if !chances.has(chance_uuid):
+		chances[chance_uuid] = Chance.new()
+		pass
+		
+	chances[chance_uuid].name = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxName/Text.text
+	chances[chance_uuid].type = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxType/Text.text
+	chances[chance_uuid].icon = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Text.text
+	chances[chance_uuid].description = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/Text.text
+	chances[chance_uuid].correct = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/VBoxContainer/HBoxCorrect/CheckButton.button_pressed
+
+	_io_write_chances(file_path_chances_data)
+	_generate_chances_list()
+	_UI_update_chances_list()
 
 func _delete_question(question_uuid):
 	is_new_question = false
@@ -351,6 +368,12 @@ func _discard_new_question():
 	_reset_chance_selector()
 	pass
 
+func _discard_new_chance():
+	is_new_chance = false
+	current_chance_uuid = ""
+	_UI_clear_chance_data()
+	_UI_toggle_ui_that_needs_selected_chance(false)
+	
 func _reset_chance_selector():
 	selected_chance_local_uuid = ""
 	selected_chance_global_uuid = ""
@@ -424,7 +447,7 @@ func _UI_present_question_data(uuid):
 	_UI_update_question_chances_list()
 	_UI_highlight_error_state(questions[uuid].errorEntries)
 	
-func _UI_present_chances_data(uuid):
+func _UI_present_chance_data(uuid):
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/ChanceHash/Text.text = uuid
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxName/Text.text = chances[uuid].name
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxType/Text.text = chances[uuid].type
@@ -483,11 +506,15 @@ func _UI_toggle_ui_that_needs_selected_question(enable: bool):
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong3/Text.editable = enable
 	
 func _UI_toggle_ui_that_needs_selected_chance(enable: bool):
+	# text fields
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxName/Text.editable = enable
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxType/Text.editable = enable
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Text.editable = enable
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/Text.editable = enable
-	
+	#buttons
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/BtnChancesSave.disabled = !enable
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/BtnChancesDiscard.disabled = !enable
+	$HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxIputButtons/BtnChancesDelete.disabled = !enable
 #endregion
 	
 #region file IO
@@ -688,6 +715,18 @@ func _on_chances_list_item_selected(index):
 	for uuid in chances:
 		if chances[uuid].listIndexChancesEditor == index:
 			_select_chance(uuid)
+
+func _on_btn_chances_save_button_up():
+	_save_chance(current_chance_uuid)
+	pass
+
+
+func _on_btn_chances_discard_button_up():
+	if is_new_chance:
+		_discard_new_chance()
+	else:
+		_UI_present_chance_data(current_chance_uuid)
+	pass
 #endregion
 
 

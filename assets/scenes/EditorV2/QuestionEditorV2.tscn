@@ -764,11 +764,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 auto_height = true
 
-[node name="BtnSave" type="Button" parent="HBoxParent/HBoxChances/VBoxQuestionEditor"]
+[node name="BtnChancesSave" type="Button" parent="HBoxParent/HBoxChances/VBoxQuestionEditor"]
 layout_mode = 2
 text = "Save Chance"
 
-[node name="BtnDiscard" type="Button" parent="HBoxParent/HBoxChances/VBoxQuestionEditor"]
+[node name="BtnChancesDiscard" type="Button" parent="HBoxParent/HBoxChances/VBoxQuestionEditor"]
 layout_mode = 2
 text = "Discard Changes"
 
@@ -917,5 +917,7 @@ text = "No"
 [connection signal="button_up" from="HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxChances/HBoxContainer/BtnReloadChances" to="." method="_on_btn_reload_chances_button_up"]
 [connection signal="text_changed" from="HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxChances/ChanceSearchBar" to="." method="_on_chance_search_bar_text_changed"]
 [connection signal="item_selected" from="HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxChances/ScrollContainer/ChancesList" to="." method="_on_chances_list_item_selected"]
+[connection signal="button_up" from="HBoxParent/HBoxChances/VBoxQuestionEditor/BtnChancesSave" to="." method="_on_btn_chances_save_button_up"]
+[connection signal="button_up" from="HBoxParent/HBoxChances/VBoxQuestionEditor/BtnChancesDiscard" to="." method="_on_btn_chances_discard_button_up"]
 [connection signal="button_up" from="QuestionPopup/VBoxContainer/Warning/HBoxContainer/BtnPopupYes" to="." method="_on_btn_popup_yes_button_up"]
 [connection signal="button_up" from="QuestionPopup/VBoxContainer/Warning/HBoxContainer/BtnPopupNo" to="." method="_on_btn_popup_no_button_up"]

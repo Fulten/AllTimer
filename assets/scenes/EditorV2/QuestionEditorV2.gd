@@ -16,10 +16,12 @@ var searchedChancesUuid = []
 
 var delete_popup = false
 var is_new_question = false
+var is_new_chance = false
 var can_select_chances = false
 var show_questions_menu = true
 var show_chances_menu = false
 var current_question_uuid: String
+var current_chance_uuid: String
 var selected_chance_local_uuid: String
 var selected_chance_global_uuid: String
 var current_question_chances = {}
@@ -137,17 +139,20 @@ class Chance:
 	var description: String
 	var type: String
 	var correct: bool
+	var icon: String
 	
 	var listIndex: int
 	var listIndexChancesEditor: int
 	
 	func _build_from_raw(
 		i_name: String,
+		i_icon: String,
 		i_description: String,
 		i_type: String,
 		i_correct: bool):
 		
 		name = i_name
+		icon = i_icon
 		description = i_description
 		type = i_type
 		correct = i_correct
@@ -162,6 +167,7 @@ class Chance:
 		chance_raw["name"] = name
 		chance_raw["type"] = type
 		chance_raw["uuid"] = chance_uuid
+		chance_raw["icon"] = icon
 		return chance_raw
 	
 	func _duplicate():
@@ -252,8 +258,6 @@ func _generate_chances_list():
 	pass
 
 func _select_question(question_uuid):
-	var chancetest = Chance.new()
-	
 	is_new_question = false
 	current_question_chances.clear()
 	current_question_uuid = question_uuid
@@ -265,6 +269,12 @@ func _select_question(question_uuid):
 	_UI_present_question_data(question_uuid)
 	_reset_chance_selector()
 	pass
+	
+func _select_chance(chance_uuid):
+	is_new_chance = false
+	current_chance_uuid = chance_uuid
+	_UI_toggle_ui_that_needs_selected_chance(true)
+	_UI_present_chances_data(chance_uuid)
 
 func _save_question(question_uuid):
 	is_new_question = false
@@ -414,6 +424,21 @@ func _UI_present_question_data(uuid):
 	_UI_update_question_chances_list()
 	_UI_highlight_error_state(questions[uuid].errorEntries)
 	
+func _UI_present_chances_data(uuid):
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/ChanceHash/Text.text = uuid
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxName/Text.text = chances[uuid].name
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxType/Text.text = chances[uuid].type
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Text.text = chances[uuid].icon
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/Text.text = chances[uuid].description
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/VBoxContainer/HBoxCorrect/CheckButton.button_pressed = chances[uuid].correct
+
+func _UI_clear_chance_data():
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/ChanceHash/Text.text = ""
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxName/Text.text = ""
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxType/Text.text = ""
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Text.text = ""
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/Text.text = ""
+
 func _UI_clear_question_data():
 	#simple information
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/QuestionHash/Text.text = ""
@@ -456,6 +481,13 @@ func _UI_toggle_ui_that_needs_selected_question(enable: bool):
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong1/Text.editable = enable
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong2/Text.editable = enable
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong3/Text.editable = enable
+	
+func _UI_toggle_ui_that_needs_selected_chance(enable: bool):
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxName/Text.editable = enable
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxType/Text.editable = enable
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Text.editable = enable
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/Text.editable = enable
+	
 #endregion
 	
 #region file IO
@@ -482,7 +514,10 @@ func _io_read_questions(file_name: String):
 			question_raw["chances"])
 		questions[question_raw["uuid"]] = question
 	pass
-	
+
+func _io_validate_question():
+	pass
+
 func _io_write_questions(file_name: String):
 	print("!INFO: Writing Questions Data")
 	var raw_data = []
@@ -506,15 +541,32 @@ func _io_read_chances(file_name: String):
 		file.close()
 	chances.clear()
 	for chance_raw in chances_raw:
+		_io_validate_chance(chance_raw)
 		var chance = Chance.new()
 		chance._build_from_raw(
 			chance_raw["name"],
+			chance_raw["icon"],
 			chance_raw["description"],
 			chance_raw["type"],
 			chance_raw["correct"])
 		chances[chance_raw["uuid"]] = chance
 	pass
-	
+
+func _io_validate_chance(chance_raw):
+	if !"name" in chance_raw:
+		chance_raw["name"] = ""
+	if !"description" in chance_raw:
+		chance_raw["description"] = ""
+	if !"correct" in chance_raw:
+		chance_raw["correct"] = true
+	if !"type" in chance_raw:
+		chance_raw["type"] = ""
+	if !"icon" in chance_raw:
+		chance_raw["icon"] = ""
+		print("!Info: Older Chance format found, adding icon entry")
+	if !"uuid" in chance_raw:
+		print("!Warning: io read chance without uuid")
+
 func _io_write_chances(file_name: String):
 	print("!INFO: Writing chances Data")
 	var raw_data = []
@@ -631,8 +683,13 @@ func _on_btn_chances_button_up():
 func _on_chance_search_bar_text_changed():
 	_generate_chances_list()
 	_UI_update_chances_list()
-	pass
+
+func _on_chances_list_item_selected(index):
+	for uuid in chances:
+		if chances[uuid].listIndexChancesEditor == index:
+			_select_chance(uuid)
 #endregion
+
 
 
 

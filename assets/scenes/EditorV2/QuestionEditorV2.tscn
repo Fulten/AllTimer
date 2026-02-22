@@ -727,6 +727,9 @@ size_flags_vertical = 3
 [node name="CheckButton" type="CheckButton" parent="HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/VBoxContainer/HBoxCorrect"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 1, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 0, 0, 1)
 text = "Correct: "
 alignment = 1
 icon_alignment = 1
@@ -913,5 +916,6 @@ text = "No"
 [connection signal="button_up" from="HBoxParent/HBoxQuestions/VBoxQuestionEditor/BtnDiscard" to="." method="_on_btn_discard_button_up"]
 [connection signal="button_up" from="HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxChances/HBoxContainer/BtnReloadChances" to="." method="_on_btn_reload_chances_button_up"]
 [connection signal="text_changed" from="HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxChances/ChanceSearchBar" to="." method="_on_chance_search_bar_text_changed"]
+[connection signal="item_selected" from="HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxChances/ScrollContainer/ChancesList" to="." method="_on_chances_list_item_selected"]
 [connection signal="button_up" from="QuestionPopup/VBoxContainer/Warning/HBoxContainer/BtnPopupYes" to="." method="_on_btn_popup_yes_button_up"]
 [connection signal="button_up" from="QuestionPopup/VBoxContainer/Warning/HBoxContainer/BtnPopupNo" to="." method="_on_btn_popup_no_button_up"]

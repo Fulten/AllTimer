@@ -119,6 +119,7 @@ layout_mode = 2
 color = Color(0.0823529, 0.0901961, 0.188235, 1)
 
 [node name="HBoxQuestions" type="HBoxContainer" parent="HBoxParent"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 30.0
@@ -524,7 +525,6 @@ layout_mode = 2
 text = "Discard Changes"
 
 [node name="HBoxChances" type="HBoxContainer" parent="HBoxParent"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 30.0

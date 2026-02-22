@@ -180,6 +180,8 @@ func _ready():
 	$HBoxParent/Control/HBoxContainer/BtnQuestions.disabled = true
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxButtons/BtnChanceAdd.disabled = true
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxButtons/BtnChanceRemove.disabled = true
+	$HBoxParent/HBoxQuestions.show()
+	$HBoxParent/HBoxChances.hide()
 	_UI_toggle_ui_that_needs_selected_question(false)
 	can_select_chances = false
 	
@@ -574,11 +576,19 @@ func _on_search_bar_text_changed():
 func _on_btn_questions_button_up():
 	show_questions_menu = true
 	show_chances_menu = false
+	$HBoxParent/HBoxQuestions.show()
+	$HBoxParent/HBoxChances.hide()
+	$HBoxParent/Control/HBoxContainer/BtnQuestions.disabled = true;
+	$HBoxParent/Control/HBoxContainer/BtnChances.disabled = false;
 	pass
 
 func _on_btn_chances_button_up():
 	show_questions_menu = false
 	show_chances_menu = true
+	$HBoxParent/HBoxQuestions.hide()
+	$HBoxParent/HBoxChances.show()
+	$HBoxParent/Control/HBoxContainer/BtnQuestions.disabled = false;
+	$HBoxParent/Control/HBoxContainer/BtnChances.disabled = true;
 	pass
 #endregion
 

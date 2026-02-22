@@ -26,7 +26,7 @@ var current_chance_uuid: String
 var selected_chance_local_uuid: String
 var selected_chance_global_uuid: String
 var current_question_chances = {}
-
+var questions_that_refrence_chances_uuid = []
 
 var ui_question_state_icons = [
 	preload("res://assets/scenes/EditorV2/Style/GreenO.png"),
@@ -48,6 +48,12 @@ var ui_entry_node_refrence = {
 	"wrong0": ["HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong1/Label", 2],
 	"wrong1": ["HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong2/Label", 2],
 	"wrong2": ["HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong3/Label", 2],}
+
+var ui_entry_node_chances_reference = {
+	"name": ["HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxName/Label", 2],
+	"type": ["HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxType/Label", 1],
+	"icon": ["HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Label", 1],
+	"description": ["HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/VBoxContainer/Label", 2]}
 
 class Question:
 	var name: String
@@ -145,6 +151,9 @@ class Chance:
 	var listIndex: int
 	var listIndexChancesEditor: int
 	
+	var errorState: int
+	var errorEntries = []
+	
 	func _build_from_raw(
 		i_name: String,
 		i_icon: String,
@@ -160,6 +169,28 @@ class Chance:
 		
 		listIndex = -1
 		listIndexChancesEditor = -1
+		
+		_check_error_state()
+	
+	func _check_error_state():
+		errorState = 0
+		errorEntries.clear()
+		
+		# optional
+		if icon == "":
+			errorState = 1
+			errorEntries.append("icon")
+		if type == "":
+			errorState = 1
+			errorEntries.append("type")
+		
+		# critical
+		if name == "":
+			errorState = 2
+			errorEntries.append("name")
+		if description == "":
+			errorState = 2
+			errorEntries.append("description")
 	
 	func _convert_to_raw(chance_uuid):
 		var chance_raw = {}
@@ -177,9 +208,11 @@ class Chance:
 		newChance.description = description
 		newChance.type = type
 		newChance.correct = correct
+		newChance.icon = icon
 		
 		newChance.listIndex = -1
 		newChance.listIndexChancesEditor = -1
+		newChance._check_error_state()
 		return newChance
 	pass
 
@@ -275,6 +308,16 @@ func _select_question(question_uuid):
 func _select_chance(chance_uuid):
 	is_new_chance = false
 	current_chance_uuid = chance_uuid
+	
+	# find all questions where given chance is refrenced
+	questions_that_refrence_chances_uuid.clear()
+	for q_uuid in questions:
+		for c_uuid in questions[q_uuid].chances:
+			if c_uuid == current_chance_uuid:
+				questions_that_refrence_chances_uuid.append(q_uuid)
+				break
+	
+	_UI_present_questions_found_in()
 	_UI_toggle_ui_that_needs_selected_chance(true)
 	_UI_present_chance_data(chance_uuid)
 
@@ -331,6 +374,7 @@ func _save_chance(chance_uuid):
 	chances[chance_uuid].correct = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/VBoxContainer/HBoxCorrect/CheckButton.button_pressed
 
 	_io_write_chances(file_path_chances_data)
+	chances[chance_uuid]._check_error_state()
 	_generate_chances_list()
 	_UI_update_chances_list()
 
@@ -429,7 +473,7 @@ func _UI_update_chances_list():
 		chances[uuid].listIndexChancesEditor = -1
 	
 	for uuid in searchedChancesUuid:
-		chances[uuid].listIndexChancesEditor = %ChancesList.add_item(chances[uuid].name)
+		chances[uuid].listIndexChancesEditor = %ChancesList.add_item(chances[uuid].name, ui_question_state_icons[chances[uuid].errorState])
 	pass
  
 func _UI_update_question_chances_list():
@@ -472,6 +516,15 @@ func _UI_present_chance_data(uuid):
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Text.text = chances[uuid].icon
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/Text.text = chances[uuid].description
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/VBoxContainer/HBoxCorrect/CheckButton.button_pressed = chances[uuid].correct
+	_UI_highlight_chances_error_state(chances[uuid].errorEntries)
+
+func _UI_present_questions_found_in():
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/VBoxQuestionsFoundIn/ScrollContainer/QuestionList.clear()
+	for uuid in questions_that_refrence_chances_uuid:
+		$HBoxParent/HBoxChances/VBoxQuestionEditor/VBoxQuestionsFoundIn/ScrollContainer/QuestionList.add_item(questions[uuid].name)
+
+func _UI_clear_questions_found_in():
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/VBoxQuestionsFoundIn/ScrollContainer/QuestionList.clear()
 
 func _UI_clear_chance_data():
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/ChanceHash/Text.text = ""
@@ -479,6 +532,7 @@ func _UI_clear_chance_data():
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxType/Text.text = ""
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Text.text = ""
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/Text.text = ""
+	_UI_clear_questions_found_in()
 	_UI_toggle_ui_that_needs_selected_chance(false)
 
 func _UI_clear_question_data():
@@ -504,12 +558,16 @@ func _UI_clear_question_data():
 func _UI_highlight_error_state(errorEntries):
 	for key in ui_entry_node_refrence:
 		get_node(ui_entry_node_refrence[key][0]).label_settings = ui_label_settings[0]
-	
 	for key in errorEntries:
 		get_node(ui_entry_node_refrence[key][0]).label_settings = ui_label_settings[ui_entry_node_refrence[key][1]]
-		pass
-	pass
-	
+
+func _UI_highlight_chances_error_state(errorEntries):
+	for key in ui_entry_node_chances_reference:
+		get_node(ui_entry_node_chances_reference[key][0]).label_settings = ui_label_settings[0]
+	for key in errorEntries:
+		get_node(ui_entry_node_chances_reference[key][0]).label_settings = ui_label_settings[ui_entry_node_chances_reference[key][1]]
+
+
 func _UI_toggle_ui_that_needs_selected_question(enable: bool):
 	$HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxIputButtons/BtnDelete.disabled = !enable
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/BtnSave.disabled = !enable

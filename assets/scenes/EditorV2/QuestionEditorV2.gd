@@ -15,6 +15,7 @@ var searchedQuestionsUuid = []
 var searchedChancesUuid = []
 
 var delete_popup = false
+var delete_popup_chance = false
 var is_new_question = false
 var is_new_chance = false
 var can_select_chances = false
@@ -345,6 +346,15 @@ func _delete_question(question_uuid):
 	_reset_chance_selector()
 	pass
 
+func _delete_chance(chance_uuid):
+	is_new_chance = false
+	chances.erase(chance_uuid)
+	_io_write_chances(file_path_chances_data)
+	current_chance_uuid = ""
+	_generate_chances_list()
+	_UI_update_chances_list()
+	_UI_clear_chance_data()
+
 func _new_question():
 	is_new_question = true
 	current_question_uuid = uuid_util.v4()
@@ -356,6 +366,14 @@ func _new_question():
 	$HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxQuestions/ScrollContainer/QuestionList.deselect_all()
 	_reset_chance_selector()
 	pass
+
+func _new_chance():
+	is_new_chance = true
+	current_chance_uuid = uuid_util.v4()
+	_UI_clear_chance_data()
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/ChanceHash/Text.text = current_chance_uuid
+	_UI_toggle_ui_that_needs_selected_chance(true)
+	%ChancesList.deselect_all()
 
 func _discard_new_question():
 	is_new_question = false
@@ -461,6 +479,7 @@ func _UI_clear_chance_data():
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxType/Text.text = ""
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Text.text = ""
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/Text.text = ""
+	_UI_toggle_ui_that_needs_selected_chance(false)
 
 func _UI_clear_question_data():
 	#simple information
@@ -621,12 +640,10 @@ func _on_btn_reload_button_up():
 ## create new blank question entry
 func _on_btn_new_button_up():
 	_new_question()
-	pass
 
 func _on_btn_delete_button_up():
 	$QuestionPopup.show()
 	delete_popup = true
-	pass
 
 func _on_btn_save_button_up():
 	_save_question(current_question_uuid)
@@ -645,12 +662,10 @@ func _on_btn_popup_yes_button_up():
 		else:
 			_delete_question(current_question_uuid)
 	delete_popup = false
-	pass # Replace with function body.
 
 func _on_btn_popup_no_button_up():
 	$QuestionPopup.hide()
 	delete_popup = false
-	pass
 
 func _on_btn_reload_chances_button_up():
 	_io_read_chances(file_path_chances_data)
@@ -720,15 +735,31 @@ func _on_btn_chances_save_button_up():
 	_save_chance(current_chance_uuid)
 	pass
 
-
 func _on_btn_chances_discard_button_up():
 	if is_new_chance:
 		_discard_new_chance()
 	else:
 		_UI_present_chance_data(current_chance_uuid)
 	pass
+
+func _on_btn_chances_new_button_up():
+	_new_chance()
+
+func _on_btn_chances_delete_button_up():
+	$ChancePopup.show()
+	delete_popup_chance = true
+
+func _on_btn_chance_popup_yes_button_up():
+	$ChancePopup.hide()
+	if delete_popup_chance: # prevent weirdness with ui selection
+		if is_new_chance:
+			_discard_new_chance()
+		else:
+			_delete_chance(current_chance_uuid)
+	delete_popup_chance = false
+
+func _on_btn_chance_popup_no_button_up():
+	$QuestionPopup.hide()
+	delete_popup_chance = false
 #endregion
-
-
-
 

@@ -12,6 +12,7 @@ var questions = {}
 var chances = {}
 
 var searchedQuestionsUuid = []
+var searchedChancesUuid = []
 
 var delete_popup = false
 var is_new_question = false
@@ -138,6 +139,7 @@ class Chance:
 	var correct: bool
 	
 	var listIndex: int
+	var listIndexChancesEditor: int
 	
 	func _build_from_raw(
 		i_name: String,
@@ -149,6 +151,9 @@ class Chance:
 		description = i_description
 		type = i_type
 		correct = i_correct
+		
+		listIndex = -1
+		listIndexChancesEditor = -1
 	
 	func _convert_to_raw(chance_uuid):
 		var chance_raw = {}
@@ -167,6 +172,7 @@ class Chance:
 		newChance.correct = correct
 		
 		newChance.listIndex = -1
+		newChance.listIndexChancesEditor = -1
 		return newChance
 	pass
 
@@ -189,7 +195,9 @@ func _ready():
 	_io_read_chances(file_path_chances_data)
 	
 	_generate_question_list()
+	_generate_chances_list()
 	_UI_update_question_list()
+	_UI_update_chances_list()
 	_UI_update_global_chances_list()
 	pass
 
@@ -201,14 +209,13 @@ func _generate_question_list():
 		for uuid in questions:
 			searchedQuestionsUuid.append(uuid)
 		return
-	
 	for uuid in questions:
 		var escape = false
 		# search name first, if it has a match move to the next entry as theres no reason to append twice
 		if questions[uuid].name.to_lower().contains(searchKey.to_lower()):
 			searchedQuestionsUuid.append(uuid)
 			continue
-		
+		# tags
 		for tag in questions[uuid].tags:
 			if tag.to_lower().contains(searchKey.to_lower()):
 				searchedQuestionsUuid.append(uuid)
@@ -218,10 +225,30 @@ func _generate_question_list():
 		if escape == true:
 			continue
 		
+		# chances
 		for chance_uuid in questions[uuid].chances:
 			if chances[chance_uuid].name.to_lower().contains(searchKey.to_lower()):
 				searchedQuestionsUuid.append(uuid)
 				break
+
+func _generate_chances_list():
+	var searchKey = $HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxChances/ChanceSearchBar.text
+	searchedChancesUuid.clear()
+	# if search query empty just pass the complete list of chances
+	if searchKey == "":
+		for uuid in chances:
+			searchedChancesUuid.append(uuid)
+		return
+	
+	for uuid in chances:
+		# search name first, if it has a match move to the next entry as theres no reason to append twice
+		if chances[uuid].name.to_lower().contains(searchKey.to_lower()):
+			searchedChancesUuid.append(uuid)
+			continue
+		# type
+		if chances[uuid].type.to_lower().contains(searchKey.to_lower()):
+			searchedChancesUuid.append(uuid)
+			continue
 	pass
 
 func _select_question(question_uuid):
@@ -343,6 +370,15 @@ func _UI_update_question_list():
 	
 	for uuid in searchedQuestionsUuid:
 		questions[uuid].listIndex = (%QuestionList.add_item(questions[uuid].name, ui_question_state_icons[questions[uuid].errorState]))
+	pass
+	
+func _UI_update_chances_list():
+	%ChancesList.clear()
+	for uuid in chances:
+		chances[uuid].listIndexChancesEditor = -1
+	
+	for uuid in searchedChancesUuid:
+		chances[uuid].listIndexChancesEditor = %ChancesList.add_item(chances[uuid].name)
 	pass
  
 func _UI_update_question_chances_list():
@@ -540,6 +576,7 @@ func _on_btn_popup_no_button_up():
 func _on_btn_reload_chances_button_up():
 	_io_read_chances(file_path_chances_data)
 	_UI_update_global_chances_list()
+	_UI_update_chances_list()
 	pass
 	
 func _on_btn_chance_add_button_up():
@@ -590,6 +627,12 @@ func _on_btn_chances_button_up():
 	$HBoxParent/Control/HBoxContainer/BtnQuestions.disabled = false;
 	$HBoxParent/Control/HBoxContainer/BtnChances.disabled = true;
 	pass
+
+func _on_chance_search_bar_text_changed():
+	_generate_chances_list()
+	_UI_update_chances_list()
+	pass
 #endregion
+
 
 

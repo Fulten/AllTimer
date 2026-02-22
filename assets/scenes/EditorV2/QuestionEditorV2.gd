@@ -2,8 +2,8 @@ extends Control
 
 const uuid_util = preload('res://addons/uuid/uuid.gd')
 
-var file_path_questions_data = "res://question_data_test.json"
-var file_path_chances_data = "res://chance_data_test.json"
+var file_path_questions_data = "res://question_data.json"
+var file_path_chances_data = "res://chance_data.json"
 
 var chances_raw = []
 var questions_raw = []

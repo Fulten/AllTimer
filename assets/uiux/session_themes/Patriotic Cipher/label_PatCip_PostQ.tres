@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cu4y1760hkif0"]
+
+[ext_resource type="FontFile" uid="uid://byhg6togfihnm" path="res://assets/uiux/session_themes/Patriotic Cipher/UAV-OSD-Sans-Mono.ttf" id="1_th1ar"]
+
+[resource]
+font = ExtResource("1_th1ar")
+font_size = 20
+font_color = Color(0.3055, 0.592583, 0.65, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)

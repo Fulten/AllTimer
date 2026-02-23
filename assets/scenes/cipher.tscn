@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://c8vqlwu2p8dl7" path="res://assets/uiux/session_themes/Patriotic Cipher/T_timer_patcip.tga" id="11_qkoei"]
 [ext_resource type="FontFile" uid="uid://bdi68tslsma5m" path="res://assets/uiux/session_themes/default/chalk.ttf" id="12_fik1c"]
 [ext_resource type="FontFile" uid="uid://c6vg4qkha7rn1" path="res://assets/uiux/session_themes/Patriotic Cipher/alarm clock.ttf" id="12_g285j"]
-[ext_resource type="FontFile" uid="uid://ppcieu81eyur" path="res://assets/uiux/session_themes/default/TeachersStudent-Regular.ttf" id="13_46j0n"]
 [ext_resource type="FontFile" uid="uid://ert0t4ov8cqh" path="res://assets/uiux/session_themes/Patriotic Cipher/ARCADE_N.TTF" id="13_li2k4"]
 [ext_resource type="Texture2D" uid="uid://cw2ifheyia7xq" path="res://assets/uiux/session_themes/default/kb1.tga" id="14_bj7b2"]
 [ext_resource type="LabelSettings" uid="uid://h5ouy4y7120k" path="res://assets/uiux/session_themes/Patriotic Cipher/cipherNumbers.tres" id="14_eimd3"]
@@ -26,7 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://b2eg3oa2waadg" path="res://assets/uiux/session_themes/Patriotic Cipher/T_status_correct_patcip.tga" id="24_irilu"]
 [ext_resource type="LabelSettings" uid="uid://y3ulyabu6hex" path="res://assets/uiux/session_themes/Patriotic Cipher/label_Cipher_ActivePlayer_default.tres" id="25_axd0y"]
 [ext_resource type="Texture2D" uid="uid://c2glpvkloux56" path="res://assets/uiux/session_themes/Patriotic Cipher/T_seperator_h_patcip.tga" id="25_owt3k"]
-[ext_resource type="Theme" uid="uid://cf8u3obo5dfya" path="res://assets/uiux/session_themes/default/button_Chalk_Submenu.tres" id="29_64rju"]
+[ext_resource type="LabelSettings" uid="uid://cu4y1760hkif0" path="res://assets/uiux/session_themes/Patriotic Cipher/label_PatCip_PostQ.tres" id="26_5o25r"]
 [ext_resource type="Texture2D" uid="uid://bcgcahuyuynp3" path="res://assets/uiux/session_themes/Patriotic Cipher/T_PauseCase_D.tga" id="29_ojduq"]
 [ext_resource type="Theme" uid="uid://bwv0duhsrgd41" path="res://assets/uiux/session_themes/Patriotic Cipher/label_PatCip_Pause.tres" id="30_7mgqq"]
 [ext_resource type="StyleBox" uid="uid://dcuqsqcektumy" path="res://assets/uiux/main_menu/volumeSlider.res" id="31_6nd3k"]
@@ -3723,9 +3722,16 @@ font = ExtResource("15_ppw4u")
 font_size = 20
 font_color = Color(0, 1, 0.623529, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_d0wgl"]
-font = ExtResource("13_46j0n")
-font_size = 24
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q8n37"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_cr43r"]
+Button/styles/normal = SubResource("StyleBoxFlat_q8n37")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1osu"]
 bg_color = Color(0, 1, 0.623529, 1)
@@ -4405,14 +4411,14 @@ visible = false
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 672.0
-offset_top = 408.0
+offset_left = 32.0
+offset_top = 624.0
 offset_right = -24.0
-offset_bottom = -208.0
+offset_bottom = -168.0
 size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.0
 text = "Question_Description"
-label_settings = SubResource("LabelSettings_d0wgl")
+label_settings = ExtResource("26_5o25r")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -4639,6 +4645,7 @@ offset_right = -704.0
 offset_bottom = -146.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_cr43r")
 texture = ExtResource("29_ojduq")
 stretch_mode = 3
 
@@ -4675,45 +4682,42 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 96.0
-offset_top = 227.0
-offset_right = -96.0
-offset_bottom = -408.0
+offset_left = 24.0
+offset_top = 205.0
+offset_right = -24.0
+offset_bottom = -386.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("31_x3bli")
 text = "Resume"
-flat = true
 
 [node name="optionsButton" type="Button" parent="pauseScreen/pauseCase/pauseBase"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 96.0
-offset_top = 332.0
-offset_right = -96.0
-offset_bottom = -303.0
+offset_left = 24.0
+offset_top = 311.0
+offset_right = -24.0
+offset_bottom = -282.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("31_x3bli")
 text = "Options"
-flat = true
 
 [node name="quitButton" type="Button" parent="pauseScreen/pauseCase/pauseBase"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 96.0
-offset_top = 435.0
-offset_right = -102.0
-offset_bottom = -200.0
+offset_left = 24.0
+offset_top = 416.0
+offset_right = -24.0
+offset_bottom = -178.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("31_x3bli")
 text = "Quit"
-flat = true
 
 [node name="pauseOptions" type="Control" parent="pauseScreen/pauseCase"]
 visible = false
@@ -4749,45 +4753,42 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 96.0
-offset_top = 224.0
-offset_right = -96.0
-offset_bottom = -411.0
+offset_left = 24.0
+offset_top = 208.0
+offset_right = -24.0
+offset_bottom = -395.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("31_x3bli")
 text = "Sound"
-flat = true
 
 [node name="displayButton" type="Button" parent="pauseScreen/pauseCase/pauseOptions"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 96.0
-offset_top = 328.0
-offset_right = -96.0
-offset_bottom = -307.0
+offset_left = 24.0
+offset_top = 312.0
+offset_right = -24.0
+offset_bottom = -291.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("31_x3bli")
 text = "Display"
-flat = true
 
 [node name="optionsBackButton" type="Button" parent="pauseScreen/pauseCase/pauseOptions"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 96.0
-offset_top = 432.0
-offset_right = -96.0
-offset_bottom = -203.0
+offset_left = 24.0
+offset_top = 415.0
+offset_right = -24.0
+offset_bottom = -186.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("31_x3bli")
 text = "Back"
-flat = true
 
 [node name="pauseSound" type="Control" parent="pauseScreen/pauseCase"]
 visible = false
@@ -4988,11 +4989,11 @@ offset_right = -267.0
 offset_bottom = -43.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("31_x3bli")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("32_0qjd0")
 theme_override_font_sizes/font_size = 28
 text = "Back"
-flat = true
 
 [node name="pauseDisplay" type="Control" parent="pauseScreen/pauseCase"]
 visible = false
@@ -5159,12 +5160,11 @@ offset_right = -267.0
 offset_bottom = -43.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("29_64rju")
+theme = ExtResource("31_x3bli")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("32_0qjd0")
 theme_override_font_sizes/font_size = 28
 text = "Back"
-flat = true
 
 [connection signal="button_down" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1" to="." method="_on_a_1_button_down"]
 [connection signal="button_up" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1" to="." method="_on_a_1_button_up"]

@@ -693,8 +693,11 @@ func _postquestion_delay_phase():
 	flag_accept_input = false
 	flag_post_question_time = true
 	
+	
 	# determine player correctness
 	var current_question = GameState.CurrentQuizQuestions[current_index]
+	var extra_seconds : int = roundf(current_question["explainer"].length() * 0.025)
+	
 	GameState._player_correctness(correct_answer,1000)
 	GameState._add_chance_hits(current_index)
 	GameState._update_profile_statistics(current_question["uuid"])
@@ -707,7 +710,7 @@ func _postquestion_delay_phase():
 	
 	_show_question_explainer.rpc(true)
 	
-	ui_postquestion_timer.start(post_question_delay_default)
+	ui_postquestion_timer.start(post_question_delay_default + extra_seconds)
 	pass
 	
 ## end of question phase occurs after each question

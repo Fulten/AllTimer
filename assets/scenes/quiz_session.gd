@@ -702,8 +702,8 @@ func _postquestion_delay_phase():
 	_create_player_statuses_table()
 	_sync_player_statuses.rpc(player_statuses_ui_2d)
 	
-	# lock all player pannels during postphase
-	_update_ui_player_pannel_locked_all.rpc(true)
+	# unlock all player pannels during postphase
+	_update_ui_player_pannel_locked_all.rpc(false)
 	
 	_show_question_explainer.rpc(true)
 	

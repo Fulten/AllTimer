@@ -662,9 +662,6 @@ func _prequestion_delay_phase():
 	flag_accept_input = false
 	flag_pre_question_time = true
 	
-	# lock all player pannels during prephase
-	_update_ui_player_pannel_locked_all.rpc(true)
-	
 	_animate_question_load_a.rpc()
 	
 	# following the timers experation it will move to the answer_question_phase

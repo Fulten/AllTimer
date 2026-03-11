@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://c15bddwgatrm4"]
+
+[ext_resource type="FontFile" uid="uid://c1imjp477f64l" path="res://assets/uiux/session_themes/Fatal Surprise/OldNewspaperTypes.ttf" id="1_0igit"]
+
+[resource]
+font = ExtResource("1_0igit")
+font_size = 40
+font_color = Color(1, 0.12, 0.12, 1)
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)

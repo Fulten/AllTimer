@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://c7s51sn55nllk"]
+
+[ext_resource type="FontFile" uid="uid://c2ioqx1qm0oah" path="res://assets/uiux/session_themes/Fatal Surprise/YIKES!__.TTF" id="1_ke5ax"]
+
+[resource]
+font = ExtResource("1_ke5ax")
+font_size = 38
+font_color = Color(0.764, 0.368, 0.8, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)

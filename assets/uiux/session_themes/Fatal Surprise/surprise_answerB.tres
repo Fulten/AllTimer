@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dx2f6y7rctbf7"]
+
+[ext_resource type="FontFile" uid="uid://bc01r67d5wp2w" path="res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf" id="1_7yfwv"]
+[ext_resource type="StyleBox" uid="uid://bqlgrfd537ivy" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_ABN.tres" id="2_1q6bs"]
+[ext_resource type="StyleBox" uid="uid://n5fdrhrvh4gb" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_ABH.tres" id="2_d7iai"]
+[ext_resource type="StyleBox" uid="uid://dyhgsqqlb61br" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_ABP.tres" id="4_ss15q"]
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 0.11, 0.11, 1)
+Button/constants/outline_size = 6
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("1_7yfwv")
+Button/styles/hover = ExtResource("2_d7iai")
+Button/styles/normal = ExtResource("2_1q6bs")
+Button/styles/pressed = ExtResource("4_ss15q")

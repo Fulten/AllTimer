@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cjmfw6j1byub"]
+
+[ext_resource type="FontFile" uid="uid://bc01r67d5wp2w" path="res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf" id="1_63o3y"]
+[ext_resource type="StyleBox" uid="uid://c8qqt3t7ryf81" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_ACH.tres" id="2_vcbkt"]
+[ext_resource type="StyleBox" uid="uid://bq8jeqgcikqmp" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_ACN.tres" id="3_h4v16"]
+[ext_resource type="StyleBox" uid="uid://m7wvub8x15kc" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_ACP.tres" id="4_4ch7k"]
+
+[resource]
+Button/colors/font_color = Color(0.88, 0.88, 0.88, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 0.1, 0.1, 1)
+Button/constants/outline_size = 6
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("1_63o3y")
+Button/styles/hover = ExtResource("2_vcbkt")
+Button/styles/normal = ExtResource("3_h4v16")
+Button/styles/pressed = ExtResource("4_4ch7k")

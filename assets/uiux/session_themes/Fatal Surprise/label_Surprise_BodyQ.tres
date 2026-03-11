@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://lhxb1b85317h"]
+
+[ext_resource type="FontFile" uid="uid://bei4vjjlwglbn" path="res://assets/uiux/session_themes/Fatal Surprise/Next Sunday.ttf" id="1_we2gj"]
+
+[resource]
+font = ExtResource("1_we2gj")
+font_size = 24
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)

@@ -426,7 +426,8 @@ func _reset_player_statuses():
 @rpc("authority", "reliable", "call_local")
 func _display_prequiz_rules():
 	if GameState.quizOptions.win_con_int == 0: # 0 : Highest score after x questions
-		$preQuiz/preSessionOrganizer/RulesText/Rounds.text %= GameState.quizOptions.win_questions
+		if !(GameState.CurrentTheme == "Fatal Surprise"):
+			$preQuiz/preSessionOrganizer/RulesText/Rounds.text %= GameState.quizOptions.win_questions
 		$preQuiz/preSessionOrganizer/RulesText/Rounds2.text %= GameState.quizOptions.win_questions
 		$preQuiz/preSessionOrganizer/RulesText/Rounds.show()
 		$preQuiz/preSessionOrganizer/RulesText/Rounds2.show()
@@ -545,6 +546,8 @@ func _reset_question_rules_visibility():
 func _select_music_track():
 	if GameState.CurrentTheme == "Patriotic Cipher":
 		SoundMaster._play_music_track("msg_theme")
+	elif GameState.CurrentTheme == "Fatal Surprise":
+		SoundMaster._play_music_track("default_theme")
 	else:
 		SoundMaster._play_music_track("default_theme")
 
@@ -567,6 +570,9 @@ func _set_theme_specific_graphics():
 	if GameState.CurrentTheme == "Patriotic Cipher":
 		asset_player_pannel_locked = load("res://assets/uiux/session_themes/Patriotic Cipher/label_Cipher_ActivePlayer_locked.tres")
 		asset_player_pannel_default = load("res://assets/uiux/session_themes/Patriotic Cipher/label_Cipher_ActivePlayer_default.tres")
+	elif GameState.CurrentTheme == "Fatal Surprise":
+		asset_player_pannel_locked = load("res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_ActivePlayer_locked.tres")
+		asset_player_pannel_default = load("res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_ActivePlayer_default.tres")
 	else:
 		asset_player_pannel_locked = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Locked.tres")
 		asset_player_pannel_default = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Default.tres")

@@ -199,7 +199,8 @@ func _local_update_selected_scene():
 
 	if GameState.CurrentTheme == "Patriotic Cipher":
 		selectedtheme = "res://assets/scenes/cipher.tscn"
-		pass
+	elif GameState.CurrentTheme == "Fatal Surprise":
+		selectedtheme = "res://assets/scenes/fatalSurprise.tscn"
 	
 	quiz_session_scene = load(selectedtheme)
 	pass

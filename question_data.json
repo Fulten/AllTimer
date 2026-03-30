@@ -806,7 +806,7 @@
 		],
 		"correct": "Holding and firing a gun",
 		"explainer": "",
-		"name": "",
+		"name": "More Accessible",
 		"question": "In 2006, a Novint Falcon was released to try and help you feel like you were doing what in first person shooters?",
 		"tags": [
 			"History",
@@ -1057,7 +1057,7 @@
 		],
 		"correct": "Frédéric Chopin",
 		"explainer": "",
-		"name": "",
+		"name": "The Final Symphony",
 		"question": "Eternal Sonata was a bizarre game in a number of ways. One in particular was the main character, who was based on a real composer. Who were they?",
 		"tags": [
 			"RPG",
@@ -1095,7 +1095,7 @@
 		"chances": [],
 		"correct": "You talk too long, I don’t understand",
 		"explainer": "",
-		"name": "",
+		"name": "Seapeople",
 		"question": "Seaman was, indeed, a very bizarre game for the dreamcast. Not only were you expert to care for the weird “seamen”, but you were also expected to talk to them. How might they respond to a more loquacious person?",
 		"tags": [
 			"Hard",
@@ -1725,7 +1725,7 @@
 			"43944b2e-9790-4fba-a257-004591ba27a2"
 		],
 		"correct": "Mario",
-		"explainer": "",
+		"explainer": "In the 1993 Super Mario Brothers film, Mario introduces Luigi as \"Luigi Mario\"",
 		"name": "And you are?",
 		"question": "What is Luigi’s last name?",
 		"tags": [
@@ -1737,6 +1737,790 @@
 			"Luigi",
 			"Bro",
 			"Brother"
+		]
+	},
+	{
+		"chances": [
+			"b5c44831-a697-43f9-adb0-b61fb485affa"
+		],
+		"correct": "The icecaps will start melting!",
+		"explainer": "",
+		"name": "Think of the Future Drek",
+		"question": "If Ratchet were trying to show Chairmen Drek the issues of climate change, what might he say?",
+		"tags": [
+			"Sony",
+			"Insomniac",
+			"Science"
+		],
+		"uuid": "e20b1ed7-3a99-48fe-b2fb-57aea3e4bd92",
+		"wrong": [
+			"The seas will boil!",
+			"The mountains will crumble!",
+			"The skies will turn black!"
+		]
+	},
+	{
+		"chances": [
+			"b5c44831-a697-43f9-adb0-b61fb485affa"
+		],
+		"correct": "Carmelita Fox",
+		"explainer": "",
+		"name": "Inconsistent Performance",
+		"question": "Which character in the Sly Cooper Series has received a Voice Actor change each game?",
+		"tags": [
+			"Sony",
+			"Sucker Punch"
+		],
+		"uuid": "7f43ebfe-7676-419d-94fa-f02bf7f8337f",
+		"wrong": [
+			"Bently",
+			"Sly Copper",
+			"Murray"
+		]
+	},
+	{
+		"chances": [
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Double Fine Adventure",
+		"explainer": "",
+		"name": "Blazing Trails",
+		"question": "Tim Schafer trailblazed kickstarter with?",
+		"tags": [
+			"Double Fine"
+		],
+		"uuid": "4ece2c48-4e36-40c5-b3d1-709d23080737",
+		"wrong": [
+			"Psychonauts 2",
+			"The Keeper",
+			"Brutal Legend"
+		]
+	},
+	{
+		"chances": [
+			"16848d16-3133-4aa2-95ba-2457168d286f",
+			"43944b2e-9790-4fba-a257-004591ba27a2"
+		],
+		"correct": "Male until needing to be female",
+		"explainer": "It's not absolutely clear, but inspired by Xenomorphs and there are males and females. Space Pirates indicate they are attempting to make a queen in Fusion.",
+		"name": "Metroid?",
+		"question": "What gender is Metroid?",
+		"tags": [
+			"Nintendo",
+			"Retro"
+		],
+		"uuid": "de3167e2-eb98-4e76-9754-34866c8c3a59",
+		"wrong": [
+			"Male",
+			"Female",
+			"Female until needing to be Male"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "Roughly 24 years",
+		"explainer": "",
+		"name": "A Doctorate in Gaming",
+		"question": "BioWare founded by 3 doctors, if bioware were to go to med school to get each of these doctor’s a degree, how many years would bioware be in school for each?",
+		"tags": [
+			"Bioware",
+			"Science"
+		],
+		"uuid": "7c539ddc-8ade-4609-a60a-1051929bd5db",
+		"wrong": [
+			"Roughly 12 years",
+			"Roughly 8 years",
+			"Roughly 21 years"
+		]
+	},
+	{
+		"chances": [
+			"45500936-fc97-4174-832f-c250cdf4e49b"
+		],
+		"correct": "The Hero’s Journey",
+		"explainer": "",
+		"name": "It's about the Journey\t",
+		"question": "What was Journey’s inspiration?",
+		"tags": [
+			"ThatGameCompany"
+		],
+		"uuid": "6b5affd0-45ac-445f-a933-1c92bebe0468",
+		"wrong": [
+			"A Monk’s Pilgramage",
+			"Tales of Arabian Nights",
+			"Hidalgo"
+		]
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"16848d16-3133-4aa2-95ba-2457168d286f"
+		],
+		"correct": "Basement",
+		"explainer": "",
+		"name": "Stranger than a Zombie?",
+		"question": "What area in Resident Evil 1 has a famously odd theme? ",
+		"tags": [
+			"Capcom",
+			"Sony",
+			"Retro"
+		],
+		"uuid": "64277afc-53d5-446b-9186-0e0e965bcbca",
+		"wrong": [
+			"Manor",
+			"Garden",
+			"Parlor"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "Ethan Winters",
+		"explainer": "",
+		"name": "It Comes off?",
+		"question": "Despite Salazaar’s claims in resident evil 4, which resident evil character’s hand actually does come off?",
+		"tags": [
+			"Capcom"
+		],
+		"uuid": "2dbccf2c-9b00-4cd1-a1af-296a0d570e11",
+		"wrong": [
+			"Estella Fiona",
+			"Leon Kennedy",
+			"Jill Valentine"
+		]
+	},
+	{
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c",
+			"43944b2e-9790-4fba-a257-004591ba27a2"
+		],
+		"correct": "Skill Leveling",
+		"explainer": "",
+		"name": "The Elder Fantasy",
+		"question": "Final Fantasy 2 Trailblazes a concept also seen in the Elder Scrolls series. What was it? ",
+		"tags": [
+			"RPG",
+			"Nintendo",
+			"Square Enix"
+		],
+		"uuid": "1f2d3d6f-00da-4240-b0c3-3167ffced5d5",
+		"wrong": [
+			"Stealth Archers",
+			"Open world exploration",
+			"Quest Compass"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "Embellish",
+		"explainer": "",
+		"name": "A Tall Tale",
+		"question": "Call of Juarez Gunslinger, what does the main character occasionally do with his tale?",
+		"tags": [
+			"Shooter",
+			"Techland"
+		],
+		"uuid": "7c833909-35bc-4f19-94d4-ad2815ab7fbf",
+		"wrong": [
+			"Ask the crowd to add details",
+			"Avoid insulting people",
+			"Avoid killing anyone"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "Johnson",
+		"explainer": "",
+		"name": "A Ride to Hell",
+		"question": "What was the name of your demon friend that can turn into your gun the boner in Shadows of the Damned?",
+		"tags": [
+			"Grasshopper Manufacture",
+			"Shooter"
+		],
+		"uuid": "870f70da-b626-4f87-8d47-66103aa99fe3",
+		"wrong": [
+			"David",
+			"Richard",
+			"Trouser Snake"
+		]
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "The Patriots",
+		"explainer": "",
+		"name": "Metal Gear... It Can't Be",
+		"question": "Who are the Lalilulelo?",
+		"tags": [
+			"Konami",
+			"Sony",
+			"Stealth"
+		],
+		"uuid": "a9d9fee5-dc59-49dc-8dfe-091bfe8c560a",
+		"wrong": [
+			"Liquid Snake",
+			"Solid Snake",
+			"Revolver Ocelot"
+		]
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "An iPod ",
+		"explainer": "",
+		"name": "Oh Kojima",
+		"question": "Kojima cheekily included a fully functional device in Metal Gear Solid 4?",
+		"tags": [
+			"Sony",
+			"Konami"
+		],
+		"uuid": "59879abe-01b1-4ec6-9c27-8599565fd470",
+		"wrong": [
+			"A Zune",
+			"A Laptop",
+			"A PSP"
+		]
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "True",
+		"explainer": "",
+		"name": "What's in the Box, Kratos?",
+		"question": "In god of war, you open Pandora’s box to get the power to kill Aries",
+		"tags": [
+			"Sony",
+			"Santa Monica Studio",
+			"Platformer"
+		],
+		"uuid": "fa2d4577-8b63-41fe-b59f-5932205bd0e9",
+		"wrong": [
+			"False",
+			"",
+			""
+		]
+	},
+	{
+		"chances": [],
+		"correct": "Doom 1993",
+		"explainer": "",
+		"name": "DOOM",
+		"question": "If we titled games based on release date like Doom 2016, what would the original doom be called?",
+		"tags": [
+			"Shooter",
+			"PC",
+			"ID Software"
+		],
+		"uuid": "46834313-5f24-4410-b85c-9679e30804e2",
+		"wrong": [
+			"Doom 1991",
+			"Doom 1995",
+			"Doom 1996"
+		]
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "False",
+		"explainer": "",
+		"name": "Kratos will have his revenge",
+		"question": "Every time Kratos kills a god, the world is affected in a substantial way. Like when Athena is killed, all the universities  crumble.",
+		"tags": [
+			"Sony",
+			"Sony Santa Monica",
+			"Platformer"
+		],
+		"uuid": "00a1e8d3-8fc6-4413-ad62-cce2deb85168",
+		"wrong": [
+			"True",
+			"",
+			""
+		]
+	},
+	{
+		"chances": [
+			"16848d16-3133-4aa2-95ba-2457168d286f",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "True",
+		"explainer": "",
+		"name": "Your network is DOOMed",
+		"question": "When DOOM released, the guy who ran the launch accidentally triggered one of the first DDOSes",
+		"tags": [
+			"Shooter",
+			"History",
+			"ID Software"
+		],
+		"uuid": "3b3ba70d-be9c-4823-a42a-1b1568b602c7",
+		"wrong": [
+			"False ",
+			"",
+			""
+		]
+	},
+	{
+		"chances": [],
+		"correct": "True",
+		"explainer": "",
+		"name": "Stay Hydrated BB",
+		"question": "Death Stranding tracks your urine color based on hydration levels",
+		"tags": [
+			"Kojima Productions",
+			"Walking Simulator"
+		],
+		"uuid": "f7c1c53e-37be-4124-b65a-43b0e35a6bf4",
+		"wrong": [
+			"False",
+			"",
+			""
+		]
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
+		"correct": "Nigeria",
+		"explainer": "",
+		"name": "Dear Playstation",
+		"question": "Which country seems to hate, lovable Kevin Butler from the Playstation “Power to the Player” commercials?",
+		"tags": [
+			"Sony",
+			"History"
+		],
+		"uuid": "936a3b18-4787-42f0-a95c-015e0cb3f9ff",
+		"wrong": [
+			"Iran",
+			"China",
+			"Japan"
+		]
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "True",
+		"explainer": "",
+		"name": "True Warriors",
+		"question": "The first Dynasty Warriors was a fighting game on the Playstation 1",
+		"tags": [
+			"Sony",
+			"Fighting"
+		],
+		"uuid": "350fd0ee-9f50-4828-a78f-5bf37eca68f3",
+		"wrong": [
+			"False",
+			"",
+			""
+		]
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "Origami",
+		"explainer": "",
+		"name": "Havey Run",
+		"question": "What is the one word many characters cannot agree on the pronunciation of in Heavy Rain?",
+		"tags": [
+			"Sony",
+			"Narrative",
+			"Quantic Dream"
+		],
+		"uuid": "1ddd4340-bc93-4449-a2fa-f65d0e0aea9a",
+		"wrong": [
+			"Killer",
+			"Flowers",
+			"Rain"
+		]
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"b9871032-d7d5-4b8a-898b-07708f349fb8"
+		],
+		"correct": "False",
+		"explainer": "",
+		"name": "Salute A True Boss",
+		"question": "Metal Gears Solid 4 has a fully usable Zune as a tribute to the failed device",
+		"tags": [
+			"Sony",
+			"Konami"
+		],
+		"uuid": "b57bd389-0050-46ad-8662-3c876b5fa7f7",
+		"wrong": [
+			"True",
+			"",
+			""
+		]
+	},
+	{
+		"chances": [],
+		"correct": "True",
+		"explainer": "",
+		"name": "Absolute Misery",
+		"question": "In Hollow Knight, if you defeat the Absolute Radiance you unlock a secret ending that hints at Silksong",
+		"tags": [
+			"Team Cherry",
+			"Metroidvania"
+		],
+		"uuid": "2b985aa8-cc7b-4e76-a399-7beb58779395",
+		"wrong": [
+			"False",
+			"",
+			""
+		]
+	},
+	{
+		"chances": [],
+		"correct": "Hurdles",
+		"explainer": "",
+		"name": "Track By Fieldlight",
+		"question": "Feng Min, a decorated e-sports competitor, has a secret talent in which track and field event?",
+		"tags": [
+			"Behaviour Interactive",
+			"Asymmetrical"
+		],
+		"uuid": "fb38315d-f0f2-49c1-a412-c4e84c1739e7",
+		"wrong": [
+			"Shotput",
+			"100m Sprint",
+			"High Jump"
+		]
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "Snake, I think ya gotta hit the select button!",
+		"explainer": "",
+		"name": "Let me help immediately!",
+		"question": "If Memir where at Snake’s waist like he is with Kratos, how might he help you make a Codec call?",
+		"tags": [
+			"Sony",
+			"Konami",
+			"Sony Santa Monica"
+		],
+		"uuid": "480131a7-0e9a-468b-beea-75f77d4761bf",
+		"wrong": [
+			"Oh Snake, I think you gotta go to that terminal to make that call!",
+			"The X button is how you open up your call, Snake!",
+			"You might wanna try hitting the Triangle button here!"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "False",
+		"explainer": "",
+		"name": "Heartless Gods",
+		"question": "Hades does not allow polyamorous relationships, despite it’s greek influence",
+		"tags": [
+			"Supergiant",
+			"Roguelite"
+		],
+		"uuid": "15b9d484-6cbc-4499-b720-878c86f8aefb",
+		"wrong": [
+			"True",
+			"",
+			""
+		]
+	},
+	{
+		"chances": [],
+		"correct": "False",
+		"explainer": "",
+		"name": "Not invited to the God Reunion",
+		"question": "Hades 2 manages to avoid any repeat gods from Hades",
+		"tags": [
+			"Supergiant",
+			"Roguelite"
+		],
+		"uuid": "732ad28b-70fa-4af0-b320-d32e43d182fb",
+		"wrong": [
+			"True",
+			"",
+			""
+		]
+	},
+	{
+		"chances": [],
+		"correct": "XXVII",
+		"explainer": "",
+		"name": "In the year 2XXX we have Final Fantasy...",
+		"question": "What Final Fantasy did Deus Ex Human Revolution joke about existing?",
+		"tags": [
+			"Square Enix",
+			"Immersive Sim"
+		],
+		"uuid": "2f394170-7b71-45df-84c9-36a9094c6b4e",
+		"wrong": [
+			"XXXI",
+			"MVXI",
+			"XXIV"
+		]
+	},
+	{
+		"chances": [
+			"16848d16-3133-4aa2-95ba-2457168d286f"
+		],
+		"correct": "Pacman",
+		"explainer": "",
+		"name": "He Made ET!",
+		"question": "What did Steven Spielberg want ET to play more like after the initial pitch he got of it?",
+		"tags": [
+			"Atari 2600",
+			"Retro"
+		],
+		"uuid": "16f6b608-4446-4fe6-b69d-38a082447811",
+		"wrong": [
+			"Mario",
+			"Space Invaders",
+			"Qbert"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "True",
+		"explainer": "",
+		"name": "Lightning is Nothing to a Ninja",
+		"question": "In Sekiro, it is possible to redirect lightning to enemies",
+		"tags": [
+			"From Software",
+			"Soulslike"
+		],
+		"uuid": "d0e0cd0a-9ded-4679-be95-f9d21860e176",
+		"wrong": [
+			"False",
+			"",
+			""
+		]
+	},
+	{
+		"chances": [],
+		"correct": "Every mission is presented as a tape recording that can be rewound",
+		"explainer": "",
+		"name": "Zero Presentation",
+		"question": "Katana Zero has what unique characteristic to it’s presentation?",
+		"tags": [
+			"Askiisoft",
+			"Indie",
+			"Side Scroller"
+		],
+		"uuid": "b7de8f21-17a0-4050-b3ba-a97704533c98",
+		"wrong": [
+			"The main character does not wield a katana at all, using his mind",
+			"Every mission is presented as a narrated flashback",
+			"The main character speaks in a foreign language slowly learned through play"
+		]
+	},
+	{
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
+		],
+		"correct": "Synesthesia",
+		"explainer": "",
+		"name": "Flow State",
+		"question": "Tetris Effect was developed primarily based on the Director Tetsuya Mizuguchi’s obsession with",
+		"tags": [
+			"Monstars Inc",
+			"Puzzle"
+		],
+		"uuid": "39a72bb8-cfd9-47bb-826c-d985e97ed5b4",
+		"wrong": [
+			"Aphantasia",
+			"Music",
+			"VR"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "A puzzle involving a series of wing dings",
+		"explainer": "",
+		"name": "Puzzling Well",
+		"question": "Animal Well has a variety of unique puzzles. One of the most famous is",
+		"tags": [
+			"Billy Basso",
+			"Indie",
+			"Metroidvania"
+		],
+		"uuid": "657de781-2955-432f-a1ab-27afb5d06340",
+		"wrong": [
+			"A puzzle that required the order of pizza from a specific phone number",
+			"A puzzle that required research into the life cycle of the average Hyena",
+			"A puzzle that involved playing the game backwards"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "Taking pictures",
+		"explainer": "",
+		"name": "A _____ Adventure",
+		"question": "What is the primary mechanice of TOEM?",
+		"tags": [
+			"Indie",
+			"Something We Made"
+		],
+		"uuid": "a4647a7e-64fa-4bef-a812-523f429038fe",
+		"wrong": [
+			"Dancing",
+			"Walking",
+			"Operating Heavy Equipment"
+		]
+	},
+	{
+		"chances": [
+			"9b458853-b268-4ada-9bb5-d0225755f2cf"
+		],
+		"correct": "12",
+		"explainer": "",
+		"name": "Furious",
+		"question": "Furi has how many bosses total, including dlc content and secret endings?",
+		"tags": [
+			"Indie",
+			"The Game Bakers"
+		],
+		"uuid": "8446bbfe-a9a7-4c6c-a764-ec3ffa086a8d",
+		"wrong": [
+			"10",
+			"13",
+			"11"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "Alchemy",
+		"explainer": "",
+		"name": "Puzzling Premise",
+		"question": "Opus Magnum is an automation game about",
+		"tags": [
+			"Indie",
+			"Zachtronics",
+			"Puzzle",
+			"Automation"
+		],
+		"uuid": "98ebd660-9bf3-4aa4-8a90-2bd2efdc26c0",
+		"wrong": [
+			"Factories",
+			"Biology",
+			"Hacking"
+		]
+	},
+	{
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
+		],
+		"correct": "Yakisoba Pan",
+		"explainer": "",
+		"name": "As long as I have my...",
+		"question": "In 13 Sentinels, Takatoshi Hijiyama is obsessed with what dish?",
+		"tags": [
+			"VanillaWare",
+			"Strategy"
+		],
+		"uuid": "0b4c6210-d10a-4c64-bbe0-4b0de71ac4ed",
+		"wrong": [
+			"Shouyu Ramen",
+			"Pork Buns",
+			"Sweet Dango"
+		]
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"43944b2e-9790-4fba-a257-004591ba27a2",
+			"16848d16-3133-4aa2-95ba-2457168d286f"
+		],
+		"correct": "It might get flipped upside down for a second exploration of the whole map!",
+		"explainer": "",
+		"name": "What is a Metroid, a miserable pile of Phazon?",
+		"question": "If the next Metroid Prime game wanted to take a page out of the Castlevania: Symphony of the Night playbook, what might happen to the world Samus is exploring?",
+		"tags": [
+			"Nintendo",
+			"Metroidvania",
+			"Konami",
+			"Sony",
+			"Retro"
+		],
+		"uuid": "a04862fa-61f1-47e7-bc4c-6d7c3c8c9923",
+		"wrong": [
+			"It might have a secret boss hidden in the game files!",
+			"It may have a weapon the teleports Samus instead of killing the enemies she shoots!",
+			"Trick question, nothing since it’s called Metroidvania for a reason"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "With you looking for your lost dog that got washed down a street drain",
+		"explainer": "",
+		"name": "Lost something unexpected",
+		"question": "Lost in Vivo begins in a way fairly unique from other horror games. How does it start?",
+		"tags": [
+			"Indie",
+			"Kira",
+			"Horror"
+		],
+		"uuid": "ffa96509-34e2-4b93-abca-caeec424e43c",
+		"wrong": [
+			"With you looking for your missing Husband as a gay man",
+			"With you looking for a way to enter a hidden compound",
+			"With you awakening in the sewers after going to bed in your house"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "It is an indicated of parentage",
+		"explainer": "",
+		"name": "The Elden Name",
+		"question": "In Elden Ring…. why do so many people share the first letter of their name?",
+		"tags": [
+			"From Software",
+			"Soulslike"
+		],
+		"uuid": "d86a4756-c308-4cda-a76a-b98e85396ecc",
+		"wrong": [
+			"From Software really likes alliteration",
+			"It is an honest coincidence",
+			"There is a hidden ARG involving the count of first letter"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "You are shot in the head",
+		"explainer": "",
+		"name": "Wrong place, wrong time",
+		"question": "How does Fallout: New Vegas start out?",
+		"tags": [
+			"Obsidian",
+			"RPG"
+		],
+		"uuid": "4d161dea-36b7-4852-85c4-cb3fdfb0e936",
+		"wrong": [
+			"You are born",
+			"You are asked to find water for your vault",
+			"You are replaced with a Synth"
+		]
+	},
+	{
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
+		],
+		"correct": "Sacrifices Must be Made",
+		"explainer": "",
+		"name": "The Noble Stoat",
+		"question": "What was the name of the game jam version of Inscryption?",
+		"tags": [
+			"Indie",
+			"Daniel Mullins Games",
+			"Roguelite"
+		],
+		"uuid": "313ca0e8-cceb-47a4-98c0-8d7dcb03569c",
+		"wrong": [
+			"Animals and Totems",
+			"Inscription",
+			"Trick question, they are the same"
 		]
 	}
 ]

@@ -1,0 +1,13 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cwov72huq68gb"]
+
+[ext_resource type="FontFile" uid="uid://c1imjp477f64l" path="res://assets/uiux/session_themes/Fatal Surprise/OldNewspaperTypes.ttf" id="1_heg7r"]
+
+[resource]
+font = ExtResource("1_heg7r")
+font_size = 24
+font_color = Color(1, 0.824, 0.12, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 15
+shadow_color = Color(0.0470588, 0.0470588, 0.0470588, 0.254902)
+shadow_offset = Vector2(5, 5)

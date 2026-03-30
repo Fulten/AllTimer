@@ -1,0 +1,17 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cb60r4grcr12y"]
+
+[ext_resource type="FontFile" uid="uid://c2ioqx1qm0oah" path="res://assets/uiux/session_themes/Fatal Surprise/YIKES!__.TTF" id="1_pje31"]
+[ext_resource type="StyleBox" uid="uid://bkftnt4lwng8b" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_OAH.tres" id="2_cblmf"]
+[ext_resource type="StyleBox" uid="uid://qpsdapharmmr" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_OAN.tres" id="3_rrlh3"]
+[ext_resource type="StyleBox" uid="uid://bo0yrrmf2jatx" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_OAP.tres" id="4_yay2e"]
+
+[resource]
+Button/colors/font_color = Color(1, 0.824, 0.12, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 0.824, 0.12, 1)
+Button/constants/outline_size = 2
+Button/font_sizes/font_size = 32
+Button/fonts/font = ExtResource("1_pje31")
+Button/styles/hover = ExtResource("2_cblmf")
+Button/styles/normal = ExtResource("3_rrlh3")
+Button/styles/pressed = ExtResource("4_yay2e")

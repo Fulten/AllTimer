@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://y4rdmerds173"]
+[gd_scene load_steps=96 format=3 uid="uid://y4rdmerds173"]
 
 [ext_resource type="Script" path="res://assets/scenes/quiz_session.gd" id="1_dvajb"]
 [ext_resource type="Texture2D" uid="uid://djq4ypfbe1x3p" path="res://assets/uiux/session_themes/Fatal Surprise/T_SurpriseBG_D.tga" id="2_3jnqf"]
@@ -28,26 +28,29 @@
 [ext_resource type="Texture2D" uid="uid://r44nkuxl80ia" path="res://assets/uiux/session_themes/default/kb3.tga" id="16_vr0cc"]
 [ext_resource type="Texture2D" uid="uid://dao52bedrv1we" path="res://assets/uiux/session_themes/default/kb4.tga" id="17_2tdve"]
 [ext_resource type="LabelSettings" uid="uid://c15bddwgatrm4" path="res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_Timer.tres" id="17_tx8eb"]
-[ext_resource type="FontFile" uid="uid://byhg6togfihnm" path="res://assets/uiux/session_themes/Patriotic Cipher/UAV-OSD-Sans-Mono.ttf" id="18_54f7j"]
 [ext_resource type="Theme" uid="uid://cjmfw6j1byub" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_answerC.tres" id="18_1883s"]
 [ext_resource type="Texture2D" uid="uid://4rygepjufl3b" path="res://assets/uiux/session_themes/Patriotic Cipher/T_seperator_v_patcip.tga" id="19_anma7"]
 [ext_resource type="Theme" uid="uid://25yhueg6b2in" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_answerD.tres" id="20_fnivo"]
-[ext_resource type="Texture2D" uid="uid://b8inje8jjrna3" path="res://assets/uiux/session_themes/Patriotic Cipher/T_status_skip_patcip.tga" id="20_ueuq2"]
-[ext_resource type="Texture2D" uid="uid://d3d8drdimuvjd" path="res://assets/uiux/session_themes/Patriotic Cipher/T_status_incorrect_patcip.tga" id="21_72rnd"]
-[ext_resource type="Texture2D" uid="uid://b2eg3oa2waadg" path="res://assets/uiux/session_themes/Patriotic Cipher/T_status_correct_patcip.tga" id="22_1s6js"]
 [ext_resource type="Texture2D" uid="uid://c2glpvkloux56" path="res://assets/uiux/session_themes/Patriotic Cipher/T_seperator_h_patcip.tga" id="23_2rk3j"]
 [ext_resource type="FontFile" uid="uid://bdi68tslsma5m" path="res://assets/uiux/session_themes/default/chalk.ttf" id="24_frsdy"]
 [ext_resource type="LabelSettings" uid="uid://cu4y1760hkif0" path="res://assets/uiux/session_themes/Patriotic Cipher/label_PatCip_PostQ.tres" id="26_eeb3k"]
 [ext_resource type="Theme" uid="uid://cqceiax0udg2u" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_answerT.tres" id="26_h7h18"]
 [ext_resource type="Texture2D" uid="uid://sib7pjpdkuax" path="res://assets/uiux/session_themes/default/separator_h.tga" id="27_7ul7w"]
 [ext_resource type="Theme" uid="uid://vscymwg6oovu" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_answerF.tres" id="27_y68p2"]
-[ext_resource type="Texture2D" uid="uid://bcgcahuyuynp3" path="res://assets/uiux/session_themes/Patriotic Cipher/T_PauseCase_D.tga" id="28_pxhtb"]
 [ext_resource type="Theme" uid="uid://bwv0duhsrgd41" path="res://assets/uiux/session_themes/Patriotic Cipher/label_PatCip_Pause.tres" id="29_yjsym"]
-[ext_resource type="Theme" uid="uid://d0ghg7yomth8d" path="res://assets/uiux/session_themes/Patriotic Cipher/cipherMenuOption.tres" id="30_pbdp8"]
+[ext_resource type="Texture2D" uid="uid://7ulr3mymrlbg" path="res://assets/uiux/session_themes/Fatal Surprise/T_status_skip_surprise_D.tga" id="30_3m661"]
+[ext_resource type="Texture2D" uid="uid://bwuuulypnbap6" path="res://assets/uiux/session_themes/Fatal Surprise/T_status_incorrect_surprise_D.tga" id="31_x7sqx"]
 [ext_resource type="StyleBox" uid="uid://dcuqsqcektumy" path="res://assets/uiux/main_menu/volumeSlider.res" id="31_xxfw0"]
 [ext_resource type="Script" path="res://assets/scenes/MasterVolume.gd" id="32_g6lmc"]
 [ext_resource type="LabelSettings" uid="uid://c7cxcedfmxuae" path="res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_Score.tres" id="33_bd73y"]
 [ext_resource type="LabelSettings" uid="uid://c7s51sn55nllk" path="res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_ActivePlayer_default.tres" id="36_wcvw5"]
+[ext_resource type="Texture2D" uid="uid://sy65gc5xpmon" path="res://assets/uiux/session_themes/Fatal Surprise/T_PauseCase_surprise_D.tga" id="42_ucyyq"]
+[ext_resource type="LabelSettings" uid="uid://72jryqo5d8dy" path="res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_OptionsHeader.tres" id="44_0cweb"]
+[ext_resource type="Theme" uid="uid://cb60r4grcr12y" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_OptionA.tres" id="45_2ctph"]
+[ext_resource type="Theme" uid="uid://bs0llurc86cw6" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_OptionB.tres" id="46_423fv"]
+[ext_resource type="Theme" uid="uid://cqgcmtgk5dmwj" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_OptionC.tres" id="47_w1ik8"]
+[ext_resource type="FontFile" uid="uid://c2ioqx1qm0oah" path="res://assets/uiux/session_themes/Fatal Surprise/YIKES!__.TTF" id="48_7158e"]
+[ext_resource type="Theme" uid="uid://1eoggfiqgn2s" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_Back.tres" id="48_pmycm"]
 
 [sub_resource type="Animation" id="Animation_3txj5"]
 resource_name = "QuestionLoad_A"
@@ -3771,7 +3774,7 @@ border_color = Color(0, 0, 0, 1)
 Button/styles/normal = SubResource("StyleBoxFlat_q8n37")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1osu"]
-bg_color = Color(0, 1, 0.623529, 1)
+bg_color = Color(1, 0.824, 0.12, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_op0j7"]
 bg_color = Color(0, 1, 1, 1)
@@ -4327,19 +4330,19 @@ theme_override_constants/separation = 8
 [node name="status_a" type="TextureRect" parent="quizInterface/players_region/activePlayer1/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("20_ueuq2")
+texture = ExtResource("30_3m661")
 stretch_mode = 3
 
 [node name="status_b" type="TextureRect" parent="quizInterface/players_region/activePlayer1/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("21_72rnd")
+texture = ExtResource("31_x7sqx")
 stretch_mode = 3
 
 [node name="status_c" type="TextureRect" parent="quizInterface/players_region/activePlayer1/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("22_1s6js")
+texture = ExtResource("30_3m661")
 stretch_mode = 3
 
 [node name="score" type="Label" parent="quizInterface/players_region/activePlayer1/player_case/status_row"]
@@ -4379,19 +4382,19 @@ theme_override_constants/separation = 8
 [node name="status_a" type="TextureRect" parent="quizInterface/players_region/activePlayer2/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("20_ueuq2")
+texture = ExtResource("30_3m661")
 stretch_mode = 3
 
 [node name="status_b" type="TextureRect" parent="quizInterface/players_region/activePlayer2/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("21_72rnd")
+texture = ExtResource("31_x7sqx")
 stretch_mode = 3
 
 [node name="status_c" type="TextureRect" parent="quizInterface/players_region/activePlayer2/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("22_1s6js")
+texture = ExtResource("30_3m661")
 stretch_mode = 3
 
 [node name="score" type="Label" parent="quizInterface/players_region/activePlayer2/player_case/status_row"]
@@ -4430,19 +4433,19 @@ theme_override_constants/separation = 8
 [node name="status_a" type="TextureRect" parent="quizInterface/players_region/activePlayer3/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("20_ueuq2")
+texture = ExtResource("30_3m661")
 stretch_mode = 3
 
 [node name="status_b" type="TextureRect" parent="quizInterface/players_region/activePlayer3/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("21_72rnd")
+texture = ExtResource("31_x7sqx")
 stretch_mode = 3
 
 [node name="status_c" type="TextureRect" parent="quizInterface/players_region/activePlayer3/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("22_1s6js")
+texture = ExtResource("30_3m661")
 stretch_mode = 3
 
 [node name="score" type="Label" parent="quizInterface/players_region/activePlayer3/player_case/status_row"]
@@ -4481,19 +4484,19 @@ theme_override_constants/separation = 8
 [node name="status_a" type="TextureRect" parent="quizInterface/players_region/activePlayer4/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("20_ueuq2")
+texture = ExtResource("30_3m661")
 stretch_mode = 3
 
 [node name="status_b" type="TextureRect" parent="quizInterface/players_region/activePlayer4/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("21_72rnd")
+texture = ExtResource("31_x7sqx")
 stretch_mode = 3
 
 [node name="status_c" type="TextureRect" parent="quizInterface/players_region/activePlayer4/player_case/status_row"]
 self_modulate = Color(1, 1, 1, 0.235294)
 layout_mode = 2
-texture = ExtResource("22_1s6js")
+texture = ExtResource("30_3m661")
 stretch_mode = 3
 
 [node name="score" type="Label" parent="quizInterface/players_region/activePlayer4/player_case/status_row"]
@@ -4757,7 +4760,7 @@ offset_bottom = -146.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_cr43r")
-texture = ExtResource("28_pxhtb")
+texture = ExtResource("42_ucyyq")
 stretch_mode = 3
 
 [node name="pauseBase" type="Control" parent="pauseScreen/pauseCase"]
@@ -4778,14 +4781,15 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 88.0
-offset_top = 61.0
-offset_right = -83.0
-offset_bottom = -564.0
+offset_left = 72.0
+offset_top = 40.0
+offset_right = -67.0
+offset_bottom = -578.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("29_yjsym")
-text = "Game menu"
+text = "Menu"
+label_settings = ExtResource("44_0cweb")
 horizontal_alignment = 1
 
 [node name="resumeButton" type="Button" parent="pauseScreen/pauseCase/pauseBase"]
@@ -4793,13 +4797,13 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = 205.0
-offset_right = -24.0
-offset_bottom = -386.0
+offset_left = 48.0
+offset_top = 200.0
+offset_right = -48.0
+offset_bottom = -410.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("30_pbdp8")
+theme = ExtResource("45_2ctph")
 text = "Resume"
 
 [node name="optionsButton" type="Button" parent="pauseScreen/pauseCase/pauseBase"]
@@ -4810,10 +4814,10 @@ anchor_bottom = 1.0
 offset_left = 24.0
 offset_top = 311.0
 offset_right = -24.0
-offset_bottom = -282.0
+offset_bottom = -298.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("30_pbdp8")
+theme = ExtResource("46_423fv")
 text = "Options"
 
 [node name="quitButton" type="Button" parent="pauseScreen/pauseCase/pauseBase"]
@@ -4822,12 +4826,12 @@ anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 24.0
-offset_top = 416.0
+offset_top = 424.0
 offset_right = -24.0
-offset_bottom = -178.0
+offset_bottom = -186.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("30_pbdp8")
+theme = ExtResource("47_w1ik8")
 text = "Quit"
 
 [node name="pauseOptions" type="Control" parent="pauseScreen/pauseCase"]
@@ -4857,6 +4861,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("29_yjsym")
 text = "Options"
+label_settings = ExtResource("44_0cweb")
 horizontal_alignment = 1
 
 [node name="soundButton" type="Button" parent="pauseScreen/pauseCase/pauseOptions"]
@@ -4864,13 +4869,13 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = 208.0
-offset_right = -24.0
-offset_bottom = -395.0
+offset_left = 40.0
+offset_top = 200.0
+offset_right = -40.0
+offset_bottom = -410.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("30_pbdp8")
+theme = ExtResource("45_2ctph")
 text = "Sound"
 
 [node name="displayButton" type="Button" parent="pauseScreen/pauseCase/pauseOptions"]
@@ -4878,13 +4883,13 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 24.0
+offset_left = 32.0
 offset_top = 312.0
 offset_right = -24.0
-offset_bottom = -291.0
+offset_bottom = -298.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("30_pbdp8")
+theme = ExtResource("47_w1ik8")
 text = "Display"
 
 [node name="optionsBackButton" type="Button" parent="pauseScreen/pauseCase/pauseOptions"]
@@ -4892,13 +4897,13 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = 415.0
-offset_right = -24.0
-offset_bottom = -186.0
+offset_left = 32.0
+offset_top = 600.0
+offset_right = -248.0
+offset_bottom = -25.9999
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("30_pbdp8")
+theme = ExtResource("48_pmycm")
 text = "Back"
 
 [node name="pauseSound" type="Control" parent="pauseScreen/pauseCase"]
@@ -4926,6 +4931,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("29_yjsym")
 text = "Sound"
+label_settings = ExtResource("44_0cweb")
 horizontal_alignment = 1
 
 [node name="VolumeLabel" type="Label" parent="pauseScreen/pauseCase/pauseSound"]
@@ -4940,8 +4946,8 @@ offset_bottom = -457.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("18_54f7j")
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("48_7158e")
+theme_override_font_sizes/font_size = 36
 text = "Volume Controls"
 horizontal_alignment = 1
 
@@ -4960,8 +4966,8 @@ grow_vertical = 2
 [node name="Master" type="Label" parent="pauseScreen/pauseCase/pauseSound/VolumeCase"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("18_54f7j")
-theme_override_font_sizes/font_size = 18
+theme_override_fonts/font = ExtResource("48_7158e")
+theme_override_font_sizes/font_size = 24
 text = "Master"
 horizontal_alignment = 1
 
@@ -4983,8 +4989,8 @@ bus_name = "Master"
 [node name="Music" type="Label" parent="pauseScreen/pauseCase/pauseSound/VolumeCase"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("18_54f7j")
-theme_override_font_sizes/font_size = 18
+theme_override_fonts/font = ExtResource("48_7158e")
+theme_override_font_sizes/font_size = 24
 text = "Music
 "
 horizontal_alignment = 1
@@ -5007,8 +5013,8 @@ bus_name = "Music"
 [node name="SFX" type="Label" parent="pauseScreen/pauseCase/pauseSound/VolumeCase"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("18_54f7j")
-theme_override_font_sizes/font_size = 18
+theme_override_fonts/font = ExtResource("48_7158e")
+theme_override_font_sizes/font_size = 24
 text = "Sound Effects
 "
 horizontal_alignment = 1
@@ -5031,8 +5037,8 @@ bus_name = "SFX"
 [node name="VO" type="Label" parent="pauseScreen/pauseCase/pauseSound/VolumeCase"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("18_54f7j")
-theme_override_font_sizes/font_size = 18
+theme_override_fonts/font = ExtResource("48_7158e")
+theme_override_font_sizes/font_size = 24
 text = "Voiceover
 "
 horizontal_alignment = 1
@@ -5066,7 +5072,7 @@ grow_vertical = 2
 [node name="SoundDeviceCategoryLabel" type="Label" parent="pauseScreen/pauseCase/pauseSound/SoundDeviceCase"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("18_54f7j")
+theme_override_fonts/font = ExtResource("48_7158e")
 theme_override_font_sizes/font_size = 24
 text = "Sound device -"
 
@@ -5074,8 +5080,8 @@ text = "Sound device -"
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
-theme_override_colors/font_color = Color(0, 1, 0.623529, 1)
-theme_override_fonts/font = ExtResource("18_54f7j")
+theme_override_colors/font_color = Color(1, 0.824, 0.12, 1)
+theme_override_fonts/font = ExtResource("48_7158e")
 theme_override_font_sizes/font_size = 18
 flat = true
 alignment = 1
@@ -5094,16 +5100,13 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 92.0
-offset_top = 584.0
-offset_right = -267.0
-offset_bottom = -43.0
+offset_left = 32.0
+offset_top = 600.0
+offset_right = -248.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("30_pbdp8")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("18_54f7j")
-theme_override_font_sizes/font_size = 28
+theme = ExtResource("48_pmycm")
 text = "Back"
 
 [node name="pauseDisplay" type="Control" parent="pauseScreen/pauseCase"]
@@ -5131,6 +5134,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("29_yjsym")
 text = "Display"
+label_settings = ExtResource("44_0cweb")
 horizontal_alignment = 1
 
 [node name="DisplayModeCase" type="VBoxContainer" parent="pauseScreen/pauseCase/pauseDisplay"]
@@ -5148,16 +5152,16 @@ grow_vertical = 2
 [node name="DisplayModeLabel" type="Label" parent="pauseScreen/pauseCase/pauseDisplay/DisplayModeCase"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("18_54f7j")
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("48_7158e")
+theme_override_font_sizes/font_size = 36
 text = "Display Mode"
 
 [node name="DisplayList" type="OptionButton" parent="pauseScreen/pauseCase/pauseDisplay/DisplayModeCase"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
-theme_override_colors/font_color = Color(0, 1, 0.623529, 1)
-theme_override_fonts/font = ExtResource("18_54f7j")
+theme_override_colors/font_color = Color(1, 0.824, 0.12, 1)
+theme_override_fonts/font = ExtResource("48_7158e")
 theme_override_font_sizes/font_size = 20
 flat = true
 alignment = 1
@@ -5182,16 +5186,16 @@ offset_bottom = 384.0
 [node name="DisplayModeLabel" type="Label" parent="pauseScreen/pauseCase/pauseDisplay/resolutionsCase"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("18_54f7j")
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("48_7158e")
+theme_override_font_sizes/font_size = 36
 text = "Resolution"
 
 [node name="ResolutionsList" type="OptionButton" parent="pauseScreen/pauseCase/pauseDisplay/resolutionsCase"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
-theme_override_colors/font_color = Color(0, 1, 0.623529, 1)
-theme_override_fonts/font = ExtResource("18_54f7j")
+theme_override_colors/font_color = Color(1, 0.824, 0.12, 1)
+theme_override_fonts/font = ExtResource("48_7158e")
 theme_override_font_sizes/font_size = 20
 flat = true
 item_count = 10
@@ -5233,16 +5237,16 @@ grow_vertical = 2
 [node name="DisplayModeLabel" type="Label" parent="pauseScreen/pauseCase/pauseDisplay/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("18_54f7j")
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("48_7158e")
+theme_override_font_sizes/font_size = 36
 text = "Input Display"
 
 [node name="InputDisplayList" type="OptionButton" parent="pauseScreen/pauseCase/pauseDisplay/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
-theme_override_colors/font_color = Color(0, 1, 0.623529, 1)
-theme_override_fonts/font = ExtResource("18_54f7j")
+theme_override_colors/font_color = Color(1, 0.824, 0.12, 1)
+theme_override_fonts/font = ExtResource("48_7158e")
 theme_override_font_sizes/font_size = 20
 flat = true
 alignment = 1
@@ -5265,16 +5269,13 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 92.0
-offset_top = 584.0
-offset_right = -267.0
-offset_bottom = -43.0
+offset_left = 32.0
+offset_top = 600.0
+offset_right = -248.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("30_pbdp8")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("18_54f7j")
-theme_override_font_sizes/font_size = 28
+theme = ExtResource("48_pmycm")
 text = "Back"
 
 [connection signal="button_down" from="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1" to="." method="_on_a_1_button_down"]

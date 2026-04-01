@@ -400,28 +400,34 @@ func _sync_player_statuses(statuses):
 			player_statuses_ui_2d[player_number][1] = statuses[player_number][1]
 			player_statuses_ui_2d[player_number][2] = statuses[player_number][2]
 			pass
-	
+	$ControlSwapper0.play_backwards("QuestionLoad_B")
+	await $ControlSwapper0.animation_finished
+	_play_status_animation(statuses)
+		
+func _play_status_animation(statuses):
 	for player_number in range(GameState.PlayerCount):
 		if statuses[player_number][0]: # status_a
-			get_node("ControlSwapper%s" % player_number).play("p%sStatus_SkipShow" % (player_number + 1))
+			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_SkipShow" % (player_number + 1))
 		if statuses[player_number][1]: # status_b
-			get_node("ControlSwapper%s" % player_number).play("p%sStatus_WrongShow" % (player_number + 1))
+			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_WrongShow" % (player_number + 1))
 		if statuses[player_number][2]: # status_c
-			get_node("ControlSwapper%s" % player_number).play("p%sStatus_RightShow" % (player_number + 1))
+			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_RightShow" % (player_number + 1))
 		pass
+	
+	
 
 ## called by the server to reset all player statuses to be hidden
 @rpc("authority", "reliable", "call_local")
 func _reset_player_statuses():
 	for player_number in range(GameState.PlayerCount):
 		if player_statuses_ui_2d[player_number][0]:
-			get_node("ControlSwapper%s" % player_number).play("p%sStatus_SkipHide" % (player_number + 1))
+			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_SkipHide" % (player_number + 1))
 			player_statuses_ui_2d[player_number][0] = false
 		if player_statuses_ui_2d[player_number][1]:
-			get_node("ControlSwapper%s" % player_number).play("p%sStatus_WrongHide" % (player_number + 1))
+			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_WrongHide" % (player_number + 1))
 			player_statuses_ui_2d[player_number][1] = false
 		if player_statuses_ui_2d[player_number][2]:
-			get_node("ControlSwapper%s" % player_number).play("p%sStatus_RightHide" % (player_number + 1))
+			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_RightHide" % (player_number + 1))
 			player_statuses_ui_2d[player_number][2] = false
 		pass
 
@@ -680,7 +686,7 @@ func _answer_question_phase():
 	pass
 	
 ## strarts the timer for the post question phase, answer input is disabled
-## shows answer e
+## shows answer explainer
 func _postquestion_delay_phase():
 	ui_countdown_timer.stop()
 	flag_accept_input = false
@@ -701,9 +707,10 @@ func _postquestion_delay_phase():
 	# unlock all player pannels during postphase
 	_update_ui_player_pannel_locked_all.rpc(false)
 	
+	
 	_show_question_explainer.rpc(true)
 	
-	ui_postquestion_timer.start(post_question_delay_default + extra_seconds)
+	ui_postquestion_timer.start(post_question_delay_default + extra_seconds + 1.0)
 	pass
 	
 ## end of question phase occurs after each question

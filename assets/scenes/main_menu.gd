@@ -507,7 +507,7 @@ const display_options = [
 
 
 func _on_display_list_item_selected(index: int) -> void:
-		DisplayServer.window_set_mode(display_options[index])
+	DisplayServer.window_set_mode(display_options[index])
 
 
 const resolution_options = [

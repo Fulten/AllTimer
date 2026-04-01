@@ -78,6 +78,9 @@ var local_clock_reading = [0,0]
 var local_answer_order = [0, 1, 2, 3]
 
 var QuizEndScreen = false
+
+var config_path = "user://settings.cfg"
+var config = ConfigFile.new()
 #endregion
 
 ##Called when the node enters the scene tree for the first time.
@@ -85,7 +88,7 @@ var QuizEndScreen = false
 func _ready():
 	_reset_question_rules_visibility()
 	_set_theme_specific_graphics()
-	_load_sound_settings()
+	_load_config_settings()
 	_select_music_track()
 	
 	if multiplayer.is_server():
@@ -551,21 +554,6 @@ func _select_music_track():
 	else:
 		SoundMaster._play_music_track("default_theme")
 
-func _load_sound_settings():
-	var config = ConfigFile.new()
-	var err = config.load("user://settings.cfg")
-	if err == OK:
-		var master = config.get_value("audio", "master", 1.0)
-		var music = config.get_value("audio", "music", 1.0)
-		var sfx = config.get_value("audio", "sfx", 1.0)
-		var voiceover = config.get_value("audio", "voiceover", 1.0)
-		%VolumeControl.set_value_no_signal(master)
-		%VolumeControl2.set_value_no_signal(music)
-		%VolumeControl3.set_value_no_signal(sfx)
-		%VolumeControl4.set_value_no_signal(voiceover)
-	pass
-
-
 func _set_theme_specific_graphics():
 	if GameState.CurrentTheme == "Patriotic Cipher":
 		asset_player_pannel_locked = load("res://assets/uiux/session_themes/Patriotic Cipher/label_Cipher_ActivePlayer_locked.tres")
@@ -589,6 +577,8 @@ func _escape_game_menu():
 	if flag_in_options_menu:
 		$pauseScreen/pauseCase/pauseOptions.hide()
 		$pauseScreen/pauseCase/pauseBase.show()
+		_save_sound_settings()
+		_save_display_settings()
 		flag_in_options_menu = false
 		return
 	
@@ -800,6 +790,12 @@ func _create_player_statuses_table():
 	
 	pass
 
+func select_option_by_text(option_button: OptionButton, target_text: String) -> void:
+	for i in range(option_button.item_count):
+		if option_button.get_item_text(i) == str(target_text):
+			option_button.select(i)
+			return
+	print("Text not found in OptionButton:", target_text)
 #endregion
 
 #region functions that translate the timers into minutes and seconds for the ui
@@ -1114,6 +1110,7 @@ func _on_sound_back_button_button_up():
 	$pauseScreen/pauseCase/pauseOptions.show()
 	flag_in_options_menu = true
 	flag_in_options_submenu = false
+	_save_sound_settings()
 
 func _on_display_button_focus_entered():
 	$SFX_Hover2.play()
@@ -1140,4 +1137,91 @@ func _on_display_back_button_button_up():
 	$pauseScreen/pauseCase/pauseOptions.show()
 	flag_in_options_menu = true
 	flag_in_options_submenu = false
+	_save_display_settings()
+#endregion
+
+func _load_config_settings():
+	var err = config.load(config_path)
+	if err == OK:
+		# AUDIO
+		var sound_device = config.get_value("audio", "sound_device", "default")
+		var master = config.get_value("audio", "master", 1.0)
+		var music = config.get_value("audio", "music", 1.0)
+		var sfx = config.get_value("audio", "sfx", 1.0)
+		var voiceover = config.get_value("audio", "voiceover", 1.0)
+		# VIDEO
+		var display_type = config.get_value("video", "type", 0)
+		var resolution = config.get_value("video", "resolution", 0)
+		var input_display = config.get_value("video", "input", "default")
+		var theme = config.get_value("video", "theme", "default")
+		# APPLY
+		_apply_audio_settings(sound_device, master, music, sfx, voiceover)
+		_apply_video_settings(display_type, resolution, input_display, theme)
+
+#region Sound Options
+#INFO: volume sliders are handled by MasterVolume.gd script
+
+func _on_sound_device_options_item_selected(index: int) -> void:
+	AudioServer.set_output_device(%SoundDeviceOptions.get_item_text(index))
+
+func _apply_audio_settings(sound_device: String, master: float, music: float, sfx: float, voiceover: float):
+	%VolumeControl.set_value_no_signal(master)
+	%VolumeControl2.set_value_no_signal(music)
+	%VolumeControl3.set_value_no_signal(sfx)
+	%VolumeControl4.set_value_no_signal(voiceover)
+		
+	var devices = AudioServer.get_output_device_list()
+	var found_match = false
+	%SoundDeviceOptions.clear()
+	for device in devices:
+		%SoundDeviceOptions.add_item(device)
+		if sound_device == device:
+			found_match = true
+			select_option_by_text(%SoundDeviceOptions, sound_device)
+
+func _save_sound_settings():
+	config.set_value("audio", "sound_device", %SoundDeviceOptions.get_item_text(%SoundDeviceOptions.get_selected_id()))
+	config.set_value("audio", "master", %VolumeControl.get_value())
+	config.set_value("audio", "music", %VolumeControl2.get_value())
+	config.set_value("audio", "sfx", %VolumeControl3.get_value())
+	config.set_value("audio", "voiceover", %VolumeControl4.get_value())
+	config.save(config_path)
+#endregion
+
+#region Display Options
+
+func _apply_video_settings(display_type: int, resolution: int, input_display: String, theme: String):
+	%DisplayList.select(display_type)
+	%ResolutionsList.select(resolution)
+	select_option_by_text(%InputDisplayList,input_display)
+
+func _save_display_settings():
+	config.set_value("video", "type", %DisplayList.get_selected_id())
+	config.set_value("video", "resolution", %ResolutionsList.get_selected_id())
+	config.set_value("video", "input", %InputDisplayList.get_item_text(%InputDisplayList.get_selected_id()))
+	config.save(config_path)
+
+const display_options = [
+	DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
+	DisplayServer.WINDOW_MODE_WINDOWED,
+	DisplayServer.WINDOW_MODE_FULLSCREEN,
+]
+
+func _on_display_list_item_selected(index: int) -> void:
+	DisplayServer.window_set_mode(display_options[index])
+
+const resolution_options = [
+	 Vector2(648, 648),
+	 Vector2(640, 480),
+	 Vector2(720, 480),
+	 Vector2(800, 600),
+	 Vector2(1152, 648),
+	 Vector2(1280, 720),
+	 Vector2(1280, 800),
+	 Vector2(1680, 720),
+	 Vector2(1920, 1080),
+	 Vector2(2560, 1440)
+]
+func _on_resolutions_list_item_selected(index: int) -> void:
+	DisplayServer.window_set_size(resolution_options[index])
 #endregion

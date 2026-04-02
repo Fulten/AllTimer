@@ -55,6 +55,11 @@ var ui_entry_node_chances_reference = {
 	"icon": ["HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Label", 1],
 	"description": ["HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/VBoxContainer/Label", 2]}
 
+var id_to_question_type = {
+	0: "Multiple Choice",
+	1: "True/False"
+}
+
 class Question:
 	var name: String
 	var body: String
@@ -63,6 +68,7 @@ class Question:
 	var wrong
 	var tags
 	var chances
+	var questionType: String
 	
 	var listIndex: int
 	var errorState: int
@@ -77,7 +83,8 @@ class Question:
 		i_wrong, 
 		i_explainer: String,
 		i_tags,
-		i_chances):
+		i_chances,
+		i_questionType):
 		
 		name = i_name
 		body = i_body
@@ -86,7 +93,7 @@ class Question:
 		explainer = i_explainer
 		tags = i_tags
 		chances = i_chances
-		
+		questionType = i_questionType
 		listIndex = -1
 		_check_error_state()
 	
@@ -118,6 +125,10 @@ class Question:
 		if wrong[0] == "":
 			errorState = 2
 			errorEntries.append("wrong0")
+			
+		if questionType == "True/False":
+			return
+			
 		if wrong[1] == "":
 			errorState = 2
 			errorEntries.append("wrong1")
@@ -138,6 +149,7 @@ class Question:
 		question_raw["tags"] = tags # array
 		question_raw["uuid"] = question_uuid
 		question_raw["wrong"] = wrong # array
+		question_raw["questionType"] = questionType
 		return question_raw
 	pass
 	
@@ -342,6 +354,7 @@ func _save_question(question_uuid):
 	questions[question_uuid].explainer = $HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxPostText/Text.text
 	questions[question_uuid].correct = $HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxCorrect/Text.text
 	questions[question_uuid].wrong = wrong_questions
+	questions[question_uuid].questionType = id_to_question_type[$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxQuestionType/OptionButton.get_selected_id()]
 	
 	for tag in tags_raw.split(",", false):
 		var tag_f = tag.strip_edges()
@@ -493,7 +506,7 @@ func _UI_present_question_data(uuid):
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxName/Text.text = questions[uuid].name
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxQuestionText/Text.text = questions[uuid].body
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxPostText/Text.text = questions[uuid].explainer
-	
+	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxQuestionType/OptionButton.select(id_to_question_type.find_key(questions[uuid].questionType))
 	# answers
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxCorrect/Text.text = questions[uuid].correct
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong1/Text.text = questions[uuid].wrong[0]
@@ -542,12 +555,12 @@ func _UI_clear_question_data():
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxQuestionText/Text.text = ""
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxPostText/Text.text = ""
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxTags/Text.text = ""
+	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxQuestionType/OptionButton.select(0)
 	# answers
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxCorrect/Text.text = ""
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong1/Text.text = ""
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong2/Text.text = ""
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong3/Text.text = ""
-	
 	%ChancesListQuestion.clear()
 	for key in ui_entry_node_refrence:
 		get_node(ui_entry_node_refrence[key][0]).label_settings = ui_label_settings[0]
@@ -573,6 +586,7 @@ func _UI_toggle_ui_that_needs_selected_question(enable: bool):
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/BtnSave.disabled = !enable
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/BtnDiscard.disabled = !enable
 	$QuestionPopup/VBoxContainer/Warning/HBoxContainer/BtnPopupYes.disabled = !enable
+	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxQuestionType/OptionButton.disabled = !enable
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxName/Text.editable = enable
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxTags/Text.editable = enable
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxQuestionText/Text.editable = enable
@@ -608,6 +622,7 @@ func _io_read_questions(file_name: String):
 	questions.clear()
 	for question_raw in questions_raw:
 		var question = Question.new()
+		_io_validate_question(question_raw)
 		question._build_from_raw(
 			question_raw["name"],
 			question_raw["question"],
@@ -615,11 +630,20 @@ func _io_read_questions(file_name: String):
 			question_raw["wrong"],
 			question_raw["explainer"],
 			question_raw["tags"],
-			question_raw["chances"])
+			question_raw["chances"],
+			question_raw["questionType"])
 		questions[question_raw["uuid"]] = question
 	pass
 
-func _io_validate_question():
+func _io_validate_question(question_raw):
+	if !"name" in question_raw:
+		question_raw["name"] = ""
+	if !"question" in question_raw:
+		question_raw["question"] = ""
+	if !"explainer" in question_raw:
+		question_raw["explainer"] = ""
+	if !"questionType" in question_raw:
+		question_raw["questionType"] = "Multiple Choice"
 	pass
 
 func _io_write_questions(file_name: String):

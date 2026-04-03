@@ -8,6 +8,7 @@
 		"explainer": "R. Kelly has had some practice giving golden showers as the gaurd did with Raiden in Metal Gear Soild 2",
 		"name": "That Kojima...",
 		"question": "With the new Metal Gear Solid movie in production, I've been thinking about what bizarre stuff might be. Hideo Kojima has always been known for his weird sense of humor and one particularly gross sequence between a guard and Raiden while he shimmies along a railing in the big shell comes to mind. If the director of the new Metal Gear Solid movie wanted to reference this moment, what celebrity would be a good fit for the guard?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Classic",
 			"Pop Culture"
@@ -27,6 +28,7 @@
 		"explainer": "In Bioshock, Adam is extracted from slugs",
 		"name": "Kingdom Shocks",
 		"question": "If Sora from Kingdom Hearts found himself in the Bioshock universe, what line might he say to Frank Fontaine during the final encounter about the body enhancing super plasmid juice, Adam?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Classic",
 			"RPG"
@@ -47,6 +49,7 @@
 		"explainer": "In Mario 64, you need 70 stars to fight Bowser for the final time",
 		"name": "Jak 64",
 		"question": "Jak and Daxter was heavily inspired by Mario 64, including down to collectable like orbs and power cells. If Jak was to fully embrace it's inspiration, how many power cells would you need to collect in the game to fight Gul and Maia?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Classic",
 			"Retro",
@@ -69,6 +72,7 @@
 		"explainer": "Final Fantasy 1, 4 and 6 were released as 1, 2 and 3 respectively in America. Final Fantasy 2,3 and 5 were not released in America originally",
 		"name": "The Final Confusion",
 		"question": "Final Fantasy has a plentiful number of sequels, but when it came to it's original releases, things got pretty messy in America. If we were to list of the first 6 final fantasies' using the American numbers where possible, what would the order be?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"RPG",
 			"Retro",
@@ -87,6 +91,7 @@
 		"explainer": "Manifold Garden is heavily based on fractals, a concept of art Desmond Paul Henry is heavily into.",
 		"name": "Artistic Gamer",
 		"question": "Artists need a break sometimes too. Manifold Garden is a game comprised of beautiful infinite patterns and puzzles to connect them. Which of the following artists would likely binge this game late on a Friday Night to unwind?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"History",
 			"Puzzle"
@@ -106,6 +111,7 @@
 		"explainer": "In Shadow Hearts: From the New World you become fairly close friends with actual historical Al Capone",
 		"name": "Shadows over the Globe",
 		"question": "Shadows Hearts: From the New World follows in the footsteps of it's previous games by melding real figures with it's fictional setting one notable ally would like feature promentaly in a documentary with the following title.",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"RPG",
 			"History"
@@ -123,6 +129,7 @@
 		"explainer": "",
 		"name": "Bootleg Theatre",
 		"question": "The story of the last bootleg theatre was pretty odd. A guy saves a bird from a cage to get rid of some sort of a bunch of seeds he owes some guy. But the thing is, as the story goes on the guy finds out the bird might actually be his kid, and he might not actual owe a debt except to himself? Things got confusing as the bird started pecking holes to other dimensions and became a god bird after drowning me. What game was the bootleg play about?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Modern",
 			"Shooter"
@@ -142,6 +149,7 @@
 		"explainer": "",
 		"name": "It's a Flood!",
 		"question": "The Covenant elite from Halo has gained notoriety for it's strange utterance \"Wart!\". With that in mind, if an elite wanted to warn us what mission the flood would appear in in Halo 1 by the number of warts, how many warts would they wart?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Classic",
 			"Shooter"
@@ -162,6 +170,7 @@
 		"explainer": "Udon noods are traditional made but wrapping",
 		"name": "Cooking with Sass",
 		"question": "If Cheap Cheap the cooking chicken were to create a dish for Cooking Momma of some authentic udon noodles, what might be a phrase that Cheap would sing?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Classic",
 			"Pop Culture"
@@ -181,6 +190,7 @@
 		"explainer": "Lagombi is based heavily on a rabbit, who would likely order a salad given the heavy presence of natural greens",
 		"name": "Cute Critters",
 		"question": "Monster Hunter has a variety of terrifying beasties. Sometimes they are even cute and based on real world creatures. If the Lagombi had a diet similar to its real world counterpart, what would it order at McDonalds",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Capcom",
 			"Adventure"
@@ -202,6 +212,7 @@
 		"explainer": "",
 		"name": "They Cut What?!",
 		"question": "The original Fallout was a beefy title with a lot of cut content. One piece of cut content was an unexpected extra race added to the pool based on an animal. What was that animal?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Retro",
 			"RPG"
@@ -219,6 +230,7 @@
 		"explainer": "Yes - Early models of the 360 sometimes encountered hardware issues that would prevent the console from even turning on. When the console experienced a problem that required service from Microsoft, it would light up three of the four arc segments that were arranged in a ring around the power button. Mirroring the Windows “Blue Screen of Death,” Xbox gamers would come to refer to this hardware failure as the “Red Ring of Death.”",
 		"name": "Do Us Part",
 		"question": "There are many heartwarming tales of couples who were first brought together by the RNG of in-game matchmaking. Suppose you met your other half in the XBOX 360 era and were now planning your very gamer-themed wedding. What kind of ring would you most NOT want to be presented with?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Game History",
 			"Microsoft"
@@ -238,6 +250,7 @@
 		"explainer": "Destiny and Destiny 2 both had notorious and well documented terrible dev cycle",
 		"name": "Toxic Relationships",
 		"question": "Game dev cycles can feel a bit like messy marriages when things don’t go as planned like duke nukem forever. What game franchise managed to have 2 messy marriages?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Shooter",
 			"Game History"
@@ -258,6 +271,7 @@
 		"explainer": "Playstation 3's had a common issue where, after a period of time, they would stop working and flash a horrigying serious of yellow flashes indicating a hardware failure",
 		"name": "Moody Lights",
 		"question": "Mood lighting is popular among gamers, but what color lighting might be a bad pick for a PS3 fan? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Game History",
 			"Sony"
@@ -277,6 +291,7 @@
 		"explainer": "In Rising Zan, Groovy, Wicked and Bitchin' are actual score ranks you can get at the end of levels",
 		"name": "Samurai Snowboarders",
 		"question": "UEP systems, creator of Cool Boarder’s, also created a non-snow boarding game “Rising Zan: The Samurai Gunman”. If they were to create a spin-off game before their closure called “Sliding Zan: The Samurai Boarder”, what would might 3 of the final score ranks be called?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sports",
 			"Adventure",
@@ -297,6 +312,7 @@
 		"explainer": "The name of the dog from the secret dog ending who controls the town of Silent Hill is Mira",
 		"name": "Endless Nightmares",
 		"question": "Whose game is James Sutherland actually playing in Silent Hill 2?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Horror",
 			"Sony"
@@ -316,6 +332,7 @@
 		"explainer": "In Kingdom Hearts: Birth By Sleep the main antagonist is played by Lenoard Nimoa and the teacher of the main characters is played by Mark Hamill",
 		"name": "Star Trek Wars",
 		"question": "If we treat the voice actors as their actor counter parts, in which game was Spock and Luke Skywalker enemies?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"RPG"
 		],
@@ -334,6 +351,7 @@
 		"explainer": "When the original servers for the first version of FFXIV went down, the in game reason was Bahmut breaking out of a moon prison and destroying Eorzea",
 		"name": "A Realm Reborn.... Again?",
 		"question": "Final Fantasy XIV’s expansion Dawntrail is sometimes referred to as 'A Realm Reborn, again”. If Dawntrail really wanted to live up to that moniker, how would the expansion need to start?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"MMO",
 			"Square Enix"
@@ -353,6 +371,7 @@
 		"explainer": "",
 		"name": "Leaky Valves",
 		"question": "With the recent leaks surrounding the Valve v Wolfire lawsuit, what was the dude bro forum level shit posting Scott Lynch, COO of Valve at the time, sent to Tim Sweeney over his frustration over Valve’s business practices?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Game History",
 			"Valve",
@@ -374,6 +393,7 @@
 		"explainer": "Nintendo formally apologized for the infamous joy-con drift found in the switch controls in 2020",
 		"name": "Wii would like to subscribe",
 		"question": "If Nintendo were a media influencer, how might their apology have gone in 2020?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Nintendo",
 			"Game History"
@@ -391,6 +411,7 @@
 		"explainer": "",
 		"name": "Shocking Resemblance",
 		"question": "If bioshock is a spiritual successor to System Shock 2, down to a variety of matching details between the games. What event in particular happens in both games near the beginning? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Immersive Sim"
 		],
@@ -407,6 +428,7 @@
 		"explainer": "In Nevada's Regulation 14, the require win-rate is 75% of all revenue",
 		"name": "State Approved Gacha",
 		"question": "Gacha games have become both wildly popular and controversial for their gambling style pull system. If Genshin Impact were to follow Nevada’s Regulation 14 (specifically the required percentage on a minimum payout and a 5 star is a successful payout), how many 5 stars should you pull in every 100 pulls?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Hard",
 			"Law"
@@ -424,6 +446,7 @@
 		"explainer": "DJ Hero is a game you play with a Mix Table peripheral",
 		"name": "A... What Hero?",
 		"question": "Guitar Hero became a household name in the mid to late 2000s and, of course, Activision began to over saturate the market with sequels and spinoffs. This included a game dedicated to a completely different instrument. What was that instrument?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Rhythm"
 		],
@@ -443,6 +466,7 @@
 		"explainer": "",
 		"name": "Sing it",
 		"question": "Harmonix’s lesser remembered singing series Karaoke Revolution eventually allowed fans to live out a particular fantasy. What was it?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Rhythm",
 			"Popculture"
@@ -460,6 +484,7 @@
 		"explainer": "",
 		"name": "Subterranean Story",
 		"question": "Sans is one of the more popular characters from Undertale. He also shares a similar eye trait and secret boss status as which character from Cave Story?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Indie"
 		],
@@ -478,6 +503,7 @@
 		"explainer": "",
 		"name": "The Titan Incident",
 		"question": "What game saw a concerning increase in popularity after the OceanGate Titan Implosion incident in 2023?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Indie",
 			"History"
@@ -497,6 +523,7 @@
 		"explainer": "",
 		"name": "Nuclear, Please",
 		"question": "If Stanislav Petrov had actual been in Arstotzka when he made his decision to avert nuclear disaster, what amount of money would he have been fined by the M.O.A. for ignoring the alarm? History, Indie",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"History",
 			"Indie"
@@ -514,6 +541,7 @@
 		"explainer": "",
 		"name": "Wait, For Real?",
 		"question": "In the Black Watchmen 4, there are a variety of situations that require real world research and investigation to resolve, which of the following is not an example of an actual question you are asked to investigate?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Puzzle",
 			"Hard"
@@ -531,6 +559,7 @@
 		"explainer": "",
 		"name": "I Prefer Eurogames...",
 		"question": "What board game genre does the Banished Vault likely fall under?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Tabletop",
 			"Indie"
@@ -550,6 +579,7 @@
 		"explainer": "",
 		"name": "Sea of Bones",
 		"question": "If Skull and Bones were to take some notes from the more popular Sea of Thieves, what might players be able to do?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Adventure",
 			"Microsoft",
@@ -571,6 +601,7 @@
 		"explainer": "",
 		"name": "Revenge of the Nerds",
 		"question": "Why was Sony forced to pay millions of dollars to Linux nerds in 2016?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
 			"History"
@@ -591,6 +622,7 @@
 		"explainer": "Sony's add campaign in 2006 for the PSP involved a bizarre cartoon of a squirrel telling another they could play nuts outside",
 		"name": "Say What?",
 		"question": "What might a squirrel have asked you to play outside in 2006?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
 			"History"
@@ -611,6 +643,7 @@
 		"explainer": "Peter Dille when asked the purpose behind the strange baby commercial for the PS3 he said it was a sort of Roarschach test where it was up to the audience to see what they saw. Like an ink blot used in the tests ",
 		"name": "PS3 is a work of Art!",
 		"question": "If Sony of America’s VP Peter Dille were to use art to help explain the strange PS3 baby commercial, what might he show you?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"History",
 			"Sony"
@@ -631,6 +664,7 @@
 		"explainer": "When asked in an interview what players without internet would do with an Xbox one, he said the solution was the Xbox 360",
 		"name": "Out of Season",
 		"question": "If Don Mattrick had been asked if the Xbox One’s online requirement was an out of season april fools day joke and consequently booed, what might he have said in response?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Microsoft",
 			"Blizzard",
@@ -651,6 +685,7 @@
 		"explainer": "",
 		"name": "He was a Demon?",
 		"question": "Onimusha actually tells an alternate history of the Sengoku period centered around the death of which notable feudal lord?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Capcom",
 			"History",
@@ -669,6 +704,7 @@
 		"explainer": "Every Resident Evil protaganist has the ability to mix herbs to make medical powders",
 		"name": "Professional Evil",
 		"question": "In each Resident Evil game, the playable characters all seem to share on particular vocation. What is it? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Capcom",
 			"Horror"
@@ -688,6 +724,7 @@
 		"explainer": "This mechanic sounds very similar to the Bonus Stars from Mario Party",
 		"name": "Super Smash.... Party?",
 		"question": "If Super Smash Brother’s Ultimate announced a new mechanic inspired by their sister series Mario Party, what might that mechanic look like? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Nintendo",
 			"Fighting",
@@ -706,6 +743,7 @@
 		"explainer": "The stack is a system somewhat unique to magic design to help resolve it's complex instant speeds spell system with respect to sorceries, abilities, effects and summoning spells.",
 		"name": "Grim Lotus",
 		"question": "If Hearthstone introduced instant speed cards similar to Magic the Gathering, what concept would also need to be introduced to the game?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Blizzard",
 			"Tabletop"
@@ -723,6 +761,7 @@
 		"explainer": "",
 		"name": "They have more in common than War",
 		"question": "If Warcraft wanted to update and include a new villainous race based on its inspiration, warhammer fantasy, what might they pick?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Blizzard",
 			"Tabletop"
@@ -743,6 +782,7 @@
 		"explainer": "",
 		"name": "I need a weapon",
 		"question": "If Revan from Knights of the Old Republic found himself on a Halo ring, what weapon would he likely prefer?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Microsoft",
 			"RPG",
@@ -766,6 +806,7 @@
 		"explainer": "",
 		"name": "Celebrimon",
 		"question": "February 23, 2016, an article published on Popcrush looked at celebrities and gave them pokemon look alikes. What celebrity looked like Lickitung?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Popculture",
 			"History",
@@ -788,6 +829,7 @@
 		"explainer": "",
 		"name": "More Accessible",
 		"question": "Accessibility has always been a factor in the game industry, even in the early days. What was one of the earliest examples of an accessibility controller release in 1989?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"History",
 			"Nintendo",
@@ -808,6 +850,7 @@
 		"explainer": "",
 		"name": "More Accessible",
 		"question": "In 2006, a Novint Falcon was released to try and help you feel like you were doing what in first person shooters?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"History",
 			"Shooter"
@@ -828,6 +871,7 @@
 		"explainer": "",
 		"name": "Time to Crash",
 		"question": "Burnouts crash mod is a beloved mode from gaming history. What game likely would have scored highest in a “Crash the game industry in the 20th century” mission?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Racing",
 			"Retro",
@@ -848,6 +892,7 @@
 		"explainer": "",
 		"name": "Write Up",
 		"question": "Which game journalist has broken the story behind the development of Destiny, Destiny 2, Anthem and seemingly every game with a bad development cycle?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"History",
 			"Journalism"
@@ -868,6 +913,7 @@
 		"explainer": "",
 		"name": "Wanna Dance?",
 		"question": "If you, like the Duke Nukem, were to drink a beer for each year the game was in development, how many beers would you drink?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"History"
 		],
@@ -884,6 +930,7 @@
 		"explainer": "",
 		"name": "Misinput",
 		"question": "Like Penicillin, some accidental discoveries have irrevocably changed the very course of society. Which accidental discovery in Street Fighter 2 changed the fighting game genre forever?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Fighting",
 			"Capcom"
@@ -901,6 +948,7 @@
 		"explainer": "",
 		"name": "That's a Big Gun",
 		"question": "In the Doom (2005) movie, what was the actual name of the BFG?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"History",
 			"Movie",
@@ -923,6 +971,7 @@
 		"explainer": "",
 		"name": "The Slayer",
 		"question": "What technique could Rayne teach Buffy if the vampires in Buffy’s world gained Bloodrayne's weakness?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Popculture",
 			"Adventure"
@@ -942,6 +991,7 @@
 		"explainer": "",
 		"name": "Who says you can't learning from Video Games?",
 		"question": "In 2009, MIT published a paper on using World of Warcraft to study which economic concept?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"History",
 			"Blizzard",
@@ -963,6 +1013,7 @@
 		"explainer": "According to the accoount in Master's of Doom, Doom was selling 200,000 copies a day",
 		"name": "Master's of Doom",
 		"question": "If you were to compare 1993’s DOOM to Wolfenstien’s sales numbers, how long did it take for Doom to outsell Wolfenstien’s first month?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"History",
 			"ID Software",
@@ -983,6 +1034,7 @@
 		"explainer": "",
 		"name": "Ego of ID",
 		"question": "ID software thought up it’s name as essential an acronym of it’s original name. What was it?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"ID Software",
 			"History",
@@ -1003,6 +1055,7 @@
 		"explainer": "",
 		"name": "Double Bind",
 		"question": "If Obsidian, like Double Fine, had similar issues making pillars of eternity as were had making Adventure, what might the have done with it?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Indie",
 			"RPG"
@@ -1022,6 +1075,7 @@
 		"explainer": "",
 		"name": "Determination to Enter that Room",
 		"question": "In Undertale, which character can you convince to let you into their room by reloading the game?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Indie",
 			"RPG"
@@ -1039,6 +1093,7 @@
 		"explainer": "",
 		"name": "Wild...",
 		"question": "In the Outer Wilds, you can achieve a secret ending before the true end of the game. How?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Indie",
 			"Adventure"
@@ -1059,6 +1114,7 @@
 		"explainer": "",
 		"name": "The Final Symphony",
 		"question": "Eternal Sonata was a bizarre game in a number of ways. One in particular was the main character, who was based on a real composer. Who were they?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"RPG",
 			"History"
@@ -1079,6 +1135,7 @@
 		"explainer": "",
 		"name": "What a Trip",
 		"question": "What was the point of LSD: Dream emulator anyway?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"History",
 			"Hard",
@@ -1097,6 +1154,7 @@
 		"explainer": "",
 		"name": "Seapeople",
 		"question": "Seaman was, indeed, a very bizarre game for the dreamcast. Not only were you expert to care for the weird “seamen”, but you were also expected to talk to them. How might they respond to a more loquacious person?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Hard",
 			"Simulator"
@@ -1117,6 +1175,7 @@
 		"explainer": "There is a level where you suck blood from a woman while she is in the bath, a intrusive and bloody act not unlike Psycho's shower scene",
 		"name": "Misquito Thriller",
 		"question": "One of the weird levels of Mister Mosquito has a level that has surprising parallels with an Alfred Hitchcock film. Which one was it?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
 			"History",
@@ -1138,6 +1197,7 @@
 		"explainer": "",
 		"name": "The Great King of Mass",
 		"question": "If Katamari Damacy included a level where you rolled up planets to make a sun, how many actual earths would you need to make it?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"History",
 			"Namco"
@@ -1157,6 +1217,7 @@
 		"explainer": "",
 		"name": "Suburban Safari",
 		"question": "If Mister Mosquito was a carrier for malaria, what would the main cast of the Yamada house have to do daily to treat their condition like the main character of Far Cry 2?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
 			"Ubisoft",
@@ -1175,6 +1236,7 @@
 		"explainer": "",
 		"name": "Africa May Cry",
 		"question": "Far Cry 2 shares a ghastly detail accurate to the real country it is based on. What was it? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Ubisoft",
 			"FPS"
@@ -1192,6 +1254,7 @@
 		"explainer": "Far Cry 4 takes place in a fictional country in the Himalayas, which contains the Largest Mountain Range",
 		"name": "Kyrat Tour Guide",
 		"question": "Based on the the real world location of the fictional county of Kyrat, what other reason might Ajay Ghale have had to visit? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Ubisoft",
 			"FPS"
@@ -1209,6 +1272,7 @@
 		"explainer": "Far Cry 5 takes place in a fictional are in Montana, which is closest to Yellowstone national park",
 		"name": "Oh America...?",
 		"question": "If you were able to go off map in Far Cry 5, what would be a cool destination to take a break from the insanity of Project at Eden’s Gate? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Ubisoft",
 			"FPS"
@@ -1226,6 +1290,7 @@
 		"explainer": "",
 		"name": "The Heart of the Desert",
 		"question": "If Yager Development took a more direct adaptational approach to their game Spec Ops the Line and it’s in inspiration “The Heart of Darkness”, what would Martin Walker be doing instead? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"2K Games",
 			"Shooter"
@@ -1245,6 +1310,7 @@
 		"explainer": "",
 		"name": "Tri-Force of Timelines",
 		"question": "Acording to the Hyrule Historia, what is the chronological order of the following games if we follow the Fallen Hero Timeline?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Nintendo",
 			"Adventure"
@@ -1262,6 +1328,7 @@
 		"explainer": "",
 		"name": "Issun's Lost Lore",
 		"question": "Okami has a variety of real world myths an mythological figures. Which of the following was actually not featured in Okami?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Capcom",
 			"Adventure"
@@ -1279,6 +1346,7 @@
 		"explainer": "",
 		"name": "Grand Theft Gasoline",
 		"question": "How many miles to the gallon does the Maibatsu Monstrosity get as reported in Grand Theft Auto 3? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Rockstar",
 			"Sandbox"
@@ -1298,6 +1366,7 @@
 		"explainer": "I'll have two number 9's(2), a number 9 large(1), a number 6 with extra dip(1), a number 7(1), two number 45's(2), one with cheese, and a large soda.﻿",
 		"name": "Damn Big Smoke",
 		"question": "How many combo items did Big smoke actually order? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Rockstar",
 			"Sandbox",
@@ -1318,6 +1387,7 @@
 		"explainer": "There are 17 available, but 2 are free",
 		"name": "Say Hello to my Little House",
 		"question": "To live out the true Scarface fantasy of owning the world, you can buy a number of Safe Houses and Assets in Grand Theft Auto: Vice City. How many can you actually buy? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sandbox"
 		],
@@ -1334,6 +1404,7 @@
 		"explainer": "",
 		"name": "This is my cousin...",
 		"question": "If Niko Bellic were to lawfully enter Liberty City, what we he need to aquire first? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Rockstar",
 			"Hard"
@@ -1354,6 +1425,7 @@
 		"explainer": "",
 		"name": "Easter Eggs, Franklin",
 		"question": "What movie is explicitly referenced by “The Beast” in Grand Theft Auto 5? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Rockstar",
 			"Sandbox",
@@ -1374,6 +1446,7 @@
 		"explainer": "",
 		"name": "Wandering COGs",
 		"question": "If Marcus Fenix found himself inside of the world of “The Wandering Village” what migh he say?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Microsoft",
 			"Shooter"
@@ -1393,6 +1466,7 @@
 		"explainer": "",
 		"name": "A trucker's mentality",
 		"question": "You have just met Dizzy in Gears of War. What does he say as it gets dark?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Microsoft",
 			"Shooter"
@@ -1412,6 +1486,7 @@
 		"explainer": "Both Troika and Arkane were offered the ability to develop their next game in an early version of the Source Engine. Troika took the offer to make Vampire the Masquerade: Bloodlines and Arkane declined and made Dark Messiah of Might and Magic",
 		"name": "Tradgedy either way",
 		"question": "In an alternate universe, what might Arkane have done instead of Troika?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"History",
 			"Hard"
@@ -1431,6 +1506,7 @@
 		"explainer": "",
 		"name": "Nathan Drake like the great...",
 		"question": "Nathan Drake’s initials happen to reference what?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
 			"Shooter"
@@ -1450,6 +1526,7 @@
 		"explainer": "",
 		"name": "That would have been wild",
 		"question": "If Uncharted 4 were to include some of the exclude content, what might you have done with Elena in a chapter? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
 			"Platformer"
@@ -1467,6 +1544,7 @@
 		"explainer": "",
 		"name": "The Concert Never Stops",
 		"question": "Despite all of the issues, how long was Rock Band 4 getting dlc?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Harmonix",
 			"Rhythm"
@@ -1484,6 +1562,7 @@
 		"explainer": "",
 		"name": "Yes Sir",
 		"question": "The main character of Metal Wolf Chaos might describe himself as?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"FromSoftware"
 		],
@@ -1502,6 +1581,7 @@
 		"explainer": "",
 		"name": "Pop Ratchet",
 		"question": "What song might Courtney Gears sing in Ratchet And Clank 3 if she fully emulated her real world countepart?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
 			"Insomniac"
@@ -1521,6 +1601,7 @@
 		"explainer": "",
 		"name": "Clank, Agent Clank",
 		"question": "If Secret Agent Clank is based on James Bond, how would Clank take his drink? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
 			"Insomniac"
@@ -1540,6 +1621,7 @@
 		"explainer": "Miz Ruby is a rythm boss fight but the audio was not synced in the boss fight",
 		"name": "SLYYYY!!!",
 		"question": "Why is Sly 1 HD the inferior way to play the game?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
 			"Platformer"
@@ -1559,6 +1641,7 @@
 		"explainer": "",
 		"name": "Gamecube Easter Eggs",
 		"question": "What sound might you recieve if you held the z button on 4 controllers when starting the gamecube? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Nintendo",
 			"Console"
@@ -1576,6 +1659,7 @@
 		"explainer": "",
 		"name": "Spreadsheet Simulator",
 		"question": "If 200 people started a fight in eve online, what might happen?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"EVE",
 			"Hard"
@@ -1593,6 +1677,7 @@
 		"explainer": "",
 		"name": "Skil up",
 		"question": "What is the primary way to increase your skills in eve online?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"EVE"
 		],
@@ -1609,6 +1694,7 @@
 		"explainer": "",
 		"name": "Murlock Pox",
 		"question": "What was the surprising debuff bug that was used to study the spread of contagions in World of Warcraft?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Blizzard",
 			"MMO"
@@ -1629,6 +1715,7 @@
 		"explainer": "",
 		"name": "Yikes....",
 		"question": "Unsurprising, what was the first AO game?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"History",
 			"Retro"
@@ -1648,6 +1735,7 @@
 		"explainer": "",
 		"name": "That ain't gonna be in Fortnite",
 		"question": "Despite negotiations, what character will never be in Fortnite?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Nintendo",
 			"Epic"
@@ -1667,6 +1755,7 @@
 		"explainer": "",
 		"name": "Can't escape me raccoon ",
 		"question": "For whatever reason, what was Sly Cooper named in the PAL region?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony"
 		],
@@ -1686,6 +1775,7 @@
 		"explainer": "",
 		"name": "It's kinda obvious",
 		"question": "Which character has a crush on Terra?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"SquareEnix",
 			"Sony",
@@ -1707,6 +1797,7 @@
 		"explainer": "",
 		"name": "The Heros Journey",
 		"question": "What happens to Cecil in the Mountain of Ordeals?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"SquareEnix",
 			"Sony"
@@ -1728,6 +1819,7 @@
 		"explainer": "In the 1993 Super Mario Brothers film, Mario introduces Luigi as \"Luigi Mario\"",
 		"name": "And you are?",
 		"question": "What is Luigi’s last name?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Nintendo",
 			"PopCulture"
@@ -1747,6 +1839,7 @@
 		"explainer": "",
 		"name": "Think of the Future Drek",
 		"question": "If Ratchet were trying to show Chairmen Drek the issues of climate change, what might he say?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
 			"Insomniac",
@@ -1767,6 +1860,7 @@
 		"explainer": "",
 		"name": "Inconsistent Performance",
 		"question": "Which character in the Sly Cooper Series has received a Voice Actor change each game?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
 			"Sucker Punch"
@@ -1786,6 +1880,7 @@
 		"explainer": "",
 		"name": "Blazing Trails",
 		"question": "Tim Schafer trailblazed kickstarter with?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Double Fine"
 		],
@@ -1805,6 +1900,7 @@
 		"explainer": "It's not absolutely clear, but inspired by Xenomorphs and there are males and females. Space Pirates indicate they are attempting to make a queen in Fusion.",
 		"name": "Metroid?",
 		"question": "What gender is Metroid?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Nintendo",
 			"Retro"
@@ -1822,6 +1918,7 @@
 		"explainer": "",
 		"name": "A Doctorate in Gaming",
 		"question": "BioWare founded by 3 doctors, if bioware were to go to med school to get each of these doctor’s a degree, how many years would bioware be in school for each?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Bioware",
 			"Science"
@@ -1841,6 +1938,7 @@
 		"explainer": "",
 		"name": "It's about the Journey\t",
 		"question": "What was Journey’s inspiration?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"ThatGameCompany"
 		],
@@ -1860,6 +1958,7 @@
 		"explainer": "",
 		"name": "Stranger than a Zombie?",
 		"question": "What area in Resident Evil 1 has a famously odd theme? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Capcom",
 			"Sony",
@@ -1878,6 +1977,7 @@
 		"explainer": "",
 		"name": "It Comes off?",
 		"question": "Despite Salazaar’s claims in resident evil 4, which resident evil character’s hand actually does come off?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Capcom"
 		],
@@ -1897,6 +1997,7 @@
 		"explainer": "",
 		"name": "The Elder Fantasy",
 		"question": "Final Fantasy 2 Trailblazes a concept also seen in the Elder Scrolls series. What was it? ",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"RPG",
 			"Nintendo",
@@ -1915,6 +2016,7 @@
 		"explainer": "",
 		"name": "A Tall Tale",
 		"question": "Call of Juarez Gunslinger, what does the main character occasionally do with his tale?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Shooter",
 			"Techland"
@@ -1932,6 +2034,7 @@
 		"explainer": "",
 		"name": "A Ride to Hell",
 		"question": "What was the name of your demon friend that can turn into your gun the boner in Shadows of the Damned?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Grasshopper Manufacture",
 			"Shooter"
@@ -1951,6 +2054,7 @@
 		"explainer": "",
 		"name": "Metal Gear... It Can't Be",
 		"question": "Who are the Lalilulelo?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Konami",
 			"Sony",
@@ -1971,6 +2075,7 @@
 		"explainer": "",
 		"name": "Oh Kojima",
 		"question": "Kojima cheekily included a fully functional device in Metal Gear Solid 4?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
 			"Konami"
@@ -1990,6 +2095,7 @@
 		"explainer": "",
 		"name": "What's in the Box, Kratos?",
 		"question": "In god of war, you open Pandora’s box to get the power to kill Aries",
+		"questionType": "True/False",
 		"tags": [
 			"Sony",
 			"Santa Monica Studio",
@@ -2008,6 +2114,7 @@
 		"explainer": "",
 		"name": "DOOM",
 		"question": "If we titled games based on release date like Doom 2016, what would the original doom be called?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Shooter",
 			"PC",
@@ -2028,6 +2135,7 @@
 		"explainer": "",
 		"name": "Kratos will have his revenge",
 		"question": "Every time Kratos kills a god, the world is affected in a substantial way. Like when Athena is killed, all the universities  crumble.",
+		"questionType": "True/False",
 		"tags": [
 			"Sony",
 			"Sony Santa Monica",
@@ -2049,6 +2157,7 @@
 		"explainer": "",
 		"name": "Your network is DOOMed",
 		"question": "When DOOM released, the guy who ran the launch accidentally triggered one of the first DDOSes",
+		"questionType": "True/False",
 		"tags": [
 			"Shooter",
 			"History",
@@ -2067,6 +2176,7 @@
 		"explainer": "",
 		"name": "Stay Hydrated BB",
 		"question": "Death Stranding tracks your urine color based on hydration levels",
+		"questionType": "True/False",
 		"tags": [
 			"Kojima Productions",
 			"Walking Simulator"
@@ -2087,6 +2197,7 @@
 		"explainer": "",
 		"name": "Dear Playstation",
 		"question": "Which country seems to hate, lovable Kevin Butler from the Playstation “Power to the Player” commercials?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
 			"History"
@@ -2106,6 +2217,7 @@
 		"explainer": "",
 		"name": "True Warriors",
 		"question": "The first Dynasty Warriors was a fighting game on the Playstation 1",
+		"questionType": "True/False",
 		"tags": [
 			"Sony",
 			"Fighting"
@@ -2125,6 +2237,7 @@
 		"explainer": "",
 		"name": "Havey Run",
 		"question": "What is the one word many characters cannot agree on the pronunciation of in Heavy Rain?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
 			"Narrative",
@@ -2146,6 +2259,7 @@
 		"explainer": "",
 		"name": "Salute A True Boss",
 		"question": "Metal Gears Solid 4 has a fully usable Zune as a tribute to the failed device",
+		"questionType": "True/False",
 		"tags": [
 			"Sony",
 			"Konami"
@@ -2163,6 +2277,7 @@
 		"explainer": "",
 		"name": "Absolute Misery",
 		"question": "In Hollow Knight, if you defeat the Absolute Radiance you unlock a secret ending that hints at Silksong",
+		"questionType": "True/False",
 		"tags": [
 			"Team Cherry",
 			"Metroidvania"
@@ -2180,6 +2295,7 @@
 		"explainer": "",
 		"name": "Track By Fieldlight",
 		"question": "Feng Min, a decorated e-sports competitor, has a secret talent in which track and field event?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Behaviour Interactive",
 			"Asymmetrical"
@@ -2199,6 +2315,7 @@
 		"explainer": "",
 		"name": "Let me help immediately!",
 		"question": "If Memir where at Snake’s waist like he is with Kratos, how might he help you make a Codec call?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
 			"Konami",
@@ -2217,6 +2334,7 @@
 		"explainer": "",
 		"name": "Heartless Gods",
 		"question": "Hades does not allow polyamorous relationships, despite it’s greek influence",
+		"questionType": "True/False",
 		"tags": [
 			"Supergiant",
 			"Roguelite"
@@ -2234,6 +2352,7 @@
 		"explainer": "",
 		"name": "Not invited to the God Reunion",
 		"question": "Hades 2 manages to avoid any repeat gods from Hades",
+		"questionType": "True/False",
 		"tags": [
 			"Supergiant",
 			"Roguelite"
@@ -2251,6 +2370,7 @@
 		"explainer": "",
 		"name": "In the year 2XXX we have Final Fantasy...",
 		"question": "What Final Fantasy did Deus Ex Human Revolution joke about existing?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Square Enix",
 			"Immersive Sim"
@@ -2270,6 +2390,7 @@
 		"explainer": "",
 		"name": "He Made ET!",
 		"question": "What did Steven Spielberg want ET to play more like after the initial pitch he got of it?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Atari 2600",
 			"Retro"
@@ -2287,6 +2408,7 @@
 		"explainer": "",
 		"name": "Lightning is Nothing to a Ninja",
 		"question": "In Sekiro, it is possible to redirect lightning to enemies",
+		"questionType": "True/False",
 		"tags": [
 			"From Software",
 			"Soulslike"
@@ -2304,6 +2426,7 @@
 		"explainer": "",
 		"name": "Zero Presentation",
 		"question": "Katana Zero has what unique characteristic to it’s presentation?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Askiisoft",
 			"Indie",
@@ -2324,6 +2447,7 @@
 		"explainer": "",
 		"name": "Flow State",
 		"question": "Tetris Effect was developed primarily based on the Director Tetsuya Mizuguchi’s obsession with",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Monstars Inc",
 			"Puzzle"
@@ -2341,6 +2465,7 @@
 		"explainer": "",
 		"name": "Puzzling Well",
 		"question": "Animal Well has a variety of unique puzzles. One of the most famous is",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Billy Basso",
 			"Indie",
@@ -2359,6 +2484,7 @@
 		"explainer": "",
 		"name": "A _____ Adventure",
 		"question": "What is the primary mechanice of TOEM?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Indie",
 			"Something We Made"
@@ -2378,6 +2504,7 @@
 		"explainer": "",
 		"name": "Furious",
 		"question": "Furi has how many bosses total, including dlc content and secret endings?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Indie",
 			"The Game Bakers"
@@ -2395,6 +2522,7 @@
 		"explainer": "",
 		"name": "Puzzling Premise",
 		"question": "Opus Magnum is an automation game about",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Indie",
 			"Zachtronics",
@@ -2416,6 +2544,7 @@
 		"explainer": "",
 		"name": "As long as I have my...",
 		"question": "In 13 Sentinels, Takatoshi Hijiyama is obsessed with what dish?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"VanillaWare",
 			"Strategy"
@@ -2437,6 +2566,7 @@
 		"explainer": "",
 		"name": "What is a Metroid, a miserable pile of Phazon?",
 		"question": "If the next Metroid Prime game wanted to take a page out of the Castlevania: Symphony of the Night playbook, what might happen to the world Samus is exploring?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Nintendo",
 			"Metroidvania",
@@ -2457,6 +2587,7 @@
 		"explainer": "",
 		"name": "Lost something unexpected",
 		"question": "Lost in Vivo begins in a way fairly unique from other horror games. How does it start?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Indie",
 			"Kira",
@@ -2475,6 +2606,7 @@
 		"explainer": "",
 		"name": "The Elden Name",
 		"question": "In Elden Ring…. why do so many people share the first letter of their name?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"From Software",
 			"Soulslike"
@@ -2492,6 +2624,7 @@
 		"explainer": "",
 		"name": "Wrong place, wrong time",
 		"question": "How does Fallout: New Vegas start out?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Obsidian",
 			"RPG"
@@ -2511,6 +2644,7 @@
 		"explainer": "",
 		"name": "The Noble Stoat",
 		"question": "What was the name of the game jam version of Inscryption?",
+		"questionType": "Multiple Choice",
 		"tags": [
 			"Indie",
 			"Daniel Mullins Games",

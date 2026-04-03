@@ -2,6 +2,7 @@
 	{
 		"correct": false,
 		"description": "Player who got the most math based question wrong",
+		"icon": "",
 		"name": "Bad at Math",
 		"type": "QUESTION",
 		"uuid": "9b458853-b268-4ada-9bb5-d0225755f2cf"
@@ -9,6 +10,7 @@
 	{
 		"correct": true,
 		"description": "Got the most question about RPGs Correct",
+		"icon": "",
 		"name": "RPG Nerd",
 		"type": "QUESTION",
 		"uuid": "108295c1-6978-44fa-a082-53d4da30fe4c"
@@ -16,6 +18,7 @@
 	{
 		"correct": true,
 		"description": "Answer the most question right about pop culture",
+		"icon": "",
 		"name": "Pop Culture Wiz",
 		"type": "QUESTION",
 		"uuid": "45500936-fc97-4174-832f-c250cdf4e49b"
@@ -23,6 +26,7 @@
 	{
 		"correct": false,
 		"description": "Answered the least questions correctly about pop culture",
+		"icon": "",
 		"name": "Under a rock",
 		"type": "QUESTION",
 		"uuid": "8c71f458-bf68-48b9-94ae-dab8c9538a37"
@@ -30,6 +34,7 @@
 	{
 		"correct": false,
 		"description": "Longest Correct answer(place holder)",
+		"icon": "",
 		"name": "Locked In",
 		"type": "QUESTION",
 		"uuid": "7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
@@ -37,6 +42,7 @@
 	{
 		"correct": true,
 		"description": "Most questions right about animals, anthro or otherwise",
+		"icon": "",
 		"name": "Furry",
 		"type": "QUESTION",
 		"uuid": "b5c44831-a697-43f9-adb0-b61fb485affa"
@@ -44,6 +50,7 @@
 	{
 		"correct": true,
 		"description": "Answered the most question correctly about retro games",
+		"icon": "",
 		"name": "Old School Kool",
 		"type": "QUESTION",
 		"uuid": "16848d16-3133-4aa2-95ba-2457168d286f"
@@ -51,6 +58,7 @@
 	{
 		"correct": true,
 		"description": "Answer the most Microsoft questions correctly",
+		"icon": "",
 		"name": "Microsoft Fanboy",
 		"type": "QUESTION",
 		"uuid": "b9871032-d7d5-4b8a-898b-07708f349fb8"
@@ -58,6 +66,7 @@
 	{
 		"correct": true,
 		"description": "Answer the most Sony questions correctly",
+		"icon": "",
 		"name": "Sony Fanboy",
 		"type": "QUESTION",
 		"uuid": "c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
@@ -65,6 +74,7 @@
 	{
 		"correct": true,
 		"description": "Answer the most Nintendo questions correctly",
+		"icon": "",
 		"name": "Nintendo Nerd",
 		"type": "QUESTION",
 		"uuid": "43944b2e-9790-4fba-a257-004591ba27a2"
@@ -72,6 +82,7 @@
 	{
 		"correct": true,
 		"description": "Answer the most History questions correctly",
+		"icon": "",
 		"name": "Historian",
 		"type": "QUESTION",
 		"uuid": "e647e31b-aec5-4d63-a650-4ecbf76b7c3f"

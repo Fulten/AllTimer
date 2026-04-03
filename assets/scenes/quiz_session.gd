@@ -20,6 +20,11 @@ extends Control
 	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3,
 	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4]
 
+@onready var ui_this_or_that_answers = [
+	$quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/This/Cat1Button,
+	$quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/That/Cat2Button
+]
+
 @onready var ui_player_names = [
 	$quizInterface/players_region/activePlayer1/player_case/player_name,
 	$quizInterface/players_region/activePlayer2/player_case/player_name,
@@ -153,6 +158,12 @@ func _input(event):
 	
 	for i in range(4):
 		if event.is_action_pressed(player_input % i):
+			if current_index > GameState.CurrentQuizQuestions.size():
+				return # ignore answer input after quiz has ended
+			#if we're a "this or that" or a "true/false" question ingnore input from 3 or 4
+			var questionType = GameState.CurrentQuizQuestions[current_index]["questionType"]
+			if (questionType == "True/False" or questionType == "This/That") and i > 1:
+				continue
 			if multiplayer.is_server(): # call locally if server
 				_player_guess(1, i)
 				pass
@@ -413,8 +424,6 @@ func _play_status_animation(statuses):
 		if statuses[player_number][2]: # status_c
 			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_RightShow" % (player_number + 1))
 		pass
-	
-	
 
 ## called by the server to reset all player statuses to be hidden
 @rpc("authority", "reliable", "call_local")
@@ -492,6 +501,26 @@ func _animate_question_load_b():
 func _animate_question_unload():
 	$ControlSwapper0.queue("QuestionUnload")
 
+@rpc("authority", "reliable", "call_local")
+func _ui_present_question_multiple_choice():
+	$quizInterface/session_organizer/VerticalAnswerCategories.show()
+	$quizInterface/session_organizer/CenteredAnswerCategories.hide()
+	pass
+
+@rpc("authority", "reliable", "call_local")
+func _ui_present_question_this_that():
+	$quizInterface/session_organizer/CenteredAnswerCategories.show()
+	$quizInterface/session_organizer/VerticalAnswerCategories.hide()
+	$quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat.show()
+	$quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse.hide()
+	pass
+@rpc("authority", "reliable", "call_local")
+func _ui_present_question_true_false():
+	$quizInterface/session_organizer/CenteredAnswerCategories.show()
+	$quizInterface/session_organizer/VerticalAnswerCategories.hide()
+	$quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse.show()
+	$quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat.hide()
+	pass
 #endregion
 
 #region RPC functions called by clients to communicate with the server
@@ -599,13 +628,29 @@ func _escape_game_menu():
 
 ##used by the server to decide on the order questions will be presented
 func _generate_answer_order():
+	# if question type is "true/false" don't shuffle
+	var questionType = GameState.CurrentQuizQuestions[current_index]["questionType"]
+	if questionType == "True/False":
+		var correct:String = GameState.CurrentQuizQuestions[current_index]["correct"]
+		if correct.to_lower() == "true":
+			local_answer_order = [0, 1, 2, 3]
+		else:
+			local_answer_order = [1, 0, 2, 3]
+		return
+	# "this or that", then only shuffle the first two indices
+	elif questionType == "This/That":
+		var available_indexes = [0,1]
+		local_answer_order = [0, 1, 2, 3]
+		local_answer_order[0] = available_indexes.pop_at(randi() % available_indexes.size())
+		local_answer_order[1] = available_indexes.pop_at(randi() % available_indexes.size())
+		return
+	#default to multiple choice
 	var available_indexes = [0, 1, 2, 3]
 	local_answer_order = [0, 1, 2, 3]
 	local_answer_order[0] = available_indexes.pop_at(randi() % available_indexes.size())
 	local_answer_order[1] = available_indexes.pop_at(randi() % available_indexes.size())
 	local_answer_order[2] = available_indexes.pop_at(randi() % available_indexes.size())
 	local_answer_order[3] = available_indexes.pop_at(randi() % available_indexes.size())
-	pass
 	
 ##uses the given questionIndex to find the corrisponding question in the master_question_data array
 ##after it will go through the selected questions chances and store them in the chances_set
@@ -638,11 +683,19 @@ func _start_quiz_server():
 	pass
 
 func _render_answers_track_correct(current_question, question_order):
-	correct_answer = question_order[0]
-	ui_multiple_choice_answers[correct_answer].text = current_question["correct"]
-	ui_multiple_choice_answers[question_order[1]].text = current_question["wrong"][0]
-	ui_multiple_choice_answers[question_order[2]].text = current_question["wrong"][1]
-	ui_multiple_choice_answers[question_order[3]].text = current_question["wrong"][2]
+	if GameState.CurrentQuizQuestions[current_index]["questionType"] == "True/False":
+		correct_answer = question_order[0]
+		pass
+	elif GameState.CurrentQuizQuestions[current_index]["questionType"] == "This/That":
+		correct_answer = question_order[0]
+		ui_this_or_that_answers[correct_answer].text = current_question["correct"]
+		ui_this_or_that_answers[question_order[1]].text = current_question["wrong"][0]
+	else:
+		correct_answer = question_order[0]
+		ui_multiple_choice_answers[correct_answer].text = current_question["correct"]
+		ui_multiple_choice_answers[question_order[1]].text = current_question["wrong"][0]
+		ui_multiple_choice_answers[question_order[2]].text = current_question["wrong"][1]
+		ui_multiple_choice_answers[question_order[3]].text = current_question["wrong"][2]
 
 ## starts the pre_quiz_rules timer, this phase displays the rules for 1 minute, or until input is recived from all players
 func _prequiz_rules_phase():
@@ -743,6 +796,12 @@ func _next_question():
 		loaded = false
 		_generate_answer_order()
 		_sync_answer_order.rpc(local_answer_order)
+		if GameState.CurrentQuizQuestions[current_index]["questionType"] == "True/False":
+			_ui_present_question_true_false.rpc()
+		elif GameState.CurrentQuizQuestions[current_index]["questionType"] == "This/That":
+			_ui_present_question_this_that.rpc()
+		else:
+			_ui_present_question_multiple_choice.rpc()
 		_prequestion_delay_phase()
 	else: # no more questions in the quiz
 		_sync_update_scores_on_clients.rpc(scores)

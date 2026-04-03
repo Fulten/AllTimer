@@ -57,7 +57,8 @@ var ui_entry_node_chances_reference = {
 
 var id_to_question_type = {
 	0: "Multiple Choice",
-	1: "True/False"
+	1: "True/False",
+	2: "This/That"
 }
 
 class Question:
@@ -108,9 +109,9 @@ class Question:
 		if !chances:
 			errorEntries.append("chances")
 			errorState = 1
-		if explainer == "":
-			errorState = 1
-			errorEntries.append("explainer")
+		#if explainer == "":
+		#	errorState = 1
+		#	errorEntries.append("explainer")
 			
 		# critical
 		if name == "":
@@ -126,7 +127,7 @@ class Question:
 			errorState = 2
 			errorEntries.append("wrong0")
 			
-		if questionType == "True/False":
+		if questionType == "True/False" || questionType == "This/That":
 			return
 			
 		if wrong[1] == "":

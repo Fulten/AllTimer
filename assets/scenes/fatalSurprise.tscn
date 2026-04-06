@@ -1,20 +1,16 @@
-[gd_scene load_steps=97 format=3 uid="uid://y4rdmerds173"]
+[gd_scene load_steps=92 format=3 uid="uid://y4rdmerds173"]
 
 [ext_resource type="Script" path="res://assets/scenes/quiz_session.gd" id="1_dvajb"]
 [ext_resource type="Texture2D" uid="uid://djq4ypfbe1x3p" path="res://assets/uiux/session_themes/Fatal Surprise/T_SurpriseBG_D.tga" id="2_3jnqf"]
 [ext_resource type="Shader" path="res://assets/scenes/Sh_SurpriseBarLG.gdshader" id="3_havqq"]
-[ext_resource type="AudioStream" uid="uid://bxtn8v7khwtji" path="res://assets/uiux/session_themes/Patriotic Cipher/PatCipBlip.mp3" id="3_oipv5"]
 [ext_resource type="Texture2D" uid="uid://dgxjt607jo5pj" path="res://assets/uiux/session_themes/Fatal Surprise/T_SurpriseBarsLG_D.tga" id="4_evx41"]
-[ext_resource type="AudioStream" uid="uid://cfadx67p30yfu" path="res://assets/uiux/session_themes/Patriotic Cipher/PatCipClick.mp3" id="4_fdd7x"]
 [ext_resource type="Shader" path="res://assets/scenes/Sh_SurpriseBarME.gdshader" id="5_1jmo2"]
-[ext_resource type="LabelSettings" uid="uid://bm4ie8wbkp2e0" path="res://assets/uiux/session_themes/Patriotic Cipher/cipherTitle.tres" id="5_x4i02"]
-[ext_resource type="LabelSettings" uid="uid://bhmvyhp31on3d" path="res://assets/uiux/session_themes/Patriotic Cipher/label_cipher_section.tres" id="6_poius"]
 [ext_resource type="Texture2D" uid="uid://l6o4u1qrjesg" path="res://assets/uiux/session_themes/Fatal Surprise/T_SurpriseBarsME_D.tga" id="6_stfim"]
-[ext_resource type="LabelSettings" uid="uid://fokwou4ul35" path="res://assets/uiux/session_themes/Patriotic Cipher/label_cipher_body.tres" id="7_bnmxf"]
 [ext_resource type="Shader" path="res://assets/scenes/Sh_SurpriseBarSM.gdshader" id="7_l6bpf"]
 [ext_resource type="Texture2D" uid="uid://0hbwv1q4rhkl" path="res://assets/uiux/session_themes/Fatal Surprise/T_SurpriseBarsSM_D.tga" id="8_f0268"]
-[ext_resource type="FontFile" uid="uid://ph1l14fo55s7" path="res://assets/uiux/session_themes/Fatal Surprise/Yet Another Ransom Note.ttf" id="11_32etq"]
-[ext_resource type="LabelSettings" uid="uid://h5ouy4y7120k" path="res://assets/uiux/session_themes/Patriotic Cipher/cipherNumbers.tres" id="11_dsnyp"]
+[ext_resource type="AudioStream" uid="uid://ec7h1ye64hbj" path="res://assets/uiux/session_themes/Fatal Surprise/SFX_buttonHover_Fatal.mp3" id="9_f0mwi"]
+[ext_resource type="AudioStream" uid="uid://djlh7rgafmpx4" path="res://assets/uiux/session_themes/Fatal Surprise/SFX_ButtonPress_Fatal.mp3" id="10_hp25g"]
+[ext_resource type="LabelSettings" uid="uid://d3eotcih4nl7d" path="res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_Title.tres" id="11_b1vj6"]
 [ext_resource type="FontFile" uid="uid://c1imjp477f64l" path="res://assets/uiux/session_themes/Fatal Surprise/OldNewspaperTypes.ttf" id="12_j5s2k"]
 [ext_resource type="LabelSettings" uid="uid://dv4lld26kj837" path="res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_BodyA.tres" id="13_1ygsn"]
 [ext_resource type="Texture2D" uid="uid://cw2ifheyia7xq" path="res://assets/uiux/session_themes/default/kb1.tga" id="13_ibjl0"]
@@ -29,13 +25,11 @@
 [ext_resource type="Texture2D" uid="uid://dao52bedrv1we" path="res://assets/uiux/session_themes/default/kb4.tga" id="17_2tdve"]
 [ext_resource type="LabelSettings" uid="uid://c15bddwgatrm4" path="res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_Timer.tres" id="17_tx8eb"]
 [ext_resource type="Theme" uid="uid://cjmfw6j1byub" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_answerC.tres" id="18_1883s"]
-[ext_resource type="Texture2D" uid="uid://4rygepjufl3b" path="res://assets/uiux/session_themes/Patriotic Cipher/T_seperator_v_patcip.tga" id="19_anma7"]
 [ext_resource type="Theme" uid="uid://25yhueg6b2in" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_answerD.tres" id="20_fnivo"]
-[ext_resource type="Texture2D" uid="uid://c2glpvkloux56" path="res://assets/uiux/session_themes/Patriotic Cipher/T_seperator_h_patcip.tga" id="23_2rk3j"]
 [ext_resource type="FontFile" uid="uid://bdi68tslsma5m" path="res://assets/uiux/session_themes/default/chalk.ttf" id="24_frsdy"]
 [ext_resource type="Theme" uid="uid://cqceiax0udg2u" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_answerT.tres" id="26_h7h18"]
-[ext_resource type="Texture2D" uid="uid://sib7pjpdkuax" path="res://assets/uiux/session_themes/default/separator_h.tga" id="27_7ul7w"]
 [ext_resource type="Theme" uid="uid://vscymwg6oovu" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_answerF.tres" id="27_y68p2"]
+[ext_resource type="Texture2D" uid="uid://cbtem03eo3u1p" path="res://assets/uiux/session_themes/Fatal Surprise/T_seperator_v_fatalSurprise_D.tga" id="29_gi3hs"]
 [ext_resource type="Theme" uid="uid://bwv0duhsrgd41" path="res://assets/uiux/session_themes/Patriotic Cipher/label_PatCip_Pause.tres" id="29_yjsym"]
 [ext_resource type="Texture2D" uid="uid://7ulr3mymrlbg" path="res://assets/uiux/session_themes/Fatal Surprise/T_status_skip_surprise_D.tga" id="30_3m661"]
 [ext_resource type="Texture2D" uid="uid://bwuuulypnbap6" path="res://assets/uiux/session_themes/Fatal Surprise/T_status_incorrect_surprise_D.tga" id="31_x7sqx"]
@@ -43,6 +37,8 @@
 [ext_resource type="Texture2D" uid="uid://crm6atqtw8inu" path="res://assets/uiux/session_themes/Fatal Surprise/T_status_correct_surprise_D.tga" id="32_eja5a"]
 [ext_resource type="Script" path="res://assets/scenes/MasterVolume.gd" id="32_g6lmc"]
 [ext_resource type="LabelSettings" uid="uid://c7cxcedfmxuae" path="res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_Score.tres" id="33_bd73y"]
+[ext_resource type="Texture2D" uid="uid://cvvcsqjlaaw38" path="res://assets/uiux/session_themes/Fatal Surprise/T_seperator_h_fatalSurprise_D.tga" id="34_gwnwm"]
+[ext_resource type="Texture2D" uid="uid://2vlcgwgqgww2" path="res://assets/uiux/session_themes/Fatal Surprise/T_playerSplash_D.tga" id="35_7kqrw"]
 [ext_resource type="LabelSettings" uid="uid://c7s51sn55nllk" path="res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_ActivePlayer_default.tres" id="36_wcvw5"]
 [ext_resource type="LabelSettings" uid="uid://cwov72huq68gb" path="res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_PostQ.tres" id="37_cst6p"]
 [ext_resource type="Texture2D" uid="uid://sy65gc5xpmon" path="res://assets/uiux/session_themes/Fatal Surprise/T_PauseCase_surprise_D.tga" id="42_ucyyq"]
@@ -707,11 +703,11 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("quizInterface/players_region/activePlayer1/player_case/player_name:self_modulate")
+tracks/9/path = NodePath("quizInterface/players_region/activePlayer1/player_case/spacer_h/splash_p1:self_modulate")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(1.5, 2),
+"times": PackedFloat32Array(1.5, 2.01),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -719,7 +715,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("quizInterface/players_region/activePlayer1/spacer_v:self_modulate")
+tracks/10/path = NodePath("quizInterface/players_region/activePlayer1/player_case/player_name:self_modulate")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -731,19 +727,19 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_a:self_modulate")
+tracks/11/path = NodePath("quizInterface/players_region/activePlayer1/spacer_v:self_modulate")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(1, 1.5),
+"times": PackedFloat32Array(1.5, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.235294), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_b:self_modulate")
+tracks/12/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_a:self_modulate")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -755,7 +751,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_c:self_modulate")
+tracks/13/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_b:self_modulate")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -767,19 +763,19 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/score:self_modulate")
+tracks/14/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_c:self_modulate")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
 "times": PackedFloat32Array(1, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0.235294), Color(1, 1, 1, 0)]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("quizInterface/players_region/activePlayer2/player_case/spacer_h:self_modulate")
+tracks/15/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/score:self_modulate")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -791,7 +787,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("quizInterface/players_region/activePlayer2/player_case/player_name:self_modulate")
+tracks/16/path = NodePath("quizInterface/players_region/activePlayer2/player_case/spacer_h:self_modulate")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -803,11 +799,11 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("quizInterface/players_region/activePlayer2/spacer_v3:self_modulate")
+tracks/17/path = NodePath("quizInterface/players_region/activePlayer2/player_case/spacer_h/splash_p2:self_modulate")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
-"times": PackedFloat32Array(1, 1.5),
+"times": PackedFloat32Array(1, 1.51),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -815,31 +811,31 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_a:self_modulate")
+tracks/18/path = NodePath("quizInterface/players_region/activePlayer2/player_case/player_name:self_modulate")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
-"times": PackedFloat32Array(0.5, 1),
+"times": PackedFloat32Array(1, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.235294), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_b:self_modulate")
+tracks/19/path = NodePath("quizInterface/players_region/activePlayer2/spacer_v3:self_modulate")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
-"times": PackedFloat32Array(0.5, 1),
+"times": PackedFloat32Array(1, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.235294), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_c:self_modulate")
+tracks/20/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_a:self_modulate")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
@@ -851,31 +847,31 @@ tracks/20/keys = {
 tracks/21/type = "value"
 tracks/21/imported = false
 tracks/21/enabled = true
-tracks/21/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/score:self_modulate")
+tracks/21/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_b:self_modulate")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
 "times": PackedFloat32Array(0.5, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0.235294), Color(1, 1, 1, 0)]
 }
 tracks/22/type = "value"
 tracks/22/imported = false
 tracks/22/enabled = true
-tracks/22/path = NodePath("quizInterface/players_region/activePlayer3/player_case/spacer_h:self_modulate")
+tracks/22/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_c:self_modulate")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
 "times": PackedFloat32Array(0.5, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0.235294), Color(1, 1, 1, 0)]
 }
 tracks/23/type = "value"
 tracks/23/imported = false
 tracks/23/enabled = true
-tracks/23/path = NodePath("quizInterface/players_region/activePlayer3/player_case/player_name:self_modulate")
+tracks/23/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/score:self_modulate")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/keys = {
@@ -887,7 +883,7 @@ tracks/23/keys = {
 tracks/24/type = "value"
 tracks/24/imported = false
 tracks/24/enabled = true
-tracks/24/path = NodePath("quizInterface/players_region/activePlayer3/spacer_v4:self_modulate")
+tracks/24/path = NodePath("quizInterface/players_region/activePlayer3/player_case/spacer_h:self_modulate")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/keys = {
@@ -899,79 +895,79 @@ tracks/24/keys = {
 tracks/25/type = "value"
 tracks/25/imported = false
 tracks/25/enabled = true
-tracks/25/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_a:self_modulate")
+tracks/25/path = NodePath("quizInterface/players_region/activePlayer3/player_case/spacer_h/splash_p3:self_modulate")
 tracks/25/interp = 1
 tracks/25/loop_wrap = true
 tracks/25/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0.5, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.235294), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/26/type = "value"
 tracks/26/imported = false
 tracks/26/enabled = true
-tracks/26/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_b:self_modulate")
+tracks/26/path = NodePath("quizInterface/players_region/activePlayer3/player_case/player_name:self_modulate")
 tracks/26/interp = 1
 tracks/26/loop_wrap = true
 tracks/26/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0.5, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.235294), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/27/type = "value"
 tracks/27/imported = false
 tracks/27/enabled = true
-tracks/27/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_c:self_modulate")
+tracks/27/path = NodePath("quizInterface/players_region/activePlayer3/spacer_v4:self_modulate")
 tracks/27/interp = 1
 tracks/27/loop_wrap = true
 tracks/27/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0.5, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.235294), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/28/type = "value"
 tracks/28/imported = false
 tracks/28/enabled = true
-tracks/28/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/score:self_modulate")
+tracks/28/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_a:self_modulate")
 tracks/28/interp = 1
 tracks/28/loop_wrap = true
 tracks/28/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0.235294), Color(1, 1, 1, 0)]
 }
 tracks/29/type = "value"
 tracks/29/imported = false
 tracks/29/enabled = true
-tracks/29/path = NodePath("quizInterface/players_region/activePlayer4/player_case/spacer_h:self_modulate")
+tracks/29/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_b:self_modulate")
 tracks/29/interp = 1
 tracks/29/loop_wrap = true
 tracks/29/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0.235294), Color(1, 1, 1, 0)]
 }
 tracks/30/type = "value"
 tracks/30/imported = false
 tracks/30/enabled = true
-tracks/30/path = NodePath("quizInterface/players_region/activePlayer4/player_case/player_name:self_modulate")
+tracks/30/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_c:self_modulate")
 tracks/30/interp = 1
 tracks/30/loop_wrap = true
 tracks/30/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0.235294), Color(1, 1, 1, 0)]
 }
 tracks/31/type = "value"
 tracks/31/imported = false
 tracks/31/enabled = true
-tracks/31/path = NodePath("quizInterface/players_region/activePlayer4/spacer_v5:self_modulate")
+tracks/31/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/score:self_modulate")
 tracks/31/interp = 1
 tracks/31/loop_wrap = true
 tracks/31/keys = {
@@ -983,79 +979,79 @@ tracks/31/keys = {
 tracks/32/type = "value"
 tracks/32/imported = false
 tracks/32/enabled = true
-tracks/32/path = NodePath("quizEnd:visible")
+tracks/32/path = NodePath("quizInterface/players_region/activePlayer4/player_case/spacer_h:self_modulate")
 tracks/32/interp = 1
 tracks/32/loop_wrap = true
 tracks/32/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/33/type = "value"
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/path = NodePath("quizInterface/players_region/activePlayer4/player_case/spacer_h/splash_p4:self_modulate")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/34/type = "value"
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/path = NodePath("quizInterface/players_region/activePlayer4/player_case/player_name:self_modulate")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/35/type = "value"
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/path = NodePath("quizInterface/players_region/activePlayer4/spacer_v5:self_modulate")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/36/type = "value"
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/path = NodePath("quizEnd:visible")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/keys = {
 "times": PackedFloat32Array(2.6, 2.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/33/type = "value"
-tracks/33/imported = false
-tracks/33/enabled = true
-tracks/33/path = NodePath("quizEnd/EndTitle:self_modulate")
-tracks/33/interp = 1
-tracks/33/loop_wrap = true
-tracks/33/keys = {
+tracks/37/type = "value"
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/path = NodePath("quizEnd/EndTitle:self_modulate")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/keys = {
 "times": PackedFloat32Array(2.7, 2.9, 3.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
-tracks/34/type = "value"
-tracks/34/imported = false
-tracks/34/enabled = true
-tracks/34/path = NodePath("quizEnd/PlayerStandingsOrg/1Placer/Name:self_modulate")
-tracks/34/interp = 1
-tracks/34/loop_wrap = true
-tracks/34/keys = {
-"times": PackedFloat32Array(3.2, 3.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/35/type = "value"
-tracks/35/imported = false
-tracks/35/enabled = true
-tracks/35/path = NodePath("quizEnd/PlayerStandingsOrg/1Placer/ScoreDisplay/Score-:self_modulate")
-tracks/35/interp = 1
-tracks/35/loop_wrap = true
-tracks/35/keys = {
-"times": PackedFloat32Array(3.2, 3.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/36/type = "value"
-tracks/36/imported = false
-tracks/36/enabled = true
-tracks/36/path = NodePath("quizEnd/PlayerStandingsOrg/1Placer/ScoreDisplay/Score:self_modulate")
-tracks/36/interp = 1
-tracks/36/loop_wrap = true
-tracks/36/keys = {
-"times": PackedFloat32Array(3.2, 3.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/37/type = "value"
-tracks/37/imported = false
-tracks/37/enabled = true
-tracks/37/path = NodePath("quizEnd/PlayerStandingsOrg/1Placer/MedalCase/Label:self_modulate")
-tracks/37/interp = 1
-tracks/37/loop_wrap = true
-tracks/37/keys = {
-"times": PackedFloat32Array(3.2, 3.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
 tracks/38/type = "value"
 tracks/38/imported = false
 tracks/38/enabled = true
-tracks/38/path = NodePath("quizEnd/PlayerStandingsOrg/1Placer/MedalCase/Awards:self_modulate")
+tracks/38/path = NodePath("quizEnd/PlayerStandingsOrg/1Placer/Name:self_modulate")
 tracks/38/interp = 1
 tracks/38/loop_wrap = true
 tracks/38/keys = {
@@ -1067,7 +1063,7 @@ tracks/38/keys = {
 tracks/39/type = "value"
 tracks/39/imported = false
 tracks/39/enabled = true
-tracks/39/path = NodePath("quizEnd/PlayerStandingsOrg/2Placer/LB:self_modulate")
+tracks/39/path = NodePath("quizEnd/PlayerStandingsOrg/1Placer/ScoreDisplay/Score-:self_modulate")
 tracks/39/interp = 1
 tracks/39/loop_wrap = true
 tracks/39/keys = {
@@ -1079,11 +1075,11 @@ tracks/39/keys = {
 tracks/40/type = "value"
 tracks/40/imported = false
 tracks/40/enabled = true
-tracks/40/path = NodePath("quizEnd/PlayerStandingsOrg/2Placer/Name:self_modulate")
+tracks/40/path = NodePath("quizEnd/PlayerStandingsOrg/1Placer/ScoreDisplay/Score:self_modulate")
 tracks/40/interp = 1
 tracks/40/loop_wrap = true
 tracks/40/keys = {
-"times": PackedFloat32Array(3.7, 4.2),
+"times": PackedFloat32Array(3.2, 3.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1091,11 +1087,11 @@ tracks/40/keys = {
 tracks/41/type = "value"
 tracks/41/imported = false
 tracks/41/enabled = true
-tracks/41/path = NodePath("quizEnd/PlayerStandingsOrg/2Placer/ScoreDisplay/Score-:self_modulate")
+tracks/41/path = NodePath("quizEnd/PlayerStandingsOrg/1Placer/MedalCase/Label:self_modulate")
 tracks/41/interp = 1
 tracks/41/loop_wrap = true
 tracks/41/keys = {
-"times": PackedFloat32Array(3.7, 4.2),
+"times": PackedFloat32Array(3.2, 3.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1103,11 +1099,11 @@ tracks/41/keys = {
 tracks/42/type = "value"
 tracks/42/imported = false
 tracks/42/enabled = true
-tracks/42/path = NodePath("quizEnd/PlayerStandingsOrg/2Placer/ScoreDisplay/Score:self_modulate")
+tracks/42/path = NodePath("quizEnd/PlayerStandingsOrg/1Placer/MedalCase/Awards:self_modulate")
 tracks/42/interp = 1
 tracks/42/loop_wrap = true
 tracks/42/keys = {
-"times": PackedFloat32Array(3.7, 4.2),
+"times": PackedFloat32Array(3.2, 3.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1115,11 +1111,11 @@ tracks/42/keys = {
 tracks/43/type = "value"
 tracks/43/imported = false
 tracks/43/enabled = true
-tracks/43/path = NodePath("quizEnd/PlayerStandingsOrg/2Placer/MedalCase/Label:self_modulate")
+tracks/43/path = NodePath("quizEnd/PlayerStandingsOrg/2Placer/LB:self_modulate")
 tracks/43/interp = 1
 tracks/43/loop_wrap = true
 tracks/43/keys = {
-"times": PackedFloat32Array(3.7, 4.2),
+"times": PackedFloat32Array(3.2, 3.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1127,7 +1123,7 @@ tracks/43/keys = {
 tracks/44/type = "value"
 tracks/44/imported = false
 tracks/44/enabled = true
-tracks/44/path = NodePath("quizEnd/PlayerStandingsOrg/2Placer/MedalCase/Awards:self_modulate")
+tracks/44/path = NodePath("quizEnd/PlayerStandingsOrg/2Placer/Name:self_modulate")
 tracks/44/interp = 1
 tracks/44/loop_wrap = true
 tracks/44/keys = {
@@ -1139,7 +1135,7 @@ tracks/44/keys = {
 tracks/45/type = "value"
 tracks/45/imported = false
 tracks/45/enabled = true
-tracks/45/path = NodePath("quizEnd/PlayerStandingsOrg/3Placer/LB:self_modulate")
+tracks/45/path = NodePath("quizEnd/PlayerStandingsOrg/2Placer/ScoreDisplay/Score-:self_modulate")
 tracks/45/interp = 1
 tracks/45/loop_wrap = true
 tracks/45/keys = {
@@ -1151,11 +1147,11 @@ tracks/45/keys = {
 tracks/46/type = "value"
 tracks/46/imported = false
 tracks/46/enabled = true
-tracks/46/path = NodePath("quizEnd/PlayerStandingsOrg/3Placer/Name:self_modulate")
+tracks/46/path = NodePath("quizEnd/PlayerStandingsOrg/2Placer/ScoreDisplay/Score:self_modulate")
 tracks/46/interp = 1
 tracks/46/loop_wrap = true
 tracks/46/keys = {
-"times": PackedFloat32Array(4.21, 4.7),
+"times": PackedFloat32Array(3.7, 4.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1163,11 +1159,11 @@ tracks/46/keys = {
 tracks/47/type = "value"
 tracks/47/imported = false
 tracks/47/enabled = true
-tracks/47/path = NodePath("quizEnd/PlayerStandingsOrg/3Placer/ScoreDisplay/Score-:self_modulate")
+tracks/47/path = NodePath("quizEnd/PlayerStandingsOrg/2Placer/MedalCase/Label:self_modulate")
 tracks/47/interp = 1
 tracks/47/loop_wrap = true
 tracks/47/keys = {
-"times": PackedFloat32Array(4.2, 4.69),
+"times": PackedFloat32Array(3.7, 4.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1175,11 +1171,11 @@ tracks/47/keys = {
 tracks/48/type = "value"
 tracks/48/imported = false
 tracks/48/enabled = true
-tracks/48/path = NodePath("quizEnd/PlayerStandingsOrg/3Placer/ScoreDisplay/Score:self_modulate")
+tracks/48/path = NodePath("quizEnd/PlayerStandingsOrg/2Placer/MedalCase/Awards:self_modulate")
 tracks/48/interp = 1
 tracks/48/loop_wrap = true
 tracks/48/keys = {
-"times": PackedFloat32Array(4.2, 4.69),
+"times": PackedFloat32Array(3.7, 4.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1187,11 +1183,11 @@ tracks/48/keys = {
 tracks/49/type = "value"
 tracks/49/imported = false
 tracks/49/enabled = true
-tracks/49/path = NodePath("quizEnd/PlayerStandingsOrg/3Placer/MedalCase/Label:self_modulate")
+tracks/49/path = NodePath("quizEnd/PlayerStandingsOrg/3Placer/LB:self_modulate")
 tracks/49/interp = 1
 tracks/49/loop_wrap = true
 tracks/49/keys = {
-"times": PackedFloat32Array(4.2, 4.69),
+"times": PackedFloat32Array(3.7, 4.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1199,7 +1195,7 @@ tracks/49/keys = {
 tracks/50/type = "value"
 tracks/50/imported = false
 tracks/50/enabled = true
-tracks/50/path = NodePath("quizEnd/PlayerStandingsOrg/3Placer/MedalCase/Awards:self_modulate")
+tracks/50/path = NodePath("quizEnd/PlayerStandingsOrg/3Placer/Name:self_modulate")
 tracks/50/interp = 1
 tracks/50/loop_wrap = true
 tracks/50/keys = {
@@ -1211,11 +1207,11 @@ tracks/50/keys = {
 tracks/51/type = "value"
 tracks/51/imported = false
 tracks/51/enabled = true
-tracks/51/path = NodePath("quizEnd/PlayerStandingsOrg/4Placer/LB:self_modulate")
+tracks/51/path = NodePath("quizEnd/PlayerStandingsOrg/3Placer/ScoreDisplay/Score-:self_modulate")
 tracks/51/interp = 1
 tracks/51/loop_wrap = true
 tracks/51/keys = {
-"times": PackedFloat32Array(4.21, 4.7),
+"times": PackedFloat32Array(4.2, 4.69),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1223,11 +1219,11 @@ tracks/51/keys = {
 tracks/52/type = "value"
 tracks/52/imported = false
 tracks/52/enabled = true
-tracks/52/path = NodePath("quizEnd/PlayerStandingsOrg/4Placer/Name:self_modulate")
+tracks/52/path = NodePath("quizEnd/PlayerStandingsOrg/3Placer/ScoreDisplay/Score:self_modulate")
 tracks/52/interp = 1
 tracks/52/loop_wrap = true
 tracks/52/keys = {
-"times": PackedFloat32Array(4.7, 5.2),
+"times": PackedFloat32Array(4.2, 4.69),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1235,11 +1231,11 @@ tracks/52/keys = {
 tracks/53/type = "value"
 tracks/53/imported = false
 tracks/53/enabled = true
-tracks/53/path = NodePath("quizEnd/PlayerStandingsOrg/4Placer/ScoreDisplay/Score-:self_modulate")
+tracks/53/path = NodePath("quizEnd/PlayerStandingsOrg/3Placer/MedalCase/Label:self_modulate")
 tracks/53/interp = 1
 tracks/53/loop_wrap = true
 tracks/53/keys = {
-"times": PackedFloat32Array(4.7, 5.2),
+"times": PackedFloat32Array(4.2, 4.69),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1247,11 +1243,11 @@ tracks/53/keys = {
 tracks/54/type = "value"
 tracks/54/imported = false
 tracks/54/enabled = true
-tracks/54/path = NodePath("quizEnd/PlayerStandingsOrg/4Placer/ScoreDisplay/Score:self_modulate")
+tracks/54/path = NodePath("quizEnd/PlayerStandingsOrg/3Placer/MedalCase/Awards:self_modulate")
 tracks/54/interp = 1
 tracks/54/loop_wrap = true
 tracks/54/keys = {
-"times": PackedFloat32Array(4.7, 5.2),
+"times": PackedFloat32Array(4.21, 4.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1259,11 +1255,11 @@ tracks/54/keys = {
 tracks/55/type = "value"
 tracks/55/imported = false
 tracks/55/enabled = true
-tracks/55/path = NodePath("quizEnd/PlayerStandingsOrg/4Placer/MedalCase/Label:self_modulate")
+tracks/55/path = NodePath("quizEnd/PlayerStandingsOrg/4Placer/LB:self_modulate")
 tracks/55/interp = 1
 tracks/55/loop_wrap = true
 tracks/55/keys = {
-"times": PackedFloat32Array(4.7, 5.2),
+"times": PackedFloat32Array(4.21, 4.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1271,10 +1267,58 @@ tracks/55/keys = {
 tracks/56/type = "value"
 tracks/56/imported = false
 tracks/56/enabled = true
-tracks/56/path = NodePath("quizEnd/PlayerStandingsOrg/4Placer/MedalCase/Awards:self_modulate")
+tracks/56/path = NodePath("quizEnd/PlayerStandingsOrg/4Placer/Name:self_modulate")
 tracks/56/interp = 1
 tracks/56/loop_wrap = true
 tracks/56/keys = {
+"times": PackedFloat32Array(4.7, 5.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/57/type = "value"
+tracks/57/imported = false
+tracks/57/enabled = true
+tracks/57/path = NodePath("quizEnd/PlayerStandingsOrg/4Placer/ScoreDisplay/Score-:self_modulate")
+tracks/57/interp = 1
+tracks/57/loop_wrap = true
+tracks/57/keys = {
+"times": PackedFloat32Array(4.7, 5.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/58/type = "value"
+tracks/58/imported = false
+tracks/58/enabled = true
+tracks/58/path = NodePath("quizEnd/PlayerStandingsOrg/4Placer/ScoreDisplay/Score:self_modulate")
+tracks/58/interp = 1
+tracks/58/loop_wrap = true
+tracks/58/keys = {
+"times": PackedFloat32Array(4.7, 5.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/59/type = "value"
+tracks/59/imported = false
+tracks/59/enabled = true
+tracks/59/path = NodePath("quizEnd/PlayerStandingsOrg/4Placer/MedalCase/Label:self_modulate")
+tracks/59/interp = 1
+tracks/59/loop_wrap = true
+tracks/59/keys = {
+"times": PackedFloat32Array(4.7, 5.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/60/type = "value"
+tracks/60/imported = false
+tracks/60/enabled = true
+tracks/60/path = NodePath("quizEnd/PlayerStandingsOrg/4Placer/MedalCase/Awards:self_modulate")
+tracks/60/interp = 1
+tracks/60/loop_wrap = true
+tracks/60/keys = {
 "times": PackedFloat32Array(4.7, 5.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -1886,7 +1930,7 @@ tracks/36/keys = {
 "times": PackedFloat32Array(1, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/37/type = "value"
 tracks/37/imported = false
@@ -1946,48 +1990,48 @@ tracks/41/keys = {
 "times": PackedFloat32Array(1, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/42/type = "value"
 tracks/42/imported = false
 tracks/42/enabled = true
-tracks/42/path = NodePath("quizInterface/players_region/activePlayer1/player_case/player_name:self_modulate")
+tracks/42/path = NodePath("quizInterface/players_region/activePlayer1/player_case/spacer_h/splash_p1:self_modulate")
 tracks/42/interp = 1
 tracks/42/loop_wrap = true
 tracks/42/keys = {
 "times": PackedFloat32Array(1, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(0.764706, 0.368627, 0.8, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/43/type = "value"
 tracks/43/imported = false
 tracks/43/enabled = true
-tracks/43/path = NodePath("quizInterface/players_region/activePlayer1/spacer_v:self_modulate")
+tracks/43/path = NodePath("quizInterface/players_region/activePlayer1/player_case/player_name:self_modulate")
 tracks/43/interp = 1
 tracks/43/loop_wrap = true
 tracks/43/keys = {
 "times": PackedFloat32Array(1, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 1)]
+"values": [Color(1, 1, 1, 0), Color(0.764706, 0.368627, 0.8, 1)]
 }
 tracks/44/type = "value"
 tracks/44/imported = false
 tracks/44/enabled = true
-tracks/44/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_a:self_modulate")
+tracks/44/path = NodePath("quizInterface/players_region/activePlayer1/spacer_v:self_modulate")
 tracks/44/interp = 1
 tracks/44/loop_wrap = true
 tracks/44/keys = {
-"times": PackedFloat32Array(1.2, 1.7),
+"times": PackedFloat32Array(1, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/45/type = "value"
 tracks/45/imported = false
 tracks/45/enabled = true
-tracks/45/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_b:self_modulate")
+tracks/45/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_a:self_modulate")
 tracks/45/interp = 1
 tracks/45/loop_wrap = true
 tracks/45/keys = {
@@ -1999,7 +2043,7 @@ tracks/45/keys = {
 tracks/46/type = "value"
 tracks/46/imported = false
 tracks/46/enabled = true
-tracks/46/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_c:self_modulate")
+tracks/46/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_b:self_modulate")
 tracks/46/interp = 1
 tracks/46/loop_wrap = true
 tracks/46/keys = {
@@ -2011,79 +2055,79 @@ tracks/46/keys = {
 tracks/47/type = "value"
 tracks/47/imported = false
 tracks/47/enabled = true
-tracks/47/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/score:self_modulate")
+tracks/47/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/status_c:self_modulate")
 tracks/47/interp = 1
 tracks/47/loop_wrap = true
 tracks/47/keys = {
 "times": PackedFloat32Array(1.2, 1.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(0.4224, 0.872373, 0.88, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
 }
 tracks/48/type = "value"
 tracks/48/imported = false
 tracks/48/enabled = true
-tracks/48/path = NodePath("quizInterface/players_region/activePlayer2/player_case/spacer_h:self_modulate")
+tracks/48/path = NodePath("quizInterface/players_region/activePlayer2/player_case/status_row/score:self_modulate")
 tracks/48/interp = 1
 tracks/48/loop_wrap = true
 tracks/48/keys = {
 "times": PackedFloat32Array(1.2, 1.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 1)]
+"values": [Color(1, 1, 1, 0), Color(0.4224, 0.872373, 0.88, 1)]
 }
 tracks/49/type = "value"
 tracks/49/imported = false
 tracks/49/enabled = true
-tracks/49/path = NodePath("quizInterface/players_region/activePlayer2/player_case/player_name:self_modulate")
+tracks/49/path = NodePath("quizInterface/players_region/activePlayer2/player_case/spacer_h:self_modulate")
 tracks/49/interp = 1
 tracks/49/loop_wrap = true
 tracks/49/keys = {
 "times": PackedFloat32Array(1.2, 1.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(0.764706, 0.368627, 0.8, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/50/type = "value"
 tracks/50/imported = false
 tracks/50/enabled = true
-tracks/50/path = NodePath("quizInterface/players_region/activePlayer2/spacer_v3:self_modulate")
+tracks/50/path = NodePath("quizInterface/players_region/activePlayer2/player_case/spacer_h/splash_p2:self_modulate")
 tracks/50/interp = 1
 tracks/50/loop_wrap = true
 tracks/50/keys = {
 "times": PackedFloat32Array(1.2, 1.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/51/type = "value"
 tracks/51/imported = false
 tracks/51/enabled = true
-tracks/51/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_a:self_modulate")
+tracks/51/path = NodePath("quizInterface/players_region/activePlayer2/player_case/player_name:self_modulate")
 tracks/51/interp = 1
 tracks/51/loop_wrap = true
 tracks/51/keys = {
-"times": PackedFloat32Array(1.4, 1.9),
+"times": PackedFloat32Array(1.2, 1.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
+"values": [Color(1, 1, 1, 0), Color(0.764706, 0.368627, 0.8, 1)]
 }
 tracks/52/type = "value"
 tracks/52/imported = false
 tracks/52/enabled = true
-tracks/52/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_b:self_modulate")
+tracks/52/path = NodePath("quizInterface/players_region/activePlayer2/spacer_v3:self_modulate")
 tracks/52/interp = 1
 tracks/52/loop_wrap = true
 tracks/52/keys = {
-"times": PackedFloat32Array(1.4, 1.9),
+"times": PackedFloat32Array(1.2, 1.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/53/type = "value"
 tracks/53/imported = false
 tracks/53/enabled = true
-tracks/53/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_c:self_modulate")
+tracks/53/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_a:self_modulate")
 tracks/53/interp = 1
 tracks/53/loop_wrap = true
 tracks/53/keys = {
@@ -2095,134 +2139,182 @@ tracks/53/keys = {
 tracks/54/type = "value"
 tracks/54/imported = false
 tracks/54/enabled = true
-tracks/54/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/score:self_modulate")
+tracks/54/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_b:self_modulate")
 tracks/54/interp = 1
 tracks/54/loop_wrap = true
 tracks/54/keys = {
 "times": PackedFloat32Array(1.4, 1.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(0.4224, 0.872373, 0.88, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
 }
 tracks/55/type = "value"
 tracks/55/imported = false
 tracks/55/enabled = true
-tracks/55/path = NodePath("quizInterface/players_region/activePlayer3/player_case/spacer_h:self_modulate")
+tracks/55/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/status_c:self_modulate")
 tracks/55/interp = 1
 tracks/55/loop_wrap = true
 tracks/55/keys = {
 "times": PackedFloat32Array(1.4, 1.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
 }
 tracks/56/type = "value"
 tracks/56/imported = false
 tracks/56/enabled = true
-tracks/56/path = NodePath("quizInterface/players_region/activePlayer3/player_case/player_name:self_modulate")
+tracks/56/path = NodePath("quizInterface/players_region/activePlayer3/player_case/status_row/score:self_modulate")
 tracks/56/interp = 1
 tracks/56/loop_wrap = true
 tracks/56/keys = {
 "times": PackedFloat32Array(1.4, 1.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(0.764706, 0.368627, 0.8, 1)]
+"values": [Color(1, 1, 1, 0), Color(0.4224, 0.872373, 0.88, 1)]
 }
 tracks/57/type = "value"
 tracks/57/imported = false
 tracks/57/enabled = true
-tracks/57/path = NodePath("quizInterface/players_region/activePlayer3/spacer_v4:self_modulate")
+tracks/57/path = NodePath("quizInterface/players_region/activePlayer3/player_case/spacer_h:self_modulate")
 tracks/57/interp = 1
 tracks/57/loop_wrap = true
 tracks/57/keys = {
 "times": PackedFloat32Array(1.4, 1.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/58/type = "value"
 tracks/58/imported = false
 tracks/58/enabled = true
-tracks/58/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_a:self_modulate")
+tracks/58/path = NodePath("quizInterface/players_region/activePlayer3/player_case/spacer_h/splash_p3:self_modulate")
 tracks/58/interp = 1
 tracks/58/loop_wrap = true
 tracks/58/keys = {
-"times": PackedFloat32Array(1.6, 2.1),
+"times": PackedFloat32Array(1.4, 1.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/59/type = "value"
 tracks/59/imported = false
 tracks/59/enabled = true
-tracks/59/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_b:self_modulate")
+tracks/59/path = NodePath("quizInterface/players_region/activePlayer3/player_case/player_name:self_modulate")
 tracks/59/interp = 1
 tracks/59/loop_wrap = true
 tracks/59/keys = {
-"times": PackedFloat32Array(1.6, 2.1),
+"times": PackedFloat32Array(1.4, 1.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
+"values": [Color(1, 1, 1, 0), Color(0.764706, 0.368627, 0.8, 1)]
 }
 tracks/60/type = "value"
 tracks/60/imported = false
 tracks/60/enabled = true
-tracks/60/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_c:self_modulate")
+tracks/60/path = NodePath("quizInterface/players_region/activePlayer3/spacer_v4:self_modulate")
 tracks/60/interp = 1
 tracks/60/loop_wrap = true
 tracks/60/keys = {
-"times": PackedFloat32Array(1.6, 2.1),
+"times": PackedFloat32Array(1.4, 1.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/61/type = "value"
 tracks/61/imported = false
 tracks/61/enabled = true
-tracks/61/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/score:self_modulate")
+tracks/61/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_a:self_modulate")
 tracks/61/interp = 1
 tracks/61/loop_wrap = true
 tracks/61/keys = {
 "times": PackedFloat32Array(1.6, 2.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(0.4224, 0.872373, 0.88, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
 }
 tracks/62/type = "value"
 tracks/62/imported = false
 tracks/62/enabled = true
-tracks/62/path = NodePath("quizInterface/players_region/activePlayer4/player_case/spacer_h:self_modulate")
+tracks/62/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_b:self_modulate")
 tracks/62/interp = 1
 tracks/62/loop_wrap = true
 tracks/62/keys = {
 "times": PackedFloat32Array(1.6, 2.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
 }
 tracks/63/type = "value"
 tracks/63/imported = false
 tracks/63/enabled = true
-tracks/63/path = NodePath("quizInterface/players_region/activePlayer4/player_case/player_name:self_modulate")
+tracks/63/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/status_c:self_modulate")
 tracks/63/interp = 1
 tracks/63/loop_wrap = true
 tracks/63/keys = {
 "times": PackedFloat32Array(1.6, 2.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(0.764706, 0.368627, 0.8, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.235294)]
 }
 tracks/64/type = "value"
 tracks/64/imported = false
 tracks/64/enabled = true
-tracks/64/path = NodePath("quizInterface/players_region/activePlayer4/spacer_v5:self_modulate")
+tracks/64/path = NodePath("quizInterface/players_region/activePlayer4/player_case/status_row/score:self_modulate")
 tracks/64/interp = 1
 tracks/64/loop_wrap = true
 tracks/64/keys = {
 "times": PackedFloat32Array(1.6, 2.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 1)]
+"values": [Color(1, 1, 1, 0), Color(0.4224, 0.872373, 0.88, 1)]
+}
+tracks/65/type = "value"
+tracks/65/imported = false
+tracks/65/enabled = true
+tracks/65/path = NodePath("quizInterface/players_region/activePlayer4/player_case/spacer_h:self_modulate")
+tracks/65/interp = 1
+tracks/65/loop_wrap = true
+tracks/65/keys = {
+"times": PackedFloat32Array(1.6, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/66/type = "value"
+tracks/66/imported = false
+tracks/66/enabled = true
+tracks/66/path = NodePath("quizInterface/players_region/activePlayer4/player_case/spacer_h/splash_p4:self_modulate")
+tracks/66/interp = 1
+tracks/66/loop_wrap = true
+tracks/66/keys = {
+"times": PackedFloat32Array(1.6, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/67/type = "value"
+tracks/67/imported = false
+tracks/67/enabled = true
+tracks/67/path = NodePath("quizInterface/players_region/activePlayer4/player_case/player_name:self_modulate")
+tracks/67/interp = 1
+tracks/67/loop_wrap = true
+tracks/67/keys = {
+"times": PackedFloat32Array(1.6, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0.764706, 0.368627, 0.8, 1)]
+}
+tracks/68/type = "value"
+tracks/68/imported = false
+tracks/68/enabled = true
+tracks/68/path = NodePath("quizInterface/players_region/activePlayer4/spacer_v5:self_modulate")
+tracks/68/interp = 1
+tracks/68/loop_wrap = true
+tracks/68/keys = {
+"times": PackedFloat32Array(1.6, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_87374"]
@@ -3307,6 +3399,54 @@ tracks/89/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/90/type = "value"
+tracks/90/imported = false
+tracks/90/enabled = true
+tracks/90/path = NodePath("quizInterface/players_region/activePlayer1/player_case/spacer_h/splash_p1:self_modulate")
+tracks/90/interp = 1
+tracks/90/loop_wrap = true
+tracks/90/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/91/type = "value"
+tracks/91/imported = false
+tracks/91/enabled = true
+tracks/91/path = NodePath("quizInterface/players_region/activePlayer2/player_case/spacer_h/splash_p2:self_modulate")
+tracks/91/interp = 1
+tracks/91/loop_wrap = true
+tracks/91/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/92/type = "value"
+tracks/92/imported = false
+tracks/92/enabled = true
+tracks/92/path = NodePath("quizInterface/players_region/activePlayer3/player_case/spacer_h/splash_p3:self_modulate")
+tracks/92/interp = 1
+tracks/92/loop_wrap = true
+tracks/92/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/93/type = "value"
+tracks/93/imported = false
+tracks/93/enabled = true
+tracks/93/path = NodePath("quizInterface/players_region/activePlayer4/player_case/spacer_h/splash_p4:self_modulate")
+tracks/93/interp = 1
+tracks/93/loop_wrap = true
+tracks/93/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_v3c8i"]
 resource_name = "p1Status_RightHide"
@@ -3736,11 +3876,6 @@ shader = ExtResource("5_1jmo2")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bguvs"]
 shader = ExtResource("7_l6bpf")
 
-[sub_resource type="LabelSettings" id="LabelSettings_qtnu5"]
-font = ExtResource("11_32etq")
-font_size = 60
-font_color = Color(1, 0.871, 0.14, 1)
-
 [sub_resource type="LabelSettings" id="LabelSettings_glqma"]
 font = ExtResource("12_j5s2k")
 font_size = 32
@@ -3900,16 +4035,16 @@ texture = ExtResource("8_f0268")
 stretch_mode = 1
 
 [node name="SFX_Hover1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_oipv5")
+stream = ExtResource("9_f0mwi")
 
 [node name="SFX_Hover2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_oipv5")
+stream = ExtResource("9_f0mwi")
 
 [node name="SFX_Hover3" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_oipv5")
+stream = ExtResource("9_f0mwi")
 
 [node name="SFX_Press" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_fdd7x")
+stream = ExtResource("10_hp25g")
 volume_db = 3.0
 
 [node name="preQuiz" type="Control" parent="."]
@@ -3936,7 +4071,7 @@ offset_bottom = -0.280029
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 text = "HERe'S tHE PLaN"
-label_settings = SubResource("LabelSettings_qtnu5")
+label_settings = ExtResource("11_b1vj6")
 horizontal_alignment = 1
 
 [node name="RulesText" type="VBoxContainer" parent="preQuiz/preSessionOrganizer"]
@@ -4317,7 +4452,7 @@ layout_mode = 2
 
 [node name="spacer_v2" type="TextureRect" parent="quizInterface/players_region/activePlayer1"]
 layout_mode = 2
-texture = ExtResource("19_anma7")
+texture = ExtResource("29_gi3hs")
 
 [node name="player_case" type="VBoxContainer" parent="quizInterface/players_region/activePlayer1"]
 self_modulate = Color(1, 1, 1, 0)
@@ -4353,8 +4488,20 @@ text = "0"
 label_settings = ExtResource("33_bd73y")
 
 [node name="spacer_h" type="TextureRect" parent="quizInterface/players_region/activePlayer1/player_case"]
+custom_minimum_size = Vector2(200, 16)
 layout_mode = 2
-texture = ExtResource("23_2rk3j")
+texture = ExtResource("34_gwnwm")
+
+[node name="splash_p1" type="TextureRect" parent="quizInterface/players_region/activePlayer1/player_case/spacer_h"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.1
+anchor_top = -0.75
+anchor_right = 1.1
+anchor_bottom = 3.0
+texture = ExtResource("35_7kqrw")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="player_name" type="Label" parent="quizInterface/players_region/activePlayer1/player_case"]
 layout_mode = 2
@@ -4366,7 +4513,7 @@ label_settings = ExtResource("36_wcvw5")
 
 [node name="spacer_v" type="TextureRect" parent="quizInterface/players_region/activePlayer1"]
 layout_mode = 2
-texture = ExtResource("19_anma7")
+texture = ExtResource("29_gi3hs")
 
 [node name="activePlayer2" type="HBoxContainer" parent="quizInterface/players_region"]
 self_modulate = Color(1, 1, 1, 0)
@@ -4405,8 +4552,20 @@ text = "0"
 label_settings = ExtResource("33_bd73y")
 
 [node name="spacer_h" type="TextureRect" parent="quizInterface/players_region/activePlayer2/player_case"]
+custom_minimum_size = Vector2(200, 16)
 layout_mode = 2
-texture = ExtResource("23_2rk3j")
+texture = ExtResource("34_gwnwm")
+
+[node name="splash_p2" type="TextureRect" parent="quizInterface/players_region/activePlayer2/player_case/spacer_h"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.1
+anchor_top = -0.75
+anchor_right = 1.1
+anchor_bottom = 3.0
+texture = ExtResource("35_7kqrw")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="player_name" type="Label" parent="quizInterface/players_region/activePlayer2/player_case"]
 layout_mode = 2
@@ -4417,7 +4576,7 @@ label_settings = ExtResource("36_wcvw5")
 
 [node name="spacer_v3" type="TextureRect" parent="quizInterface/players_region/activePlayer2"]
 layout_mode = 2
-texture = ExtResource("19_anma7")
+texture = ExtResource("29_gi3hs")
 
 [node name="activePlayer3" type="HBoxContainer" parent="quizInterface/players_region"]
 self_modulate = Color(1, 1, 1, 0)
@@ -4456,8 +4615,20 @@ text = "0"
 label_settings = ExtResource("33_bd73y")
 
 [node name="spacer_h" type="TextureRect" parent="quizInterface/players_region/activePlayer3/player_case"]
+custom_minimum_size = Vector2(200, 16)
 layout_mode = 2
-texture = ExtResource("23_2rk3j")
+texture = ExtResource("34_gwnwm")
+
+[node name="splash_p3" type="TextureRect" parent="quizInterface/players_region/activePlayer3/player_case/spacer_h"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.1
+anchor_top = -0.75
+anchor_right = 1.1
+anchor_bottom = 3.0
+texture = ExtResource("35_7kqrw")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="player_name" type="Label" parent="quizInterface/players_region/activePlayer3/player_case"]
 layout_mode = 2
@@ -4468,7 +4639,7 @@ label_settings = ExtResource("36_wcvw5")
 
 [node name="spacer_v4" type="TextureRect" parent="quizInterface/players_region/activePlayer3"]
 layout_mode = 2
-texture = ExtResource("19_anma7")
+texture = ExtResource("29_gi3hs")
 
 [node name="activePlayer4" type="HBoxContainer" parent="quizInterface/players_region"]
 self_modulate = Color(1, 1, 1, 0)
@@ -4507,8 +4678,20 @@ text = "0"
 label_settings = ExtResource("33_bd73y")
 
 [node name="spacer_h" type="TextureRect" parent="quizInterface/players_region/activePlayer4/player_case"]
+custom_minimum_size = Vector2(200, 16)
 layout_mode = 2
-texture = ExtResource("23_2rk3j")
+texture = ExtResource("34_gwnwm")
+
+[node name="splash_p4" type="TextureRect" parent="quizInterface/players_region/activePlayer4/player_case/spacer_h"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.1
+anchor_top = -0.75
+anchor_right = 1.1
+anchor_bottom = 3.0
+texture = ExtResource("35_7kqrw")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="player_name" type="Label" parent="quizInterface/players_region/activePlayer4/player_case"]
 layout_mode = 2
@@ -4519,7 +4702,7 @@ label_settings = ExtResource("36_wcvw5")
 
 [node name="spacer_v5" type="TextureRect" parent="quizInterface/players_region/activePlayer4"]
 layout_mode = 2
-texture = ExtResource("19_anma7")
+texture = ExtResource("29_gi3hs")
 
 [node name="post_question" type="Label" parent="quizInterface"]
 visible = false
@@ -4561,8 +4744,8 @@ offset_top = 0.279995
 offset_right = -0.00012207
 offset_bottom = -0.240005
 grow_horizontal = 2
-text = "End of quiz"
-label_settings = ExtResource("5_x4i02")
+text = "MISsiOn ResuLtS"
+label_settings = ExtResource("11_b1vj6")
 horizontal_alignment = 1
 
 [node name="PlayerStandingsOrg" type="VBoxContainer" parent="quizEnd"]
@@ -4584,8 +4767,8 @@ layout_mode = 2
 
 [node name="Name" type="Label" parent="quizEnd/PlayerStandingsOrg/1Placer"]
 layout_mode = 2
-text = "1P Name"
-label_settings = ExtResource("6_poius")
+text = "P1 Name"
+label_settings = ExtResource("36_wcvw5")
 
 [node name="ScoreDisplay" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/1Placer"]
 layout_mode = 2
@@ -4593,12 +4776,12 @@ layout_mode = 2
 [node name="Score-" type="Label" parent="quizEnd/PlayerStandingsOrg/1Placer/ScoreDisplay"]
 layout_mode = 2
 text = "Score:"
-label_settings = ExtResource("7_bnmxf")
+label_settings = ExtResource("13_1ygsn")
 
 [node name="Score" type="Label" parent="quizEnd/PlayerStandingsOrg/1Placer/ScoreDisplay"]
 layout_mode = 2
 text = "[error]"
-label_settings = ExtResource("11_dsnyp")
+label_settings = ExtResource("33_bd73y")
 
 [node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/1Placer"]
 layout_mode = 2
@@ -4606,23 +4789,23 @@ layout_mode = 2
 [node name="Label" type="Label" parent="quizEnd/PlayerStandingsOrg/1Placer/MedalCase"]
 layout_mode = 2
 text = "Certifications:"
-label_settings = ExtResource("7_bnmxf")
+label_settings = ExtResource("13_1ygsn")
 
 [node name="Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/1Placer/MedalCase"]
 layout_mode = 2
-label_settings = ExtResource("7_bnmxf")
+label_settings = ExtResource("37_cst6p")
 
 [node name="2Placer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
 layout_mode = 2
 
 [node name="LB" type="TextureRect" parent="quizEnd/PlayerStandingsOrg/2Placer"]
 layout_mode = 2
-texture = ExtResource("27_7ul7w")
+texture = ExtResource("34_gwnwm")
 
 [node name="Name" type="Label" parent="quizEnd/PlayerStandingsOrg/2Placer"]
 layout_mode = 2
 text = "p2 Name"
-label_settings = ExtResource("6_poius")
+label_settings = ExtResource("36_wcvw5")
 
 [node name="ScoreDisplay" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/2Placer"]
 layout_mode = 2
@@ -4630,12 +4813,12 @@ layout_mode = 2
 [node name="Score-" type="Label" parent="quizEnd/PlayerStandingsOrg/2Placer/ScoreDisplay"]
 layout_mode = 2
 text = "Score:"
-label_settings = ExtResource("7_bnmxf")
+label_settings = ExtResource("13_1ygsn")
 
 [node name="Score" type="Label" parent="quizEnd/PlayerStandingsOrg/2Placer/ScoreDisplay"]
 layout_mode = 2
 text = "[error]"
-label_settings = ExtResource("11_dsnyp")
+label_settings = ExtResource("33_bd73y")
 
 [node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/2Placer"]
 layout_mode = 2
@@ -4643,24 +4826,24 @@ layout_mode = 2
 [node name="Label" type="Label" parent="quizEnd/PlayerStandingsOrg/2Placer/MedalCase"]
 layout_mode = 2
 text = "Certifications:"
-label_settings = ExtResource("7_bnmxf")
+label_settings = ExtResource("13_1ygsn")
 
 [node name="Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/2Placer/MedalCase"]
 layout_mode = 2
 text = "N/A"
-label_settings = ExtResource("7_bnmxf")
+label_settings = ExtResource("37_cst6p")
 
 [node name="3Placer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
 layout_mode = 2
 
 [node name="LB" type="TextureRect" parent="quizEnd/PlayerStandingsOrg/3Placer"]
 layout_mode = 2
-texture = ExtResource("27_7ul7w")
+texture = ExtResource("34_gwnwm")
 
 [node name="Name" type="Label" parent="quizEnd/PlayerStandingsOrg/3Placer"]
 layout_mode = 2
 text = "p3 Name"
-label_settings = ExtResource("6_poius")
+label_settings = ExtResource("36_wcvw5")
 
 [node name="ScoreDisplay" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/3Placer"]
 layout_mode = 2
@@ -4668,12 +4851,12 @@ layout_mode = 2
 [node name="Score-" type="Label" parent="quizEnd/PlayerStandingsOrg/3Placer/ScoreDisplay"]
 layout_mode = 2
 text = "Score:"
-label_settings = ExtResource("7_bnmxf")
+label_settings = ExtResource("13_1ygsn")
 
 [node name="Score" type="Label" parent="quizEnd/PlayerStandingsOrg/3Placer/ScoreDisplay"]
 layout_mode = 2
 text = "[error]"
-label_settings = ExtResource("11_dsnyp")
+label_settings = ExtResource("33_bd73y")
 
 [node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/3Placer"]
 layout_mode = 2
@@ -4681,24 +4864,24 @@ layout_mode = 2
 [node name="Label" type="Label" parent="quizEnd/PlayerStandingsOrg/3Placer/MedalCase"]
 layout_mode = 2
 text = "Certifications:"
-label_settings = ExtResource("7_bnmxf")
+label_settings = ExtResource("13_1ygsn")
 
 [node name="Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/3Placer/MedalCase"]
 layout_mode = 2
 text = "[error]"
-label_settings = ExtResource("7_bnmxf")
+label_settings = ExtResource("37_cst6p")
 
 [node name="4Placer" type="VBoxContainer" parent="quizEnd/PlayerStandingsOrg"]
 layout_mode = 2
 
 [node name="LB" type="TextureRect" parent="quizEnd/PlayerStandingsOrg/4Placer"]
 layout_mode = 2
-texture = ExtResource("27_7ul7w")
+texture = ExtResource("34_gwnwm")
 
 [node name="Name" type="Label" parent="quizEnd/PlayerStandingsOrg/4Placer"]
 layout_mode = 2
 text = "p4 Name"
-label_settings = ExtResource("6_poius")
+label_settings = ExtResource("36_wcvw5")
 
 [node name="ScoreDisplay" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/4Placer"]
 layout_mode = 2
@@ -4706,12 +4889,12 @@ layout_mode = 2
 [node name="Score-" type="Label" parent="quizEnd/PlayerStandingsOrg/4Placer/ScoreDisplay"]
 layout_mode = 2
 text = "Score:"
-label_settings = ExtResource("7_bnmxf")
+label_settings = ExtResource("13_1ygsn")
 
 [node name="Score" type="Label" parent="quizEnd/PlayerStandingsOrg/4Placer/ScoreDisplay"]
 layout_mode = 2
 text = "[error]"
-label_settings = ExtResource("11_dsnyp")
+label_settings = ExtResource("33_bd73y")
 
 [node name="MedalCase" type="HBoxContainer" parent="quizEnd/PlayerStandingsOrg/4Placer"]
 layout_mode = 2
@@ -4719,12 +4902,12 @@ layout_mode = 2
 [node name="Label" type="Label" parent="quizEnd/PlayerStandingsOrg/4Placer/MedalCase"]
 layout_mode = 2
 text = "Certifications:"
-label_settings = ExtResource("7_bnmxf")
+label_settings = ExtResource("13_1ygsn")
 
 [node name="Awards" type="Label" parent="quizEnd/PlayerStandingsOrg/4Placer/MedalCase"]
 layout_mode = 2
 text = "[error]"
-label_settings = ExtResource("7_bnmxf")
+label_settings = ExtResource("37_cst6p")
 
 [node name="pauseScreen" type="Control" parent="."]
 visible = false

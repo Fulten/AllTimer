@@ -43,6 +43,7 @@ func _private_music_to_load():
 	_load_music_track("res://assets/uiux/main_menu/bgm_lobby.mp3", "mp_lobby")
 	_load_music_track("res://assets/uiux/main_menu/bgm_quiz.mp3", "default_theme")
 	_load_music_track("res://assets/uiux/session_themes/Patriotic Cipher/MGS3 OST - Battle in the Base.mp3", "msg_theme")
+	_load_music_track("res://assets/uiux/session_themes/Fatal Surprise/bgm_quiz_FatalSurprise.mp3", "fatal_theme")
 	# quiz session music
 
 # loads sound effects to be played

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ec7h1ye64hbj"
+path="res://.godot/imported/SFX_buttonHover_Fatal.mp3-a53b3f391f9c5ebd94d831fc69e40e17.mp3str"
+
+[deps]
+
+source_file="res://assets/uiux/session_themes/Fatal Surprise/SFX_buttonHover_Fatal.mp3"
+dest_files=["res://.godot/imported/SFX_buttonHover_Fatal.mp3-a53b3f391f9c5ebd94d831fc69e40e17.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -585,7 +585,7 @@ func _select_music_track():
 	if GameState.CurrentTheme == "Patriotic Cipher":
 		SoundMaster._play_music_track("msg_theme")
 	elif GameState.CurrentTheme == "Fatal Surprise":
-		SoundMaster._play_music_track("default_theme")
+		SoundMaster._play_music_track("fatal_theme")
 	else:
 		SoundMaster._play_music_track("default_theme")
 

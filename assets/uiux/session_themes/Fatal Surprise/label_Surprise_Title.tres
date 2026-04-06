@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://d3eotcih4nl7d"]
+
+[ext_resource type="FontFile" uid="uid://ph1l14fo55s7" path="res://assets/uiux/session_themes/Fatal Surprise/Yet Another Ransom Note.ttf" id="1_fw7gw"]
+
+[resource]
+font = ExtResource("1_fw7gw")
+font_size = 60
+font_color = Color(1, 0.871, 0.14, 1)

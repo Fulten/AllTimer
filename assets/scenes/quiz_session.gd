@@ -1291,3 +1291,4 @@ const resolution_options = [
 func _on_resolutions_list_item_selected(index: int) -> void:
 	DisplayServer.window_set_size(resolution_options[index])
 #endregion
+

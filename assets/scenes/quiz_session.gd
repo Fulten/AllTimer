@@ -158,7 +158,7 @@ func _input(event):
 	
 	for i in range(4):
 		if event.is_action_pressed(player_input % i):
-			if current_index > GameState.CurrentQuizQuestions.size():
+			if current_index >= GameState.CurrentQuizQuestions.size():
 				return # ignore answer input after quiz has ended
 			#if we're a "this or that" or a "true/false" question ingnore input from 3 or 4
 			var questionType = GameState.CurrentQuizQuestions[current_index]["questionType"]
@@ -1009,7 +1009,11 @@ func _debug_advance_to_next_question():
 	flag_post_question_time = false
 	flag_accept_input = false
 	
-	_end_of_quiz_phase()
+	_create_player_statuses_table()
+	_show_question_explainer.rpc(false)
+	_reset_player_statuses.rpc()
+	
+	_next_question()
 	pass
 
 #endregion

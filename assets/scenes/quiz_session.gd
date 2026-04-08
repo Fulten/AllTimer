@@ -443,6 +443,16 @@ func _reset_player_statuses():
 ## hides the quiz interface and shows the prequiz rules interface
 @rpc("authority", "reliable", "call_local")
 func _display_prequiz_rules():
+	# set the rules dependent elements to hide
+	$preQuiz/preSessionOrganizer/RulesText/Rounds.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Rounds2.hide()
+	
+	$preQuiz/preSessionOrganizer/RulesText/Answers.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Answers2.hide()
+	
+	$preQuiz/preSessionOrganizer/RulesText/Score.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Score2.hide()
+	
 	if GameState.quizOptions.win_con_int == 0: # 0 : Highest score after x questions
 		if !(GameState.CurrentTheme == "Fatal Surprise"):
 			$preQuiz/preSessionOrganizer/RulesText/Rounds.text %= GameState.quizOptions.win_questions
@@ -464,8 +474,8 @@ func _display_prequiz_rules():
 	
 	$preQuiz/preSessionOrganizer/RulesText/Timer.text %= GameState.quizOptions.timer
 
-	$preQuiz.show()
-	$quizInterface.hide()
+	#$preQuiz.show()
+	#$quizInterface.hide()
 	$ControlSwapper0.play("QuizIntro")
 	
 	pass
@@ -473,19 +483,9 @@ func _display_prequiz_rules():
 ## shows the prequiz rules interface and hides the quiz interface
 @rpc("authority", "reliable", "call_local")
 func _hide_prequiz_rules():
-	# set the rules dependent elements to hide
-	$preQuiz/preSessionOrganizer/RulesText/Rounds.hide()
-	$preQuiz/preSessionOrganizer/RulesText/Rounds2.hide()
-	
-	$preQuiz/preSessionOrganizer/RulesText/Score.hide()
-	$preQuiz/preSessionOrganizer/RulesText/Score2.hide()
-	
-	$preQuiz/preSessionOrganizer/RulesText/Answers.hide()
-	$preQuiz/preSessionOrganizer/RulesText/Answers2.hide()
-	
-	$preQuiz.hide()
-	
-	$quizInterface.show()
+	#controlswapper handles visibility states
+	#$preQuiz.hide()
+	#$quizInterface.show()
 	$ControlSwapper0.play("QuizStart")
 	pass
 

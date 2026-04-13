@@ -3946,7 +3946,7 @@ one_shot = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("11_qkoei")
-expand_mode = 1
+expand_mode = 2
 
 [node name="Countdown" type="Timer" parent="quizInterface/session_organizer/question_header"]
 wait_time = 10.0
@@ -3958,9 +3958,11 @@ text = "#"
 label_settings = SubResource("LabelSettings_35yei")
 
 [node name="question_name" type="Label" parent="quizInterface/session_organizer/question_header"]
+custom_minimum_size = Vector2(1440, 125)
 layout_mode = 2
 text = "Question_Name"
 label_settings = SubResource("LabelSettings_2pk4f")
+autowrap_mode = 2
 
 [node name="CountdownLabel" type="Label" parent="quizInterface/session_organizer"]
 layout_mode = 2

@@ -4195,7 +4195,7 @@ one_shot = true
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 texture = ExtResource("14_gh1gl")
-expand_mode = 1
+expand_mode = 2
 
 [node name="Countdown" type="Timer" parent="quizInterface/session_organizer/question_header"]
 wait_time = 10.0
@@ -4208,9 +4208,11 @@ text = "#"
 label_settings = SubResource("LabelSettings_14q7v")
 
 [node name="question_name" type="Label" parent="quizInterface/session_organizer/question_header"]
+custom_minimum_size = Vector2(1440, 175)
 layout_mode = 2
 text = "Question_Name"
 label_settings = SubResource("LabelSettings_cveel")
+autowrap_mode = 2
 
 [node name="CountdownLabel" type="Label" parent="quizInterface/session_organizer"]
 layout_mode = 2
@@ -4310,6 +4312,7 @@ theme = ExtResource("20_fnivo")
 text = "answer_four"
 
 [node name="CenteredAnswerCategories" type="HBoxContainer" parent="quizInterface/session_organizer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 420
 alignment = 1

@@ -710,7 +710,27 @@ func _io_write_chances(file_name: String):
 	var file = FileAccess.open(file_name, FileAccess.WRITE)
 	file.store_string(json_string)
 	file.close()
-	pass
+	
+	
+func _calculate_statistics():
+	var multiple_choice_count = 0
+	var true_false_count = 0
+	var this_or_that_count = 0
+	
+	for uuid in questions:
+		if questions[uuid]["questionType"] == "Multiple Choice":
+			multiple_choice_count += 1
+		elif questions[uuid]["questionType"] == "True/False":
+			true_false_count += 1
+		elif questions[uuid]["questionType"] == "This/That":
+			this_or_that_count += 1
+	
+	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxTotals/HBoxQuestionCounter/Count.text = str(questions.size())
+	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxTotals/HBoxChancesCounter/Count.text = str(chances.size())
+	
+	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes/HBoxMultipleChoice/Count.text = str(multiple_choice_count)
+	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes/HBoxTrueFalse/Count.text = str(true_false_count)
+	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes/HBoxThisThat/Count.text = str(this_or_that_count)
 	pass
 #endregion
 
@@ -812,6 +832,7 @@ func _on_btn_chances_button_up():
 	$HBoxParent/Control/HBoxContainer/BtnStatistics.disabled = false
 	
 func _on_btn_statistics_button_up():
+	_calculate_statistics()
 	show_questions_menu = false
 	show_chances_menu = false
 	show_statistics_menu = true

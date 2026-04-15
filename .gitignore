@@ -4,3 +4,4 @@
 .old_code_refrence/
 export.cfg
 export_presets.cfg
+assets/scenes/*.tmp

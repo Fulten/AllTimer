@@ -32,7 +32,7 @@ class Player:
 		pass
 
 class QuizOptions:
-	var timer: int
+	var timer: int # length of question answer phase timer
 	var win_con: String
 	var win_con_int: int
 
@@ -104,7 +104,10 @@ func _get_chance_from_uuid(chance_uuid):
 
 func _adjust_score(player_index,score):
 	var playerId = playerNumberToIds[player_index]
-	players[playerId]["score"] += roundf(score * players[playerId]["guessTime"]/30)
+	# var awarded_points = roundf(score * players[playerId]["guessTime"]/30) # old scoring function
+	# points awarded are always equal to at least half the point value of the question, positive or negative
+	var awarded_points = (score * players[playerId]["guessTime"]/30) * 0.5 + score * 0.5
+	players[playerId]["score"] += awarded_points
 
 func _player_has_guessed(player_id):
 	return players[player_id]["guess"] >= 0
@@ -125,9 +128,9 @@ func _player_correctness(correct_answer, score):
 		var playerGuess = players[playerNumberToIds[i]]["guess"]
 		players[playerNumberToIds[i]]["correct"] = playerGuess == correct_answer
 		if players[playerNumberToIds[i]]["correct"]:
-			_adjust_score(i,score)
+			_adjust_score(i, score)
 		else:
-			_adjust_score(i,-1*score)
+			_adjust_score(i, -score)
 
 ## updates the question answered and seen metrics section of the player profiles
 ## this is called on the server, and only updates the profile data on the server side

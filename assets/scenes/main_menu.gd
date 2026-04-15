@@ -75,6 +75,7 @@ func load_settings():
 		var display_type = config.get_value("video", "type", 0)
 		var resolution = config.get_value("video", "resolution", 0)
 		var input_display = config.get_value("video", "input", "default")
+		@warning_ignore("shadowed_variable_base_class")
 		var theme = config.get_value("video", "theme", "default")
 #		GAME
 		var timer = config.get_value("game", "timer", 30)
@@ -124,7 +125,7 @@ func apply_audio_settings(sound_device: String, master: float, music: float, sfx
 	#AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Voice"), linear_to_db(voiceover))
 	%VolumeControl4.set_value_no_signal(voiceover)
 
-
+@warning_ignore("shadowed_variable_base_class")
 func apply_video_settings(display_type: int, resolution: int, input_display: String, theme: String):
 	%DisplayList.select(display_type)
 	_on_display_list_item_selected(display_type)
@@ -151,6 +152,7 @@ func update_game_state(timer: int, tallies: bool, skipping_losses: bool, gamblin
 	GameState.quizOptions.skipping_losses = skipping_losses
 	GameState.quizOptions.gambling_modes = gambling_modes
 
+@warning_ignore("shadowed_variable_base_class")
 func update_game_state_theme(theme: String):
 	GameState.CurrentTheme = theme
 	

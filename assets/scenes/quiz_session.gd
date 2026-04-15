@@ -86,6 +86,10 @@ var QuizEndScreen = false
 
 var config_path = "user://settings.cfg"
 var config = ConfigFile.new()
+
+# variables for score rollup animation
+var rollup_count = 0
+
 #endregion
 
 ##Called when the node enters the scene tree for the first time.
@@ -252,11 +256,15 @@ func _sync_update_question_on_clients(question_index):
 	loaded = false
 	pass
 	
-@rpc("authority", "reliable")
-func _sync_update_scores_on_clients(scores):
+@rpc("authority", "reliable", "call_local")
+func _sync_update_scores_on_clients(scores, last_scores):
 	for key in scores.keys():
 		GameState.players[key]["score"] = scores[key]
+		GameState.players[key]["last_score"] = last_scores[key]
 		pass
+	rollup_count = 10
+	print("test start")
+	_local_score_rollup()
 	pass
 
 @rpc("authority", "call_local", "reliable")
@@ -298,7 +306,6 @@ func _show_end_of_quiz_screen():
 		pass
 		
 	for n in range(GameState.PlayerCount):
-		GameState.players[scoreOrder[n]]
 		var uiNum = n + 1
 		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/Name" % uiNum).text = GameState.players[scoreOrder[n]].name
 		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/ScoreDisplay/Score" % uiNum).text = "%s" % GameState.players[scoreOrder[n]].score
@@ -374,8 +381,9 @@ func _sync_and_save_client_profile_statistics(playersData):
 
 ##RPC: enables and disabled the explainer text for the question based on a bool
 @rpc("authority", "reliable", "call_local")
-func _show_question_explainer(show: bool):
-	if show:
+@warning_ignore("shadowed_variable_base_class")
+func _show_question_explainer(visible: bool):
+	if visible:
 		ui_post_question.show()
 	else:
 		ui_post_question.hide()
@@ -639,10 +647,10 @@ func _generate_answer_order():
 		return
 	# "this or that", then only shuffle the first two indices
 	elif questionType == "This/That":
-		var available_indexes = [0,1]
+		var available_indexes_tt = [0,1]
 		local_answer_order = [0, 1, 2, 3]
-		local_answer_order[0] = available_indexes.pop_at(randi() % available_indexes.size())
-		local_answer_order[1] = available_indexes.pop_at(randi() % available_indexes.size())
+		local_answer_order[0] = available_indexes_tt.pop_at(randi() % available_indexes_tt.size())
+		local_answer_order[1] = available_indexes_tt.pop_at(randi() % available_indexes_tt.size())
 		return
 	#default to multiple choice
 	var available_indexes = [0, 1, 2, 3]
@@ -710,6 +718,7 @@ func _prequestion_delay_phase():
 	# add aditional delay depending on how long the question is to read,
 	# currently one extra second per 40 characters ( * 1/40 = 0.025)
 	var current_question = GameState.CurrentQuizQuestions[current_index]
+	@warning_ignore("narrowing_conversion")
 	var extra_seconds : int = roundf(current_question["question"].length() * 0.025)
 	
 	flag_pre_quiz_rules = false
@@ -750,6 +759,7 @@ func _postquestion_delay_phase():
 	
 	# determine player correctness
 	var current_question = GameState.CurrentQuizQuestions[current_index]
+	@warning_ignore("narrowing_conversion")
 	var extra_seconds : int = roundf(current_question["explainer"].length() * 0.025)
 	
 	GameState._player_correctness(correct_answer, question_score_value)
@@ -772,6 +782,7 @@ func _postquestion_delay_phase():
 		scores[key] = GameState.players[key]["score"]
 		last_scores[key] = GameState.players[key]["last_score"]
 		pass
+	print("postphase")
 	_sync_update_scores_on_clients.rpc(scores, last_scores)
 	
 	ui_postquestion_timer.start(post_question_delay_default + extra_seconds + 1.0)
@@ -866,6 +877,27 @@ func select_option_by_text(option_button: OptionButton, target_text: String) -> 
 			option_button.select(i)
 			return
 	print("Text not found in OptionButton:", target_text)
+	
+
+# depends on the globabal variables
+#var rollup_count
+func _local_score_rollup():
+	var rollup_max = 10
+	var t = float(rollup_count) / float(rollup_max)
+	
+	print("rollup test: %s" % rollup_count)
+	
+	if rollup_count <= 0:
+		for i in range(GameState.PlayerCount):
+			ui_player_scores[i].text = str(GameState.players[GameState.playerNumberToIds[i]]["score"])
+	else:
+		for i in range(GameState.PlayerCount):
+			var current_score = GameState.players[GameState.playerNumberToIds[i]]["score"]
+			var last_score = GameState.players[GameState.playerNumberToIds[i]]["last_score"]
+		
+			ui_player_scores[i].text = str(current_score + (last_score - current_score) * t)
+			rollup_count -= 1
+		get_tree().create_timer(0.025).timeout.connect(_local_score_rollup)
 #endregion
 
 #region functions that translate the timers into minutes and seconds for the ui
@@ -960,7 +992,6 @@ func _prepare_quiz_chances(chance_count):
 
 func _next_chance():
 	var next_chance = chances_set.keys()[randi() % chances_set.keys().size()]
-	var description = ""
 	for chance in master_chances_data:
 		if chance["uuid"] == next_chance:
 			GameState._add_chance(chance["name"], chance["description"], chance["type"], chance["uuid"], chance["correct"], chances_set[next_chance])
@@ -1019,6 +1050,10 @@ func _debug_advance_to_next_question():
 	
 	_next_question()
 	pass
+
+
+
+
 
 #endregion
 
@@ -1227,6 +1262,7 @@ func _load_config_settings():
 		var display_type = config.get_value("video", "type", 0)
 		var resolution = config.get_value("video", "resolution", 0)
 		var input_display = config.get_value("video", "input", "default")
+		@warning_ignore("shadowed_variable_base_class")
 		var theme = config.get_value("video", "theme", "default")
 		# APPLY
 		_apply_audio_settings(sound_device, master, music, sfx, voiceover)
@@ -1245,12 +1281,10 @@ func _apply_audio_settings(sound_device: String, master: float, music: float, sf
 	%VolumeControl4.set_value_no_signal(voiceover)
 		
 	var devices = AudioServer.get_output_device_list()
-	var found_match = false
 	%SoundDeviceOptions.clear()
 	for device in devices:
 		%SoundDeviceOptions.add_item(device)
 		if sound_device == device:
-			found_match = true
 			select_option_by_text(%SoundDeviceOptions, sound_device)
 
 func _save_sound_settings():
@@ -1264,7 +1298,7 @@ func _save_sound_settings():
 
 #region Display Options
 
-func _apply_video_settings(display_type: int, resolution: int, input_display: String, theme: String):
+func _apply_video_settings(display_type: int, resolution: int, input_display: String, _theme: String):
 	%DisplayList.select(display_type)
 	%ResolutionsList.select(resolution)
 	select_option_by_text(%InputDisplayList,input_display)

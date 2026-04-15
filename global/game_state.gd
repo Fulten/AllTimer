@@ -131,6 +131,7 @@ func _player_correctness(correct_answer, score):
 		var playerGuess = players[playerNumberToIds[i]]["guess"]
 		# if the player has passed make no change to score
 		if not players[playerNumberToIds[i]]["hasGuessed"]:
+			players[playerNumberToIds[i]]["last_score"] = players[playerNumberToIds[i]]["score"]
 			continue
 		
 		players[playerNumberToIds[i]]["correct"] = playerGuess == correct_answer

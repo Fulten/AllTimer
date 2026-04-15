@@ -263,7 +263,6 @@ func _sync_update_scores_on_clients(scores, last_scores):
 		GameState.players[key]["last_score"] = last_scores[key]
 		pass
 	rollup_count = 10
-	print("test start")
 	_local_score_rollup()
 	pass
 
@@ -782,7 +781,6 @@ func _postquestion_delay_phase():
 		scores[key] = GameState.players[key]["score"]
 		last_scores[key] = GameState.players[key]["last_score"]
 		pass
-	print("postphase")
 	_sync_update_scores_on_clients.rpc(scores, last_scores)
 	
 	ui_postquestion_timer.start(post_question_delay_default + extra_seconds + 1.0)
@@ -876,7 +874,7 @@ func select_option_by_text(option_button: OptionButton, target_text: String) -> 
 		if option_button.get_item_text(i) == str(target_text):
 			option_button.select(i)
 			return
-	print("Text not found in OptionButton:", target_text)
+	print("Warning: Text not found in OptionButton:", target_text)
 	
 
 # depends on the globabal variables
@@ -884,8 +882,6 @@ func select_option_by_text(option_button: OptionButton, target_text: String) -> 
 func _local_score_rollup():
 	var rollup_max = 10
 	var t = float(rollup_count) / float(rollup_max)
-	
-	print("rollup test: %s" % rollup_count)
 	
 	if rollup_count <= 0:
 		for i in range(GameState.PlayerCount):
@@ -1010,7 +1006,7 @@ func _debug_score_order_testing():
 	var scoreOrder = ["3", "4", "1", "2"]
 	var scores = {"1":400, "2":500, "3":600, "4":700}
 	
-	print("!Debug")
+	print("!Debug Function Start: _debug_score_order_testing")
 	for test in scoreOrder:
 		print(test)
 		
@@ -1031,7 +1027,7 @@ func _debug_score_order_testing():
 		scoreOrder[indexOfHighest] = swapTemp
 		pass
 		
-	print("!Debug")
+	print("!Debug Function End")
 	for test in scoreOrder:
 		print(test)
 	

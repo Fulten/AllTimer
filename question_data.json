@@ -25,7 +25,7 @@
 			"108295c1-6978-44fa-a082-53d4da30fe4c"
 		],
 		"correct": "\"I know now, without a doubt, Adam is Slugs\"",
-		"explainer": "In Bioshock, Adam is extracted from slugs",
+		"explainer": "In Bioshock, Adam is extracted from slugs. In one of Sora's climactic scenes, he declares \"I know now, without a doubt, Kingdom Hearts is light!\"",
 		"name": "Kingdom Shocks",
 		"question": "If Sora from Kingdom Hearts found himself in the Bioshock universe, what line might he say to Frank Fontaine during the final encounter about the body enhancing super plasmid juice, Adam?",
 		"questionType": "Multiple Choice",
@@ -71,7 +71,7 @@
 		"correct": "1, 2, 3, 2, 5, 3",
 		"explainer": "Final Fantasy 1, 4 and 6 were released as 1, 2 and 3 respectively in America. Final Fantasy 2,3 and 5 were not released in America originally",
 		"name": "The Final Confusion",
-		"question": "Final Fantasy has a plentiful number of sequels, but when it came to it's original releases, things got pretty messy in America. If we were to list of the first 6 final fantasies' using the American numbers where possible, what would the order be?",
+		"question": "Final Fantasy has a plentiful number of sequels, but when it came to it's original releases, things got pretty messy in America. If we were to list of the first 6 Final Fantasy releases using the American numbers where possible, what would the order be?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"RPG",
@@ -88,7 +88,7 @@
 	{
 		"chances": [],
 		"correct": "Desmond Paul Henry",
-		"explainer": "Manifold Garden is heavily based on fractals, a concept of art Desmond Paul Henry is heavily into.",
+		"explainer": "Manifold Garden is heavily based on fractals, a mathematically-based art that Desmond Paul Henry was a pioneer of.",
 		"name": "Artistic Gamer",
 		"question": "Artists need a break sometimes too. Manifold Garden is a game comprised of beautiful infinite patterns and puzzles to connect them. Which of the following artists would likely binge this game late on a Friday Night to unwind?",
 		"questionType": "Multiple Choice",
@@ -108,9 +108,9 @@
 			"108295c1-6978-44fa-a082-53d4da30fe4c"
 		],
 		"correct": "\"The Criminals of Prohibition\"",
-		"explainer": "In Shadow Hearts: From the New World you become fairly close friends with actual historical Al Capone",
-		"name": "Shadows over the Globe",
-		"question": "Shadows Hearts: From the New World follows in the footsteps of it's previous games by melding real figures with it's fictional setting one notable ally would like feature promentaly in a documentary with the following title.",
+		"explainer": "In Shadow Hearts: From the New World you become fairly close friends with actual historical Al Capone!",
+		"name": "Shadows Over the Globe",
+		"question": "Shadows Hearts: From the New World follows in the footsteps of its previous games by melding real figures with its fictional setting one notable ally would like feature promentaly in which documentary with the following title?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"RPG",
@@ -124,11 +124,13 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
+		],
 		"correct": "Bioshock Infinite",
 		"explainer": "",
 		"name": "Bootleg Theatre",
-		"question": "The story of the last bootleg theatre was pretty odd. A guy saves a bird from a cage to get rid of some sort of a bunch of seeds he owes some guy. But the thing is, as the story goes on the guy finds out the bird might actually be his kid, and he might not actual owe a debt except to himself? Things got confusing as the bird started pecking holes to other dimensions and became a god bird after drowning me. What game was the bootleg play about?",
+		"question": "The story of the last bootleg theatre was pretty odd. A guy saves a bird from a cage to get rid of a bunch of seeds he owes another guy. But the thing is, as the story goes on, the guy finds out the bird might actually be his kid, and that he might not actually owe a debt... except to himself? Things get confusing when the bird starts pecking holes to other dimensions and becomes a god bird after drowning. What game is the bootleg play about?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Modern",
@@ -166,8 +168,8 @@
 			"45500936-fc97-4174-832f-c250cdf4e49b",
 			"8c71f458-bf68-48b9-94ae-dab8c9538a37"
 		],
-		"correct": "\"Stamp Stamp Stamp the dough into the floor!\"",
-		"explainer": "Udon noods are traditional made but wrapping",
+		"correct": "\"Stomp Stomp Stomp the dough into the floor!\"",
+		"explainer": "Udon noodles are traditionally made by using body weight to develop the gluten by stepping on it, using your hands is usually not strong enough.",
 		"name": "Cooking with Sass",
 		"question": "If Cheap Cheap the cooking chicken were to create a dish for Cooking Momma of some authentic udon noodles, what might be a phrase that Cheap would sing?",
 		"questionType": "Multiple Choice",
@@ -187,9 +189,9 @@
 			"b5c44831-a697-43f9-adb0-b61fb485affa"
 		],
 		"correct": "A Salad",
-		"explainer": "Lagombi is based heavily on a rabbit, who would likely order a salad given the heavy presence of natural greens",
+		"explainer": "Lagombi is based heavily on a rabbit, who would likely order a salad to get its natural greens.",
 		"name": "Cute Critters",
-		"question": "Monster Hunter has a variety of terrifying beasties. Sometimes they are even cute and based on real world creatures. If the Lagombi had a diet similar to its real world counterpart, what would it order at McDonalds",
+		"question": "Monster Hunter has a variety of terrifying beasties which are sometimes even cute and based on real world creatures. If the Lagombi had a diet similar to its real world counterpart, what would it order at McDonalds?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Capcom",
@@ -225,7 +227,10 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"b9871032-d7d5-4b8a-898b-07708f349fb8",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
 		"correct": "The Red Ring",
 		"explainer": "Yes - Early models of the 360 sometimes encountered hardware issues that would prevent the console from even turning on. When the console experienced a problem that required service from Microsoft, it would light up three of the four arc segments that were arranged in a ring around the power button. Mirroring the Windows “Blue Screen of Death,” Xbox gamers would come to refer to this hardware failure as the “Red Ring of Death.”",
 		"name": "Do Us Part",
@@ -244,12 +249,13 @@
 	},
 	{
 		"chances": [
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37"
 		],
 		"correct": "Destiny",
-		"explainer": "Destiny and Destiny 2 both had notorious and well documented terrible dev cycle",
+		"explainer": "Bungie's Destiny 1 & 2 both had notoriously rocky relationships with each of their publishers that played out publicly like bad breakups on social media.",
 		"name": "Toxic Relationships",
-		"question": "Game dev cycles can feel a bit like messy marriages when things don’t go as planned like duke nukem forever. What game franchise managed to have 2 messy marriages?",
+		"question": "Game dev cycles can feel a bit like messy marriages when things don’t go as planned, like Duke Nukem Forever. What game franchise managed to go through 2 messy \"marriages?\"",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Shooter",
@@ -268,7 +274,7 @@
 			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
 		],
 		"correct": "Yellow",
-		"explainer": "Playstation 3's had a common issue where, after a period of time, they would stop working and flash a horrigying serious of yellow flashes indicating a hardware failure",
+		"explainer": "Playstation 3's had a common issue where, after a period of time, they would stop working and flash a horrifying series of yellow lights, indicating a hardware failure.",
 		"name": "Moody Lights",
 		"question": "Mood lighting is popular among gamers, but what color lighting might be a bad pick for a PS3 fan? ",
 		"questionType": "Multiple Choice",
@@ -287,10 +293,10 @@
 		"chances": [
 			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
 		],
-		"correct": "Groovy, Wicked and Bitchin'",
-		"explainer": "In Rising Zan, Groovy, Wicked and Bitchin' are actual score ranks you can get at the end of levels",
+		"correct": "Groovy, Wicked, Bitchin'",
+		"explainer": "In Rising Zan, Groovy, Wicked and Bitchin' are actual score ranks you can get at the end of levels.",
 		"name": "Samurai Snowboarders",
-		"question": "UEP systems, creator of Cool Boarder’s, also created a non-snow boarding game “Rising Zan: The Samurai Gunman”. If they were to create a spin-off game before their closure called “Sliding Zan: The Samurai Boarder”, what would might 3 of the final score ranks be called?",
+		"question": "UEP systems, creator of Cool Boarders, also created a non-snow boarding game “Rising Zan: The Samurai Gunman.” If they were to create a spin-off game before their closure called “Sliding Zan: The Samurai Boarder”, what might 3 of the final score ranks be called?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Sports",
@@ -320,16 +326,17 @@
 		"uuid": "3a501dcb-5b4b-47f9-b387-b536e272173e",
 		"wrong": [
 			"Mary, the Dog",
-			"Mena, the Cat",
+			"Mina, the Cat",
 			"John, the Cat"
 		]
 	},
 	{
 		"chances": [
-			"108295c1-6978-44fa-a082-53d4da30fe4c"
+			"108295c1-6978-44fa-a082-53d4da30fe4c",
+			"45500936-fc97-4174-832f-c250cdf4e49b"
 		],
 		"correct": "Kingdom Hearts: Birth By Sleep",
-		"explainer": "In Kingdom Hearts: Birth By Sleep the main antagonist is played by Lenoard Nimoa and the teacher of the main characters is played by Mark Hamill",
+		"explainer": "In Kingdom Hearts: Birth By Sleep, the main antagonist is played by Lenoard Nimoa and the teacher of the main characters is played by Mark Hamill.",
 		"name": "Star Trek Wars",
 		"question": "If we treat the voice actors as their actor counter parts, in which game was Spock and Luke Skywalker enemies?",
 		"questionType": "Multiple Choice",
@@ -348,9 +355,9 @@
 			"108295c1-6978-44fa-a082-53d4da30fe4c"
 		],
 		"correct": "Bahamut would destroy the entire world, again.",
-		"explainer": "When the original servers for the first version of FFXIV went down, the in game reason was Bahmut breaking out of a moon prison and destroying Eorzea",
-		"name": "A Realm Reborn.... Again?",
-		"question": "Final Fantasy XIV’s expansion Dawntrail is sometimes referred to as 'A Realm Reborn, again”. If Dawntrail really wanted to live up to that moniker, how would the expansion need to start?",
+		"explainer": "When the original servers for the first version of FFXIV went down, the in-game reason was Bahamut breaking out of a moon prison and destroying Eorzea.",
+		"name": "A Realm Reborn... Again?",
+		"question": "Final Fantasy XIV’s expansion Dawntrail is sometimes referred to as 'A Realm Reborn, again.” If Dawntrail really wanted to live up to that moniker, how would the expansion need to start?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"MMO",
@@ -360,7 +367,7 @@
 		"wrong": [
 			"The Warrior of Light would destroy the Crystals, again.",
 			"Y’shtola would save the world, again.",
-			"Alexander would appears to protect the party, again."
+			"Alexander arrives to protect the party, again."
 		]
 	},
 	{
@@ -370,7 +377,7 @@
 		"correct": "You mad bro?",
 		"explainer": "",
 		"name": "Leaky Valves",
-		"question": "With the recent leaks surrounding the Valve v Wolfire lawsuit, what was the dude bro forum level shit posting Scott Lynch, COO of Valve at the time, sent to Tim Sweeney over his frustration over Valve’s business practices?",
+		"question": "About the leaks surrounding the Valve vs. Wolfire lawsuit: what was the dude-bro forum level shit-post that Scott Lynch, COO of Valve at the time, sent to Tim Sweeney concerning his frustration over Valve’s business practices?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Game History",
@@ -390,9 +397,9 @@
 			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
 		],
 		"correct": "After a lot of soul searching, we are really sorry about the Switch joy-con drift ",
-		"explainer": "Nintendo formally apologized for the infamous joy-con drift found in the switch controls in 2020",
+		"explainer": "Nintendo formally apologized for the infamous joy-con drift found in the switch controls in 2020.",
 		"name": "Wii would like to subscribe",
-		"question": "If Nintendo were a media influencer, how might their apology have gone in 2020?",
+		"question": "If Nintendo were a media influencer, what apology might they have given in 2020?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Nintendo",
@@ -406,7 +413,9 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
+		],
 		"correct": "In both games you find a wrench to defend yourself",
 		"explainer": "",
 		"name": "Shocking Resemblance",
@@ -425,9 +434,9 @@
 	{
 		"chances": [],
 		"correct": "75",
-		"explainer": "In Nevada's Regulation 14, the require win-rate is 75% of all revenue",
+		"explainer": "In Nevada's Regulation 14, the required win-rate is 75% of all amounts wagered.",
 		"name": "State Approved Gacha",
-		"question": "Gacha games have become both wildly popular and controversial for their gambling style pull system. If Genshin Impact were to follow Nevada’s Regulation 14 (specifically the required percentage on a minimum payout and a 5 star is a successful payout), how many 5 stars should you pull in every 100 pulls?",
+		"question": "Gacha games have become both wildly popular and controversial for their gambling style pull system. If Genshin Impact were to follow Nevada’s Regulation 14 (specifically the required percentage on a minimum payout, and a 5 star is a successful payout), how many 5 stars should you pull in every 100 pulls?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Hard",
@@ -441,11 +450,13 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"45500936-fc97-4174-832f-c250cdf4e49b"
+		],
 		"correct": "A Mix Table",
-		"explainer": "DJ Hero is a game you play with a Mix Table peripheral",
+		"explainer": "DJ Hero is a game you play with a Mix Table peripheral device!",
 		"name": "A... What Hero?",
-		"question": "Guitar Hero became a household name in the mid to late 2000s and, of course, Activision began to over saturate the market with sequels and spinoffs. This included a game dedicated to a completely different instrument. What was that instrument?",
+		"question": "Guitar Hero became a household name in the mid to late 2000s and, of course, Activision began to oversaturate the market with sequels and spinoffs. This included a game dedicated to a completely different instrument. What was that instrument?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Rhythm"
@@ -465,7 +476,7 @@
 		"correct": "To be on American Idol",
 		"explainer": "",
 		"name": "Sing it",
-		"question": "Harmonix’s lesser remembered singing series Karaoke Revolution eventually allowed fans to live out a particular fantasy. What was it?",
+		"question": "Harmonix’s lesser remembered singing series, Karaoke Revolution, eventually allowed fans to live out which particular fantasy?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Rhythm",
@@ -479,7 +490,9 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
+		],
 		"correct": "Ballos",
 		"explainer": "",
 		"name": "Subterranean Story",
@@ -522,7 +535,7 @@
 		"correct": "Nothing, the first two citations are warnings",
 		"explainer": "",
 		"name": "Nuclear, Please",
-		"question": "If Stanislav Petrov had actual been in Arstotzka when he made his decision to avert nuclear disaster, what amount of money would he have been fined by the M.O.A. for ignoring the alarm? History, Indie",
+		"question": "If Stanislav Petrov had actually been in Arstotzka when he made his decision to avert nuclear disaster, what amount of money would he have been fined by the M.O.A. for ignoring the alarm?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"History",
@@ -530,7 +543,7 @@
 		],
 		"uuid": "13b875c0-4f28-417d-b8f6-84227face8ab",
 		"wrong": [
-			"3 credits",
+			"Nothing, you don't get fined for ignoring the alarm",
 			"10 credits",
 			"5 credits"
 		]
@@ -540,7 +553,7 @@
 		"correct": "Investigate the signing of the Declaration of Independence to uncover the bloodline of a leader of a cult",
 		"explainer": "",
 		"name": "Wait, For Real?",
-		"question": "In the Black Watchmen 4, there are a variety of situations that require real world research and investigation to resolve, which of the following is not an example of an actual question you are asked to investigate?",
+		"question": "In The Black Watchmen, there are a variety of situations that require real world research and investigation to resolve. Which of the following is not an example of an investigation you are tasked with?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Puzzle",
@@ -548,7 +561,7 @@
 		],
 		"uuid": "58397a3e-8723-4ded-af1c-89de79215319",
 		"wrong": [
-			"Investigate superstorms that occurred in Australia in 2009 that actually turned out to be occult activity to hide a ritual",
+			"Investigate superstorms that occurred in Australia in 2009 that actually turned out to be occult ritual activity",
 			"Use Google maps to identify the only building in London whose rooftop can see Cleopatra’s Needle from one street away.",
 			"Investigate a woman’s credit card history to discover what their favorite sports team was through their bets on actual basketball games."
 		]
@@ -575,10 +588,10 @@
 		"chances": [
 			"b9871032-d7d5-4b8a-898b-07708f349fb8"
 		],
-		"correct": "Fire their crew out of the cannons",
+		"correct": "Firing crew out of cannons",
 		"explainer": "",
 		"name": "Sea of Bones",
-		"question": "If Skull and Bones were to take some notes from the more popular Sea of Thieves, what might players be able to do?",
+		"question": "If Skull and Bones were to take notes from the more popular Sea of Thieves, what additional mechanic might they implement?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Adventure",
@@ -587,9 +600,9 @@
 		],
 		"uuid": "3c4a99d8-4c43-4936-bd84-2fa6879670e1",
 		"wrong": [
-			"Toss the anchor to the enemy ship",
-			"Haul a keg of grog onto an island",
-			"Fire a gattling cannon"
+			"Tossing the anchor to an enemy ship",
+			"Hauling kegs of grog onto an island",
+			"Firing a gattling cannon"
 		]
 	},
 	{
@@ -597,7 +610,7 @@
 			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
 			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
 		],
-		"correct": "They removed OtherOS from the ps3",
+		"correct": "They removed OtherOS from the PS3",
 		"explainer": "",
 		"name": "Revenge of the Nerds",
 		"question": "Why was Sony forced to pay millions of dollars to Linux nerds in 2016?",
@@ -618,10 +631,10 @@
 			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
 			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
 		],
-		"correct": "Nuts",
-		"explainer": "Sony's add campaign in 2006 for the PSP involved a bizarre cartoon of a squirrel telling another they could play nuts outside",
+		"correct": "Nut",
+		"explainer": "Sony's ad campaign for the PSP in 2006 involved a bizarre animation of a squirrel telling another that they could play \"portable nut\" outside.",
 		"name": "Say What?",
-		"question": "What might a squirrel have asked you to play outside in 2006?",
+		"question": "What might a cartoon squirrel have asked you to play outside in 2006?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
@@ -629,7 +642,7 @@
 		],
 		"uuid": "45e67df6-3fe8-4909-b2b6-75fb78bdb1e8",
 		"wrong": [
-			"Trees",
+			"Tag",
 			"PSP",
 			"Leaves"
 		]
@@ -640,9 +653,9 @@
 			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
 		],
 		"correct": "An Ink blot",
-		"explainer": "Peter Dille when asked the purpose behind the strange baby commercial for the PS3 he said it was a sort of Roarschach test where it was up to the audience to see what they saw. Like an ink blot used in the tests ",
+		"explainer": "Peter Dille, when asked the purpose behind the strange baby commercial for the PS3, said it was a sort of Rorschach test where it was up to the audience to see what they saw. Like ink blot tests previously used in Psychology.",
 		"name": "PS3 is a work of Art!",
-		"question": "If Sony of America’s VP Peter Dille were to use art to help explain the strange PS3 baby commercial, what might he show you?",
+		"question": "If Sony of America’s VP, Peter Dille, were to use art to help explain the strange PS3 baby commercial, what might he show you?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"History",
@@ -663,7 +676,7 @@
 		"correct": "Do you guys not have Xbox 360s?",
 		"explainer": "When asked in an interview what players without internet would do with an Xbox one, he said the solution was the Xbox 360",
 		"name": "Out of Season",
-		"question": "If Don Mattrick had been asked if the Xbox One’s online requirement was an out of season april fools day joke and consequently booed, what might he have said in response?",
+		"question": "If Don Mattrick had been asked if the Xbox One’s online requirement was an out of season April Fools Day joke and consequently booed, what might he have said in response?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Microsoft",
@@ -701,9 +714,9 @@
 	{
 		"chances": [],
 		"correct": "Herbalism",
-		"explainer": "Every Resident Evil protaganist has the ability to mix herbs to make medical powders",
+		"explainer": "Every Resident Evil protaganist has the ability to mix herbs to make medical powders.",
 		"name": "Professional Evil",
-		"question": "In each Resident Evil game, the playable characters all seem to share on particular vocation. What is it? ",
+		"question": "In each Resident Evil game, the playable characters all seem to share one particular vocation. What is it? ",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Capcom",
@@ -723,7 +736,7 @@
 		"correct": "Players are awarded additional victory points based on random criteria at the end",
 		"explainer": "This mechanic sounds very similar to the Bonus Stars from Mario Party",
 		"name": "Super Smash.... Party?",
-		"question": "If Super Smash Brother’s Ultimate announced a new mechanic inspired by their sister series Mario Party, what might that mechanic look like? ",
+		"question": "If Super Smash Brothers Ultimate announced a new mechanic inspired by their sister series Mario Party, what might that mechanic look like? ",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Nintendo",
@@ -742,7 +755,7 @@
 		"correct": "The Stack",
 		"explainer": "The stack is a system somewhat unique to magic design to help resolve it's complex instant speeds spell system with respect to sorceries, abilities, effects and summoning spells.",
 		"name": "Grim Lotus",
-		"question": "If Hearthstone introduced instant speed cards similar to Magic the Gathering, what concept would also need to be introduced to the game?",
+		"question": "If Hearthstone introduced \"instant speed\" cards similar to Magic the Gathering, what concept would also need to be introduced to the game?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Blizzard",
@@ -751,7 +764,7 @@
 		"uuid": "287cde61-047b-48f4-8c5d-e37cf6addfba",
 		"wrong": [
 			"The Queue",
-			"The Deck",
+			"Trap Cards",
 			"Sorcery spells"
 		]
 	},

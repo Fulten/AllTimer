@@ -842,7 +842,7 @@ func _create_player_statuses_table():
 		var playerCorrectness = GameState.players[GameState.playerNumberToIds[playerNumber]]["correct"]
 		var playerAnswered = GameState.players[GameState.playerNumberToIds[playerNumber]]["hasGuessed"]
 		
-		# if player has not answered
+		# if player has not answered, they have passed
 		if !playerAnswered:
 			player_statuses_ui_2d[playerNumber] = [true, false, false]
 			continue

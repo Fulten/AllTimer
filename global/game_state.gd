@@ -8,6 +8,7 @@ class Player:
 	var hasGuessed: bool
 	var correct: bool
 	var score: int
+	var last_score: int
 	var profileData
 	var chances
 	
@@ -19,6 +20,7 @@ class Player:
 		hasGuessed = false
 		correct = false
 		score = 0
+		last_score = 0
 		profileData = u_profile
 		chances = {}
 		pass
@@ -28,6 +30,7 @@ class Player:
 		hasGuessed = false
 		correct = false
 		score = 0
+		last_score = 0
 		chances = {}
 		pass
 
@@ -126,6 +129,10 @@ func _reset_guesses():
 func _player_correctness(correct_answer, score):
 	for i in PlayerCount:
 		var playerGuess = players[playerNumberToIds[i]]["guess"]
+		# if the player has passed make no change to score
+		if not players[playerNumberToIds[i]]["hasGuessed"]:
+			continue
+		
 		players[playerNumberToIds[i]]["correct"] = playerGuess == correct_answer
 		if players[playerNumberToIds[i]]["correct"]:
 			_adjust_score(i, score)

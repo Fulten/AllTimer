@@ -765,6 +765,15 @@ func _postquestion_delay_phase():
 	
 	_show_question_explainer.rpc(true)
 	
+	#sync player scores
+	var scores = {}
+	var last_scores = {}
+	for key in GameState.players.keys():
+		scores[key] = GameState.players[key]["score"]
+		last_scores[key] = GameState.players[key]["last_score"]
+		pass
+	_sync_update_scores_on_clients.rpc(scores, last_scores)
+	
 	ui_postquestion_timer.start(post_question_delay_default + extra_seconds + 1.0)
 	pass
 	
@@ -786,12 +795,7 @@ func _next_question():
 	_update_ui_player_pannel_locked_all.rpc(false)
 		
 	current_index += 1
-	var scores = {}
-	for key in GameState.players.keys():
-		scores[key] = GameState.players[key]["score"]
-		pass
 	if current_index < GameState.CurrentQuizQuestions.size(): # still questions in the quiz
-		_sync_update_scores_on_clients.rpc(scores)
 		_sync_update_question_on_clients.rpc(current_index)
 		players_answered = 0
 		GameState._reset_guesses()
@@ -806,8 +810,6 @@ func _next_question():
 			_ui_present_question_multiple_choice.rpc()
 		_prequestion_delay_phase()
 	else: # no more questions in the quiz
-		_sync_update_scores_on_clients.rpc(scores)
-		
 		# we need to transcribe profile data into its own array to send using rpc
 		# as rpc will refuse to send typed objects for security reasons
 		var playersData = {}

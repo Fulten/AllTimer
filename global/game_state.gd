@@ -107,9 +107,9 @@ func _get_chance_from_uuid(chance_uuid):
 
 func _adjust_score(player_index,score):
 	var playerId = playerNumberToIds[player_index]
+	players[playerId]["last_score"] = players[playerId]["score"]
 	# var awarded_points = roundf(score * players[playerId]["guessTime"]/30) # old scoring function
-	# points awarded are always equal to at least half the point value of the question, positive or negative
-	var awarded_points = (score * players[playerId]["guessTime"]/30) * 0.5 + score * 0.5
+	var awarded_points = (score + score * players[playerId]["guessTime"]/quizOptions.timer)/2
 	players[playerId]["score"] += awarded_points
 
 func _player_has_guessed(player_id):

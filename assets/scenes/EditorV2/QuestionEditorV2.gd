@@ -242,6 +242,7 @@ func _ready():
 	$HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxButtons/BtnChanceRemove.disabled = true
 	$HBoxParent/HBoxQuestions.show()
 	$HBoxParent/HBoxChances.hide()
+	$HBoxParent/HBoxStatistics.hide()
 	_UI_toggle_ui_that_needs_selected_question(false)
 	_UI_toggle_ui_that_needs_selected_chance(false)
 	can_select_chances = false

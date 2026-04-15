@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dgkyt8vikwwn6"]
+[gd_scene load_steps=21 format=3 uid="uid://dgkyt8vikwwn6"]
 
 [ext_resource type="StyleBox" uid="uid://clt67rot44qgn" path="res://assets/scenes/EditorV2/Style/StyleB_Editor_btn_disabled.tres" id="1_2o521"]
 [ext_resource type="StyleBox" uid="uid://drfhb5723mfe7" path="res://assets/scenes/EditorV2/Style/StyleB_Editor_btn_hover.tres" id="1_876sx"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://qwe1ynkdknjm" path="res://assets/scenes/EditorV2/Style/GreenO.png" id="8_5qrwy"]
 [ext_resource type="Texture2D" uid="uid://ck8xbcr6f1r0t" path="res://assets/scenes/EditorV2/Style/YellowDash.png" id="9_u300d"]
 [ext_resource type="LabelSettings" uid="uid://ok3gc7wnerpl" path="res://assets/scenes/EditorV2/Style/Question_Editor_Labels.tres" id="11_iy5vm"]
+[ext_resource type="StyleBox" uid="uid://cmjq0v08ylojb" path="res://assets/scenes/EditorV2/Style/StyleB_Editor_Gray_Label.tres" id="14_qgx12"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t1mt4"]
 
@@ -129,6 +130,7 @@ layout_mode = 2
 color = Color(0.0823529, 0.0901961, 0.188235, 1)
 
 [node name="HBoxQuestions" type="HBoxContainer" parent="HBoxParent"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 30.0
@@ -810,8 +812,130 @@ layout_mode = 2
 text = "Discard Changes"
 
 [node name="HBoxStatistics" type="HBoxContainer" parent="HBoxParent"]
-visible = false
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 30.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxParent/HBoxStatistics"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxTotals" type="VBoxContainer" parent="HBoxParent/HBoxStatistics/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxTotals"]
+layout_mode = 2
+text = "Total Questions And Chances"
+label_settings = ExtResource("6_851cc")
+
+[node name="HBoxQuestionCounter" type="HBoxContainer" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxTotals"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxTotals/HBoxQuestionCounter"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("14_qgx12")
+text = "Question Count:"
+label_settings = ExtResource("11_iy5vm")
+
+[node name="Count" type="Label" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxTotals/HBoxQuestionCounter"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_styles/normal = ExtResource("14_qgx12")
+text = "N/A"
+label_settings = ExtResource("11_iy5vm")
+
+[node name="HBoxChancesCounter" type="HBoxContainer" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxTotals"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxTotals/HBoxChancesCounter"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("14_qgx12")
+text = "Chances Count:"
+label_settings = ExtResource("11_iy5vm")
+
+[node name="Count" type="Label" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxTotals/HBoxChancesCounter"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_styles/normal = ExtResource("14_qgx12")
+text = "N/A"
+label_settings = ExtResource("11_iy5vm")
+
+[node name="ChancesCount" type="VBoxContainer" parent="HBoxParent/HBoxStatistics/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxQuestionTypes" type="VBoxContainer" parent="HBoxParent/HBoxStatistics/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuestionTypesHeader" type="Label" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes"]
+layout_mode = 2
+text = "Question Types:"
+label_settings = ExtResource("6_851cc")
+
+[node name="HBoxMultipleChoice" type="HBoxContainer" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes/HBoxMultipleChoice"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("14_qgx12")
+text = "Multiple Choice Count:"
+label_settings = ExtResource("11_iy5vm")
+
+[node name="Count" type="Label" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes/HBoxMultipleChoice"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_styles/normal = ExtResource("14_qgx12")
+text = "N/A"
+label_settings = ExtResource("11_iy5vm")
+
+[node name="HBoxTrueFalse" type="HBoxContainer" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes/HBoxTrueFalse"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("14_qgx12")
+text = "True/False Count:"
+label_settings = ExtResource("11_iy5vm")
+
+[node name="Count" type="Label" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes/HBoxTrueFalse"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_styles/normal = ExtResource("14_qgx12")
+text = "N/A"
+label_settings = ExtResource("11_iy5vm")
+
+[node name="HBoxThisThat" type="HBoxContainer" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes/HBoxThisThat"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("14_qgx12")
+text = "This Or That Count:"
+label_settings = ExtResource("11_iy5vm")
+
+[node name="Count" type="Label" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes/HBoxThisThat"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_styles/normal = ExtResource("14_qgx12")
+text = "N/A"
+label_settings = ExtResource("11_iy5vm")
+
+[node name="VDivider" type="ColorRect" parent="HBoxParent/HBoxStatistics/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(10, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.0823529, 0.0901961, 0.188235, 1)
 
 [node name="QuestionPopup" type="ColorRect" parent="."]
 visible = false

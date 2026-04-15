@@ -122,6 +122,12 @@ func _ready():
 		_clean_chance_set_and_master()
 		_generate_answer_order()
 		_sync_answer_order.rpc(local_answer_order)
+		if GameState.CurrentQuizQuestions[current_index]["questionType"] == "True/False":
+			_ui_present_question_true_false.rpc()
+		elif GameState.CurrentQuizQuestions[current_index]["questionType"] == "This/That":
+			_ui_present_question_this_that.rpc()
+		else:
+			_ui_present_question_multiple_choice.rpc()
 		_player_loaded(multiplayer.get_unique_id())
 		print("server [%s] loaded" % multiplayer.get_unique_id())
 		pass
@@ -802,7 +808,6 @@ func _end_of_quiz_phase():
 func _next_question():
 	# set player pannel graphics back to their unlocked state
 	_update_ui_player_pannel_locked_all.rpc(false)
-		
 	current_index += 1
 	if current_index < GameState.CurrentQuizQuestions.size(): # still questions in the quiz
 		_sync_update_question_on_clients.rpc(current_index)

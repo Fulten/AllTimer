@@ -92,7 +92,7 @@ offset_right = 1081.0
 offset_bottom = 1142.0
 rotation = 4.71239
 
-[node name="BtnQuestions" type="Button" parent="HBoxParent/Control/HBoxContainer"]
+[node name="BtnStatistics" type="Button" parent="HBoxParent/Control/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -100,7 +100,7 @@ theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = ExtResource("6_stbnt")
 theme_override_styles/disabled = ExtResource("2_248gj")
-text = "Questions"
+text = "Statistics"
 
 [node name="BtnChances" type="Button" parent="HBoxParent/Control/HBoxContainer"]
 layout_mode = 2
@@ -111,6 +111,16 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("6_stbnt")
 theme_override_styles/disabled = ExtResource("2_248gj")
 text = "Chances"
+
+[node name="BtnQuestions" type="Button" parent="HBoxParent/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("6_stbnt")
+theme_override_styles/disabled = ExtResource("2_248gj")
+text = "Questions"
 
 [node name="VDivider2" type="ColorRect" parent="HBoxParent"]
 clip_contents = true
@@ -799,6 +809,10 @@ text = "Save Chance"
 layout_mode = 2
 text = "Discard Changes"
 
+[node name="HBoxStatistics" type="HBoxContainer" parent="HBoxParent"]
+visible = false
+layout_mode = 2
+
 [node name="QuestionPopup" type="ColorRect" parent="."]
 visible = false
 layout_mode = 1
@@ -927,8 +941,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "No"
 
-[connection signal="button_up" from="HBoxParent/Control/HBoxContainer/BtnQuestions" to="." method="_on_btn_questions_button_up"]
+[connection signal="button_up" from="HBoxParent/Control/HBoxContainer/BtnStatistics" to="." method="_on_btn_statistics_button_up"]
 [connection signal="button_up" from="HBoxParent/Control/HBoxContainer/BtnChances" to="." method="_on_btn_chances_button_up"]
+[connection signal="button_up" from="HBoxParent/Control/HBoxContainer/BtnQuestions" to="." method="_on_btn_questions_button_up"]
 [connection signal="button_up" from="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxQuestions/HBoxContainer/BtnReload" to="." method="_on_btn_reload_button_up"]
 [connection signal="text_changed" from="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxQuestions/SearchBar" to="." method="_on_search_bar_text_changed"]
 [connection signal="item_selected" from="HBoxParent/HBoxQuestions/VBoxQuestionBrowser/VBoxQuestions/ScrollContainer/QuestionList" to="." method="_on_question_list_item_selected"]

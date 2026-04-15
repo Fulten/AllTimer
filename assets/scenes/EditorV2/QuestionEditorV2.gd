@@ -21,6 +21,7 @@ var is_new_chance = false
 var can_select_chances = false
 var show_questions_menu = true
 var show_chances_menu = false
+var show_statistics_menu = false
 var current_question_uuid: String
 var current_chance_uuid: String
 var selected_chance_local_uuid: String
@@ -790,20 +791,35 @@ func _on_search_bar_text_changed():
 func _on_btn_questions_button_up():
 	show_questions_menu = true
 	show_chances_menu = false
+	show_statistics_menu = false
 	$HBoxParent/HBoxQuestions.show()
 	$HBoxParent/HBoxChances.hide()
-	$HBoxParent/Control/HBoxContainer/BtnQuestions.disabled = true;
-	$HBoxParent/Control/HBoxContainer/BtnChances.disabled = false;
-	pass
+	$HBoxParent/HBoxStatistics.hide()
+	$HBoxParent/Control/HBoxContainer/BtnQuestions.disabled = true
+	$HBoxParent/Control/HBoxContainer/BtnChances.disabled = false
+	$HBoxParent/Control/HBoxContainer/BtnStatistics.disabled = false
 
 func _on_btn_chances_button_up():
 	show_questions_menu = false
 	show_chances_menu = true
+	show_statistics_menu = false
 	$HBoxParent/HBoxQuestions.hide()
 	$HBoxParent/HBoxChances.show()
-	$HBoxParent/Control/HBoxContainer/BtnQuestions.disabled = false;
-	$HBoxParent/Control/HBoxContainer/BtnChances.disabled = true;
-	pass
+	$HBoxParent/HBoxStatistics.hide()
+	$HBoxParent/Control/HBoxContainer/BtnQuestions.disabled = false
+	$HBoxParent/Control/HBoxContainer/BtnChances.disabled = true
+	$HBoxParent/Control/HBoxContainer/BtnStatistics.disabled = false
+	
+func _on_btn_statistics_button_up():
+	show_questions_menu = false
+	show_chances_menu = false
+	show_statistics_menu = true
+	$HBoxParent/HBoxQuestions.hide()
+	$HBoxParent/HBoxChances.hide()
+	$HBoxParent/HBoxStatistics.show()
+	$HBoxParent/Control/HBoxContainer/BtnQuestions.disabled = false
+	$HBoxParent/Control/HBoxContainer/BtnChances.disabled = false
+	$HBoxParent/Control/HBoxContainer/BtnStatistics.disabled = true
 
 func _on_chance_search_bar_text_changed():
 	_generate_chances_list()

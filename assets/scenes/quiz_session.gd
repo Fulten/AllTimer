@@ -40,6 +40,27 @@ extends Control
 	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2,
 	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3,
 	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4]
+	
+var surprize_styleBs_a1 = [
+	load("res://assets/uiux/session_themes/Fatal Surprise/surprise_AAH.tres"),
+	load("res://assets/uiux/session_themes/Fatal Surprise/surprise_AAN.tres"),
+	load("res://assets/uiux/session_themes/Fatal Surprise/surprise_AAP.tres")
+]
+var surprize_styleBs_a2 = [
+	load("res://assets/uiux/session_themes/Fatal Surprise/surprise_ABH.tres"),
+	load("res://assets/uiux/session_themes/Fatal Surprise/surprise_ABN.tres"),
+	load("res://assets/uiux/session_themes/Fatal Surprise/surprise_ABP.tres")
+]
+var surprize_styleBs_a3 = [
+	load("res://assets/uiux/session_themes/Fatal Surprise/surprise_ACH.tres"),
+	load("res://assets/uiux/session_themes/Fatal Surprise/surprise_ACN.tres"),
+	load("res://assets/uiux/session_themes/Fatal Surprise/surprise_ACP.tres")
+]
+var surprize_styleBs_a4 = [
+	load("res://assets/uiux/session_themes/Fatal Surprise/surprise_ADH.tres"),
+	load("res://assets/uiux/session_themes/Fatal Surprise/surprise_ADN.tres"),
+	load("res://assets/uiux/session_themes/Fatal Surprise/surprise_ADP.tres")
+]
 
 var asset_player_pannel_locked
 var asset_player_pannel_default
@@ -704,11 +725,61 @@ func _render_answers_track_correct(current_question, question_order):
 		ui_this_or_that_answers[correct_answer].text = current_question["correct"]
 		ui_this_or_that_answers[question_order[1]].text = current_question["wrong"][0]
 	else:
+		if GameState.CurrentTheme == "Fatal Surprise":
+			_apply_scew_to_fatal_answers()
 		correct_answer = question_order[0]
 		ui_multiple_choice_answers[correct_answer].text = current_question["correct"]
 		ui_multiple_choice_answers[question_order[1]].text = current_question["wrong"][0]
 		ui_multiple_choice_answers[question_order[2]].text = current_question["wrong"][1]
 		ui_multiple_choice_answers[question_order[3]].text = current_question["wrong"][2]
+
+func _apply_scew_to_fatal_answers():
+	var current_question = GameState.CurrentQuizQuestions[current_index]
+	var average_answer_length = 0
+	average_answer_length += current_question["correct"].length()
+	average_answer_length += current_question["wrong"][0].length()
+	average_answer_length += current_question["wrong"][1].length()
+	average_answer_length += current_question["wrong"][2].length()
+	average_answer_length /= 4
+	
+	var scew_modifier = float(max(average_answer_length - 25, 0)) * 0.002
+	
+	print("scew: " + str(scew_modifier))
+	print("average: " + str(average_answer_length))
+	
+	#a1 styleboxes
+	surprize_styleBs_a1[0].skew.y = max(0.1 - scew_modifier, 0.01)
+	surprize_styleBs_a1[1].skew.y = max(0.1 - scew_modifier, 0.01)
+	surprize_styleBs_a1[2].skew.y = max(0.1 - scew_modifier, 0.01)
+	
+	surprize_styleBs_a2[0].skew.y = max(0.025 - scew_modifier * 0.25, 0.0025)
+	surprize_styleBs_a2[1].skew.y = max(0.05 - scew_modifier * 0.5, 0.005)
+	surprize_styleBs_a2[2].skew.y = max(0.025 - scew_modifier * 0.25, 0.0025)
+	
+	surprize_styleBs_a3[0].skew.y = min(-0.025 + scew_modifier * 0.25, -0.0025)
+	surprize_styleBs_a3[1].skew.y = min(-0.05 + scew_modifier * 0.5, -0.005)
+	surprize_styleBs_a3[2].skew.y = min(-0.025 + scew_modifier * 0.25, -0.0025)
+	
+	surprize_styleBs_a4[0].skew.y = min(-0.08 + scew_modifier * 0.8, -0.008)
+	surprize_styleBs_a4[1].skew.y = min(-0.07 + scew_modifier * 0.7, -0.007)
+	surprize_styleBs_a4[2].skew.y = min(-0.08 + scew_modifier * 0.8, -0.008)
+	
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1.add_theme_stylebox_override("hover", surprize_styleBs_a1[0])
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1.add_theme_stylebox_override("normal", surprize_styleBs_a1[1])
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1.add_theme_stylebox_override("pressed", surprize_styleBs_a1[2])
+	
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2.add_theme_stylebox_override("hover", surprize_styleBs_a2[0])
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2.add_theme_stylebox_override("normal", surprize_styleBs_a2[1])
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2.add_theme_stylebox_override("pressed", surprize_styleBs_a2[2])
+	
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3.add_theme_stylebox_override("hover", surprize_styleBs_a3[0])
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3.add_theme_stylebox_override("normal", surprize_styleBs_a3[1])
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3/a3.add_theme_stylebox_override("pressed", surprize_styleBs_a3[2])
+	
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4.add_theme_stylebox_override("hover", surprize_styleBs_a4[0])
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4.add_theme_stylebox_override("normal", surprize_styleBs_a4[1])
+	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4.add_theme_stylebox_override("pressed", surprize_styleBs_a4[2])
+
 
 ## starts the pre_quiz_rules timer, this phase displays the rules for 1 minute, or until input is recived from all players
 func _prequiz_rules_phase():

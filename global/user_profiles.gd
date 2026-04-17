@@ -25,6 +25,7 @@ func _new_profile(profileName):
 		"questions_answered": {},
 		"questions_seen": {},
 		"questions_chances": {},
+		"unlocked_themes": [],
 	}
 	
 	return newProfile
@@ -40,7 +41,7 @@ func _save_new_profile(newProfile):
 		print("!INFO: Profile Name Collision [%s]" % newProfile.name)
 		pass
 	pass
-	
+
 ## Updates an already existing profile with new statistics
 func _overwrite_profile_with_reference(updatedProfile):
 	if profiles.has(updatedProfile.name):
@@ -62,7 +63,7 @@ func _overwrite_profile_with_reference(updatedProfile):
 		print("!INFO: Profile there is no profile with name [%s]" % updatedProfile.name)
 		pass
 	pass
-	
+
 func _delete_profile(profileName):
 	print("!INFO: Deleting Existing Profile: [%s]" % profileName)
 	profiles.erase(profileName)
@@ -114,12 +115,14 @@ func _IO_read_profiles():
 		if !"score_highest" in profiles[key]:
 			profiles[key]["score_highest"] = 0
 			saveProfilesChanges = true
-			
-		pass
+		
+		# add new unlocked themes
+		if !"unlocked_themes" in profiles[key]:
+			profiles[key]["unlocked_themes"] = []
+			saveProfilesChanges = true
 		
 	if saveProfilesChanges:
 		_IO_write_profiles()
-		pass
 
 func _IO_write_profiles():
 	var file = FileAccess.open("user://user_profiles.json", FileAccess.WRITE)
@@ -154,7 +157,6 @@ func _load_chance_data():
 		raw_chance_data = JSON.parse_string(file.get_as_text())
 		file.close()
 		
-		
 		for entry in raw_chance_data:
 			var chance = {
 				"name": entry["name"],
@@ -170,8 +172,3 @@ func _has_chance_hash(chance_uuid: String):
 	if chance_uuid in chance_descriptors:
 		return true
 	return false
-	
-	
-	
-	
-	

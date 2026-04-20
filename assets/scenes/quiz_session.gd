@@ -753,11 +753,11 @@ func _apply_scew_to_fatal_answers():
 	surprize_styleBs_a1[2].skew.y = max(0.1 - scew_modifier, 0.01)
 	
 	surprize_styleBs_a2[0].skew.y = max(0.025 - scew_modifier * 0.25, 0.0025)
-	surprize_styleBs_a2[1].skew.y = max(0.05 - scew_modifier * 0.5, 0.005)
+	surprize_styleBs_a2[1].skew.y = max(0.050 - scew_modifier * 0.5, 0.005)
 	surprize_styleBs_a2[2].skew.y = max(0.025 - scew_modifier * 0.25, 0.0025)
 	
 	surprize_styleBs_a3[0].skew.y = min(-0.025 + scew_modifier * 0.25, -0.0025)
-	surprize_styleBs_a3[1].skew.y = min(-0.05 + scew_modifier * 0.5, -0.005)
+	surprize_styleBs_a3[1].skew.y = min(-0.050 + scew_modifier * 0.5, -0.005)
 	surprize_styleBs_a3[2].skew.y = min(-0.025 + scew_modifier * 0.25, -0.0025)
 	
 	surprize_styleBs_a4[0].skew.y = min(-0.08 + scew_modifier * 0.8, -0.008)

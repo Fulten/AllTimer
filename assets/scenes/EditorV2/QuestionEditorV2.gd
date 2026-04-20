@@ -39,6 +39,11 @@ var ui_label_settings = [
 	preload("res://assets/scenes/EditorV2/Style/Question_Editor_Labels_yellow.tres"),
 	preload("res://assets/scenes/EditorV2/Style/Question_Editor_Labels_red.tres")]
 	
+var ui_label_settings_small = [
+	preload("res://assets/scenes/EditorV2/Style/Question_Editor_Labels_small.tres"),
+	preload("res://assets/scenes/EditorV2/Style/Question_Editor_Labels_yellow_small.tres"),
+	preload("res://assets/scenes/EditorV2/Style/Question_Editor_Labels_red_small.tres")]
+	
 var ui_entry_node_refrence = {
 	"tags": ["HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxTags/Label", 1],
 	"chances": ["HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances/HBoxLabels/QuestionChances", 1],
@@ -573,9 +578,9 @@ func _UI_clear_question_data():
 
 func _UI_highlight_error_state(errorEntries):
 	for key in ui_entry_node_refrence:
-		get_node(ui_entry_node_refrence[key][0]).label_settings = ui_label_settings[0]
+		get_node(ui_entry_node_refrence[key][0]).label_settings = ui_label_settings_small[0]
 	for key in errorEntries:
-		get_node(ui_entry_node_refrence[key][0]).label_settings = ui_label_settings[ui_entry_node_refrence[key][1]]
+		get_node(ui_entry_node_refrence[key][0]).label_settings = ui_label_settings_small[ui_entry_node_refrence[key][1]]
 
 func _UI_highlight_chances_error_state(errorEntries):
 	for key in ui_entry_node_chances_reference:

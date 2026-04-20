@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dgkyt8vikwwn6"]
+[gd_scene load_steps=22 format=3 uid="uid://dgkyt8vikwwn6"]
 
 [ext_resource type="StyleBox" uid="uid://clt67rot44qgn" path="res://assets/scenes/EditorV2/Style/StyleB_Editor_btn_disabled.tres" id="1_2o521"]
 [ext_resource type="StyleBox" uid="uid://drfhb5723mfe7" path="res://assets/scenes/EditorV2/Style/StyleB_Editor_btn_hover.tres" id="1_876sx"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://ck8xbcr6f1r0t" path="res://assets/scenes/EditorV2/Style/YellowDash.png" id="9_u300d"]
 [ext_resource type="LabelSettings" uid="uid://ok3gc7wnerpl" path="res://assets/scenes/EditorV2/Style/Question_Editor_Labels.tres" id="11_iy5vm"]
 [ext_resource type="StyleBox" uid="uid://cmjq0v08ylojb" path="res://assets/scenes/EditorV2/Style/StyleB_Editor_Gray_Label.tres" id="14_qgx12"]
+[ext_resource type="LabelSettings" uid="uid://y4v04o1f10r6" path="res://assets/scenes/EditorV2/Style/Question_Editor_Labels_small.tres" id="14_wq3tb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t1mt4"]
 
@@ -130,7 +131,6 @@ layout_mode = 2
 color = Color(0.0823529, 0.0901961, 0.188235, 1)
 
 [node name="HBoxQuestions" type="HBoxContainer" parent="HBoxParent"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 30.0
@@ -298,7 +298,7 @@ wrap_mode = 1
 [node name="HBoxQuestionText" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 3.0
+size_flags_stretch_ratio = 4.0
 
 [node name="Label" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxQuestionText"]
 custom_minimum_size = Vector2(125, 0)
@@ -320,7 +320,7 @@ wrap_mode = 1
 [node name="HBoxPostText" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 3.0
+size_flags_stretch_ratio = 4.0
 
 [node name="Label" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxPostText"]
 custom_minimum_size = Vector2(125, 0)
@@ -342,7 +342,6 @@ wrap_mode = 1
 [node name="HBoxQuestionType" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 3.0
 
 [node name="Label" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxQuestionType"]
 custom_minimum_size = Vector2(125, 0)
@@ -350,13 +349,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Question Type:"
-label_settings = ExtResource("11_iy5vm")
+label_settings = ExtResource("14_wq3tb")
 autowrap_mode = 2
 
 [node name="OptionButton" type="OptionButton" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Header/HBoxQuestionType"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 16.0
+theme_override_font_sizes/font_size = 16
 item_count = 3
 selected = 0
 popup/item_0/text = "Multiple Choice"
@@ -369,7 +369,6 @@ popup/item_2/id = 2
 [node name="Answers" type="VBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 3.0
 
 [node name="QuestionAnswers" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers"]
 layout_mode = 2
@@ -380,7 +379,7 @@ horizontal_alignment = 1
 [node name="HBoxCorrect" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 3.0
+size_flags_stretch_ratio = 2.0
 
 [node name="Label" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxCorrect"]
 custom_minimum_size = Vector2(125, 0)
@@ -388,21 +387,22 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Correct Answer:"
-label_settings = ExtResource("11_iy5vm")
+label_settings = ExtResource("14_wq3tb")
 autowrap_mode = 2
 
 [node name="Text" type="TextEdit" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxCorrect"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 16.0
+size_flags_stretch_ratio = 8.0
+theme_override_font_sizes/font_size = 16
 placeholder_text = " Correct Answer"
 wrap_mode = 1
 
 [node name="HBoxWrong1" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 3.0
+size_flags_stretch_ratio = 2.0
 
 [node name="Label" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong1"]
 custom_minimum_size = Vector2(125, 0)
@@ -410,21 +410,22 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Wrong Answer 1:"
-label_settings = ExtResource("11_iy5vm")
+label_settings = ExtResource("14_wq3tb")
 autowrap_mode = 2
 
 [node name="Text" type="TextEdit" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong1"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 16.0
+size_flags_stretch_ratio = 8.0
+theme_override_font_sizes/font_size = 16
 placeholder_text = " Wrong Answer One"
 wrap_mode = 1
 
 [node name="HBoxWrong2" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 3.0
+size_flags_stretch_ratio = 2.0
 
 [node name="Label" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong2"]
 custom_minimum_size = Vector2(125, 0)
@@ -432,21 +433,22 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Wrong Answer 2:"
-label_settings = ExtResource("11_iy5vm")
+label_settings = ExtResource("14_wq3tb")
 autowrap_mode = 2
 
 [node name="Text" type="TextEdit" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 16.0
+size_flags_stretch_ratio = 8.0
+theme_override_font_sizes/font_size = 16
 placeholder_text = " Wrong Answer Two"
 wrap_mode = 1
 
 [node name="HBoxWrong3" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 3.0
+size_flags_stretch_ratio = 2.0
 
 [node name="Label" type="Label" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong3"]
 custom_minimum_size = Vector2(125, 0)
@@ -454,21 +456,22 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Wrong Answer 3:"
-label_settings = ExtResource("11_iy5vm")
+label_settings = ExtResource("14_wq3tb")
 autowrap_mode = 2
 
 [node name="Text" type="TextEdit" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Answers/HBoxWrong3"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 16.0
+size_flags_stretch_ratio = 8.0
+theme_override_font_sizes/font_size = 16
 placeholder_text = " Wrong Answer Three"
 wrap_mode = 1
 
 [node name="Chances" type="VBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 2.25
+size_flags_stretch_ratio = 1.5
 
 [node name="HBoxLabels" type="HBoxContainer" parent="HBoxParent/HBoxQuestions/VBoxQuestionEditor/Chances"]
 layout_mode = 2
@@ -812,6 +815,7 @@ layout_mode = 2
 text = "Discard Changes"
 
 [node name="HBoxStatistics" type="HBoxContainer" parent="HBoxParent"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 30.0

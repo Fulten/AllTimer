@@ -1,9 +1,11 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cqgcmtgk5dmwj"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cqgcmtgk5dmwj"]
 
 [ext_resource type="FontFile" uid="uid://c2ioqx1qm0oah" path="res://assets/uiux/session_themes/Fatal Surprise/YIKES!__.TTF" id="1_xvox0"]
 [ext_resource type="StyleBox" uid="uid://cmh7m1x6axfuv" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_OCH.tres" id="2_5yksv"]
 [ext_resource type="StyleBox" uid="uid://ccaojj7ggshii" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_OCN.tres" id="3_kk8bn"]
 [ext_resource type="StyleBox" uid="uid://dheovih7r13cd" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_OCP.tres" id="4_ov3pv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_24kcx"]
 
 [resource]
 Button/colors/font_color = Color(1, 0.824, 0.12, 1)
@@ -12,6 +14,7 @@ Button/colors/font_pressed_color = Color(1, 0.824, 0.12, 1)
 Button/constants/outline_size = 2
 Button/font_sizes/font_size = 32
 Button/fonts/font = ExtResource("1_xvox0")
+Button/styles/focus = SubResource("StyleBoxEmpty_24kcx")
 Button/styles/hover = ExtResource("2_5yksv")
 Button/styles/normal = ExtResource("3_kk8bn")
 Button/styles/pressed = ExtResource("4_ov3pv")

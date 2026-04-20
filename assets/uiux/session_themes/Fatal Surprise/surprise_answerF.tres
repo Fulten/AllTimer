@@ -1,9 +1,11 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://vscymwg6oovu"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://vscymwg6oovu"]
 
 [ext_resource type="FontFile" uid="uid://bc01r67d5wp2w" path="res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf" id="1_smish"]
 [ext_resource type="StyleBox" uid="uid://d03kyu0spiijk" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_AFH.tres" id="2_f6tit"]
 [ext_resource type="StyleBox" uid="uid://dm8mhxqaaibq3" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_AFN.tres" id="3_70kwh"]
 [ext_resource type="StyleBox" uid="uid://d2v4oq45n2eeb" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_AFP.tres" id="4_qwdal"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3xk4y"]
 
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
@@ -12,6 +14,7 @@ Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/colors/font_pressed_color = Color(1, 0.15, 0.15, 1)
 Button/constants/outline_size = 4
 Button/fonts/font = ExtResource("1_smish")
+Button/styles/focus = SubResource("StyleBoxEmpty_3xk4y")
 Button/styles/hover = ExtResource("2_f6tit")
 Button/styles/normal = ExtResource("3_70kwh")
 Button/styles/pressed = ExtResource("4_qwdal")

@@ -1,6 +1,8 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bx4b57fds04q1"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bx4b57fds04q1"]
 
 [ext_resource type="FontFile" uid="uid://ppcieu81eyur" path="res://assets/uiux/session_themes/default/TeachersStudent-Regular.ttf" id="1_lilal"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2sql"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w5xcg"]
 bg_color = Color(0.607843, 0.8, 0.8, 0.239216)
@@ -49,6 +51,7 @@ expand_margin_right = 4.0
 [resource]
 default_font = ExtResource("1_lilal")
 default_font_size = 32
+Button/styles/focus = SubResource("StyleBoxEmpty_h2sql")
 Button/styles/hover = SubResource("StyleBoxFlat_w5xcg")
 Button/styles/normal = SubResource("StyleBoxFlat_1nm8g")
 Button/styles/pressed = SubResource("StyleBoxFlat_dn0es")

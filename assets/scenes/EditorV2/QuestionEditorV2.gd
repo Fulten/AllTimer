@@ -29,6 +29,10 @@ var selected_chance_global_uuid: String
 var current_question_chances = {}
 var questions_that_refrence_chances_uuid = []
 
+var stat_tags_list = {}
+var stat_sorted_keys = []
+var stat_searched_keys = []
+
 var ui_question_state_icons = [
 	preload("res://assets/scenes/EditorV2/Style/GreenO.png"),
 	preload("res://assets/scenes/EditorV2/Style/YellowDash.png"),
@@ -722,6 +726,8 @@ func _calculate_statistics():
 	var true_false_count = 0
 	var this_or_that_count = 0
 	
+	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxTags/SearchBarTags.text = ""
+	
 	for uuid in questions:
 		if questions[uuid]["questionType"] == "Multiple Choice":
 			multiple_choice_count += 1
@@ -730,23 +736,17 @@ func _calculate_statistics():
 		elif questions[uuid]["questionType"] == "This/That":
 			this_or_that_count += 1
 	
-	# find all tags
-	var tags = {}
-	
+	# find all tags and numerate them
 	for key in questions:
 		for tag in questions[key]["tags"]:
-			if tag in tags:
-				tags[tag] += 1
+			if tag in stat_tags_list:
+				stat_tags_list[tag] += 1
 			else:
-				tags[tag] = 1
+				stat_tags_list[tag] = 1
 		
-	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxTags/TagList.clear()
-	
-	var sorted_keys = _sort_tags_map(tags)
-	
-	for key in sorted_keys:
-		var tagstr = "%s: %s" % [str(key), str(tags[key])]
-		$HBoxParent/HBoxStatistics/VBoxContainer/VBoxTags/TagList.add_item(tagstr, null, false)
+	_generate_tags_list()
+	_generate_searched_tags_list()
+	_update_chances_ui()
 	
 	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxTotals/HBoxQuestionCounter/Count.text = str(questions.size())
 	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxTotals/HBoxChancesCounter/Count.text = str(chances.size())
@@ -754,7 +754,30 @@ func _calculate_statistics():
 	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes/HBoxMultipleChoice/Count.text = str(multiple_choice_count)
 	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes/HBoxTrueFalse/Count.text = str(true_false_count)
 	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes/HBoxThisThat/Count.text = str(this_or_that_count)
+
+func _generate_tags_list():
+	stat_sorted_keys = _sort_tags_map(stat_tags_list)
 	
+func _generate_searched_tags_list():
+	stat_searched_keys.clear()
+	
+	var searchKey = $HBoxParent/HBoxStatistics/VBoxContainer/VBoxTags/SearchBarTags.text
+	
+	if searchKey == "":
+		for key in stat_sorted_keys:
+			stat_searched_keys.append(key)
+		return
+	
+	for key in stat_sorted_keys:
+		if key.to_lower().contains(searchKey.to_lower()):
+			stat_searched_keys.append(key)
+			
+func _update_chances_ui():
+	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxTags/TagList.clear()
+	for key in stat_searched_keys:
+		var tagstr = "%s: %s" % [str(key), str(stat_tags_list[key])]
+		$HBoxParent/HBoxStatistics/VBoxContainer/VBoxTags/TagList.add_item(tagstr, null, false)
+
 func _sort_tags_map(tags):
 	var sorted_keys = []
 	var unsorted_keys = []
@@ -927,5 +950,9 @@ func _on_btn_chance_popup_yes_button_up():
 func _on_btn_chance_popup_no_button_up():
 	$QuestionPopup.hide()
 	delete_popup_chance = false
-#endregion
 
+func _on_search_bar_tags_text_changed():
+	_generate_searched_tags_list()
+	_update_chances_ui()
+	
+#endregion

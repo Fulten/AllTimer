@@ -942,9 +942,15 @@ layout_mode = 2
 text = "Tags:"
 label_settings = ExtResource("6_851cc")
 
+[node name="SearchBarTags" type="TextEdit" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxTags"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Search..."
+
 [node name="TagList" type="ItemList" parent="HBoxParent/HBoxStatistics/VBoxContainer/VBoxTags"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 14.0
 
 [node name="VDivider2" type="ColorRect" parent="HBoxParent/HBoxStatistics/VBoxContainer"]
 clip_contents = true
@@ -1111,6 +1117,7 @@ text = "No"
 [connection signal="button_up" from="HBoxParent/HBoxChances/VBoxChancesBrowser/VBoxIputButtons/BtnChancesDelete" to="." method="_on_btn_chances_delete_button_up"]
 [connection signal="button_up" from="HBoxParent/HBoxChances/VBoxQuestionEditor/BtnChancesSave" to="." method="_on_btn_chances_save_button_up"]
 [connection signal="button_up" from="HBoxParent/HBoxChances/VBoxQuestionEditor/BtnChancesDiscard" to="." method="_on_btn_chances_discard_button_up"]
+[connection signal="text_changed" from="HBoxParent/HBoxStatistics/VBoxContainer/VBoxTags/SearchBarTags" to="." method="_on_search_bar_tags_text_changed"]
 [connection signal="button_up" from="QuestionPopup/VBoxContainer/Warning/HBoxContainer/BtnPopupYes" to="." method="_on_btn_popup_yes_button_up"]
 [connection signal="button_up" from="QuestionPopup/VBoxContainer/Warning/HBoxContainer/BtnPopupNo" to="." method="_on_btn_popup_no_button_up"]
 [connection signal="button_up" from="ChancePopup/VBoxContainer/Warning/HBoxContainer/BtnChancePopupYes" to="." method="_on_btn_chance_popup_yes_button_up"]

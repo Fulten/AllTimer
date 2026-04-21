@@ -730,13 +730,53 @@ func _calculate_statistics():
 		elif questions[uuid]["questionType"] == "This/That":
 			this_or_that_count += 1
 	
+	# find all tags
+	var tags = {}
+	
+	for key in questions:
+		for tag in questions[key]["tags"]:
+			if tag in tags:
+				tags[tag] += 1
+			else:
+				tags[tag] = 1
+		
+	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxTags/TagList.clear()
+	
+	var sorted_keys = _sort_tags_map(tags)
+	
+	for key in sorted_keys:
+		var tagstr = "%s: %s" % [str(key), str(tags[key])]
+		$HBoxParent/HBoxStatistics/VBoxContainer/VBoxTags/TagList.add_item(tagstr, null, false)
+	
 	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxTotals/HBoxQuestionCounter/Count.text = str(questions.size())
 	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxTotals/HBoxChancesCounter/Count.text = str(chances.size())
 	
 	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes/HBoxMultipleChoice/Count.text = str(multiple_choice_count)
 	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes/HBoxTrueFalse/Count.text = str(true_false_count)
 	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxQuestionTypes/HBoxThisThat/Count.text = str(this_or_that_count)
-	pass
+	
+func _sort_tags_map(tags):
+	var sorted_keys = []
+	var unsorted_keys = []
+	
+	for key in tags:
+		unsorted_keys.append(key)
+	
+	while unsorted_keys.size() > 0:
+		var highest = 0
+		var highest_key = ""
+		var highest_index = -1
+		
+		for i in range(unsorted_keys.size()):
+			if tags[unsorted_keys[i]] > highest:
+				highest = tags[unsorted_keys[i]]
+				highest_key = unsorted_keys[i]
+				highest_index = i
+				
+		sorted_keys.append(highest_key)
+		unsorted_keys.remove_at(highest_index)
+	
+	return sorted_keys
 #endregion
 
 #region node callbacks

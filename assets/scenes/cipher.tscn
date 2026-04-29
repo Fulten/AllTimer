@@ -8,7 +8,7 @@
 [ext_resource type="LabelSettings" uid="uid://bhmvyhp31on3d" path="res://assets/uiux/session_themes/Patriotic Cipher/label_cipher_section.tres" id="9_kn6fp"]
 [ext_resource type="LabelSettings" uid="uid://fokwou4ul35" path="res://assets/uiux/session_themes/Patriotic Cipher/label_cipher_body.tres" id="10_2070n"]
 [ext_resource type="Texture2D" uid="uid://c8vqlwu2p8dl7" path="res://assets/uiux/session_themes/Patriotic Cipher/T_timer_patcip.tga" id="11_qkoei"]
-[ext_resource type="FontFile" uid="uid://bdi68tslsma5m" path="res://assets/uiux/session_themes/default/chalk.ttf" id="12_fik1c"]
+[ext_resource type="FontFile" uid="uid://nbi3m4mcclyx" path="res://assets/uiux/session_themes/default/Chalk.otf" id="12_fik1c"]
 [ext_resource type="FontFile" uid="uid://c6vg4qkha7rn1" path="res://assets/uiux/session_themes/Patriotic Cipher/alarm clock.ttf" id="12_g285j"]
 [ext_resource type="FontFile" uid="uid://ert0t4ov8cqh" path="res://assets/uiux/session_themes/Patriotic Cipher/ARCADE_N.TTF" id="13_li2k4"]
 [ext_resource type="Texture2D" uid="uid://cw2ifheyia7xq" path="res://assets/uiux/session_themes/default/kb1.tga" id="14_bj7b2"]

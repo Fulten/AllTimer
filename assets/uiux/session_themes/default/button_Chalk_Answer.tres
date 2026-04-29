@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=6 format=3 uid="uid://bx4b57fds04q1"]
 
-[ext_resource type="FontFile" uid="uid://ppcieu81eyur" path="res://assets/uiux/session_themes/default/TeachersStudent-Regular.ttf" id="1_lilal"]
+[ext_resource type="FontFile" uid="uid://bhhwfwj5iakco" path="res://assets/uiux/session_themes/default/angelina.TTF" id="1_hrc2w"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2sql"]
 
@@ -16,8 +16,8 @@ corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 corner_detail = 10
-expand_margin_left = 4.0
-expand_margin_right = 4.0
+expand_margin_left = 10.0
+expand_margin_right = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1nm8g"]
 bg_color = Color(0.6, 0.6, 0.6, 0.203922)
@@ -31,8 +31,8 @@ corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 corner_detail = 10
-expand_margin_left = 4.0
-expand_margin_right = 4.0
+expand_margin_left = 10.0
+expand_margin_right = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dn0es"]
 bg_color = Color(0.0627, 0.11, 0.0627, 1)
@@ -45,11 +45,11 @@ corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
-expand_margin_left = 4.0
-expand_margin_right = 4.0
+expand_margin_left = 10.0
+expand_margin_right = 10.0
 
 [resource]
-default_font = ExtResource("1_lilal")
+default_font = ExtResource("1_hrc2w")
 default_font_size = 32
 Button/styles/focus = SubResource("StyleBoxEmpty_h2sql")
 Button/styles/hover = SubResource("StyleBoxFlat_w5xcg")

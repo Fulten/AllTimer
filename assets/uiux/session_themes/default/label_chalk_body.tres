@@ -1,7 +1,7 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bxrfww81cwua1"]
 
-[ext_resource type="FontFile" uid="uid://bdi68tslsma5m" path="res://assets/uiux/session_themes/default/chalk.ttf" id="1_lxb42"]
+[ext_resource type="FontFile" uid="uid://nbi3m4mcclyx" path="res://assets/uiux/session_themes/default/Chalk.otf" id="1_sk4fe"]
 
 [resource]
-font = ExtResource("1_lxb42")
+font = ExtResource("1_sk4fe")
 font_size = 36

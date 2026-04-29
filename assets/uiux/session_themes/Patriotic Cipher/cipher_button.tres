@@ -1,6 +1,8 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://y23gbxkkoip4"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://y23gbxkkoip4"]
 
 [ext_resource type="FontFile" uid="uid://ert0t4ov8cqh" path="res://assets/uiux/session_themes/Patriotic Cipher/ARCADE_N.TTF" id="1_78l78"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rscpx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n12at"]
 bg_color = Color(0.3445, 0.65, 0.532892, 1)
@@ -42,6 +44,7 @@ Button/colors/font_focus_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
 Button/colors/font_pressed_color = Color(0, 1, 0.623529, 1)
 Button/fonts/font = ExtResource("1_78l78")
+Button/styles/focus = SubResource("StyleBoxEmpty_rscpx")
 Button/styles/hover = SubResource("StyleBoxFlat_n12at")
 Button/styles/normal = SubResource("StyleBoxFlat_w84s0")
 Button/styles/pressed = SubResource("StyleBoxFlat_kf3b7")

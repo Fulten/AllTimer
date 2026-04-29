@@ -26,7 +26,7 @@
 [ext_resource type="LabelSettings" uid="uid://c15bddwgatrm4" path="res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_Timer.tres" id="17_tx8eb"]
 [ext_resource type="Theme" uid="uid://cjmfw6j1byub" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_answerC.tres" id="18_1883s"]
 [ext_resource type="Theme" uid="uid://25yhueg6b2in" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_answerD.tres" id="20_fnivo"]
-[ext_resource type="FontFile" uid="uid://bdi68tslsma5m" path="res://assets/uiux/session_themes/default/chalk.ttf" id="24_frsdy"]
+[ext_resource type="FontFile" uid="uid://cctkma5i2dsgs" path="res://assets/uiux/session_themes/default/chalkiez.otf" id="24_frsdy"]
 [ext_resource type="Theme" uid="uid://cqceiax0udg2u" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_answerT.tres" id="26_h7h18"]
 [ext_resource type="Theme" uid="uid://vscymwg6oovu" path="res://assets/uiux/session_themes/Fatal Surprise/surprise_answerF.tres" id="27_y68p2"]
 [ext_resource type="Texture2D" uid="uid://cbtem03eo3u1p" path="res://assets/uiux/session_themes/Fatal Surprise/T_seperator_v_fatalSurprise_D.tga" id="29_gi3hs"]

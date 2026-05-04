@@ -71,7 +71,7 @@
 		"correct": "1, 2, 3, 2, 5, 3",
 		"explainer": "Final Fantasy 1, 4 and 6 were released as 1, 2 and 3 respectively in America. Final Fantasy 2,3 and 5 were not released in America originally",
 		"name": "The Final Confusion",
-		"question": "Final Fantasy has a plentiful number of sequels, but when it came to it's original releases, things got pretty messy in America. If we were to list of the first 6 Final Fantasy releases using the American numbers where possible, what would the order be?",
+		"question": "Final Fantasy has a plentiful number of sequels, but when it came to its original releases, things got pretty messy in America. If we were to list off the first 6 Final Fantasy releases using the American numbers where possible, what would the order be?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"RPG",
@@ -110,7 +110,7 @@
 		"correct": "\"The Criminals of Prohibition\"",
 		"explainer": "In Shadow Hearts: From the New World you become fairly close friends with actual historical Al Capone!",
 		"name": "Shadows Over the Globe",
-		"question": "Shadows Hearts: From the New World follows in the footsteps of its previous games by melding real figures with its fictional setting one notable ally would like feature promentaly in which documentary with the following title?",
+		"question": "Shadows Hearts: From the New World follows in the footsteps of its previous games by melding real figures with its fictional setting. One notable ally would likely feature prominently in which of the following documentaries?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"RPG",
@@ -130,7 +130,7 @@
 		"correct": "Bioshock Infinite",
 		"explainer": "",
 		"name": "Bootleg Theatre",
-		"question": "The story of the last bootleg theatre was pretty odd. A guy saves a bird from a cage to get rid of a bunch of seeds he owes another guy. But the thing is, as the story goes on, the guy finds out the bird might actually be his kid, and that he might not actually owe a debt... except to himself? Things get confusing when the bird starts pecking holes to other dimensions and becomes a god bird after drowning. What game is the bootleg play about?",
+		"question": "The story of the last bootleg theatre was pretty odd. A guy saves a bird from a cage to get rid of a bunch of seeds he owes another guy. But the thing is, as the story goes on, the guy finds out the bird might actually be his kid, and that he might not actually owe a debt... except to himself? Things get confusing when the bird starts pecking holes to other dimensions and becomes a god bird after drowning the guy. What game is the bootleg play about?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Modern",
@@ -274,7 +274,7 @@
 			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
 		],
 		"correct": "Yellow",
-		"explainer": "Playstation 3's had a common issue where, after a period of time, they would stop working and flash a horrifying series of yellow lights, indicating a hardware failure.",
+		"explainer": "Playstation 3s had a common issue where, after a period of time, they would stop working and flash a horrifying series of yellow lights, indicating a hardware failure.",
 		"name": "Moody Lights",
 		"question": "Mood lighting is popular among gamers, but what color lighting might be a bad pick for a PS3 fan? ",
 		"questionType": "Multiple Choice",
@@ -336,9 +336,9 @@
 			"45500936-fc97-4174-832f-c250cdf4e49b"
 		],
 		"correct": "Kingdom Hearts: Birth By Sleep",
-		"explainer": "In Kingdom Hearts: Birth By Sleep, the main antagonist is played by Lenoard Nimoa and the teacher of the main characters is played by Mark Hamill.",
+		"explainer": "In Kingdom Hearts: Birth By Sleep, the main antagonist is played by Leonard Nimoy and the teacher of the main characters is played by Mark Hamill.",
 		"name": "Star Trek Wars",
-		"question": "If we treat the voice actors as their actor counter parts, in which game was Spock and Luke Skywalker enemies?",
+		"question": "If we treat the characters as their actor counter parts, in which game were Spock and Luke Skywalker enemies?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"RPG"
@@ -456,7 +456,7 @@
 		"correct": "A Mix Table",
 		"explainer": "DJ Hero is a game you play with a Mix Table peripheral device!",
 		"name": "A... What Hero?",
-		"question": "Guitar Hero became a household name in the mid to late 2000s and, of course, Activision began to oversaturate the market with sequels and spinoffs. This included a game dedicated to a completely different instrument. What was that instrument?",
+		"question": "Guitar Hero became a household name in the mid-to-late 2000s and, of course, Activision began to oversaturate the market with sequels and spinoffs. This included a game dedicated to which completely different instrument?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Rhythm"
@@ -1167,7 +1167,7 @@
 	{
 		"chances": [],
 		"correct": "You talk too long, I don’t understand",
-		"explainer": "",
+		"explainer": "In the game Seaman, the technology where the \"seamen\" would listen to you and react via a microphone to your questions was fairly primitive and required specific kinds of questions. To indicate to the player that they needed it worded differently, this phrase is said by default.",
 		"name": "Seapeople",
 		"question": "Seaman was, indeed, a very bizarre game for the dreamcast. Not only were you expert to care for the weird “seamen”, but you were also expected to talk to them. How might they respond to a more loquacious person?",
 		"questionType": "Multiple Choice",
@@ -1303,7 +1303,7 @@
 	{
 		"chances": [],
 		"correct": "Sailing up the Congo to meet an Ivory trader",
-		"explainer": "",
+		"explainer": "The main character in both the novel and the game similarly end up making things worse than before intervening, with the former dealing with illegal exotic trades rather than a warlord with a god-complex",
 		"name": "The Heart of the Desert",
 		"question": "If Yager Development took a more direct adaptational approach to their game Spec Ops the Line and it’s in inspiration “The Heart of Darkness”, what would Martin Walker be doing instead? ",
 		"questionType": "Multiple Choice",
@@ -1461,7 +1461,7 @@
 		"correct": "They are moving Cities with a Giant Turtle",
 		"explainer": "",
 		"name": "Wandering COGs",
-		"question": "If Marcus Fenix found himself inside of the world of “The Wandering Village” what migh he say?",
+		"question": "If Marcus Fenix found himself inside of the world of “The Wandering Village” what might he say?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Microsoft",
@@ -1654,7 +1654,7 @@
 			"43944b2e-9790-4fba-a257-004591ba27a2"
 		],
 		"correct": "A man performing the kabuki yo! with a ting at the end",
-		"explainer": "",
+		"explainer": "Holding the Z-Button changes the start-up jingle to an alternate one depending on how many controllers are holding it.\n",
 		"name": "Gamecube Easter Eggs",
 		"question": "What sound might you recieve if you held the z button on 4 controllers when starting the gamecube? ",
 		"questionType": "Multiple Choice",
@@ -1853,7 +1853,7 @@
 		],
 		"correct": "The icecaps will start melting!",
 		"explainer": "",
-		"name": "Think of the Future Drek",
+		"name": "Think of the Future, Drek",
 		"question": "If Ratchet were trying to show Chairmen Drek the issues of climate change, what might he say?",
 		"questionType": "Multiple Choice",
 		"tags": [
@@ -2090,7 +2090,7 @@
 		"correct": "An iPod ",
 		"explainer": "",
 		"name": "Oh Kojima",
-		"question": "Which device did Kojima cheekily include in Metal Gear Solid 4?",
+		"question": "Which device, and all of its functionality, did Kojima cheekily include in Metal Gear Solid 4?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
@@ -2210,7 +2210,7 @@
 			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
 		],
 		"correct": "Nigeria",
-		"explainer": "",
+		"explainer": "In one of the commercials, Kevin said the line \"You can't believe everything you read on the internet, otherwise I'd be a Nigerian millionaire.\" This offended the Nigerian government and resulted in Sony changing the line and apologizing to the Nigerian government.",
 		"name": "Dear Playstation",
 		"question": "Which country seems to hate lovable Kevin Butler from the Playstation “Power to the Player” commercials?",
 		"questionType": "Multiple Choice",
@@ -2519,7 +2519,7 @@
 		"correct": "12",
 		"explainer": "",
 		"name": "Furious",
-		"question": "Furi has how many bosses total, including dlc content and secret endings?",
+		"question": "If the main character of Furi wanted to rant about his major battles over a pint for each, how many beers would he need to order to cover all of the bosses he encountered, including DLC and secret endings?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Indie",
@@ -2618,7 +2618,7 @@
 	},
 	{
 		"chances": [],
-		"correct": "It is an indicated of parentage",
+		"correct": "It is an indicator of parentage",
 		"explainer": "",
 		"name": "The Elden Name",
 		"question": "In Elden Ring…. why do so many people share the first letter of their name?",

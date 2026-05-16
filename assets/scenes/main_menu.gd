@@ -22,6 +22,7 @@ func _ready():
 	GameState.quizOptions.initilize()
 	load_settings()
 	UserProfiles._IO_read_profiles()
+	GameState._IO_read_tags_filter()
 	_refresh_profiles_dropdown()
 	_update_current_profile_label()
 	_update_profile_statistics()

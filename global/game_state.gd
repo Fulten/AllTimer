@@ -78,7 +78,10 @@ var PlayersLoaded = 0
 var CurrentQuizQuestions = [] #The questions to be used in the current quiz
 var CurrentQuestionIndex = 0 #The index of question currently on in quiz
 
-var TagsToExclude = [] #The list of tags to be excluded from quizes
+var TagsFilterFile = "user://quiz_filters.json"
+var TagsFilter = {}
+
+
 var CurrentChances = [] #The list of chance stars to track for the game
 
 ## currently avalible themes
@@ -205,3 +208,43 @@ func _reset_quiz_state():
 	CurrentQuizQuestions.clear()
 	GameStarted = false
 	pass
+	
+func _IO_read_tags_filter():
+	var file = FileAccess.open(TagsFilterFile, FileAccess.READ)
+	var missing = false
+	
+	if file:
+		TagsFilter = JSON.parse_string(file.get_as_text())
+		file.close()
+	else:
+		print("!!ERROR: Failed to read tags filter")
+		
+	if TagsFilter == null:
+		print("test 1")
+		TagsFilter = {
+			"TagsBlackList": false, # decides whether TagsFilter is a blacklist or whitelist
+			"TagsFilter": [] # list of tags used to filter the quiz
+		}
+		_IO_write_tags_filter()
+		return
+	
+	if !"TagsBlackList" in TagsFilter:
+		TagsFilter["TagsBlackList"] = false
+		missing = true
+	
+	if !"TagsFilter" in TagsFilter:
+		TagsFilter["TagsFilter"] = []
+		missing = true
+		
+	if missing:
+		_IO_write_tags_filter()
+		return
+		
+func _IO_write_tags_filter():
+	var file = FileAccess.open(TagsFilterFile, FileAccess.WRITE)
+	if file:
+		var jsonString = JSON.stringify(TagsFilter)
+		file.store_string(jsonString)
+		file.close()
+	else:
+		print("!!ERROR: Failed to save tags filter")

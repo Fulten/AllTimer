@@ -69,6 +69,7 @@ var asset_player_pannel_default
 #region global variables
 var master_chances_data = []
 var master_question_data = []
+var filtered_question_data = []
 var chances_set = {}
 
 var local_question_set_uuids = []
@@ -686,10 +687,10 @@ func _generate_answer_order():
 	local_answer_order[2] = available_indexes.pop_at(randi() % available_indexes.size())
 	local_answer_order[3] = available_indexes.pop_at(randi() % available_indexes.size())
 	
-##uses the given questionIndex to find the corrisponding question in the master_question_data array
+##uses the given questionIndex to find the corrisponding question in the filtered_question_data array
 ##after it will go through the selected questions chances and store them in the chances_set
 func _next_question_data_and_store_chances(questionIndex, selected_index):
-	var nextQuestion = master_question_data.pop_at(selected_index)
+	var nextQuestion = filtered_question_data.pop_at(selected_index)
 	for chance in nextQuestion["chances"]:
 		if !chances_set.has(chance):
 			chances_set[chance] = [questionIndex]
@@ -1019,16 +1020,23 @@ func _load_master_questions():
 	if file:
 		master_question_data = JSON.parse_string(file.get_as_text())
 		file.close()
-	var i = 0
 	for question in master_question_data:
 		var tagMatch = false
-		for tag in GameState.TagsToExclude:
-			if tag in question:
-				tagMatch = true
+		for tag in GameState.TagsFilter["TagsFilter"]:
+			var escape = false
+			for question_tag in question["tags"]:
+				if tag in question_tag.to_lower():
+					tagMatch = true
+					escape = true
+					break
+			if escape:
 				break
-		if !tagMatch:
-			master_question_data[i] = question
-			i += 1
+
+		var a = tagMatch
+		var b = GameState.TagsFilter["TagsBlackList"]
+		# need to use XOR operator for whether or not to accept the question into the set
+		if  (a or b) and not (a and b):
+			filtered_question_data.append(question)
 	pass
 	
 func _load_master_chances():
@@ -1040,6 +1048,7 @@ func _load_master_chances():
 
 func _clean_master_questions():
 	master_question_data = []
+	filtered_question_data = []
 	pass
 	
 func _clean_chance_set_and_master():
@@ -1050,9 +1059,9 @@ func _clean_chance_set_and_master():
 func _select_quiz_questions(quizSize):
 	GameState.CurrentQuizQuestions = []
 	for i in range(quizSize):
-		if master_question_data.size() == 0:
+		if filtered_question_data.size() == 0:
 			break
-		GameState.CurrentQuizQuestions.append(_next_question_data_and_store_chances(i, randi() % master_question_data.size()))
+		GameState.CurrentQuizQuestions.append(_next_question_data_and_store_chances(i, randi() % filtered_question_data.size()))
 	pass
 	
 func _prepare_quiz_chances(chance_count):

@@ -236,6 +236,9 @@ func _IO_read_tags_filter():
 		TagsFilter["TagsFilter"] = []
 		missing = true
 		
+	for i in range(0, TagsFilter["TagsFilter"].size()):
+		TagsFilter["TagsFilter"][i] = TagsFilter["TagsFilter"][i].to_lower()
+		
 	if missing:
 		_IO_write_tags_filter()
 		return

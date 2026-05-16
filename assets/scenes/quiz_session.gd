@@ -745,9 +745,6 @@ func _apply_scew_to_fatal_answers():
 	
 	var scew_modifier = float(max(average_answer_length - 25, 0)) * 0.002
 	
-	print("scew: " + str(scew_modifier))
-	print("average: " + str(average_answer_length))
-	
 	#a1 styleboxes
 	surprize_styleBs_a1[0].skew.y = max(0.1 - scew_modifier, 0.01)
 	surprize_styleBs_a1[1].skew.y = max(0.1 - scew_modifier, 0.01)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bjrqcx0k7scpa"]
+[gd_scene load_steps=44 format=3 uid="uid://bjrqcx0k7scpa"]
 
 [ext_resource type="Theme" uid="uid://j8encu3x20ng" path="res://assets/uiux/main_menu/default_theme.tres" id="1_nvabs"]
 [ext_resource type="Shader" path="res://assets/uiux/main_menu/scrolling_background.gdshader" id="2_40555"]
@@ -14,6 +14,8 @@
 [ext_resource type="AudioStream" uid="uid://b7uw13gw7eym7" path="res://assets/uiux/main_menu/SFX_ButtonHover.mp3" id="12_evs6x"]
 [ext_resource type="LabelSettings" uid="uid://mv8bcxsbvof1" path="res://assets/scenes/Label_TagW.tres" id="12_fat6d"]
 [ext_resource type="AudioStream" uid="uid://crk8ui184joxw" path="res://assets/uiux/main_menu/SFX_ButtonPress.mp3" id="13_w17qx"]
+[ext_resource type="Theme" uid="uid://wsbgxiubgl02" path="res://assets/scenes/ButtonNF_Toggle.tres" id="14_6pik3"]
+[ext_resource type="Theme" uid="uid://cblo30jiqi52a" path="res://assets/scenes/ButtonNF_Clickable.tres" id="15_a7e8b"]
 [ext_resource type="Texture2D" uid="uid://h0ngjad4u0fn" path="res://assets/uiux/main_menu/T_BadAtMath_D.tga" id="17_iljph"]
 [ext_resource type="LabelSettings" uid="uid://b8rucp80rws68" path="res://assets/scenes/Label_Subsection.tres" id="18_f5q02"]
 [ext_resource type="LabelSettings" uid="uid://bga51ml3vvwne" path="res://assets/scenes/Label_SubTag.tres" id="19_ihq36"]
@@ -100,7 +102,6 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_xro5j"]
 resource_name = "Anim_Game_FadeIn"
-length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -120,10 +121,10 @@ tracks/1/path = NodePath("../Options_Game2/Game:position")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.5, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(657, -200), Vector2(657, 309)]
+"values": [Vector2(657, -200), Vector2(657, 309), Vector2(657, 309), Vector2(657, -33)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -132,10 +133,22 @@ tracks/2/path = NodePath("../Options_Game2/SettingsList:position")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.5, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(533, 1100), Vector2(533, 500)]
+"values": [Vector2(533, 1100), Vector2(533, 500), Vector2(533, 500), Vector2(533, 158)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Options_Game2/Underline:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-72, -54), Vector2(-72, -54), Vector2(-72, -396)]
 }
 
 [sub_resource type="Animation" id="Animation_sboeb"]
@@ -163,7 +176,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(657, 309), Vector2(657, -200)]
+"values": [Vector2(657, -33), Vector2(657, -200)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -175,7 +188,19 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(533, 500), Vector2(533, 1100)]
+"values": [Vector2(533, 158), Vector2(533, 1100)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Options_Game2/Underline:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-72, -396), Vector2(-72, -54)]
 }
 
 [sub_resource type="Animation" id="Animation_kslew"]
@@ -912,6 +937,18 @@ tracks/21/keys = {
 "update": 0,
 "values": [Vector2(456, 432)]
 }
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("../Options_Game2/Underline:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-72, -54)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hplv1"]
 _data = {
@@ -939,6 +976,26 @@ diffuse_texture = ExtResource("3_0ceap")
 texture_repeat = 2
 
 [sub_resource type="Theme" id="Theme_wr4x0"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_an7m0"]
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 5
+vertical = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n8h0l"]
+bg_color = Color(0, 0, 0, 0.470588)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="Theme" id="Theme_ialk3"]
+OptionButton/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+OptionButton/fonts/font = ExtResource("7_ixy01")
+OptionButton/styles/normal = SubResource("StyleBoxFlat_n8h0l")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7iv0q"]
 bg_color = Color(0.670588, 0.54902, 1, 1)
@@ -1110,7 +1167,7 @@ anchor_right = 33.6
 anchor_bottom = 15.6
 offset_top = 3.0
 offset_right = -0.00012207
-offset_bottom = 2.99884
+offset_bottom = 2.99896
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_wr4x0")
@@ -1489,7 +1546,7 @@ anchor_bottom = 0.5
 offset_left = -231.0
 offset_top = -163.0
 offset_right = 231.0
-offset_bottom = 37.0
+offset_bottom = 37.0002
 grow_horizontal = 2
 grow_vertical = 2
 text = "Game"
@@ -1514,6 +1571,166 @@ offset_right = 355.0
 offset_bottom = 451.999
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="FiltersCase" type="VBoxContainer" parent="Options_Game2/SettingsList"]
+layout_mode = 2
+alignment = 1
+
+[node name="QuestionFilterLabel" type="Label" parent="Options_Game2/SettingsList/FiltersCase"]
+layout_mode = 2
+text = "Question Filters"
+label_settings = ExtResource("18_f5q02")
+horizontal_alignment = 1
+
+[node name="WhitelistToggle" type="Button" parent="Options_Game2/SettingsList/FiltersCase"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("14_6pik3")
+toggle_mode = true
+text = "Whitelist mode"
+
+[node name="FilterContainers" type="HBoxContainer" parent="Options_Game2/SettingsList/FiltersCase"]
+layout_mode = 2
+alignment = 1
+
+[node name="ColumnA" type="VBoxContainer" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers"]
+layout_mode = 2
+
+[node name="Filter1" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnA"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_ixy01")
+theme_override_font_sizes/font_size = 16
+text = "filter one"
+flat = true
+
+[node name="Filter4" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnA"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_ixy01")
+theme_override_font_sizes/font_size = 16
+text = "filter four"
+flat = true
+
+[node name="Filter7" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnA"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_ixy01")
+theme_override_font_sizes/font_size = 16
+text = "filter seven"
+flat = true
+
+[node name="Filter10" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnA"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_ixy01")
+theme_override_font_sizes/font_size = 16
+text = "filter ten
+"
+flat = true
+
+[node name="ColumnB" type="VBoxContainer" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers"]
+layout_mode = 2
+
+[node name="Filter2" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnB"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_ixy01")
+theme_override_font_sizes/font_size = 16
+text = "filter two"
+flat = true
+
+[node name="Filter5" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnB"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_ixy01")
+theme_override_font_sizes/font_size = 16
+text = "filter five"
+flat = true
+
+[node name="Filter8" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnB"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_ixy01")
+theme_override_font_sizes/font_size = 16
+text = "filter eight"
+flat = true
+
+[node name="Filter11" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnB"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_ixy01")
+theme_override_font_sizes/font_size = 16
+text = "filter eleven"
+flat = true
+
+[node name="ColumnC" type="VBoxContainer" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers"]
+layout_mode = 2
+
+[node name="Filter3" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnC"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_ixy01")
+theme_override_font_sizes/font_size = 16
+text = "filter three"
+flat = true
+
+[node name="Filter6" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnC"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_ixy01")
+theme_override_font_sizes/font_size = 16
+text = "filter six"
+flat = true
+
+[node name="Filter9" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnC"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_ixy01")
+theme_override_font_sizes/font_size = 16
+text = "filter nine"
+flat = true
+
+[node name="Filter12" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnC"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_ixy01")
+theme_override_font_sizes/font_size = 16
+text = "filter twelve"
+flat = true
+
+[node name="FilterPresets" type="HBoxContainer" parent="Options_Game2/SettingsList/FiltersCase"]
+layout_mode = 2
+alignment = 1
+
+[node name="SavePresetButton" type="Button" parent="Options_Game2/SettingsList/FiltersCase/FilterPresets"]
+layout_mode = 2
+theme = ExtResource("15_a7e8b")
+theme_override_font_sizes/font_size = 24
+text = "Save"
+
+[node name="PresetNameField" type="TextEdit" parent="Options_Game2/SettingsList/FiltersCase/FilterPresets"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("7_ixy01")
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Preset 01"
+
+[node name="VSeparator" type="VSeparator" parent="Options_Game2/SettingsList/FiltersCase/FilterPresets"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxLine_an7m0")
+
+[node name="LoadPresetButton" type="Button" parent="Options_Game2/SettingsList/FiltersCase/FilterPresets"]
+layout_mode = 2
+theme = ExtResource("15_a7e8b")
+theme_override_font_sizes/font_size = 24
+text = "Load"
+
+[node name="FilterPresetList" type="OptionButton" parent="Options_Game2/SettingsList/FiltersCase/FilterPresets"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = SubResource("Theme_ialk3")
+item_count = 1
+selected = 0
+popup/item_0/text = " Default"
+popup/item_0/id = 0
+
+[node name="ClearFiltersButton" type="Button" parent="Options_Game2/SettingsList/FiltersCase"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("15_a7e8b")
+theme_override_font_sizes/font_size = 26
+text = "Clear all"
 
 [node name="TimerSetting" type="HBoxContainer" parent="Options_Game2/SettingsList"]
 layout_mode = 2
@@ -1570,60 +1787,6 @@ popup/item_1/text = "Chalkboard"
 popup/item_1/id = 1
 popup/item_2/text = "Patriotic Cipher"
 popup/item_2/id = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Options_Game2/SettingsList"]
-layout_mode = 2
-alignment = 1
-
-[node name="AltRulesHeader" type="Label" parent="Options_Game2/SettingsList/HBoxContainer2"]
-layout_mode = 2
-text = "Alternate rules"
-label_settings = ExtResource("18_f5q02")
-
-[node name="AltRulesContainer" type="VBoxContainer" parent="Options_Game2/SettingsList"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Options_Game2/SettingsList/AltRulesContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="ShowTallies" type="Label" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer"]
-layout_mode = 2
-text = "Show tallies"
-label_settings = ExtResource("12_fat6d")
-
-[node name="TalliesCheckBox" type="CheckBox" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-flat = true
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Options_Game2/SettingsList/AltRulesContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Lose4Skip" type="Label" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer2"]
-layout_mode = 2
-text = "Lose points for skipping"
-label_settings = ExtResource("12_fat6d")
-
-[node name="Lose4SkipCheckBox" type="CheckBox" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-flat = true
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="Options_Game2/SettingsList/AltRulesContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="GamblingOn" type="Label" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer3"]
-layout_mode = 2
-text = "Gambling modes"
-label_settings = ExtResource("12_fat6d")
-
-[node name="GamblingOnCheckBox" type="CheckBox" parent="Options_Game2/SettingsList/AltRulesContainer/HBoxContainer3"]
-unique_name_in_owner = true
-layout_mode = 2
-flat = true
 
 [node name="CategoryWhitelistButton" type="Button" parent="Options_Game2/SettingsList"]
 visible = false
@@ -2039,7 +2202,7 @@ anchor_top = 0.437
 anchor_right = 0.825
 anchor_bottom = 0.733
 offset_top = 0.039978
-offset_right = -0.000366211
+offset_right = -0.000488281
 offset_bottom = 0.359985
 grow_horizontal = 0
 grow_vertical = 2

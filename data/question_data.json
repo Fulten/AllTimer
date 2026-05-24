@@ -480,7 +480,7 @@
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Rhythm",
-			"Popculture"
+			"Pop Culture"
 		],
 		"uuid": "947acbb3-edfb-4533-b0b1-fc4a09e6a02a",
 		"wrong": [
@@ -821,7 +821,7 @@
 		"question": "In 2016, an article published on Popcrush compared celebrities with their pokemon look-alikes. Which celebrity's look-alike was Lickitung?",
 		"questionType": "Multiple Choice",
 		"tags": [
-			"Popculture",
+			"Pop Culture",
 			"History",
 			"Nintendo"
 		],
@@ -989,7 +989,7 @@
 		"question": "What technique could Rayne teach Buffy if the vampires in Buffy’s world gained Bloodrayne's weakness?",
 		"questionType": "Multiple Choice",
 		"tags": [
-			"Popculture",
+			"Pop Culture",
 			"Adventure"
 		],
 		"uuid": "580d0b45-9d11-43b2-b438-f97ef88f59cc",
@@ -1032,7 +1032,7 @@
 		"questionType": "Multiple Choice",
 		"tags": [
 			"History",
-			"ID Software",
+			"Id Software",
 			"Hard"
 		],
 		"uuid": "cd0caec5-badc-4ce0-82c6-9c1080556bda",
@@ -1052,7 +1052,7 @@
 		"question": "ID Software's name is essentially an acronym from the company's original group's name, which was ...?",
 		"questionType": "Multiple Choice",
 		"tags": [
-			"ID Software",
+			"Id Software",
 			"History",
 			"Hard"
 		],
@@ -1445,7 +1445,7 @@
 		"tags": [
 			"Rockstar",
 			"Sandbox",
-			"Popculture"
+			"Pop Culture"
 		],
 		"uuid": "63ea57b7-50e5-4a03-8c50-3413e13d1130",
 		"wrong": [

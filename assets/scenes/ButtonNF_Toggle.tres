@@ -1,0 +1,35 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://wsbgxiubgl02"]
+
+[ext_resource type="FontFile" uid="uid://bc01r67d5wp2w" path="res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf" id="1_dbt1d"]
+[ext_resource type="StyleBox" uid="uid://di4w5l0kt12cq" path="res://assets/scenes/NonFlatButtonCase.tres" id="2_8bphr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t2ac4"]
+bg_color = Color(0, 0, 0, 0.588235)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 3.0
+expand_margin_right = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ctf3"]
+bg_color = Color(0, 0, 0, 1)
+
+[resource]
+default_font = ExtResource("1_dbt1d")
+default_font_size = 36
+Button/colors/font_color = Color(0, 0, 0, 0)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 1, 0.65, 1)
+Button/constants/outline_size = 2
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("1_dbt1d")
+Button/styles/hover = SubResource("StyleBoxFlat_t2ac4")
+Button/styles/normal = ExtResource("2_8bphr")
+Button/styles/pressed = SubResource("StyleBoxFlat_6ctf3")

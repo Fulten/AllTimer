@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dy8lkjphm6pdg"]
+[gd_scene load_steps=13 format=3 uid="uid://dy8lkjphm6pdg"]
 
 [ext_resource type="Script" path="res://assets/scenes/multiplayer_lobby.gd" id="1_e4r6j"]
 [ext_resource type="Texture2D" uid="uid://ctaoad4ca7mx7" path="res://assets/uiux/main_menu/T_MenuVignette_D.tga" id="1_l3cbn"]
@@ -10,6 +10,8 @@
 [ext_resource type="LabelSettings" uid="uid://b8rucp80rws68" path="res://assets/scenes/Label_Subsection.tres" id="5_wtxry"]
 [ext_resource type="LabelSettings" uid="uid://mv8bcxsbvof1" path="res://assets/scenes/Label_TagW.tres" id="6_ujxch"]
 [ext_resource type="Theme" uid="uid://cblo30jiqi52a" path="res://assets/scenes/ButtonNF_Clickable.tres" id="7_8se73"]
+[ext_resource type="FontFile" uid="uid://bc01r67d5wp2w" path="res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf" id="11_2bcij"]
+[ext_resource type="Theme" uid="uid://wsbgxiubgl02" path="res://assets/scenes/ButtonNF_Toggle.tres" id="12_cbtm4"]
 
 [node name="MultiplayerLobby" type="Control"]
 layout_mode = 3
@@ -396,6 +398,40 @@ offset_left = -6.10352e-05
 theme = ExtResource("2_jy5fm")
 text = ">Dangit!<"
 flat = true
+
+[node name="Filters" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.667
+anchor_top = 0.533
+anchor_right = 0.867
+anchor_bottom = 0.704
+offset_left = -0.640137
+offset_top = 0.359924
+offset_right = -0.640137
+offset_bottom = 7.67993
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Filters"]
+layout_mode = 2
+text = "Filter Preset"
+label_settings = ExtResource("5_wtxry")
+
+[node name="FilterPresetList" type="OptionButton" parent="Filters"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("11_2bcij")
+theme_override_font_sizes/font_size = 20
+item_count = 1
+selected = 0
+popup/item_0/text = "Default"
+popup/item_0/id = 0
+
+[node name="WhitelistToggle" type="Button" parent="Filters"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("12_cbtm4")
+toggle_mode = true
+text = "Whitelist Mode"
 
 [connection signal="button_down" from="PeerConnectors/HostButton" to="." method="_on_host_button_button_down"]
 [connection signal="button_up" from="PeerConnectors/HostButton" to="." method="_on_host_button_button_up"]

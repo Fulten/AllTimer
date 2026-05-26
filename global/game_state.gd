@@ -71,7 +71,7 @@ var CurrentQuizQuestions = [] #The questions to be used in the current quiz
 var CurrentQuestionIndex = 0 #The index of question currently on in quiz
 
 var TagsFilterFile = "user://quiz_filters.json"
-var TagsFilter = {}
+var TagsFilters = {}
 
 
 var CurrentChances = [] #The list of chance stars to track for the game
@@ -206,30 +206,30 @@ func _IO_read_tags_filter():
 	var missing = false
 	
 	if file:
-		TagsFilter = JSON.parse_string(file.get_as_text())
+		TagsFilters = JSON.parse_string(file.get_as_text())
 		file.close()
 	else:
-		print("!!ERROR: Failed to read tags filter")
+		print("!!ERROR: Failed to read tags filters")
 		
-	if TagsFilter == null:
-		print("test 1")
-		TagsFilter = {
-			"TagsBlackList": false, # decides whether TagsFilter is a blacklist or whitelist
-			"TagsFilter": [] # list of tags used to filter the quiz
-		}
+	if TagsFilters == null:
+		TagsFilters = {}
 		_IO_write_tags_filter()
 		return
 	
-	if !"TagsBlackList" in TagsFilter:
-		TagsFilter["TagsBlackList"] = false
-		missing = true
+	for key in TagsFilters:
+		if !"selected" in TagsFilters[key]:
+			TagsFilters[key]["selected"] = false
+			
+		if !"blackList" in TagsFilters[key]:
+			TagsFilters[key]["blackList"] = false
+			missing = true
 	
-	if !"TagsFilter" in TagsFilter:
-		TagsFilter["TagsFilter"] = []
-		missing = true
+		if !"tags" in TagsFilters[key]:
+			TagsFilters[key]["tags"] = []
+			missing = true
 		
-	for i in range(0, TagsFilter["TagsFilter"].size()):
-		TagsFilter["TagsFilter"][i] = TagsFilter["TagsFilter"][i].to_lower()
+		for i in range(0, TagsFilters[key]["tags"].size()):
+			TagsFilters[key]["tags"][i] = TagsFilters[key]["tags"][i].to_lower()
 		
 	if missing:
 		_IO_write_tags_filter()
@@ -238,8 +238,8 @@ func _IO_read_tags_filter():
 func _IO_write_tags_filter():
 	var file = FileAccess.open(TagsFilterFile, FileAccess.WRITE)
 	if file:
-		var jsonString = JSON.stringify(TagsFilter)
+		var jsonString = JSON.stringify(TagsFilters)
 		file.store_string(jsonString)
 		file.close()
 	else:
-		print("!!ERROR: Failed to save tags filter")
+		print("!!ERROR: Failed to save tags filters")

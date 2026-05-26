@@ -112,6 +112,9 @@ var config = ConfigFile.new()
 # variables for score rollup animation
 var rollup_count = 0
 
+var selectedTagsFilter
+var useTagFilter = false
+
 #endregion
 
 ##Called when the node enters the scene tree for the first time.
@@ -125,6 +128,7 @@ func _ready():
 	if multiplayer.is_server():
 		$pauseScreen/pauseCase/pauseBase/quitButton.text = "lobby"
 		QUIZ_SIZE = GameState.quizOptions.win_questions
+		_select_tags_filter()
 		_load_quiz_data()
 		_select_quiz_questions(QUIZ_SIZE)
 		_prepare_quiz_chances(CHANCE_COUNT)
@@ -589,7 +593,15 @@ func _player_loaded(_peerId):
 #endregion
 
 #region local functions used by the server and clients
-
+# if there is a filter enabled, store it as the selected filter, and mark the quiz to use it
+func _select_tags_filter():
+	useTagFilter = false
+	for key in GameState.TagsFilters:
+		if GameState.TagsFilters[key]["selected"] == true:
+			selectedTagsFilter = GameState.TagsFilters[key]
+			useTagFilter = true
+			return
+	
 func _reset_question_rules_visibility():
 	# hide all rules text
 	$preQuiz/preSessionOrganizer/RulesText/Rounds.hide()
@@ -1007,24 +1019,28 @@ func _load_master_questions():
 	if file:
 		master_question_data = JSON.parse_string(file.get_as_text())
 		file.close()
-	for question in master_question_data:
-		var tagMatch = false
-		for tag in GameState.TagsFilter["TagsFilter"]:
-			var escape = false
-			for question_tag in question["tags"]:
-				if tag in question_tag.to_lower():
-					tagMatch = true
-					escape = true
+	
+	if useTagFilter:
+		for question in master_question_data:
+			var tagMatch = false
+			for tag in selectedTagsFilter["tags"]:
+				var escape = false
+				for question_tag in question["tags"]:
+					if tag in question_tag.to_lower():
+						tagMatch = true
+						escape = true
+						break
+				if escape:
 					break
-			if escape:
-				break
 
-		var a = tagMatch
-		var b = GameState.TagsFilter["TagsBlackList"]
-		# need to use XOR operator for whether or not to accept the question into the set
-		if  (a or b) and not (a and b):
+			var a = tagMatch
+			var b = selectedTagsFilter["blackList"]
+			# need to use XOR operator for whether or not to accept the question into the set
+			if  (a or b) and not (a and b):
+				filtered_question_data.append(question)
+	else:
+		for question in master_question_data:
 			filtered_question_data.append(question)
-	pass
 	
 func _load_master_chances():
 	var file = FileAccess.open("res://data/chance_data.json", FileAccess.READ)

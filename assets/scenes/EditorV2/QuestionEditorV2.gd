@@ -725,6 +725,8 @@ func _calculate_statistics():
 	var true_false_count = 0
 	var this_or_that_count = 0
 	
+	stat_tags_list.clear()
+	
 	$HBoxParent/HBoxStatistics/VBoxContainer/VBoxTags/SearchBarTags.text = ""
 	
 	for uuid in questions:

@@ -52,14 +52,8 @@ func save_video_settings():
 
 
 func save_game_settings():
-	update_game_state(int(%TimerSettingList.get_item_text(%TimerSettingList.get_selected_id())),
-		%TalliesCheckBox.is_pressed(),
-		%Lose4SkipCheckBox.is_pressed(),
-		%GamblingOnCheckBox.is_pressed())
+	update_game_state(int(%TimerSettingList.get_item_text(%TimerSettingList.get_selected_id())))
 	config.set_value("game", "timer", GameState.quizOptions.timer)
-	config.set_value("game", "tallies", GameState.quizOptions.tallies)
-	config.set_value("game", "skipping_losses", GameState.quizOptions.skipping_losses)
-	config.set_value("game", "gambling_modes", GameState.quizOptions.gambling_modes)
 	config.save(config_path)
 #endregion
 
@@ -80,13 +74,10 @@ func load_settings():
 		var theme = config.get_value("video", "theme", "default")
 #		GAME
 		var timer = config.get_value("game", "timer", 30)
-		var tallies = config.get_value("game", "tallies", false)
-		var skipping_losses = config.get_value("game", "skipping_losses", false)
-		var gambling_modes = config.get_value("game", "gambling_modes", false)
 #		APPLY
 		apply_audio_settings(sound_device, master, music, sfx, voiceover)
 		apply_video_settings(display_type, resolution, input_display, theme)
-		apply_game_settings(timer, tallies, skipping_losses, gambling_modes)
+		apply_game_settings(timer)
 	else:
 		print("No settings file found. Using defaults.")
 
@@ -137,21 +128,15 @@ func apply_video_settings(display_type: int, resolution: int, input_display: Str
 	update_game_state_theme(theme)
 
 
-func apply_game_settings(timer: int, tallies: bool, skipping_losses: bool, gambling_modes: bool):
+func apply_game_settings(timer: int):
 	select_option_by_int(%TimerSettingList, timer)
-	%TalliesCheckBox.set_pressed_no_signal(tallies)
-	%Lose4SkipCheckBox.set_pressed_no_signal(skipping_losses)
-	%GamblingOnCheckBox.set_pressed_no_signal(gambling_modes)
-	update_game_state(timer, tallies, skipping_losses, gambling_modes)
+	update_game_state(timer)
 	return
 #endregion
 
 
-func update_game_state(timer: int, tallies: bool, skipping_losses: bool, gambling_modes: bool):
+func update_game_state(timer: int):
 	GameState.quizOptions.timer = timer
-	GameState.quizOptions.tallies = tallies
-	GameState.quizOptions.skipping_losses = skipping_losses
-	GameState.quizOptions.gambling_modes = gambling_modes
 
 @warning_ignore("shadowed_variable_base_class")
 func update_game_state_theme(theme: String):

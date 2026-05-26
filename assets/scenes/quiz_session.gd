@@ -136,10 +136,7 @@ func _ready():
 			"Highest score after 10 questions", 
 			0,  # cut feature, always use "highest score after x question"
 			10, # 10 questions
-			GameState.quizOptions.win_points,
-			GameState.quizOptions.tallies,
-			GameState.quizOptions.skipping_losses,
-			GameState.quizOptions.gambling_modes)
+			GameState.quizOptions.win_points)
 		_clean_master_questions()
 		_clean_chance_set_and_master()
 		_generate_answer_order()
@@ -243,10 +240,7 @@ func _sync_server_client_game_rules(
 	i_win_con: String, 
 	i_win_con_int: int, 
 	i_win_questions: int, 
-	i_win_points: int, 
-	i_tallies: bool, 
-	i_skipping_losses: bool, 
-	i_gambling_modes: bool):
+	i_win_points: int):
 		
 	GameState.quizOptions.timer = i_timer
 	GameState.quizOptions.win_con = i_win_con
@@ -254,10 +248,6 @@ func _sync_server_client_game_rules(
 
 	GameState.quizOptions.win_questions = i_win_questions
 	GameState.quizOptions.win_points = i_win_points
-
-	GameState.quizOptions.tallies = i_tallies
-	GameState.quizOptions.skipping_losses = i_skipping_losses
-	GameState.quizOptions.gambling_modes = i_gambling_modes
 	pass
 
 @rpc("authority", "reliable")

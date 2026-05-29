@@ -1,5 +1,9 @@
 extends Control
 
+var tags_list_font = preload("res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf")
+var style_box_empty = StyleBoxEmpty.new()
+
+
 var config = ConfigFile.new()
 var config_path = "user://settings.cfg"
 
@@ -15,6 +19,9 @@ var flag_profiles_menu_sub = false
 var node_hover_text
 var show_award_hover = false
 
+var loaded_filter
+var is_filter_loaded = false
+
 func _ready():
 	$StackAnimator.play("Anim_Stack0_Init")
 	await get_tree().create_timer(0.1).timeout
@@ -22,7 +29,12 @@ func _ready():
 	GameState.quizOptions.initilize()
 	load_settings()
 	UserProfiles._IO_read_profiles()
+	
 	GameState._IO_read_tags_filter()
+	GameState._build_complete_tags_list()
+	_load_filter_preset_list()
+	_display_filter_tag_list()
+	
 	_refresh_profiles_dropdown()
 	_update_current_profile_label()
 	_update_profile_statistics()
@@ -484,8 +496,56 @@ func _on_timer_game_to_options_timeout():
 	get_node("Options_2").show()
 	$Options_2/OptionsCategories/GameButton.grab_focus()
 	flag_options_menu_game = false
-#endregion
 
+
+
+
+func _on_filter_whitelist_toggle_button_up():
+	
+	pass 
+
+
+func _on_filter_save_preset_button_button_up(key, filter):
+	GameState.TagsFilters[key] = filter
+	GameState._IO_write_tags_filter()
+	_load_filter_preset_list()
+
+func _on_filter_load_preset_button_button_up():
+	var filter_list_selector = $Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList
+	var key = filter_list_selector.get_item_text(filter_list_selector.get_selected_id())
+	loaded_filter = GameState.TagsFilters[key]
+	is_filter_loaded = true
+	
+#endregion
+	
+#region tag filter functions
+func _display_filter_tag_list():
+	var container = $Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer
+	for child in container.get_children():
+		child.queue_free()
+	
+	for tag in GameState.tags_list:
+		var new_tag = CheckBox.new()
+		new_tag.text = tag
+		new_tag.flat = true
+		new_tag.toggle_mode = true
+		
+		new_tag.add_theme_font_size_override("theme_override_font_sizes/font_size", 16)
+		new_tag.add_theme_font_override("theme_override_fonts/font", tags_list_font)
+		new_tag.add_theme_stylebox_override("theme_override_styles/focus", style_box_empty)
+		new_tag.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+		container.add_child(new_tag)
+	
+	pass
+
+func _load_filter_preset_list():
+	var preset_list:OptionButton = $Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList
+	
+	preset_list.clear()
+	for key in GameState.TagsFilters:
+		preset_list.add_item(key)
+	
+#endregion
 
 const display_options = [
 	DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
@@ -493,10 +553,8 @@ const display_options = [
 	DisplayServer.WINDOW_MODE_FULLSCREEN,
 ]
 
-
 func _on_display_list_item_selected(index: int) -> void:
 	DisplayServer.window_set_mode(display_options[index])
-
 
 const resolution_options = [
 	 Vector2(648, 648),
@@ -511,11 +569,8 @@ const resolution_options = [
 	 Vector2(2560, 1440)
 ]
 
-
 func _on_resolutions_list_item_selected(index: int) -> void:
 	DisplayServer.window_set_size(resolution_options[index])
-
-
 
 func _on_sound_device_options_item_selected(index: int) -> void:
 	AudioServer.set_output_device(%SoundDeviceOptions.get_item_text(index))
@@ -571,8 +626,6 @@ func _escape_game_menu():
 		get_node("Stack_0").show()
 		flag_profiles_menu = false
 	pass
-	
-	
 
 #region functions for displaying profile statistics
 func _update_profile_statistics():

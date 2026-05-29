@@ -1,5 +1,7 @@
 extends Node
 
+var file_path_questions_data = "res://data/question_data.json"
+
 class Player:
 	var name: String
 	var uuid: int
@@ -70,6 +72,9 @@ var PlayersLoaded = 0
 var CurrentQuizQuestions = [] #The questions to be used in the current quiz
 var CurrentQuestionIndex = 0 #The index of question currently on in quiz
 
+var questions = {}
+var tags_list = {}
+
 var TagsFilterFile = "user://quiz_filters.json"
 var TagsFilters = {}
 
@@ -82,6 +87,42 @@ var CurrentChances = [] #The list of chance stars to track for the game
 var CurrentTheme = "Chalkboard" #The current quiz theme
 
 var GameStarted = false
+
+class Question:
+	var name: String
+	var body: String
+	var explainer: String
+	var correct: String
+	var wrong
+	var tags
+	var chances
+	var questionType: String
+	
+	var listIndex: int
+	var errorState: int
+	var errorEntries = []
+	
+	## converts raw question data into formatted question object
+	## should also handel error checking for bad formatting
+	func _build_from_raw(
+		i_name: String, 
+		i_body: String, 
+		i_correct: String, 
+		i_wrong, 
+		i_explainer: String,
+		i_tags,
+		i_chances,
+		i_questionType):
+		
+		name = i_name
+		body = i_body
+		correct = i_correct
+		wrong = i_wrong
+		explainer = i_explainer
+		tags = i_tags
+		chances = i_chances
+		questionType = i_questionType
+		listIndex = -1
 
 func _add_chance(chance_name, description, type, uuid, value, associated_questions: Array):
 	CurrentChances.append({ #to be updated when we add more types with an if/switch
@@ -201,6 +242,42 @@ func _reset_quiz_state():
 	GameStarted = false
 	pass
 	
+func _build_complete_tags_list():
+	_io_read_questions(file_path_questions_data)
+	# find all tags and numerate them
+	for key in questions:
+		for tag in questions[key]["tags"]:
+			if tag in tags_list:
+				tags_list[tag] += 1
+			else:
+				tags_list[tag] = 1
+		
+
+func _io_read_questions(file_name: String):
+	print("!INFO: Reading Question Data")
+	var file = FileAccess.open(file_name, FileAccess.READ)
+	var questions_raw
+	if file:
+		var json_string = file.get_as_text()
+		questions_raw = JSON.parse_string(json_string)
+		file.close()
+	else:
+		print("!!ERROR: Unable to access [\"%s\"]" % file_name)
+		return
+	questions.clear()
+	for question_raw in questions_raw:
+		var question = Question.new()
+		question._build_from_raw(
+			question_raw["name"],
+			question_raw["question"],
+			question_raw["correct"],
+			question_raw["wrong"],
+			question_raw["explainer"],
+			question_raw["tags"],
+			question_raw["chances"],
+			question_raw["questionType"])
+		questions[question_raw["uuid"]] = question
+
 func _IO_read_tags_filter():
 	var file = FileAccess.open(TagsFilterFile, FileAccess.READ)
 	var missing = false

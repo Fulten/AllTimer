@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bjrqcx0k7scpa"]
+[gd_scene load_steps=47 format=3 uid="uid://bjrqcx0k7scpa"]
 
 [ext_resource type="Theme" uid="uid://j8encu3x20ng" path="res://assets/uiux/main_menu/default_theme.tres" id="1_nvabs"]
 [ext_resource type="Shader" path="res://assets/uiux/main_menu/scrolling_background.gdshader" id="2_40555"]
@@ -992,6 +992,8 @@ border_color = Color(0, 0, 0, 1)
 [sub_resource type="Theme" id="Theme_hhi6e"]
 ScrollContainer/styles/panel = SubResource("StyleBoxFlat_i3572")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hfhrh"]
+
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_an7m0"]
 grow_begin = 0.0
 grow_end = 0.0
@@ -1615,6 +1617,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(250, 300)
 layout_mode = 2
 theme = SubResource("Theme_hhi6e")
+horizontal_scroll_mode = 0
 
 [node name="FilterContainer" type="VBoxContainer" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase"]
 layout_mode = 2
@@ -1622,8 +1625,10 @@ alignment = 1
 
 [node name="Filter1" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("7_ixy01")
 theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hfhrh")
 text = "filter one"
 flat = true
 
@@ -2379,6 +2384,9 @@ texture = ExtResource("17_iljph")
 [connection signal="button_up" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_button_up"]
 [connection signal="focus_entered" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_focus_entered"]
 [connection signal="mouse_entered" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_mouse_entered"]
+[connection signal="button_up" from="Options_Game2/SettingsList/FiltersCase/WhitelistToggle" to="." method="_on_filter_whitelist_toggle_button_up"]
+[connection signal="button_up" from="Options_Game2/SettingsList/FiltersCase/FilterPresets/SavePresetButton" to="." method="_on_filter_save_preset_button_button_up"]
+[connection signal="button_up" from="Options_Game2/SettingsList/FiltersCase/FilterPresets/LoadPresetButton" to="." method="_on_filter_load_preset_button_button_up"]
 [connection signal="button_down" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_button_down"]
 [connection signal="button_up" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_button_up"]
 [connection signal="focus_entered" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_focus_entered"]

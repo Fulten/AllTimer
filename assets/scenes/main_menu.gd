@@ -1,7 +1,7 @@
 extends Control
 
 var tags_list_font = preload("res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf")
-var style_box_empty = StyleBoxEmpty.new()
+var style_box_empty:StyleBoxEmpty = StyleBoxEmpty.new()
 
 
 var config = ConfigFile.new()
@@ -530,13 +530,11 @@ func _display_filter_tag_list():
 		new_tag.flat = true
 		new_tag.toggle_mode = true
 		
-		new_tag.add_theme_font_size_override("theme_override_font_sizes/font_size", 16)
-		new_tag.add_theme_font_override("theme_override_fonts/font", tags_list_font)
-		new_tag.add_theme_stylebox_override("theme_override_styles/focus", style_box_empty)
+		new_tag.add_theme_font_size_override("font_size", 16)
+		new_tag.add_theme_font_override("font", tags_list_font)
+		new_tag.add_theme_stylebox_override("focus", style_box_empty)
 		new_tag.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 		container.add_child(new_tag)
-	
-	pass
 
 func _load_filter_preset_list():
 	var preset_list:OptionButton = $Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList

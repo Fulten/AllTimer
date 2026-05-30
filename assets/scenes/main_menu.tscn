@@ -1139,6 +1139,7 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="Stack_0" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -1545,7 +1546,6 @@ text = "Back"
 flat = true
 
 [node name="Options_Game2" type="Control" parent="."]
-visible = false
 layout_mode = 2
 anchors_preset = 0
 anchor_right = 1.0
@@ -2395,7 +2395,7 @@ texture = ExtResource("17_iljph")
 [connection signal="mouse_entered" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_mouse_entered"]
 [connection signal="button_up" from="Options_Game2/SettingsList/FiltersCase/WhitelistToggle" to="." method="_on_filter_whitelist_toggle_button_up"]
 [connection signal="button_up" from="Options_Game2/SettingsList/FiltersCase/FilterPresets/SavePresetButton" to="." method="_on_filter_save_preset_button_button_up"]
-[connection signal="button_up" from="Options_Game2/SettingsList/FiltersCase/FilterPresets/LoadPresetButton" to="." method="_on_filter_load_preset_button_button_up"]
+[connection signal="item_selected" from="Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList" to="." method="_on_filter_preset_list_item_selected"]
 [connection signal="button_down" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_button_down"]
 [connection signal="button_up" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_button_up"]
 [connection signal="focus_entered" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_focus_entered"]

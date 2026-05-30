@@ -38,6 +38,7 @@ func _ready():
 	GameState._build_complete_tags_list()
 	_load_filter_preset_list()
 	_display_filter_tag_list()
+	_on_filter_preset_list_item_selected(0)
 	
 	_refresh_profiles_dropdown()
 	_update_current_profile_label()
@@ -517,7 +518,6 @@ func _on_filter_save_preset_button_button_up():
 	for i in range(filter_tag_selectors.size()):
 		if filter_tag_selectors[i]["button_pressed"] == true:
 			loaded_filter["tags"].append(filter_tag_selectors[i].text)
-			pass
 	
 	loaded_filter["blacklist"] = is_filter_blacklist
 	
@@ -525,7 +525,8 @@ func _on_filter_save_preset_button_button_up():
 	GameState._IO_write_tags_filter()
 	_load_filter_preset_list()
 
-func _on_filter_load_preset_button_button_up():
+	
+func _on_filter_preset_list_item_selected(index):
 	var filter_list_selector = $Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList
 	var key = filter_list_selector.get_item_text(filter_list_selector.get_selected_id())
 	
@@ -541,8 +542,10 @@ func _on_filter_load_preset_button_button_up():
 	is_filter_blacklist = loaded_filter["blacklist"]
 	
 	for i in range(filter_tag_selectors.size()):
+		
 		var has_tag = false
 		for tag in loaded_filter["tags"]:
+			
 			if filter_tag_selectors[i].text.to_lower() == tag.to_lower():
 				has_tag = true
 				break
@@ -560,6 +563,7 @@ func _on_filter_load_preset_button_button_up():
 		$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "Whitelist"
 	
 	is_filter_loaded = true
+	
 #endregion
 	
 #region tag filter functions
@@ -570,6 +574,7 @@ func _display_filter_tag_list():
 	
 	for tag in GameState.tags_list:
 		var new_tag = CheckBox.new()
+		print("test: %s" % tag)
 		new_tag.text = tag
 		new_tag.flat = true
 		new_tag.toggle_mode = true
@@ -588,6 +593,11 @@ func _load_filter_preset_list():
 	for key in GameState.TagsFilters:
 		preset_list.add_item(key)
 	
+	for i in range(GameState.TagsFilters.size()):
+		if GameState.TagsFilters[preset_list.get_item_text(i)]["selected"]:
+			preset_list.select(i)
+		
+
 #endregion
 
 const display_options = [

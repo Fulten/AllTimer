@@ -1736,7 +1736,13 @@ layout_mode = 2
 theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxLine_an7m0")
 
+[node name="PresetLabel" type="Label" parent="Options_Game2/SettingsList/FiltersCase/FilterPresets"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "LOAD: "
+
 [node name="LoadPresetButton" type="Button" parent="Options_Game2/SettingsList/FiltersCase/FilterPresets"]
+visible = false
 layout_mode = 2
 theme = ExtResource("15_a7e8b")
 theme_override_font_sizes/font_size = 24

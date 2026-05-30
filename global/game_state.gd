@@ -297,8 +297,8 @@ func _IO_read_tags_filter():
 		if !"selected" in TagsFilters[key]:
 			TagsFilters[key]["selected"] = false
 			
-		if !"blackList" in TagsFilters[key]:
-			TagsFilters[key]["blackList"] = false
+		if !"blacklist" in TagsFilters[key]:
+			TagsFilters[key]["blacklist"] = false
 			missing = true
 	
 		if !"tags" in TagsFilters[key]:

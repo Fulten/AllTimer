@@ -1034,7 +1034,7 @@ func _load_master_questions():
 					break
 
 			var a = tagMatch
-			var b = selectedTagsFilter["blackList"]
+			var b = selectedTagsFilter["blacklist"]
 			# need to use XOR operator for whether or not to accept the question into the set
 			if  (a or b) and not (a and b):
 				filtered_question_data.append(question)

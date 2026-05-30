@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bjrqcx0k7scpa"]
+[gd_scene load_steps=48 format=3 uid="uid://bjrqcx0k7scpa"]
 
 [ext_resource type="Theme" uid="uid://j8encu3x20ng" path="res://assets/uiux/main_menu/default_theme.tres" id="1_nvabs"]
 [ext_resource type="Shader" path="res://assets/uiux/main_menu/scrolling_background.gdshader" id="2_40555"]
@@ -977,6 +977,8 @@ texture_repeat = 2
 
 [sub_resource type="Theme" id="Theme_wr4x0"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j6he7"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3572"]
 content_margin_left = 4.0
 content_margin_top = 4.0
@@ -1603,8 +1605,9 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("14_6pik3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_j6he7")
 toggle_mode = true
-text = "Whitelist mode"
+text = "Whitelist"
 
 [node name="FilterContainers" type="HBoxContainer" parent="Options_Game2/SettingsList/FiltersCase"]
 layout_mode = 2

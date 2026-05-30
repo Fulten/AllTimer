@@ -2,7 +2,8 @@ extends Control
 
 var tags_list_font = preload("res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf")
 var style_box_empty:StyleBoxEmpty = StyleBoxEmpty.new()
-
+var filter_container
+	
 
 var config = ConfigFile.new()
 var config_path = "user://settings.cfg"
@@ -21,6 +22,8 @@ var show_award_hover = false
 
 var loaded_filter
 var is_filter_loaded = false
+var is_filter_blacklist = false
+var filter_tag_selectors = []
 
 func _ready():
 	$StackAnimator.play("Anim_Stack0_Init")
@@ -30,6 +33,7 @@ func _ready():
 	load_settings()
 	UserProfiles._IO_read_profiles()
 	
+	filter_container = $Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer
 	GameState._IO_read_tags_filter()
 	GameState._build_complete_tags_list()
 	_load_filter_preset_list()
@@ -497,32 +501,72 @@ func _on_timer_game_to_options_timeout():
 	$Options_2/OptionsCategories/GameButton.grab_focus()
 	flag_options_menu_game = false
 
-
-
-
 func _on_filter_whitelist_toggle_button_up():
+	var button = $Options_Game2/SettingsList/FiltersCase/WhitelistToggle
+	if button.button_pressed:
+		button.text = "Blacklist"
+		is_filter_blacklist = true
+	else:
+		button.text = "Whitelist"
+		is_filter_blacklist = false
+
+func _on_filter_save_preset_button_button_up():
+	var key = $Options_Game2/SettingsList/FiltersCase/FilterPresets/PresetNameField.text
 	
-	pass 
-
-
-func _on_filter_save_preset_button_button_up(key, filter):
-	GameState.TagsFilters[key] = filter
+	loaded_filter["tags"].clear()
+	for i in range(filter_tag_selectors.size()):
+		if filter_tag_selectors[i]["button_pressed"] == true:
+			loaded_filter["tags"].append(filter_tag_selectors[i].text)
+			pass
+	
+	loaded_filter["blacklist"] = is_filter_blacklist
+	
+	GameState.TagsFilters[key] = loaded_filter
 	GameState._IO_write_tags_filter()
 	_load_filter_preset_list()
 
 func _on_filter_load_preset_button_button_up():
 	var filter_list_selector = $Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList
 	var key = filter_list_selector.get_item_text(filter_list_selector.get_selected_id())
-	loaded_filter = GameState.TagsFilters[key]
-	is_filter_loaded = true
 	
+	for filter in GameState.TagsFilters:
+		GameState.TagsFilters[filter]["selected"] = false
+		pass
+	GameState.TagsFilters[key]["selected"] = true
+	
+	loaded_filter = GameState.TagsFilters[key]
+	
+	$Options_Game2/SettingsList/FiltersCase/FilterPresets/PresetNameField.text = key
+	
+	is_filter_blacklist = loaded_filter["blacklist"]
+	
+	for i in range(filter_tag_selectors.size()):
+		var has_tag = false
+		for tag in loaded_filter["tags"]:
+			if filter_tag_selectors[i].text.to_lower() == tag.to_lower():
+				has_tag = true
+				break
+		if has_tag:
+			filter_container.get_child(i)["button_pressed"] = true
+		else:
+			filter_container.get_child(i)["button_pressed"] = false
+			
+	
+	if is_filter_blacklist:
+		$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.button_pressed = true
+		$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "Blacklist"
+	else:
+		$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.button_pressed = false
+		$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "Whitelist"
+	
+	is_filter_loaded = true
 #endregion
 	
 #region tag filter functions
-func _display_filter_tag_list():
-	var container = $Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer
-	for child in container.get_children():
+func _display_filter_tag_list(): 
+	for child in filter_container.get_children():
 		child.queue_free()
+	filter_tag_selectors.clear()
 	
 	for tag in GameState.tags_list:
 		var new_tag = CheckBox.new()
@@ -534,7 +578,8 @@ func _display_filter_tag_list():
 		new_tag.add_theme_font_override("font", tags_list_font)
 		new_tag.add_theme_stylebox_override("focus", style_box_empty)
 		new_tag.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-		container.add_child(new_tag)
+		filter_container.add_child(new_tag)
+		filter_tag_selectors.append(new_tag)
 
 func _load_filter_preset_list():
 	var preset_list:OptionButton = $Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList

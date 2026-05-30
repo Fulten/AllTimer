@@ -38,13 +38,13 @@ func _ready():
 	GameState._build_complete_tags_list()
 	_load_filter_preset_list()
 	_display_filter_tag_list()
-	_on_filter_preset_list_item_selected(0)
 	
 	_refresh_profiles_dropdown()
 	_update_current_profile_label()
 	_update_profile_statistics()
 	SoundMaster._play_music_track("main_menu")
 	_create_hover_text_node()
+	get_tree().create_timer(0.5).timeout.connect(_on_filter_preset_list_item_selected)
 
 func _process(_delta):
 	pass
@@ -526,7 +526,7 @@ func _on_filter_save_preset_button_button_up():
 	_load_filter_preset_list()
 
 	
-func _on_filter_preset_list_item_selected(index):
+func _on_filter_preset_list_item_selected(index = 0):
 	var filter_list_selector = $Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList
 	var key = filter_list_selector.get_item_text(filter_list_selector.get_selected_id())
 	
@@ -574,7 +574,6 @@ func _display_filter_tag_list():
 	
 	for tag in GameState.tags_list:
 		var new_tag = CheckBox.new()
-		print("test: %s" % tag)
 		new_tag.text = tag
 		new_tag.flat = true
 		new_tag.toggle_mode = true

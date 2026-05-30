@@ -1139,7 +1139,6 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="Stack_0" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -1546,6 +1545,7 @@ text = "Back"
 flat = true
 
 [node name="Options_Game2" type="Control" parent="."]
+visible = false
 layout_mode = 2
 anchors_preset = 0
 anchor_right = 1.0

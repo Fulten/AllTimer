@@ -460,3 +460,4 @@ text = "Whitelist Mode"
 [connection signal="button_up" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_button_up"]
 [connection signal="focus_entered" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_focus_entered"]
 [connection signal="mouse_entered" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_mouse_entered"]
+[connection signal="item_selected" from="Filters/FilterPresetList" to="." method="_on_filter_preset_list_item_selected"]

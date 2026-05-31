@@ -17,6 +17,7 @@ func _ready():
 	_refresh_profiles_dropdown()
 	select_option_by_text($ThemeCase/ThemesList, GameState.CurrentTheme)
 	SoundMaster._play_music_track("mp_lobby")
+	_init_filter_preset_list()
 
 func _process(_delta):
 	pass
@@ -240,4 +241,24 @@ func _reset_menu():
 	
 	multiplayer_disconnect.emit()
 	_update_connected_players()
+	pass
+
+func _init_filter_preset_list():
+	$Filters/FilterPresetList.clear()
+	if GameState.TagsFilters.size() > 0:
+		var i:int = 0
+		var selected:int = 0
+		for key in GameState.TagsFilters:
+			$Filters/FilterPresetList.add_item(key)
+			if GameState.TagsFilters[key]["selected"]:
+				selected = i
+			i += 1
+		$Filters/FilterPresetList.selected = selected
+	else:
+		$Filters/FilterPresetList.add_item("N/A")
+		$Filters/FilterPresetList.disabled = true
+
+func _on_filter_preset_list_item_selected(index):
+	
+	
 	pass

@@ -520,7 +520,6 @@ func _on_filter_save_preset_button_button_up():
 			loaded_filter["tags"].append(filter_tag_selectors[i].text)
 	
 	loaded_filter["blacklist"] = is_filter_blacklist
-	
 	GameState.TagsFilters[key] = loaded_filter
 	GameState._IO_write_tags_filter()
 	_load_filter_preset_list()
@@ -529,13 +528,14 @@ func _on_filter_save_preset_button_button_up():
 func _on_filter_preset_list_item_selected(index = 0):
 	var filter_list_selector = $Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList
 	var key = filter_list_selector.get_item_text(filter_list_selector.get_selected_id())
-	
+	 
+	#update the selected tag
 	for filter in GameState.TagsFilters:
 		GameState.TagsFilters[filter]["selected"] = false
 		pass
 	GameState.TagsFilters[key]["selected"] = true
-	
 	loaded_filter = GameState.TagsFilters[key]
+	GameState._IO_write_tags_filter()
 	
 	$Options_Game2/SettingsList/FiltersCase/FilterPresets/PresetNameField.text = key
 	

@@ -2396,6 +2396,7 @@ texture = ExtResource("17_iljph")
 [connection signal="button_up" from="Options_Game2/SettingsList/FiltersCase/WhitelistToggle" to="." method="_on_filter_whitelist_toggle_button_up"]
 [connection signal="button_up" from="Options_Game2/SettingsList/FiltersCase/FilterPresets/SavePresetButton" to="." method="_on_filter_save_preset_button_button_up"]
 [connection signal="item_selected" from="Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList" to="." method="_on_filter_preset_list_item_selected"]
+[connection signal="button_up" from="Options_Game2/SettingsList/FiltersCase/ClearFiltersButton" to="." method="_on_clear_filters_button_button_up"]
 [connection signal="button_down" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_button_down"]
 [connection signal="button_up" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_button_up"]
 [connection signal="focus_entered" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_focus_entered"]

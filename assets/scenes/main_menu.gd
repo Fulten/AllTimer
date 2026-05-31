@@ -542,7 +542,6 @@ func _on_filter_preset_list_item_selected(index = 0):
 	is_filter_blacklist = loaded_filter["blacklist"]
 	
 	for i in range(filter_tag_selectors.size()):
-		
 		var has_tag = false
 		for tag in loaded_filter["tags"]:
 			
@@ -564,6 +563,14 @@ func _on_filter_preset_list_item_selected(index = 0):
 	
 	is_filter_loaded = true
 	
+func _on_clear_filters_button_button_up():
+	for i in range(filter_tag_selectors.size()):
+		filter_container.get_child(i)["button_pressed"] = false
+	$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.button_pressed = false
+	$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "Whitelist"
+	is_filter_blacklist = false
+	loaded_filter["blacklist"] = false
+	loaded_filter["tags"] = []
 #endregion
 	
 #region tag filter functions
@@ -813,3 +820,4 @@ func _create_hover_text_node():
 	
 	get_tree().root.add_child(node_hover_text)
 #endregion
+

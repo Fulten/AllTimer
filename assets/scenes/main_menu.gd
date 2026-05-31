@@ -566,10 +566,10 @@ func _on_filter_preset_list_item_selected(index = 0):
 func _on_clear_filters_button_button_up():
 	for i in range(filter_tag_selectors.size()):
 		filter_container.get_child(i)["button_pressed"] = false
-	$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.button_pressed = false
-	$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "Whitelist"
-	is_filter_blacklist = false
-	loaded_filter["blacklist"] = false
+	$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.button_pressed = true
+	$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "blacklist"
+	is_filter_blacklist = true
+	loaded_filter["blacklist"] = true
 	loaded_filter["tags"] = []
 #endregion
 	

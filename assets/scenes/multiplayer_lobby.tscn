@@ -431,7 +431,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("12_cbtm4")
 toggle_mode = true
-text = "Whitelist Mode"
+text = "Whitelist"
 
 [connection signal="button_down" from="PeerConnectors/HostButton" to="." method="_on_host_button_button_down"]
 [connection signal="button_up" from="PeerConnectors/HostButton" to="." method="_on_host_button_button_up"]
@@ -461,3 +461,4 @@ text = "Whitelist Mode"
 [connection signal="focus_entered" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_focus_entered"]
 [connection signal="mouse_entered" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_mouse_entered"]
 [connection signal="item_selected" from="Filters/FilterPresetList" to="." method="_on_filter_preset_list_item_selected"]
+[connection signal="button_up" from="Filters/WhitelistToggle" to="." method="_on_whitelist_toggle_button_up"]

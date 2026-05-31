@@ -595,7 +595,6 @@ func _load_filter_preset_list():
 	for i in range(GameState.TagsFilters.size()):
 		if GameState.TagsFilters[preset_list.get_item_text(i)]["selected"]:
 			preset_list.select(i)
-		
 
 #endregion
 

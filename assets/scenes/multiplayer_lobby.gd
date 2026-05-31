@@ -17,7 +17,7 @@ func _ready():
 	_refresh_profiles_dropdown()
 	select_option_by_text($ThemeCase/ThemesList, GameState.CurrentTheme)
 	SoundMaster._play_music_track("mp_lobby")
-	_init_filter_preset_list()
+	_init_filter_preset()
 
 func _process(_delta):
 	pass
@@ -243,7 +243,7 @@ func _reset_menu():
 	_update_connected_players()
 	pass
 
-func _init_filter_preset_list():
+func _init_filter_preset():
 	$Filters/FilterPresetList.clear()
 	if GameState.TagsFilters.size() > 0:
 		var i:int = 0
@@ -254,11 +254,42 @@ func _init_filter_preset_list():
 				selected = i
 			i += 1
 		$Filters/FilterPresetList.selected = selected
+		# set the blacklist button
+		if GameState.TagsFilters[$Filters/FilterPresetList.get_item_text(selected)]["blacklist"]:
+			$Filters/WhitelistToggle.text = "Blacklist"
+			$Filters/WhitelistToggle.button_pressed = true
+		else:
+			$Filters/WhitelistToggle.text = "Whitelist"
 	else:
+		#if there are no filters
 		$Filters/FilterPresetList.add_item("N/A")
 		$Filters/FilterPresetList.disabled = true
+		$Filters/WhitelistToggle.disabled = true
 
 func _on_filter_preset_list_item_selected(index):
-	
-	
-	pass
+	var key = $Filters/FilterPresetList.get_item_text(index)
+	#update the selected tag
+	for filter in GameState.TagsFilters:
+		GameState.TagsFilters[filter]["selected"] = false
+		pass
+	GameState.TagsFilters[key]["selected"] = true
+	# set the blacklist button
+	if GameState.TagsFilters[key]["blacklist"]:
+		$Filters/WhitelistToggle.text = "Blacklist"
+		$Filters/WhitelistToggle.button_pressed = true
+	else:
+		$Filters/WhitelistToggle.text = "Whitelist"
+		$Filters/WhitelistToggle.button_pressed = false
+		
+	GameState._IO_write_tags_filter()
+
+func _on_whitelist_toggle_button_up():
+	var key = $Filters/FilterPresetList.get_item_text($Filters/FilterPresetList.get_selected_id())
+	var button = $Filters/WhitelistToggle
+	if button.button_pressed:
+		button.text = "Blacklist"
+		GameState.TagsFilters[key]["blacklist"] = true
+	else:
+		button.text = "Whitelist"
+		GameState.TagsFilters[key]["blacklist"] = false
+	GameState._IO_write_tags_filter()

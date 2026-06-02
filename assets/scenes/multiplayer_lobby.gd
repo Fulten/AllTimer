@@ -256,10 +256,10 @@ func _init_filter_preset():
 		$Filters/FilterPresetList.selected = selected
 		# set the blacklist button
 		if GameState.TagsFilters[$Filters/FilterPresetList.get_item_text(selected)]["blacklist"]:
-			$Filters/WhitelistToggle.text = "Blacklist"
+			$Filters/WhitelistToggle.text = "Is Blacklist: True"
 			$Filters/WhitelistToggle.button_pressed = true
 		else:
-			$Filters/WhitelistToggle.text = "Whitelist"
+			$Filters/WhitelistToggle.text = "Is Blacklist: False"
 	else:
 		#if there are no filters
 		$Filters/FilterPresetList.add_item("N/A")
@@ -275,10 +275,10 @@ func _on_filter_preset_list_item_selected(index):
 	GameState.TagsFilters[key]["selected"] = true
 	# set the blacklist button
 	if GameState.TagsFilters[key]["blacklist"]:
-		$Filters/WhitelistToggle.text = "Blacklist"
+		$Filters/WhitelistToggle.text = "Is Blacklist: True"
 		$Filters/WhitelistToggle.button_pressed = true
 	else:
-		$Filters/WhitelistToggle.text = "Whitelist"
+		$Filters/WhitelistToggle.text = "Is Blacklist: False"
 		$Filters/WhitelistToggle.button_pressed = false
 		
 	GameState._IO_write_tags_filter()
@@ -287,9 +287,9 @@ func _on_whitelist_toggle_button_up():
 	var key = $Filters/FilterPresetList.get_item_text($Filters/FilterPresetList.get_selected_id())
 	var button = $Filters/WhitelistToggle
 	if button.button_pressed:
-		button.text = "Blacklist"
+		button.text = "Is Blacklist: True"
 		GameState.TagsFilters[key]["blacklist"] = true
 	else:
-		button.text = "Whitelist"
+		button.text = "Is Blacklist: False"
 		GameState.TagsFilters[key]["blacklist"] = false
 	GameState._IO_write_tags_filter()

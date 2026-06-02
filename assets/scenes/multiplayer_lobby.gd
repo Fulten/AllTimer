@@ -28,6 +28,7 @@ func _init_theme_selector():
 	$ThemeCase/ThemesList.clear()
 	$ThemeCase/ThemesList.add_item("Default")
 	for theme in UserProfiles.THEME_NAMES:
+		# uncomment the following comments, and delete the extra "$ThemeCase/ThemesList.add_item(theme)"
 		#if UserProfiles.unlocked_themes[theme]:
 		#	$ThemeCase/ThemesList.add_item(theme)
 		$ThemeCase/ThemesList.add_item(theme)

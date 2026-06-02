@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://bjrqcx0k7scpa"]
+[gd_scene load_steps=49 format=3 uid="uid://bjrqcx0k7scpa"]
 
 [ext_resource type="Theme" uid="uid://j8encu3x20ng" path="res://assets/uiux/main_menu/default_theme.tres" id="1_nvabs"]
 [ext_resource type="Shader" path="res://assets/uiux/main_menu/scrolling_background.gdshader" id="2_40555"]
@@ -1016,6 +1016,8 @@ OptionButton/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 OptionButton/fonts/font = ExtResource("7_ixy01")
 OptionButton/styles/normal = SubResource("StyleBoxFlat_n8h0l")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sq2ut"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7iv0q"]
 bg_color = Color(0.670588, 0.54902, 1, 1)
 
@@ -1752,6 +1754,9 @@ text = "Load"
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = SubResource("Theme_ialk3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_sq2ut")
+theme_override_styles/hover = SubResource("StyleBoxFlat_n8h0l")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_n8h0l")
 item_count = 1
 selected = 0
 popup/item_0/text = " Default"

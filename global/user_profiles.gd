@@ -3,9 +3,18 @@ extends Node
 var FILE_PATH_USER_PROFILES = "user://user_profiles.json"
 var FILE_PATH_THEME_UNLOCKS = "user://theme_unlocks.json"
 
+#logic for selecting which theme to load is in Master_scene.gd
+#
 var THEME_NAMES = [
-	""
+	"Chalkboard",
+	"Patriotic Cipher",
+	"Fatal Surprise"
 ]
+
+# table will contain uid for chances, which corrispod to a given theme
+var THEME_UNOCKED_BY_CHANCE = {
+	
+}
 
 
 var profiles = {}
@@ -16,6 +25,7 @@ var unlocked_themes = {}
 
 func _ready():
 	_load_chance_data()
+	_IO_read_themes_unlocks()
 
 func _new_profile(profileName):
 	var newID = 0
@@ -151,7 +161,18 @@ func _IO_read_themes_unlocks():
 		file.close()
 	else:
 		print("!!ERROR: Failed to read theme unlocks.")
+		
+	var update_file = false
 	
+	# fillout any themes missing from theme unlocks
+	for theme in THEME_NAMES:
+		if !theme in unlocked_themes:
+			unlocked_themes[theme] = false
+			update_file = true
+	
+	if update_file:
+		_IO_write_themes_unlocks()
+
 func _IO_write_themes_unlocks():
 	var file = FileAccess.open(FILE_PATH_THEME_UNLOCKS, FileAccess.WRITE)
 	if file:

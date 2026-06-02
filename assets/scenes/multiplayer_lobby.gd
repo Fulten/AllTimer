@@ -15,12 +15,22 @@ func _ready():
 	IpInputTextNode = $PeerConnectors/TextEdit
 	IpInputTextNode.set("text", ip_address)
 	_refresh_profiles_dropdown()
-	select_option_by_text($ThemeCase/ThemesList, GameState.CurrentTheme)
 	SoundMaster._play_music_track("mp_lobby")
 	_init_filter_preset()
+	_init_theme_selector()
+	select_theme_by_text($ThemeCase/ThemesList, GameState.CurrentTheme)
 
 func _process(_delta):
 	pass
+
+
+func _init_theme_selector():
+	$ThemeCase/ThemesList.clear()
+	$ThemeCase/ThemesList.add_item("Default")
+	for theme in UserProfiles.THEME_NAMES:
+		#if UserProfiles.unlocked_themes[theme]:
+		#	$ThemeCase/ThemesList.add_item(theme)
+		$ThemeCase/ThemesList.add_item(theme)
 
 ##called when the text in the IP Address field is changed
 func _on_text_edit_text_changed():
@@ -48,12 +58,14 @@ func _on_themes_list_item_selected(index):
 		config.save("user://settings.cfg")
 	pass
 	
-func select_option_by_text(option_button: OptionButton, target_text: String) -> void:
+func select_theme_by_text(option_button: OptionButton, target_text: String) -> void:
 	for i in range(option_button.item_count):
 		if option_button.get_item_text(i) == str(target_text):
 			option_button.select(i)
 			return
-	print("Text not found in OptionButton:", target_text)
+	# if an invalid theme is selected use the default instead
+	option_button.select(0)
+	GameState.CurrentTheme = option_button.get_item_text(0)
 	
 #region Host Button
 func _on_host_button_mouse_entered():

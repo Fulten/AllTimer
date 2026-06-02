@@ -528,7 +528,6 @@ func _on_filter_save_preset_button_button_up():
 	GameState._IO_write_tags_filter()
 	_load_filter_preset_list()
 
-	
 func _on_filter_preset_list_item_selected(index = 0):
 	# if there is at least one filter
 	if GameState.TagsFilters.size() > 0:
@@ -611,10 +610,9 @@ func _set_filter_blacklist(is_blacklist):
 	is_filter_blacklist = is_blacklist
 	$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.button_pressed = is_blacklist
 	if is_blacklist:
-		$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "Blacklist"
+		$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "Blacklist: True"
 	else:
-		$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "Whitelist"
-
+		$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "Blacklist: False"
 #endregion
 
 const display_options = [

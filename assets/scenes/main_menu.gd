@@ -504,12 +504,7 @@ func _on_timer_game_to_options_timeout():
 
 func _on_filter_whitelist_toggle_button_up():
 	var button = $Options_Game2/SettingsList/FiltersCase/WhitelistToggle
-	if button.button_pressed:
-		button.text = "Blacklist"
-		is_filter_blacklist = true
-	else:
-		button.text = "Whitelist"
-		is_filter_blacklist = false
+	_set_filter_blacklist(button.button_pressed)
 
 func _on_filter_save_preset_button_button_up():
 	var key = $Options_Game2/SettingsList/FiltersCase/FilterPresets/PresetNameField.text
@@ -525,6 +520,11 @@ func _on_filter_save_preset_button_button_up():
 	
 	loaded_filter["blacklist"] = is_filter_blacklist
 	GameState.TagsFilters[key] = loaded_filter
+	
+	for filter in GameState.TagsFilters:
+		GameState.TagsFilters[filter]["selected"] = false
+	GameState.TagsFilters[key]["selected"] = true
+	
 	GameState._IO_write_tags_filter()
 	_load_filter_preset_list()
 
@@ -558,20 +558,14 @@ func _on_filter_preset_list_item_selected(index = 0):
 			else:
 				filter_container.get_child(i)["button_pressed"] = false
 			
-		if is_filter_blacklist:
-			$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.button_pressed = true
-			$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "Blacklist"
-		else:
-			$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.button_pressed = false
-			$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "Whitelist"
+		_set_filter_blacklist(is_filter_blacklist)
+		
 		is_filter_loaded = true
 	
 func _on_clear_filters_button_button_up():
 	for i in range(filter_tag_selectors.size()):
 		filter_container.get_child(i)["button_pressed"] = false
-	$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.button_pressed = true
-	$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "blacklist"
-	is_filter_blacklist = true
+	_set_filter_blacklist(true)
 	loaded_filter["blacklist"] = true
 	loaded_filter["tags"] = []
 #endregion
@@ -602,18 +596,24 @@ func _load_filter_preset_list():
 		preset_list.clear()
 		for key in GameState.TagsFilters:
 			preset_list.add_item(key)
-	
+		
 		for i in range(GameState.TagsFilters.size()):
 			if GameState.TagsFilters[preset_list.get_item_text(i)]["selected"]:
 				preset_list.select(i)
 	else:
 		#if theres no filters load an empty filter instead
-		is_filter_blacklist = true
+		_set_filter_blacklist(true)
 		loaded_filter["selected"] = true
 		loaded_filter["blacklist"] = true
 		loaded_filter["tags"] = []
-		$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.button_pressed = true
-		$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "blacklist"
+
+func _set_filter_blacklist(is_blacklist):
+	is_filter_blacklist = is_blacklist
+	$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.button_pressed = is_blacklist
+	if is_blacklist:
+		$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "Blacklist"
+	else:
+		$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "Whitelist"
 
 #endregion
 

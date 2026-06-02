@@ -1,7 +1,18 @@
 extends Node
 
+var FILE_PATH_USER_PROFILES = "user://user_profiles.json"
+var FILE_PATH_THEME_UNLOCKS = "user://theme_unlocks.json"
+
+var THEME_NAMES = [
+	""
+]
+
+
 var profiles = {}
 var chance_descriptors = {}
+var unlocked_themes = {}
+
+
 
 func _ready():
 	_load_chance_data()
@@ -70,13 +81,13 @@ func _delete_profile(profileName):
 	pass
 
 func _IO_read_profiles():
-	var file = FileAccess.open("user://user_profiles.json", FileAccess.READ)
+	var file = FileAccess.open(FILE_PATH_USER_PROFILES, FileAccess.READ)
 	if file:
 		profiles = JSON.parse_string(file.get_as_text())
 		file.close()
 		pass
 	else:
-		print("!!ERROR: Failed to read profiles at _read_profiles")
+		print("!!ERROR: Failed to read profiles.")
 		pass
 		
 	if profiles == null:
@@ -125,17 +136,32 @@ func _IO_read_profiles():
 		_IO_write_profiles()
 
 func _IO_write_profiles():
-	var file = FileAccess.open("user://user_profiles.json", FileAccess.WRITE)
+	var file = FileAccess.open(FILE_PATH_USER_PROFILES, FileAccess.WRITE)
 	if file:
 		var jsonString = JSON.stringify(profiles)
 		file.store_string(jsonString)
 		file.close()
-		pass
 	else:
-		print("!!ERROR: Failed to save profile at _save_new_profile")
-		pass
-	pass
+		print("!!ERROR: Failed to save profile.")
 
+func _IO_read_themes_unlocks():
+	var file = FileAccess.open(FILE_PATH_THEME_UNLOCKS, FileAccess.READ)
+	if file:
+		unlocked_themes = JSON.parse_string(file.get_as_text())
+		file.close()
+	else:
+		print("!!ERROR: Failed to read theme unlocks.")
+	
+func _IO_write_themes_unlocks():
+	var file = FileAccess.open(FILE_PATH_THEME_UNLOCKS, FileAccess.WRITE)
+	if file:
+		var jsonString = JSON.stringify(unlocked_themes)
+		file.store_string(jsonString)
+		file.close()
+	else:
+		print("!!ERROR: Failed to save theme unlocks.")
+	pass
+	
 func _get_selected_profile_key():
 	if profiles.size() < 1:
 		print("!WARNING: no user profile avalible")

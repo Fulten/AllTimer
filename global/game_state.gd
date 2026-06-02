@@ -78,12 +78,8 @@ var tags_list = {}
 var TagsFilterFile = "user://quiz_filters.json"
 var TagsFilters = {}
 
-
 var CurrentChances = [] #The list of chance stars to track for the game
 
-## currently avalible themes
-## Chalkboard - default
-## MGS Radio - cipher
 var CurrentTheme = "Chalkboard" #The current quiz theme
 
 var GameStarted = false

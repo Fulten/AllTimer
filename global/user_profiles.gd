@@ -11,17 +11,36 @@ var THEME_NAMES = [
 	"Fatal Surprise"
 ]
 
+##defines how a given theme is unlocked,
+## The bool Specific_Award controls if the theme can be unlocked by any kind, 
+## or only awards linked to it in the THEME_UNOCKED_BY_CHANCE map
+## ex. (type: count, count: 4. theme is unlocked after getting 4 awards)
+var THEME_UNLOCK_REQUIRMENT = {
+	"Chalkboard": 
+		{
+			"Specific_Award": false,
+			"count": 4
+		},
+	"Patriotic Cipher": 
+		{
+			"Specific_Award": false,
+			"count": 8
+		},
+	"Fatal Surprise": 
+		{
+			"Specific_Award": false,
+			"count": 12
+		}
+}
+
 # table will contain uid for chances, which corrispod to a given theme
 var THEME_UNOCKED_BY_CHANCE = {
 	
 }
 
-
 var profiles = {}
 var chance_descriptors = {}
 var unlocked_themes = {}
-
-
 
 func _ready():
 	_load_chance_data()
@@ -167,7 +186,9 @@ func _IO_read_themes_unlocks():
 	# fillout any themes missing from theme unlocks
 	for theme in THEME_NAMES:
 		if !theme in unlocked_themes:
-			unlocked_themes[theme] = false
+			unlocked_themes[theme] = {}
+			unlocked_themes[theme]["unlocked"] = false
+			unlocked_themes[theme]["count"] = 0
 			update_file = true
 	
 	if update_file:
@@ -182,7 +203,24 @@ func _IO_write_themes_unlocks():
 	else:
 		print("!!ERROR: Failed to save theme unlocks.")
 	pass
+
+func _check_theme_unlock(award_hash):
+	# see if the award is associated with a specific theme first
+	if award_hash in THEME_UNOCKED_BY_CHANCE:
+		var index = THEME_UNOCKED_BY_CHANCE[award_hash]
+		if "count" in unlocked_themes[index]:
+			unlocked_themes[index]["count"] += 1
+		else:
+			unlocked_themes[index]["count"] = 1
 	
+	for theme in THEME_NAMES:
+		if !THEME_UNLOCK_REQUIRMENT[theme]["Specific_Award"]:
+			if "count" in unlocked_themes[theme]:
+				unlocked_themes[theme]["count"] += 1
+			else:
+				unlocked_themes[theme]["count"] = 1
+	
+
 func _get_selected_profile_key():
 	if profiles.size() < 1:
 		print("!WARNING: no user profile avalible")

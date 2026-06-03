@@ -279,6 +279,12 @@ func _generate_question_list():
 		if questions[uuid].name.to_lower().contains(searchKey.to_lower()):
 			searchedQuestionsUuid.append(uuid)
 			continue
+		
+		#uuid
+		if uuid.to_lower().contains(searchKey.to_lower()):
+			searchedQuestionsUuid.append(uuid)
+			continue
+			
 		# tags
 		for tag in questions[uuid].tags:
 			if tag.to_lower().contains(searchKey.to_lower()):
@@ -309,6 +315,12 @@ func _generate_chances_list():
 		if chances[uuid].name.to_lower().contains(searchKey.to_lower()):
 			searchedChancesUuid.append(uuid)
 			continue
+		
+		# uuid
+		if uuid.to_lower().contains(searchKey.to_lower()):
+			searchedChancesUuid.append(uuid)
+			continue
+			
 		# type
 		if chances[uuid].type.to_lower().contains(searchKey.to_lower()):
 			searchedChancesUuid.append(uuid)

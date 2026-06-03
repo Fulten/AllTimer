@@ -331,12 +331,10 @@ func _show_end_of_quiz_screen():
 		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/Name" % uiNum).text = GameState.players[scoreOrder[n]].name
 		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/ScoreDisplay/Score" % uiNum).text = "%s" % GameState.players[scoreOrder[n]].score
 		
+		var chanceStr = ""
 		for chanceKey in GameState.players[scoreOrder[n]]["chances"].keys():
-			var chanceStr = ""
 			chanceStr += "%s, " % (GameState._get_chance_from_uuid(chanceKey)["name"])
-			
-			get_node("quizEnd/PlayerStandingsOrg/%sPlacer/MedalCase/Awards" % uiNum)["text"] = chanceStr
-			
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/MedalCase/Awards" % uiNum)["text"] = chanceStr
 		
 		get_node("quizEnd/PlayerStandingsOrg/%sPlacer" % uiNum).show()
 		pass
@@ -396,6 +394,12 @@ func _sync_and_save_client_profile_statistics(playersData):
 		
 	if profileData["score_lowest"] > gameScore:
 		profileData["score_lowest"] = gameScore
+	
+	# account chances to theme unlocks
+	for chanceKey in GameState.players[multiplayer.get_unique_id()]["chances"].keys():
+		UserProfiles._check_theme_unlock(chanceKey)
+		UserProfiles._IO_write_themes_unlocks()
+		pass
 	
 	UserProfiles._overwrite_profile_with_reference(profileData)
 	pass

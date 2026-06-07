@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cdw2hb2wqpuso"]
+
+[ext_resource type="FontFile" uid="uid://bc01r67d5wp2w" path="res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf" id="1_sh0am"]
+
+[resource]
+CheckBox/font_sizes/font_size = 14
+CheckBox/fonts/font = ExtResource("1_sh0am")

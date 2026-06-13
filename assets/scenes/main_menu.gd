@@ -2,8 +2,6 @@ extends Control
 
 var tags_list_font = preload("res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf")
 var style_box_empty:StyleBoxEmpty = StyleBoxEmpty.new()
-var filter_container
-	
 
 var config = ConfigFile.new()
 var config_path = "user://settings.cfg"
@@ -20,10 +18,8 @@ var flag_profiles_menu_sub = false
 var node_hover_text
 var show_award_hover = false
 
-var loaded_filter = {}
-var is_filter_loaded = false
-var is_filter_blacklist = false
 var filter_tag_selectors = []
+var filter_selected_key = ""
 
 func _ready():
 	$StackAnimator.play("Anim_Stack0_Init")
@@ -32,19 +28,15 @@ func _ready():
 	GameState.quizOptions.initilize()
 	load_settings()
 	UserProfiles._IO_read_profiles()
-	
-	filter_container = $Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer
-	GameState._IO_read_tags_filter()
-	GameState._build_complete_tags_list()
-	_load_filter_preset_list()
-	_display_filter_tag_list()
+
+	#get_tree().create_timer(0.025).timeout.connect(_init_filter_ui)
+	_init_filter_ui()
 	
 	_refresh_profiles_dropdown()
 	_update_current_profile_label()
 	_update_profile_statistics()
 	SoundMaster._play_music_track("main_menu")
 	_create_hover_text_node()
-	get_tree().create_timer(0.5).timeout.connect(_on_filter_preset_list_item_selected)
 
 func _process(_delta):
 	pass
@@ -98,14 +90,12 @@ func load_settings():
 	else:
 		print("No settings file found. Using defaults.")
 
-
 func select_option_by_text(option_button: OptionButton, target_text: String) -> void:
 	for i in range(option_button.item_count):
 		if option_button.get_item_text(i) == str(target_text):
 			option_button.select(i)
 			return
 	print("Text not found in OptionButton:", target_text)
-
 
 func select_option_by_int(option_button: OptionButton, target_int: int) -> void:
 	for i in range(option_button.item_count):
@@ -502,76 +492,66 @@ func _on_timer_game_to_options_timeout():
 	$Options_2/OptionsCategories/GameButton.grab_focus()
 	flag_options_menu_game = false
 
-func _on_filter_whitelist_toggle_button_up():
-	var button = $Options_Game2/SettingsList/FiltersCase/WhitelistToggle
-	_set_filter_blacklist(button.button_pressed)
-
 func _on_filter_save_preset_button_button_up():
-	var key = $Options_Game2/SettingsList/FiltersCase/FilterPresets/PresetNameField.text
+	_save_filter()
 	
-	if key == "":
-		print("Warn: tried to save filter with no name")
-		return
+func _on_delete_preset_button_button_up():
+	_delete_filter()
 	
-	loaded_filter["tags"].clear()
-	for i in range(filter_tag_selectors.size()):
-		if filter_tag_selectors[i]["button_pressed"] == true:
-			loaded_filter["tags"].append(filter_tag_selectors[i].text)
-	
-	loaded_filter["blacklist"] = is_filter_blacklist
-	GameState.TagsFilters[key] = loaded_filter
-	
-	for filter in GameState.TagsFilters:
-		GameState.TagsFilters[filter]["selected"] = false
-	GameState.TagsFilters[key]["selected"] = true
-	
-	GameState._IO_write_tags_filter()
-	_load_filter_preset_list()
-
-func _on_filter_preset_list_item_selected(index = 0):
-	# if there is at least one filter
-	if GameState.TagsFilters.size() > 0:
-		var filter_list_selector = $Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList
-		var key = filter_list_selector.get_item_text(filter_list_selector.get_selected_id())
-	 
-		#update the selected tag
-		for filter in GameState.TagsFilters:
-			GameState.TagsFilters[filter]["selected"] = false
-			pass
-		GameState.TagsFilters[key]["selected"] = true
-		loaded_filter = GameState.TagsFilters[key]
-		GameState._IO_write_tags_filter()
-	
-		$Options_Game2/SettingsList/FiltersCase/FilterPresets/PresetNameField.text = key
-	
-		is_filter_blacklist = loaded_filter["blacklist"]
-	
-		for i in range(filter_tag_selectors.size()):
-			var has_tag = false
-			for tag in loaded_filter["tags"]:
-				if filter_tag_selectors[i].text.to_lower() == tag.to_lower():
-					has_tag = true
-					break
-			if has_tag:
-				filter_container.get_child(i)["button_pressed"] = true
-			else:
-				filter_container.get_child(i)["button_pressed"] = false
-			
-		_set_filter_blacklist(is_filter_blacklist)
-		
-		is_filter_loaded = true
+func _on_filter_selected(index):
+	var ui_filter_selector:OptionButton = $Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList
+	filter_selected_key = ui_filter_selector.get_item_text(index)
+	for i in range(GameState.TagsFilters.size()):
+		if ui_filter_selector.get_item_text(i) != filter_selected_key:
+			GameState.TagsFilters[ui_filter_selector.get_item_text(i)]["selected"] = false
+	_load_filter()
 	
 func _on_clear_filters_button_button_up():
-	for i in range(filter_tag_selectors.size()):
-		filter_container.get_child(i)["button_pressed"] = false
-	_set_filter_blacklist(true)
-	loaded_filter["blacklist"] = true
-	loaded_filter["tags"] = []
-#endregion
+	_UI_reset_filter_tag_buttons()
+	_UI_toggle_blacklist_button()
 	
+func _on_filter_whitelist_toggle_button_up():
+	var blacklist_btn = $Options_Game2/SettingsList/FiltersCase/WhitelistToggle
+	_UI_toggle_blacklist_button(blacklist_btn["button_pressed"])
+#endregion
+
 #region tag filter functions
-func _display_filter_tag_list(): 
-	for child in filter_container.get_children():
+##initilizes the filter ui
+func _init_filter_ui():
+	GameState._IO_read_tags_filter()
+	GameState._build_complete_tags_list()
+	_UI_load_filter_tag_buttons()
+	_UI_load_filter_selector()
+	_load_filter()
+
+func _UI_load_filter_selector():
+	var ui_filter_selector:OptionButton = $Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList
+	ui_filter_selector.clear()
+	var filter_selected = false
+	for filter in GameState.TagsFilters:
+		ui_filter_selector.add_item(filter)
+	for i in range(GameState.TagsFilters.size()):
+		if GameState.TagsFilters[ui_filter_selector.get_item_text(i)]["selected"] and not filter_selected:
+			ui_filter_selector.select(i)
+			filter_selected_key = ui_filter_selector.get_item_text(i)
+			filter_selected = true
+		else:
+			GameState.TagsFilters[ui_filter_selector.get_item_text(i)]["selected"] = false
+	
+	# select the first index if there is no filter selected in file
+	if not filter_selected and GameState.TagsFilters.size() > 0:
+		ui_filter_selector.select(0)
+		filter_selected_key = ui_filter_selector.get_item_text(0)
+	# if there are no filters to select, set to default
+	elif not filter_selected:
+		filter_selected_key = "Default"
+		ui_filter_selector.add_item("Default")
+
+## iterates through a list of all existing tags, 
+## and and creates new nodes to represent them using checkbox buttons in the filter container
+func _UI_load_filter_tag_buttons(): 
+	var ui_filter_container = $Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer
+	for child in ui_filter_container.get_children():
 		child.queue_free()
 	filter_tag_selectors.clear()
 	
@@ -585,34 +565,73 @@ func _display_filter_tag_list():
 		new_tag.add_theme_font_override("font", tags_list_font)
 		new_tag.add_theme_stylebox_override("focus", style_box_empty)
 		new_tag.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-		filter_container.add_child(new_tag)
+		ui_filter_container.add_child(new_tag)
 		filter_tag_selectors.append(new_tag)
 
-func _load_filter_preset_list():
-	var preset_list:OptionButton = $Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList
-	
-	if GameState.TagsFilters.size() > 0:
-		preset_list.clear()
-		for key in GameState.TagsFilters:
-			preset_list.add_item(key)
-		
-		for i in range(GameState.TagsFilters.size()):
-			if GameState.TagsFilters[preset_list.get_item_text(i)]["selected"]:
-				preset_list.select(i)
-	else:
-		#if theres no filters load an empty filter instead
-		_set_filter_blacklist(true)
-		loaded_filter["selected"] = true
-		loaded_filter["blacklist"] = true
-		loaded_filter["tags"] = []
+## sets all of the buttons in the filter container to unpressed
+func _UI_reset_filter_tag_buttons():
+	for i in range(filter_tag_selectors.size()):
+		filter_tag_selectors[i]["button_pressed"] = false
 
-func _set_filter_blacklist(is_blacklist):
-	is_filter_blacklist = is_blacklist
-	$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.button_pressed = is_blacklist
+## sets the toggle state of the tag buttons
+func _UI_set_filter_tag_buttons(selected_tags = {}):
+	for i in range(filter_tag_selectors.size()):
+		filter_tag_selectors[i]["button_pressed"] = filter_tag_selectors[i].text.to_lower() in selected_tags
+
+## toggles the ui state for the filter creators, blacklist button
+## defaults to true, as an empty blacklist filters out no questions
+## as opposed to an empty whitelist which filters out all questions
+func _UI_toggle_blacklist_button(is_blacklist:bool = true):
+	var ui_blacklist_btn:Button = $Options_Game2/SettingsList/FiltersCase/WhitelistToggle
 	if is_blacklist:
-		$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "Blacklist: True"
+		ui_blacklist_btn.text = "Blacklist: True"
+		ui_blacklist_btn["button_pressed"] = true
 	else:
-		$Options_Game2/SettingsList/FiltersCase/WhitelistToggle.text = "Blacklist: False"
+		ui_blacklist_btn.text = "Blacklist: False"
+		ui_blacklist_btn["button_pressed"] = false
+
+# load a filter's settings using the filter_selected_key
+func _load_filter():
+	if filter_selected_key in GameState.TagsFilters:
+		var filter = GameState.TagsFilters[filter_selected_key]
+		_UI_set_filter_tag_buttons(filter["tags"])
+		_UI_toggle_blacklist_button(filter["blacklist"])
+		$Options_Game2/SettingsList/FiltersCase/FilterPresets/PresetNameField.text = filter_selected_key
+	else:
+		_UI_reset_filter_tag_buttons()
+		_UI_toggle_blacklist_button()
+
+func _save_filter():
+	# only save if the entry name is not blank
+	var filter_name = $Options_Game2/SettingsList/FiltersCase/FilterPresets/PresetNameField.text
+	if filter_name != "":
+		var blacklist_btn = $Options_Game2/SettingsList/FiltersCase/WhitelistToggle
+		var is_blacklist = blacklist_btn["button_pressed"]
+		var tags = []
+	
+		for i in range(filter_tag_selectors.size()):
+			if filter_tag_selectors[i]["button_pressed"]:
+				tags.append(filter_tag_selectors[i].text.to_lower())
+		
+		GameState.TagsFilters[filter_name] = {}
+		GameState.TagsFilters[filter_name]["blacklist"] = is_blacklist
+		GameState.TagsFilters[filter_name]["tags"] = tags
+		for filter in GameState.TagsFilters:
+			GameState.TagsFilters[filter]["selected"] = false
+		GameState.TagsFilters[filter_name]["selected"] = true
+		GameState._IO_write_tags_filter()
+		
+		filter_selected_key = filter_name
+		_UI_load_filter_selector()
+		_load_filter()
+
+func _delete_filter():
+	GameState.TagsFilters.erase(filter_selected_key)
+	GameState._IO_write_tags_filter()
+	filter_selected_key = ""
+	_UI_load_filter_selector()
+	_load_filter()
+
 #endregion
 
 const display_options = [

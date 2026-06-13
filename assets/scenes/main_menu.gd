@@ -1,6 +1,6 @@
 extends Control
 
-var tags_list_font = preload("res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf")
+var tags_list_theme = preload("res://assets/scenes/Checkbox_Filter.tres")
 var style_box_empty:StyleBoxEmpty = StyleBoxEmpty.new()
 
 var config = ConfigFile.new()
@@ -561,10 +561,10 @@ func _UI_load_filter_tag_buttons():
 		new_tag.flat = true
 		new_tag.toggle_mode = true
 		
+		new_tag.theme = tags_list_theme
 		new_tag.add_theme_font_size_override("font_size", 16)
-		new_tag.add_theme_font_override("font", tags_list_font)
-		new_tag.add_theme_stylebox_override("focus", style_box_empty)
-		new_tag.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+		
+		#new_tag.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 		ui_filter_container.add_child(new_tag)
 		filter_tag_selectors.append(new_tag)
 

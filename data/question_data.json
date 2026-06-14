@@ -2672,5 +2672,194 @@
 			"Inscription",
 			"Trick question, they are the same"
 		]
+	},
+	{
+		"chances": [
+			"73a5640a-0de7-49d7-81ec-035674312195"
+		],
+		"correct": "A Chai, Cinnamon Latte with some Macaroons",
+		"explainer": "Chai, CNMN and Macaron are all characters in Hi-Fi Rush",
+		"name": "High-Fi Appetite",
+		"question": "If you have had a chance to play through High-Fi Rush, what sort of order might you be hankering from your local coffee shop?",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Microsoft",
+			"Brawler"
+		],
+		"uuid": "74f954fd-40eb-4d25-a2c3-c819eaee7332",
+		"wrong": [
+			"A White Chocolate Mocha with a Mixed Greens Salad",
+			"A Black Coffee with a Biscoff",
+			"A Cappuccino with Vanilla Ice Cream"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "Whaling",
+		"explainer": "Whale oil is used as the primary fuel source for most of Dunwall's gadgets",
+		"name": "An Outside Opprotunity",
+		"question": "If you found yourself in the city of Dunwall looking for work, what might be a particularly lucrative business to get into?",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Microsoft"
+		],
+		"uuid": "a86b8847-45f8-4761-9bd5-faf8f159fe71",
+		"wrong": [
+			"Hunting",
+			"Music",
+			"Painting"
+		]
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "The Belly of a Dinosaur",
+		"explainer": "",
+		"name": "Gotcha!!!",
+		"question": "Ape Escape’s time traveling adventures take you to a number of strange and wild locations, including:",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Sony"
+		],
+		"uuid": "e4334569-05d0-42db-8bb6-f4757829cafc",
+		"wrong": [
+			"The Bottom of a Deep Sea Trench",
+			"The Landing point of the May Flower",
+			"Atop the back of a Dragon"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "Red Light, Green Light",
+		"explainer": "",
+		"name": "SUPER HOT",
+		"question": "Super Hot is really just a glorified version of…",
+		"questionType": "Multiple Choice",
+		"tags": [],
+		"uuid": "4c5fd497-1e70-4548-a15c-ab00b8311ce4",
+		"wrong": [
+			"Tag",
+			"Hide and Seek",
+			"Hop Scotch"
+		]
+	},
+	{
+		"chances": [
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "Chess Champion",
+		"explainer": "There is a puzzle that involves plugging chess piece themed fuses into regular fuse boxes",
+		"name": "Who built this place?",
+		"question": "Raccoon City police department in the original Resident Evil has some wild architectural choices, one involves in particular would really piss off a..",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Sony",
+			"Capcom"
+		],
+		"uuid": "c57a30f9-8507-42b6-ae11-466da3807c5c",
+		"wrong": [
+			"Tennis Player",
+			"Basketball Player",
+			"Poker Champion"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "Death",
+		"explainer": "",
+		"name": "PERSONA!!!",
+		"question": "As is somewhat evident by it’s main weapon the envoker, Personas 3 is really a game about…",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Sony"
+		],
+		"uuid": "25e6d3ba-7683-4a8d-b664-8b96378f02ff",
+		"wrong": [
+			"Life",
+			"Drugs",
+			"Working"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "4 Freemans",
+		"explainer": "",
+		"name": "Mr Freeman",
+		"question": "If we counted the number of Freeman there have been as main characters in Half-Life games, including the episodes, how many Freemans do we have?",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Valve"
+		],
+		"uuid": "4b2383ce-a4ad-47ed-b045-aff81098bca7",
+		"wrong": [
+			"3 Freemans",
+			"2 Freemans",
+			"5 Freemans"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "Rockets and a Deadly Neurotoxin",
+		"explainer": "",
+		"name": "This is the part where you die",
+		"question": "At the End of Portal, what does the GLaDOS try to kill you with?",
+		"questionType": "Multiple Choice",
+		"tags": [],
+		"uuid": "ee11a246-45a1-43a3-873b-bdb01c45442d",
+		"wrong": [
+			"A Poisoned Cake",
+			"A Gun",
+			"Turrets and really big Hammer"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "Moon Rocks",
+		"explainer": "",
+		"name": "Cave Fucking Johnson",
+		"question": "If you were to snort the material used to make the White paint from Portal 2, what would you be snorting?",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Valve"
+		],
+		"uuid": "5101dfa6-2b3d-4cd4-b169-0f11f062a5a8",
+		"wrong": [
+			"Cocaine",
+			"Lead",
+			"Standard Paint"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "You",
+		"explainer": "",
+		"name": "Back in Time",
+		"question": "The real villain of Braid is…",
+		"questionType": "Multiple Choice",
+		"tags": [],
+		"uuid": "edbc6383-8193-4abb-ae6d-fb857a78477d",
+		"wrong": [
+			"The Princess",
+			"The Environment",
+			"Enemies"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "Snakes",
+		"explainer": "The entity Anne faces is called the Hiss",
+		"name": "The Oldest Animal",
+		"question": "Based on the main entity Jesse Faden finds herself facing in Control, what sort of animal might she have reservations about interacting with afterwards?",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Remedy"
+		],
+		"uuid": "94b5faab-1aed-44f9-8123-33b8e20acc72",
+		"wrong": [
+			"Dogs",
+			"Geckos",
+			"Bears"
+		]
 	}
 ]

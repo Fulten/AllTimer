@@ -59,7 +59,7 @@
 		"correct": true,
 		"description": "Answer the most Microsoft questions correctly",
 		"icon": "",
-		"name": "Microsoft Fanboy",
+		"name": "Microsoft Mastter",
 		"type": "QUESTION",
 		"uuid": "b9871032-d7d5-4b8a-898b-07708f349fb8"
 	},
@@ -67,7 +67,7 @@
 		"correct": true,
 		"description": "Answer the most Sony questions correctly",
 		"icon": "",
-		"name": "Sony Fanboy",
+		"name": "Sony Sicophant",
 		"type": "QUESTION",
 		"uuid": "c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
 	},
@@ -86,5 +86,37 @@
 		"name": "Historian",
 		"type": "QUESTION",
 		"uuid": "e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+	},
+	{
+		"correct": true,
+		"description": "Food is front of mind with for you with these questions ain't it?",
+		"icon": "",
+		"name": "Foodie",
+		"type": "QUESTION",
+		"uuid": "73a5640a-0de7-49d7-81ec-035674312195"
+	},
+	{
+		"correct": true,
+		"description": "You seem to have a heavy focus on the laws with these sorts of results",
+		"icon": "",
+		"name": "Lawyer",
+		"type": "QUESTION",
+		"uuid": "fc8d9c8c-aa26-467b-802d-1d8f4762ba08"
+	},
+	{
+		"correct": true,
+		"description": "Seems we have some Fighting game fans",
+		"icon": "",
+		"name": "New Challenger!",
+		"type": "QUESTION",
+		"uuid": "f1bc8cb3-ac7b-455e-bfa7-3a0038053066"
+	},
+	{
+		"correct": true,
+		"description": "Answer the most questions about Art",
+		"icon": "",
+		"name": "Artist",
+		"type": "QUESTION",
+		"uuid": "eb4e497d-9ff2-47b0-b4f0-347b84346e17"
 	}
 ]

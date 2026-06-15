@@ -2,7 +2,9 @@
 	{
 		"chances": [
 			"45500936-fc97-4174-832f-c250cdf4e49b",
-			"8c71f458-bf68-48b9-94ae-dab8c9538a37"
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"fc8d9c8c-aa26-467b-802d-1d8f4762ba08"
 		],
 		"correct": "R. Kelly",
 		"explainer": "R. Kelly has had some practice giving golden showers as the gaurd did with Raiden in Metal Gear Soild 2",
@@ -43,7 +45,9 @@
 	{
 		"chances": [
 			"9b458853-b268-4ada-9bb5-d0225755f2cf",
-			"16848d16-3133-4aa2-95ba-2457168d286f"
+			"16848d16-3133-4aa2-95ba-2457168d286f",
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
 		"correct": "70 power cells",
 		"explainer": "In Mario 64, you need 70 stars to fight Bowser for the final time",
@@ -86,7 +90,11 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"eb4e497d-9ff2-47b0-b4f0-347b84346e17",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"1f3983fd-8f28-4344-b166-958491cd60e9"
+		],
 		"correct": "Desmond Paul Henry",
 		"explainer": "Manifold Garden is heavily based on fractals, a mathematically-based art that Desmond Paul Henry was a pioneer of.",
 		"name": "Artistic Gamer",
@@ -105,7 +113,9 @@
 	},
 	{
 		"chances": [
-			"108295c1-6978-44fa-a082-53d4da30fe4c"
+			"108295c1-6978-44fa-a082-53d4da30fe4c",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
 		],
 		"correct": "\"The Criminals of Prohibition\"",
 		"explainer": "In Shadow Hearts: From the New World you become fairly close friends with actual historical Al Capone!",
@@ -125,7 +135,8 @@
 	},
 	{
 		"chances": [
-			"108295c1-6978-44fa-a082-53d4da30fe4c"
+			"108295c1-6978-44fa-a082-53d4da30fe4c",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
 		],
 		"correct": "Bioshock Infinite",
 		"explainer": "",
@@ -145,7 +156,9 @@
 	},
 	{
 		"chances": [
-			"9b458853-b268-4ada-9bb5-d0225755f2cf"
+			"9b458853-b268-4ada-9bb5-d0225755f2cf",
+			"b9871032-d7d5-4b8a-898b-07708f349fb8",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
 		],
 		"correct": "Wart! Wart! Wart! Wart! Wart! Wart!",
 		"explainer": "",
@@ -166,7 +179,9 @@
 	{
 		"chances": [
 			"45500936-fc97-4174-832f-c250cdf4e49b",
-			"8c71f458-bf68-48b9-94ae-dab8c9538a37"
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"73a5640a-0de7-49d7-81ec-035674312195",
+			"51bf9fc6-1359-46e8-9457-1036b79065be"
 		],
 		"correct": "\"Stomp Stomp Stomp the dough into the floor!\"",
 		"explainer": "Udon noodles are traditionally made by using body weight to develop the gluten by stepping on it, using your hands is usually not strong enough.",
@@ -186,7 +201,8 @@
 	},
 	{
 		"chances": [
-			"b5c44831-a697-43f9-adb0-b61fb485affa"
+			"b5c44831-a697-43f9-adb0-b61fb485affa",
+			"73a5640a-0de7-49d7-81ec-035674312195"
 		],
 		"correct": "A Salad",
 		"explainer": "Lagombi is based heavily on a rabbit, who would likely order a salad to get its natural greens.",
@@ -250,7 +266,8 @@
 	{
 		"chances": [
 			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
-			"8c71f458-bf68-48b9-94ae-dab8c9538a37"
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
 		],
 		"correct": "Destiny",
 		"explainer": "Bungie's Destiny 1 & 2 both had notoriously rocky relationships with each of their publishers that played out publicly like bad breakups on social media.",
@@ -312,7 +329,8 @@
 	},
 	{
 		"chances": [
-			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"ef315876-ebad-4b38-8a0a-9b4203765b59"
 		],
 		"correct": "Mira, the Dog",
 		"explainer": "The name of the dog from the secret dog ending who controls the town of Silent Hill is Mira",
@@ -333,7 +351,9 @@
 	{
 		"chances": [
 			"108295c1-6978-44fa-a082-53d4da30fe4c",
-			"45500936-fc97-4174-832f-c250cdf4e49b"
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
 		"correct": "Kingdom Hearts: Birth By Sleep",
 		"explainer": "In Kingdom Hearts: Birth By Sleep, the main antagonist is played by Leonard Nimoy and the teacher of the main characters is played by Mark Hamill.",
@@ -372,7 +392,8 @@
 	},
 	{
 		"chances": [
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"fc8d9c8c-aa26-467b-802d-1d8f4762ba08"
 		],
 		"correct": "You mad bro?",
 		"explainer": "",
@@ -432,7 +453,10 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"fc8d9c8c-aa26-467b-802d-1d8f4762ba08",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
+		],
 		"correct": "75",
 		"explainer": "In Nevada's Regulation 14, the required win-rate is 75% of all amounts wagered.",
 		"name": "State Approved Gacha",
@@ -451,7 +475,9 @@
 	},
 	{
 		"chances": [
-			"45500936-fc97-4174-832f-c250cdf4e49b"
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"51bf9fc6-1359-46e8-9457-1036b79065be",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37"
 		],
 		"correct": "A Mix Table",
 		"explainer": "DJ Hero is a game you play with a Mix Table peripheral device!",
@@ -471,7 +497,8 @@
 	{
 		"chances": [
 			"45500936-fc97-4174-832f-c250cdf4e49b",
-			"8c71f458-bf68-48b9-94ae-dab8c9538a37"
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"51bf9fc6-1359-46e8-9457-1036b79065be"
 		],
 		"correct": "To be on American Idol",
 		"explainer": "",
@@ -510,7 +537,11 @@
 	},
 	{
 		"chances": [
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"fc8d9c8c-aa26-467b-802d-1d8f4762ba08",
+			"ef315876-ebad-4b38-8a0a-9b4203765b59"
 		],
 		"correct": "Iron Lung",
 		"explainer": "",
@@ -549,7 +580,10 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"1f3983fd-8f28-4344-b166-958491cd60e9"
+		],
 		"correct": "Investigate the signing of the Declaration of Independence to uncover the bloodline of a leader of a cult",
 		"explainer": "",
 		"name": "Wait, For Real?",
@@ -567,7 +601,9 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"c55d28e0-c1c7-4ed0-a9ff-2a8cfefe1300"
+		],
 		"correct": "Resource Management",
 		"explainer": "",
 		"name": "I Prefer Eurogames...",
@@ -608,7 +644,8 @@
 	{
 		"chances": [
 			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"fc8d9c8c-aa26-467b-802d-1d8f4762ba08"
 		],
 		"correct": "They removed OtherOS from the PS3",
 		"explainer": "",
@@ -650,7 +687,8 @@
 	{
 		"chances": [
 			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"eb4e497d-9ff2-47b0-b4f0-347b84346e17"
 		],
 		"correct": "An Ink blot",
 		"explainer": "Peter Dille, when asked the purpose behind the strange baby commercial for the PS3, said it was a sort of Rorschach test where it was up to the audience to see what they saw. Like ink blot tests previously used in Psychology.",
@@ -692,7 +730,8 @@
 	},
 	{
 		"chances": [
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"ef315876-ebad-4b38-8a0a-9b4203765b59"
 		],
 		"correct": "Nobunaga Oda",
 		"explainer": "",
@@ -712,7 +751,10 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"73a5640a-0de7-49d7-81ec-035674312195",
+			"ef315876-ebad-4b38-8a0a-9b4203765b59"
+		],
 		"correct": "Herbalism",
 		"explainer": "Every Resident Evil protaganist has the ability to mix herbs to make medical powders.",
 		"name": "Professional Evil",
@@ -731,7 +773,9 @@
 	},
 	{
 		"chances": [
-			"43944b2e-9790-4fba-a257-004591ba27a2"
+			"43944b2e-9790-4fba-a257-004591ba27a2",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9",
+			"f1bc8cb3-ac7b-455e-bfa7-3a0038053066"
 		],
 		"correct": "Players are awarded additional victory points based on random criteria at the end",
 		"explainer": "This mechanic sounds very similar to the Bonus Stars from Mario Party",
@@ -751,7 +795,11 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"c55d28e0-c1c7-4ed0-a9ff-2a8cfefe1300"
+		],
 		"correct": "The Stack",
 		"explainer": "The stack is a system somewhat unique to magic design to help resolve it's complex instant speeds spell system with respect to sorceries, abilities, effects and summoning spells.",
 		"name": "Grim Lotus",
@@ -769,7 +817,12 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"b5c44831-a697-43f9-adb0-b61fb485affa",
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"c55d28e0-c1c7-4ed0-a9ff-2a8cfefe1300"
+		],
 		"correct": "Skaven",
 		"explainer": "",
 		"name": "They have more in common than War",
@@ -789,7 +842,8 @@
 	{
 		"chances": [
 			"108295c1-6978-44fa-a082-53d4da30fe4c",
-			"b9871032-d7d5-4b8a-898b-07708f349fb8"
+			"b9871032-d7d5-4b8a-898b-07708f349fb8",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
 		],
 		"correct": "Energy Sword",
 		"explainer": "",
@@ -813,7 +867,8 @@
 			"45500936-fc97-4174-832f-c250cdf4e49b",
 			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
 			"43944b2e-9790-4fba-a257-004591ba27a2",
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
 		"correct": "Miley Cyrus",
 		"explainer": "",
@@ -836,7 +891,8 @@
 		"chances": [
 			"16848d16-3133-4aa2-95ba-2457168d286f",
 			"43944b2e-9790-4fba-a257-004591ba27a2",
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
 		],
 		"correct": "NES Hands Free Controller",
 		"explainer": "",
@@ -857,7 +913,9 @@
 	},
 	{
 		"chances": [
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
 		],
 		"correct": "Holding and firing a gun",
 		"explainer": "",
@@ -878,7 +936,8 @@
 	{
 		"chances": [
 			"16848d16-3133-4aa2-95ba-2457168d286f",
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
 		"correct": "E.T.",
 		"explainer": "The E.T. game is one of the biggest commercial failures in industry history and is regarded as a major inciter of the Video Game Crash of 1983.",
@@ -899,7 +958,8 @@
 	},
 	{
 		"chances": [
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
 		],
 		"correct": "Jason Schrier",
 		"explainer": "",
@@ -920,7 +980,8 @@
 	{
 		"chances": [
 			"9b458853-b268-4ada-9bb5-d0225755f2cf",
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
 		],
 		"correct": "About 15",
 		"explainer": "Please drink responsibly.",
@@ -940,7 +1001,8 @@
 	{
 		"chances": [
 			"16848d16-3133-4aa2-95ba-2457168d286f",
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"f1bc8cb3-ac7b-455e-bfa7-3a0038053066"
 		],
 		"correct": "Combos",
 		"explainer": "",
@@ -959,7 +1021,11 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
+		],
 		"correct": "Bio Force Gun v3.14",
 		"explainer": "",
 		"name": "That's a Big Gun",
@@ -981,7 +1047,8 @@
 	{
 		"chances": [
 			"45500936-fc97-4174-832f-c250cdf4e49b",
-			"8c71f458-bf68-48b9-94ae-dab8c9538a37"
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"ef315876-ebad-4b38-8a0a-9b4203765b59"
 		],
 		"correct": "Normal Water burns them like acid",
 		"explainer": "",
@@ -1023,7 +1090,9 @@
 	},
 	{
 		"chances": [
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"9b458853-b268-4ada-9bb5-d0225755f2cf",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
 		],
 		"correct": "1 Day",
 		"explainer": "According to the account in Masters of Doom, Doom was selling 200,000 copies a day",
@@ -1044,7 +1113,9 @@
 	},
 	{
 		"chances": [
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
 		],
 		"correct": "Ideas from the Deep",
 		"explainer": "",
@@ -1065,7 +1136,9 @@
 	},
 	{
 		"chances": [
-			"108295c1-6978-44fa-a082-53d4da30fe4c"
+			"108295c1-6978-44fa-a082-53d4da30fe4c",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"1f3983fd-8f28-4344-b166-958491cd60e9"
 		],
 		"correct": "They might have released a pillars of eternity part 1 and part 2",
 		"explainer": "",
@@ -1104,7 +1177,9 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"1f3983fd-8f28-4344-b166-958491cd60e9"
+		],
 		"correct": "Duplicate a ship using the time travel experiment",
 		"explainer": "",
 		"name": "Wild...",
@@ -1124,7 +1199,8 @@
 	{
 		"chances": [
 			"108295c1-6978-44fa-a082-53d4da30fe4c",
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"51bf9fc6-1359-46e8-9457-1036b79065be"
 		],
 		"correct": "Frédéric Chopin",
 		"explainer": "",
@@ -1145,7 +1221,8 @@
 	{
 		"chances": [
 			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"eb4e497d-9ff2-47b0-b4f0-347b84346e17"
 		],
 		"correct": "To create contemporary art",
 		"explainer": "",
@@ -1165,7 +1242,9 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
+		],
 		"correct": "You talk too long, I don’t understand",
 		"explainer": "In the game Seaman, the technology where the \"seamen\" would listen to you and react via a microphone to your questions was fairly primitive and required specific kinds of questions. To indicate to the player that they needed it worded differently, this phrase is said by default.",
 		"name": "Seapeople",
@@ -1185,7 +1264,10 @@
 	{
 		"chances": [
 			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"45500936-fc97-4174-832f-c250cdf4e49b"
 		],
 		"correct": "Psycho",
 		"explainer": "There is a level where you suck blood from a woman while she is in the bath, a intrusive and bloody act not unlike Psycho's shower scene",
@@ -1207,7 +1289,9 @@
 	{
 		"chances": [
 			"9b458853-b268-4ada-9bb5-d0225755f2cf",
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
 		"correct": "About 1,300,000",
 		"explainer": "",
@@ -1227,7 +1311,8 @@
 	},
 	{
 		"chances": [
-			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
 		],
 		"correct": "Take medicine every 30-40 real life minutes",
 		"explainer": "",
@@ -1247,7 +1332,11 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
+		],
 		"correct": "There are child soldiers",
 		"explainer": "",
 		"name": "Africa May Cry",
@@ -1265,7 +1354,12 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
+		],
 		"correct": "To see the World's Largest Mountain Range ",
 		"explainer": "Far Cry 4 takes place in a fictional country in the Himalayas, which contains the Largest Mountain Range",
 		"name": "Kyrat Tour Guide",
@@ -1283,7 +1377,12 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
+		],
 		"correct": "Yellowstone",
 		"explainer": "Far Cry 5 takes place in a fictional are in Montana, which is closest to Yellowstone national park",
 		"name": "Oh America...?",
@@ -1301,7 +1400,12 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
+		],
 		"correct": "Sailing up the Congo to meet an Ivory trader",
 		"explainer": "The main character in both the novel and the game similarly end up making things worse than before intervening, with the former dealing with illegal exotic trades rather than a warlord with a god-complex",
 		"name": "The Heart of the Desert",
@@ -1320,7 +1424,9 @@
 	},
 	{
 		"chances": [
-			"43944b2e-9790-4fba-a257-004591ba27a2"
+			"43944b2e-9790-4fba-a257-004591ba27a2",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
 		"correct": "Skyward Sword, Orcarina of Time, A Link to the Past, The Legend of Zelda, Breath of the Wild",
 		"explainer": "",
@@ -1339,7 +1445,9 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
+		],
 		"correct": "Izanagi’s descent into Yomi",
 		"explainer": "",
 		"name": "Issun's Lost Lore",
@@ -1357,7 +1465,9 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
+		],
 		"correct": "3 miles to the gallon",
 		"explainer": "",
 		"name": "Grand Theft Gasoline",
@@ -1376,7 +1486,8 @@
 	},
 	{
 		"chances": [
-			"9b458853-b268-4ada-9bb5-d0225755f2cf"
+			"9b458853-b268-4ada-9bb5-d0225755f2cf",
+			"73a5640a-0de7-49d7-81ec-035674312195"
 		],
 		"correct": "7 and a large soda",
 		"explainer": "I'll have two number 9's(2), a number 9 large(1), a number 6 with extra dip(1), a number 7(1), two number 45's(2), one with cheese, and a large soda.﻿",
@@ -1397,7 +1508,8 @@
 	},
 	{
 		"chances": [
-			"9b458853-b268-4ada-9bb5-d0225755f2cf"
+			"9b458853-b268-4ada-9bb5-d0225755f2cf",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
 		],
 		"correct": "15",
 		"explainer": "There are 17 available, but 2 are free",
@@ -1415,7 +1527,9 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"fc8d9c8c-aa26-467b-802d-1d8f4762ba08"
+		],
 		"correct": "A Visa",
 		"explainer": "",
 		"name": "This is my cousin...",
@@ -1435,7 +1549,8 @@
 	{
 		"chances": [
 			"45500936-fc97-4174-832f-c250cdf4e49b",
-			"8c71f458-bf68-48b9-94ae-dab8c9538a37"
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"b5c44831-a697-43f9-adb0-b61fb485affa"
 		],
 		"correct": "Teen Wolf",
 		"explainer": "",
@@ -1456,7 +1571,8 @@
 	},
 	{
 		"chances": [
-			"b9871032-d7d5-4b8a-898b-07708f349fb8"
+			"b9871032-d7d5-4b8a-898b-07708f349fb8",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
 		],
 		"correct": "They are moving Cities with a Giant Turtle",
 		"explainer": "",
@@ -1496,7 +1612,8 @@
 	},
 	{
 		"chances": [
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
 		],
 		"correct": "Work with the Source engine early",
 		"explainer": "Both Troika and Arkane were offered the ability to develop their next game in an early version of the Source Engine. Troika took the offer to make Vampire the Masquerade: Bloodlines and Arkane declined and made Dark Messiah of Might and Magic",
@@ -1536,7 +1653,8 @@
 	},
 	{
 		"chances": [
-			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
 		],
 		"correct": "A dance to steal an item",
 		"explainer": "",
@@ -1555,7 +1673,10 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"51bf9fc6-1359-46e8-9457-1036b79065be"
+		],
 		"correct": "8 years",
 		"explainer": "",
 		"name": "The Concert Never Stops",
@@ -1573,7 +1694,9 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
 		"correct": "The President of the United States",
 		"explainer": "",
 		"name": "Yes Sir",
@@ -1591,7 +1714,11 @@
 	},
 	{
 		"chances": [
-			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"b5c44831-a697-43f9-adb0-b61fb485affa",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
 		"correct": "Toxic",
 		"explainer": "",
@@ -1611,7 +1738,11 @@
 	},
 	{
 		"chances": [
-			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"73a5640a-0de7-49d7-81ec-035674312195",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
 		"correct": "A vodka martini",
 		"explainer": "",
@@ -1631,7 +1762,10 @@
 	},
 	{
 		"chances": [
-			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"b5c44831-a697-43f9-adb0-b61fb485affa",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
 		"correct": "Miz Ruby is desynced",
 		"explainer": "Miz Ruby is a rythm boss fight but the audio in the remaster was not synced to the boss fight",
@@ -1651,7 +1785,9 @@
 	},
 	{
 		"chances": [
-			"43944b2e-9790-4fba-a257-004591ba27a2"
+			"43944b2e-9790-4fba-a257-004591ba27a2",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
 		"correct": "A man performing the kabuki yo! with a ting at the end",
 		"explainer": "Holding the Z-Button changes the start-up jingle to an alternate one depending on how many controllers are holding it.\n",
@@ -1670,7 +1806,10 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37"
+		],
 		"correct": "TiDi",
 		"explainer": "Large scale fights in Eve required so many calculations to resolve that CCP Games implemented time dilation to slow these wars down to a crawl.",
 		"name": "Spreadsheet Simulator",
@@ -1688,7 +1827,9 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
+		],
 		"correct": "Queue skills to learn in real-time",
 		"explainer": "",
 		"name": "Skill up",
@@ -1705,7 +1846,10 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+		],
 		"correct": "The Corrupted Blood incident",
 		"explainer": "",
 		"name": "Murlock Pox",
@@ -1725,7 +1869,8 @@
 	{
 		"chances": [
 			"16848d16-3133-4aa2-95ba-2457168d286f",
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"fc8d9c8c-aa26-467b-802d-1d8f4762ba08"
 		],
 		"correct": "The Joy of Sex",
 		"explainer": "",
@@ -1745,7 +1890,9 @@
 	},
 	{
 		"chances": [
-			"43944b2e-9790-4fba-a257-004591ba27a2"
+			"43944b2e-9790-4fba-a257-004591ba27a2",
+			"fc8d9c8c-aa26-467b-802d-1d8f4762ba08",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
 		],
 		"correct": "Samus Aran",
 		"explainer": "",
@@ -1765,7 +1912,10 @@
 	},
 	{
 		"chances": [
-			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"b5c44831-a697-43f9-adb0-b61fb485affa",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
 		"correct": "Sly Raccoon",
 		"explainer": "",
@@ -1785,7 +1935,9 @@
 	{
 		"chances": [
 			"108295c1-6978-44fa-a082-53d4da30fe4c",
-			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"b5c44831-a697-43f9-adb0-b61fb485affa",
+			"16848d16-3133-4aa2-95ba-2457168d286f"
 		],
 		"correct": "Ultros",
 		"explainer": "",
@@ -1807,7 +1959,8 @@
 	{
 		"chances": [
 			"108295c1-6978-44fa-a082-53d4da30fe4c",
-			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"16848d16-3133-4aa2-95ba-2457168d286f"
 		],
 		"correct": "He becomes a level 0 paladin",
 		"explainer": "",
@@ -1829,7 +1982,8 @@
 		"chances": [
 			"45500936-fc97-4174-832f-c250cdf4e49b",
 			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
-			"43944b2e-9790-4fba-a257-004591ba27a2"
+			"43944b2e-9790-4fba-a257-004591ba27a2",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
 		"correct": "Mario",
 		"explainer": "In the 1993 Super Mario Brothers film, Mario introduces Luigi as \"Luigi Mario\"",
@@ -1849,7 +2003,9 @@
 	},
 	{
 		"chances": [
-			"b5c44831-a697-43f9-adb0-b61fb485affa"
+			"b5c44831-a697-43f9-adb0-b61fb485affa",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
 		"correct": "The icecaps will start melting!",
 		"explainer": "",
@@ -1870,7 +2026,10 @@
 	},
 	{
 		"chances": [
-			"b5c44831-a697-43f9-adb0-b61fb485affa"
+			"b5c44831-a697-43f9-adb0-b61fb485affa",
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
 		"correct": "Carmelita Fox",
 		"explainer": "",
@@ -1890,7 +2049,9 @@
 	},
 	{
 		"chances": [
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"1f3983fd-8f28-4344-b166-958491cd60e9"
 		],
 		"correct": "Double Fine Adventure",
 		"explainer": "",
@@ -1910,7 +2071,9 @@
 	{
 		"chances": [
 			"16848d16-3133-4aa2-95ba-2457168d286f",
-			"43944b2e-9790-4fba-a257-004591ba27a2"
+			"43944b2e-9790-4fba-a257-004591ba27a2",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
 		"correct": "Genderless until interacting with a Queen",
 		"explainer": "Metroids with specific genes can become Queens that lay eggs; otherwise, they are genderless and reproduce asexually in the presence of beta radiation.",
@@ -1929,7 +2092,10 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"9b458853-b268-4ada-9bb5-d0225755f2cf",
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
+		],
 		"correct": "Roughly 24 years",
 		"explainer": "",
 		"name": "A Doctorate in Gaming",
@@ -1948,7 +2114,9 @@
 	},
 	{
 		"chances": [
-			"45500936-fc97-4174-832f-c250cdf4e49b"
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"b5c44831-a697-43f9-adb0-b61fb485affa"
 		],
 		"correct": "The Hero’s Journey",
 		"explainer": "",
@@ -1968,7 +2136,8 @@
 	{
 		"chances": [
 			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
-			"16848d16-3133-4aa2-95ba-2457168d286f"
+			"16848d16-3133-4aa2-95ba-2457168d286f",
+			"ef315876-ebad-4b38-8a0a-9b4203765b59"
 		],
 		"correct": "Basement",
 		"explainer": "",
@@ -1988,7 +2157,9 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"ef315876-ebad-4b38-8a0a-9b4203765b59"
+		],
 		"correct": "Ethan Winters",
 		"explainer": "",
 		"name": "It Comes off?",
@@ -2007,7 +2178,8 @@
 	{
 		"chances": [
 			"108295c1-6978-44fa-a082-53d4da30fe4c",
-			"43944b2e-9790-4fba-a257-004591ba27a2"
+			"43944b2e-9790-4fba-a257-004591ba27a2",
+			"16848d16-3133-4aa2-95ba-2457168d286f"
 		],
 		"correct": "Skill Leveling",
 		"explainer": "",
@@ -2027,7 +2199,9 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"87d069b4-7439-4041-843a-a51bf83a5303"
+		],
 		"correct": "Embellish",
 		"explainer": "He's an unreliable narrator, and your encounters and challenges change to match what he makes up.",
 		"name": "A Tall Tale",
@@ -2045,7 +2219,9 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"ef315876-ebad-4b38-8a0a-9b4203765b59"
+		],
 		"correct": "Johnson",
 		"explainer": "",
 		"name": "A Ride to Hell",
@@ -2125,7 +2301,11 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"16848d16-3133-4aa2-95ba-2457168d286f",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
+		],
 		"correct": "Doom 1993",
 		"explainer": "",
 		"name": "DOOM",
@@ -2167,7 +2347,8 @@
 	{
 		"chances": [
 			"16848d16-3133-4aa2-95ba-2457168d286f",
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
 		],
 		"correct": "True",
 		"explainer": "",
@@ -2187,7 +2368,9 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"73a5640a-0de7-49d7-81ec-035674312195"
+		],
 		"correct": "True",
 		"explainer": "",
 		"name": "Stay Hydrated BB",
@@ -2207,7 +2390,8 @@
 	{
 		"chances": [
 			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
-			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"fc8d9c8c-aa26-467b-802d-1d8f4762ba08"
 		],
 		"correct": "Nigeria",
 		"explainer": "In one of the commercials, Kevin said the line \"You can't believe everything you read on the internet, otherwise I'd be a Nigerian millionaire.\" This offended the Nigerian government and resulted in Sony changing the line and apologizing to the Nigerian government.",
@@ -2227,7 +2411,8 @@
 	},
 	{
 		"chances": [
-			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"f1bc8cb3-ac7b-455e-bfa7-3a0038053066"
 		],
 		"correct": "True",
 		"explainer": "",
@@ -2288,7 +2473,10 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"b5c44831-a697-43f9-adb0-b61fb485affa",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
+		],
 		"correct": "True",
 		"explainer": "",
 		"name": "Absolute Misery",
@@ -2306,7 +2494,10 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"ef315876-ebad-4b38-8a0a-9b4203765b59"
+		],
 		"correct": "Hurdles",
 		"explainer": "Her vocation manifests as one of the most-used perks in Dead by Daylight.",
 		"name": "Track By Fieldlight",
@@ -2381,7 +2572,10 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
+		],
 		"correct": "XXVII",
 		"explainer": "",
 		"name": "In the year 2XXX we have Final Fantasy...",
@@ -2400,7 +2594,8 @@
 	},
 	{
 		"chances": [
-			"16848d16-3133-4aa2-95ba-2457168d286f"
+			"16848d16-3133-4aa2-95ba-2457168d286f",
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
 		],
 		"correct": "Pacman",
 		"explainer": "",
@@ -2419,7 +2614,9 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
+		],
 		"correct": "True",
 		"explainer": "",
 		"name": "Lightning is Nothing to a Ninja",
@@ -2437,7 +2634,9 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
+		],
 		"correct": "Every mission is presented as a tape recording that can be rewound",
 		"explainer": "",
 		"name": "Zero Presentation",
@@ -2457,7 +2656,9 @@
 	},
 	{
 		"chances": [
-			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"eb4e497d-9ff2-47b0-b4f0-347b84346e17",
+			"1f3983fd-8f28-4344-b166-958491cd60e9"
 		],
 		"correct": "Synesthesia",
 		"explainer": "",
@@ -2476,7 +2677,12 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"45500936-fc97-4174-832f-c250cdf4e49b",
+			"8c71f458-bf68-48b9-94ae-dab8c9538a37",
+			"1f3983fd-8f28-4344-b166-958491cd60e9"
+		],
 		"correct": "A puzzle involving a series of wing dings",
 		"explainer": "",
 		"name": "Puzzling Well",
@@ -2495,7 +2701,11 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"eb4e497d-9ff2-47b0-b4f0-347b84346e17",
+			"1f3983fd-8f28-4344-b166-958491cd60e9",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
+		],
 		"correct": "Taking pictures",
 		"explainer": "",
 		"name": "A _____ Adventure",
@@ -2514,11 +2724,12 @@
 	},
 	{
 		"chances": [
-			"9b458853-b268-4ada-9bb5-d0225755f2cf"
+			"9b458853-b268-4ada-9bb5-d0225755f2cf",
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
 		],
 		"correct": "12",
 		"explainer": "",
-		"name": "Furious",
+		"name": "Furious Drinking",
 		"question": "If the main character of Furi wanted to rant about his major battles over a pint for each, how many beers would he need to order to cover all of the bosses he encountered, including DLC and secret endings?",
 		"questionType": "Multiple Choice",
 		"tags": [
@@ -2533,7 +2744,10 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"1f3983fd-8f28-4344-b166-958491cd60e9"
+		],
 		"correct": "Alchemy",
 		"explainer": "",
 		"name": "Puzzling Premise",
@@ -2554,7 +2768,9 @@
 	},
 	{
 		"chances": [
-			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"73a5640a-0de7-49d7-81ec-035674312195",
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
 		],
 		"correct": "Yakisoba Pan",
 		"explainer": "",
@@ -2576,7 +2792,8 @@
 		"chances": [
 			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
 			"43944b2e-9790-4fba-a257-004591ba27a2",
-			"16848d16-3133-4aa2-95ba-2457168d286f"
+			"16848d16-3133-4aa2-95ba-2457168d286f",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
 		"correct": "It might get flipped upside down for a second exploration of the whole map!",
 		"explainer": "",
@@ -2598,7 +2815,10 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"ef315876-ebad-4b38-8a0a-9b4203765b59"
+		],
 		"correct": "With you looking for your lost dog that got washed down a street drain",
 		"explainer": "",
 		"name": "Lost something unexpected",
@@ -2617,7 +2837,10 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
+		],
 		"correct": "It is an indicator of parentage",
 		"explainer": "",
 		"name": "The Elden Name",
@@ -2635,7 +2858,10 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
+		],
 		"correct": "You are shot in the head",
 		"explainer": "",
 		"name": "Wrong place, wrong time",
@@ -2654,7 +2880,8 @@
 	},
 	{
 		"chances": [
-			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"c55d28e0-c1c7-4ed0-a9ff-2a8cfefe1300"
 		],
 		"correct": "Sacrifices Must Be Made",
 		"explainer": "",
@@ -2688,9 +2915,9 @@
 		],
 		"uuid": "74f954fd-40eb-4d25-a2c3-c819eaee7332",
 		"wrong": [
-			"A White Chocolate Mocha with a Mixed Greens Salad",
-			"A Black Coffee with a Biscoff",
-			"A Cappuccino with Vanilla Ice Cream"
+			"A white chocolate mocha with a mixed greens salad",
+			"A black coffee with a Biscoff",
+			"A cappuccino with vanilla ice cream"
 		]
 	},
 	{
@@ -2712,9 +2939,11 @@
 	},
 	{
 		"chances": [
-			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"b5c44831-a697-43f9-adb0-b61fb485affa",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 		],
-		"correct": "The Belly of a Dinosaur",
+		"correct": "The belly of a dinosaur",
 		"explainer": "",
 		"name": "Gotcha!!!",
 		"question": "Ape Escape’s time traveling adventures take you to a number of strange and wild locations, including:",
@@ -2724,19 +2953,23 @@
 		],
 		"uuid": "e4334569-05d0-42db-8bb6-f4757829cafc",
 		"wrong": [
-			"The Bottom of a Deep Sea Trench",
-			"The Landing point of the May Flower",
-			"Atop the back of a Dragon"
+			"The bottom of a deep sea trench",
+			"The landing point of the May Flower",
+			"Atop the back of a dragon"
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"87d069b4-7439-4041-843a-a51bf83a5303"
+		],
 		"correct": "Red Light, Green Light",
 		"explainer": "",
 		"name": "SUPER HOT",
 		"question": "Super Hot is really just a glorified version of…",
 		"questionType": "Multiple Choice",
-		"tags": [],
+		"tags": [
+			"Indie"
+		],
 		"uuid": "4c5fd497-1e70-4548-a15c-ab00b8311ce4",
 		"wrong": [
 			"Tag",
@@ -2746,12 +2979,13 @@
 	},
 	{
 		"chances": [
-			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"ef315876-ebad-4b38-8a0a-9b4203765b59"
 		],
 		"correct": "Chess Champion",
 		"explainer": "There is a puzzle that involves plugging chess piece themed fuses into regular fuse boxes",
 		"name": "Who built this place?",
-		"question": "Raccoon City police department in the original Resident Evil has some wild architectural choices, one involves in particular would really piss off a..",
+		"question": "The Raccoon City police department in the original Resident Evil 2 has some wild design choices, one in particular involving fuses would really piss off a..",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony",
@@ -2765,11 +2999,14 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
+		],
 		"correct": "Death",
 		"explainer": "",
 		"name": "PERSONA!!!",
-		"question": "As is somewhat evident by it’s main weapon the envoker, Personas 3 is really a game about…",
+		"question": "As is somewhat evident by it’s main weapon the Evoker, Persona 3 is really a game about…",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Sony"
@@ -2782,10 +3019,13 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"9b458853-b268-4ada-9bb5-d0225755f2cf",
+			"87d069b4-7439-4041-843a-a51bf83a5303"
+		],
 		"correct": "4 Freemans",
 		"explainer": "",
-		"name": "Mr Freeman",
+		"name": "Mister Freeman",
 		"question": "If we counted the number of Freeman there have been as main characters in Half-Life games, including the episodes, how many Freemans do we have?",
 		"questionType": "Multiple Choice",
 		"tags": [
@@ -2799,26 +3039,32 @@
 		]
 	},
 	{
-		"chances": [],
-		"correct": "Rockets and a Deadly Neurotoxin",
+		"chances": [
+			"1f3983fd-8f28-4344-b166-958491cd60e9"
+		],
+		"correct": "Rockets and a deadly neurotoxin",
 		"explainer": "",
 		"name": "This is the part where you die",
-		"question": "At the End of Portal, what does the GLaDOS try to kill you with?",
+		"question": "At the end of Portal, what does GLaDOS try to kill you with?",
 		"questionType": "Multiple Choice",
-		"tags": [],
+		"tags": [
+			"Valve"
+		],
 		"uuid": "ee11a246-45a1-43a3-873b-bdb01c45442d",
 		"wrong": [
-			"A Poisoned Cake",
-			"A Gun",
-			"Turrets and really big Hammer"
+			"A poisoned cake",
+			"A gun",
+			"Turrets and really big hammer"
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"1f3983fd-8f28-4344-b166-958491cd60e9"
+		],
 		"correct": "Moon Rocks",
 		"explainer": "",
 		"name": "Cave Fucking Johnson",
-		"question": "If you were to snort the material used to make the White paint from Portal 2, what would you be snorting?",
+		"question": "If you were to snort the material used to make the white paint from Portal 2, what would you be snorting?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Valve"
@@ -2831,13 +3077,18 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"1f3983fd-8f28-4344-b166-958491cd60e9"
+		],
 		"correct": "You",
 		"explainer": "",
 		"name": "Back in Time",
 		"question": "The real villain of Braid is…",
 		"questionType": "Multiple Choice",
-		"tags": [],
+		"tags": [
+			"Indie"
+		],
 		"uuid": "edbc6383-8193-4abb-ae6d-fb857a78477d",
 		"wrong": [
 			"The Princess",
@@ -2846,11 +3097,13 @@
 		]
 	},
 	{
-		"chances": [],
+		"chances": [
+			"b5c44831-a697-43f9-adb0-b61fb485affa"
+		],
 		"correct": "Snakes",
-		"explainer": "The entity Anne faces is called the Hiss",
+		"explainer": "The force Jesse faces she calls the Hiss",
 		"name": "The Oldest Animal",
-		"question": "Based on the main entity Jesse Faden finds herself facing in Control, what sort of animal might she have reservations about interacting with afterwards?",
+		"question": "Based on the main force Jesse Faden finds herself facing in Control, what sort of animal might she have reservations about interacting with afterwards?",
 		"questionType": "Multiple Choice",
 		"tags": [
 			"Remedy"
@@ -2860,6 +3113,188 @@
 			"Dogs",
 			"Geckos",
 			"Bears"
+		]
+	},
+	{
+		"chances": [
+			"e647e31b-aec5-4d63-a650-4ecbf76b7c3f",
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
+		],
+		"correct": "Anubis",
+		"explainer": "",
+		"name": "To fight God with Anime",
+		"question": "Jehutty is a bit of a god slayer in Zone of the Enders: 2nd Runner as he goes toe-to-toe with a frame named after the god",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Konami",
+			"Sony"
+		],
+		"uuid": "92370f11-cb4d-4462-9755-aff1499b35a0",
+		"wrong": [
+			"Hades",
+			"Zeus",
+			"Ra"
+		]
+	},
+	{
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"c55d28e0-c1c7-4ed0-a9ff-2a8cfefe1300"
+		],
+		"correct": "It looks like it was drawn by a young child",
+		"explainer": "It really is that bad",
+		"name": "A Pipe Dream more like",
+		"question": "What reason might the surprisingly well-designed, deckbuilding, roguelike Dream Quest not have taken off like Slay the Spire dispite Dream Quest releasing first?",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Indie"
+		],
+		"uuid": "321dfadf-02bb-47f9-9607-7259948a6f05",
+		"wrong": [
+			"It has instant speed effects where the enemy can interrupt your turn",
+			"It was never released on steam",
+			"It isn’t actually a card game"
+		]
+	},
+	{
+		"chances": [
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a",
+			"c55d28e0-c1c7-4ed0-a9ff-2a8cfefe1300"
+		],
+		"correct": "A Flush Five, or five cards of the same suit and face",
+		"explainer": "The Flush Five is worth 160 points, nothing else is worth that much on its own",
+		"name": "You're bluffin...",
+		"question": "Despite its nature as a poker game, what is the highest value hand you can play in the Balatro?",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Indie"
+		],
+		"uuid": "40adbb88-8bb1-4a87-b176-0fac33d8f060",
+		"wrong": [
+			"A Royal Flush, or a five card straight of the same suit from 10-Ace",
+			"A Five of a Kind, or five cards of the same face",
+			"A Pauper Flush, or five card straight of the same suit from Ace-5"
+		]
+	},
+	{
+		"chances": [
+			"108295c1-6978-44fa-a082-53d4da30fe4c",
+			"43944b2e-9790-4fba-a257-004591ba27a2",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
+		],
+		"correct": "I’m half Palpatine already!",
+		"explainer": "Xehanort's plan is to possess the body of other characters, including Sora, leading to Xigbar directly saying \"I'm half Xehanort already!\"",
+		"name": "The Force is like Darkness I guess",
+		"question": "If Palpatine had the same plan as Xehanort in Kingdom Hearts: Dream Drop Distance, what might Anakin have said to Obiwan at Mustafar?",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Square Enix",
+			"Nintendo"
+		],
+		"uuid": "0b5d1cfa-92ec-4d4c-a9e5-4004ff9e85e5",
+		"wrong": [
+			"The dark side of the force is light!",
+			"From my perspective, the Sith are evil!",
+			"You were the Chosen one!"
+		]
+	},
+	{
+		"chances": [
+			"b5c44831-a697-43f9-adb0-b61fb485affa",
+			"108295c1-6978-44fa-a082-53d4da30fe4c",
+			"c82f00b4-260c-4f19-99d5-bf7bb11dc0e0",
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
+		],
+		"correct": "Lion",
+		"explainer": "",
+		"name": "Kingdom Hearts is Animals?",
+		"question": "In Kingdom Hearts 2, we confirm Sora is in fact a furry when he gets turned into a",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Square Enix",
+			"Sony"
+		],
+		"uuid": "9c368d4f-1042-4992-91c5-9ba4f05357e4",
+		"wrong": [
+			"Dog",
+			"Bird",
+			"Dragon"
+		]
+	},
+	{
+		"chances": [
+			"367e7143-8aa3-41ab-ae7c-6602e1d6c2a9",
+			"108295c1-6978-44fa-a082-53d4da30fe4c"
+		],
+		"correct": "Card games",
+		"explainer": "All of Luxord's mechanics involve cards and card games like Memory",
+		"name": "A challenge, is it?",
+		"question": "Based on his boss mechanics in Kingdom Hearts 3, what style of game would Luxord do pretty well in?",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Square Enix"
+		],
+		"uuid": "7cd328bc-5dda-4d68-8597-b1dbafd69092",
+		"wrong": [
+			"Chess",
+			"Checkers",
+			"Baseball"
+		]
+	},
+	{
+		"chances": [
+			"73a5640a-0de7-49d7-81ec-035674312195",
+			"7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
+		],
+		"correct": "It takes place in a post apocalypse",
+		"explainer": "",
+		"name": "Dangerously Delicious",
+		"question": "The Cook Serve Delicious series has a wild bit of lore.",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Indie"
+		],
+		"uuid": "bd720e4b-34e5-4e61-b5a1-4c11ae86655a",
+		"wrong": [
+			"It takes place during the Great Depression",
+			"It takes place on the back of a turtle",
+			"It takes place in a simulation"
+		]
+	},
+	{
+		"chances": [],
+		"correct": "You wait one real world day",
+		"explainer": "",
+		"name": "Ninja Hunter Tools Come at a Premium",
+		"question": "If Monster Hunter had the same system for crafting weapons as Warframe does, how might it work?",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Capcom"
+		],
+		"uuid": "4af0f386-5e8d-4c65-9030-5f2d28012001",
+		"wrong": [
+			"You need to cut the weapon manually in a mini-game",
+			"You watch an advertisement every time you make one",
+			"You need to train up a skill before you can craft the weapon"
+		]
+	},
+	{
+		"chances": [
+			"f1bc8cb3-ac7b-455e-bfa7-3a0038053066"
+		],
+		"correct": "A fight against Akuma from Street Fighter",
+		"explainer": "",
+		"name": "A New Challenger!",
+		"question": "In the game Asura’s Wrath, what is a surprise battle you have in one of it’s dlc?",
+		"questionType": "Multiple Choice",
+		"tags": [
+			"Capcom"
+		],
+		"uuid": "cd4d9707-9de1-41bd-8a36-654fe5434f9d",
+		"wrong": [
+			"A fight against Amaterasu from Okami",
+			"A fight against Dante from Devil May Cry",
+			"A fight against Chris Redfield from Resident Evil 5"
 		]
 	}
 ]

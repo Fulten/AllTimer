@@ -32,8 +32,8 @@
 		"uuid": "8c71f458-bf68-48b9-94ae-dab8c9538a37"
 	},
 	{
-		"correct": false,
-		"description": "Longest Correct answer(place holder)",
+		"correct": true,
+		"description": "Most Hard Questions Answered",
 		"icon": "",
 		"name": "Locked In",
 		"type": "QUESTION",
@@ -59,7 +59,7 @@
 		"correct": true,
 		"description": "Answer the most Microsoft questions correctly",
 		"icon": "",
-		"name": "Microsoft Mastter",
+		"name": "Microsoft Master",
 		"type": "QUESTION",
 		"uuid": "b9871032-d7d5-4b8a-898b-07708f349fb8"
 	},
@@ -67,7 +67,7 @@
 		"correct": true,
 		"description": "Answer the most Sony questions correctly",
 		"icon": "",
-		"name": "Sony Sicophant",
+		"name": "Sony Sycophant",
 		"type": "QUESTION",
 		"uuid": "c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
 	},
@@ -113,10 +113,58 @@
 	},
 	{
 		"correct": true,
-		"description": "Answer the most questions about Art",
+		"description": "Answer the most questions about Art and Photography",
 		"icon": "",
 		"name": "Artist",
 		"type": "QUESTION",
 		"uuid": "eb4e497d-9ff2-47b0-b4f0-347b84346e17"
+	},
+	{
+		"correct": true,
+		"description": "Most question around horror correct",
+		"icon": "",
+		"name": "Horror Fan",
+		"type": "QUESTION",
+		"uuid": "ef315876-ebad-4b38-8a0a-9b4203765b59"
+	},
+	{
+		"correct": true,
+		"description": "Most question right about puzzle games",
+		"icon": "",
+		"name": "Puzzler",
+		"type": "QUESTION",
+		"uuid": "1f3983fd-8f28-4344-b166-958491cd60e9"
+	},
+	{
+		"correct": true,
+		"description": "Most correct about games aimed at younger audiences",
+		"icon": "",
+		"name": "Child at Heart",
+		"type": "QUESTION",
+		"uuid": "367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
+	},
+	{
+		"correct": true,
+		"description": "Most question correct about first person shooters",
+		"icon": "",
+		"name": "FPS Enjoyer",
+		"type": "QUESTION",
+		"uuid": "87d069b4-7439-4041-843a-a51bf83a5303"
+	},
+	{
+		"correct": true,
+		"description": "Most questions correct about board and card games",
+		"icon": "",
+		"name": "Board Gamer",
+		"type": "QUESTION",
+		"uuid": "c55d28e0-c1c7-4ed0-a9ff-2a8cfefe1300"
+	},
+	{
+		"correct": true,
+		"description": "Answer the most questions correct about Music",
+		"icon": "",
+		"name": "Music Maniac",
+		"type": "QUESTION",
+		"uuid": "51bf9fc6-1359-46e8-9457-1036b79065be"
 	}
 ]

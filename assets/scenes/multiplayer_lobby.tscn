@@ -213,17 +213,46 @@ theme = ExtResource("2_jy5fm")
 text = "back"
 flat = true
 
+[node name="ProfileCase" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.142
+anchor_top = 0.356
+anchor_right = 0.329
+anchor_bottom = 0.474
+offset_left = -0.640015
+offset_top = -0.480011
+offset_right = 0.319946
+offset_bottom = 0.0799561
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ProfileCase"]
+layout_mode = 2
+text = "selected profile"
+label_settings = ExtResource("5_wtxry")
+
+[node name="ProfilesList" type="OptionButton" parent="ProfileCase"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 28
+flat = true
+item_count = 1
+selected = 0
+popup/item_0/text = "N/A"
+popup/item_0/id = 0
+
 [node name="PeerCase" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.137
-anchor_top = 0.363
-anchor_right = 0.333
-anchor_bottom = 0.637
-offset_left = 16.96
-offset_top = -0.0400085
-offset_right = -5.35999
-offset_bottom = -108.96
+anchor_top = 0.511
+anchor_right = 0.329
+anchor_bottom = 0.681
+offset_left = 0.959991
+offset_top = 0.119934
+offset_right = 2.31995
+offset_bottom = 0.519958
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -260,44 +289,17 @@ text = "Peer_Profile_Name"
 label_settings = ExtResource("3_qhvyi")
 horizontal_alignment = 1
 
-[node name="ProfileCase" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.4
-anchor_top = 0.489
-anchor_right = 0.6
-anchor_bottom = 0.659
-offset_top = -0.119995
-offset_bottom = 0.280029
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="ProfileCase"]
-layout_mode = 2
-text = "selected profile"
-label_settings = ExtResource("5_wtxry")
-
-[node name="ProfilesList" type="OptionButton" parent="ProfileCase"]
-layout_mode = 2
-focus_mode = 0
-theme_override_font_sizes/font_size = 28
-flat = true
-item_count = 1
-selected = 0
-popup/item_0/text = "N/A"
-popup/item_0/id = 0
-
 [node name="ThemeCase" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.4
-anchor_top = 0.43
-anchor_right = 0.6
-anchor_bottom = 0.6
-offset_left = 518.0
-offset_top = -74.4
-offset_right = 518.0
-offset_bottom = -73.9999
+anchor_left = 0.67
+anchor_top = 0.361
+anchor_right = 0.871
+anchor_bottom = 0.5
+offset_left = -0.400024
+offset_top = 0.119965
+offset_right = -2.32007
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -322,6 +324,40 @@ popup/item_2/text = "Patriotic Cipher"
 popup/item_2/id = 2
 popup/item_3/text = "Fatal Surprise"
 popup/item_3/id = 3
+
+[node name="Filters" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.667
+anchor_top = 0.511
+anchor_right = 0.867
+anchor_bottom = 0.689
+offset_left = -0.640137
+offset_top = 0.119934
+offset_right = -0.640137
+offset_bottom = -0.119995
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Filters"]
+layout_mode = 2
+text = "Filter Preset"
+label_settings = ExtResource("5_wtxry")
+
+[node name="FilterPresetList" type="OptionButton" parent="Filters"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("11_2bcij")
+theme_override_font_sizes/font_size = 20
+item_count = 1
+selected = 0
+popup/item_0/text = "Default"
+popup/item_0/id = 0
+
+[node name="WhitelistToggle" type="Button" parent="Filters"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("12_cbtm4")
+toggle_mode = true
+text = "Whitelist"
 
 [node name="ConnectionFailedPopupCase" type="Control" parent="."]
 visible = false
@@ -399,39 +435,43 @@ theme = ExtResource("2_jy5fm")
 text = ">Dangit!<"
 flat = true
 
-[node name="Filters" type="VBoxContainer" parent="."]
+[node name="TimerSetting" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.667
-anchor_top = 0.533
-anchor_right = 0.867
-anchor_bottom = 0.704
-offset_left = -0.640137
-offset_top = 0.359924
-offset_right = -0.640137
-offset_bottom = 7.67993
-theme_override_constants/separation = 10
+anchor_left = 0.371
+anchor_top = 0.481
+anchor_right = 0.629
+anchor_bottom = 0.585
+offset_left = -0.320068
+offset_top = 0.519958
+offset_right = 0.319946
+offset_bottom = 0.199951
+alignment = 1
 
-[node name="Label" type="Label" parent="Filters"]
+[node name="Tag_RoundLength" type="Label" parent="TimerSetting"]
 layout_mode = 2
-text = "Filter Preset"
+text = "Round timer length: "
 label_settings = ExtResource("5_wtxry")
 
-[node name="FilterPresetList" type="OptionButton" parent="Filters"]
+[node name="TimerSettingList" type="OptionButton" parent="TimerSetting"]
+unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 theme_override_fonts/font = ExtResource("11_2bcij")
-theme_override_font_sizes/font_size = 20
-item_count = 1
-selected = 0
-popup/item_0/text = "Default"
+theme_override_font_sizes/font_size = 24
+flat = true
+alignment = 1
+item_count = 4
+selected = 2
+fit_to_longest_item = false
+popup/item_0/text = "5 Sec"
 popup/item_0/id = 0
-
-[node name="WhitelistToggle" type="Button" parent="Filters"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme = ExtResource("12_cbtm4")
-toggle_mode = true
-text = "Whitelist"
+popup/item_1/text = "10 Sec"
+popup/item_1/id = 1
+popup/item_2/text = "30 Sec"
+popup/item_2/id = 2
+popup/item_3/text = "1 min"
+popup/item_3/id = 3
 
 [connection signal="button_down" from="PeerConnectors/HostButton" to="." method="_on_host_button_button_down"]
 [connection signal="button_up" from="PeerConnectors/HostButton" to="." method="_on_host_button_button_up"]
@@ -456,9 +496,9 @@ text = "Whitelist"
 [connection signal="mouse_entered" from="StateChangers/BackToMainButton" to="." method="_on_back_to_main_button_mouse_entered"]
 [connection signal="item_selected" from="ProfileCase/ProfilesList" to="." method="_on_profiles_list_item_selected"]
 [connection signal="item_selected" from="ThemeCase/ThemesList" to="." method="_on_themes_list_item_selected"]
+[connection signal="item_selected" from="Filters/FilterPresetList" to="." method="_on_filter_preset_list_item_selected"]
+[connection signal="button_up" from="Filters/WhitelistToggle" to="." method="_on_whitelist_toggle_button_up"]
 [connection signal="button_down" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_button_down"]
 [connection signal="button_up" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_button_up"]
 [connection signal="focus_entered" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_focus_entered"]
 [connection signal="mouse_entered" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_mouse_entered"]
-[connection signal="item_selected" from="Filters/FilterPresetList" to="." method="_on_filter_preset_list_item_selected"]
-[connection signal="button_up" from="Filters/WhitelistToggle" to="." method="_on_whitelist_toggle_button_up"]

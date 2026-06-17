@@ -15,6 +15,7 @@
 [ext_resource type="LabelSettings" uid="uid://mv8bcxsbvof1" path="res://assets/scenes/Label_TagW.tres" id="12_fat6d"]
 [ext_resource type="AudioStream" uid="uid://crk8ui184joxw" path="res://assets/uiux/main_menu/SFX_ButtonPress.mp3" id="13_w17qx"]
 [ext_resource type="Theme" uid="uid://wsbgxiubgl02" path="res://assets/scenes/ButtonNF_Toggle.tres" id="14_6pik3"]
+[ext_resource type="ButtonGroup" uid="uid://clytsvrsqcsjr" path="res://assets/uiux/main_menu/BGroup_FilterSorting.tres" id="15_03var"]
 [ext_resource type="Theme" uid="uid://cdw2hb2wqpuso" path="res://assets/scenes/Checkbox_Filter.tres" id="15_8bsy6"]
 [ext_resource type="Theme" uid="uid://cblo30jiqi52a" path="res://assets/scenes/ButtonNF_Clickable.tres" id="15_a7e8b"]
 [ext_resource type="Texture2D" uid="uid://h0ngjad4u0fn" path="res://assets/uiux/main_menu/T_BadAtMath_D.tga" id="17_iljph"]
@@ -106,7 +107,7 @@ resource_name = "Anim_Game_FadeIn"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Options_Game2/Game:label_settings:font_color")
+tracks/0/path = NodePath("../Options_Game2/Filters:label_settings:font_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -118,7 +119,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Options_Game2/Game:position")
+tracks/1/path = NodePath("../Options_Game2/Filters:position")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -158,7 +159,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Options_Game2/Game:label_settings:font_color")
+tracks/0/path = NodePath("../Options_Game2/Filters:label_settings:font_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -170,7 +171,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Options_Game2/Game:position")
+tracks/1/path = NodePath("../Options_Game2/Filters:position")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -785,7 +786,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("../Options_Game2/Game:label_settings:font_color")
+tracks/9/path = NodePath("../Options_Game2/Filters:label_settings:font_color")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -797,7 +798,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("../Options_Game2/Game:position")
+tracks/10/path = NodePath("../Options_Game2/Filters:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -996,12 +997,6 @@ border_color = Color(0, 0, 0, 1)
 ScrollContainer/styles/panel = SubResource("StyleBoxFlat_i3572")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hfhrh"]
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_an7m0"]
-grow_begin = 0.0
-grow_end = 0.0
-thickness = 5
-vertical = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n8h0l"]
 bg_color = Color(0, 0, 0, 0.470588)
@@ -1294,9 +1289,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -377.0
+offset_left = -388.0
 offset_top = 22.0
-offset_right = 369.0
+offset_right = 380.0
 offset_bottom = 80.0003
 grow_horizontal = 2
 grow_vertical = 2
@@ -1331,7 +1326,7 @@ focus_neighbor_top = NodePath("../../OptionsCategoriesReturn")
 focus_neighbor_right = NodePath("../DisplayButton")
 focus_neighbor_bottom = NodePath("../../OptionsCategoriesReturn")
 theme = ExtResource("9_sym4l")
-text = "Game
+text = "Filters
 "
 flat = true
 
@@ -1558,7 +1553,7 @@ offset_top = 64.0
 offset_right = -72.0
 offset_bottom = -72.0
 
-[node name="Game" type="Label" parent="Options_Game2"]
+[node name="Filters" type="Label" parent="Options_Game2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1567,11 +1562,11 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -231.0
 offset_top = -163.0
-offset_right = 231.0
-offset_bottom = 37.0001
+offset_right = 330.0
+offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Game"
+text = "Filters"
 label_settings = ExtResource("8_3ymww")
 
 [node name="Underline" type="Line2D" parent="Options_Game2"]
@@ -1596,13 +1591,8 @@ grow_vertical = 2
 
 [node name="FiltersCase" type="VBoxContainer" parent="Options_Game2/SettingsList"]
 layout_mode = 2
+theme_override_constants/separation = 15
 alignment = 1
-
-[node name="QuestionFilterLabel" type="Label" parent="Options_Game2/SettingsList/FiltersCase"]
-layout_mode = 2
-text = "Question Filters"
-label_settings = ExtResource("18_f5q02")
-horizontal_alignment = 1
 
 [node name="WhitelistToggle" type="Button" parent="Options_Game2/SettingsList/FiltersCase"]
 layout_mode = 2
@@ -1614,22 +1604,38 @@ text = "Whitelist"
 
 [node name="FilterContainers" type="HBoxContainer" parent="Options_Game2/SettingsList/FiltersCase"]
 layout_mode = 2
+theme_override_constants/separation = 10
 alignment = 1
 
-[node name="ColumnAlignment" type="VBoxContainer" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers"]
+[node name="SortingButtonContainer" type="VBoxContainer" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers"]
 layout_mode = 2
 
-[node name="ScrollCase" type="ScrollContainer" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment"]
-custom_minimum_size = Vector2(250, 400)
+[node name="AlphabeticalSort" type="Button" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/SortingButtonContainer"]
+layout_mode = 2
+theme = ExtResource("14_6pik3")
+toggle_mode = true
+button_group = ExtResource("15_03var")
+text = "AZ"
+
+[node name="CountSort" type="Button" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/SortingButtonContainer"]
+layout_mode = 2
+theme = ExtResource("14_6pik3")
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("15_03var")
+text = "#↑↓"
+
+[node name="ScrollCase" type="ScrollContainer" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers"]
+custom_minimum_size = Vector2(250, 600)
 layout_mode = 2
 theme = SubResource("Theme_hhi6e")
 horizontal_scroll_mode = 0
 
-[node name="FilterContainer" type="VBoxContainer" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase"]
+[node name="FilterContainer" type="VBoxContainer" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase"]
 layout_mode = 2
 alignment = 1
 
-[node name="Filter1" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer"]
+[node name="Filter1" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("15_8bsy6")
@@ -1637,85 +1643,123 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_hfhrh")
 text = "filter one"
 flat = true
 
-[node name="Filter2" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer"]
+[node name="Filter2" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
 layout_mode = 2
 theme = ExtResource("15_8bsy6")
 text = "filter two"
 flat = true
 
-[node name="Filter3" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer"]
+[node name="Filter3" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
 layout_mode = 2
 theme = ExtResource("15_8bsy6")
 text = "filter three"
 flat = true
 
-[node name="Filter4" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer"]
+[node name="Filter4" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
 layout_mode = 2
 theme = ExtResource("15_8bsy6")
 text = "filter four"
 flat = true
 
-[node name="Filter5" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer"]
+[node name="Filter5" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
 layout_mode = 2
 theme = ExtResource("15_8bsy6")
 text = "filter five"
 flat = true
 
-[node name="Filter6" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer"]
+[node name="Filter6" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
 layout_mode = 2
 theme = ExtResource("15_8bsy6")
 text = "filter six"
 flat = true
 
-[node name="Filter7" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer"]
+[node name="Filter7" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
 layout_mode = 2
 theme = ExtResource("15_8bsy6")
 text = "filter seven"
 flat = true
 
-[node name="Filter8" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer"]
+[node name="Filter8" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
 layout_mode = 2
 theme = ExtResource("15_8bsy6")
 text = "filter eight"
 flat = true
 
-[node name="Filter9" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer"]
+[node name="Filter9" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
 layout_mode = 2
 theme = ExtResource("15_8bsy6")
 text = "filter nine"
 flat = true
 
-[node name="Filter10" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer"]
+[node name="Filter10" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
 layout_mode = 2
 theme = ExtResource("15_8bsy6")
 text = "filter ten
 "
 flat = true
 
-[node name="Filter11" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer"]
+[node name="Filter11" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
 layout_mode = 2
 theme = ExtResource("15_8bsy6")
 text = "filter eleven"
 flat = true
 
-[node name="Filter12" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer"]
+[node name="Filter12" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
 layout_mode = 2
 theme = ExtResource("15_8bsy6")
 text = "filter twelve"
 flat = true
 
-[node name="FilterPresets" type="HBoxContainer" parent="Options_Game2/SettingsList/FiltersCase"]
+[node name="Filter13" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
+layout_mode = 2
+theme = ExtResource("15_8bsy6")
+text = "filter twelvety-two"
+flat = true
+
+[node name="Filter14" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
+layout_mode = 2
+theme = ExtResource("15_8bsy6")
+text = "filter fourteen"
+flat = true
+
+[node name="Filter15" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
+layout_mode = 2
+theme = ExtResource("15_8bsy6")
+text = "filter fifteen"
+flat = true
+
+[node name="Filter16" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
+layout_mode = 2
+theme = ExtResource("15_8bsy6")
+text = "filter sixteen"
+flat = true
+
+[node name="Filter17" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
+layout_mode = 2
+theme = ExtResource("15_8bsy6")
+text = "filter seventeen"
+flat = true
+
+[node name="Filter18" type="CheckBox" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer"]
+layout_mode = 2
+theme = ExtResource("15_8bsy6")
+text = "filter eighteen"
+flat = true
+
+[node name="ColumnAlignment" type="VBoxContainer" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers"]
+layout_mode = 2
+
+[node name="SavePresetFields" type="HBoxContainer" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment"]
 layout_mode = 2
 theme_override_constants/separation = 10
-alignment = 1
 
-[node name="SavePresetButton" type="Button" parent="Options_Game2/SettingsList/FiltersCase/FilterPresets"]
+[node name="SavePresetButton" type="Button" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/SavePresetFields"]
 layout_mode = 2
 theme = ExtResource("15_a7e8b")
 theme_override_font_sizes/font_size = 24
 text = "Save"
 
-[node name="PresetNameField" type="TextEdit" parent="Options_Game2/SettingsList/FiltersCase/FilterPresets"]
+[node name="PresetNameField" type="TextEdit" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/SavePresetFields"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_vertical = 4
@@ -1723,18 +1767,18 @@ theme_override_fonts/font = ExtResource("7_ixy01")
 theme_override_font_sizes/font_size = 20
 placeholder_text = "Preset 01"
 
-[node name="VSeparator" type="VSeparator" parent="Options_Game2/SettingsList/FiltersCase/FilterPresets"]
+[node name="LoadPresetFields" type="HBoxContainer" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment"]
 layout_mode = 2
-theme_override_constants/separation = 30
-theme_override_styles/separator = SubResource("StyleBoxLine_an7m0")
+theme_override_constants/separation = 10
+alignment = 1
 
-[node name="PresetLabel" type="Label" parent="Options_Game2/SettingsList/FiltersCase/FilterPresets"]
+[node name="PresetLabel" type="Label" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/LoadPresetFields"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "LOAD: "
 label_settings = ExtResource("18_f5q02")
 
-[node name="FilterPresetList" type="OptionButton" parent="Options_Game2/SettingsList/FiltersCase/FilterPresets"]
+[node name="FilterPresetList" type="OptionButton" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/LoadPresetFields"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = SubResource("Theme_ialk3")
@@ -1746,21 +1790,22 @@ selected = 0
 popup/item_0/text = " Default"
 popup/item_0/id = 0
 
-[node name="DeletePresetButton" type="Button" parent="Options_Game2/SettingsList/FiltersCase"]
+[node name="DeletePresetButton" type="Button" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
 theme = ExtResource("15_a7e8b")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 26
 text = "Delete selected"
 
-[node name="ClearFiltersButton" type="Button" parent="Options_Game2/SettingsList/FiltersCase"]
+[node name="ClearFiltersButton" type="Button" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
 theme = ExtResource("15_a7e8b")
 theme_override_font_sizes/font_size = 26
 text = "Clear all"
 
 [node name="TimerSetting" type="HBoxContainer" parent="Options_Game2/SettingsList"]
+visible = false
 layout_mode = 2
 alignment = 1
 
@@ -2363,10 +2408,10 @@ texture = ExtResource("17_iljph")
 [connection signal="focus_entered" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_focus_entered"]
 [connection signal="mouse_entered" from="Options_Display2/OptionsDisplayReturn" to="." method="_on_options_display_return_mouse_entered"]
 [connection signal="button_up" from="Options_Game2/SettingsList/FiltersCase/WhitelistToggle" to="." method="_on_filter_whitelist_toggle_button_up"]
-[connection signal="button_up" from="Options_Game2/SettingsList/FiltersCase/FilterPresets/SavePresetButton" to="." method="_on_filter_save_preset_button_button_up"]
-[connection signal="item_selected" from="Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList" to="." method="_on_filter_selected"]
-[connection signal="button_up" from="Options_Game2/SettingsList/FiltersCase/DeletePresetButton" to="." method="_on_delete_preset_button_button_up"]
-[connection signal="button_up" from="Options_Game2/SettingsList/FiltersCase/ClearFiltersButton" to="." method="_on_clear_filters_button_button_up"]
+[connection signal="button_up" from="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/SavePresetFields/SavePresetButton" to="." method="_on_filter_save_preset_button_button_up"]
+[connection signal="item_selected" from="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/LoadPresetFields/FilterPresetList" to="." method="_on_filter_selected"]
+[connection signal="button_up" from="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/DeletePresetButton" to="." method="_on_delete_preset_button_button_up"]
+[connection signal="button_up" from="Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ClearFiltersButton" to="." method="_on_clear_filters_button_button_up"]
 [connection signal="button_down" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_button_down"]
 [connection signal="button_up" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_button_up"]
 [connection signal="focus_entered" from="Options_Game2/OptionsGameReturn" to="." method="_on_options_game_return_focus_entered"]

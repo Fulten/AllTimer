@@ -1563,7 +1563,7 @@ anchor_bottom = 0.5
 offset_left = -231.0
 offset_top = -163.0
 offset_right = 330.0
-offset_bottom = 37.0
+offset_bottom = 37.0001
 grow_horizontal = 2
 grow_vertical = 2
 text = "Filters"
@@ -1613,15 +1613,12 @@ layout_mode = 2
 [node name="AlphabeticalSort" type="Button" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/SortingButtonContainer"]
 layout_mode = 2
 theme = ExtResource("14_6pik3")
-toggle_mode = true
 button_group = ExtResource("15_03var")
 text = "AZ"
 
 [node name="CountSort" type="Button" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/SortingButtonContainer"]
 layout_mode = 2
 theme = ExtResource("14_6pik3")
-toggle_mode = true
-button_pressed = true
 button_group = ExtResource("15_03var")
 text = "#↑↓"
 

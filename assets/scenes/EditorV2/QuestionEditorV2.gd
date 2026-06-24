@@ -170,6 +170,7 @@ class Chance:
 	var type: String
 	var correct: bool
 	var icon: String
+	var bonus: int
 	
 	var listIndex: int
 	var listIndexChancesEditor: int
@@ -182,13 +183,15 @@ class Chance:
 		i_icon: String,
 		i_description: String,
 		i_type: String,
-		i_correct: bool):
+		i_correct: bool,
+		i_bonus: int):
 		
 		name = i_name
 		icon = i_icon
 		description = i_description
 		type = i_type
 		correct = i_correct
+		bonus = i_bonus
 		
 		listIndex = -1
 		listIndexChancesEditor = -1
@@ -223,6 +226,7 @@ class Chance:
 		chance_raw["type"] = type
 		chance_raw["uuid"] = chance_uuid
 		chance_raw["icon"] = icon
+		chance_raw["bonus"] = bonus
 		return chance_raw
 	
 	func _duplicate():
@@ -232,6 +236,7 @@ class Chance:
 		newChance.type = type
 		newChance.correct = correct
 		newChance.icon = icon
+		newChance.bonus = bonus
 		
 		newChance.listIndex = -1
 		newChance.listIndexChancesEditor = -1
@@ -408,6 +413,7 @@ func _save_chance(chance_uuid):
 	chances[chance_uuid].icon = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Text.text
 	chances[chance_uuid].description = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/Text.text
 	chances[chance_uuid].correct = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/VBoxContainer/HBoxCorrect/CheckButton.button_pressed
+	chances[chance_uuid].bonus = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxBonusValue/Text.text.to_int()
 
 	_io_write_chances(file_path_chances_data)
 	chances[chance_uuid]._check_error_state()
@@ -550,8 +556,10 @@ func _UI_present_chance_data(uuid):
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxName/Text.text = chances[uuid].name
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxType/Text.text = chances[uuid].type
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Text.text = chances[uuid].icon
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxBonusValue/Text.text = str(chances[uuid].bonus)
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/Text.text = chances[uuid].description
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/VBoxContainer/HBoxCorrect/CheckButton.button_pressed = chances[uuid].correct
+	
 	_UI_highlight_chances_error_state(chances[uuid].errorEntries)
 
 func _UI_present_questions_found_in():
@@ -568,6 +576,7 @@ func _UI_clear_chance_data():
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxType/Text.text = ""
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Text.text = ""
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/Text.text = ""
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxBonusValue/Text.text = ""
 	_UI_clear_questions_found_in()
 	_UI_toggle_ui_that_needs_selected_chance(false)
 
@@ -625,6 +634,7 @@ func _UI_toggle_ui_that_needs_selected_chance(enable: bool):
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxType/Text.editable = enable
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Text.editable = enable
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/Text.editable = enable
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxBonusValue/Text.editable = enable
 	#buttons
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/BtnChancesSave.disabled = !enable
 	$HBoxParent/HBoxChances/VBoxQuestionEditor/BtnChancesDiscard.disabled = !enable
@@ -699,7 +709,8 @@ func _io_read_chances(file_name: String):
 			chance_raw["icon"],
 			chance_raw["description"],
 			chance_raw["type"],
-			chance_raw["correct"])
+			chance_raw["correct"],
+			chance_raw["bonus"])
 		chances[chance_raw["uuid"]] = chance
 	pass
 
@@ -715,6 +726,9 @@ func _io_validate_chance(chance_raw):
 	if !"icon" in chance_raw:
 		chance_raw["icon"] = ""
 		print("!Info: Older Chance format found, adding icon entry")
+	if !"bonus" in chance_raw:
+		chance_raw["bonus"] = 200
+		print("!Info: Older Chance format found, adding bonus entry")
 	if !"uuid" in chance_raw:
 		print("!Warning: io read chance without uuid")
 

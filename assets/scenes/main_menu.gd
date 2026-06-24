@@ -499,7 +499,7 @@ func _on_delete_preset_button_button_up():
 	_delete_filter()
 	
 func _on_filter_selected(index):
-	var ui_filter_selector:OptionButton = $Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList
+	var ui_filter_selector:OptionButton = $Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/LoadPresetFields/FilterPresetList
 	filter_selected_key = ui_filter_selector.get_item_text(index)
 	for i in range(GameState.TagsFilters.size()):
 		if ui_filter_selector.get_item_text(i) != filter_selected_key:
@@ -525,7 +525,7 @@ func _init_filter_ui():
 	_load_filter()
 
 func _UI_load_filter_selector():
-	var ui_filter_selector:OptionButton = $Options_Game2/SettingsList/FiltersCase/FilterPresets/FilterPresetList
+	var ui_filter_selector:OptionButton = $Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/LoadPresetFields/FilterPresetList
 	ui_filter_selector.clear()
 	var filter_selected = false
 	for filter in GameState.TagsFilters:
@@ -550,7 +550,7 @@ func _UI_load_filter_selector():
 ## iterates through a list of all existing tags, 
 ## and and creates new nodes to represent them using checkbox buttons in the filter container
 func _UI_load_filter_tag_buttons(): 
-	var ui_filter_container = $Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/ScrollCase/FilterContainer
+	var ui_filter_container = $Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer
 	for child in ui_filter_container.get_children():
 		child.queue_free()
 	filter_tag_selectors.clear()
@@ -596,14 +596,14 @@ func _load_filter():
 		var filter = GameState.TagsFilters[filter_selected_key]
 		_UI_set_filter_tag_buttons(filter["tags"])
 		_UI_toggle_blacklist_button(filter["blacklist"])
-		$Options_Game2/SettingsList/FiltersCase/FilterPresets/PresetNameField.text = filter_selected_key
+		$Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/SavePresetFields/PresetNameField.text = filter_selected_key
 	else:
 		_UI_reset_filter_tag_buttons()
 		_UI_toggle_blacklist_button()
 
 func _save_filter():
 	# only save if the entry name is not blank
-	var filter_name = $Options_Game2/SettingsList/FiltersCase/FilterPresets/PresetNameField.text
+	var filter_name = $Options_Game2/SettingsList/FiltersCase/FilterContainers/ColumnAlignment/SavePresetFields/PresetNameField.text
 	if filter_name != "":
 		var blacklist_btn = $Options_Game2/SettingsList/FiltersCase/WhitelistToggle
 		var is_blacklist = blacklist_btn["button_pressed"]

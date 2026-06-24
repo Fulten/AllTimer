@@ -293,6 +293,13 @@ func _show_end_of_quiz_screen():
 	ui_countdown_timer.stop()
 	QuizEndScreen = true
 	
+	## add score from chances
+	for key in GameState.players:
+		var chance_bonus = 0
+		for chanceKey in GameState.players[key]["chances"].keys():
+			chance_bonus += GameState._get_chance_from_uuid(chanceKey)["bonus"]
+		GameState.players[key].score += chance_bonus
+	
 	var scoreOrder = []
 	
 	for n in range(4):
@@ -1082,7 +1089,7 @@ func _next_chance():
 	var next_chance = chances_set.keys()[randi() % chances_set.keys().size()]
 	for chance in master_chances_data:
 		if chance["uuid"] == next_chance:
-			GameState._add_chance(chance["name"], chance["description"], chance["type"], chance["uuid"], chance["correct"], chances_set[next_chance])
+			GameState._add_chance(chance["name"], chance["description"], chance["type"], chance["uuid"], chance["correct"], chances_set[next_chance], chance["bonus"])
 			chances_set.erase(next_chance)
 			return
 		

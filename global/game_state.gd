@@ -120,7 +120,7 @@ class Question:
 		questionType = i_questionType
 		listIndex = -1
 
-func _add_chance(chance_name, description, type, uuid, value, associated_questions: Array):
+func _add_chance(chance_name, description, type, uuid, value, associated_questions: Array, bonus):
 	CurrentChances.append({ #to be updated when we add more types with an if/switch
 		"name": chance_name,
 		"description": description,
@@ -129,6 +129,7 @@ func _add_chance(chance_name, description, type, uuid, value, associated_questio
 		"correct": value,
 		"associated_questions": associated_questions,
 		"player_hits": [0,0,0,0],
+		"bonus": bonus
 	})
 
 func _get_chance_from_uuid(chance_uuid):

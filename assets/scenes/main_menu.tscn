@@ -1612,13 +1612,13 @@ layout_mode = 2
 
 [node name="AlphabeticalSort" type="Button" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/SortingButtonContainer"]
 layout_mode = 2
-theme = ExtResource("14_6pik3")
+theme = ExtResource("15_a7e8b")
 button_group = ExtResource("15_03var")
 text = "AZ"
 
 [node name="CountSort" type="Button" parent="Options_Game2/SettingsList/FiltersCase/FilterContainers/SortingButtonContainer"]
 layout_mode = 2
-theme = ExtResource("14_6pik3")
+theme = ExtResource("15_a7e8b")
 button_group = ExtResource("15_03var")
 text = "#↑↓"
 

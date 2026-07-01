@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dy8lkjphm6pdg"]
+[gd_scene load_steps=15 format=3 uid="uid://dy8lkjphm6pdg"]
 
 [ext_resource type="Script" path="res://assets/scenes/multiplayer_lobby.gd" id="1_e4r6j"]
 [ext_resource type="Texture2D" uid="uid://ctaoad4ca7mx7" path="res://assets/uiux/main_menu/T_MenuVignette_D.tga" id="1_l3cbn"]
@@ -12,6 +12,12 @@
 [ext_resource type="Theme" uid="uid://cblo30jiqi52a" path="res://assets/scenes/ButtonNF_Clickable.tres" id="7_8se73"]
 [ext_resource type="FontFile" uid="uid://bc01r67d5wp2w" path="res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf" id="11_2bcij"]
 [ext_resource type="Theme" uid="uid://wsbgxiubgl02" path="res://assets/scenes/ButtonNF_Toggle.tres" id="12_cbtm4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p8ef3"]
+bg_color = Color(0, 0, 0, 0.431373)
+
+[sub_resource type="Theme" id="Theme_q60op"]
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_p8ef3")
 
 [node name="MultiplayerLobby" type="Control"]
 layout_mode = 3
@@ -54,7 +60,7 @@ anchor_right = 0.967
 anchor_bottom = 0.948
 offset_left = -70.36
 offset_top = -63.72
-offset_right = 70.3599
+offset_right = 70.3597
 offset_bottom = 64.1599
 grow_horizontal = 2
 grow_vertical = 2
@@ -62,141 +68,274 @@ texture = ExtResource("1_l3cbn")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Lobby" type="Label" parent="."]
+[node name="LobbyOrganizer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.333
-anchor_top = 0.111
-anchor_right = 0.667
-anchor_bottom = 0.296
-offset_left = 75.64
-offset_top = 0.119987
-offset_right = -74.6401
-offset_bottom = 0.320007
-grow_horizontal = 2
-text = "lobby"
-label_settings = ExtResource("2_ljpbk")
+anchor_left = 0.25
+anchor_top = 0.237
+anchor_right = 0.75
+anchor_bottom = 0.8
+offset_top = 0.039978
+offset_right = -0.00012207
+theme_override_constants/separation = 5
 
-[node name="PeerConnectors" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -239.0
-offset_top = -156.0
-offset_right = 239.0
-offset_bottom = -100.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="HSeparator" type="HSeparator" parent="LobbyOrganizer"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="Columns" type="HBoxContainer" parent="LobbyOrganizer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="NetworkingColumn" type="VBoxContainer" parent="LobbyOrganizer/Columns"]
+layout_mode = 2
+
+[node name="FieldLabel" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn"]
+layout_mode = 2
+text = "Join address"
+label_settings = ExtResource("5_wtxry")
+horizontal_alignment = 1
+
+[node name="IPField" type="TextEdit" parent="LobbyOrganizer/Columns/NetworkingColumn"]
+custom_minimum_size = Vector2(415, 55)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+placeholder_text = " 069.420.1.337"
+
+[node name="PeerConnectors" type="HBoxContainer" parent="LobbyOrganizer/Columns/NetworkingColumn"]
+layout_mode = 2
 theme_override_constants/separation = 10
+alignment = 1
 
-[node name="HostButton" type="Button" parent="PeerConnectors"]
+[node name="HostButton" type="Button" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors"]
 layout_mode = 2
 theme = ExtResource("7_8se73")
 text = "Host"
 
-[node name="Label" type="Label" parent="PeerConnectors"]
+[node name="Label" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors"]
 layout_mode = 2
 text = "or"
 label_settings = ExtResource("3_qhvyi")
 
-[node name="JoinButton" type="Button" parent="PeerConnectors"]
+[node name="JoinButton" type="Button" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors"]
 layout_mode = 2
 theme = ExtResource("7_8se73")
 text = "Join
 "
 
-[node name="TextEdit" type="TextEdit" parent="PeerConnectors"]
-custom_minimum_size = Vector2(220, 0)
+[node name="CancelConnectionButton" type="Button" parent="LobbyOrganizer/Columns/NetworkingColumn"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
-placeholder_text = " 069.420.1.337"
-
-[node name="HostingLabel" type="Label" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.367
-anchor_top = 0.356
-anchor_right = 0.633
-anchor_bottom = 0.415
-offset_left = 7.35999
-offset_top = 7.51999
-offset_right = -7.35999
-offset_bottom = -8.20001
-grow_horizontal = 2
-grow_vertical = 2
-text = "Hosting"
-label_settings = ExtResource("5_wtxry")
-horizontal_alignment = 1
-
-[node name="JoiningLabel" type="Label" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.367
-anchor_top = 0.356
-anchor_right = 0.633
-anchor_bottom = 0.415
-offset_left = 7.35999
-offset_top = 7.51999
-offset_right = -7.35999
-offset_bottom = -8.20001
-grow_horizontal = 2
-grow_vertical = 2
-text = "Joining"
-label_settings = ExtResource("5_wtxry")
-horizontal_alignment = 1
-
-[node name="JoinedLabel" type="Label" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.367
-anchor_top = 0.356
-anchor_right = 0.633
-anchor_bottom = 0.415
-offset_left = 7.35999
-offset_top = 7.51999
-offset_right = -7.35999
-offset_bottom = -8.20001
-grow_horizontal = 2
-grow_vertical = 2
-text = "Joined"
-label_settings = ExtResource("5_wtxry")
-horizontal_alignment = 1
-
-[node name="CancelConnectionButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.433
-anchor_top = 0.356
-anchor_right = 0.567
-anchor_bottom = 0.474
-offset_left = 0.639954
-offset_top = 55.52
-offset_right = -8.64001
-offset_bottom = -15.92
-grow_horizontal = 2
-grow_vertical = 2
 theme = ExtResource("2_jy5fm")
 disabled = true
 text = "cancel"
 flat = true
 
+[node name="HSeparator" type="HSeparator" parent="LobbyOrganizer/Columns/NetworkingColumn"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="HostingLabel" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn"]
+visible = false
+layout_mode = 2
+text = "Hosting"
+label_settings = ExtResource("5_wtxry")
+horizontal_alignment = 1
+
+[node name="JoiningLabel" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn"]
+visible = false
+layout_mode = 2
+text = "Joining"
+label_settings = ExtResource("5_wtxry")
+horizontal_alignment = 1
+
+[node name="JoinedLabel" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn"]
+visible = false
+layout_mode = 2
+text = "Joined"
+label_settings = ExtResource("5_wtxry")
+horizontal_alignment = 1
+
+[node name="PeerCase" type="VBoxContainer" parent="LobbyOrganizer/Columns/NetworkingColumn"]
+layout_mode = 2
+
+[node name="ConnectedPlayersLabel" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase"]
+layout_mode = 2
+text = "Connected Players"
+label_settings = ExtResource("5_wtxry")
+horizontal_alignment = 1
+
+[node name="Peer0" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase"]
+visible = false
+layout_mode = 2
+text = "%ProfileName%"
+label_settings = ExtResource("6_ujxch")
+horizontal_alignment = 1
+
+[node name="Peer1" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase"]
+visible = false
+layout_mode = 2
+text = "Peer_Profile_Name"
+label_settings = ExtResource("3_qhvyi")
+horizontal_alignment = 1
+
+[node name="Peer2" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase"]
+visible = false
+layout_mode = 2
+text = "Peer_Profile_Name"
+label_settings = ExtResource("3_qhvyi")
+horizontal_alignment = 1
+
+[node name="Peer3" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase"]
+visible = false
+layout_mode = 2
+text = "Peer_Profile_Name"
+label_settings = ExtResource("3_qhvyi")
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="LobbyOrganizer/Columns"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="SettingsColumn" type="VBoxContainer" parent="LobbyOrganizer/Columns"]
+layout_mode = 2
+
+[node name="Filters" type="VBoxContainer" parent="LobbyOrganizer/Columns/SettingsColumn"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="PresetLabel" type="Label" parent="LobbyOrganizer/Columns/SettingsColumn/Filters"]
+layout_mode = 2
+text = "Filter Preset"
+label_settings = ExtResource("5_wtxry")
+horizontal_alignment = 1
+
+[node name="FilterPresetList" type="OptionButton" parent="LobbyOrganizer/Columns/SettingsColumn/Filters"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("11_2bcij")
+theme_override_font_sizes/font_size = 26
+item_count = 1
+selected = 0
+popup/item_0/text = "Default"
+popup/item_0/id = 0
+
+[node name="WhitelistToggle" type="Button" parent="LobbyOrganizer/Columns/SettingsColumn/Filters"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("12_cbtm4")
+toggle_mode = true
+text = "Whitelist"
+
+[node name="HSeparator" type="HSeparator" parent="LobbyOrganizer/Columns/SettingsColumn"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="ProfileCase" type="VBoxContainer" parent="LobbyOrganizer/Columns/SettingsColumn"]
+layout_mode = 2
+
+[node name="ProfileLabel" type="Label" parent="LobbyOrganizer/Columns/SettingsColumn/ProfileCase"]
+layout_mode = 2
+text = "selected profile"
+label_settings = ExtResource("5_wtxry")
+horizontal_alignment = 1
+
+[node name="ProfilesList" type="OptionButton" parent="LobbyOrganizer/Columns/SettingsColumn/ProfileCase"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 28
+item_count = 1
+selected = 0
+popup/item_0/text = "N/A"
+popup/item_0/id = 0
+
+[node name="HSeparator3" type="HSeparator" parent="LobbyOrganizer/Columns/SettingsColumn"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="TimerSetting" type="HBoxContainer" parent="LobbyOrganizer/Columns/SettingsColumn"]
+layout_mode = 2
+alignment = 1
+
+[node name="Tag_RoundLength" type="Label" parent="LobbyOrganizer/Columns/SettingsColumn/TimerSetting"]
+layout_mode = 2
+text = "Round length: "
+label_settings = ExtResource("5_wtxry")
+
+[node name="TimerSettingList" type="OptionButton" parent="LobbyOrganizer/Columns/SettingsColumn/TimerSetting"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme = SubResource("Theme_q60op")
+theme_override_fonts/font = ExtResource("11_2bcij")
+theme_override_font_sizes/font_size = 24
+alignment = 1
+item_count = 4
+selected = 2
+fit_to_longest_item = false
+popup/item_0/text = "5 Sec"
+popup/item_0/id = 0
+popup/item_1/text = "10 Sec"
+popup/item_1/id = 1
+popup/item_2/text = "30 Sec"
+popup/item_2/id = 2
+popup/item_3/text = "1 min"
+popup/item_3/id = 3
+
+[node name="HSeparator2" type="HSeparator" parent="LobbyOrganizer/Columns/SettingsColumn"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="ThemeCase" type="VBoxContainer" parent="LobbyOrganizer/Columns/SettingsColumn"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LobbyOrganizer/Columns/SettingsColumn/ThemeCase"]
+layout_mode = 2
+text = "Quiz Skin"
+label_settings = ExtResource("5_wtxry")
+horizontal_alignment = 1
+
+[node name="ThemesList" type="OptionButton" parent="LobbyOrganizer/Columns/SettingsColumn/ThemeCase"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("11_2bcij")
+theme_override_font_sizes/font_size = 26
+item_count = 4
+selected = 0
+popup/item_0/text = "Default"
+popup/item_0/id = 0
+popup/item_1/text = "Chalkboard"
+popup/item_1/id = 1
+popup/item_2/text = "Patriotic Cipher"
+popup/item_2/id = 2
+popup/item_3/text = "Fatal Surprise"
+popup/item_3/id = 3
+
+[node name="Lobby" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.372
+anchor_top = 0.059
+anchor_right = 0.629
+anchor_bottom = 0.244
+offset_left = 0.76001
+offset_top = 0.279995
+offset_right = -1.68005
+offset_bottom = 0.47998
+grow_horizontal = 2
+text = "lobby"
+label_settings = ExtResource("2_ljpbk")
+
 [node name="StateChangers" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.379
-anchor_top = 0.778
-anchor_right = 0.625
-anchor_bottom = 0.889
-offset_left = 40.32
-offset_top = 3.75995
-offset_right = -48.0
-offset_bottom = -0.120056
+anchor_left = 0.4
+anchor_top = 0.837
+anchor_right = 0.6
+anchor_bottom = 0.944
+offset_top = 0.039978
+offset_bottom = 0.479919
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -212,152 +351,6 @@ layout_mode = 2
 theme = ExtResource("2_jy5fm")
 text = "back"
 flat = true
-
-[node name="ProfileCase" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.142
-anchor_top = 0.356
-anchor_right = 0.329
-anchor_bottom = 0.474
-offset_left = -0.640015
-offset_top = -0.480011
-offset_right = 0.319946
-offset_bottom = 0.0799561
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="ProfileCase"]
-layout_mode = 2
-text = "selected profile"
-label_settings = ExtResource("5_wtxry")
-
-[node name="ProfilesList" type="OptionButton" parent="ProfileCase"]
-layout_mode = 2
-focus_mode = 0
-theme_override_font_sizes/font_size = 28
-flat = true
-item_count = 1
-selected = 0
-popup/item_0/text = "N/A"
-popup/item_0/id = 0
-
-[node name="PeerCase" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.137
-anchor_top = 0.511
-anchor_right = 0.329
-anchor_bottom = 0.681
-offset_left = 0.959991
-offset_top = 0.119934
-offset_right = 2.31995
-offset_bottom = 0.519958
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="PeerCase"]
-layout_mode = 2
-text = "Connected Players"
-label_settings = ExtResource("5_wtxry")
-
-[node name="Peer0" type="Label" parent="PeerCase"]
-visible = false
-layout_mode = 2
-text = "%ProfileName%"
-label_settings = ExtResource("6_ujxch")
-horizontal_alignment = 1
-
-[node name="Peer1" type="Label" parent="PeerCase"]
-visible = false
-layout_mode = 2
-text = "Peer_Profile_Name"
-label_settings = ExtResource("3_qhvyi")
-horizontal_alignment = 1
-
-[node name="Peer2" type="Label" parent="PeerCase"]
-visible = false
-layout_mode = 2
-text = "Peer_Profile_Name"
-label_settings = ExtResource("3_qhvyi")
-horizontal_alignment = 1
-
-[node name="Peer3" type="Label" parent="PeerCase"]
-visible = false
-layout_mode = 2
-text = "Peer_Profile_Name"
-label_settings = ExtResource("3_qhvyi")
-horizontal_alignment = 1
-
-[node name="ThemeCase" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.67
-anchor_top = 0.361
-anchor_right = 0.871
-anchor_bottom = 0.5
-offset_left = -0.400024
-offset_top = 0.119965
-offset_right = -2.32007
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="ThemeCase"]
-layout_mode = 2
-text = "Quiz Skin"
-label_settings = ExtResource("5_wtxry")
-
-[node name="ThemesList" type="OptionButton" parent="ThemeCase"]
-layout_mode = 2
-focus_mode = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 28
-flat = true
-item_count = 4
-selected = 0
-popup/item_0/text = "Default"
-popup/item_0/id = 0
-popup/item_1/text = "Chalkboard"
-popup/item_1/id = 1
-popup/item_2/text = "Patriotic Cipher"
-popup/item_2/id = 2
-popup/item_3/text = "Fatal Surprise"
-popup/item_3/id = 3
-
-[node name="Filters" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.667
-anchor_top = 0.511
-anchor_right = 0.867
-anchor_bottom = 0.689
-offset_left = -0.640137
-offset_top = 0.119934
-offset_right = -0.640137
-offset_bottom = -0.119995
-theme_override_constants/separation = 10
-
-[node name="Label" type="Label" parent="Filters"]
-layout_mode = 2
-text = "Filter Preset"
-label_settings = ExtResource("5_wtxry")
-
-[node name="FilterPresetList" type="OptionButton" parent="Filters"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("11_2bcij")
-theme_override_font_sizes/font_size = 20
-item_count = 1
-selected = 0
-popup/item_0/text = "Default"
-popup/item_0/id = 0
-
-[node name="WhitelistToggle" type="Button" parent="Filters"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme = ExtResource("12_cbtm4")
-toggle_mode = true
-text = "Whitelist"
 
 [node name="ConnectionFailedPopupCase" type="Control" parent="."]
 visible = false
@@ -435,57 +428,23 @@ theme = ExtResource("2_jy5fm")
 text = ">Dangit!<"
 flat = true
 
-[node name="TimerSetting" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.371
-anchor_top = 0.481
-anchor_right = 0.629
-anchor_bottom = 0.585
-offset_left = -0.320068
-offset_top = 0.519958
-offset_right = 0.319946
-offset_bottom = 0.199951
-alignment = 1
-
-[node name="Tag_RoundLength" type="Label" parent="TimerSetting"]
-layout_mode = 2
-text = "Round timer length: "
-label_settings = ExtResource("5_wtxry")
-
-[node name="TimerSettingList" type="OptionButton" parent="TimerSetting"]
-unique_name_in_owner = true
-layout_mode = 2
-focus_mode = 0
-theme_override_fonts/font = ExtResource("11_2bcij")
-theme_override_font_sizes/font_size = 24
-flat = true
-alignment = 1
-item_count = 4
-selected = 2
-fit_to_longest_item = false
-popup/item_0/text = "5 Sec"
-popup/item_0/id = 0
-popup/item_1/text = "10 Sec"
-popup/item_1/id = 1
-popup/item_2/text = "30 Sec"
-popup/item_2/id = 2
-popup/item_3/text = "1 min"
-popup/item_3/id = 3
-
-[connection signal="button_down" from="PeerConnectors/HostButton" to="." method="_on_host_button_button_down"]
-[connection signal="button_up" from="PeerConnectors/HostButton" to="." method="_on_host_button_button_up"]
-[connection signal="focus_entered" from="PeerConnectors/HostButton" to="." method="_on_host_button_focus_entered"]
-[connection signal="mouse_entered" from="PeerConnectors/HostButton" to="." method="_on_host_button_mouse_entered"]
-[connection signal="button_down" from="PeerConnectors/JoinButton" to="." method="_on_join_button_button_down"]
-[connection signal="button_up" from="PeerConnectors/JoinButton" to="." method="_on_join_button_button_up"]
-[connection signal="focus_entered" from="PeerConnectors/JoinButton" to="." method="_on_join_button_focus_entered"]
-[connection signal="mouse_entered" from="PeerConnectors/JoinButton" to="." method="_on_join_button_mouse_entered"]
-[connection signal="text_changed" from="PeerConnectors/TextEdit" to="." method="_on_text_edit_text_changed"]
-[connection signal="button_down" from="CancelConnectionButton" to="." method="_on_cancel_connection_button_button_down"]
-[connection signal="button_up" from="CancelConnectionButton" to="." method="_on_cancel_connection_button_button_up"]
-[connection signal="focus_entered" from="CancelConnectionButton" to="." method="_on_cancel_connection_button_focus_entered"]
-[connection signal="mouse_entered" from="CancelConnectionButton" to="." method="_on_cancel_connection_button_mouse_entered"]
+[connection signal="text_changed" from="LobbyOrganizer/Columns/NetworkingColumn/IPField" to="." method="_on_text_edit_text_changed"]
+[connection signal="button_down" from="LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/HostButton" to="." method="_on_host_button_button_down"]
+[connection signal="button_up" from="LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/HostButton" to="." method="_on_host_button_button_up"]
+[connection signal="focus_entered" from="LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/HostButton" to="." method="_on_host_button_focus_entered"]
+[connection signal="mouse_entered" from="LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/HostButton" to="." method="_on_host_button_mouse_entered"]
+[connection signal="button_down" from="LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/JoinButton" to="." method="_on_join_button_button_down"]
+[connection signal="button_up" from="LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/JoinButton" to="." method="_on_join_button_button_up"]
+[connection signal="focus_entered" from="LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/JoinButton" to="." method="_on_join_button_focus_entered"]
+[connection signal="mouse_entered" from="LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/JoinButton" to="." method="_on_join_button_mouse_entered"]
+[connection signal="button_down" from="LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton" to="." method="_on_cancel_connection_button_button_down"]
+[connection signal="button_up" from="LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton" to="." method="_on_cancel_connection_button_button_up"]
+[connection signal="focus_entered" from="LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton" to="." method="_on_cancel_connection_button_focus_entered"]
+[connection signal="mouse_entered" from="LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton" to="." method="_on_cancel_connection_button_mouse_entered"]
+[connection signal="item_selected" from="LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList" to="." method="_on_filter_preset_list_item_selected"]
+[connection signal="button_up" from="LobbyOrganizer/Columns/SettingsColumn/Filters/WhitelistToggle" to="." method="_on_whitelist_toggle_button_up"]
+[connection signal="item_selected" from="LobbyOrganizer/Columns/SettingsColumn/ProfileCase/ProfilesList" to="." method="_on_profiles_list_item_selected"]
+[connection signal="item_selected" from="LobbyOrganizer/Columns/SettingsColumn/ThemeCase/ThemesList" to="." method="_on_themes_list_item_selected"]
 [connection signal="button_down" from="StateChangers/LaunchButton" to="." method="_on_launch_button_button_down"]
 [connection signal="button_up" from="StateChangers/LaunchButton" to="." method="_on_launch_button_button_up"]
 [connection signal="focus_entered" from="StateChangers/LaunchButton" to="." method="_on_launch_button_focus_entered"]
@@ -494,10 +453,6 @@ popup/item_3/id = 3
 [connection signal="button_up" from="StateChangers/BackToMainButton" to="." method="_on_back_to_main_button_button_up"]
 [connection signal="focus_entered" from="StateChangers/BackToMainButton" to="." method="_on_back_to_main_button_focus_entered"]
 [connection signal="mouse_entered" from="StateChangers/BackToMainButton" to="." method="_on_back_to_main_button_mouse_entered"]
-[connection signal="item_selected" from="ProfileCase/ProfilesList" to="." method="_on_profiles_list_item_selected"]
-[connection signal="item_selected" from="ThemeCase/ThemesList" to="." method="_on_themes_list_item_selected"]
-[connection signal="item_selected" from="Filters/FilterPresetList" to="." method="_on_filter_preset_list_item_selected"]
-[connection signal="button_up" from="Filters/WhitelistToggle" to="." method="_on_whitelist_toggle_button_up"]
 [connection signal="button_down" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_button_down"]
 [connection signal="button_up" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_button_up"]
 [connection signal="focus_entered" from="ConnectionFailedPopupCase/ConnFailAck" to="." method="_on_conn_fail_ack_focus_entered"]

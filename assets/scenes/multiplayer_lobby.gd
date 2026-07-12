@@ -12,50 +12,48 @@ var profiles_list_id_to_name = {}
 
 func _ready():
 	$StateChangers/LaunchButton.grab_focus()
-	IpInputTextNode = $PeerConnectors/TextEdit
+	IpInputTextNode = $LobbyOrganizer/Columns/NetworkingColumn/IPField
 	IpInputTextNode.set("text", ip_address)
 	_refresh_profiles_dropdown()
 	SoundMaster._play_music_track("mp_lobby")
 	_init_filter_preset()
 	_init_theme_selector()
-	select_theme_by_text($ThemeCase/ThemesList, GameState.CurrentTheme)
+	select_theme_by_text($LobbyOrganizer/Columns/SettingsColumn/ThemeCase/ThemesList, GameState.CurrentTheme)
 
 func _process(_delta):
 	pass
 
-
 func _init_theme_selector():
-	$ThemeCase/ThemesList.clear()
-	$ThemeCase/ThemesList.add_item("Default")
+	var ui_themesList = $LobbyOrganizer/Columns/SettingsColumn/ThemeCase/ThemesList
+	ui_themesList.clear()
+	ui_themesList.add_item("Default")
 	for theme in UserProfiles.THEME_NAMES:
-		# uncomment the following comments, and delete the extra "$ThemeCase/ThemesList.add_item(theme)"
+		# uncomment the following comments, and delete the extra "ui_themesList.add_item(theme)"
 		#if UserProfiles.unlocked_themes[theme]["unlocked"]:
-		#	$ThemeCase/ThemesList.add_item(theme)
-		$ThemeCase/ThemesList.add_item(theme)
+		#	ui_themesList.add_item(theme)
+		ui_themesList.add_item(theme)
 
 ##called when the text in the IP Address field is changed
 func _on_text_edit_text_changed():
 	ip_address = IpInputTextNode.get("text")
-	pass
 
 ##called when the Profiles List drop down's selection is changed
 func _on_profiles_list_item_selected(index):
 	for key in UserProfiles.profiles.keys():
 		UserProfiles.profiles[key]["selected"] = false
-		pass
 		
 	UserProfiles.profiles[profiles_list_id_to_name[index]]["selected"] = true
 	UserProfiles._IO_write_profiles()
-	pass 
 	
 ##called when the Themes List drop down's selection is changed
 func _on_themes_list_item_selected(index):
-	GameState.CurrentTheme = $ThemeCase/ThemesList.get_item_text(index)
+	var ui_themesList = $LobbyOrganizer/Columns/SettingsColumn/ThemeCase/ThemesList
+	GameState.CurrentTheme = ui_themesList.get_item_text(index)
 	# save change to theme to file
 	var config = ConfigFile.new()
 	var err = config.load("user://settings.cfg")
 	if err == OK:
-		config.set_value("video", "theme", $ThemeCase/ThemesList.get_item_text($ThemeCase/ThemesList.get_selected_id()))
+		config.set_value("video", "theme", ui_themesList.get_item_text(ui_themesList.get_selected_id()))
 		config.save("user://settings.cfg")
 	pass
 	
@@ -77,15 +75,15 @@ func _on_host_button_button_down():
 	$SFX_Press.play()
 func _on_host_button_button_up():
 	multiplayer_host.emit(ip_address)
-	$PeerConnectors.hide()
-	$HostingLabel.show()
-	$CancelConnectionButton.show()
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors.hide()
+	$LobbyOrganizer/Columns/NetworkingColumn/HostingLabel.show()
+	$LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton.show()
 	
-	$ProfileCase/ProfilesList.disabled = true
+	$LobbyOrganizer/Columns/SettingsColumn/ProfileCase/ProfilesList.disabled = true
+	$LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton.disabled = false
 	
-	$CancelConnectionButton.disabled = false
-	$PeerConnectors/HostButton.disabled = true
-	$PeerConnectors/JoinButton.disabled = true
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/HostButton.disabled = true
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/JoinButton.disabled = true
 	$StateChangers/LaunchButton.disabled = false
 #endregion
 
@@ -98,15 +96,15 @@ func _on_join_button_button_down():
 	$SFX_Press.play()
 func _on_join_button_button_up():
 	multiplayer_connect.emit(ip_address)
-	$PeerConnectors.hide()
-	$JoiningLabel.show()
-	$CancelConnectionButton.show()
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors.hide()
+	$LobbyOrganizer/Columns/NetworkingColumn/JoiningLabel.show()
+	$LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton.show()
 	
-	$ProfileCase/ProfilesList.disabled = true
+	$LobbyOrganizer/Columns/SettingsColumn/ProfileCase/ProfilesList.disabled = true
 	
-	$CancelConnectionButton.disabled = false
-	$PeerConnectors/HostButton.disabled = true
-	$PeerConnectors/JoinButton.disabled = true
+	$LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton.disabled = false
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/HostButton.disabled = true
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/JoinButton.disabled = true
 #endregion
 
 #region Cancel Button
@@ -117,17 +115,17 @@ func _on_cancel_connection_button_focus_entered():
 func _on_cancel_connection_button_button_down():
 	$SFX_Press.play()
 func _on_cancel_connection_button_button_up():
-	$HostingLabel.hide()
-	$JoiningLabel.hide()
-	$JoinedLabel.hide()
-	$CancelConnectionButton.hide()
-	$PeerConnectors.show()
+	$LobbyOrganizer/Columns/NetworkingColumn/HostingLabel.hide()
+	$LobbyOrganizer/Columns/NetworkingColumn/JoiningLabel.hide()
+	$LobbyOrganizer/Columns/NetworkingColumn/JoinedLabel.hide()
+	$LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton.hide()
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors.show()
 	
-	$ProfileCase/ProfilesList.disabled = false
+	$LobbyOrganizer/Columns/SettingsColumn/ProfileCase/ProfilesList.disabled = false
 	
-	$CancelConnectionButton.disabled = true
-	$PeerConnectors/HostButton.disabled = false
-	$PeerConnectors/JoinButton.disabled = false
+	$LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton.disabled = true
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/HostButton.disabled = false
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/JoinButton.disabled = false
 	$StateChangers/LaunchButton.disabled = true
 	
 	multiplayer_disconnect.emit()
@@ -144,7 +142,6 @@ func _on_launch_button_button_down():
 func _on_launch_button_button_up():
 	$StateChangers/LaunchButton.disabled = true
 	launch_quiz.emit()
-	pass
 #endregion
 
 #region Back Button
@@ -156,7 +153,6 @@ func _on_back_to_main_button_button_down():
 	$SFX_Press.play()
 func _on_back_to_main_button_button_up():
 	_exit_menu()
-	pass
 #endregion
 
 #region Connection Failed confirm Button
@@ -172,14 +168,14 @@ func _on_conn_fail_ack_button_up():
 
 func _update_connected_players():
 	for n in range(0, 3):
-		var playerLabel = get_node("./PeerCase/Peer%d" % n)
+		var playerLabel = get_node("./LobbyOrganizer/Columns/NetworkingColumn/PeerCase/Peer%d" % n)
 		playerLabel.set("text", "")
 		playerLabel.hide()
 		
 	var n = 0
 	
 	for playerId in GameState.players:
-		var playerLabel = get_node("./PeerCase/Peer%d" % n)
+		var playerLabel = get_node("./LobbyOrganizer/Columns/NetworkingColumn/PeerCase/Peer%d" % n)
 		playerLabel.set("text", GameState.players[playerId].name)
 		playerLabel.show()
 		n += 1
@@ -191,40 +187,36 @@ func _exit_menu():
 	queue_free()
 
 func _connected_to_server():
-	$JoiningLabel.hide()
-	$JoinedLabel.show()
+	$LobbyOrganizer/Columns/NetworkingColumn/JoiningLabel.hide()
+	$LobbyOrganizer/Columns/NetworkingColumn/JoinedLabel.show()
 	pass
 
 func _enable_launch_button():
 	$StateChangers/LaunchButton.disabled = false
-	pass
 
 func _connection_reset(error):
 	print("Connection Failed: %s" % error)
 	get_node("ConnectionFailedPopupCase").show()
 	_update_connected_players()
 	
-	$HostingLabel.hide()
-	$JoinedLabel.hide()
-	$JoiningLabel.hide()
-	$CancelConnectionButton.hide()
-	$PeerConnectors.show()
+	$LobbyOrganizer/Columns/NetworkingColumn/HostingLabel.hide()
+	$LobbyOrganizer/Columns/NetworkingColumn/JoinedLabel.hide()
+	$LobbyOrganizer/Columns/NetworkingColumn/JoiningLabel.hide()
+	$LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton.hide()
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors.show()
 	
-	$CancelConnectionButton.disabled = true
-	$PeerConnectors/HostButton.disabled = false
-	$PeerConnectors/JoinButton.disabled = false
-	$StateChangers/LaunchButton.disabled = true
-	pass
+	$LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton.disabled = true
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/JoinButton.disabled = false
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/HostButton.disabled = false
 
 func _refresh_profiles_dropdown():
-	var profile_list = $ProfileCase/ProfilesList
+	var profile_list = $LobbyOrganizer/Columns/SettingsColumn/ProfileCase/ProfilesList
 	var id = 0
 	profile_list.clear()
 	
 	if UserProfiles.profiles.size() <= 0: # use placeholder if profiles list is empty
 		profile_list.add_item("N/A")
 		return
-	
 	
 	for key in UserProfiles.profiles.keys():
 		profile_list.add_item(UserProfiles.profiles[key]["name"])
@@ -239,17 +231,17 @@ func _refresh_profiles_dropdown():
 	pass
 
 func _reset_menu():
-	$HostingLabel.hide()
-	$JoiningLabel.hide()
-	$JoinedLabel.hide()
-	$CancelConnectionButton.hide()
-	$PeerConnectors.show()
+	$LobbyOrganizer/Columns/NetworkingColumn/HostingLabel.hide()
+	$LobbyOrganizer/Columns/NetworkingColumn/JoiningLabel.hide()
+	$LobbyOrganizer/Columns/NetworkingColumn/JoinedLabel.hide()
+	$LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton.hide()
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors.show()
 	
-	$ProfileCase/ProfilesList.disabled = false
+	$LobbyOrganizer/Columns/SettingsColumn/ProfileCase/ProfilesList.disabled = false
 	
-	$CancelConnectionButton.disabled = true
-	$PeerConnectors/HostButton.disabled = false
-	$PeerConnectors/JoinButton.disabled = false
+	$LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton.disabled = true
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/HostButton.disabled = false
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/JoinButton.disabled = false
 	$StateChangers/LaunchButton.disabled = true
 	
 	multiplayer_disconnect.emit()
@@ -257,30 +249,32 @@ func _reset_menu():
 	pass
 
 func _init_filter_preset():
-	$Filters/FilterPresetList.clear()
+	$LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.clear()
+	var whitelist_btn = $LobbyOrganizer/Columns/SettingsColumn/Filters/WhitelistToggle
 	if GameState.TagsFilters.size() > 0:
 		var i:int = 0
 		var selected:int = 0
 		for key in GameState.TagsFilters:
-			$Filters/FilterPresetList.add_item(key)
+			$LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.add_item(key)
 			if GameState.TagsFilters[key]["selected"]:
 				selected = i
 			i += 1
-		$Filters/FilterPresetList.selected = selected
+		$LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.selected = selected
 		# set the blacklist button
-		if GameState.TagsFilters[$Filters/FilterPresetList.get_item_text(selected)]["blacklist"]:
-			$Filters/WhitelistToggle.text = "Is Blacklist: True"
-			$Filters/WhitelistToggle.button_pressed = true
+		if GameState.TagsFilters[$LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.get_item_text(selected)]["blacklist"]:
+			whitelist_btn.text = "Is Blacklist: True"
+			whitelist_btn.button_pressed = true
 		else:
-			$Filters/WhitelistToggle.text = "Is Blacklist: False"
+			whitelist_btn.text = "Is Blacklist: False"
 	else:
 		#if there are no filters
-		$Filters/FilterPresetList.add_item("N/A")
-		$Filters/FilterPresetList.disabled = true
-		$Filters/WhitelistToggle.disabled = true
+		$LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.add_item("N/A")
+		$LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.disabled = true
+		whitelist_btn.disabled = true
 
 func _on_filter_preset_list_item_selected(index):
-	var key = $Filters/FilterPresetList.get_item_text(index)
+	var key = $LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.get_item_text(index)
+	var whitelist_btn = $LobbyOrganizer/Columns/SettingsColumn/Filters/WhitelistToggle
 	#update the selected tag
 	for filter in GameState.TagsFilters:
 		GameState.TagsFilters[filter]["selected"] = false
@@ -288,17 +282,17 @@ func _on_filter_preset_list_item_selected(index):
 	GameState.TagsFilters[key]["selected"] = true
 	# set the blacklist button
 	if GameState.TagsFilters[key]["blacklist"]:
-		$Filters/WhitelistToggle.text = "Is Blacklist: True"
-		$Filters/WhitelistToggle.button_pressed = true
+		whitelist_btn.text = "Is Blacklist: True"
+		whitelist_btn.button_pressed = true
 	else:
-		$Filters/WhitelistToggle.text = "Is Blacklist: False"
-		$Filters/WhitelistToggle.button_pressed = false
+		whitelist_btn.text = "Is Blacklist: False"
+		whitelist_btn.button_pressed = false
 		
 	GameState._IO_write_tags_filter()
 
 func _on_whitelist_toggle_button_up():
-	var key = $Filters/FilterPresetList.get_item_text($Filters/FilterPresetList.get_selected_id())
-	var button = $Filters/WhitelistToggle
+	var key = $LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.get_item_text($LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.get_selected_id())
+	var button = $LobbyOrganizer/Columns/SettingsColumn/Filters/WhitelistToggle
 	if button.button_pressed:
 		button.text = "Is Blacklist: True"
 		GameState.TagsFilters[key]["blacklist"] = true

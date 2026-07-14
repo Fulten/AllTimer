@@ -3,7 +3,7 @@
 		"bonus": 400,
 		"correct": false,
 		"description": "Player who got the most math based question wrong",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_BadAtMath_D.tga",
 		"name": "Bad at Math",
 		"type": "QUESTION",
 		"uuid": "9b458853-b268-4ada-9bb5-d0225755f2cf"
@@ -12,7 +12,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Got the most question about RPGs Correct",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_RPGNerd_D.tga",
 		"name": "RPG Nerd",
 		"type": "QUESTION",
 		"uuid": "108295c1-6978-44fa-a082-53d4da30fe4c"
@@ -21,7 +21,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Answer the most question right about pop culture",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
 		"name": "Pop Culture Wiz",
 		"type": "QUESTION",
 		"uuid": "45500936-fc97-4174-832f-c250cdf4e49b"
@@ -30,7 +30,7 @@
 		"bonus": 200,
 		"correct": false,
 		"description": "Answered the least questions correctly about pop culture",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_UnderARock_D.tga",
 		"name": "Under a rock",
 		"type": "QUESTION",
 		"uuid": "8c71f458-bf68-48b9-94ae-dab8c9538a37"
@@ -39,7 +39,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Most Hard Questions Answered",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_LockedIn_D.tga",
 		"name": "Locked In",
 		"type": "QUESTION",
 		"uuid": "7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
@@ -48,7 +48,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Most questions right about animals, anthro or otherwise",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_Furry_D.tga",
 		"name": "Furry",
 		"type": "QUESTION",
 		"uuid": "b5c44831-a697-43f9-adb0-b61fb485affa"
@@ -57,7 +57,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Answered the most question correctly about retro games",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_OldSkoolKool_D.tga",
 		"name": "Old School Kool",
 		"type": "QUESTION",
 		"uuid": "16848d16-3133-4aa2-95ba-2457168d286f"
@@ -66,7 +66,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Answer the most Microsoft questions correctly",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_MicrosoftMaster_D.tga",
 		"name": "Microsoft Master",
 		"type": "QUESTION",
 		"uuid": "b9871032-d7d5-4b8a-898b-07708f349fb8"
@@ -75,7 +75,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Answer the most Sony questions correctly",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_SonySycophant_D.tga",
 		"name": "Sony Sycophant",
 		"type": "QUESTION",
 		"uuid": "c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
@@ -84,7 +84,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Answer the most Nintendo questions correctly",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_NintendoNerd_D.tga",
 		"name": "Nintendo Nerd",
 		"type": "QUESTION",
 		"uuid": "43944b2e-9790-4fba-a257-004591ba27a2"
@@ -93,7 +93,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Answer the most History questions correctly",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_Historian_D.tga",
 		"name": "Historian",
 		"type": "QUESTION",
 		"uuid": "e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
@@ -102,7 +102,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Food is front of mind with for you with these questions ain't it?",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
 		"name": "Foodie",
 		"type": "QUESTION",
 		"uuid": "73a5640a-0de7-49d7-81ec-035674312195"
@@ -111,7 +111,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "You seem to have a heavy focus on the laws with these sorts of results",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
 		"name": "Lawyer",
 		"type": "QUESTION",
 		"uuid": "fc8d9c8c-aa26-467b-802d-1d8f4762ba08"
@@ -120,7 +120,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Seems we have some Fighting game fans",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
 		"name": "New Challenger!",
 		"type": "QUESTION",
 		"uuid": "f1bc8cb3-ac7b-455e-bfa7-3a0038053066"
@@ -129,7 +129,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Answer the most questions about Art and Photography",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
 		"name": "Artist",
 		"type": "QUESTION",
 		"uuid": "eb4e497d-9ff2-47b0-b4f0-347b84346e17"
@@ -138,7 +138,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Most question around horror correct",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
 		"name": "Horror Fan",
 		"type": "QUESTION",
 		"uuid": "ef315876-ebad-4b38-8a0a-9b4203765b59"
@@ -147,7 +147,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Most question right about puzzle games",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
 		"name": "Puzzler",
 		"type": "QUESTION",
 		"uuid": "1f3983fd-8f28-4344-b166-958491cd60e9"
@@ -156,7 +156,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Most correct about games aimed at younger audiences",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
 		"name": "Child at Heart",
 		"type": "QUESTION",
 		"uuid": "367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
@@ -165,7 +165,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Most question correct about first person shooters",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
 		"name": "FPS Enjoyer",
 		"type": "QUESTION",
 		"uuid": "87d069b4-7439-4041-843a-a51bf83a5303"
@@ -174,7 +174,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Most questions correct about board and card games",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
 		"name": "Board Gamer",
 		"type": "QUESTION",
 		"uuid": "c55d28e0-c1c7-4ed0-a9ff-2a8cfefe1300"
@@ -183,7 +183,7 @@
 		"bonus": 200,
 		"correct": true,
 		"description": "Answer the most questions correct about Music",
-		"icon": "",
+		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
 		"name": "Music Maniac",
 		"type": "QUESTION",
 		"uuid": "51bf9fc6-1359-46e8-9457-1036b79065be"

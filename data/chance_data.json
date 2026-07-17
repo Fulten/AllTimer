@@ -1,6 +1,6 @@
 [
 	{
-		"bonus": 400,
+		"bonus": 800,
 		"correct": false,
 		"description": "Got the most math wrong",
 		"icon": "res://assets/uiux/main_menu/Awards/T_BadAtMath_D.tga",
@@ -9,7 +9,7 @@
 		"uuid": "9b458853-b268-4ada-9bb5-d0225755f2cf"
 	},
 	{
-		"bonus": 200,
+		"bonus": 700,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Role Playing Games correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_RPGNerd_D.tga",
@@ -18,7 +18,7 @@
 		"uuid": "108295c1-6978-44fa-a082-53d4da30fe4c"
 	},
 	{
-		"bonus": 200,
+		"bonus": 600,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Pop Culture correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
@@ -27,7 +27,7 @@
 		"uuid": "45500936-fc97-4174-832f-c250cdf4e49b"
 	},
 	{
-		"bonus": 200,
+		"bonus": 750,
 		"correct": false,
 		"description": "Answered the most questions pertaining to Pop Culture wrong",
 		"icon": "res://assets/uiux/main_menu/Awards/T_UnderARock_D.tga",
@@ -36,7 +36,7 @@
 		"uuid": "8c71f458-bf68-48b9-94ae-dab8c9538a37"
 	},
 	{
-		"bonus": 200,
+		"bonus": 900,
 		"correct": true,
 		"description": "Answered the most difficult questions correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_LockedIn_D.tga",
@@ -45,7 +45,7 @@
 		"uuid": "7690f19d-4b0b-41bc-ba2f-e5a6e900928a"
 	},
 	{
-		"bonus": 200,
+		"bonus": 600,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Animals, anthro or otherwise, correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_Furry_D.tga",
@@ -54,7 +54,7 @@
 		"uuid": "b5c44831-a697-43f9-adb0-b61fb485affa"
 	},
 	{
-		"bonus": 200,
+		"bonus": 850,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Retro Games correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_OldSkoolKool_D.tga",
@@ -63,7 +63,7 @@
 		"uuid": "16848d16-3133-4aa2-95ba-2457168d286f"
 	},
 	{
-		"bonus": 200,
+		"bonus": 700,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Microsoft correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_MicrosoftMaster_D.tga",
@@ -72,7 +72,7 @@
 		"uuid": "b9871032-d7d5-4b8a-898b-07708f349fb8"
 	},
 	{
-		"bonus": 200,
+		"bonus": 700,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Sony correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_SonySycophant_D.tga",
@@ -81,7 +81,7 @@
 		"uuid": "c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
 	},
 	{
-		"bonus": 200,
+		"bonus": 700,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Nintendo correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_NintendoNerd_D.tga",
@@ -90,7 +90,7 @@
 		"uuid": "43944b2e-9790-4fba-a257-004591ba27a2"
 	},
 	{
-		"bonus": 200,
+		"bonus": 800,
 		"correct": true,
 		"description": "Answered the most questions pertaining to History correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_Historian_D.tga",
@@ -99,7 +99,7 @@
 		"uuid": "e647e31b-aec5-4d63-a650-4ecbf76b7c3f"
 	},
 	{
-		"bonus": 200,
+		"bonus": 600,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Food correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
@@ -108,7 +108,7 @@
 		"uuid": "73a5640a-0de7-49d7-81ec-035674312195"
 	},
 	{
-		"bonus": 200,
+		"bonus": 900,
 		"correct": true,
 		"description": "Answered the most questions pertaining to the Law correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
@@ -117,7 +117,7 @@
 		"uuid": "fc8d9c8c-aa26-467b-802d-1d8f4762ba08"
 	},
 	{
-		"bonus": 200,
+		"bonus": 700,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Fighting Games correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_NewChallenger_D.tga",
@@ -126,7 +126,7 @@
 		"uuid": "f1bc8cb3-ac7b-455e-bfa7-3a0038053066"
 	},
 	{
-		"bonus": 200,
+		"bonus": 750,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Art and Photography correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_Artist_D.tga",
@@ -135,7 +135,7 @@
 		"uuid": "eb4e497d-9ff2-47b0-b4f0-347b84346e17"
 	},
 	{
-		"bonus": 200,
+		"bonus": 750,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Horror correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
@@ -144,7 +144,7 @@
 		"uuid": "ef315876-ebad-4b38-8a0a-9b4203765b59"
 	},
 	{
-		"bonus": 200,
+		"bonus": 750,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Puzzle Games correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_Puzzler_D.tga",
@@ -153,7 +153,7 @@
 		"uuid": "1f3983fd-8f28-4344-b166-958491cd60e9"
 	},
 	{
-		"bonus": 200,
+		"bonus": 750,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Children's Games correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
@@ -162,7 +162,7 @@
 		"uuid": "367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"
 	},
 	{
-		"bonus": 200,
+		"bonus": 650,
 		"correct": true,
 		"description": "Answered the most questions pertaining to First Person Shooters correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_FPSEnjoyer_D.tga",
@@ -171,7 +171,7 @@
 		"uuid": "87d069b4-7439-4041-843a-a51bf83a5303"
 	},
 	{
-		"bonus": 200,
+		"bonus": 800,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Board and Card games",
 		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
@@ -180,7 +180,7 @@
 		"uuid": "c55d28e0-c1c7-4ed0-a9ff-2a8cfefe1300"
 	},
 	{
-		"bonus": 200,
+		"bonus": 750,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Music correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_MusicManiac_D.tga",

@@ -3773,6 +3773,7 @@ layout_mode = 2
 
 [node name="answer_pair1" type="HBoxContainer" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="a1_icon" type="TextureRect" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1"]
 custom_minimum_size = Vector2(50, 50)
@@ -3791,6 +3792,7 @@ text = "answer_one"
 
 [node name="answer_pair2" type="HBoxContainer" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="a2_icon" type="TextureRect" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2"]
 custom_minimum_size = Vector2(50, 50)
@@ -3809,6 +3811,7 @@ text = "answer_two"
 
 [node name="answer_pair3" type="HBoxContainer" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="a3_icon" type="TextureRect" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair3"]
 custom_minimum_size = Vector2(50, 50)
@@ -3828,6 +3831,7 @@ text = "answer_three
 
 [node name="answer_pair4" type="HBoxContainer" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="a4_icon" type="TextureRect" parent="quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4"]
 custom_minimum_size = Vector2(50, 50)

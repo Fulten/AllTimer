@@ -494,6 +494,23 @@ func _on_timer_game_to_options_timeout():
 
 func _on_filter_save_preset_button_button_up():
 	_save_filter()
+
+func _on_alphabetical_sort_button_down():
+	$Stack_0/MainMenuButtons/SFX_Press.play()
+func _on_alphabetical_sort_button_up():
+	if current_sort == SortMode.ALPHA_ASCEND:
+		current_sort = SortMode.ALPHA_DESCEND
+	else:
+		current_sort = SortMode.ALPHA_ASCEND
+	sort_tags(filter_tag_selectors)
+func _on_count_sort_button_down():
+	$Stack_0/MainMenuButtons/SFX_Press.play()
+func _on_count_sort_button_up():
+	if current_sort == SortMode.VALUE_ASCEND:
+		current_sort = SortMode.VALUE_DESCEND
+	else:
+		current_sort = SortMode.VALUE_ASCEND
+	sort_tags(filter_tag_selectors)
 	
 func _on_delete_preset_button_button_up():
 	_delete_filter()
@@ -565,8 +582,21 @@ func _UI_load_filter_tag_buttons():
 		new_tag.add_theme_font_size_override("font_size", 16)
 		
 		#new_tag.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+		new_tag.set_meta("tag_ref", tag)
 		ui_filter_container.add_child(new_tag)
 		filter_tag_selectors.append(new_tag)
+	current_sort = SortMode.ALPHA_ASCEND
+	sort_tags(filter_tag_selectors)
+
+func sync_ui_tag_order() -> void:
+	var ui_filter_container = $Options_Game2/SettingsList/FiltersCase/FilterContainers/ScrollCase/FilterContainer
+	for i in range(filter_tag_selectors.size()):
+		var target_tag_text = filter_tag_selectors[i].text
+		# find the child tagged with this entry
+		for child in ui_filter_container.get_children():
+			if child.get_meta("tag_ref") == target_tag_text:
+				ui_filter_container.move_child(child, i)
+				break
 
 ## sets all of the buttons in the filter container to unpressed
 func _UI_reset_filter_tag_buttons():
@@ -589,6 +619,24 @@ func _UI_toggle_blacklist_button(is_blacklist:bool = true):
 	else:
 		ui_blacklist_btn.text = "Blacklist: False"
 		ui_blacklist_btn["button_pressed"] = false
+
+enum SortMode { ALPHA_ASCEND, ALPHA_DESCEND, VALUE_ASCEND, VALUE_DESCEND }
+
+var current_sort: SortMode = SortMode.ALPHA_ASCEND
+
+func sort_tags(arr: Array) -> void:
+	match current_sort:
+		SortMode.ALPHA_ASCEND:
+			arr.sort_custom(func(a, b): return a["text"].to_lower() < b["text"].to_lower())
+		SortMode.ALPHA_DESCEND:
+			arr.sort_custom(func(a, b): return a["text"].to_lower() > b["text"].to_lower())
+		SortMode.VALUE_ASCEND:
+			return; #no opp until counts are loaded
+			#arr.sort_custom(func(a, b): return a["value"] < b["value"])
+		SortMode.VALUE_DESCEND:
+			return; #no opp until counts are loaded
+			#arr.sort_custom(func(a, b): return a["value"] > b["value"])
+	sync_ui_tag_order()
 
 # load a filter's settings using the filter_selected_key
 func _load_filter():
@@ -624,7 +672,7 @@ func _save_filter():
 		filter_selected_key = filter_name
 		_UI_load_filter_selector()
 		_load_filter()
-
+	
 func _delete_filter():
 	GameState.TagsFilters.erase(filter_selected_key)
 	GameState._IO_write_tags_filter()

@@ -102,7 +102,7 @@
 		"bonus": 600,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Food correctly",
-		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
+		"icon": "res://assets/uiux/main_menu/Awards/T_Foodie_D.tga",
 		"name": "Foodie",
 		"type": "QUESTION",
 		"uuid": "73a5640a-0de7-49d7-81ec-035674312195"
@@ -111,7 +111,7 @@
 		"bonus": 900,
 		"correct": true,
 		"description": "Answered the most questions pertaining to the Law correctly",
-		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
+		"icon": "res://assets/uiux/main_menu/Awards/T_Attorney_D.tga",
 		"name": "Attorney",
 		"type": "QUESTION",
 		"uuid": "fc8d9c8c-aa26-467b-802d-1d8f4762ba08"
@@ -138,7 +138,7 @@
 		"bonus": 750,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Horror correctly",
-		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
+		"icon": "res://assets/uiux/main_menu/Awards/T_HorrorFan_D.tga",
 		"name": "Horror Fan",
 		"type": "QUESTION",
 		"uuid": "ef315876-ebad-4b38-8a0a-9b4203765b59"

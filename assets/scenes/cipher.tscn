@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://di56bs4ycntxw"]
+[gd_scene load_steps=74 format=3 uid="uid://di56bs4ycntxw"]
 
 [ext_resource type="Script" path="res://assets/scenes/quiz_session.gd" id="1_khyfr"]
 [ext_resource type="Texture2D" uid="uid://dq2hnijwt0hlh" path="res://assets/uiux/session_themes/Patriotic Cipher/session_bg.tga" id="2_mj6gr"]
@@ -1044,6 +1044,18 @@ tracks/56/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+tracks/57/type = "value"
+tracks/57/imported = false
+tracks/57/enabled = true
+tracks/57/path = NodePath("quizEnd/ReturnToLobbyButton:self_modulate")
+tracks/57/interp = 1
+tracks/57/loop_wrap = true
+tracks/57/keys = {
+"times": PackedFloat32Array(5, 5.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_2bncq"]
 resource_name = "QuizIntro"
@@ -1171,38 +1183,98 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Flavor:self_modulate")
+tracks/10/path = NodePath("quizInterface:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(4, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("quizInterface:visible")
+tracks/11/path = NodePath("preQuiz:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("preQuiz:visible")
+tracks/12/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ReadyCheck:self_modulate")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"times": PackedFloat32Array(4, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("preQuiz/preSessionOrganizer/RulesText/Flavor:self_modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(4, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button1Texture:self_modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(4, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button2Texture:self_modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(4, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button3Texture:self_modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(4, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button4Texture:self_modulate")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(4, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_ptqdf"]
@@ -1987,6 +2059,18 @@ tracks/64/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(0.3055, 0.592583, 0.65, 1)]
+}
+tracks/65/type = "value"
+tracks/65/imported = false
+tracks/65/enabled = true
+tracks/65/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/StandingBy:self_modulate")
+tracks/65/interp = 1
+tracks/65/loop_wrap = true
+tracks/65/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_87374"]
@@ -3071,6 +3155,162 @@ tracks/89/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/90/type = "value"
+tracks/90/imported = false
+tracks/90/enabled = true
+tracks/90/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ReadyCheck:self_modulate")
+tracks/90/interp = 1
+tracks/90/loop_wrap = true
+tracks/90/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/91/type = "value"
+tracks/91/imported = false
+tracks/91/enabled = true
+tracks/91/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button1Texture:self_modulate")
+tracks/91/interp = 1
+tracks/91/loop_wrap = true
+tracks/91/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/92/type = "value"
+tracks/92/imported = false
+tracks/92/enabled = true
+tracks/92/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button2Texture:self_modulate")
+tracks/92/interp = 1
+tracks/92/loop_wrap = true
+tracks/92/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/93/type = "value"
+tracks/93/imported = false
+tracks/93/enabled = true
+tracks/93/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button3Texture:self_modulate")
+tracks/93/interp = 1
+tracks/93/loop_wrap = true
+tracks/93/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/94/type = "value"
+tracks/94/imported = false
+tracks/94/enabled = true
+tracks/94/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button4Texture:self_modulate")
+tracks/94/interp = 1
+tracks/94/loop_wrap = true
+tracks/94/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/95/type = "value"
+tracks/95/imported = false
+tracks/95/enabled = true
+tracks/95/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ReadyCheck:visible")
+tracks/95/interp = 1
+tracks/95/loop_wrap = true
+tracks/95/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/96/type = "value"
+tracks/96/imported = false
+tracks/96/enabled = true
+tracks/96/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button1Texture:visible")
+tracks/96/interp = 1
+tracks/96/loop_wrap = true
+tracks/96/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/97/type = "value"
+tracks/97/imported = false
+tracks/97/enabled = true
+tracks/97/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button2Texture:visible")
+tracks/97/interp = 1
+tracks/97/loop_wrap = true
+tracks/97/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/98/type = "value"
+tracks/98/imported = false
+tracks/98/enabled = true
+tracks/98/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button3Texture:visible")
+tracks/98/interp = 1
+tracks/98/loop_wrap = true
+tracks/98/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/99/type = "value"
+tracks/99/imported = false
+tracks/99/enabled = true
+tracks/99/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button4Texture:visible")
+tracks/99/interp = 1
+tracks/99/loop_wrap = true
+tracks/99/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/100/type = "value"
+tracks/100/imported = false
+tracks/100/enabled = true
+tracks/100/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/StandingBy:visible")
+tracks/100/interp = 1
+tracks/100/loop_wrap = true
+tracks/100/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/101/type = "value"
+tracks/101/imported = false
+tracks/101/enabled = true
+tracks/101/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/StandingBy:self_modulate")
+tracks/101/interp = 1
+tracks/101/loop_wrap = true
+tracks/101/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/102/type = "value"
+tracks/102/imported = false
+tracks/102/enabled = true
+tracks/102/path = NodePath("quizEnd/ReturnToLobbyButton:self_modulate")
+tracks/102/interp = 1
+tracks/102/loop_wrap = true
+tracks/102/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_v3c8i"]
 resource_name = "p1Status_RightHide"
@@ -3456,6 +3696,146 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0.235294), Color(1, 0.141176, 0.141176, 1), Color(1, 1, 1, 0.235294), Color(1, 0.141176, 0.141176, 1), Color(1, 0.141176, 0.141176, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_fclq5"]
+resource_name = "QuizPrompting"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ReadyCheck:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.27451), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button1Texture:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.27451), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button2Texture:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.27451), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button3Texture:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.27451), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button4Texture:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.27451), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jhnif"]
+resource_name = "QuizStandBy"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ReadyCheck:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button1Texture:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button2Texture:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button3Texture:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures/Button4Texture:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("preQuiz/preSessionOrganizer/RulesText/ReadyCheck/StandingBy:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2s641"]
 _data = {
 "QuestionLoad_A": SubResource("Animation_3txj5"),
@@ -3463,6 +3843,8 @@ _data = {
 "QuestionUnload": SubResource("Animation_3hfv2"),
 "QuizFinish": SubResource("Animation_nhinr"),
 "QuizIntro": SubResource("Animation_2bncq"),
+"QuizPrompting": SubResource("Animation_fclq5"),
+"QuizStandBy": SubResource("Animation_jhnif"),
 "QuizStart": SubResource("Animation_ptqdf"),
 "RESET": SubResource("Animation_87374"),
 "p1Status_RightHide": SubResource("Animation_v3c8i"),
@@ -3692,6 +4074,52 @@ text = "Headquarters has detected at least one other agent at the blacksite. Get
 label_settings = ExtResource("10_2070n")
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="ReadyCheck" type="VBoxContainer" parent="preQuiz/preSessionOrganizer/RulesText"]
+layout_mode = 2
+alignment = 1
+
+[node name="ReadyCheck" type="Label" parent="preQuiz/preSessionOrganizer/RulesText/ReadyCheck"]
+layout_mode = 2
+text = "Press any answer key to Ready Up"
+label_settings = ExtResource("10_2070n")
+horizontal_alignment = 1
+
+[node name="StandingBy" type="Label" parent="preQuiz/preSessionOrganizer/RulesText/ReadyCheck"]
+visible = false
+layout_mode = 2
+text = "Ready ! Mission launch imminent..."
+label_settings = ExtResource("10_2070n")
+horizontal_alignment = 1
+
+[node name="ButtonTextures" type="HBoxContainer" parent="preQuiz/preSessionOrganizer/RulesText/ReadyCheck"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Button1Texture" type="TextureRect" parent="preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("14_bj7b2")
+stretch_mode = 4
+
+[node name="Button2Texture" type="TextureRect" parent="preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("16_5coas")
+stretch_mode = 4
+
+[node name="Button3Texture" type="TextureRect" parent="preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("17_fag03")
+stretch_mode = 4
+
+[node name="Button4Texture" type="TextureRect" parent="preQuiz/preSessionOrganizer/RulesText/ReadyCheck/ButtonTextures"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("18_4s6r2")
+stretch_mode = 4
 
 [node name="quizInterface" type="Control" parent="."]
 clip_contents = true
@@ -4239,6 +4667,20 @@ grow_horizontal = 2
 text = "End of quiz"
 label_settings = ExtResource("8_d5au1")
 horizontal_alignment = 1
+
+[node name="ReturnToLobbyButton" type="Button" parent="quizEnd"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.834
+anchor_top = 0.867
+anchor_right = 0.98
+anchor_bottom = 0.97
+offset_left = 23.72
+offset_top = 23.64
+offset_right = -24.6
+offset_bottom = -23.6
+theme = ExtResource("17_0bpq4")
+text = "Return to lobby"
 
 [node name="PlayerStandingsOrg" type="VBoxContainer" parent="quizEnd"]
 layout_mode = 1

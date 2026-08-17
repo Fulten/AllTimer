@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dy8lkjphm6pdg"]
+[gd_scene load_steps=16 format=3 uid="uid://dy8lkjphm6pdg"]
 
 [ext_resource type="Script" path="res://assets/scenes/multiplayer_lobby.gd" id="1_e4r6j"]
 [ext_resource type="Texture2D" uid="uid://ctaoad4ca7mx7" path="res://assets/uiux/main_menu/T_MenuVignette_D.tga" id="1_l3cbn"]
@@ -18,6 +18,10 @@ bg_color = Color(0, 0, 0, 0.431373)
 
 [sub_resource type="Theme" id="Theme_q60op"]
 PopupMenu/styles/panel = SubResource("StyleBoxFlat_p8ef3")
+
+[sub_resource type="Theme" id="Theme_lwx1r"]
+OptionButton/font_sizes/font_size = 16
+OptionButton/fonts/font = ExtResource("11_2bcij")
 
 [node name="MultiplayerLobby" type="Control"]
 layout_mode = 3
@@ -281,6 +285,26 @@ popup/item_2/text = "30 Sec"
 popup/item_2/id = 2
 popup/item_3/text = "1 min"
 popup/item_3/id = 3
+
+[node name="ReadingTimeSection" type="HBoxContainer" parent="LobbyOrganizer/Columns/SettingsColumn"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LobbyOrganizer/Columns/SettingsColumn/ReadingTimeSection"]
+layout_mode = 2
+text = "reading time: "
+label_settings = ExtResource("5_wtxry")
+
+[node name="OptionButton" type="OptionButton" parent="LobbyOrganizer/Columns/SettingsColumn/ReadingTimeSection"]
+layout_mode = 2
+theme = SubResource("Theme_lwx1r")
+item_count = 3
+selected = 1
+popup/item_0/text = "Speedy"
+popup/item_0/id = 0
+popup/item_1/text = "Standard"
+popup/item_1/id = 1
+popup/item_2/text = "Patient"
+popup/item_2/id = 2
 
 [node name="HSeparator2" type="HSeparator" parent="LobbyOrganizer/Columns/SettingsColumn"]
 self_modulate = Color(0, 0, 0, 1)

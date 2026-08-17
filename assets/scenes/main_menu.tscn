@@ -342,7 +342,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(1, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-750, 432), Vector2(456, 432)]
+"values": [Vector2(-750, 392), Vector2(328, 392)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -355,6 +355,18 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(2000, 472), Vector2(1152, 472)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%Options_Profile/OptionsProfileReturn:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(860, 939), Vector2(1160, 939)]
 }
 
 [sub_resource type="Animation" id="Animation_yjq64"]
@@ -418,7 +430,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(456, 432), Vector2(-750, 432)]
+"values": [Vector2(328, 392), Vector2(-750, 392)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -431,6 +443,18 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1152, 472), Vector2(2000, 472)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%Options_Profile/OptionsProfileReturn:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1160, 939), Vector2(860, 939)]
 }
 
 [sub_resource type="Animation" id="Animation_5jqqd"]
@@ -950,6 +974,18 @@ tracks/22/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-72, -54)]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("%Options_Profile/OptionsProfileReturn:position")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(860, 939)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hplv1"]
@@ -2071,7 +2107,7 @@ anchor_bottom = 0.5
 offset_left = -315.0
 offset_top = -167.0
 offset_right = 317.0
-offset_bottom = 33.0007
+offset_bottom = 33.0004
 grow_horizontal = 2
 grow_vertical = 2
 text = "Profile"
@@ -2093,7 +2129,7 @@ anchor_bottom = 0.4
 offset_left = -7.04004
 offset_top = 339.68
 offset_right = -15.3602
-offset_bottom = 339.999
+offset_bottom = 339.997
 grow_vertical = 2
 
 [node name="DimensionFrame" type="VBoxContainer" parent="Options_Profile/ProfileSettingsCase"]
@@ -2222,15 +2258,15 @@ flat = true
 
 [node name="OptionsProfileReturn" type="Button" parent="Options_Profile"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -141.0
-offset_right = 100.0
-offset_bottom = -83.0
+anchors_preset = -1
+anchor_left = 0.448
+anchor_top = 0.869
+anchor_right = 0.552
+anchor_bottom = 0.923
+offset_left = -0.160034
+offset_top = 0.47998
+offset_right = 0.160156
+offset_bottom = 0.159973
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("9_sym4l")
@@ -2245,7 +2281,7 @@ anchor_top = 0.437
 anchor_right = 0.825
 anchor_bottom = 0.733
 offset_top = 0.039978
-offset_right = -0.000488281
+offset_right = 0.0126953
 offset_bottom = 0.359985
 grow_horizontal = 0
 grow_vertical = 2
@@ -2311,13 +2347,14 @@ label_settings = ExtResource("12_fat6d")
 [node name="AwardsSection" type="VBoxContainer" parent="Options_Profile"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.237
-anchor_top = 0.4
-anchor_right = 0.587
-anchor_bottom = 0.83
-offset_left = 0.959991
-offset_right = 0.959839
-offset_bottom = -0.400024
+anchor_left = 0.171
+anchor_top = 0.363
+anchor_right = 0.583
+anchor_bottom = 0.77
+offset_left = 127.68
+offset_top = 39.96
+offset_right = 128.643
+offset_bottom = 40.4
 mouse_filter = 2
 theme_override_constants/separation = 10
 
@@ -2328,7 +2365,7 @@ label_settings = ExtResource("18_f5q02")
 
 [node name="AwardsCase" type="GridContainer" parent="Options_Profile/AwardsSection"]
 self_modulate = Color(0, 0, 0, 1)
-custom_minimum_size = Vector2(360, 360)
+custom_minimum_size = Vector2(768, 384)
 layout_mode = 2
 theme = SubResource("Theme_d4m5o")
 theme_override_constants/h_separation = 5

@@ -209,7 +209,8 @@ func _on_play_button_mouse_entered():
 func _on_play_button_button_down():
 	$Stack_0/MainMenuButtons/SFX_Press.play()
 func _on_play_button_button_up():
-	get_tree().change_scene_to_file("res://assets/scenes/loading_screen.tscn")
+	if UserProfiles.profiles.size() > 0:
+		get_tree().change_scene_to_file("res://assets/scenes/loading_screen.tscn")
 
 
 func _on_options_button_focus_entered():
@@ -357,6 +358,7 @@ func _on_delete_button_button_up():
 	UserProfiles._delete_profile(profiles_list_id_to_name[profile_list.get_selected_id()])
 	_refresh_profiles_dropdown()
 	_update_current_profile_label()
+	_update_profile_statistics()
 	get_node("Options_Profile/ProfileDestroyer").hide()
 	flag_profiles_menu_sub = false
 	pass
@@ -833,8 +835,7 @@ func create_new_award(awardHash: String):
 	var node_label_settings = LabelSettings.new()
 	var node_vbox_container = VBoxContainer.new()
 	
-	# TODO: multiple different icons for the different awards
-	var award_texture = load("res://assets/uiux/main_menu/T_BadAtMath_D.tga")
+	var award_texture = load(UserProfiles.chance_descriptors[awardHash]["icon"])
 	
 	node_label_settings.outline_size = 4
 	node_label_settings.outline_color = _select_award_outline_color(UserProfiles.chance_descriptors[awardHash]["type"])
@@ -847,7 +848,8 @@ func create_new_award(awardHash: String):
 	
 	
 	node_texture.texture = award_texture
-	node_texture.expand_mode = TextureRect.EXPAND_KEEP_SIZE
+	node_texture.custom_minimum_size = Vector2(128, 128)
+	node_texture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	node_texture.stretch_mode = TextureRect.STRETCH_SCALE
 	
 	#TODO: add hover text to award texture containing detailed description

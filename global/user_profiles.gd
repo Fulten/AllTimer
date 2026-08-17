@@ -107,6 +107,7 @@ func _overwrite_profile_with_reference(updatedProfile):
 func _delete_profile(profileName):
 	print("!INFO: Deleting Existing Profile: [%s]" % profileName)
 	profiles.erase(profileName)
+	_IO_write_profiles()
 	pass
 
 func _IO_read_profiles():
@@ -247,6 +248,7 @@ func _load_chance_data():
 				"name": entry["name"],
 				"description": entry["description"],
 				"type": entry["type"],
+				"icon": entry["icon"],
 			}
 			chance_descriptors[entry["uuid"]] = chance
 		

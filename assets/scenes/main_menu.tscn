@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bjrqcx0k7scpa"]
+[gd_scene load_steps=52 format=3 uid="uid://bjrqcx0k7scpa"]
 
 [ext_resource type="Theme" uid="uid://j8encu3x20ng" path="res://assets/uiux/main_menu/default_theme.tres" id="1_nvabs"]
 [ext_resource type="Shader" path="res://assets/uiux/main_menu/scrolling_background.gdshader" id="2_40555"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://c70rl4plqsm7n" path="res://assets/uiux/main_menu/NeonSans.otf" id="7_h5m3g"]
 [ext_resource type="FontFile" uid="uid://bc01r67d5wp2w" path="res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf" id="7_ixy01"]
 [ext_resource type="LabelSettings" uid="uid://dtxn1h8dpa0pi" path="res://assets/scenes/Label_Title.tres" id="8_3ymww"]
+[ext_resource type="Theme" uid="uid://0vaxrsxbc4nw" path="res://assets/scenes/ButtonNF_Clickable2.tres" id="9_2a23h"]
 [ext_resource type="Theme" uid="uid://bs1imbtgf7dr4" path="res://assets/scenes/Button_Clickable.tres" id="9_sym4l"]
 [ext_resource type="Script" path="res://assets/scenes/MasterVolume.gd" id="11_e6ba1"]
 [ext_resource type="StyleBox" uid="uid://dcuqsqcektumy" path="res://assets/uiux/main_menu/volumeSlider.res" id="11_sycm3"]
@@ -987,6 +988,58 @@ tracks/23/keys = {
 "update": 0,
 "values": [Vector2(860, 939)]
 }
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("NotifLocus/Notif_UnlockedTheme:visible")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_oov0p"]
+resource_name = "Anim_Notif_Dismiss"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NotifLocus/DismissNotifButton:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NotifLocus/Notif_UnlockedTheme:self_modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NotifLocus/Notif_UnlockedTheme:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hplv1"]
 _data = {
@@ -994,6 +1047,7 @@ _data = {
 "Anim_Display_FadeOut": SubResource("Animation_a5m32"),
 "Anim_Game_FadeIn": SubResource("Animation_xro5j"),
 "Anim_Game_FadeOut": SubResource("Animation_sboeb"),
+"Anim_Notif_Dismiss": SubResource("Animation_oov0p"),
 "Anim_OptionCategories_FadeOut": SubResource("Animation_kslew"),
 "Anim_OptionsCategories_FadeIn": SubResource("Animation_8w1od"),
 "Anim_Profile_FadeIn": SubResource("Animation_qoe65"),
@@ -1210,6 +1264,38 @@ position = Vector2(-6.10352e-05, 10)
 points = PackedVector2Array(592, 544, 1320, 544)
 width = 2.0
 default_color = Color(0, 0, 0, 1)
+
+[node name="NotifLocus" type="VBoxContainer" parent="Stack_0"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 14.4
+anchor_top = 17.6
+anchor_right = 33.6
+anchor_bottom = 20.8
+offset_right = -0.00012207
+offset_bottom = -6.10352e-05
+theme_override_constants/separation = 20
+
+[node name="Notif_ProfileRequired" type="Label" parent="Stack_0/NotifLocus"]
+visible = false
+layout_mode = 2
+text = "A profile is required to run a quiz.
+Create one in the menu below"
+label_settings = ExtResource("19_ihq36")
+horizontal_alignment = 1
+
+[node name="Notif_UnlockedTheme" type="Label" parent="Stack_0/NotifLocus"]
+layout_mode = 2
+text = "You've unlocked a new quiz theme!
+Find it in the display menu or the multiplayer lobby"
+label_settings = ExtResource("19_ihq36")
+horizontal_alignment = 1
+
+[node name="DismissNotifButton" type="Button" parent="Stack_0/NotifLocus"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("9_2a23h")
+text = "Dismiss"
 
 [node name="MainMenuButtons" type="HBoxContainer" parent="Stack_0"]
 layout_mode = 1
@@ -2266,7 +2352,7 @@ anchor_bottom = 0.923
 offset_left = -0.160034
 offset_top = 0.47998
 offset_right = 0.160156
-offset_bottom = 0.159973
+offset_bottom = 0.160034
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("9_sym4l")
@@ -2403,6 +2489,10 @@ texture = ExtResource("17_iljph")
 [connection signal="timeout" from="StackAnimator/Timer_Game_to_Options" to="." method="_on_timer_game_to_options_timeout"]
 [connection signal="timeout" from="StackAnimator/Timer_Stack0_to_Profile" to="." method="_on_timer_stack_0_to_profile_timeout"]
 [connection signal="timeout" from="StackAnimator/Timer_Profile_to_Stack0" to="." method="_on_timer_profile_to_stack_0_timeout"]
+[connection signal="button_down" from="Stack_0/NotifLocus/DismissNotifButton" to="." method="_on_dismiss_notif_button_button_down"]
+[connection signal="focus_entered" from="Stack_0/NotifLocus/DismissNotifButton" to="." method="_on_dismiss_notif_button_focus_entered"]
+[connection signal="mouse_entered" from="Stack_0/NotifLocus/DismissNotifButton" to="." method="_on_dismiss_notif_button_mouse_entered"]
+[connection signal="pressed" from="Stack_0/NotifLocus/DismissNotifButton" to="." method="_on_dismiss_notif_button_pressed"]
 [connection signal="button_down" from="Stack_0/MainMenuButtons/PlayButton" to="." method="_on_play_button_button_down"]
 [connection signal="button_up" from="Stack_0/MainMenuButtons/PlayButton" to="." method="_on_play_button_button_up"]
 [connection signal="focus_entered" from="Stack_0/MainMenuButtons/PlayButton" to="." method="_on_play_button_focus_entered"]

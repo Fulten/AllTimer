@@ -258,6 +258,16 @@ func _on_timer_stack_0_to_profile_timeout():
 	flag_profiles_menu = true
 
 
+func _on_dismiss_notif_button_mouse_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_dismiss_notif_button_focus_entered():
+	$Stack_0/MainMenuButtons/SFX_Hover.play()
+func _on_dismiss_notif_button_button_down():
+	$Stack_0/MainMenuButtons/SFX_Press.play()
+func _on_dismiss_notif_button_pressed():
+	$StackAnimator.play("Anim_Notif_Dismiss")
+
+
 func _on_options_profile_return_focus_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
 func _on_options_profile_return_mouse_entered():
@@ -899,4 +909,3 @@ func _create_hover_text_node():
 	
 	get_tree().root.add_child(node_hover_text)
 #endregion
-

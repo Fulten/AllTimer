@@ -1,0 +1,39 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://0vaxrsxbc4nw"]
+
+[ext_resource type="FontFile" uid="uid://bc01r67d5wp2w" path="res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf" id="1_sjqa8"]
+[ext_resource type="StyleBox" uid="uid://di4w5l0kt12cq" path="res://assets/scenes/NonFlatButtonCase.tres" id="2_8ooel"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mmvin"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t2ac4"]
+bg_color = Color(0, 0, 0, 0.882353)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 3.0
+expand_margin_right = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eu0m4"]
+bg_color = Color(0, 0, 0, 0.313726)
+
+[resource]
+default_font = ExtResource("1_sjqa8")
+default_font_size = 36
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(0, 1, 1, 1)
+Button/colors/font_hover_color = Color(0, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 0)
+Button/constants/outline_size = 2
+Button/font_sizes/font_size = 36
+Button/fonts/font = ExtResource("1_sjqa8")
+Button/styles/focus = SubResource("StyleBoxEmpty_mmvin")
+Button/styles/hover = SubResource("StyleBoxFlat_t2ac4")
+Button/styles/normal = ExtResource("2_8ooel")
+Button/styles/pressed = SubResource("StyleBoxFlat_eu0m4")

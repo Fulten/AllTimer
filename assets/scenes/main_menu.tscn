@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bjrqcx0k7scpa"]
+[gd_scene load_steps=53 format=3 uid="uid://bjrqcx0k7scpa"]
 
 [ext_resource type="Theme" uid="uid://j8encu3x20ng" path="res://assets/uiux/main_menu/default_theme.tres" id="1_nvabs"]
 [ext_resource type="Shader" path="res://assets/uiux/main_menu/scrolling_background.gdshader" id="2_40555"]
@@ -10,6 +10,7 @@
 [ext_resource type="LabelSettings" uid="uid://dtxn1h8dpa0pi" path="res://assets/scenes/Label_Title.tres" id="8_3ymww"]
 [ext_resource type="Theme" uid="uid://0vaxrsxbc4nw" path="res://assets/scenes/ButtonNF_Clickable2.tres" id="9_2a23h"]
 [ext_resource type="Theme" uid="uid://bs1imbtgf7dr4" path="res://assets/scenes/Button_Clickable.tres" id="9_sym4l"]
+[ext_resource type="Theme" uid="uid://2suvuoa0ann7" path="res://assets/scenes/Button_Disabled.tres" id="10_dhvku"]
 [ext_resource type="Script" path="res://assets/scenes/MasterVolume.gd" id="11_e6ba1"]
 [ext_resource type="StyleBox" uid="uid://dcuqsqcektumy" path="res://assets/uiux/main_menu/volumeSlider.res" id="11_sycm3"]
 [ext_resource type="AudioStream" uid="uid://b7uw13gw7eym7" path="res://assets/uiux/main_menu/SFX_ButtonHover.mp3" id="12_evs6x"]
@@ -204,6 +205,46 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-72, -396), Vector2(-72, -54)]
+}
+
+[sub_resource type="Animation" id="Animation_oov0p"]
+resource_name = "Anim_Notif_Dismiss"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NotifLocus/DismissNotifButton:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NotifLocus/Notif_UnlockedTheme:self_modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NotifLocus/Notif_UnlockedTheme:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_kslew"]
@@ -1001,46 +1042,6 @@ tracks/24/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_oov0p"]
-resource_name = "Anim_Notif_Dismiss"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("NotifLocus/DismissNotifButton:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("NotifLocus/Notif_UnlockedTheme:self_modulate")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("NotifLocus/Notif_UnlockedTheme:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hplv1"]
 _data = {
 "Anim_Display_FadeIn": SubResource("Animation_hvadh"),
@@ -1266,6 +1267,7 @@ width = 2.0
 default_color = Color(0, 0, 0, 1)
 
 [node name="NotifLocus" type="VBoxContainer" parent="Stack_0"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 14.4
@@ -1292,6 +1294,7 @@ label_settings = ExtResource("19_ihq36")
 horizontal_alignment = 1
 
 [node name="DismissNotifButton" type="Button" parent="Stack_0/NotifLocus"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("9_2a23h")
@@ -1312,6 +1315,13 @@ grow_vertical = 2
 theme = SubResource("Theme_wr4x0")
 theme_override_constants/separation = 160
 alignment = 1
+
+[node name="DisabledPlayButton" type="Button" parent="Stack_0/MainMenuButtons"]
+visible = false
+layout_mode = 2
+theme = ExtResource("10_dhvku")
+text = "Play"
+flat = true
 
 [node name="PlayButton" type="Button" parent="Stack_0/MainMenuButtons"]
 layout_mode = 2

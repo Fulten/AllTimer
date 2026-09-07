@@ -1128,6 +1128,7 @@ script = ExtResource("2_fcx7b")
 metadata/_edit_horizontal_guides_ = [-136.0]
 
 [node name="StackAnimator" type="AnimationPlayer" parent="."]
+reset_on_save = false
 root_node = NodePath("../Stack_0")
 libraries = {
 "": SubResource("AnimationLibrary_hplv1")
@@ -1287,6 +1288,7 @@ label_settings = ExtResource("19_ihq36")
 horizontal_alignment = 1
 
 [node name="Notif_UnlockedTheme" type="Label" parent="Stack_0/NotifLocus"]
+visible = false
 layout_mode = 2
 text = "You've unlocked a new quiz theme!
 Find it in the display menu or the multiplayer lobby"
@@ -1502,9 +1504,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -308.5
-offset_top = -163.0
+offset_top = -672.0
 offset_right = 309.5
-offset_bottom = 37.0
+offset_bottom = -472.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Display"
@@ -1524,9 +1526,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -320.0
-offset_top = 29.0
+offset_top = 628.0
 offset_right = 320.0
-offset_bottom = 373.006
+offset_bottom = 972.006
 grow_horizontal = 2
 grow_vertical = 2
 

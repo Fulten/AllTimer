@@ -204,7 +204,6 @@ func _input(event):
 func _profileRequired_warning(visible: bool):
 	$Stack_0/NotifLocus.visible = visible
 	$Stack_0/NotifLocus/Notif_ProfileRequired.visible = visible
-	$Stack_0/NotifLocus/DismissNotifButton.visible = visible
 	
 
 #region Button UX

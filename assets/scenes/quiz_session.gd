@@ -1165,7 +1165,6 @@ func _on_a_1_button_up():
 		_player_guess(1, button_value)
 		pass
 	else: #send guess to server
-		$ControlSwapper0.play("QuizStandby")
 		_player_guess.rpc_id(1, multiplayer.get_unique_id(), button_value)
 		pass
 	pass
@@ -1428,3 +1427,7 @@ func _on_resolutions_list_item_selected(index: int) -> void:
 	DisplayServer.window_set_size(resolution_options[index])
 #endregion
 
+
+func _on_control_swapper_0_animation_finished(anim_name):
+	if "QuizIntro" == anim_name:
+		$ControlSwapper0.play("QuizPrompting")

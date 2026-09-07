@@ -201,6 +201,12 @@ func _input(event):
 	pass
 
 
+func _profileRequired_warning(visible: bool):
+	$Stack_0/NotifLocus.visible = visible
+	$Stack_0/NotifLocus/Notif_ProfileRequired.visible = visible
+	$Stack_0/NotifLocus/DismissNotifButton.visible = visible
+	
+
 #region Button UX
 func _on_play_button_focus_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
@@ -211,6 +217,8 @@ func _on_play_button_button_down():
 func _on_play_button_button_up():
 	if UserProfiles.profiles.size() > 0:
 		get_tree().change_scene_to_file("res://assets/scenes/loading_screen.tscn")
+	else:
+		_profileRequired_warning(true)
 
 
 func _on_options_button_focus_entered():
@@ -326,6 +334,7 @@ func _on_save_button_button_up():
 		UserProfiles._save_new_profile(new_profile)
 		_refresh_profiles_dropdown()
 		_update_current_profile_label()
+		_profileRequired_warning(false)
 		get_node("Options_Profile/ProfileCreator").hide()
 		$Options_Profile/ProfileCreator/ProfileNamer/ProfileEntryField.text = ""
 		flag_profiles_menu_sub = false

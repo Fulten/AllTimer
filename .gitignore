@@ -5,3 +5,5 @@
 export.cfg
 export_presets.cfg
 assets/scenes/*.tmp
+*.exe
+*.7z

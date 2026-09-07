@@ -580,6 +580,8 @@ func _player_guess(playerId, guess):
 					#delay so _hide_prequiz_rules has time to play its animation
 					get_tree().create_timer(4.2).timeout.connect(_prequestion_delay_phase)
 					pass
+				else:
+					$ControlSwapper0.play("QuizStandby")
 			return
 		if !ui_countdown_timer.is_stopped():
 			if !GameState._player_has_guessed(playerId):
@@ -1146,10 +1148,6 @@ func _debug_advance_to_next_question():
 	_next_question()
 	pass
 
-
-
-
-
 #endregion
 
 #region buttons for inputing question answers via ui
@@ -1167,6 +1165,7 @@ func _on_a_1_button_up():
 		_player_guess(1, button_value)
 		pass
 	else: #send guess to server
+		$ControlSwapper0.play("QuizStandby")
 		_player_guess.rpc_id(1, multiplayer.get_unique_id(), button_value)
 		pass
 	pass

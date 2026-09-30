@@ -452,7 +452,7 @@ theme = ExtResource("2_jy5fm")
 text = ">Dangit!<"
 flat = true
 
-[connection signal="text_changed" from="LobbyOrganizer/Columns/NetworkingColumn/IPField" to="." method="_on_text_edit_text_changed"]
+[connection signal="text_changed" from="LobbyOrganizer/Columns/NetworkingColumn/IPField" to="." method="_on_ip_field_text_changed"]
 [connection signal="button_down" from="LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/HostButton" to="." method="_on_host_button_button_down"]
 [connection signal="button_up" from="LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/HostButton" to="." method="_on_host_button_button_up"]
 [connection signal="focus_entered" from="LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/HostButton" to="." method="_on_host_button_focus_entered"]

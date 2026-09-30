@@ -1,68 +1,146 @@
 extends Control
 
-var load_multiplayer_lobby_scene = true
-
+#region Variables
 var quiz_session_scene = preload("res://assets/scenes/quiz_session.tscn")
-var multiplayer_lobby_scene = preload("res://assets/scenes/multiplayer_lobby.tscn")
+var mp_lobby_scene = preload("res://assets/scenes/multiplayer_lobby.tscn")
 
 var quiz_session_instance
-var multiplayer_lobby_instance
+var mp_lobby_instance
+var mp_lobby_root
 
-var multiplayer_lobby_script
+enum MP_STATE {
+	LOBBY = 0,
+	STARTGAME = 1,
+	INGAME = 2,
+	STOPGAME = 3
+}
 
-var master_chances_data = []
-var master_question_data = []
-var chances_set = {}
+var load_multiplayer_lobby_scene = true
+
+var GAME_STATE = MP_STATE.LOBBY
 
 var players_loaded = 0
-var launch_quiz = false
 
-const PORT: int = 12345 # port to use
-const MAX_CONNECTIONS: int = 3
-var IP_ADDRESS = "127.0.0.1" # use local host
+const MAX_CONNECTIONS: int = 3 # allow at most 3 other players to connect to server
+const PORT: int = 12345
+var IP_ADDRESS = "127.0.0.1" # default to local host
 
 var peer
 
 @onready var progress_bar = $progress_bar
+#endregion
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	
-	# connect multiplayer callback functions
+	_connect_multiplayer_callback_functions()
+	GameState.PlayerCount = 1;
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	if load_multiplayer_lobby_scene && !GameState.GameStarted:
+		_initilize_mp_lobby_instance()
+		_connect_mp_lobby_signals()
+		load_multiplayer_lobby_scene = false
+
+#region Multiplayer Callback functions
+func _connect_multiplayer_callback_functions():
 	multiplayer.peer_connected.connect(_mp_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_mp_on_peer_disconnected)
 	multiplayer.connected_to_server.connect(_mp_on_connected_ok)
 	multiplayer.connection_failed.connect(_mp_on_connected_fail)
 	multiplayer.server_disconnected.connect(_mp_on_server_disconnected)
-	GameState.PlayerCount = 1;
-	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	if load_multiplayer_lobby_scene && !GameState.GameStarted:
-		multiplayer_lobby_instance = multiplayer_lobby_scene.instantiate()
-		get_tree().root.add_child(multiplayer_lobby_instance)
-		multiplayer_lobby_script = multiplayer_lobby_instance.get_node("/root/MultiplayerLobby")
+func _mp_on_peer_connected(id: int):
+	if !GameState.GameStarted:
+		_register_player.rpc_id(id, UserProfiles.profiles[UserProfiles._get_selected_profile_key()])
+		print("peer %s to %s" % [id, multiplayer.get_unique_id()])
+	elif multiplayer.is_server():
+		_kick_peer.rpc_id(id, "Connection Refused, quiz in progress")
+		
+func _mp_on_peer_disconnected(id: int):
+	GameState.players.erase(id)
+	GameState.PlayerCount -= 1
+	mp_lobby_root._update_connected_players()
+	
+	if GameState.GameStarted:
+		quiz_session_instance._player_dropped()
+		
+	print("Info: player %s disconneted" % id)
+	
+# player has connected to server
+func _mp_on_connected_ok():
+	var playerData = GameState.Player.new()
+	playerData.initilize(UserProfiles.profiles[UserProfiles._get_selected_profile_key()], multiplayer.get_unique_id())
+	GameState.players[multiplayer.get_unique_id()] = playerData
+	mp_lobby_instance._connected_to_server()
 
-		multiplayer_lobby_script.multiplayer_host.connect(_mp_host_server)
-		multiplayer_lobby_script.multiplayer_connect.connect(_mp_join)
-		multiplayer_lobby_script.launch_quiz.connect(_launch_quiz)
-		multiplayer_lobby_script.multiplayer_disconnect.connect(_mp_disconnect)
+# player has failed to connect to server
+func _mp_on_connected_fail():
+	multiplayer.multiplayer_peer = null
+	mp_lobby_instance._connection_reset("Failed To Connect")
+	
+# player has been disconnected from server
+func _mp_on_server_disconnected():
+	multiplayer.multiplayer_peer = null
+	GameState.players.clear()
+	mp_lobby_instance._connection_reset("Disconnected From Server")
+#endregion
 
-		load_multiplayer_lobby_scene = false
-	pass
-	if launch_quiz:
-		load_quiz.rpc()
-		launch_quiz = false
-	pass
+#region Multiplayer RPC functions
+@rpc("any_peer", "reliable")
+func _register_player(playerProfile):
+	# if the game is already in progress deny new connections
 
-func _set_ip(ip_address):
-	IP_ADDRESS = ip_address
-	pass
+	var playerData = GameState.Player.new()
+	var newPlayerId = multiplayer.get_remote_sender_id()
+	playerData.initilize(playerProfile, newPlayerId)
+	
+	GameState.players[newPlayerId] = playerData
+	
+	GameState.PlayerCount += 1
+	mp_lobby_root._refresh_connected_players_list()
+	print("Info: player %s connected" % playerData.uuid)
 
-# host player has created a multiplayer lobby
-func _mp_host_server(ip_address):
+@rpc("authority", "call_local", "reliable")
+func load_quiz():
+	_local_update_selected_scene()
+	quiz_session_instance = quiz_session_scene.instantiate()
+	quiz_session_instance.end_of_quiz.connect(_end_of_quiz_handler)
+	quiz_session_instance.exit_quiz.connect(_exit_quiz_handler)
+	get_tree().root.add_child(quiz_session_instance)
+
+@rpc("authority", "reliable")
+func _kick_peer(reason):
+	multiplayer.multiplayer_peer = null
+	GameState.players.clear()
+	mp_lobby_instance._connection_reset(reason)
+
+# called by the server to start the quiz
+@rpc("authority", "call_local", "reliable")
+func _launch_quiz():
+	if multiplayer.has_multiplayer_peer() && multiplayer.is_server():
+		GAME_STATE = MP_STATE.STARTGAME
+		print("Info: server is launching quiz")
+
+
+#endregion
+
+#region Multiplayer lobby functions
+func _initilize_mp_lobby_instance():
+	mp_lobby_instance = mp_lobby_scene.instantiate()
+	get_tree().root.add_child(mp_lobby_instance)
+	mp_lobby_root = mp_lobby_instance.get_node("/root/MultiplayerLobby")
+
+func _connect_mp_lobby_signals():
+	mp_lobby_root.sig_mp_host.connect(_mp_lobby_host_server)
+	mp_lobby_root.sig_mp_connect.connect(_mp_lobby_join)
+	mp_lobby_root.sig_mp_disconnect.connect(_mp_lobby_disconnect)
+	mp_lobby_root.sig_mp_kick_peer.connect(_mp_lobby_kick_peer)
+	mp_lobby_root.sig_mp_launch.connect(_mp_lobby_launch_quiz)
+	mp_lobby_root.sig_mp_exit.connect(_mp_lobby_exit)
+
+func _mp_lobby_host_server(ip_address):
 	_set_ip(ip_address)
 	peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(PORT, MAX_CONNECTIONS)
@@ -74,124 +152,57 @@ func _mp_host_server(ip_address):
 	playerData.initilize(UserProfiles.profiles[UserProfiles._get_selected_profile_key()], 1)
 	GameState.players[1] = playerData
 	
-	multiplayer_lobby_script._update_connected_players()
+	mp_lobby_instance._refresh_connected_players_list()
 	print("Hosting server on IP: %s, PORT: %d" % [IP_ADDRESS, PORT])
-	pass
-	
-func _mp_disconnect():
-	if multiplayer.has_multiplayer_peer():
-		print("Peer id %s, disconnecting" % multiplayer.get_unique_id())
-		multiplayer.multiplayer_peer = null
-		pass
-	GameState.players.clear()
-	GameState.PlayerCount = 1
-	pass	
 
-func _mp_join(ip_address):
+func _mp_lobby_join(ip_address):
 	_set_ip(ip_address)
 	peer = ENetMultiplayerPeer.new()
 	peer.create_client(IP_ADDRESS, PORT)
 	multiplayer.multiplayer_peer = peer
-	pass
 
-func _mp_on_peer_connected(id: int):
-	if !GameState.GameStarted:
-		_register_player.rpc_id(id, UserProfiles.profiles[UserProfiles._get_selected_profile_key()])
-		print("peer %s to %s" % [id, multiplayer.get_unique_id()])
-		pass
-	elif multiplayer.is_server():
-		_kick_peer.rpc_id(id, "Connection Refused, quiz in progress")
-		pass
-	
-@rpc("any_peer", "reliable")
-func _register_player(playerProfile):
-	# if the game is already in progress deny connection
-
-	var playerData = GameState.Player.new()
-	var newPlayerId = multiplayer.get_remote_sender_id()
-	playerData.initilize(playerProfile, newPlayerId)
-	
-	GameState.players[newPlayerId] = playerData
-	
-	GameState.PlayerCount += 1
-	multiplayer_lobby_script._update_connected_players()
-	print("player %s connected" % playerData.uuid)
-	pass
-
-func _mp_on_peer_disconnected(id: int):
-	GameState.players.erase(id)
-	GameState.PlayerCount -= 1
-	multiplayer_lobby_script._update_connected_players()
-	
-	if GameState.GameStarted:
-		quiz_session_instance._player_dropped()
-		pass
-		
-	print("player %s disconneted" % id)
-	pass
-
-# player has connected to server
-func _mp_on_connected_ok():
-	var playerData = GameState.Player.new()
-	playerData.initilize(UserProfiles.profiles[UserProfiles._get_selected_profile_key()], multiplayer.get_unique_id())
-	GameState.players[multiplayer.get_unique_id()] = playerData
-	multiplayer_lobby_instance._connected_to_server()
-	pass
-
-# player has failed to connect to server
-func _mp_on_connected_fail():
-	multiplayer.multiplayer_peer = null
-	multiplayer_lobby_instance._connection_reset("connection failed")
-	pass
-
-# player has been disconnected from server
-func _mp_on_server_disconnected():
-	multiplayer.multiplayer_peer = null
+func _mp_lobby_disconnect():
+	if multiplayer.has_multiplayer_peer():
+		print("Peer Id:[%s], disconnecting" % multiplayer.get_unique_id())
+		multiplayer.multiplayer_peer = null
 	GameState.players.clear()
-	multiplayer_lobby_instance._connection_reset("server disconnected")
-	pass
+	GameState.PlayerCount = 1
 
-# called when the multiplayer menu sends it's signal
-@rpc("authority", "call_local", "reliable")
-func _launch_quiz():
-	if multiplayer.has_multiplayer_peer() && multiplayer.is_server():
-		launch_quiz = true
-		print("server is launching quiz")
-	pass
+func _mp_lobby_kick_peer(peer_id: int):
+	if multiplayer.get_peers().has(peer_id) && peer_id != 1: 
+		_kick_peer.rpc_id(peer_id, "Kicked From Lobby.")
+		print("Peer Id:[%s] has been kicked." % peer_id)
+	else:
+		print("!WARN: attempted to kick peer that does not exist Id:[%s]" % peer_id)
 
-# When the server decides to start the game from a UI scene,
-# do Lobby.load_game.rpc(filepath)
-@rpc("authority", "call_local", "reliable")
-func load_quiz():
-	_local_update_selected_scene()
-	quiz_session_instance = quiz_session_scene.instantiate()
-	quiz_session_instance.end_of_quiz.connect(_end_of_quiz_handler)
-	quiz_session_instance.exit_quiz.connect(_exit_quiz_handler)
-	get_tree().root.add_child(quiz_session_instance)
-	pass
+func _mp_lobby_launch_quiz():
+	if multiplayer.is_server():
+		_launch_quiz.rpc()
+	else:
+		print("!WARN!: recived launch quiz signal from non host!")
 
-@rpc("authority", "reliable")
-func _kick_peer(reason):
-	multiplayer.multiplayer_peer = null
-	GameState.players.clear()
-	multiplayer_lobby_instance._connection_reset(reason)
-	pass
+func _mp_lobby_exit():
+	_quit_to_main_menu()
+
+#endregion
+
+
+func _set_ip(ip_address):
+	IP_ADDRESS = ip_address
 
 func _end_of_quiz_handler():
 	SoundMaster._play_music_track("mp_lobby")
 	if multiplayer.is_server():
-		multiplayer_lobby_instance._enable_launch_button()
-		pass
-	pass
+		mp_lobby_instance._enable_launch_button()
 	
 func _exit_quiz_handler():
 	multiplayer.multiplayer_peer = null
-	multiplayer_lobby_instance._reset_menu()
-	pass
+	mp_lobby_instance._reset_lobby()
 
-func _exit_quiz():
+func _quit_to_main_menu():
+	#TODO: send a disconnet packet to all connected peers
+	mp_lobby_instance.queue_free()
 	get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
-	pass
 
 func _local_update_selected_scene():
 	#load chalkboard scene by default in the case of bad input
@@ -203,4 +214,4 @@ func _local_update_selected_scene():
 		selectedtheme = "res://assets/scenes/fatalSurprise.tscn"
 	
 	quiz_session_scene = load(selectedtheme)
-	pass
+

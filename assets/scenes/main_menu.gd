@@ -614,7 +614,7 @@ func sync_ui_tag_order() -> void:
 		var target_tag_text = filter_tag_selectors[i].text
 		# find the child tagged with this entry
 		for child in ui_filter_container.get_children():
-			if child.get_meta("tag_ref") == target_tag_text:
+			if child.has_meta("tag_ref") && child.get_meta("tag_ref") == target_tag_text:
 				ui_filter_container.move_child(child, i)
 				break
 

@@ -141,7 +141,6 @@ func apply_game_settings(timer: int):
 	return
 #endregion
 
-
 func update_game_state(timer: int):
 	GameState.quizOptions.timer = timer
 
@@ -189,7 +188,6 @@ func _update_current_profile_label():
 	# if there are no profiles, user placeholder Guest
 	currentProfileLable.text = "Guest"
 	pass
-	
 
 func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
@@ -199,7 +197,6 @@ func _input(event):
 	if show_award_hover and event is InputEventMouse:
 		node_hover_text.set_position(get_viewport().get_mouse_position() + Vector2(20.0,0.0))
 	pass
-
 
 func _profileRequired_warning(visible: bool):
 	$Stack_0/NotifLocus.visible = visible
@@ -302,7 +299,6 @@ func _on_profile_creator_button_button_up():
 	get_node("Options_Profile/ProfileCreator").show()
 	flag_profiles_menu_sub = true
 
-
 func _on_profiles_list_item_selected(index):
 	for key in UserProfiles.profiles.keys():
 		UserProfiles.profiles[key]["selected"] = false
@@ -313,8 +309,6 @@ func _on_profiles_list_item_selected(index):
 	_update_profile_statistics()
 	UserProfiles._IO_write_profiles()
 	pass 
-
-
 
 func _on_save_button_mouse_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()

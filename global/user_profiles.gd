@@ -4,7 +4,6 @@ var FILE_PATH_USER_PROFILES = "user://user_profiles.json"
 var FILE_PATH_THEME_UNLOCKS = "user://theme_unlocks.json"
 
 #logic for selecting which theme to load is in Master_scene.gd
-#
 var THEME_NAMES = [
 	"Chalkboard",
 	"Patriotic Cipher",
@@ -33,7 +32,7 @@ var THEME_UNLOCK_REQUIRMENT = {
 		}
 }
 
-# table will contain uid for chances, which corrispod to a given theme
+# table will contain uid for chances, which corrispond to a given theme
 var THEME_UNOCKED_BY_CHANCE = {
 	
 }
@@ -46,6 +45,7 @@ func _ready():
 	_load_chance_data()
 	_IO_read_themes_unlocks()
 
+#region profile operations
 func _new_profile(profileName):
 	var newID = 0
 	if profiles != null:
@@ -109,6 +109,59 @@ func _delete_profile(profileName):
 	profiles.erase(profileName)
 	_IO_write_profiles()
 	pass
+
+func _get_selected_profile_key():
+	if profiles.size() < 1:
+		print("!WARNING: no user profile avalible")
+		return "Guest"
+	
+	for key in profiles.keys():
+		if profiles[key]["selected"]:
+			return key
+	
+	print("!!ERROR: it shouldn't be possible there to be no selected profile")
+	return "Profile not found"
+#endregion
+
+func _check_theme_unlock(award_hash):
+	# see if the award is associated with a specific theme first
+	if award_hash in THEME_UNOCKED_BY_CHANCE:
+		var index = THEME_UNOCKED_BY_CHANCE[award_hash]
+		if "count" in unlocked_themes[index]:
+			unlocked_themes[index]["count"] += 1
+		else:
+			unlocked_themes[index]["count"] = 1
+	
+	for theme in THEME_NAMES:
+		if !THEME_UNLOCK_REQUIRMENT[theme]["Specific_Award"]:
+			if "count" in unlocked_themes[theme]:
+				unlocked_themes[theme]["count"] += 1
+			else:
+				unlocked_themes[theme]["count"] = 1
+
+## check if the chance uuid passed is valid
+func _has_chance_hash(chance_uuid: String):
+	if chance_uuid in chance_descriptors:
+		return true
+	return false
+
+#region File Operations
+## load name, description, and type into a refrence dictionary
+func _load_chance_data():
+	var file = FileAccess.open("res://data/chance_data.json", FileAccess.READ)
+	var raw_chance_data
+	if file:
+		raw_chance_data = JSON.parse_string(file.get_as_text())
+		file.close()
+		
+		for entry in raw_chance_data:
+			var chance = {
+				"name": entry["name"],
+				"description": entry["description"],
+				"type": entry["type"],
+				"icon": entry["icon"],
+			}
+			chance_descriptors[entry["uuid"]] = chance
 
 func _IO_read_profiles():
 	var file = FileAccess.open(FILE_PATH_USER_PROFILES, FileAccess.READ)
@@ -204,58 +257,6 @@ func _IO_write_themes_unlocks():
 	else:
 		print("!!ERROR: Failed to save theme unlocks.")
 	pass
+#endregion
 
-func _check_theme_unlock(award_hash):
-	# see if the award is associated with a specific theme first
-	if award_hash in THEME_UNOCKED_BY_CHANCE:
-		var index = THEME_UNOCKED_BY_CHANCE[award_hash]
-		if "count" in unlocked_themes[index]:
-			unlocked_themes[index]["count"] += 1
-		else:
-			unlocked_themes[index]["count"] = 1
-	
-	for theme in THEME_NAMES:
-		if !THEME_UNLOCK_REQUIRMENT[theme]["Specific_Award"]:
-			if "count" in unlocked_themes[theme]:
-				unlocked_themes[theme]["count"] += 1
-			else:
-				unlocked_themes[theme]["count"] = 1
-	
 
-func _get_selected_profile_key():
-	if profiles.size() < 1:
-		print("!WARNING: no user profile avalible")
-		return "Guest"
-	
-	for key in profiles.keys():
-		if profiles[key]["selected"]:
-			return key
-		pass
-	
-	print("!!ERROR: it shouldn't be possible there to be no selected profile")
-	return "Profile not found"
-
-## load name, description, and type into a refrence dictionary
-func _load_chance_data():
-	var file = FileAccess.open("res://data/chance_data.json", FileAccess.READ)
-	var raw_chance_data
-	if file:
-		raw_chance_data = JSON.parse_string(file.get_as_text())
-		file.close()
-		
-		for entry in raw_chance_data:
-			var chance = {
-				"name": entry["name"],
-				"description": entry["description"],
-				"type": entry["type"],
-				"icon": entry["icon"],
-			}
-			chance_descriptors[entry["uuid"]] = chance
-		
-	pass
-
-## check if the chance uuid passed is valid
-func _has_chance_hash(chance_uuid: String):
-	if chance_uuid in chance_descriptors:
-		return true
-	return false

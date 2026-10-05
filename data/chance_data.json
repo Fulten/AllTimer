@@ -21,7 +21,7 @@
 		"bonus": 600,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Pop Culture correctly",
-		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
+		"icon": "res://assets/uiux/main_menu/Awards/T_PopCultureWiz_D.tga\n",
 		"name": "Pop Culture Wiz",
 		"type": "QUESTION",
 		"uuid": "45500936-fc97-4174-832f-c250cdf4e49b"
@@ -156,7 +156,7 @@
 		"bonus": 750,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Children's Games correctly",
-		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
+		"icon": "res://assets/uiux/main_menu/Awards/T_ChildAtHeart_D.tga",
 		"name": "Child at Heart",
 		"type": "QUESTION",
 		"uuid": "367e7143-8aa3-41ab-ae7c-6602e1d6c2a9"

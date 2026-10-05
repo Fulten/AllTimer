@@ -32,9 +32,7 @@ func _ready():
 	#get_tree().create_timer(0.025).timeout.connect(_init_filter_ui)
 	_init_filter_ui()
 	
-	_refresh_profiles_dropdown()
-	_update_current_profile_label()
-	_update_profile_statistics()
+	handle_profile_refresh()
 	SoundMaster._play_music_track("main_menu")
 	_create_hover_text_node()
 
@@ -148,7 +146,17 @@ func update_game_state(timer: int):
 @warning_ignore("shadowed_variable_base_class")
 func update_game_state_theme(theme: String):
 	GameState.CurrentTheme = theme
-	
+
+
+func handle_profile_refresh():
+	_refresh_profiles_dropdown()
+	_update_current_profile_label()
+	_update_profile_statistics()
+	if UserProfiles.profiles.size() > 0:
+		_profileRequired_warning(false)
+	else:
+		_profileRequired_warning(true)
+
 func _refresh_profiles_dropdown():
 	var profile_list = $Options_Profile/ProfileSettingsCase/DimensionFrame/CurrentProfileCase/ProfilesList
 	var id = 0
@@ -202,6 +210,8 @@ func _input(event):
 
 
 func _profileRequired_warning(visible: bool):
+	$Stack_0/MainMenuButtons/PlayButton.visible = !visible
+	$Stack_0/MainMenuButtons/DisabledPlayButton.visible = visible
 	$Stack_0/NotifLocus.visible = visible
 	$Stack_0/NotifLocus/Notif_ProfileRequired.visible = visible
 	
@@ -331,9 +341,7 @@ func _on_save_button_button_up():
 		var new_profile = UserProfiles._new_profile(new_profile_name)
 		
 		UserProfiles._save_new_profile(new_profile)
-		_refresh_profiles_dropdown()
-		_update_current_profile_label()
-		_profileRequired_warning(false)
+		handle_profile_refresh()
 		get_node("Options_Profile/ProfileCreator").hide()
 		$Options_Profile/ProfileCreator/ProfileNamer/ProfileEntryField.text = ""
 		flag_profiles_menu_sub = false
@@ -374,9 +382,7 @@ func _on_delete_button_button_up():
 		return
 		
 	UserProfiles._delete_profile(profiles_list_id_to_name[profile_list.get_selected_id()])
-	_refresh_profiles_dropdown()
-	_update_current_profile_label()
-	_update_profile_statistics()
+	handle_profile_refresh()
 	get_node("Options_Profile/ProfileDestroyer").hide()
 	flag_profiles_menu_sub = false
 	pass

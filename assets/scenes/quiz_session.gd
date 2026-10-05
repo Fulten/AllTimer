@@ -805,7 +805,7 @@ func _prequiz_rules_phase():
 ## starts the pre_question timer, and halts accepting answer input from players
 ## variable delay to give players time to read the question before allowing them to answer
 func _prequestion_delay_phase():
-	SoundMaster._play_music_track("reading", true, false, 0.0)
+	SoundMaster._dynamic_next_track("reading")
 	# add aditional delay depending on how long the question is to read,
 	# currently one extra second per 40 characters ( * 1/40 = 0.025)
 	var current_question = GameState.CurrentQuizQuestions[current_index]
@@ -827,7 +827,7 @@ func _prequestion_delay_phase():
 ## shows the players the possible question answers
 func _answer_question_phase():
 	ui_prequestion_timer.stop()
-	SoundMaster._play_music_track("appear", true, false, 0.0)
+	SoundMaster._dynamic_next_track("appear")
 	
 	flag_accept_input = true
 	flag_pre_question_time = false
@@ -1006,9 +1006,9 @@ func post_question_clock():
 
 func dynamic_music_answers(percentage: float):
 	if SoundMaster.next_track == "appear" and percentage <= .5:
-		SoundMaster._play_music_track("midway", true, false, 0.0)
+		SoundMaster._dynamic_next_track("midway")
 	elif SoundMaster.next_track == "midway" and percentage <=.25:
-		SoundMaster._play_music_track("outta_time", true, false, 0.0)
+		SoundMaster._dynamic_next_track("outta_time")
 
 func countdown_clock():
 	var time_left = ui_countdown_timer.get_time_left()

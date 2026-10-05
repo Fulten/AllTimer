@@ -92,6 +92,16 @@ func _private_next_track():
 	audioStreamPlayerMusic.volume_db = 0.0
 	audioStreamPlayerMusic.play()
 
+# this requires both tracks to be the same length and looping
+func _dynamic_next_track(song_name: String):
+	var current_pos = audioStreamPlayerMusic.get_playback_position()
+	next_track = song_name
+	next_track_loop = true
+	audioStreamPlayerMusic.set_stream(songs[next_track])
+	audioStreamPlayerMusic.stream.loop = next_track_loop
+	audioStreamPlayerMusic.volume_db = 0.0
+	audioStreamPlayerMusic.play(current_pos)
+
 func _stop_music_track():
 	if audioStreamPlayerMusic.playing:
 		var songDelayTween = create_tween()

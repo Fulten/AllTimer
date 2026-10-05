@@ -410,7 +410,8 @@ func _save_chance(chance_uuid):
 		
 	chances[chance_uuid].name = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxName/Text.text
 	chances[chance_uuid].type = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxType/Text.text
-	chances[chance_uuid].icon = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Text.text
+	$HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Text.text = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Text.text.strip_edges()
+	chances[chance_uuid].icon = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxIcon/Text.text.strip_edges()
 	chances[chance_uuid].description = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/Text.text
 	chances[chance_uuid].correct = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxDescription/VBoxContainer/HBoxCorrect/CheckButton.button_pressed
 	chances[chance_uuid].bonus = $HBoxParent/HBoxChances/VBoxQuestionEditor/ChanceData/HBoxBonusValue/Text.text.to_int()

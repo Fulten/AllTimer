@@ -39,12 +39,17 @@ func _ready():
 # loads music tracks to be played
 func _private_music_to_load():
 	# main menu music
-	_load_music_track("res://assets/uiux/main_menu/bgm_main.mp3", "main_menu")
+	_load_music_track("res://assets/music/Reading.ogg", "main_menu")
 	_load_music_track("res://assets/uiux/main_menu/bgm_lobby.mp3", "mp_lobby")
 	_load_music_track("res://assets/uiux/main_menu/bgm_quiz.mp3", "default_theme")
 	_load_music_track("res://assets/uiux/session_themes/Patriotic Cipher/MGS3 OST - Battle in the Base.mp3", "msg_theme")
 	_load_music_track("res://assets/uiux/session_themes/Fatal Surprise/bgm_quiz_FatalSurprise.mp3", "fatal_theme")
 	# quiz session music
+	_load_music_track("res://assets/music/Reading.ogg", "reading")
+	_load_music_track("res://assets/music/Midway_Thru.ogg", "midway")
+	_load_music_track("res://assets/music/Between_Questions.ogg", "between")
+	_load_music_track("res://assets/music/Answers_Appear.ogg", "appear")
+	_load_music_track("res://assets/music/Runnin_out_of_time.ogg", "outta_time")
 
 # loads sound effects to be played
 func _private_effects_to_load():
@@ -52,6 +57,7 @@ func _private_effects_to_load():
 	_load_sound_effect("res://assets/uiux/main_menu/SFX_ButtonPress.mp3","btn_press")
 	_load_sound_effect("res://assets/uiux/main_menu/sfx_click.mp3","sfx_click")
 	_load_sound_effect("res://assets/uiux/main_menu/sfx_hover.mp3","sfx_hover")
+	_load_sound_effect("res://assets/music/Answers_Locked.ogg", "locked")
 	pass
 	
 func _load_music_track(file_path: String, song_name: String):
@@ -67,15 +73,16 @@ func _load_sound_effect(file_path: String, effect_name: String):
 		print("!!Error: file under path:[%s] was not found." % file_path)
 	pass
 	
-func _play_music_track(song_name: String, looping: bool = true):
+func _play_music_track(song_name: String, looping: bool = true, tween: bool = true, songDelay: float = 1.0):
 	if songs.has(song_name):
 		next_track = song_name
 		next_track_loop = looping
-		# use a tween to fade out the volume before the next track plays
-		var songDelayTween = create_tween()
-		songDelayTween.tween_property(audioStreamPlayerMusic, "volume_db", -60.0, 0.9)
+		if tween:
+			# use a tween to fade out the volume before the next track plays
+			var songDelayTween = create_tween()
+			songDelayTween.tween_property(audioStreamPlayerMusic, "volume_db", -60.0, 0.9)
 		
-		songDelayTimer.start(1.0)
+		songDelayTimer.start(songDelay)
 	else:
 		print("!!Error: song by name:[%s] was not found in songs map" % song_name)
 

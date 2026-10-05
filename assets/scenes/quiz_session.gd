@@ -165,6 +165,7 @@ func _process(_delta):
 				local_clock_reading = post_question_clock()
 			else:
 				local_clock_reading = countdown_clock()
+				
 			_sync_server_client_clock_reading.rpc(local_clock_reading)
 			_load_question_refresh_scores()
 			ui_countdown_text.text = "%02d:%02d" % local_clock_reading
@@ -637,7 +638,7 @@ func _select_music_track():
 	elif GameState.CurrentTheme == "Fatal Surprise":
 		SoundMaster._play_music_track("fatal_theme")
 	else:
-		SoundMaster._play_music_track("default_theme")
+		SoundMaster._play_music_track("between")
 
 func _set_theme_specific_graphics():
 	if GameState.CurrentTheme == "Patriotic Cipher":
@@ -804,6 +805,7 @@ func _prequiz_rules_phase():
 ## starts the pre_question timer, and halts accepting answer input from players
 ## variable delay to give players time to read the question before allowing them to answer
 func _prequestion_delay_phase():
+	SoundMaster._play_music_track("reading", true, false, 0.0)
 	# add aditional delay depending on how long the question is to read,
 	# currently one extra second per 40 characters ( * 1/40 = 0.025)
 	var current_question = GameState.CurrentQuizQuestions[current_index]
@@ -825,6 +827,7 @@ func _prequestion_delay_phase():
 ## shows the players the possible question answers
 func _answer_question_phase():
 	ui_prequestion_timer.stop()
+	SoundMaster._play_music_track("appear", true, false, 0.0)
 	
 	flag_accept_input = true
 	flag_pre_question_time = false
@@ -840,6 +843,9 @@ func _answer_question_phase():
 ## shows answer explainer
 func _postquestion_delay_phase():
 	ui_countdown_timer.stop()
+	SoundMaster._stop_music_track()
+	SoundMaster._play_sound_effect("locked")
+	SoundMaster._play_music_track("between", true, true, 1.5)
 	flag_accept_input = false
 	flag_post_question_time = true
 	
@@ -998,8 +1004,15 @@ func post_question_clock():
 	var second = int(time_left) % 60
 	return [minute, second]
 
+func dynamic_music_answers(percentage: float):
+	if SoundMaster.next_track == "appear" and percentage <= .5:
+		SoundMaster._play_music_track("midway", true, false, 0.0)
+	elif SoundMaster.next_track == "midway" and percentage <=.25:
+		SoundMaster._play_music_track("outta_time", true, false, 0.0)
+
 func countdown_clock():
 	var time_left = ui_countdown_timer.get_time_left()
+	dynamic_music_answers(time_left / GameState.quizOptions.timer)
 	var minute = floor(time_left / 60)
 	var second = int(time_left) % 60
 	return [minute, second]

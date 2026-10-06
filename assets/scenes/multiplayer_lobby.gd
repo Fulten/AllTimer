@@ -1,7 +1,14 @@
 extends Control
 
+@onready var ui_mp_peer_display = [
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/Peer0,
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/Peer1,
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/Peer2,
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/Peer3,
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/Peer4]
 # as multiplayer lobby will be instantiated by the master scene
 # we can use signals to relay actions to the master scene
+signal sig_mp_profile_change
 signal sig_mp_host
 signal sig_mp_connect (ip)
 signal sig_mp_kick_peer (mp_id: int)
@@ -48,6 +55,9 @@ func _enable_launch_button():
 #endregion
 
 #region functions used to communicate with master
+func _profile_changed():
+	sig_mp_profile_change.emit()
+
 func _hosting_server():
 	sig_mp_host.emit(ip_address)
 	
@@ -113,18 +123,18 @@ func _init_filter_preset():
 		whitelist_btn.disabled = true
 
 func _ui_update_connected_players():
-	for n in range(0, 3):
-		var playerLabel = get_node("./LobbyOrganizer/Columns/NetworkingColumn/PeerCase/Peer%d" % n)
-		playerLabel.set("text", "")
-		playerLabel.hide()
-		
-	var n = 0
-	
-	for playerId in GameState.players:
-		var playerLabel = get_node("./LobbyOrganizer/Columns/NetworkingColumn/PeerCase/Peer%d" % n)
-		playerLabel.set("text", GameState.players[playerId].name)
-		playerLabel.show()
-		n += 1
+	for n in range(0, 4):
+		ui_mp_peer_display[n].text = ""
+		ui_mp_peer_display[n].hide()
+	var k = 0
+	for key in GameState.players:
+		if k > 3:
+			print("ERROR: Players array has exceeded size 4")
+			return
+		if GameState.players[key]["active"]:
+			ui_mp_peer_display[k].text = GameState.players[key].name
+			ui_mp_peer_display[k].show()
+			k += 1
 
 func _ui_finished_joining():
 	$LobbyOrganizer/Columns/NetworkingColumn/JoiningLabel.hide()
@@ -284,5 +294,6 @@ func _on_profiles_list_item_selected(index):
 		
 	UserProfiles.profiles[profiles_list_id_to_name[index]]["selected"] = true
 	UserProfiles._IO_write_profiles()
+	_profile_changed()
 #endregion
 

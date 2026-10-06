@@ -5,6 +5,8 @@ extends Node
 class Player:
 	var name: String
 	var uuid: int
+	var active: bool
+	
 	var guess: int
 	var guessTime: int
 	var hasGuessed: bool
@@ -14,18 +16,20 @@ class Player:
 	var profileData
 	var chances
 	
-	func initilize(u_profile, i_uuid) :
+	func initilize(u_profile, i_uuid):
 		name = u_profile["name"]
+		profileData = u_profile
 		uuid = i_uuid
+		active = true
+		
 		guess = -1
 		guessTime = 0
 		hasGuessed = false
 		correct = false
 		score = 0
 		last_score = 0
-		profileData = u_profile
 		chances = {}
-		pass
+		
 	func reset_player():
 		guess = -1
 		guessTime = 0
@@ -34,7 +38,20 @@ class Player:
 		score = 0
 		last_score = 0
 		chances = {}
-		pass
+		
+	func new_from(player_data):
+		name = player_data["name"]
+		profileData = player_data["profileData"]
+		uuid = player_data["uuid"]
+		active = true
+		
+		guess = -1
+		guessTime = 0
+		hasGuessed = false
+		correct = false
+		score = 0
+		last_score = 0
+		chances = {}
 
 class QuizOptions:
 	var timer: int # length of question answer phase timer
@@ -94,14 +111,19 @@ class Question:
 		listIndex = -1
 #endregion
 
+#region variables
 var quizOptions = QuizOptions.new()
 
 var players = {}
-var PlayerCount = 1
-var PlayersLoaded = 0
-# translates player number to multiplayer id
-var playerNumberToIds = [-1, -1, -1, -1]
+var players_loaded = 0
 
+# translates player number to multiplayer id
+var playerCardOrder = [-1, -1, -1, -1]
+
+var activeId = -1
+var GameStarted = false
+
+var CurrentTheme = "Chalkboard" #The current quiz theme
 
 var QuestionDataFile = "res://data/question_data.json"
 var CurrentQuizQuestions = [] #The questions to be used in the current quiz
@@ -115,11 +137,60 @@ var TagsFilters = {}
 
 var CurrentChances = [] #The list of chance stars to track for the game
 
-var CurrentTheme = "Chalkboard" #The current quiz theme
+#endregion
 
-var GameStarted = false
+#region player related functions
+func _new_player(player_profile, mp_id):
+	var playerData = GameState.Player.new()
+	playerData.initilize(player_profile, mp_id)
+	GameState.players[mp_id] = playerData
+	_build_player_number_to_id_table()
 
-#region functions called during the quiz
+func _remove_player(mp_id):
+	players.erase(mp_id)
+	_build_player_number_to_id_table()
+
+func _clear_players():
+	players.clear()
+	playerCardOrder = [-1,-1,-1,-1]
+
+func _has_active_id(temp_id: int):
+	for key in players:
+		if key == temp_id:
+			return true
+
+func _deactivate_player(mp_id):
+	if players.has(mp_id):
+		players[mp_id]["active"] = false
+		_build_player_number_to_id_table()
+	
+func _reactivate_player(mp_id, mp_activeId):
+	for key in players:
+		if key == mp_activeId:
+			var playerData = GameState.Player.new()
+			playerData.new_from(players[key])
+			_remove_player(key)
+			players[mp_id] = playerData
+	
+func _reset_players():
+	for key in players.keys():
+		players[key].reset_player()
+		
+func _player_count() -> int:
+	var i = 0
+	for key in players:
+		if players[key]["active"]:
+			i += 1
+	return i
+
+func _build_player_number_to_id_table():
+	playerCardOrder = [-1,-1,-1,-1]
+	var i = 0
+	for key in players.keys():
+		if players[key]["active"]:
+			playerCardOrder[i] = key
+			i += 1
+
 func _player_has_guessed(player_id):
 	return players[player_id]["guess"] >= 0
 
@@ -128,33 +199,37 @@ func _player_guess(player_id,guess,current_time):
 	players[player_id]["guessTime"] = current_time
 	players[player_id]["hasGuessed"] = true
 	
-func _reset_guesses():
-	for i in range(PlayerCount):
-		players[playerNumberToIds[i]]["guess"] = -1
-		players[playerNumberToIds[i]]["guessTime"] = 0
-		players[playerNumberToIds[i]]["hasGuessed"] = false
+func _reset_player_guesses():
+	for key in players:
+		players[key]["guess"] = -1
+		players[key]["guessTime"] = 0
+		players[key]["hasGuessed"] = false
 
-func _player_correctness(correct_answer, score):
-	for i in PlayerCount:
-		var playerGuess = players[playerNumberToIds[i]]["guess"]
-		# if the player has passed make no change to score
-		if not players[playerNumberToIds[i]]["hasGuessed"]:
-			players[playerNumberToIds[i]]["last_score"] = players[playerNumberToIds[i]]["score"]
+func _player_answer_correctness(correct_answer, score):
+	for key in players:
+		#if player slot is inactive pass
+		if not players[key]["active"]:
 			continue
-		
-		players[playerNumberToIds[i]]["correct"] = playerGuess == correct_answer
-		if players[playerNumberToIds[i]]["correct"]:
-			_adjust_score(i, score)
+			
+		var playerGuess = players[key]["guess"]
+		# if the player has passed make no change to score
+		if not players[key]["hasGuessed"]:
+			players[key]["last_score"] = players[key]["score"]
+			continue
+			
+		players[key]["correct"] = playerGuess == correct_answer
+		if players[key]["correct"]:
+			_adjust_player_score(key, score)
 		else:
-			_adjust_score(i, -score)
+			_adjust_player_score(key, -score)
 
-func _adjust_score(player_index,score):
-	var playerId = playerNumberToIds[player_index]
-	players[playerId]["last_score"] = players[playerId]["score"]
+func _adjust_player_score(key, score):
+	players[key]["last_score"] = players[key]["score"]
 	# var awarded_points = roundf(score * players[playerId]["guessTime"]/30) # old scoring function
-	var awarded_points = (score + score * players[playerId]["guessTime"]/quizOptions.timer)/2
-	players[playerId]["score"] += awarded_points
+	var awarded_points = (score + score * players[key]["guessTime"]/quizOptions.timer)/2
+	players[key]["score"] += awarded_points
 #endregion
+
 
 #region functions related to chances
 func _add_chance(chance_name, description, type, uuid, value, associated_questions: Array, bonus):
@@ -179,56 +254,46 @@ func _get_chance_from_uuid(chance_uuid):
 func _add_chance_hits(question_index):
 	for chance in CurrentChances:
 		if chance["associated_questions"].has(question_index):
-			for i in range(PlayerCount):
-				if players[playerNumberToIds[i]]["correct"] == chance["correct"]:
-					chance["player_hits"][i] += 1
-					players[playerNumberToIds[i]]["chances"][chance["uuid"]] = 1
-					if chance["uuid"] in players[playerNumberToIds[i]]["profileData"]["questions_chances"]:
-						players[playerNumberToIds[i]]["profileData"]["questions_chances"][chance["uuid"]] += 1
+			for key in players:
+				if players[key]["correct"] == chance["correct"]:
+					chance["player_hits"][key] += 1
+					players[key]["chances"][chance["uuid"]] = 1
+					if chance["uuid"] in players[key]["profileData"]["questions_chances"]:
+						players[key]["profileData"]["questions_chances"][chance["uuid"]] += 1
 					else:
-						players[playerNumberToIds[i]]["profileData"]["questions_chances"][chance["uuid"]] = 1
+						players[key]["profileData"]["questions_chances"][chance["uuid"]] = 1
 #endregion
 
 #region functions called during the end of the quiz
 ## updates the question answered and seen metrics section of the player profiles
 ## this is called on the server, and only updates the profile data on the server side
 func _update_profile_statistics(current_question_uuid):
-	for i in PlayerCount:
-		var playerCorrectness = players[playerNumberToIds[i]]["correct"]
+	for key in players:
+		var playerCorrect = players[key]["correct"]
 		# questions_answered incremented when the user answers the question correctly
-		if playerCorrectness:
-			if current_question_uuid in players[playerNumberToIds[i]]["profileData"]["questions_answered"]:
-				players[playerNumberToIds[i]]["profileData"]["questions_answered"][current_question_uuid] += 1
+		if playerCorrect:
+			if current_question_uuid in players[key]["profileData"]["questions_answered"]:
+				players[key]["profileData"]["questions_answered"][current_question_uuid] += 1
 			else:
-				players[playerNumberToIds[i]]["profileData"]["questions_answered"][current_question_uuid] = 1
+				players[key]["profileData"]["questions_answered"][current_question_uuid] = 1
 
 		# questions_seen incremented when the user sees a question
-		if current_question_uuid in players[playerNumberToIds[i]]["profileData"]["questions_seen"]:
-			players[playerNumberToIds[i]]["profileData"]["questions_seen"][current_question_uuid] += 1
+		if current_question_uuid in players[key]["profileData"]["questions_seen"]:
+			players[key]["profileData"]["questions_seen"][current_question_uuid] += 1
 		else:
-			players[playerNumberToIds[i]]["profileData"]["questions_seen"][current_question_uuid] = 1
+			players[key]["profileData"]["questions_seen"][current_question_uuid] = 1
 
 func _reset_quiz_state():
 	_reset_players()
-	PlayersLoaded = 0
+	players_loaded = 0
 	CurrentQuestionIndex = 0
 	CurrentChances.clear()
 	CurrentQuizQuestions.clear()
 	GameStarted = false
 
-func _reset_players():
-	for key in players.keys():
-		players[key].reset_player()
 #endregion
 
-#region functions called at the start of the quiz
-func _build_player_number_to_id_table():
-	playerNumberToIds = [-1,-1,-1,-1]
-	var i = 0
-	for key in players.keys():
-		playerNumberToIds[i] = key
-		i += 1
-
+#region functions called to build the tags filter
 func _build_complete_tags_list():
 	_io_read_questions(QuestionDataFile)
 	# find all tags and numerate them

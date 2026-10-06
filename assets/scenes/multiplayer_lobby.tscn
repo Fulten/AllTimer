@@ -197,6 +197,13 @@ text = "Peer_Profile_Name"
 label_settings = ExtResource("3_qhvyi")
 horizontal_alignment = 1
 
+[node name="Peer4" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase"]
+visible = false
+layout_mode = 2
+text = "Peer_Profile_Name"
+label_settings = ExtResource("3_qhvyi")
+horizontal_alignment = 1
+
 [node name="VSeparator" type="VSeparator" parent="LobbyOrganizer/Columns"]
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2

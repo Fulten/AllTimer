@@ -82,6 +82,9 @@ func _save_new_profile(newProfile):
 		pass
 	pass
 
+func _get_selected_profile():
+	return profiles[_get_selected_profile_key()]
+
 ## Updates an already existing profile with new statistics
 func _overwrite_profile_with_reference(updatedProfile):
 	if profiles.has(updatedProfile.name):

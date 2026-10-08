@@ -6,6 +6,8 @@ var mp_lobby_scene = preload("res://assets/scenes/multiplayer_lobby.tscn")
 
 var quiz_session_instance
 var mp_lobby_instance
+var late_join_player_count = -1
+var late_join_players_recived = 1
 
 const MAX_CONNECTIONS: int = 3 # allow at most 3 other players to connect to server
 const PORT: int = 12345
@@ -30,15 +32,6 @@ func _process(_delta):
 func _set_ip(ip_address):
 	IP_ADDRESS = ip_address
 
-func _local_update_selected_scene():
-	#load chalkboard scene by default in the case of bad input
-	var selectedtheme = "res://assets/scenes/quiz_session.tscn"
-	if GameState.CurrentTheme == "Patriotic Cipher":
-		selectedtheme = "res://assets/scenes/cipher.tscn"
-	elif GameState.CurrentTheme == "Fatal Surprise":
-		selectedtheme = "res://assets/scenes/fatalSurprise.tscn"
-	quiz_session_scene = load(selectedtheme)
-
 #region Multiplayer Callback functions
 func _connect_multiplayer_callback_functions():
 	multiplayer.connected_to_server.connect(_mp_on_connected_to_server)
@@ -49,9 +42,7 @@ func _connect_multiplayer_callback_functions():
 
 # Emitted when this MultiplayerAPI's multiplayer_peer successfully connected to a server. Only emitted on clients.
 func _mp_on_connected_to_server():
-	GameState._new_player(UserProfiles._get_selected_profile(), multiplayer.get_unique_id())
-	if GameState.activeId == -1:
-		GameState.activeId = multiplayer.get_unique_id()
+	GameState._new_player(UserProfiles._get_selected_profile()["name"], multiplayer.get_unique_id())
 	mp_lobby_instance._connected_to_server()
 	print("Info: peer %s has connected to server" % multiplayer.get_unique_id())
 
@@ -70,8 +61,10 @@ func _mp_on_peer_connected(id: int):
 # Emitted when this MultiplayerAPI's multiplayer_peer disconnects from a peer. 
 # Clients get notified when other clients disconnect from the same server.
 func _mp_on_peer_disconnected(id: int):
-	GameState._deactivate_player(id)
-	if GameState.GameStarted:
+	if GameState._in_lobby():
+		GameState._remove_player(id)
+	else:
+		GameState._deactivate_player(id)
 		quiz_session_instance._player_dropped()
 	mp_lobby_instance._refresh_connected_players_list()
 	print("Info: peer %s has disconnected from server" % id)
@@ -93,42 +86,75 @@ func _kick_peer(reason):
 
 @rpc("any_peer", "reliable")
 func _request_player_data():
-	_recive_player_data.rpc_id(multiplayer.get_remote_sender_id(), UserProfiles._get_selected_profile(), GameState.activeId)
+	_recive_player_data.rpc_id(multiplayer.get_remote_sender_id(), UserProfiles._get_selected_profile()["name"], GameState.activeId)
 
 @rpc("any_peer", "reliable")
-func _recive_player_data(playerProfile, activeId):
+func _recive_player_data(playerName, activeId):
 	# if active id isn't -1 then this player is reconnecting after being disconnected
 	if GameState._player_count() >= 4:
 		if multiplayer.is_server():
 			_kick_peer.rpc_id(multiplayer.get_remote_sender_id(), "Connection Refused, lobby is full")
-	if GameState._has_active_id(activeId): 
+	if GameState._in_lobby():
+		GameState._new_player(playerName, multiplayer.get_remote_sender_id())
+		mp_lobby_instance._refresh_connected_players_list()
+	elif !GameState._in_lobby() && GameState._has_active_id(activeId):
 		GameState._reactivate_player(multiplayer.get_remote_sender_id(), activeId)
 		mp_lobby_instance._refresh_connected_players_list()
-	# if the game hasn't started yet let new players join
-	elif !GameState.GameStarted:
-		GameState._new_player(playerProfile, multiplayer.get_remote_sender_id())
-		mp_lobby_instance._refresh_connected_players_list()
+		if multiplayer.is_server():
+			var rejoined_profile = GameState.players[multiplayer.get_remote_sender_id()]
+			_late_join_client.rpc_id(multiplayer.get_remote_sender_id(), 
+				GameState._player_count(),
+				multiplayer.get_remote_sender_id(),
+				rejoined_profile["name"],
+				rejoined_profile["score"],
+				rejoined_profile["last_score"],
+				rejoined_profile["chances"])
 	# if the game has already started deny new players
 	elif multiplayer.is_server():
 		_kick_peer.rpc_id(multiplayer.get_remote_sender_id(), "Connection Refused, quiz in progress")
+
+@rpc("authority", "reliable")
+func _late_join_client(playerCount, new_active_id, p_name, p_score, p_last_score, p_chances):
+	GameState.players.clear()
+	GameState._new_player(p_name, multiplayer.get_unique_id())
+	GameState.players[multiplayer.get_unique_id()]["score"] = p_score
+	GameState.players[multiplayer.get_unique_id()]["last_score"] = p_last_score
+	GameState.players[multiplayer.get_unique_id()]["chances"] = p_chances
+	late_join_player_count = playerCount
+	GameState.activeId = new_active_id
+	_resync_player_data.rpc()
 	
-@rpc("authority", "call_local", "reliable")
-func load_quiz():
-	_initilize_quiz_scene()
+@rpc("any_peer", "reliable")
+func _resync_player_data():
+	_resync_player_data_recive.rpc_id(multiplayer.get_remote_sender_id(), UserProfiles._get_selected_profile()["name"])
+
+@rpc("any_peer", "reliable")
+func _resync_player_data_recive(playerName):
+	GameState._new_player(playerName, multiplayer.get_remote_sender_id())
+	late_join_players_recived += 1
+	
+	if late_join_player_count == late_join_players_recived:
+		_rejoin_quiz_session()
+		late_join_player_count = -1
+		late_join_players_recived = 1
+	
+@rpc("authority", "reliable")
+func _assign_active_id(id):
+	GameState.activeId = id
 
 # called by the server to start the quiz
 @rpc("authority", "call_local", "reliable")
 func _launch_quiz():
+	_load_into_quiz()
 	if multiplayer.has_multiplayer_peer() && multiplayer.is_server():
 		#TODO: rehook up quiz start
 		print("Info: server is launching quiz")
-
+		
 #endregion
 
 #region Multiplayer lobby functions
 func _initilize_mp_lobby_instance():
 	mp_lobby_instance = mp_lobby_scene.instantiate()
-	get_tree().root.add_child(mp_lobby_instance)
 	mp_lobby_instance.sig_mp_profile_change.connect(_mp_lobby_profile_changed)
 	mp_lobby_instance.sig_mp_host.connect(_mp_lobby_host_server)
 	mp_lobby_instance.sig_mp_connect.connect(_mp_lobby_join)
@@ -136,6 +162,7 @@ func _initilize_mp_lobby_instance():
 	mp_lobby_instance.sig_mp_kick_peer.connect(_mp_lobby_kick_peer)
 	mp_lobby_instance.sig_mp_launch.connect(_mp_lobby_launch_quiz)
 	mp_lobby_instance.sig_mp_exit.connect(_mp_lobby_exit)
+	get_tree().root.add_child(mp_lobby_instance)
 
 func _mp_lobby_profile_changed():
 	GameState.activeId = -1
@@ -148,7 +175,7 @@ func _mp_lobby_host_server(ip_address):
 		return error
 	multiplayer.multiplayer_peer = peer
 	
-	GameState._new_player(UserProfiles._get_selected_profile(), multiplayer.get_unique_id())
+	GameState._new_player(UserProfiles._get_selected_profile()["name"], multiplayer.get_unique_id())
 	mp_lobby_instance._refresh_connected_players_list()
 	
 	print("Info: Hosting server on IP: %s, PORT: %d" % [IP_ADDRESS, PORT])
@@ -182,9 +209,11 @@ func _mp_lobby_kick_peer(peer_id: int):
 
 func _mp_lobby_launch_quiz():
 	if multiplayer.is_server():
+		for peer_id in multiplayer.get_peers():
+			_assign_active_id.rpc_id(peer_id, peer_id)
 		_launch_quiz.rpc()
 	else:
-		print("!WARN: recived launch quiz signal from non-host!")
+		print("!WARN: attempted to launch quiz as non-host!")
 
 func _mp_lobby_exit():
 	if multiplayer.has_multiplayer_peer():
@@ -200,6 +229,14 @@ func _quit_to_main_menu():
 #endregion
 
 #region quiz session functions
+func _rejoin_quiz_session():
+	_load_into_quiz()
+	print("Info: peer %s is rejoining active quiz session" % multiplayer.get_unique_id())
+
+func _load_into_quiz():
+	_initilize_quiz_scene()
+	GameState.quiz_phase = GameState.QUIZSTATE.loading
+	
 func _initilize_quiz_scene():
 	_local_update_selected_scene()
 	quiz_session_instance = quiz_session_scene.instantiate()
@@ -207,13 +244,24 @@ func _initilize_quiz_scene():
 	quiz_session_instance.sig_exit_quiz.connect(_exit_quiz_handler)
 	get_tree().root.add_child(quiz_session_instance)
 
+func _local_update_selected_scene():
+	#load chalkboard scene by default in the case of bad input
+	var selectedtheme = "res://assets/scenes/quiz_session.tscn"
+	if GameState.CurrentTheme == "Patriotic Cipher":
+		selectedtheme = "res://assets/scenes/cipher.tscn"
+	elif GameState.CurrentTheme == "Fatal Surprise":
+		selectedtheme = "res://assets/scenes/fatalSurprise.tscn"
+	quiz_session_scene = load(selectedtheme)
+
 func _end_of_quiz_handler():
+	GameState.quiz_phase = GameState.QUIZSTATE.lobby
 	SoundMaster._play_music_track("mp_lobby")
 	if multiplayer.is_server():
 		mp_lobby_instance._enable_launch_button()
 
 # if a client leaves an active quiz session, 
 func _exit_quiz_handler():
+	GameState.quiz_phase = GameState.QUIZSTATE.lobby
 	SoundMaster._play_music_track("mp_lobby")
 	multiplayer.multiplayer_peer = null
 	GameState._clear_players()

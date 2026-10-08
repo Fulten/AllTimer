@@ -106,25 +106,45 @@ enum MENU {
 	subMenuDisplay = 4,
 }
 
-var quiz_phase = QUIZSTATE.preQuiz
-
-enum QUIZSTATE {
-	preQuiz = 0,
-	preQuestion = 1,
-	question = 2,
-	postQuestion = 3,
-	PostQuiz = 4,
-}
 #endregion
 
 
 func _ready():
+	_load_config_settings()
+	menu_location = MENU.noMenu
+	_pause_menu_update_graphics()
 	
-	pass
+	if multiplayer.is_server():
+		$pauseScreen/pauseCase/pauseBase/quitButton.text = "lobby"
+
 	
 func _proccess():
+	pass
+
+func _input(event):
+	# opens game menu locally on client
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		_escape_game_menu()
+		pass
+		
+	# ignore input until quiz starts
+	if !GameState._game_started():
+		return
+		
+	#TODO:include debug key to advance to next question
+
+#region rpc functions
+@rpc("authority", "call_local", "reliable")
+func _server_ending_quiz():
+	GameState._reset_quiz_state()
+	sig_end_of_quiz.emit()
+	queue_free()
+	
+
+func _player_dropped():
 	
 	pass
+#endregion
 
 #region quiz setup functions
 func _host_setup_quiz():
@@ -139,11 +159,6 @@ func _client_setup_quiz():
 #endregion
 
 #region Pause Menu Functionality
-@rpc("authority", "call_local", "reliable")
-func _server_ending_quiz():
-	GameState._reset_quiz_state()
-	sig_end_of_quiz.emit()
-
 func _client_disconnect_from_server():
 	GameState._reset_quiz_state()
 	sig_exit_quiz.emit()

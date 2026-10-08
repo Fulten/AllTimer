@@ -4,7 +4,6 @@ extends Node
 #region Class Definitions
 class Player:
 	var name: String
-	var uuid: int
 	var active: bool
 	
 	var guess: int
@@ -16,10 +15,8 @@ class Player:
 	var profileData
 	var chances
 	
-	func initilize(u_profile, i_uuid):
-		name = u_profile["name"]
-		profileData = u_profile
-		uuid = i_uuid
+	func initilize(p_name):
+		name = p_name
 		active = true
 		
 		guess = -1
@@ -39,19 +36,18 @@ class Player:
 		last_score = 0
 		chances = {}
 		
-	func new_from(player_data):
-		name = player_data["name"]
-		profileData = player_data["profileData"]
-		uuid = player_data["uuid"]
+	func new_from(old_player):
+		name = old_player["name"]
 		active = true
 		
 		guess = -1
 		guessTime = 0
 		hasGuessed = false
 		correct = false
-		score = 0
-		last_score = 0
-		chances = {}
+		score = old_player["score"]
+		last_score = old_player["last_score"]
+		chances = old_player["chances"]
+
 
 class QuizOptions:
 	var timer: int # length of question answer phase timer
@@ -121,7 +117,7 @@ var players_loaded = 0
 var playerCardOrder = [-1, -1, -1, -1]
 
 var activeId = -1
-var GameStarted = false
+var quiz_phase = QUIZSTATE.lobby
 
 var CurrentTheme = "Chalkboard" #The current quiz theme
 
@@ -137,12 +133,21 @@ var TagsFilters = {}
 
 var CurrentChances = [] #The list of chance stars to track for the game
 
+enum QUIZSTATE {
+	lobby = 0,
+	loading = 1,
+	preQuiz = 2,
+	preQuestion = 3,
+	question = 4,
+	postQuestion = 5,
+	PostQuiz = 5,
+}
 #endregion
 
 #region player related functions
-func _new_player(player_profile, mp_id):
+func _new_player(p_name, mp_id):
 	var playerData = GameState.Player.new()
-	playerData.initilize(player_profile, mp_id)
+	playerData.initilize(p_name)
 	GameState.players[mp_id] = playerData
 	_build_player_number_to_id_table()
 
@@ -171,6 +176,8 @@ func _reactivate_player(mp_id, mp_activeId):
 			playerData.new_from(players[key])
 			_remove_player(key)
 			players[mp_id] = playerData
+			_build_player_number_to_id_table()
+			return
 	
 func _reset_players():
 	for key in players.keys():
@@ -230,6 +237,11 @@ func _adjust_player_score(key, score):
 	players[key]["score"] += awarded_points
 #endregion
 
+func _game_started():
+	return !(quiz_phase < QUIZSTATE.preQuiz)
+
+func _in_lobby():
+	return quiz_phase == QUIZSTATE.lobby
 
 #region functions related to chances
 func _add_chance(chance_name, description, type, uuid, value, associated_questions: Array, bonus):
@@ -289,7 +301,7 @@ func _reset_quiz_state():
 	CurrentQuestionIndex = 0
 	CurrentChances.clear()
 	CurrentQuizQuestions.clear()
-	GameStarted = false
+	quiz_phase = QUIZSTATE.lobby
 
 #endregion
 

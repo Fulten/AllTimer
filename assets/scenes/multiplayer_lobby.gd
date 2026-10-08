@@ -168,6 +168,7 @@ func _ui_reset_menu():
 	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/HostButton.disabled = false
 	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/JoinButton.disabled = false
 	$StateChangers/LaunchButton.disabled = true
+	_ui_update_connected_players()
 #endregion
 
 #region Ui Signals

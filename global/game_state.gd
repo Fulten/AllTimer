@@ -48,7 +48,6 @@ class Player:
 		last_score = old_player["last_score"]
 		chances = old_player["chances"]
 
-
 class QuizOptions:
 	var timer: int # length of question answer phase timer
 	var win_con: String
@@ -122,8 +121,6 @@ var quiz_phase = QUIZSTATE.lobby
 var CurrentTheme = "Chalkboard" #The current quiz theme
 
 var QuestionDataFile = "res://data/question_data.json"
-var CurrentQuizQuestions = [] #The questions to be used in the current quiz
-var CurrentQuestionIndex = 0 #The index of question currently on in quiz
 
 var questions = {}
 var tags_list = {}
@@ -131,7 +128,7 @@ var tags_list = {}
 var TagsFilterFile = "user://quiz_filters.json"
 var TagsFilters = {}
 
-var CurrentChances = [] #The list of chance stars to track for the game
+#endregion
 
 enum QUIZSTATE {
 	lobby = 0,
@@ -142,7 +139,6 @@ enum QUIZSTATE {
 	postQuestion = 5,
 	PostQuiz = 5,
 }
-#endregion
 
 #region player related functions
 func _new_player(p_name, mp_id):
@@ -237,43 +233,15 @@ func _adjust_player_score(key, score):
 	players[key]["score"] += awarded_points
 #endregion
 
-func _game_started():
+#region boolean functions that query quiz_phase
+func _game_started() -> bool:
 	return !(quiz_phase < QUIZSTATE.preQuiz)
 
-func _in_lobby():
+func _in_lobby() -> bool:
 	return quiz_phase == QUIZSTATE.lobby
 
-#region functions related to chances
-func _add_chance(chance_name, description, type, uuid, value, associated_questions: Array, bonus):
-	CurrentChances.append({ #to be updated when we add more types with an if/switch
-		"name": chance_name,
-		"description": description,
-		"type": type,
-		"uuid": uuid,
-		"correct": value,
-		"associated_questions": associated_questions,
-		"player_hits": [0,0,0,0],
-		"bonus": bonus
-	})
-
-func _get_chance_from_uuid(chance_uuid):
-	for chance in CurrentChances:
-		if chance["uuid"] == chance_uuid:
-			return chance
-
-## checks which chances a user has scored
-## and stores them in the profile data
-func _add_chance_hits(question_index):
-	for chance in CurrentChances:
-		if chance["associated_questions"].has(question_index):
-			for key in players:
-				if players[key]["correct"] == chance["correct"]:
-					chance["player_hits"][key] += 1
-					players[key]["chances"][chance["uuid"]] = 1
-					if chance["uuid"] in players[key]["profileData"]["questions_chances"]:
-						players[key]["profileData"]["questions_chances"][chance["uuid"]] += 1
-					else:
-						players[key]["profileData"]["questions_chances"][chance["uuid"]] = 1
+func _can_guess() -> bool:
+	return quiz_phase == QUIZSTATE.question
 #endregion
 
 #region functions called during the end of the quiz
@@ -298,14 +266,10 @@ func _update_profile_statistics(current_question_uuid):
 func _reset_quiz_state():
 	_reset_players()
 	players_loaded = 0
-	CurrentQuestionIndex = 0
-	CurrentChances.clear()
-	CurrentQuizQuestions.clear()
 	quiz_phase = QUIZSTATE.lobby
-
 #endregion
 
-#region functions called to build the tags filter
+#region question filter section
 func _build_complete_tags_list():
 	_io_read_questions(QuestionDataFile)
 	# find all tags and numerate them

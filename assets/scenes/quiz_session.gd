@@ -25,7 +25,6 @@ extends Control
 	$quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/This/Cat1Button,
 	$quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/That/Cat2Button
 ]
-
 @onready var ui_player_names = [
 	$quizInterface/players_region/activePlayer1/player_case/player_name,
 	$quizInterface/players_region/activePlayer2/player_case/player_name,
@@ -94,21 +93,25 @@ var post_question_delay_default = 5.0
 
 var questions = {}
 var quiz_questions_list = []
+var quiz_question_index = 0 
 var quiz_chances = []
 
 var question_name = "n/a"
 var question_explainer = "explainer_text"
 var question_body = "body_text"
 var question_answers = ["answer_0", "answer_1", "answer_2", "answer_3"]
+var question_answers_correct_index = -1
 var question_type = ""
+var question_uuid = ""
 
-var quiz_question_index = 0 
 var menu_location = MENU.noMenu
 var rollup_count = 0
 
 
 var player_input = "p_answer_%s"
 var player_statuses_ui_2d: Array[Array]
+
+var players_ready = 0
 
 enum MENU {
 	noMenu = 0,
@@ -120,16 +123,20 @@ enum MENU {
 #endregion
 
 enum QUIZSTATE {
-	lobby = 0,
-	loading = 1,
-	preQuiz = 2,
-	preQuestion = 3,
-	question = 4,
-	postQuestion = 5,
-	PostQuiz = 5,
+	lobby,
+	loading,
+	preQuiz,
+	endOfRules,
+	preQuestion,
+	question,
+	postQuestion,
+	endOfPhase,
+	endScreen
 }
 
 func _ready():
+	$preQuiz.hide()
+	$quizInterface.hide()
 	menu_location = MENU.noMenu
 	_pause_menu_update_graphics()
 	_set_theme_specific_graphics()
@@ -140,9 +147,9 @@ func _ready():
 		$pauseScreen/pauseCase/pauseBase/quitButton.text = "Lobby"
 		_host_setup_quiz()
 
-func _proccess():
+func _process(_delta):
 	pass
-
+	
 func _is_event_keypress(event, key) -> bool:
 	return event is InputEventKey and event.pressed and event.keycode == key
 
@@ -154,16 +161,22 @@ func _input(event):
 	if DEBUG and multiplayer.is_server() and _is_event_keypress(event, KEY_P):
 		_DEBUG_next_question()
 	
+	match GameState.quiz_phase:
+		QUIZSTATE.preQuiz:
+			for guess in range(4):
+				if event.is_action_pressed(player_input % guess):
+					_player_ready()
+		QUIZSTATE.question:
+			for guess in range(4):
+				if event.is_action_pressed(player_input % guess):
+					#if we're a "this or that" or a "true/false" question ignore input from 3 and 4
+					var questionType = _current_question_type()
+					if (questionType == "True/False" or questionType == "This/That") and guess > 1:
+						break
+					_player_guess(guess)
+	
 	# ignore input until quiz starts
-	if GameState._can_guess():
-		for guess in range(4):
-			if event.is_action_pressed(player_input % guess):
-				#if we're a "this or that" or a "true/false" question ignore input from 3 and 4
-				var questionType = _current_question_type()
-				if (questionType == "True/False" or questionType == "This/That") and guess > 1:
-					continue
-				_player_guess(guess)
-
+	
 func _player_guess(guess):
 	if GameState._can_guess():
 		if multiplayer.is_server():
@@ -175,10 +188,102 @@ func _player_dropped():
 	
 	pass
 	
-func _start_quiz():
+#region quiz phase functions
+#===================================================
+func _phase_pre_quiz():
+	if DEBUG:
+		print("!!DEBUG: Prequiz phase")
+	GameState.quiz_phase = QUIZSTATE.preQuiz
 	
-	pass
+	ui_prequestion_timer.timeout.connect(_phase_question)
+	ui_countdown_timer.timeout.connect(_phase_post_question)
+	ui_postquestion_timer.timeout.connect(_phase_end_of_phase)
+	
+	var q = quiz_questions_list[quiz_question_index]
+	question_uuid = q["uuid"]
+	
+	_set_question_answers_as_randomised_array(q)
+	
+	_sync_quiz_phase.rpc(
+		GameState.quiz_phase, 
+		quiz_question_index,
+		q["name"], q["explainer"], q["question"], question_answers, q["questionType"], 
+		_get_timer_reading(GameState.quiz_phase))
 
+func _phase_end_of_rules():
+	if DEBUG:
+		print("!!DEBUG: End Of Rules phase")
+	GameState.quiz_phase = QUIZSTATE.endOfRules
+	_sync_quiz_phase.rpc(
+		GameState.quiz_phase, 
+		quiz_question_index,
+		question_name, question_explainer, question_body, question_answers, question_type, 
+		_get_timer_reading(GameState.quiz_phase))
+		
+	get_tree().create_timer(4.2).timeout.connect(_phase_pre_question)
+
+func _phase_pre_question():
+	if DEBUG:
+		print("!!DEBUG: Prequestion phase")
+	GameState.quiz_phase = QUIZSTATE.preQuestion
+
+	@warning_ignore("narrowing_conversion")
+	var extra_seconds : int = roundf(question_body.length() * 0.025)
+	
+	ui_prequestion_timer.start(pre_question_delay_default + extra_seconds)
+	
+	_sync_quiz_phase.rpc(
+		GameState.quiz_phase, 
+		quiz_question_index,
+		question_name, question_explainer, question_body, question_answers, question_type, 
+		_get_timer_reading(GameState.quiz_phase))
+	
+func _phase_question():
+	if DEBUG:
+		print("!!DEBUG: Question phase")
+	GameState.quiz_phase = QUIZSTATE.question
+	
+	ui_prequestion_timer.stop()
+	ui_countdown_timer.start(GameState.quizOptions.timer)
+	
+	_sync_quiz_phase.rpc(
+		GameState.quiz_phase, 
+		quiz_question_index,
+		question_name, question_explainer, question_body, question_answers, question_type, 
+		_get_timer_reading(GameState.quiz_phase))
+	
+func _phase_post_question():
+	if DEBUG:
+		print("!!DEBUG: Postquestion phase")
+	GameState.quiz_phase = QUIZSTATE.postQuestion
+	_sync_quiz_phase.rpc(
+		GameState.quiz_phase, 
+		quiz_question_index,
+		question_name, question_explainer, question_body, question_answers, question_type, 
+		_get_timer_reading(GameState.quiz_phase))
+	
+func _phase_end_of_phase():
+	if DEBUG:
+		print("!!DEBUG: end of phase phase")
+	GameState.quiz_phase = QUIZSTATE.endOfPhase
+	quiz_question_index += 1
+	
+	var q = quiz_questions_list[quiz_question_index]
+	question_uuid = q["uuid"]
+	
+	_set_question_answers_as_randomised_array(q)
+	
+	_sync_quiz_phase.rpc(
+		GameState.quiz_phase, 
+		quiz_question_index,
+		q["name"], q["explainer"], q["question"], question_answers, q["questionType"], 
+		_get_timer_reading(GameState.quiz_phase))
+	
+func _phase_end_screen():
+	if DEBUG:
+		print("!!DEBUG: endscreen phase")
+#endregion
+	
 #region server side rpc functions
 #===================================================
 @rpc("authority", "call_local", "reliable")
@@ -188,8 +293,53 @@ func _server_ending_quiz():
 	queue_free()
 	
 @rpc("authority", "call_local", "reliable")
-func _sync_game_state(gameState: int):
+func _sync_quiz_phase(
+	quiz_phase, 
+	question_index: int,
+	q_name: String, 
+	q_explain: String, 
+	q_body: String, 
+	q_answers: Array, 
+	q_type: String, 
+	timer_reading: Array
+	):
+	$preQuiz.show()
+	$quizInterface.show()
 	
+	GameState.quiz_phase = quiz_phase
+	quiz_question_index = question_index
+	
+	question_name = q_name
+	question_explainer = q_explain
+	question_body = q_body
+	question_answers = q_answers
+	question_type = q_type
+	
+	_ui_apply_question_data()
+	_ui_update_timer(timer_reading)
+	
+	match GameState.quiz_phase:
+		QUIZSTATE.preQuiz:
+			_ui_ani_display_prequiz_rules()
+		QUIZSTATE.endOfRules:
+			_ui_ani_quiz_start()
+		QUIZSTATE.preQuestion:
+			_ui_ani_question_load_a()
+		QUIZSTATE.question:
+			_ui_ani_question_load_b()
+		QUIZSTATE.postQuestion:
+			pass
+		QUIZSTATE.endOfPhase:
+			_ui_ani_question_unload()
+		QUIZSTATE.endScreen:
+			pass
+
+@rpc("authority", "call_local", "reliable")
+func _sync_player_info():
+	pass
+
+@rpc("authority", "call_local", "reliable")
+func _sync_game_timer():
 	pass
 
 @rpc("authority", "reliable")
@@ -210,7 +360,16 @@ func _player_setup_done():
 	if multiplayer.is_server():
 		GameState.players_loaded += 1
 		if GameState.players_loaded == GameState._player_count():
-			_start_quiz()
+			_phase_pre_quiz()
+
+@rpc("any_peer", "reliable")
+func _player_ready():
+	if multiplayer.is_server():
+		players_ready += 1
+		if players_ready >= GameState._player_count():
+			_phase_end_of_rules()
+	else:
+		_player_ready.rpc_id(1)
 #endregion
 
 #region question related
@@ -222,10 +381,74 @@ func _current_question_type() -> String:
 			return question_type
 		_: #if not default to multiple choice
 			return "Multiple Choice"
+			
+func _set_question_answers_as_randomised_array(question):
+	var correct = question["correct"]
+	var wrong = question["wrong"]
+	var type = question["questionType"]
+	var answers = [correct, wrong[0], wrong[1], wrong[2]]
+	
+	match type:
+		"True/False":
+			if correct.to_lower() == "true":
+				question_answers_correct_index = 0
+			else:
+				question_answers_correct_index = 1
+			question_answers = ["True", "False", "null", "null"]
+		"This/That":
+			var available_indexes_tt = [0, 1]
+			var i = 0
+			while available_indexes_tt.size():
+				var answer_index = available_indexes_tt.pop_at(randi() % available_indexes_tt.size())
+				question_answers[i] = answers[answer_index]
+				if answer_index == 0:
+					question_answers_correct_index = i
+				i += 1
+			question_answers[2] = "null"
+			question_answers[3] = "null"
+		_: # "Multiple Choice"
+			var available_indexes_tt = [0, 1, 2, 3]
+			var i = 0
+			while available_indexes_tt.size():
+				var answer_index = available_indexes_tt.pop_at(randi() % available_indexes_tt.size())
+				question_answers[i] = answers[answer_index]
+				if answer_index == 0:
+					question_answers_correct_index = i
+				i += 1
 #endregion
 
 #region quiz ui and animation functions
 #===================================================
+func _ui_apply_question_data():
+	var type = _current_question_type()
+	ui_questions_index.text = "%s" % quiz_question_index
+	
+	ui_questions_name.text = question_name
+	ui_questions_body.text = question_body
+	ui_post_question.text = question_explainer
+	
+	match type:
+		"True/False":
+			$quizInterface/session_organizer/CenteredAnswerCategories.show()
+			$quizInterface/session_organizer/VerticalAnswerCategories.hide()
+			$quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse.show()
+			$quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat.hide()
+		"This/That":
+			for i in range(2):
+				ui_this_or_that_answers[i].text = question_answers[i]
+			$quizInterface/session_organizer/CenteredAnswerCategories.show()
+			$quizInterface/session_organizer/VerticalAnswerCategories.hide()
+			$quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse.hide()
+			$quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat.show()
+		_:
+			for i in range(4):
+				ui_multiple_choice_answers[i].text = question_answers[i]
+			$quizInterface/session_organizer/VerticalAnswerCategories.show()
+			$quizInterface/session_organizer/CenteredAnswerCategories.hide()
+
+func _ui_update_timer(clock_reading: Array):
+	ui_countdown_text = "%s:%s" % clock_reading
+
 func _ui_apply_scew_to_fatal_answers():
 	var average_answer_length = 0
 	average_answer_length += question_answers[0].length()
@@ -306,22 +529,6 @@ func _ui_local_score_rollup():
 			rollup_count -= 1
 		get_tree().create_timer(0.025).timeout.connect(_ui_local_score_rollup)
 
-func _ui_present_question_multiple_choice():
-	$quizInterface/session_organizer/VerticalAnswerCategories.show()
-	$quizInterface/session_organizer/CenteredAnswerCategories.hide()
-	
-func _ui_present_question_this_that():
-	$quizInterface/session_organizer/CenteredAnswerCategories.show()
-	$quizInterface/session_organizer/VerticalAnswerCategories.hide()
-	$quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat.show()
-	$quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse.hide()
-
-func _ui_present_question_true_false():
-	$quizInterface/session_organizer/CenteredAnswerCategories.show()
-	$quizInterface/session_organizer/VerticalAnswerCategories.hide()
-	$quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse.show()
-	$quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat.hide()
-
 func _ui_ani_display_prequiz_rules():
 	# set the rules dependent elements to hide
 	$preQuiz/preSessionOrganizer/RulesText/Rounds.hide()
@@ -349,24 +556,45 @@ func _ui_ani_display_prequiz_rules():
 
 	$preQuiz/preSessionOrganizer/RulesText/Timer.text %= GameState.quizOptions.timer
 	$ControlSwapper0.play("QuizIntro")
-
+	
+func _on_control_swapper_0_animation_finished(anim_name):
+	if "QuizIntro" == anim_name:
+		$ControlSwapper0.play("QuizPrompting")
+	
 func _ui_ani_quiz_start():
 	$ControlSwapper0.play("QuizStart")
-	
+
 func _ui_ani_question_load_a():
 	$ControlSwapper0.queue("QuestionLoad_A")
 
 func _ui_ani_question_load_b():
 	$ControlSwapper0.queue("QuestionLoad_B")
 	
-func _animate_question_unload():
+func _ui_ani_question_unload():
 	$ControlSwapper0.queue("QuestionUnload")
 #endregion
 
-#region converts timer readings into minutes and seconds
+#region timers
 #===================================================
+func _get_timer_reading(quiz_phase):
+	match quiz_phase:
+		QUIZSTATE.preQuestion:
+			return clock_pre_question()
+		QUIZSTATE.question:
+			return clock_countdown()
+		QUIZSTATE.postQuestion:
+			return clock_post_question()
+		_:
+			return [0,0]
+
 func clock_pre_question():
 	var time_left = ui_prequestion_timer.get_time_left()
+	var minute = floor(time_left / 60)
+	var second = int(time_left) % 60
+	return [minute, second]
+	
+func clock_countdown():
+	var time_left = ui_countdown_timer.get_time_left()
 	var minute = floor(time_left / 60)
 	var second = int(time_left) % 60
 	return [minute, second]
@@ -377,11 +605,6 @@ func clock_post_question():
 	var second = int(time_left) % 60
 	return [minute, second]
 
-func clock_countdown():
-	var time_left = ui_countdown_timer.get_time_left()
-	var minute = floor(time_left / 60)
-	var second = int(time_left) % 60
-	return [minute, second]
 #endregion
 
 #region setup for quiz chances and questions
@@ -391,16 +614,21 @@ func _host_setup_quiz():
 	_select_question_filter()
 	_io_load_master_questions()
 	_io_load_master_chances()
-	_select_quiz_questions(QUIZ_LENGTH)
+	var question_count = _select_quiz_questions(QUIZ_LENGTH)
+	if question_count < QUIZ_LENGTH:
+		print("Info: fewer than max questions picked, only %s questions in this quiz" % question_count)
 
 	_clean_questions_data()
 	_clean_chance_data()
 	
-	GameState.players_loaded = 1
 	_player_load_quiz.rpc()
+	_player_setup_done()
+	
+	#TODO: add a sanity check if a player manages to drop during quiz load 
+	#that'll send server and lobby back to the tile after some seconds if the quiz still hasn't started
 	
 func _client_setup_quiz():
-	_player_setup_done()
+	_player_setup_done.rpc_id(1)
 	
 func _select_question_filter():
 	use_question_filter = false
@@ -453,11 +681,11 @@ func _clean_chance_data():
 	master_chances_data = []
 
 func _select_quiz_questions(quizSize) -> int:
-	var size = 0
+	var quiz_size = 0
 	for i in range(quizSize):
 		# return early if we run out of questions,
 		if filtered_question_data.size() == 0:
-			break
+			return 0
 		
 		var question = filtered_question_data.pop_at(randi() % filtered_question_data.size())
 		quiz_questions_list.append(question)
@@ -466,7 +694,8 @@ func _select_quiz_questions(quizSize) -> int:
 				chances_set[chance].append(question["uuid"])
 			else:
 				chances_set[chance] = [question["uuid"]]
-	return size
+		quiz_size += 1
+	return quiz_size
 
 func _get_chance_data_from_uuid(chance_uuid):
 	for chance in master_chances_data:

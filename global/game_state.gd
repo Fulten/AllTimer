@@ -116,7 +116,7 @@ var players_loaded = 0
 var playerCardOrder = [-1, -1, -1, -1]
 
 var activeId = -1
-var quiz_phase = QUIZSTATE.lobby
+var quiz_phase
 
 var CurrentTheme = "Chalkboard" #The current quiz theme
 
@@ -131,13 +131,15 @@ var TagsFilters = {}
 #endregion
 
 enum QUIZSTATE {
-	lobby = 0,
-	loading = 1,
-	preQuiz = 2,
-	preQuestion = 3,
-	question = 4,
-	postQuestion = 5,
-	PostQuiz = 5,
+	lobby,
+	loading,
+	preQuiz,
+	endOfRules,
+	preQuestion,
+	question,
+	postQuestion,
+	endOfPhase,
+	endScreen
 }
 
 #region player related functions
@@ -235,7 +237,7 @@ func _adjust_player_score(key, score):
 
 #region boolean functions that query quiz_phase
 func _game_started() -> bool:
-	return !(quiz_phase < QUIZSTATE.preQuiz)
+	return !(quiz_phase < QUIZSTATE.endOfRules)
 
 func _in_lobby() -> bool:
 	return quiz_phase == QUIZSTATE.lobby
@@ -264,9 +266,9 @@ func _update_profile_statistics(current_question_uuid):
 			players[key]["profileData"]["questions_seen"][current_question_uuid] = 1
 
 func _reset_quiz_state():
+	quiz_phase = QUIZSTATE.lobby
 	_reset_players()
 	players_loaded = 0
-	quiz_phase = QUIZSTATE.lobby
 #endregion
 
 #region question filter section

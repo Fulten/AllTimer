@@ -21,6 +21,7 @@ var peer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	GameState.quiz_phase = GameState.QUIZSTATE.lobby
 	GameState._clear_players()
 	_connect_multiplayer_callback_functions()
 	_initilize_mp_lobby_instance()
@@ -234,8 +235,8 @@ func _rejoin_quiz_session():
 	print("Info: peer %s is rejoining active quiz session" % multiplayer.get_unique_id())
 
 func _load_into_quiz():
-	_initilize_quiz_scene()
 	GameState.quiz_phase = GameState.QUIZSTATE.loading
+	_initilize_quiz_scene()
 	
 func _initilize_quiz_scene():
 	_local_update_selected_scene()

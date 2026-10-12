@@ -29,12 +29,21 @@ func _ready():
 	load_settings()
 	UserProfiles._IO_read_profiles()
 
-	#get_tree().create_timer(0.025).timeout.connect(_init_filter_ui)
 	_init_filter_ui()
 	
 	handle_profile_refresh()
 	SoundMaster._play_music_track("main_menu")
 	_create_hover_text_node()
+	InputDevice.device_changed.connect(_on_device_changed)
+	_on_device_changed(InputDevice.current, InputDevice.last_joypad_id)
+
+func _on_device_changed(device: InputDevice.DeviceType, _id: int) -> void:
+	return
+	#match device:
+		#InputDevice.DeviceType.KEYBOARD_MOUSE: prompt.texture = key_e_icon
+		#InputDevice.DeviceType.PLAYSTATION:   prompt.texture = ps_square_icon
+		#InputDevice.DeviceType.SWITCH:        prompt.texture = switch_y_icon
+		#_:                                    prompt.texture = xbox_x_icon
 
 func _process(_delta):
 	pass

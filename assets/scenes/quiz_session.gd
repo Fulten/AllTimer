@@ -7,7 +7,6 @@ extends Control
 @onready var ui_countdown_timer = $quizInterface/session_organizer/question_header/Countdown
 @onready var ui_prequestion_timer = $quizInterface/session_organizer/question_header/Prequestion_timer
 @onready var ui_postquestion_timer = $quizInterface/session_organizer/question_header/Postquestion_timer
-@onready var ui_countdown_text = $quizInterface/session_organizer/CountdownLabel
 @onready var ui_questions_body = $quizInterface/session_organizer/question_body
 @onready var ui_post_question = $quizInterface/post_question
 @onready var ui_players = [
@@ -107,6 +106,7 @@ var question_uuid = ""
 var menu_location = MENU.noMenu
 var rollup_count = 0
 
+var delta_t = 0.0
 
 var player_input = "p_answer_%s"
 var player_statuses_ui_2d: Array[Array]
@@ -147,9 +147,12 @@ func _ready():
 		$pauseScreen/pauseCase/pauseBase/quitButton.text = "Lobby"
 		_host_setup_quiz()
 
-func _process(_delta):
-	pass
-	
+func _process(delta):
+	delta_t += delta
+	if delta_t > 0.2:
+		if multiplayer.is_server():
+			_sync_game_timer.rpc(_get_timer_reading(GameState.quiz_phase))
+
 func _is_event_keypress(event, key) -> bool:
 	return event is InputEventKey and event.pressed and event.keycode == key
 
@@ -316,7 +319,6 @@ func _sync_quiz_phase(
 	question_type = q_type
 	
 	_ui_apply_question_data()
-	_ui_update_timer(timer_reading)
 	
 	match GameState.quiz_phase:
 		QUIZSTATE.preQuiz:
@@ -339,8 +341,8 @@ func _sync_player_info():
 	pass
 
 @rpc("authority", "call_local", "reliable")
-func _sync_game_timer():
-	pass
+func _sync_game_timer(clock_reading: Array):
+	$quizInterface/session_organizer/CountdownLabel.text = "%02d:%02d" % clock_reading
 
 @rpc("authority", "reliable")
 func _player_load_quiz():
@@ -445,9 +447,6 @@ func _ui_apply_question_data():
 				ui_multiple_choice_answers[i].text = question_answers[i]
 			$quizInterface/session_organizer/VerticalAnswerCategories.show()
 			$quizInterface/session_organizer/CenteredAnswerCategories.hide()
-
-func _ui_update_timer(clock_reading: Array):
-	ui_countdown_text = "%s:%s" % clock_reading
 
 func _ui_apply_scew_to_fatal_answers():
 	var average_answer_length = 0

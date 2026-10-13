@@ -165,16 +165,14 @@ func _has_active_id(temp_id: int):
 func _deactivate_player(mp_id):
 	if players.has(mp_id):
 		players[mp_id]["active"] = false
-		_build_player_number_to_id_table()
 	
 func _reactivate_player(mp_id, mp_activeId):
 	for key in players:
 		if key == mp_activeId:
 			var playerData = GameState.Player.new()
 			playerData.new_from(players[key])
-			_remove_player(key)
 			players[mp_id] = playerData
-			_build_player_number_to_id_table()
+			_remove_player(key)
 			return
 	
 func _reset_players():
@@ -182,19 +180,14 @@ func _reset_players():
 		players[key].reset_player()
 		
 func _player_count() -> int:
-	var i = 0
-	for key in players:
-		if players[key]["active"]:
-			i += 1
-	return i
+	return players.size()
 
 func _build_player_number_to_id_table():
 	playerCardOrder = [-1,-1,-1,-1]
 	var i = 0
 	for key in players.keys():
-		if players[key]["active"]:
-			playerCardOrder[i] = key
-			i += 1
+		playerCardOrder[i] = key
+		i += 1
 
 func _player_has_guessed(player_id):
 	return players[player_id]["guess"] >= 0
@@ -237,7 +230,10 @@ func _adjust_player_score(key, score):
 
 #region boolean functions that query quiz_phase
 func _game_started() -> bool:
-	return !(quiz_phase < QUIZSTATE.endOfRules)
+	return (quiz_phase != QUIZSTATE.lobby 
+		and quiz_phase != QUIZSTATE.loading
+		and quiz_phase != QUIZSTATE.preQuiz 
+		and quiz_phase != QUIZSTATE.endOfRules)
 
 func _in_lobby() -> bool:
 	return quiz_phase == QUIZSTATE.lobby

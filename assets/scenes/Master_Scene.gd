@@ -66,13 +66,12 @@ func _mp_on_peer_disconnected(id: int):
 		GameState._remove_player(id)
 	else:
 		GameState._deactivate_player(id)
-		quiz_session_instance._player_dropped()
+		quiz_session_instance._player_dropped(id)
 	mp_lobby_instance._refresh_connected_players_list()
 	print("Info: peer %s has disconnected from server" % id)
 	
 # Emitted when this MultiplayerAPI's multiplayer_peer disconnects from server. Only emitted on clients.
 func _mp_on_server_disconnected():
-	GameState.activeId = multiplayer.get_unique_id()
 	multiplayer.multiplayer_peer = null
 	GameState.players.clear()
 	mp_lobby_instance._connection_reset("Disconnected From Server")
@@ -135,9 +134,16 @@ func _resync_player_data_recive(playerName):
 	late_join_players_recived += 1
 	
 	if late_join_player_count == late_join_players_recived:
-		_rejoin_quiz_session()
+		_load_into_quiz()
+		_late_join_client_ready.rpc_id(1)
 		late_join_player_count = -1
 		late_join_players_recived = 1
+	
+@rpc("any_peer", "reliable")
+func _late_join_client_ready():
+	quiz_session_instance._server_full_sync()
+	quiz_session_instance._sync_game_rules.rpc_id(multiplayer.get_remote_sender_id())
+	quiz_session_instance._late_join_callback.rpc_id(multiplayer.get_remote_sender_id())
 	
 @rpc("authority", "reliable")
 func _assign_active_id(id):
@@ -147,10 +153,6 @@ func _assign_active_id(id):
 @rpc("authority", "call_local", "reliable")
 func _launch_quiz():
 	_load_into_quiz()
-	if multiplayer.has_multiplayer_peer() && multiplayer.is_server():
-		#TODO: rehook up quiz start
-		print("Info: server is launching quiz")
-		
 #endregion
 
 #region Multiplayer lobby functions
@@ -190,10 +192,15 @@ func _mp_lobby_join(ip_address):
 func _mp_lobby_disconnect():
 	if multiplayer.has_multiplayer_peer():
 		GameState.activeId = multiplayer.get_unique_id()
+		_mp_player_dc.rpc()
 		print("Info: peer Id:[%s], disconnecting" % multiplayer.get_unique_id())
 		multiplayer.multiplayer_peer = null
 		GameState._clear_players()
 		mp_lobby_instance._refresh_connected_players_list()
+		
+@rpc("any_peer", "reliable")
+func _mp_player_dc():
+	_mp_on_peer_disconnected(multiplayer.get_remote_sender_id())
 
 func _mp_lobby_kick_peer(peer_id: int):
 	if !multiplayer.is_server():
@@ -230,13 +237,10 @@ func _quit_to_main_menu():
 #endregion
 
 #region quiz session functions
-func _rejoin_quiz_session():
-	_load_into_quiz()
-	print("Info: peer %s is rejoining active quiz session" % multiplayer.get_unique_id())
-
 func _load_into_quiz():
 	GameState.quiz_phase = GameState.QUIZSTATE.loading
 	_initilize_quiz_scene()
+	
 	
 func _initilize_quiz_scene():
 	_local_update_selected_scene()

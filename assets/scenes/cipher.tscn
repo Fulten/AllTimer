@@ -4076,6 +4076,7 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="ReadyCheck" type="VBoxContainer" parent="preQuiz/preSessionOrganizer/RulesText"]
+unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
@@ -4196,6 +4197,7 @@ layout_mode = 2
 theme_override_constants/separation = 420
 
 [node name="MultipleChoice" type="VBoxContainer" parent="quizInterface/session_organizer/VerticalAnswerCategories"]
+unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
@@ -4284,6 +4286,7 @@ theme_override_constants/separation = 420
 alignment = 1
 
 [node name="TrueOrFalse" type="HBoxContainer" parent="quizInterface/session_organizer/CenteredAnswerCategories"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 15
@@ -4343,6 +4346,7 @@ text = "False"
 layout_mode = 2
 
 [node name="ThisOrThat" type="HBoxContainer" parent="quizInterface/session_organizer/CenteredAnswerCategories"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 15
 alignment = 1

@@ -1,6 +1,6 @@
 extends Control
 
-#region refrences to quiz ui elements
+#region ui stuff
 #===================================================
 @onready var ui_questions_name = $quizInterface/session_organizer/question_header/question_name
 @onready var ui_questions_index = $quizInterface/session_organizer/question_header/question_index
@@ -63,6 +63,14 @@ var surprize_styleBs_a4 = [
 
 var asset_player_pannel_locked
 var asset_player_pannel_default
+
+var pre_quiz_rules_text_rounds = ""
+var pre_quiz_rules_text_rounds2 = ""
+var pre_quiz_rules_text_answers = ""
+var pre_quiz_rules_text_answers2 = ""
+var pre_quiz_rules_text_score = ""
+var pre_quiz_rules_text_score2 = ""
+var pre_quiz_rules_text_timer = ""
 #endregion
 
 #region global variables
@@ -141,7 +149,7 @@ func _ready():
 	$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.hide()
 	menu_location = MENU.noMenu
 	_pause_menu_update_graphics()
-	_set_theme_specific_graphics()
+	_set_theme_specific_information()
 	_load_config_settings()
 	_select_music_track()
 	
@@ -214,13 +222,13 @@ func _server_full_sync():
 		_get_timer_reading(GameState.quiz_phase))
 
 func _player_dropped(mp_id):
-	print("Info: player Dropped id:%s" % mp_id)
 	if GameState._game_started():
 		for i in range(GameState._player_count()):
 			if GameState.playerCardOrder[i] == mp_id:
 				_ui_player_pannel_locked(i, true)
 	if multiplayer.is_server():
 		_server_full_sync()
+		print("Info: player Dropped id:%s" % mp_id)
 
 #region quiz phase functions
 #===================================================
@@ -318,7 +326,7 @@ func _phase_end_screen():
 	if DEBUG:
 		print("!!DEBUG: endscreen phase")
 #endregion
-	
+
 #region server side rpc functions
 #===================================================
 @rpc("authority", "call_local", "reliable")
@@ -360,7 +368,8 @@ func _sync_play_phase_animation():
 		
 	match GameState.quiz_phase:
 		QUIZSTATE.preQuiz:
-			_ui_ani_display_prequiz_rules()
+			_ui_update_prequiz_rules()
+			_ui_ani_quiz_intro()
 		QUIZSTATE.endOfRules:
 			_ui_ani_quiz_start()
 		QUIZSTATE.preQuestion:
@@ -414,7 +423,8 @@ func _late_join_load_in():
 	await $ControlSwapper0.animation_finished
 	match GameState.quiz_phase:
 		QUIZSTATE.preQuiz:
-			_ui_ani_display_prequiz_rules()
+			_ui_update_prequiz_rules()
+			$ControlSwapper0.play("QuizIntro", -1, 10.0, true)
 		QUIZSTATE.endOfRules:
 			$ControlSwapper0.play("QuizStart", -1, 10.0, true)
 		QUIZSTATE.preQuestion:
@@ -640,7 +650,7 @@ func _ui_reset_player_statuses():
 			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_RightHide" % (player_number + 1))
 			player_statuses_ui_2d[player_number][2] = false
 
-func _ui_ani_display_prequiz_rules():
+func _ui_update_prequiz_rules():
 	# set the rules dependent elements to hide
 	$preQuiz/preSessionOrganizer/RulesText/Rounds.hide()
 	$preQuiz/preSessionOrganizer/RulesText/Rounds2.hide()
@@ -649,32 +659,48 @@ func _ui_ani_display_prequiz_rules():
 	$preQuiz/preSessionOrganizer/RulesText/Score.hide()
 	$preQuiz/preSessionOrganizer/RulesText/Score2.hide()
 	
-	if GameState.quizOptions.win_con_int == 0: # 0 : Highest score after x questions
+	var win_con_int = 0
+	var win_questions = 10
+	var win_points = 5000
+	var timer = 30
+	
+	if GameState.quizOptions.win_con_int:
+		win_con_int = GameState.quizOptions.win_con_int
+	if GameState.quizOptions.win_questions:
+		win_questions = GameState.quizOptions.win_questions
+	if GameState.quizOptions.win_points:
+		win_points = GameState.quizOptions.win_points
+	if GameState.quizOptions.timer:
+		timer = GameState.quizOptions.timer
+	
+	if win_con_int == 0: # 0 : Highest score after x questions
 		if !(GameState.CurrentTheme == "Fatal Surprise"):
-			$preQuiz/preSessionOrganizer/RulesText/Rounds.text %= GameState.quizOptions.win_questions
-		$preQuiz/preSessionOrganizer/RulesText/Rounds2.text %= GameState.quizOptions.win_questions
+			$preQuiz/preSessionOrganizer/RulesText/Rounds.text = pre_quiz_rules_text_rounds % win_questions
+		$preQuiz/preSessionOrganizer/RulesText/Rounds2.text = pre_quiz_rules_text_rounds2 % win_questions
 		$preQuiz/preSessionOrganizer/RulesText/Rounds.show()
 		$preQuiz/preSessionOrganizer/RulesText/Rounds2.show()
-	elif GameState.quizOptions.win_con_int == 1: # 1 : First to answer x questions correctly
-		$preQuiz/preSessionOrganizer/RulesText/Answers.text %= GameState.quizOptions.win_questions
-		$preQuiz/preSessionOrganizer/RulesText/Answers2.text %= GameState.quizOptions.win_questions
+	elif win_con_int == 1: # 1 : First to answer x questions correctly
+		$preQuiz/preSessionOrganizer/RulesText/Answers.text = pre_quiz_rules_text_answers % win_questions
+		$preQuiz/preSessionOrganizer/RulesText/Answers2.text = pre_quiz_rules_text_answers2 % win_questions
 		$preQuiz/preSessionOrganizer/RulesText/Answers.show()
 		$preQuiz/preSessionOrganizer/RulesText/Answers2.show()
-	elif GameState.quizOptions.win_con_int == 2: # 2 : First to reach x points
-		$preQuiz/preSessionOrganizer/RulesText/Score2.text %= GameState.quizOptions.win_points
+	elif win_con_int == 2: # 2 : First to reach x points
+		$preQuiz/preSessionOrganizer/RulesText/Score2.text = pre_quiz_rules_text_score2 % win_points
 		$preQuiz/preSessionOrganizer/RulesText/Score.show()
 		$preQuiz/preSessionOrganizer/RulesText/Score2.show()
 
-	$preQuiz/preSessionOrganizer/RulesText/Timer.text %= GameState.quizOptions.timer
-	$ControlSwapper0.play("QuizIntro")
-	
+	$preQuiz/preSessionOrganizer/RulesText/Timer.text = pre_quiz_rules_text_timer % timer
+
 func _on_control_swapper_0_animation_finished(anim_name):
 	if "QuizIntro" == anim_name && GameState.quiz_phase == QUIZSTATE.preQuiz:
 		$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.show()
 		$ControlSwapper0.play("QuizPrompting")
-	
+
+func _ui_ani_quiz_intro():
+	$ControlSwapper0.queue("QuizIntro")
+
 func _ui_ani_quiz_start():
-	$ControlSwapper0.play("QuizStart")
+	$ControlSwapper0.queue("QuizStart")
 
 func _ui_ani_question_load_a():
 	$ControlSwapper0.queue("QuestionLoad_A")
@@ -728,6 +754,8 @@ func _host_setup_quiz():
 	_select_question_filter()
 	_io_load_master_questions()
 	_io_load_master_chances()
+	
+	QUIZ_LENGTH = GameState.quizOptions.win_questions
 	var question_count = _select_quiz_questions(QUIZ_LENGTH)
 	if question_count < QUIZ_LENGTH:
 		print("Info: fewer than max questions picked, only %s questions in this quiz" % question_count)
@@ -833,14 +861,38 @@ func _select_music_track():
 	else:
 		SoundMaster._play_music_track("default_theme")
 
-func _set_theme_specific_graphics():
+func _set_theme_specific_information():
 	if GameState.CurrentTheme == "Patriotic Cipher":
+		pre_quiz_rules_text_rounds = "The player with the highest score after %s rounds wins."
+		pre_quiz_rules_text_rounds2 = "The quiz will end after %s round(s)"
+		pre_quiz_rules_text_answers = "The first agent to correctly answer %s questions wins."
+		pre_quiz_rules_text_answers2 = "The quiz will end when an agent correctly answers %s questions"
+		pre_quiz_rules_text_score = "The first agent to reach the high score wins."
+		pre_quiz_rules_text_score2 = "The quiz will end when an agent achieves a score of %s"
+		pre_quiz_rules_text_timer = "Agents will have %s seconds to answer each question."
+		
 		asset_player_pannel_locked = load("res://assets/uiux/session_themes/Patriotic Cipher/label_Cipher_ActivePlayer_locked.tres")
 		asset_player_pannel_default = load("res://assets/uiux/session_themes/Patriotic Cipher/label_Cipher_ActivePlayer_default.tres")
 	elif GameState.CurrentTheme == "Fatal Surprise":
+		pre_quiz_rules_text_rounds = "There's an exact number of rounds in this one, whoever has the highest score at the end takes it all."
+		pre_quiz_rules_text_rounds2 = "This exam lasts for %s round(s), don't let it slip through your fingers."
+		pre_quiz_rules_text_answers = "Score doesn't apply in this run, so there's no penalty for wrong answers."
+		pre_quiz_rules_text_answers2 = "Once somebody answers %s questions correctly, they get crowned winner. You like crowns?"
+		pre_quiz_rules_text_score = "There's a target score we need you to hit before the exam ends -"
+		pre_quiz_rules_text_score2 = "The first person to reach %s points wins, that's gotta be you."
+		pre_quiz_rules_text_timer = "Members only get %s seconds per question."
+		
 		asset_player_pannel_locked = load("res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_ActivePlayer_locked.tres")
 		asset_player_pannel_default = load("res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_ActivePlayer_default.tres")
 	else:
+		pre_quiz_rules_text_rounds = "The player with the highest score after %s rounds wins."
+		pre_quiz_rules_text_rounds2 = "The quiz will end after %s round(s)"
+		pre_quiz_rules_text_answers = "The first player to correctly answer %s questions wins."
+		pre_quiz_rules_text_answers2 = "The quiz will end when a player correctly answers %s questions"
+		pre_quiz_rules_text_score = "The first player to reach the high score wins."
+		pre_quiz_rules_text_score2 = "The quiz will end when a player achieves a score of %s"
+		pre_quiz_rules_text_timer = "Players will have %s seconds to answer each question."
+		
 		asset_player_pannel_locked = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Locked.tres")
 		asset_player_pannel_default = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Default.tres")
 #endregion

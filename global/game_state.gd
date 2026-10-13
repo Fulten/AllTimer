@@ -61,7 +61,7 @@ class QuizOptions:
 	# 1 : First to answer 10 questions correctly
 	# 2 : First to reach 1000 points
 
-	func initilize(i_timer = 30, i_win_con = "default", i_win_con_int = 0, i_win_questions = 10, i_win_points = 1000) :
+	func initilize(i_timer = 30, i_win_con = "default", i_win_con_int = 0, i_win_questions = 10, i_win_points = 5000) :
 		timer = i_timer
 		win_con = i_win_con # textual representation of wincondition
 		win_con_int = i_win_con_int #integer representation of windcondition

@@ -45,7 +45,6 @@ func _connect_multiplayer_callback_functions():
 func _mp_on_connected_to_server():
 	GameState._new_player(UserProfiles._get_selected_profile()["name"], multiplayer.get_unique_id())
 	mp_lobby_instance._connected_to_server()
-	print("Info: peer %s has connected to server" % multiplayer.get_unique_id())
 
 # Emitted when this MultiplayerAPI's multiplayer_peer fails to establish a connection to a server. Only emitted on clients.
 func _mp_on_connected_fail():
@@ -58,6 +57,8 @@ func _mp_on_connected_fail():
 # Upon connecting to a server, a client also receives this signal for the server (with ID being 1).
 func _mp_on_peer_connected(id: int):
 	_request_player_data.rpc_id(id)
+	if multiplayer.is_server():
+		print("Info: peer %s has connected to server" % id)
 
 # Emitted when this MultiplayerAPI's multiplayer_peer disconnects from a peer. 
 # Clients get notified when other clients disconnect from the same server.
@@ -68,7 +69,8 @@ func _mp_on_peer_disconnected(id: int):
 		GameState._deactivate_player(id)
 		quiz_session_instance._player_dropped(id)
 	mp_lobby_instance._refresh_connected_players_list()
-	print("Info: peer %s has disconnected from server" % id)
+	if multiplayer.is_server():
+		print("Info: peer %s has disconnected from server" % id)
 	
 # Emitted when this MultiplayerAPI's multiplayer_peer disconnects from server. Only emitted on clients.
 func _mp_on_server_disconnected():
@@ -102,6 +104,7 @@ func _recive_player_data(playerName, activeId):
 		mp_lobby_instance._refresh_connected_players_list()
 		if multiplayer.is_server():
 			var rejoined_profile = GameState.players[multiplayer.get_remote_sender_id()]
+			await get_tree().create_timer(0.1).timeout
 			_late_join_client.rpc_id(multiplayer.get_remote_sender_id(), 
 				GameState._player_count(),
 				multiplayer.get_remote_sender_id(),
@@ -143,7 +146,7 @@ func _resync_player_data_recive(playerName):
 func _late_join_client_ready():
 	quiz_session_instance._server_full_sync()
 	quiz_session_instance._sync_game_rules.rpc_id(multiplayer.get_remote_sender_id())
-	quiz_session_instance._late_join_callback.rpc_id(multiplayer.get_remote_sender_id())
+	quiz_session_instance._late_join_load_in.rpc_id(multiplayer.get_remote_sender_id())
 	
 @rpc("authority", "reliable")
 func _assign_active_id(id):
@@ -193,7 +196,6 @@ func _mp_lobby_disconnect():
 	if multiplayer.has_multiplayer_peer():
 		GameState.activeId = multiplayer.get_unique_id()
 		_mp_player_dc.rpc()
-		print("Info: peer Id:[%s], disconnecting" % multiplayer.get_unique_id())
 		multiplayer.multiplayer_peer = null
 		GameState._clear_players()
 		mp_lobby_instance._refresh_connected_players_list()
@@ -225,7 +227,6 @@ func _mp_lobby_launch_quiz():
 
 func _mp_lobby_exit():
 	if multiplayer.has_multiplayer_peer():
-		print("Info: Peer Id:[%s], disconnecting" % multiplayer.get_unique_id())
 		multiplayer.multiplayer_peer = null
 		GameState._clear_players()
 		mp_lobby_instance._refresh_connected_players_list()

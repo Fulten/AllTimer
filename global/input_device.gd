@@ -53,7 +53,6 @@ func _input(event: InputEvent) -> void:
 		if absf(event.axis_value) >= STICK_DEADZONE:
 			_set_device(_get_joy_type(event.device), event.device)
 
-
 func is_gamepad() -> bool:
 	return current != DeviceType.KEYBOARD_MOUSE
 

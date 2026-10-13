@@ -117,13 +117,18 @@ var useTagFilter = false
 
 #endregion
 
+var _icons: Dictionary = {}
+
 ##Called when the node enters the scene tree for the first time.
 ##primarily used by the server to setup the quiz session
 func _ready():
 	_reset_question_rules_visibility()
 	_set_theme_specific_graphics()
 	_load_config_settings()
+	_load_icons()
 	_select_music_track()
+	InputDevice.device_changed.connect(_on_device_changed)
+	_on_device_changed(InputDevice.current, InputDevice.last_joypad_id)
 	
 	if multiplayer.is_server():
 		$pauseScreen/pauseCase/pauseBase/quitButton.text = "lobby"
@@ -155,6 +160,32 @@ func _ready():
 		print("server [%s] loaded" % multiplayer.get_unique_id())
 		pass
 	pass
+
+func _load_icons() -> void:
+	for device in ["KB", "XB", "PS"]:
+		for input in range(1, 5):
+			var file := "res://assets/uiux/session_themes/T_%s%s_D.tga" % [device, input]
+			_icons["%s%s" % [device, input]] = load(file)
+	
+func _on_device_changed(device: InputDevice.DeviceType, _id: int) -> void:
+	match device:
+		InputDevice.DeviceType.KEYBOARD_MOUSE: _replace_icons("KB")
+		InputDevice.DeviceType.PLAYSTATION: _replace_icons("PS")
+		_: _replace_icons("XB")
+
+func _replace_icons(device: String) -> void:
+	%ReadyCheck/ButtonTextures/Button1Texture.texture = _icons["%s1" % [device]]
+	%ReadyCheck/ButtonTextures/Button2Texture.texture = _icons["%s2" % [device]]
+	%ReadyCheck/ButtonTextures/Button3Texture.texture = _icons["%s3" % [device]]
+	%ReadyCheck/ButtonTextures/Button4Texture.texture = _icons["%s4" % [device]]
+	%MultipleChoice/answer_pair1/a1_icon.texture = _icons["%s1" % [device]]
+	%MultipleChoice/answer_pair2/a2_icon.texture = _icons["%s2" % [device]]
+	%MultipleChoice/answer_pair3/a3_icon.texture = _icons["%s3" % [device]]
+	%MultipleChoice/answer_pair4/a4_icon.texture = _icons["%s4" % [device]]
+	%TrueOrFalse/True/a1_icon.texture = _icons["%s1" % [device]]
+	%TrueOrFalse/False/a2_icon.texture = _icons["%s2" % [device]]
+	%ThisOrThat/This/a1_icon.texture = _icons["%s1" % [device]]
+	%ThisOrThat/That/a2_icon.texture = _icons["%s2" % [device]]
 
 func _process(_delta):
 	if GameState.GameStarted:

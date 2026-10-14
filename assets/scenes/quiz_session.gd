@@ -176,7 +176,7 @@ func _input(event):
 	if _is_event_keypress(event, KEY_ESCAPE):
 		_escape_game_menu()
 
-	if DEBUG and multiplayer.is_server() and _is_event_keypress(event, KEY_P):
+	if DEBUG and multiplayer.has_multiplayer_peer() and multiplayer.is_server() and _is_event_keypress(event, KEY_P):
 		_DEBUG_next_question()
 	
 	match GameState.quiz_phase:
@@ -420,29 +420,33 @@ func _sync_game_rules(
 	
 @rpc("authority", "reliable")
 func _late_join_load_in():
-	$ControlSwapper0.play("QuizStart", -1, 10.0)
-	await $ControlSwapper0.animation_finished
+	_ui_update_prequiz_rules()
 	match GameState.quiz_phase:
 		QUIZSTATE.preQuiz:
-			_ui_update_prequiz_rules()
-			$ControlSwapper0.play("QuizIntro", -1, 10.0, true)
+			$ControlSwapper0.play("QuizIntro", -1, 10.0, false)
 		QUIZSTATE.endOfRules:
-			$ControlSwapper0.play("QuizStart", -1, 10.0, true)
+			$ControlSwapper0.play("QuizStart", -1, 20.0, false)
 		QUIZSTATE.preQuestion:
-			$ControlSwapper0.play("QuizStart", -1, 10.0, true)
-			$ControlSwapper0.play("QuestionLoad_A", -1, 10.0, true)
+			$ControlSwapper0.play("QuizStart", -1, 20.0, false)
+			await $ControlSwapper0.animation_finished
+			$ControlSwapper0.play("QuestionLoad_A", -1, 20.0, false)
 		QUIZSTATE.question:
-			$ControlSwapper0.play("QuizStart", -1, 10.0, true)
-			$ControlSwapper0.play("QuestionLoad_A", -1, 10.0, true)
-			$ControlSwapper0.play("QuestionLoad_B", -1, 10.0, true)
+			$ControlSwapper0.play("QuizStart", -1, 20.0, false)
+			await $ControlSwapper0.animation_finished
+			$ControlSwapper0.play("QuestionLoad_A", -1, 20.0, false)
+			await $ControlSwapper0.animation_finished
+			$ControlSwapper0.play("QuestionLoad_B", -1, 20.0, false)
 		QUIZSTATE.postQuestion:
-			$ControlSwapper0.play("QuizStart", -1, 10.0, true)
-			$ControlSwapper0.play("QuestionLoad_A", -1, 10.0, true)
+			$ControlSwapper0.play("QuizStart", -1, 20.0, false)
+			await $ControlSwapper0.animation_finished
+			$ControlSwapper0.play("QuestionLoad_A", -1, 20.0, false)
 			ui_post_question.show()
 		QUIZSTATE.endOfPhase:
-			$ControlSwapper0.play("QuizStart", -1, 10.0, true)
-			$ControlSwapper0.play("QuestionLoad_A", -1, 10.0, true)
-			$ControlSwapper0.play("QuestionUnload", -1, 10.0, true)
+			$ControlSwapper0.play("QuizStart", -1, 20.0, false)
+			await $ControlSwapper0.animation_finished
+			$ControlSwapper0.play("QuestionLoad_A", -1, 20.0, false)
+			await $ControlSwapper0.animation_finished
+			$ControlSwapper0.play("QuestionUnload", -1, 20.0, false)
 		QUIZSTATE.endScreen:
 			pass
 	_late_join_player_setup_done.rpc_id(1)
@@ -706,19 +710,19 @@ func _ui_ani_quiz_intro():
 	$ControlSwapper0.queue("QuizIntro")
 
 func _ui_ani_quiz_start():
-	$ControlSwapper0.queue("QuizStart")
+	$ControlSwapper0.play("QuizStart")
 
 func _ui_ani_question_load_a():
-	$ControlSwapper0.queue("QuestionLoad_A")
+	$ControlSwapper0.play("QuestionLoad_A")
 
 func _ui_ani_question_load_b():
-	$ControlSwapper0.queue("QuestionLoad_B")
+	$ControlSwapper0.play("QuestionLoad_B")
 	
 func _ui_ani_question_answers_unload():
 	$ControlSwapper0.play_backwards("QuestionLoad_B")
 	
 func _ui_ani_question_unload():
-	$ControlSwapper0.queue("QuestionUnload")
+	$ControlSwapper0.play("QuestionUnload")
 #endregion
 
 #region timers
@@ -1162,3 +1166,6 @@ func _DEBUG_next_question():
 func _DEBUG_restart_from_beginning():
 	pass
 #endregion
+
+func _test():
+	pass

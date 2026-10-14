@@ -63,21 +63,22 @@ func _mp_on_peer_connected(id: int):
 # Emitted when this MultiplayerAPI's multiplayer_peer disconnects from a peer. 
 # Clients get notified when other clients disconnect from the same server.
 func _mp_on_peer_disconnected(id: int):
-	if GameState._in_lobby():
-		GameState._remove_player(id)
-	else:
-		GameState._deactivate_player(id)
-		quiz_session_instance._player_dropped(id)
-	mp_lobby_instance._refresh_connected_players_list()
-	if multiplayer.is_server():
-		print("Info: peer %s has disconnected from server" % id)
+	if multiplayer.has_multiplayer_peer():
+		if GameState._in_lobby():
+			GameState._remove_player(id)
+		else:
+			GameState._deactivate_player(id)
+			quiz_session_instance._player_dropped(id)
+		mp_lobby_instance._refresh_connected_players_list()
+		if multiplayer.is_server():
+			print("Info: peer %s has disconnected from server" % id)
 	
 # Emitted when this MultiplayerAPI's multiplayer_peer disconnects from server. Only emitted on clients.
 func _mp_on_server_disconnected():
 	multiplayer.multiplayer_peer = null
 	GameState.players.clear()
 	mp_lobby_instance._connection_reset("Disconnected From Server")
-#endregion
+#endregions
 
 #region Multiplayer RPC functions
 @rpc("authority", "reliable")
@@ -104,7 +105,6 @@ func _recive_player_data(playerName, activeId):
 		mp_lobby_instance._refresh_connected_players_list()
 		if multiplayer.is_server():
 			var rejoined_profile = GameState.players[multiplayer.get_remote_sender_id()]
-			await get_tree().create_timer(0.1).timeout
 			_late_join_client.rpc_id(multiplayer.get_remote_sender_id(), 
 				GameState._player_count(),
 				multiplayer.get_remote_sender_id(),
@@ -118,6 +118,7 @@ func _recive_player_data(playerName, activeId):
 
 @rpc("authority", "reliable")
 func _late_join_client(playerCount, new_active_id, p_name, p_score, p_last_score, p_chances):
+	_load_into_quiz()
 	GameState.players.clear()
 	GameState._new_player(p_name, multiplayer.get_unique_id())
 	GameState.players[multiplayer.get_unique_id()]["score"] = p_score
@@ -137,7 +138,6 @@ func _resync_player_data_recive(playerName):
 	late_join_players_recived += 1
 	
 	if late_join_player_count == late_join_players_recived:
-		_load_into_quiz()
 		_late_join_client_ready.rpc_id(1)
 		late_join_player_count = -1
 		late_join_players_recived = 1

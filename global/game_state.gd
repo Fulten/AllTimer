@@ -5,6 +5,7 @@ extends Node
 class Player:
 	var name: String
 	var active: bool
+	var loaded: bool
 	
 	var guess: int
 	var guessTime: int
@@ -18,6 +19,7 @@ class Player:
 	func initilize(p_name):
 		name = p_name
 		active = true
+		loaded = false
 		
 		guess = -1
 		guessTime = 0
@@ -127,6 +129,7 @@ var tags_list = {}
 
 var TagsFilterFile = "user://quiz_filters.json"
 var TagsFilters = {}
+
 
 #endregion
 

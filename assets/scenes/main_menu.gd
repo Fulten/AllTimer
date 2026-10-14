@@ -198,6 +198,7 @@ func _input(event):
 		node_hover_text.set_position(get_viewport().get_mouse_position() + Vector2(20.0,0.0))
 	pass
 
+@warning_ignore("shadowed_variable_base_class")
 func _profileRequired_warning(is_visible: bool):
 	$Stack_0/NotifLocus.visible = is_visible
 	$Stack_0/NotifLocus/Notif_ProfileRequired.visible = is_visible

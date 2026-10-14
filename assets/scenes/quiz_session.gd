@@ -164,7 +164,9 @@ func _process(delta):
 	delta_t += delta
 	if delta_t > 0.2:
 		if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
-			_sync_game_timer.rpc(_get_timer_reading(GameState.quiz_phase))
+			for key in GameState.players:
+				if GameState.players[key]["loaded"]:
+					_sync_game_timer.rpc_id(key, _get_timer_reading(GameState.quiz_phase))
 
 func _is_event_keypress(event, key) -> bool:
 	return event is InputEventKey and event.pressed and event.keycode == key
@@ -226,6 +228,7 @@ func _player_dropped(mp_id):
 			if GameState.playerCardOrder[i] == mp_id:
 				_ui_player_pannel_locked(i, true)
 	if multiplayer.is_server():
+		GameState.players[mp_id]["loaded"] = false
 		_server_full_sync()
 		print("Info: player Dropped id:%s" % mp_id)
 
@@ -442,18 +445,19 @@ func _late_join_load_in():
 			$ControlSwapper0.play("QuestionUnload", -1, 10.0, true)
 		QUIZSTATE.endScreen:
 			pass
-
+	_late_join_player_setup_done.rpc_id(1)
 #endregion
 
 #region client side rpc functions
 #===================================================
 @rpc("any_peer", "reliable")
 func _player_guess_rpc(mp_id, guess):
-	
-	pass
+	#TODO: register player guess with server
+	print("DEBUG: id: %s, guess: %s" % [mp_id, guess])
 
 @rpc("any_peer", "reliable")
 func _player_setup_done():
+	GameState.players[multiplayer.get_remote_sender_id()]["loaded"] = true
 	if multiplayer.is_server():
 		GameState.players_loaded += 1
 		if GameState.players_loaded == GameState._player_count():
@@ -467,6 +471,10 @@ func _player_ready():
 			_phase_end_of_rules()
 	else:
 		_player_ready.rpc_id(1)
+
+@rpc("any_peer", "reliable")
+func _late_join_player_setup_done():
+	GameState.players[multiplayer.get_remote_sender_id()]["loaded"] = true
 #endregion
 
 #region question related

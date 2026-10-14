@@ -198,9 +198,9 @@ func _input(event):
 		node_hover_text.set_position(get_viewport().get_mouse_position() + Vector2(20.0,0.0))
 	pass
 
-func _profileRequired_warning(visible: bool):
-	$Stack_0/NotifLocus.visible = visible
-	$Stack_0/NotifLocus/Notif_ProfileRequired.visible = visible
+func _profileRequired_warning(is_visible: bool):
+	$Stack_0/NotifLocus.visible = is_visible
+	$Stack_0/NotifLocus/Notif_ProfileRequired.visible = is_visible
 	
 
 #region Button UX

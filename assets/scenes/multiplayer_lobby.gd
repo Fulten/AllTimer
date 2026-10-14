@@ -92,11 +92,11 @@ func _init_theme_selector():
 	var ui_themesList = $LobbyOrganizer/Columns/SettingsColumn/ThemeCase/ThemesList
 	ui_themesList.clear()
 	ui_themesList.add_item("Default")
-	for theme in UserProfiles.THEME_NAMES:
-		# uncomment the following comments, and delete the extra "ui_themesList.add_item(theme)"
-		#if UserProfiles.unlocked_themes[theme]["unlocked"]:
-		#	ui_themesList.add_item(theme)
-		ui_themesList.add_item(theme)
+	for game_theme in UserProfiles.THEME_NAMES:
+		# uncomment the following comments, and delete the extra "ui_themesList.add_item(game_theme)"
+		#if UserProfiles.unlocked_themes[game_theme]["unlocked"]:
+		#	ui_themesList.add_item(game_theme)
+		ui_themesList.add_item(game_theme)
 
 func _init_filter_preset():
 	$LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.clear()

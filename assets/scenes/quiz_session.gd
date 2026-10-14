@@ -190,7 +190,7 @@ func _input(event):
 					if (questionType == "True/False" or questionType == "This/That") and guess > 1:
 						break
 					_player_guess(guess)
-	
+
 func _player_guess(guess):
 	if GameState._can_guess():
 		if multiplayer.is_server():
@@ -218,8 +218,7 @@ func _server_full_sync():
 	_sync_quiz_phase.rpc(
 		GameState.quiz_phase, 
 		quiz_question_index,
-		q["name"], q["explainer"], q["question"], question_answers, q["questionType"], 
-		_get_timer_reading(GameState.quiz_phase))
+		q["name"], q["explainer"], q["question"], question_answers, q["questionType"])
 
 func _player_dropped(mp_id):
 	if GameState._game_started():
@@ -343,8 +342,7 @@ func _sync_quiz_phase(
 	q_explain: String, 
 	q_body: String, 
 	q_answers: Array, 
-	q_type: String, 
-	timer_reading: Array
+	q_type: String
 	):
 	
 	if GameState._game_started():

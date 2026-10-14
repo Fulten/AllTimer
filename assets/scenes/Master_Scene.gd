@@ -145,7 +145,13 @@ func _resync_player_data_recive(playerName):
 @rpc("any_peer", "reliable")
 func _late_join_client_ready():
 	quiz_session_instance._server_full_sync()
-	quiz_session_instance._sync_game_rules.rpc_id(multiplayer.get_remote_sender_id())
+	quiz_session_instance._sync_game_rules.rpc_id(
+		multiplayer.get_remote_sender_id(),
+		GameState.quizOptions.timer, 
+		"Highest score after 10 questions", 
+		0,  # cut feature, always use "highest score after x question"
+		10, # 10 questions
+		GameState.quizOptions.win_points)
 	quiz_session_instance._late_join_load_in.rpc_id(multiplayer.get_remote_sender_id())
 	
 @rpc("authority", "reliable")

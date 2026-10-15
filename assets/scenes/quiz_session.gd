@@ -196,6 +196,7 @@ func _input(event):
 					if (questionType == "True/False" or questionType == "This/That") and guess > 1:
 						break
 					_player_guess(guess)
+	pass
 
 func _player_guess(guess):
 	if GameState._can_guess():
@@ -209,14 +210,17 @@ func _server_full_sync():
 	player_ids.resize(GameState._player_count())
 	var player_scores = []
 	player_scores.resize(GameState._player_count())
+	var player_scores_last = []
+	player_scores_last.resize(GameState._player_count())
 	var index = 0
 	
 	for key in GameState.players:
 		player_ids[index] = key
 		player_scores[index] = GameState.players[key]["score"]
+		player_scores_last[index] = GameState.players[key]["last_score"]
 		index += 1
 	
-	_sync_player_info.rpc(player_ids, player_scores, player_scores)
+	_sync_player_info.rpc(player_ids, player_scores, player_scores_last)
 	
 	var q = quiz_questions_list[quiz_question_index]
 	question_uuid = q["uuid"]
@@ -263,7 +267,7 @@ func _phase_end_of_rules():
 	_server_full_sync()
 	_sync_play_phase_animation.rpc()
 	
-	get_tree().create_timer(4.2).timeout.connect(_phase_pre_question)
+	get_tree().create_timer(3.2).timeout.connect(_phase_pre_question)
 
 func _phase_pre_question():
 	if DEBUG:
@@ -307,7 +311,7 @@ func _phase_post_question():
 	_server_full_sync()
 	_sync_play_phase_animation.rpc()
 	
-	ui_postquestion_timer.start(post_question_delay_default + extra_seconds + 1.0)
+	ui_postquestion_timer.start(post_question_delay_default + extra_seconds + 1.5)
 
 func _phase_end_of_phase():
 	if DEBUG:
@@ -315,6 +319,8 @@ func _phase_end_of_phase():
 	GameState.quiz_phase = QUIZSTATE.endOfPhase
 	ui_postquestion_timer.stop()
 	
+	for key in GameState.players:
+		GameState.players[key]["last_score"] = GameState.players[key]["score"]
 	
 	_server_full_sync()
 	_sync_play_phase_animation.rpc()
@@ -407,6 +413,7 @@ func _sync_player_info(player_ids: Array, player_scores: Array, player_scores_la
 		GameState.players[player_ids[i]]["last_score"] = player_scores_last[i]
 	
 		_ui_update_player_panels()
+		_ui_update_scores()
 
 @rpc("authority", "call_local", "reliable")
 func _sync_game_timer(clock_reading: Array):
@@ -550,14 +557,17 @@ func _ui_update_player_panels():
 		if GameState.playerCardOrder[i] != -1:
 			var player_info = GameState.players[GameState.playerCardOrder[i]]
 			ui_player_names[i].text = player_info["name"]
-			ui_player_scores[i].text = "%s" % player_info["score"]
 			ui_players[i].show()
 		else:
 			ui_players[i].hide()
-	
-	rollup_count = 10
-	_ui_local_score_rollup()
 
+func _ui_update_scores():
+	for key in GameState.players:
+		if GameState.players[key]["score"] != GameState.players[key]["last_score"]:
+			rollup_count = 10
+			_ui_local_score_rollup()
+			break
+	
 func _ui_local_score_rollup():
 	var t = float(rollup_count) / float(ROLLUP_MAX)
 	
@@ -568,10 +578,10 @@ func _ui_local_score_rollup():
 		for i in range(GameState._player_count()):
 			var current_score = GameState.players[GameState.playerCardOrder[i]]["score"]
 			var last_score = GameState.players[GameState.playerCardOrder[i]]["last_score"]
-		
+			
 			ui_player_scores[i].text = str(current_score + (last_score - current_score) * t)
 			rollup_count -= 1
-		get_tree().create_timer(0.025).timeout.connect(_ui_local_score_rollup)
+		get_tree().create_timer(0.1).timeout.connect(_ui_local_score_rollup)
 
 func _ui_player_pannel_locked(index, locked: bool):
 	if locked or not GameState.players[GameState.playerCardOrder[index]]["active"]:

@@ -33,6 +33,10 @@ class Player:
 		chances = {}
 		
 	func reset_player():
+		active = true
+		loaded = false
+		ready = false
+		
 		guess = -1
 		guessTime = 0
 		hasGuessed = false

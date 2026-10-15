@@ -175,15 +175,19 @@ func _input(event):
 	# opens game menu locally on client
 	if _is_event_keypress(event, KEY_ESCAPE):
 		_escape_game_menu()
-
-	if DEBUG and multiplayer.has_multiplayer_peer() and multiplayer.is_server() and _is_event_keypress(event, KEY_P):
-		_DEBUG_next_question()
+	
+	#debug keybinds
+	if DEBUG and multiplayer.has_multiplayer_peer() and multiplayer.is_server():
+		if _is_event_keypress(event, KEY_N):
+			_DEBUG_next_question()
+		if _is_event_keypress(event, KEY_R):
+			_DEBUG_restart_from_beginning()
 	
 	match GameState.quiz_phase:
 		QUIZSTATE.preQuiz:
 			for guess in range(4):
 				if event.is_action_pressed(player_input % guess):
-					_player_ready()
+					_player_ready(multiplayer.get_unique_id())
 		QUIZSTATE.question:
 			for guess in range(4):
 				if event.is_action_pressed(player_input % guess):
@@ -242,7 +246,7 @@ func _phase_pre_quiz():
 	ui_prequestion_timer.timeout.connect(_phase_question)
 	ui_countdown_timer.timeout.connect(_phase_post_question)
 	ui_postquestion_timer.timeout.connect(_phase_end_of_phase)
-		
+	
 	var q = quiz_questions_list[quiz_question_index]
 	question_uuid = q["uuid"]
 	
@@ -269,49 +273,58 @@ func _phase_pre_question():
 	@warning_ignore("narrowing_conversion")
 	var extra_seconds : int = roundf(question_body.length() * 0.025)
 	
-	
 	_server_full_sync()
-	
-	ui_prequestion_timer.start(pre_question_delay_default + extra_seconds)
-	
 	_sync_play_phase_animation.rpc()
 	
+	ui_prequestion_timer.start(pre_question_delay_default + extra_seconds)
+
 func _phase_question():
 	if DEBUG:
 		print("!!DEBUG: Question phase")
 	GameState.quiz_phase = QUIZSTATE.question
-	
 	ui_prequestion_timer.stop()
-	ui_countdown_timer.start(GameState.quizOptions.timer)
 	
 	_server_full_sync()
 	_sync_play_phase_animation.rpc()
+	
+	ui_countdown_timer.start(GameState.quizOptions.timer)
 	
 func _phase_post_question():
 	if DEBUG:
 		print("!!DEBUG: Postquestion phase")
 	GameState.quiz_phase = QUIZSTATE.postQuestion
-	
 	ui_countdown_timer.stop()
+	
 	@warning_ignore("narrowing_conversion")
 	var extra_seconds : int = roundf(question_explainer.length() * 0.025)
 	
+	var question_score_value = 1000
+	
+	GameState._check_player_answers(question_answers_correct_index, question_score_value)
+	#TODO: recored info needed to update profile statstics at the end of quiz
+	GameState._reset_player_guesses()
 	
 	_server_full_sync()
-	
-
-	ui_postquestion_timer.start(post_question_delay_default + extra_seconds + 1.0)
-	
 	_sync_play_phase_animation.rpc()
 	
-	
+	ui_postquestion_timer.start(post_question_delay_default + extra_seconds + 1.0)
+
 func _phase_end_of_phase():
 	if DEBUG:
 		print("!!DEBUG: end of phase phase")
 	GameState.quiz_phase = QUIZSTATE.endOfPhase
-	
 	ui_postquestion_timer.stop()
 	
+	
+	_server_full_sync()
+	_sync_play_phase_animation.rpc()
+	
+	if quiz_question_index < QUIZ_LENGTH - 1:
+		get_tree().create_timer(1.2).timeout.connect(_phase_next_question)
+	else:
+		get_tree().create_timer(1.2).timeout.connect(_phase_end_screen)
+		
+func _phase_next_question():
 	quiz_question_index += 1
 	
 	var q = quiz_questions_list[quiz_question_index]
@@ -319,14 +332,15 @@ func _phase_end_of_phase():
 	
 	_set_question_answers_as_randomised_array(q)
 	
-	_server_full_sync()
-	_sync_play_phase_animation.rpc()
-	
-	get_tree().create_timer(1.2).timeout.connect(_phase_pre_question)
-	
+	_phase_pre_question()
+
 func _phase_end_screen():
 	if DEBUG:
 		print("!!DEBUG: endscreen phase")
+	GameState.quiz_phase = QUIZSTATE.endScreen
+	
+	_server_full_sync()
+	_sync_play_phase_animation.rpc()
 #endregion
 
 #region server side rpc functions
@@ -456,8 +470,11 @@ func _late_join_load_in():
 #===================================================
 @rpc("any_peer", "reliable")
 func _player_guess_rpc(mp_id, guess):
-	#TODO: register player guess with server
-	print("DEBUG: id: %s, guess: %s" % [mp_id, guess])
+	if GameState.quiz_phase == QUIZSTATE.question:
+		if not ui_countdown_timer.is_stopped():
+			GameState._player_guess(mp_id, guess, ui_countdown_timer.get_time_left())
+		if GameState._have_all_players_answered():
+			_phase_post_question()
 
 @rpc("any_peer", "reliable")
 func _player_setup_done():
@@ -468,13 +485,13 @@ func _player_setup_done():
 			_phase_pre_quiz()
 
 @rpc("any_peer", "reliable")
-func _player_ready():
+func _player_ready(mp_id):
 	if multiplayer.is_server():
-		players_ready += 1
-		if players_ready >= GameState._player_count():
+		GameState.players[mp_id]["ready"] = true
+		if GameState._are_all_players_ready():
 			_phase_end_of_rules()
 	else:
-		_player_ready.rpc_id(1)
+		_player_ready.rpc_id(1, mp_id)
 
 @rpc("any_peer", "reliable")
 func _late_join_player_setup_done():
@@ -768,6 +785,7 @@ func _host_setup_quiz():
 	QUIZ_LENGTH = GameState.quizOptions.win_questions
 	var question_count = _select_quiz_questions(QUIZ_LENGTH)
 	if question_count < QUIZ_LENGTH:
+		QUIZ_LENGTH = question_count
 		print("Info: fewer than max questions picked, only %s questions in this quiz" % question_count)
 
 	_clean_questions_data()

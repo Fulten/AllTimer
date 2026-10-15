@@ -6,6 +6,7 @@ class Player:
 	var name: String
 	var active: bool
 	var loaded: bool
+	var ready: bool
 	
 	var guess: int
 	var guessTime: int
@@ -20,10 +21,12 @@ class Player:
 		name = p_name
 		active = true
 		loaded = false
+		ready = false
 		
 		guess = -1
 		guessTime = 0
 		hasGuessed = false
+		
 		correct = false
 		score = 0
 		last_score = 0
@@ -41,6 +44,8 @@ class Player:
 	func new_from(old_player):
 		name = old_player["name"]
 		active = true
+		loaded = false
+		ready = false
 		
 		guess = -1
 		guessTime = 0
@@ -130,7 +135,6 @@ var tags_list = {}
 var TagsFilterFile = "user://quiz_filters.json"
 var TagsFilters = {}
 
-
 #endregion
 
 enum QUIZSTATE {
@@ -168,6 +172,7 @@ func _has_active_id(temp_id: int):
 func _deactivate_player(mp_id):
 	if players.has(mp_id):
 		players[mp_id]["active"] = false
+		players[mp_id]["loaded"] = false
 	
 func _reactivate_player(mp_id, mp_activeId):
 	for key in players:
@@ -192,32 +197,42 @@ func _build_player_number_to_id_table():
 		playerCardOrder[i] = key
 		i += 1
 
-func _player_has_guessed(player_id):
-	return players[player_id]["guess"] >= 0
+func _player_has_guessed(player_id) -> bool:
+	return players[player_id]["hasGuessed"]
 
-func _player_guess(player_id,guess,current_time):
+func _have_all_players_answered() -> bool:
+	var all_players_answered = true
+	for key in players:
+		if players[key]["loaded"] and not players[key]["hasGuessed"]:
+			all_players_answered = false
+	return all_players_answered
+
+func _are_all_players_ready() -> bool:
+	var ready = true
+	for key in players:
+		if players[key]["loaded"] and not players[key]["ready"]:
+			ready = false
+	return ready
+
+func _player_guess(player_id, guess, current_time):
 	players[player_id]["guess"] = guess
 	players[player_id]["guessTime"] = current_time
 	players[player_id]["hasGuessed"] = true
-	
+
 func _reset_player_guesses():
 	for key in players:
 		players[key]["guess"] = -1
 		players[key]["guessTime"] = 0
 		players[key]["hasGuessed"] = false
 
-func _player_answer_correctness(correct_answer, score):
+func _check_player_answers(correct_answer, score):
 	for key in players:
-		#if player slot is inactive pass
-		if not players[key]["active"]:
-			continue
-			
 		var playerGuess = players[key]["guess"]
 		# if the player has passed make no change to score
 		if not players[key]["hasGuessed"]:
 			players[key]["last_score"] = players[key]["score"]
 			continue
-			
+		
 		players[key]["correct"] = playerGuess == correct_answer
 		if players[key]["correct"]:
 			_adjust_player_score(key, score)
@@ -226,8 +241,7 @@ func _player_answer_correctness(correct_answer, score):
 
 func _adjust_player_score(key, score):
 	players[key]["last_score"] = players[key]["score"]
-	# var awarded_points = roundf(score * players[playerId]["guessTime"]/30) # old scoring function
-	var awarded_points = (score + score * players[key]["guessTime"]/quizOptions.timer)/2
+	var awarded_points = (score + score * players[key]["guessTime"] / quizOptions.timer) / 2
 	players[key]["score"] += awarded_points
 #endregion
 

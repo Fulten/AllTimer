@@ -166,6 +166,58 @@ func _on_conn_fail_ack_button_up():
 	get_node("ConnectionFailedPopupCase").hide()
 #endregion
 
+#region Kick peer buttons
+func _on_kick_peer_1_focus_entered():
+	$SFX_Hover.play()
+func _on_kick_peer_1_mouse_entered():
+	$SFX_Hover.play()
+func _on_kick_peer_1_button_down():
+	$SFX_Press.play()
+func _on_kick_peer_1_pressed():
+	get_node("LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer").show()
+	
+
+
+func _on_kick_peer_2_focus_entered():
+	$SFX_Hover.play()
+func _on_kick_peer_2_mouse_entered():
+	$SFX_Hover.play()
+func _on_kick_peer_2_button_down():
+	$SFX_Press.play()
+func _on_kick_peer_2_pressed():
+	get_node("LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer").show()
+
+
+func _on_kick_peer_3_focus_entered():
+	$SFX_Hover.play()
+func _on_kick_peer_3_mouse_entered():
+	$SFX_Hover.play()
+func _on_kick_peer_3_button_down():
+	$SFX_Press.play()
+func _on_kick_peer_3_pressed():
+	get_node("LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer").show()
+
+
+func _on_confirm_kick_button_focus_entered():
+	$SFX_Hover.play()
+func _on_confirm_kick_button_mouse_entered():
+	$SFX_Hover.play()
+func _on_confirm_kick_button_button_down():
+	$SFX_Press.play()
+func _on_confirm_kick_button_pressed():
+	get_node("LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer").hide()
+
+
+func _on_cancel_kick_button_focus_entered():
+	$SFX_Hover.play()
+func _on_cancel_kick_button_mouse_entered():
+	$SFX_Hover.play()
+func _on_cancel_kick_button_button_down():
+	$SFX_Press.play()
+func _on_cancel_kick_button_pressed():
+	get_node("LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer").hide()
+#endregion
+
 func _update_connected_players():
 	for n in range(0, 3):
 		var playerLabel = get_node("./LobbyOrganizer/Columns/NetworkingColumn/PeerCase/Peer%d" % n)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dy8lkjphm6pdg"]
+[gd_scene load_steps=18 format=3 uid="uid://dy8lkjphm6pdg"]
 
 [ext_resource type="Script" path="res://assets/scenes/multiplayer_lobby.gd" id="1_e4r6j"]
 [ext_resource type="Texture2D" uid="uid://ctaoad4ca7mx7" path="res://assets/uiux/main_menu/T_MenuVignette_D.tga" id="1_l3cbn"]
@@ -10,7 +10,9 @@
 [ext_resource type="LabelSettings" uid="uid://b8rucp80rws68" path="res://assets/scenes/Label_Subsection.tres" id="5_wtxry"]
 [ext_resource type="LabelSettings" uid="uid://mv8bcxsbvof1" path="res://assets/scenes/Label_TagW.tres" id="6_ujxch"]
 [ext_resource type="Theme" uid="uid://cblo30jiqi52a" path="res://assets/scenes/ButtonNF_Clickable.tres" id="7_8se73"]
+[ext_resource type="Theme" uid="uid://cxvor61f2irx" path="res://assets/scenes/ButtonNF_ClickableHidden.tres" id="10_jegoe"]
 [ext_resource type="FontFile" uid="uid://bc01r67d5wp2w" path="res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf" id="11_2bcij"]
+[ext_resource type="LabelSettings" uid="uid://bga51ml3vvwne" path="res://assets/scenes/Label_SubTag.tres" id="11_ftagw"]
 [ext_resource type="Theme" uid="uid://wsbgxiubgl02" path="res://assets/scenes/ButtonNF_Toggle.tres" id="12_cbtm4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p8ef3"]
@@ -162,6 +164,7 @@ horizontal_alignment = 1
 
 [node name="PeerCase" type="VBoxContainer" parent="LobbyOrganizer/Columns/NetworkingColumn"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="ConnectedPlayersLabel" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase"]
 layout_mode = 2
@@ -170,32 +173,88 @@ label_settings = ExtResource("5_wtxry")
 horizontal_alignment = 1
 
 [node name="Peer0" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase"]
-visible = false
 layout_mode = 2
 text = "%ProfileName%"
 label_settings = ExtResource("6_ujxch")
 horizontal_alignment = 1
 
-[node name="Peer1" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase"]
-visible = false
+[node name="KickAligner1" type="HBoxContainer" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="KickPeer1" type="Button" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner1"]
+layout_mode = 2
+theme = ExtResource("10_jegoe")
+text = "KICK"
+
+[node name="Peer1" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner1"]
 layout_mode = 2
 text = "Peer_Profile_Name"
 label_settings = ExtResource("3_qhvyi")
 horizontal_alignment = 1
 
-[node name="Peer2" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase"]
-visible = false
+[node name="KickAligner2" type="HBoxContainer" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="KickPeer2" type="Button" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner2"]
+layout_mode = 2
+theme = ExtResource("10_jegoe")
+text = "KICK"
+
+[node name="Peer2" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner2"]
 layout_mode = 2
 text = "Peer_Profile_Name"
 label_settings = ExtResource("3_qhvyi")
 horizontal_alignment = 1
 
-[node name="Peer3" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase"]
-visible = false
+[node name="KickAligner3" type="HBoxContainer" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="KickPeer3" type="Button" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner3"]
+layout_mode = 2
+theme = ExtResource("10_jegoe")
+text = "KICK"
+
+[node name="Peer3" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner3"]
 layout_mode = 2
 text = "Peer_Profile_Name"
 label_settings = ExtResource("3_qhvyi")
 horizontal_alignment = 1
+
+[node name="KickConfirmationContainer" type="VBoxContainer" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase"]
+visible = false
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer"]
+self_modulate = Color(0, 0, 0, 0)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="KickingPeerLabel" type="Label" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer"]
+layout_mode = 2
+text = "Kick Peer_Profile_Name ?"
+label_settings = ExtResource("11_ftagw")
+horizontal_alignment = 1
+
+[node name="KickConfirmationButtons" type="HBoxContainer" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="ConfirmKickButton" type="Button" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer/KickConfirmationButtons"]
+layout_mode = 2
+theme = ExtResource("7_8se73")
+text = "Kick"
+
+[node name="CancelKickButton" type="Button" parent="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer/KickConfirmationButtons"]
+layout_mode = 2
+theme = ExtResource("7_8se73")
+text = "Cancel"
 
 [node name="VSeparator" type="VSeparator" parent="LobbyOrganizer/Columns"]
 self_modulate = Color(0, 0, 0, 1)
@@ -465,6 +524,26 @@ flat = true
 [connection signal="button_up" from="LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton" to="." method="_on_cancel_connection_button_button_up"]
 [connection signal="focus_entered" from="LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton" to="." method="_on_cancel_connection_button_focus_entered"]
 [connection signal="mouse_entered" from="LobbyOrganizer/Columns/NetworkingColumn/CancelConnectionButton" to="." method="_on_cancel_connection_button_mouse_entered"]
+[connection signal="button_down" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner1/KickPeer1" to="." method="_on_kick_peer_1_button_down"]
+[connection signal="focus_entered" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner1/KickPeer1" to="." method="_on_kick_peer_1_focus_entered"]
+[connection signal="mouse_entered" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner1/KickPeer1" to="." method="_on_kick_peer_1_mouse_entered"]
+[connection signal="pressed" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner1/KickPeer1" to="." method="_on_kick_peer_1_pressed"]
+[connection signal="button_down" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner2/KickPeer2" to="." method="_on_kick_peer_2_button_down"]
+[connection signal="focus_entered" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner2/KickPeer2" to="." method="_on_kick_peer_2_focus_entered"]
+[connection signal="mouse_entered" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner2/KickPeer2" to="." method="_on_kick_peer_2_mouse_entered"]
+[connection signal="pressed" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner2/KickPeer2" to="." method="_on_kick_peer_2_pressed"]
+[connection signal="button_down" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner3/KickPeer3" to="." method="_on_kick_peer_3_button_down"]
+[connection signal="focus_entered" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner3/KickPeer3" to="." method="_on_kick_peer_3_focus_entered"]
+[connection signal="mouse_entered" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner3/KickPeer3" to="." method="_on_kick_peer_3_mouse_entered"]
+[connection signal="pressed" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner3/KickPeer3" to="." method="_on_kick_peer_3_pressed"]
+[connection signal="button_down" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer/KickConfirmationButtons/ConfirmKickButton" to="." method="_on_confirm_kick_button_button_down"]
+[connection signal="focus_entered" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer/KickConfirmationButtons/ConfirmKickButton" to="." method="_on_confirm_kick_button_focus_entered"]
+[connection signal="mouse_entered" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer/KickConfirmationButtons/ConfirmKickButton" to="." method="_on_confirm_kick_button_mouse_entered"]
+[connection signal="pressed" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer/KickConfirmationButtons/ConfirmKickButton" to="." method="_on_confirm_kick_button_pressed"]
+[connection signal="button_down" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer/KickConfirmationButtons/CancelKickButton" to="." method="_on_cancel_kick_button_button_down"]
+[connection signal="focus_entered" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer/KickConfirmationButtons/CancelKickButton" to="." method="_on_cancel_kick_button_focus_entered"]
+[connection signal="mouse_entered" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer/KickConfirmationButtons/CancelKickButton" to="." method="_on_cancel_kick_button_mouse_entered"]
+[connection signal="pressed" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer/KickConfirmationButtons/CancelKickButton" to="." method="_on_cancel_kick_button_pressed"]
 [connection signal="item_selected" from="LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList" to="." method="_on_filter_preset_list_item_selected"]
 [connection signal="button_up" from="LobbyOrganizer/Columns/SettingsColumn/Filters/WhitelistToggle" to="." method="_on_whitelist_toggle_button_up"]
 [connection signal="item_selected" from="LobbyOrganizer/Columns/SettingsColumn/ProfileCase/ProfilesList" to="." method="_on_profiles_list_item_selected"]

@@ -1,0 +1,69 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cxvor61f2irx"]
+
+[ext_resource type="FontFile" uid="uid://bc01r67d5wp2w" path="res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf" id="1_nybg6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mmvin"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3vsdc"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnxe2"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 0.196078)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkxvi"]
+bg_color = Color(1, 0.141176, 0.141176, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.141176, 0.141176, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[resource]
+default_font = ExtResource("1_nybg6")
+default_font_size = 36
+Button/colors/font_color = Color(0, 0, 0, 0.196078)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 0.196078)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 2
+Button/font_sizes/font_size = 18
+Button/fonts/font = ExtResource("1_nybg6")
+Button/styles/focus = SubResource("StyleBoxEmpty_mmvin")
+Button/styles/hover = SubResource("StyleBoxFlat_3vsdc")
+Button/styles/normal = SubResource("StyleBoxFlat_nnxe2")
+Button/styles/pressed = SubResource("StyleBoxFlat_jkxvi")

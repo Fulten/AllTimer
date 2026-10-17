@@ -155,15 +155,20 @@ func _ready():
 	
 	for i in range(4):
 		ui_players[i].hide()
+		
+	$quizEnd/ReturnToLobbyButton.text = "Exit Session"
 	
 	if multiplayer.is_server():
+		$quizEnd/ReturnToLobbyButton.text = "Return To Lobby"
 		$pauseScreen/pauseCase/pauseBase/quitButton.text = "Lobby"
+		
 		_host_setup_quiz()
 
 func _process(delta):
-	delta_t += delta
-	if delta_t > 0.2:
-		if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
+	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
+		delta_t += delta
+		if delta_t > 0.2:
+			delta_t = 0.0
 			for key in GameState.players:
 				if GameState.players[key]["loaded"]:
 					_sync_game_timer.rpc_id(key, _get_timer_reading(GameState.quiz_phase))
@@ -180,8 +185,6 @@ func _input(event):
 	if DEBUG and multiplayer.has_multiplayer_peer() and multiplayer.is_server():
 		if _is_event_keypress(event, KEY_N):
 			_DEBUG_next_question()
-		if _is_event_keypress(event, KEY_R):
-			_DEBUG_restart_from_beginning()
 	
 	match GameState.quiz_phase:
 		QUIZSTATE.preQuiz:
@@ -196,7 +199,6 @@ func _input(event):
 					if (questionType == "True/False" or questionType == "This/That") and guess > 1:
 						break
 					_player_guess(guess)
-	pass
 
 func _player_guess(guess):
 	if GameState._can_guess():
@@ -305,7 +307,7 @@ func _phase_post_question():
 	var question_score_value = 1000
 	
 	GameState._check_player_answers(question_answers_correct_index, question_score_value)
-	#TODO: recored info needed to update profile statstics at the end of quiz
+	#TODO: score chances
 	GameState._reset_player_guesses()
 	
 	_server_full_sync()
@@ -344,6 +346,7 @@ func _phase_end_screen():
 	if DEBUG:
 		print("!!DEBUG: endscreen phase")
 	GameState.quiz_phase = QUIZSTATE.endScreen
+	
 	
 	_server_full_sync()
 	_sync_play_phase_animation.rpc()
@@ -404,7 +407,8 @@ func _sync_play_phase_animation():
 		QUIZSTATE.endOfPhase:
 			_ui_ani_question_unload()
 		QUIZSTATE.endScreen:
-			pass
+			_ui_setup_end_screen()
+			_ui_ani_display_end_screen()
 
 @rpc("authority", "call_local", "reliable")
 func _sync_player_info(player_ids: Array, player_scores: Array, player_scores_last):
@@ -469,7 +473,9 @@ func _late_join_load_in():
 			await $ControlSwapper0.animation_finished
 			$ControlSwapper0.play("QuestionUnload", -1, 20.0, false)
 		QUIZSTATE.endScreen:
-			pass
+			_ui_setup_end_screen()
+			$ControlSwapper0.play("QuizFinish", -1, 20.0, false)
+			
 	_late_join_player_setup_done.rpc_id(1)
 #endregion
 
@@ -750,6 +756,57 @@ func _ui_ani_question_answers_unload():
 	
 func _ui_ani_question_unload():
 	$ControlSwapper0.play("QuestionUnload")
+	
+func _ui_ani_display_end_screen():
+	$ControlSwapper0.play("QuizFinish")
+	
+func _ui_setup_end_screen():
+	# add additional score from chances
+	for key in GameState.players:
+		var chance_bonus = 0
+		for chanceKey in GameState.players[key]["chances"].keys():
+			chance_bonus += GameState._get_chance_from_uuid(chanceKey)["bonus"]
+		GameState.players[key].score += chance_bonus
+	
+	# order players by score
+	var scoreOrder = []
+	
+	for key in GameState.players.keys():
+		scoreOrder.append(key)
+	
+	# create an index of the player entries thats sorted based on score
+	for n in range(GameState._player_count()):
+		var highestScore = GameState.players[scoreOrder[n]].score
+		var indexOfHighest = n
+		var swapTemp
+		
+		for i in range(n, GameState._player_count()):
+			if GameState.players[scoreOrder[i]].score > highestScore:
+				highestScore = GameState.players[scoreOrder[i]].score
+				indexOfHighest = i
+		
+		swapTemp = scoreOrder[n]
+		scoreOrder[n] = scoreOrder[indexOfHighest]
+		scoreOrder[indexOfHighest] = swapTemp
+	
+	#setup ui
+	for n in range(4):
+		var uiNumber = n + 1
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer" % uiNumber).hide()
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/MedalCase/Awards" % uiNumber)["text"] = "N/A"
+	
+	for n in range(GameState._player_count()):
+		var uiNum = n + 1
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/Name" % uiNum).text = GameState.players[scoreOrder[n]].name
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/ScoreDisplay/Score" % uiNum).text = "%s" % GameState.players[scoreOrder[n]].score
+		
+		var chanceStr = ""
+		for chanceKey in GameState.players[scoreOrder[n]]["chances"].keys():
+			chanceStr += "%s, " % "TODO"
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/MedalCase/Awards" % uiNum)["text"] = chanceStr
+		
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer" % uiNum).show()
+
 #endregion
 
 #region timers
@@ -1069,10 +1126,8 @@ func _on_quit_button_mouse_entered():
 func _on_quit_button_button_down():
 	$SFX_Press.play()
 func _on_quit_button_button_up():
-	# if server exit to multiplayer lobby
 	if multiplayer.is_server():
 		_server_ending_quiz.rpc()
-	# if client, exit multiplayer session and return to main menu
 	else: 
 		_client_disconnect_from_server()
 
@@ -1189,11 +1244,28 @@ func _on_resolutions_list_item_selected(index: int) -> void:
 #region debug and testing functions
 #===================================================
 func _DEBUG_next_question():
-	pass
+	ui_prequestion_timer.stop()
+	ui_countdown_timer.stop()
+	ui_postquestion_timer.stop()
 	
-func _DEBUG_restart_from_beginning():
-	pass
+	if quiz_question_index < QUIZ_LENGTH - 1:
+		_phase_next_question()
+	else:
+		_phase_end_screen()
 #endregion
+
+
+func _on_return_to_lobby_button_focus_entered():
+	$SFX_Hover3.play()
+func _on_return_to_lobby_button_mouse_entered():
+	$SFX_Hover3.play()
+func _on_return_to_lobby_button_button_down():
+	$SFX_Press.play()
+func _on_return_to_lobby_button_button_up():
+	if multiplayer.is_server():
+		_server_ending_quiz.rpc()
+	else: 
+		_client_disconnect_from_server()
 
 func _test():
 	pass

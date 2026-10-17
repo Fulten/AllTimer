@@ -94,13 +94,7 @@ func _request_player_data():
 @rpc("any_peer", "reliable")
 func _recive_player_data(playerName, activeId):
 	# if active id isn't -1 then this player is reconnecting after being disconnected
-	if GameState._player_count() >= 4:
-		if multiplayer.is_server():
-			_kick_peer.rpc_id(multiplayer.get_remote_sender_id(), "Connection Refused, lobby is full")
-	if GameState._in_lobby():
-		GameState._new_player(playerName, multiplayer.get_remote_sender_id())
-		mp_lobby_instance._refresh_connected_players_list()
-	elif !GameState._in_lobby() && GameState._has_active_id(activeId):
+	if !GameState._in_lobby() && GameState._has_active_id(activeId):
 		GameState._reactivate_player(multiplayer.get_remote_sender_id(), activeId)
 		mp_lobby_instance._refresh_connected_players_list()
 		if multiplayer.is_server():
@@ -112,6 +106,12 @@ func _recive_player_data(playerName, activeId):
 				rejoined_profile["score"],
 				rejoined_profile["last_score"],
 				rejoined_profile["chances"])
+	elif GameState._player_count() >= 4:
+		if multiplayer.is_server():
+			_kick_peer.rpc_id(multiplayer.get_remote_sender_id(), "Connection Refused, lobby is full")
+	elif GameState._in_lobby():
+		GameState._new_player(playerName, multiplayer.get_remote_sender_id())
+		mp_lobby_instance._refresh_connected_players_list()
 	# if the game has already started deny new players
 	elif multiplayer.is_server():
 		_kick_peer.rpc_id(multiplayer.get_remote_sender_id(), "Connection Refused, quiz in progress")

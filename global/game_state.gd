@@ -212,11 +212,11 @@ func _have_all_players_answered() -> bool:
 	return all_players_answered
 
 func _are_all_players_ready() -> bool:
-	var ready = true
+	var players_ready = true
 	for key in players:
 		if players[key]["loaded"] and not players[key]["ready"]:
-			ready = false
-	return ready
+			players_ready = false
+	return players_ready
 
 func _player_guess(player_id, guess, current_time):
 	players[player_id]["guess"] = guess

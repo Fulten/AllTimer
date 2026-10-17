@@ -195,7 +195,7 @@ func _input(event):
 			for guess in range(4):
 				if event.is_action_pressed(player_input % guess):
 					#if we're a "this or that" or a "true/false" question ignore input from 3 and 4
-					var questionType = _current_question_type()
+					var questionType = question_type
 					if (questionType == "True/False" or questionType == "This/That") and guess > 1:
 						break
 					_player_guess(guess)
@@ -513,14 +513,6 @@ func _late_join_player_setup_done():
 
 #region question related
 #===================================================
-func _current_question_type() -> String:
-	match question_type:
-		#if it is a valid question type, return as is
-		["Multiple Choice", "True/False", "This/That"]:
-			return question_type
-		_: #if not default to multiple choice
-			return "Multiple Choice"
-			
 func _set_question_answers_as_randomised_array(question):
 	var correct = question["correct"]
 	var wrong = question["wrong"]
@@ -602,7 +594,7 @@ func _ui_player_pannel_locked_all(locked: bool):
 		_ui_player_pannel_locked(i, locked)
 
 func _ui_apply_question_data():
-	var type = _current_question_type()
+	var type = question_type
 	ui_questions_index.text = "%s" % (quiz_question_index + 1)
 	
 	ui_questions_name.text = question_name

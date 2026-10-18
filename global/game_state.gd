@@ -125,6 +125,7 @@ var players_loaded = 0
 
 # translates player number to multiplayer id
 var playerCardOrder = [-1, -1, -1, -1]
+var idToCardIndex = {}
 
 var activeId = -1
 var quiz_phase
@@ -167,6 +168,7 @@ func _remove_player(mp_id):
 func _clear_players():
 	players.clear()
 	playerCardOrder = [-1,-1,-1,-1]
+	idToCardIndex = {}
 
 func _has_active_id(temp_id: int):
 	for key in players:
@@ -196,9 +198,11 @@ func _player_count() -> int:
 
 func _build_player_number_to_id_table():
 	playerCardOrder = [-1,-1,-1,-1]
+	idToCardIndex = {}
 	var i = 0
 	for key in players.keys():
 		playerCardOrder[i] = key
+		idToCardIndex[key] = i
 		i += 1
 
 func _player_has_guessed(player_id) -> bool:

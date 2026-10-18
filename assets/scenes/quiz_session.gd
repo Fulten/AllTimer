@@ -206,10 +206,7 @@ func _input(event):
 
 func _player_guess(guess):
 	if GameState._can_guess():
-		if multiplayer.is_server():
-			_player_guess_rpc(1, guess)
-		else:
-			_player_guess_rpc.rpc_id(1, multiplayer.get_unique_id(), guess)
+		_player_guess_rpc.rpc(multiplayer.get_unique_id(), guess)
 
 func _server_full_sync():
 	var player_ids = []
@@ -238,9 +235,7 @@ func _server_full_sync():
 
 func _player_dropped(mp_id):
 	if GameState._game_started():
-		for i in range(GameState._player_count()):
-			if GameState.playerCardOrder[i] == mp_id:
-				_ui_player_pannel_locked(i, true)
+		_ui_update_lock_player_pannel(mp_id, true)
 	if multiplayer.is_server():
 		GameState.players[mp_id]["loaded"] = false
 		_server_full_sync()
@@ -413,10 +408,13 @@ func _sync_play_phase_animation():
 		QUIZSTATE.preQuiz:
 			_ui_update_prequiz_rules()
 			_ui_ani_quiz_intro()
+			return
 		QUIZSTATE.endOfRules:
 			_ui_ani_quiz_start()
+			return
 		QUIZSTATE.preQuestion:
 			_ui_ani_question_load_a()
+			_ui_update_lock_all_player_pannels(false)
 		QUIZSTATE.question:
 			_ui_ani_question_load_b()
 		QUIZSTATE.postQuestion:
@@ -428,10 +426,13 @@ func _sync_play_phase_animation():
 				ui_has_status_table = false
 				ui_playing_statuses_animation = true
 		QUIZSTATE.endOfPhase:
+			_ui_update_lock_all_player_pannels(false)
 			_ui_ani_question_unload()
 		QUIZSTATE.endScreen:
 			_ui_setup_end_screen()
 			_ui_ani_display_end_screen()
+			
+	$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.hide()
 
 @rpc("authority", "call_local", "reliable")
 func _sync_player_info(player_ids: Array, player_scores: Array, player_scores_last):
@@ -464,14 +465,13 @@ func _sync_game_timer(clock_reading: Array):
 @rpc("authority", "reliable", "call_local")
 func _sync_player_statuses(player_ids: Array, statuses):
 	player_statuses_local.resize(GameState._player_count())
-	for n in range(GameState._player_count()):
-		for i in range(GameState._player_count()):
-			if GameState.playerCardOrder[n] == player_ids[i]:
-				player_statuses_local[n].resize(3)
-				player_statuses_local[n][0] = statuses[i][0]
-				player_statuses_local[n][1] = statuses[i][1]
-				player_statuses_local[n][2] = statuses[i][2]
-				break
+	for n in range(player_ids.size()):
+		var i = GameState.idToCardIndex[player_ids[n]]
+		player_statuses_local[n].resize(3)
+		player_statuses_local[n][0] = statuses[i][0]
+		player_statuses_local[n][1] = statuses[i][1]
+		player_statuses_local[n][2] = statuses[i][2]
+		
 	ui_has_status_table = true
 
 @rpc("authority", "reliable")
@@ -487,27 +487,32 @@ func _late_join_load_in():
 		QUIZSTATE.endOfRules:
 			$ControlSwapper0.play("QuizStart", -1, 20.0, false)
 		QUIZSTATE.preQuestion:
+			$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.hide()
 			$ControlSwapper0.play("QuizStart", -1, 20.0, false)
 			await $ControlSwapper0.animation_finished
 			$ControlSwapper0.play("QuestionLoad_A", -1, 20.0, false)
 		QUIZSTATE.question:
+			$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.hide()
 			$ControlSwapper0.play("QuizStart", -1, 20.0, false)
 			await $ControlSwapper0.animation_finished
 			$ControlSwapper0.play("QuestionLoad_A", -1, 20.0, false)
 			await $ControlSwapper0.animation_finished
 			$ControlSwapper0.play("QuestionLoad_B", -1, 20.0, false)
 		QUIZSTATE.postQuestion:
+			$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.hide()
 			$ControlSwapper0.play("QuizStart", -1, 20.0, false)
 			await $ControlSwapper0.animation_finished
 			$ControlSwapper0.play("QuestionLoad_A", -1, 20.0, false)
 			ui_post_question.show()
 		QUIZSTATE.endOfPhase:
+			$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.hide()
 			$ControlSwapper0.play("QuizStart", -1, 20.0, false)
 			await $ControlSwapper0.animation_finished
 			$ControlSwapper0.play("QuestionLoad_A", -1, 20.0, false)
 			await $ControlSwapper0.animation_finished
 			$ControlSwapper0.play("QuestionUnload", -1, 20.0, false)
 		QUIZSTATE.endScreen:
+			$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.hide()
 			_ui_setup_end_screen()
 			$ControlSwapper0.play("QuizFinish", -1, 20.0, false)
 			
@@ -516,13 +521,15 @@ func _late_join_load_in():
 
 #region client side rpc functions
 #===================================================
-@rpc("any_peer", "reliable")
+@rpc("any_peer", "reliable", "call_local")
 func _player_guess_rpc(mp_id, guess):
 	if GameState.quiz_phase == QUIZSTATE.question:
-		if not ui_countdown_timer.is_stopped():
-			GameState._player_guess(mp_id, guess, ui_countdown_timer.get_time_left())
-		if GameState._have_all_players_answered():
-			_phase_post_question()
+		_ui_update_lock_player_pannel(mp_id, true)
+		if multiplayer.is_server():
+			if not ui_countdown_timer.is_stopped():
+				GameState._player_guess(mp_id, guess, ui_countdown_timer.get_time_left())
+			if GameState._have_all_players_answered():
+				_phase_post_question()
 
 @rpc("any_peer", "reliable")
 func _player_setup_done():
@@ -631,17 +638,18 @@ func _ui_local_score_rollup():
 			rollup_count -= 1
 		get_tree().create_timer(0.1).timeout.connect(_ui_local_score_rollup)
 
-func _ui_player_pannel_locked(index, locked: bool):
-	if locked or not GameState.players[GameState.playerCardOrder[index]]["active"]:
-		get_node("quizInterface/players_region/activePlayer%s/player_case/player_name" % index
+func _ui_update_lock_player_pannel(mp_id, locked: bool):
+	var card_index = GameState.idToCardIndex[mp_id] + 1
+	if locked or not GameState.players[mp_id]["active"]:
+		get_node("quizInterface/players_region/activePlayer%s/player_case/player_name" % card_index
 			).set_label_settings(asset_player_pannel_locked)
 	else:
-		get_node("quizInterface/players_region/activePlayer%s/player_case/player_name" % index
+		get_node("quizInterface/players_region/activePlayer%s/player_case/player_name" % card_index
 			).set_label_settings(asset_player_pannel_default)
 
-func _ui_player_pannel_locked_all(locked: bool):
-	for i in range(GameState._player_count()):
-		_ui_player_pannel_locked(i, locked)
+func _ui_update_lock_all_player_pannels(locked: bool):
+	for key in GameState.players:
+		_ui_update_lock_player_pannel(key, locked)
 
 func _ui_apply_question_data():
 	var type = question_type
@@ -777,7 +785,7 @@ func _ui_update_prequiz_rules():
 	$preQuiz/preSessionOrganizer/RulesText/Timer.text = pre_quiz_rules_text_timer % timer
 
 func _on_control_swapper_0_animation_finished(anim_name):
-	if "QuizIntro" == anim_name && GameState.quiz_phase == QUIZSTATE.preQuiz:
+	if GameState.quiz_phase == QUIZSTATE.preQuiz and "QuizIntro" == anim_name:
 		$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.show()
 		$ControlSwapper0.play("QuizPrompting")
 

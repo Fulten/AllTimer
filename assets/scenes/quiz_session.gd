@@ -111,13 +111,17 @@ var question_answers_correct_index = -1
 var question_type = ""
 var question_uuid = ""
 
+var ui_playing_statuses_animation = false
+var ui_has_status_table = false
+
 var menu_location = MENU.noMenu
 var rollup_count = 0
 
 var delta_t = 0.0
 
 var player_input = "p_answer_%s"
-var player_statuses_ui_2d: Array[Array]
+var player_statuses_master: Array[Array]
+var player_statuses_local: Array[Array]
 
 var players_ready = 0
 var phase_in_progress = false
@@ -308,6 +312,16 @@ func _phase_post_question():
 	
 	GameState._check_player_answers(question_answers_correct_index, question_score_value)
 	#TODO: score chances
+	
+	_create_player_statuses_table()
+	
+	var player_ids = []
+	player_ids.resize(GameState._player_count())
+	for n in range(GameState._player_count()):
+		player_ids[n] = GameState.playerCardOrder[n]
+		
+	_sync_player_statuses.rpc(player_ids, player_statuses_master)
+	
 	GameState._reset_player_guesses()
 	
 	_server_full_sync()
@@ -390,6 +404,11 @@ func _sync_quiz_phase(
 func _sync_play_phase_animation():
 	ui_post_question.hide()
 		
+	if ui_playing_statuses_animation:
+		ui_playing_statuses_animation = false
+		_ui_ani_reset_player_statuses(player_statuses_local)
+		await $ControlSwapper0.animation_finished
+		
 	match GameState.quiz_phase:
 		QUIZSTATE.preQuiz:
 			_ui_update_prequiz_rules()
@@ -403,7 +422,11 @@ func _sync_play_phase_animation():
 		QUIZSTATE.postQuestion:
 			ui_post_question.show()
 			_ui_ani_question_answers_unload()
-			await $ControlSwapper0.animation_finished
+			if ui_has_status_table:
+				await $ControlSwapper0.animation_finished
+				_ui_ani_update_player_statuses(player_statuses_local)
+				ui_has_status_table = false
+				ui_playing_statuses_animation = true
 		QUIZSTATE.endOfPhase:
 			_ui_ani_question_unload()
 		QUIZSTATE.endScreen:
@@ -419,14 +442,6 @@ func _sync_player_info(player_ids: Array, player_scores: Array, player_scores_la
 		_ui_update_player_panels()
 		_ui_update_scores()
 
-@rpc("authority", "call_local", "reliable")
-func _sync_game_timer(clock_reading: Array):
-	$quizInterface/session_organizer/CountdownLabel.text = "%02d:%02d" % clock_reading
-
-@rpc("authority", "reliable")
-func _player_load_quiz():
-	_client_setup_quiz()
-
 @rpc("authority", "reliable")
 func _sync_game_rules(
 	i_timer: int, 
@@ -441,8 +456,28 @@ func _sync_game_rules(
 
 	GameState.quizOptions.win_questions = i_win_questions
 	GameState.quizOptions.win_points = i_win_points
-	pass
 	
+@rpc("authority", "call_local", "reliable")
+func _sync_game_timer(clock_reading: Array):
+	$quizInterface/session_organizer/CountdownLabel.text = "%02d:%02d" % clock_reading
+
+@rpc("authority", "reliable", "call_local")
+func _sync_player_statuses(player_ids: Array, statuses):
+	player_statuses_local.resize(GameState._player_count())
+	for n in range(GameState._player_count()):
+		for i in range(GameState._player_count()):
+			if GameState.playerCardOrder[n] == player_ids[i]:
+				player_statuses_local[n].resize(3)
+				player_statuses_local[n][0] = statuses[i][0]
+				player_statuses_local[n][1] = statuses[i][1]
+				player_statuses_local[n][2] = statuses[i][2]
+				break
+	ui_has_status_table = true
+
+@rpc("authority", "reliable")
+func _player_load_quiz():
+	_client_setup_quiz()
+
 @rpc("authority", "reliable")
 func _late_join_load_in():
 	_ui_update_prequiz_rules()
@@ -511,7 +546,7 @@ func _late_join_player_setup_done():
 	GameState.players[multiplayer.get_remote_sender_id()]["loaded"] = true
 #endregion
 
-#region question related
+#region server utilities
 #===================================================
 func _set_question_answers_as_randomised_array(question):
 	var correct = question["correct"]
@@ -546,6 +581,21 @@ func _set_question_answers_as_randomised_array(question):
 				if answer_index == 0:
 					question_answers_correct_index = i
 				i += 1
+
+func _create_player_statuses_table():
+	player_statuses_master.clear()
+	player_statuses_master.resize(GameState._player_count())
+	
+	for n in range(GameState._player_count()):
+		var playerCorrectness = GameState.players[GameState.playerCardOrder[n]]["correct"]
+		var playerAnswered = GameState.players[GameState.playerCardOrder[n]]["hasGuessed"]
+		
+		if !playerAnswered:
+			player_statuses_master[n] = [true, false, false]
+		elif playerCorrectness:
+			player_statuses_master[n] = [false, false, true]
+		else:
+			player_statuses_master[n] = [false, true, false]
 #endregion
 
 #region quiz ui and animation functions
@@ -663,27 +713,27 @@ func _ui_apply_scew_to_fatal_answers():
 	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4.add_theme_stylebox_override("normal", surprize_styleBs_a4[1])
 	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4.add_theme_stylebox_override("pressed", surprize_styleBs_a4[2])
 
-func _ui_play_status_animation(statuses):
-	for player_number in range(GameState.PlayerCount):
-		if statuses[player_number][0]: # status_a
-			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_SkipShow" % (player_number + 1))
-		if statuses[player_number][1]: # status_b
-			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_WrongShow" % (player_number + 1))
-		if statuses[player_number][2]: # status_c
-			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_RightShow" % (player_number + 1))
+func _ui_ani_update_player_statuses(statuses):
+	for n in range(GameState._player_count()):
+		if statuses[n][0]: # status_a
+			get_node("ControlSwapper%s" % n).queue("p%sStatus_SkipShow" % (n + 1))
+		if statuses[n][1]: # status_b
+			get_node("ControlSwapper%s" % n).queue("p%sStatus_WrongShow" % (n + 1))
+		if statuses[n][2]: # status_c
+			get_node("ControlSwapper%s" % n).queue("p%sStatus_RightShow" % (n + 1))
 
 ## called by the server to reset all player statuses to be hidden
-func _ui_reset_player_statuses():
-	for player_number in range(GameState.PlayerCount):
-		if player_statuses_ui_2d[player_number][0]:
-			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_SkipHide" % (player_number + 1))
-			player_statuses_ui_2d[player_number][0] = false
-		if player_statuses_ui_2d[player_number][1]:
-			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_WrongHide" % (player_number + 1))
-			player_statuses_ui_2d[player_number][1] = false
-		if player_statuses_ui_2d[player_number][2]:
-			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_RightHide" % (player_number + 1))
-			player_statuses_ui_2d[player_number][2] = false
+func _ui_ani_reset_player_statuses(statuses):
+	for n in range(GameState._player_count()):
+		if statuses[n][0]:
+			get_node("ControlSwapper%s" % n).queue("p%sStatus_SkipHide" % (n + 1))
+			statuses[n][0] = false
+		if statuses[n][1]:
+			get_node("ControlSwapper%s" % n).queue("p%sStatus_WrongHide" % (n + 1))
+			statuses[n][1] = false
+		if statuses[n][2]:
+			get_node("ControlSwapper%s" % n).queue("p%sStatus_RightHide" % (n + 1))
+			statuses[n][2] = false
 
 func _ui_update_prequiz_rules():
 	# set the rules dependent elements to hide

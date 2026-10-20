@@ -208,7 +208,21 @@ func _player_guess(guess):
 	if GameState._can_guess():
 		_player_guess_rpc.rpc(multiplayer.get_unique_id(), guess)
 
-func _server_full_sync():
+func _player_dropped(mp_id):
+	if GameState._game_started():
+		_ui_update_lock_player_pannel(mp_id, true)
+	if multiplayer.is_server():
+		GameState.players[mp_id]["loaded"] = false
+		_server_full_sync()
+		print("Info: player Dropped id:%s" % mp_id)
+
+#region server side functions that handle syncing with players
+#===================================================
+func _server_full_sync(mp_id = -1):
+	_server_sync_player_info(mp_id)
+	_server_sync_quiz_phase(mp_id)
+	
+func _server_sync_player_info(mp_id = -1):
 	var player_ids = []
 	player_ids.resize(GameState._player_count())
 	var player_scores = []
@@ -223,23 +237,41 @@ func _server_full_sync():
 		player_scores_last[index] = GameState.players[key]["last_score"]
 		index += 1
 	
-	_sync_player_info.rpc(player_ids, player_scores, player_scores_last)
-	
+	if mp_id == -1:
+		_sync_player_info.rpc(player_ids, player_scores, player_scores_last)
+	else:
+		_sync_player_info.rpc_id(mp_id, player_ids, player_scores, player_scores_last)
+
+func _server_sync_quiz_phase(mp_id = -1):
 	var q = quiz_questions_list[quiz_question_index]
 	question_uuid = q["uuid"]
 	
-	_sync_quiz_phase.rpc(
-		GameState.quiz_phase, 
-		quiz_question_index,
-		q["name"], q["explainer"], q["question"], question_answers, q["questionType"])
+	if mp_id == -1:
+		_sync_quiz_phase.rpc(
+			GameState.quiz_phase, 
+			quiz_question_index,
+			q["name"], q["explainer"], q["question"], question_answers, q["questionType"])
+	else:
+		_sync_quiz_phase.rpc_id(
+			mp_id,
+			GameState.quiz_phase, 
+			quiz_question_index,
+			q["name"], q["explainer"], q["question"], question_answers, q["questionType"])
 
-func _player_dropped(mp_id):
-	if GameState._game_started():
-		_ui_update_lock_player_pannel(mp_id, true)
-	if multiplayer.is_server():
-		GameState.players[mp_id]["loaded"] = false
-		_server_full_sync()
-		print("Info: player Dropped id:%s" % mp_id)
+func _server_sync_late_join(mp_id):
+	_server_sync_player_info()
+	_server_sync_quiz_phase(mp_id)
+	_sync_game_rules.rpc_id(
+		mp_id,
+		GameState.quizOptions.timer, 
+		"Highest score after 10 questions", 
+		0,  # cut feature, always use "highest score after x question"
+		10, # 10 questions
+		GameState.quizOptions.win_points)
+	
+	_late_join_load_in.rpc_id(mp_id)
+
+#endregion
 
 #region quiz phase functions
 #===================================================
@@ -1304,7 +1336,6 @@ func _DEBUG_next_question():
 		_phase_end_screen()
 #endregion
 
-
 func _on_return_to_lobby_button_focus_entered():
 	$SFX_Hover3.play()
 func _on_return_to_lobby_button_mouse_entered():
@@ -1316,6 +1347,3 @@ func _on_return_to_lobby_button_button_up():
 		_server_ending_quiz.rpc()
 	else: 
 		_client_disconnect_from_server()
-
-func _test():
-	pass

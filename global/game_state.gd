@@ -44,7 +44,7 @@ class Player:
 		score = 0
 		last_score = 0
 		chances = {}
-		
+
 	func new_from(old_player):
 		name = old_player["name"]
 		active = true

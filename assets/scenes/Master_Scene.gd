@@ -6,8 +6,6 @@ var mp_lobby_scene = preload("res://assets/scenes/multiplayer_lobby.tscn")
 
 var quiz_session_instance
 var mp_lobby_instance
-var late_join_player_count = -1
-var late_join_players_recived = 1
 
 const MAX_CONNECTIONS: int = 3 # allow at most 3 other players to connect to server
 const PORT: int = 12345
@@ -33,6 +31,37 @@ func _process(_delta):
 func _set_ip(ip_address):
 	IP_ADDRESS = ip_address
 
+func _send_late_join_client_full_data(mp_id):
+	var player_ids = []
+	player_ids.resize(GameState._player_count())
+	var player_names = []
+	player_names.resize(GameState._player_count())
+	
+	var i = 0
+	for key in GameState.players:
+		player_ids[i] = key
+		player_names[i] = GameState.players[key]["name"]
+		i += 1
+		
+	_late_join_client.rpc_id(mp_id, mp_id, player_ids, player_names)
+
+func _send_clients_player_data(mp_id = -1):
+	var player_ids = []
+	player_ids.resize(GameState._player_count())
+	var player_names = []
+	player_names.resize(GameState._player_count())
+	
+	var i = 0
+	for key in GameState.players:
+		player_ids[i] = key
+		player_names[i] = GameState.players[key]["name"]
+		i += 1
+		
+	if mp_id == -1:
+		_sync_player_data.rpc(player_ids, player_names)
+	else:
+		_sync_player_data.rpc_id(player_ids, player_names)
+
 #region Multiplayer Callback functions
 func _connect_multiplayer_callback_functions():
 	multiplayer.connected_to_server.connect(_mp_on_connected_to_server)
@@ -56,22 +85,21 @@ func _mp_on_connected_fail():
 # ID is the peer ID of the new peer. Clients get notified when other clients connect to the same server. 
 # Upon connecting to a server, a client also receives this signal for the server (with ID being 1).
 func _mp_on_peer_connected(id: int):
-	_request_player_data.rpc_id(id)
 	if multiplayer.is_server():
+		_request_player_data.rpc_id(id)
 		print("Info: peer %s has connected to server" % id)
 
 # Emitted when this MultiplayerAPI's multiplayer_peer disconnects from a peer. 
 # Clients get notified when other clients disconnect from the same server.
 func _mp_on_peer_disconnected(id: int):
-	if multiplayer.has_multiplayer_peer() and GameState.players.has(id):
-		if GameState._in_lobby():
-			GameState._remove_player(id)
-		else:
-			GameState._deactivate_player(id)
-			quiz_session_instance._player_dropped(id)
-		mp_lobby_instance._refresh_connected_players_list()
-		if multiplayer.is_server():
-			print("Info: peer %s has disconnected from server" % id)
+	if multiplayer.is_server():
+		print("Info: peer %s has disconnected from server" % id)
+		if multiplayer.has_multiplayer_peer() and GameState.players.has(id):
+			if GameState._in_lobby():
+				_remove_player.rpc(id)
+			else:
+				GameState._deactivate_player(id)
+				quiz_session_instance._player_dropped(id)
 
 # Emitted when this MultiplayerAPI's multiplayer_peer disconnects from server. Only emitted on clients.
 func _mp_on_server_disconnected():
@@ -87,61 +115,37 @@ func _kick_peer(reason):
 	GameState.players.clear()
 	mp_lobby_instance._connection_reset(reason)
 
-@rpc("any_peer", "reliable")
+@rpc("authority", "reliable")
 func _request_player_data():
 	_recive_player_data.rpc_id(multiplayer.get_remote_sender_id(), UserProfiles._get_selected_profile()["name"], GameState.activeId)
 
 @rpc("any_peer", "reliable")
 func _recive_player_data(playerName, activeId):
-	# if active id isn't -1 then this player is reconnecting after being disconnected
-	if !GameState._in_lobby() && GameState._has_active_id(activeId):
-		GameState._reactivate_player(multiplayer.get_remote_sender_id(), activeId)
+	if !GameState._in_lobby() and GameState._has_active_id(activeId):
+		_reactivate_player.rpc(multiplayer.get_remote_sender_id(), activeId)
+		_send_late_join_client_full_data(multiplayer.get_remote_sender_id())
+		_send_clients_player_data()
 		mp_lobby_instance._refresh_connected_players_list()
-		if multiplayer.is_server():
-			var rejoined_profile = GameState.players[multiplayer.get_remote_sender_id()]
-			_late_join_client.rpc_id(multiplayer.get_remote_sender_id(), 
-				GameState._player_count(),
-				multiplayer.get_remote_sender_id(),
-				rejoined_profile["name"],
-				rejoined_profile["score"],
-				rejoined_profile["last_score"],
-				rejoined_profile["chances"])
 	elif GameState._player_count() >= 4:
-		if multiplayer.is_server():
-			_kick_peer.rpc_id(multiplayer.get_remote_sender_id(), "Connection Refused, lobby is full")
+		_kick_peer.rpc_id(multiplayer.get_remote_sender_id(), "Connection Refused, lobby is full")
 	elif GameState._in_lobby():
 		GameState._new_player(playerName, multiplayer.get_remote_sender_id())
+		_send_clients_player_data()
 		mp_lobby_instance._refresh_connected_players_list()
-	# if the game has already started deny new players
-	elif multiplayer.is_server():
+	else: # if the game has already started deny new players
 		_kick_peer.rpc_id(multiplayer.get_remote_sender_id(), "Connection Refused, quiz in progress")
 
 @rpc("authority", "reliable")
-func _late_join_client(playerCount, new_active_id, p_name, p_score, p_last_score, p_chances):
+func _late_join_client(activeId, playerIds: Array, playerNames: Array):
+	GameState.activeId = activeId
+	
+	for i in range(playerIds.size()):
+		if not GameState.players.has(playerIds[i]):
+			GameState._new_player(playerNames[i], playerIds[i])
+	
 	_load_into_quiz()
-	GameState.players.clear()
-	GameState._new_player(p_name, multiplayer.get_unique_id())
-	GameState.players[multiplayer.get_unique_id()]["score"] = p_score
-	GameState.players[multiplayer.get_unique_id()]["last_score"] = p_last_score
-	GameState.players[multiplayer.get_unique_id()]["chances"] = p_chances
-	late_join_player_count = playerCount
-	GameState.activeId = new_active_id
-	_resync_player_data.rpc()
-	
-@rpc("any_peer", "reliable")
-func _resync_player_data():
-	_resync_player_data_recive.rpc_id(multiplayer.get_remote_sender_id(), UserProfiles._get_selected_profile()["name"])
+	_late_join_client_ready.rpc_id(1)
 
-@rpc("any_peer", "reliable")
-func _resync_player_data_recive(playerName):
-	GameState._new_player(playerName, multiplayer.get_remote_sender_id())
-	late_join_players_recived += 1
-	
-	if late_join_player_count == late_join_players_recived:
-		_late_join_client_ready.rpc_id(1)
-		late_join_player_count = -1
-		late_join_players_recived = 1
-	
 @rpc("any_peer", "reliable")
 func _late_join_client_ready():
 	quiz_session_instance._server_sync_late_join(multiplayer.get_remote_sender_id())
@@ -150,7 +154,23 @@ func _late_join_client_ready():
 func _assign_active_id(id):
 	GameState.activeId = id
 
-# called by the server to start the quiz
+@rpc("authority", "reliable")
+func _sync_player_data(playerIds: Array, playerNames: Array):
+	for i in range(playerIds.size()):
+		if not GameState.players.has(playerIds[i]):
+			GameState._new_player(playerNames[i], playerIds[i])
+	mp_lobby_instance._refresh_connected_players_list()
+
+@rpc("authority", "call_local", "reliable")
+func _remove_player(mp_id):
+	GameState._remove_player(mp_id)
+	mp_lobby_instance._refresh_connected_players_list()
+
+@rpc("authority", "call_local", "reliable")
+func _reactivate_player(mp_id, active_id):
+	GameState._reactivate_player(mp_id, active_id)
+	mp_lobby_instance._refresh_connected_players_list()
+
 @rpc("authority", "call_local", "reliable")
 func _launch_quiz():
 	_load_into_quiz()
@@ -170,7 +190,7 @@ func _initilize_mp_lobby_instance():
 
 func _mp_lobby_profile_changed():
 	GameState.activeId = -1
-	
+
 func _mp_lobby_host_server(ip_address):
 	_set_ip(ip_address)
 	peer = ENetMultiplayerPeer.new()
@@ -197,7 +217,7 @@ func _mp_lobby_disconnect():
 		multiplayer.multiplayer_peer = null
 		GameState._clear_players()
 		mp_lobby_instance._refresh_connected_players_list()
-		
+
 @rpc("any_peer", "reliable")
 func _mp_player_dc():
 	_mp_on_peer_disconnected(multiplayer.get_remote_sender_id())
@@ -209,8 +229,7 @@ func _mp_lobby_kick_peer(peer_id: int):
 		
 	if multiplayer.get_peers().has(peer_id) && peer_id != 1: 
 		_kick_peer.rpc_id(peer_id, "Kicked \"%s\"From Lobby." % peer_id)
-		GameState._remove_player(peer_id)
-		mp_lobby_instance._refresh_connected_players_list()
+		_remove_player(peer_id)
 		print("Info: peer id:[%s] has been kicked." % peer_id)
 	else:
 		print("!WARN: attempted to kick peer that does not exist Id:[%s]" % peer_id)

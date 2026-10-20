@@ -161,9 +161,9 @@ func _reset_quiz_state():
 
 #region player related functions
 func _new_player(p_name, mp_id):
-	var playerData = GameState.Player.new()
-	playerData.initilize(p_name)
-	GameState.players[mp_id] = playerData
+	var new_player = GameState.Player.new()
+	new_player.initilize(p_name)
+	GameState.players[mp_id] = new_player
 	_build_player_number_to_id_table()
 
 func _remove_player(mp_id):
@@ -185,17 +185,15 @@ func _deactivate_player(mp_id):
 		players[mp_id]["active"] = false
 		players[mp_id]["loaded"] = false
 	
-func _reactivate_player(mp_id, mp_activeId):
-	for key in players:
-		if key == mp_activeId:
-			var playerData = GameState.Player.new()
-			playerData.new_from(players[key])
-			players[mp_id] = playerData
-			_remove_player(key)
-			return
-	
+func _reactivate_player(mp_id, active_id):
+	if players.has(active_id):
+		var playerData = GameState.Player.new()
+		playerData.new_from(players[active_id])
+		players[mp_id] = playerData
+		_remove_player(active_id)
+
 func _reset_players():
-	for key in players.keys():
+	for key in players:
 		players[key].reset_player()
 		
 func _player_count() -> int:
@@ -205,7 +203,7 @@ func _build_player_number_to_id_table():
 	playerCardOrder = [-1,-1,-1,-1]
 	idToCardIndex = {}
 	var i = 0
-	for key in players.keys():
+	for key in players:
 		playerCardOrder[i] = key
 		idToCardIndex[key] = i
 		i += 1

@@ -583,6 +583,7 @@ func _player_ready(mp_id):
 @rpc("any_peer", "reliable")
 func _late_join_player_setup_done():
 	GameState.players[multiplayer.get_remote_sender_id()]["loaded"] = true
+	GameState.players[multiplayer.get_remote_sender_id()]["active"] = true
 #endregion
 
 #region server utilities

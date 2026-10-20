@@ -63,7 +63,7 @@ func _mp_on_peer_connected(id: int):
 # Emitted when this MultiplayerAPI's multiplayer_peer disconnects from a peer. 
 # Clients get notified when other clients disconnect from the same server.
 func _mp_on_peer_disconnected(id: int):
-	if multiplayer.has_multiplayer_peer():
+	if multiplayer.has_multiplayer_peer() and GameState.players.has(id):
 		if GameState._in_lobby():
 			GameState._remove_player(id)
 		else:
@@ -72,7 +72,7 @@ func _mp_on_peer_disconnected(id: int):
 		mp_lobby_instance._refresh_connected_players_list()
 		if multiplayer.is_server():
 			print("Info: peer %s has disconnected from server" % id)
-	
+
 # Emitted when this MultiplayerAPI's multiplayer_peer disconnects from server. Only emitted on clients.
 func _mp_on_server_disconnected():
 	multiplayer.multiplayer_peer = null

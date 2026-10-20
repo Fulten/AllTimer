@@ -14,7 +14,7 @@ class Player:
 	var correct: bool
 	var score: int
 	var last_score: int
-	var profileData
+	var profileId
 	var chances
 	
 	func initilize(p_name):
@@ -154,6 +154,11 @@ enum QUIZSTATE {
 	endScreen
 }
 
+func _reset_quiz_state():
+	quiz_phase = QUIZSTATE.lobby
+	_reset_players()
+	players_loaded = 0
+
 #region player related functions
 func _new_player(p_name, mp_id):
 	var playerData = GameState.Player.new()
@@ -267,31 +272,6 @@ func _can_guess() -> bool:
 	return quiz_phase == QUIZSTATE.question
 #endregion
 
-#region functions called during the end of the quiz
-## updates the question answered and seen metrics section of the player profiles
-## this is called on the server, and only updates the profile data on the server side
-func _update_profile_statistics(current_question_uuid):
-	for key in players:
-		var playerCorrect = players[key]["correct"]
-		# questions_answered incremented when the user answers the question correctly
-		if playerCorrect:
-			if current_question_uuid in players[key]["profileData"]["questions_answered"]:
-				players[key]["profileData"]["questions_answered"][current_question_uuid] += 1
-			else:
-				players[key]["profileData"]["questions_answered"][current_question_uuid] = 1
-
-		# questions_seen incremented when the user sees a question
-		if current_question_uuid in players[key]["profileData"]["questions_seen"]:
-			players[key]["profileData"]["questions_seen"][current_question_uuid] += 1
-		else:
-			players[key]["profileData"]["questions_seen"][current_question_uuid] = 1
-
-func _reset_quiz_state():
-	quiz_phase = QUIZSTATE.lobby
-	_reset_players()
-	players_loaded = 0
-#endregion
-
 #region question filter section
 func _build_complete_tags_list():
 	_io_read_questions(QuestionDataFile)
@@ -371,6 +351,3 @@ func _IO_write_tags_filter():
 	else:
 		print("!!ERROR: Failed to save tags filters")
 #endregion
-
-
-

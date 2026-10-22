@@ -15,7 +15,7 @@ class Player:
 	var score: int
 	var last_score: int
 	var profileId
-	var chances
+	var chances: Array
 	
 	func initilize(p_name):
 		name = p_name
@@ -30,7 +30,7 @@ class Player:
 		correct = false
 		score = 0
 		last_score = 0
-		chances = {}
+		chances = []
 		
 	func reset_player():
 		active = true
@@ -43,7 +43,7 @@ class Player:
 		correct = false
 		score = 0
 		last_score = 0
-		chances = {}
+		chances = []
 
 	func new_from(old_player):
 		name = old_player["name"]
@@ -115,6 +115,29 @@ class Question:
 		chances = i_chances
 		questionType = i_questionType
 		listIndex = -1
+
+class Chance:
+	var name: String
+	var correct: bool
+	var bonus: int
+	var uuid
+	
+	var player_hits: Dictionary
+	var related_questions: Array
+	
+	static func create(i_name, i_correct, i_bonus, i_uuid) -> Chance:
+		var chance = Chance.new()
+		chance.name = i_name
+		chance.correct = i_correct
+		chance.bonus = i_bonus
+		chance.uuid = i_uuid
+		
+		chance.player_hits = {}
+		chance.related_questions = []
+		
+		for key in GameState.players:
+			chance.player_hits[key] = 0
+		return chance
 #endregion
 
 #region variables
@@ -135,6 +158,7 @@ var CurrentTheme = "Chalkboard" #The current quiz theme
 var QuestionDataFile = "res://data/question_data.json"
 
 var questions = {}
+var chances = {}
 var tags_list = {}
 
 var TagsFilterFile = "user://quiz_filters.json"
@@ -157,6 +181,7 @@ enum QUIZSTATE {
 func _reset_quiz_state():
 	quiz_phase = QUIZSTATE.lobby
 	_reset_players()
+	chances.clear()
 	players_loaded = 0
 
 #region player related functions
@@ -250,10 +275,20 @@ func _check_player_answers(correct_answer, score):
 		else:
 			_adjust_player_score(key, -score)
 
+func _check_player_chances(question_uuid):
+	for chance_key in chances:
+		if chances[chance_key].related_questions.has(question_uuid):
+			for key in players:
+				if players[key]["hasGuessed"] and (players[key]["correct"] == chances[chance_key].correct):
+					chances[chance_key].player_hits[key] += 1
+
 func _adjust_player_score(key, score):
 	players[key]["last_score"] = players[key]["score"]
 	var awarded_points = (score + score * players[key]["guessTime"] / quizOptions.timer) / 2
 	players[key]["score"] += awarded_points
+
+
+
 #endregion
 
 #region boolean functions that query quiz_phase

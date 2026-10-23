@@ -161,28 +161,15 @@ func _save_new_profile(new_profile_name):
 		print("!INFO: Profile Name Collision [%s]" % new_profile_name)
 
 ## Updates an already existing profile with new statistics
-func _overwrite_profile_with_reference(updatedProfile):
-	if profiles.has(updatedProfile.name):
-		print("!INFO: Updating Profile With Name: [%s]" % updatedProfile.name)	
-		var newProfile = {
-			"name": updatedProfile["name"],
-			"id": updatedProfile["id"],
-			"score_lowest": updatedProfile["score_lowest"],
-			"score_highest": updatedProfile["score_highest"],
-			"selected": updatedProfile["selected"],
-			"questions_answered": updatedProfile["questions_answered"],
-			"questions_seen": updatedProfile["questions_seen"],
-			"questions_chances": updatedProfile["questions_chances"],
-		}
-		profiles[updatedProfile.name] = newProfile
+func _overwrite_profile_with_reference(updated_profile: Profile):
+	if profiles.has(updated_profile.name):
+		profiles[updated_profile.name] = updated_profile
 		_IO_write_profiles()
-		pass
 	else:
-		print("!INFO: Profile there is no profile with name [%s]" % updatedProfile.name)
-		pass
+		print("!INFO: Profile there is no profile with name [%s]" % updated_profile.name)
 	pass
 
-func _update_profile_with_quiz_data(p_name: String, q_score: int, question_uuids: Array, question_answers: Array[bool], chances_scored: Array):
+func _update_profile_with_quiz_data(p_name: String, q_score: int, question_uuids: Array, question_answers: Array, chances_scored: Array):
 	if profiles.has(p_name):
 		var new_profile = Profile.copy(profiles[p_name])
 

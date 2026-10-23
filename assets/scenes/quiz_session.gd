@@ -87,7 +87,7 @@ var config_path = "user://settings.cfg"
 var QuestionDataFile = "res://data/question_data.json"
 var config = ConfigFile.new()
 
-var DEBUG = true
+var DEBUG = false
 var QUIZ_LENGTH = 10
 var ROLLUP_MAX = 10
 
@@ -101,6 +101,7 @@ var questions = {}
 var quiz_questions_list = []
 var quiz_question_index = 0 
 var quiz_chances = []
+var player_answers_record = {}
 
 var question_name = "n/a"
 var question_explainer = "explainer_text"
@@ -295,11 +296,34 @@ func _server_sync_endscreen_info(mp_id = -1):
 	else:
 		_sync_player_end_screen.rpc_id(mp_id, player_ids, player_scores, player_chances)
 
-func _server_sync_profile_data(mp_id = -1):
-	#TODO
-	
-	
-	pass
+func _server_sync_profile_data():
+	for key in GameState.players:
+		var question_uuids = []
+		
+		for question in quiz_questions_list:
+			question_uuids.append(question["uuid"])
+		
+		var player_chances = []
+			
+		for chance in GameState.chances:
+			if GameState.chances[chance].player_hits[key] >= 1:
+				player_chances.append(chance)
+			
+		if DEBUG:
+			print("!!DEBUG: sending profile data to player_id: [%s]" % key)
+		if key == 1:
+			_sync_profile_data(
+				GameState.players[key].score, 
+				question_uuids, 
+				player_answers_record[key], 
+				player_chances)
+		elif multiplayer.get_peers().has(key):
+			_sync_profile_data.rpc_id(
+				key,
+				GameState.players[key].score, 
+				question_uuids, 
+				player_answers_record[key], 
+				player_chances)
 #endregion
 
 #region quiz phase functions
@@ -339,7 +363,9 @@ func _phase_pre_question():
 	@warning_ignore("narrowing_conversion")
 	var extra_seconds : int = roundf(question_body.length() * 0.05)
 	
-	print("test: extra seconds %s" % extra_seconds)
+	if DEBUG:
+		print("!INFO: extra seconds for pre_question phase [%s]" % extra_seconds)
+		
 	_server_full_sync()
 	_sync_play_phase_animation.rpc()
 	
@@ -369,6 +395,9 @@ func _phase_post_question():
 	
 	GameState._check_player_answers(question_answers_correct_index, question_score_value)
 	GameState._check_player_chances(quiz_questions_list[quiz_question_index]["uuid"])
+	
+	for key in GameState.players:
+		player_answers_record[key][quiz_question_index] = GameState.players[key].correct
 	
 	_create_player_statuses_table()
 	
@@ -421,9 +450,9 @@ func _phase_end_screen():
 	_server_full_sync()
 	_server_sync_endscreen_info()
 	
-	_server_sync_profile_data()
 	
 	_sync_play_phase_animation.rpc()
+	_server_sync_profile_data()
 #endregion
 
 #region server side rpc functions
@@ -546,6 +575,15 @@ func _sync_player_end_screen(ids, scores, chances):
 		GameState.players[ids[i]]["last_score"] = scores[i]
 		for key in chances[i]:
 			GameState.players[ids[i]]["chances"].append(key)
+
+@rpc("authority", "call_local", "reliable")
+func _sync_profile_data(p_score, question_uuids, question_answers, chances_scored):
+	UserProfiles._update_profile_with_quiz_data(
+		UserProfiles._get_selected_profile_key(), 
+		p_score,
+		question_uuids,
+		question_answers,
+		chances_scored)
 
 @rpc("authority", "reliable")
 func _player_load_quiz():
@@ -980,7 +1018,13 @@ func _host_setup_quiz():
 	if question_count < QUIZ_LENGTH:
 		QUIZ_LENGTH = question_count
 		print("Info: fewer than max questions picked, only %s questions in this quiz" % question_count)
-
+	
+	for key in GameState.players:
+		player_answers_record[key] = []
+		player_answers_record[key].resize(QUIZ_LENGTH)
+		for i in range(player_answers_record[key].size()):
+			player_answers_record[key][i] = false
+	
 	_clean_questions_data()
 	_sync_game_rules.rpc(
 		GameState.quizOptions.timer, 

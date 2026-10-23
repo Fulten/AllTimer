@@ -87,7 +87,7 @@ var config_path = "user://settings.cfg"
 var QuestionDataFile = "res://data/question_data.json"
 var config = ConfigFile.new()
 
-var DEBUG = false
+var DEBUG = true
 var QUIZ_LENGTH = 10
 var ROLLUP_MAX = 10
 
@@ -209,7 +209,6 @@ func _player_dropped(mp_id):
 	if GameState._game_started():
 		_ui_update_lock_player_pannel(mp_id, true)
 	if multiplayer.is_server():
-		GameState.players[mp_id]["loaded"] = false
 		_server_full_sync()
 		print("Info: player Dropped id:%s" % mp_id)
 
@@ -460,6 +459,16 @@ func _phase_end_screen():
 @rpc("authority", "call_local", "reliable")
 func _server_ending_quiz():
 	GameState._reset_quiz_state()
+	
+	#remove inactive players from session when returning to lobby
+	var inactive_players = []
+	for key in GameState.players:
+		if not GameState.players[key]["active"]:
+			inactive_players.append(key)
+	
+	for key in inactive_players:
+		GameState.players.erase(key)
+	
 	sig_end_of_quiz.emit()
 	queue_free()
 
@@ -577,12 +586,12 @@ func _sync_player_end_screen(ids, scores, chances):
 			GameState.players[ids[i]]["chances"].append(key)
 
 @rpc("authority", "call_local", "reliable")
-func _sync_profile_data(p_score, question_uuids, question_answers, chances_scored):
+func _sync_profile_data(p_score, question_uuids, answers, chances_scored):
 	UserProfiles._update_profile_with_quiz_data(
 		UserProfiles._get_selected_profile_key(), 
 		p_score,
 		question_uuids,
-		question_answers,
+		answers,
 		chances_scored)
 
 @rpc("authority", "reliable")
@@ -732,8 +741,9 @@ func _ui_update_player_panels():
 func _ui_update_scores():
 	for key in GameState.players:
 		if GameState.players[key]["score"] != GameState.players[key]["last_score"]:
-			rollup_count = 10
-			_ui_local_score_rollup()
+			if rollup_count <= 0:
+				rollup_count = 10
+				_ui_local_score_rollup()
 			break
 	
 func _ui_local_score_rollup():
@@ -748,8 +758,8 @@ func _ui_local_score_rollup():
 			var last_score = GameState.players[GameState.playerCardOrder[i]]["last_score"]
 			
 			ui_player_scores[i].text = str(current_score + (last_score - current_score) * t)
-			rollup_count -= 1
-		get_tree().create_timer(0.1).timeout.connect(_ui_local_score_rollup)
+		rollup_count -= 1
+		get_tree().create_timer(0.06).timeout.connect(_ui_local_score_rollup)
 
 func _ui_update_lock_player_pannel(mp_id, locked: bool):
 	var card_index = GameState.idToCardIndex[mp_id] + 1

@@ -98,7 +98,7 @@ func _mp_on_peer_disconnected(id: int):
 			if GameState._in_lobby():
 				_remove_player.rpc(id)
 			else:
-				GameState._deactivate_player(id)
+				_deactivate_player.rpc(id)
 				quiz_session_instance._player_dropped(id)
 
 # Emitted when this MultiplayerAPI's multiplayer_peer disconnects from server. Only emitted on clients.
@@ -165,6 +165,12 @@ func _sync_player_data(playerIds: Array, playerNames: Array):
 func _remove_player(mp_id):
 	GameState._remove_player(mp_id)
 	mp_lobby_instance._refresh_connected_players_list()
+
+@rpc("authority", "call_local", "reliable")
+func _deactivate_player(mp_id):
+	GameState._deactivate_player(mp_id)
+	mp_lobby_instance._refresh_connected_players_list()
+
 
 @rpc("authority", "call_local", "reliable")
 func _reactivate_player(mp_id, active_id):
@@ -279,6 +285,7 @@ func _local_update_selected_scene():
 func _end_of_quiz_handler():
 	GameState.quiz_phase = GameState.QUIZSTATE.lobby
 	SoundMaster._play_music_track("mp_lobby")
+	mp_lobby_instance._refresh_connected_players_list()
 	if multiplayer.is_server():
 		mp_lobby_instance._enable_launch_button()
 

@@ -184,6 +184,10 @@ func _update_profile_with_quiz_data(p_name: String, q_score: int, question_uuids
 		profiles[new_profile.name] = new_profile
 		
 		_IO_write_profiles()
+		
+		for key in chances_scored:
+			UserProfiles._check_theme_unlock(key)
+			UserProfiles._IO_write_themes_unlocks()
 	else:
 		print("!!!ERROR: there is no profile with name [%s]" % p_name)
 

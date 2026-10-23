@@ -294,6 +294,12 @@ func _server_sync_endscreen_info(mp_id = -1):
 		_sync_player_end_screen.rpc(player_ids, player_scores, player_chances)
 	else:
 		_sync_player_end_screen.rpc_id(mp_id, player_ids, player_scores, player_chances)
+
+func _server_sync_profile_data(mp_id = -1):
+	#TODO
+	
+	
+	pass
 #endregion
 
 #region quiz phase functions
@@ -414,6 +420,8 @@ func _phase_end_screen():
 	
 	_server_full_sync()
 	_server_sync_endscreen_info()
+	
+	_server_sync_profile_data()
 	
 	_sync_play_phase_animation.rpc()
 #endregion

@@ -183,6 +183,7 @@ func _update_current_profile_label():
 		# if there are no profiles selected, mark the first profile in the list as selected
 		UserProfiles.profiles[profiles_list_id_to_name[0]]["selected"] = true
 		currentProfileLable.text = UserProfiles.profiles[profiles_list_id_to_name[0]]["name"]
+		UserProfiles._IO_write_profiles()
 		return
 	
 	# if there are no profiles, user placeholder Guest
@@ -323,16 +324,13 @@ func _on_save_button_button_up():
 		if new_profile_name == "": # returns if profile name is empty
 			return	
 		
-		var new_profile = UserProfiles._new_profile(new_profile_name)
-		
-		UserProfiles._save_new_profile(new_profile)
+		UserProfiles._save_new_profile(new_profile_name)
 		_refresh_profiles_dropdown()
 		_update_current_profile_label()
 		_profileRequired_warning(false)
 		get_node("Options_Profile/ProfileCreator").hide()
 		$Options_Profile/ProfileCreator/ProfileNamer/ProfileEntryField.text = ""
 		flag_profiles_menu_sub = false
-		pass
 	
 func _on_cancel_profile_button_mouse_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()

@@ -3,6 +3,99 @@ extends Node
 var FILE_PATH_USER_PROFILES = "user://user_profiles.json"
 var FILE_PATH_THEME_UNLOCKS = "user://theme_unlocks.json"
 
+class Profile:
+	var name: String
+	var id: int
+	var selected: bool
+	
+	var score_lowest: int
+	var score_highest: int
+	
+	var questions_answered: Dictionary
+	var questions_seen: Dictionary
+	var questions_chances: Dictionary
+	
+	static func create(i_name: String, i_id: int, i_score_low: int, i_score_high: int)-> Profile:
+		var profile = Profile.new()
+		profile.name = i_name
+		profile.id = i_id
+		profile.selected = true
+		
+		profile.score_lowest = i_score_low
+		profile.score_highest = i_score_high
+		
+		profile.questions_answered = {}
+		profile.questions_seen = {}
+		profile.questions_chances = {}
+		
+		return profile
+
+	static func copy(old_profile: Profile) -> Profile:
+		var profile = Profile.new()
+		profile.name = old_profile.name
+		profile.id = old_profile.id
+		profile.selected = old_profile.selected
+		
+		profile.score_lowest = old_profile.score_lowest
+		profile.score_highest = old_profile.score_highest
+		
+		profile.questions_answered = old_profile.questions_answered
+		profile.questions_seen = old_profile.questions_seen
+		profile.questions_chances = old_profile.questions_chances
+		
+		return profile
+
+	static func from_raw(raw_data: Dictionary) -> Profile:
+		var profile = Profile.new()
+		profile.name = raw_data["name"]
+		profile.id = raw_data["id"]
+		profile.selected = raw_data["selected"]
+		
+		profile.score_lowest = raw_data["score_lowest"]
+		profile.score_highest = raw_data["score_highest"]
+		
+		profile.questions_answered = raw_data["questions_answered"]
+		profile.questions_seen = raw_data["questions_seen"]
+		profile.questions_chances = raw_data["questions_chances"]
+		
+		return profile
+
+	func raw() -> Dictionary:
+		var profile = {}
+		profile["name"] = name
+		profile["id"] = id
+		profile["selected"] = selected
+		
+		profile["score_lowest"] = score_lowest
+		profile["score_highest"] = score_highest
+		
+		profile["questions_answered"] = questions_answered
+		profile["questions_seen"] = questions_seen
+		profile["questions_chances"] = questions_chances
+		
+		return profile
+
+	func append_answers_answered_seen(question_uuids: Array, question_answers: Array):
+		for i in range(question_uuids.size()):
+			if questions_seen.has(question_uuids[i]):
+				questions_seen[question_uuids[i]] += 1
+			else:
+				questions_seen[question_uuids[i]] = 1
+			if question_answers[i]:
+				if questions_answered.has(question_uuids[i]):
+					questions_answered[question_uuids[i]] += 1
+				else:
+					questions_answered[question_uuids[i]] = 1
+		
+	func append_answers_chances(chances: Array):
+		for i in range(chances.size()):
+			if questions_chances.has(chances[i]):
+				questions_chances[chances[i]] += 1
+			else:
+				questions_chances[chances[i]] = 1
+			pass
+
+
 #logic for selecting which theme to load is in Master_scene.gd
 var THEME_NAMES = [
 	"Chalkboard",
@@ -37,6 +130,7 @@ var THEME_UNOCKED_BY_CHANCE = {
 	
 }
 
+var profiles_raw = {}
 var profiles = {}
 var chance_descriptors = {}
 var unlocked_themes = {}
@@ -46,44 +140,25 @@ func _ready():
 	_IO_read_themes_unlocks()
 
 #region profile operations
-func _new_profile(profileName):
+func _new_profile_id()-> int:
 	var newID = 0
 	if profiles != null:
 		for key in profiles.keys():
-			if profiles[key]["id"] >= newID:
-				newID = profiles[key]["id"] + 1
-				pass
-			pass
-		pass
-	
-	var newProfile = {
-		"name": profileName,
-		"id": newID,
-		"score_lowest": 0,
-		"score_highest": 0,
-		"selected": false,
-		"questions_answered": {},
-		"questions_seen": {},
-		"questions_chances": {},
-		"unlocked_themes": [],
-	}
-	
-	return newProfile
+			if profiles[key].id >= newID:
+				newID = profiles[key].id + 1
+	return newID
 
 ## saves a new profile
-func _save_new_profile(newProfile):
-	if !profiles.has(newProfile.name):
-		print("!INFO: Saving New Profile: [%s]" % newProfile.name)
-		profiles[newProfile.name] = newProfile
+func _save_new_profile(new_profile_name):
+	if !profiles.has(new_profile_name):
+		print("!INFO: Saving New Profile: [%s]" % new_profile_name)
+		
+		var new_profile = Profile.create(new_profile_name, _new_profile_id(), 0, 0)
+		profiles[new_profile_name] = new_profile
+		
 		_IO_write_profiles()
-		pass
 	else:
-		print("!INFO: Profile Name Collision [%s]" % newProfile.name)
-		pass
-	pass
-
-func _get_selected_profile():
-	return profiles[_get_selected_profile_key()]
+		print("!INFO: Profile Name Collision [%s]" % new_profile_name)
 
 ## Updates an already existing profile with new statistics
 func _overwrite_profile_with_reference(updatedProfile):
@@ -107,23 +182,46 @@ func _overwrite_profile_with_reference(updatedProfile):
 		pass
 	pass
 
+func _update_profile_with_quiz_data(p_name: String, q_score: int, question_uuids: Array, question_answers: Array[bool], chances_scored: Array):
+	if profiles.has(p_name):
+		var new_profile = Profile.copy(profiles[p_name])
+
+		if q_score > new_profile.score_highest:
+			new_profile.score_highest = q_score
+		if q_score < new_profile.score_lowest:
+			new_profile.score_lowest = q_score
+		
+		new_profile.append_answers_answered_seen(question_uuids, question_answers)
+		new_profile.append_answers_chances(chances_scored)
+		
+		profiles[new_profile.name] = new_profile
+		
+		_IO_write_profiles()
+	else:
+		print("!!!ERROR: there is no profile with name [%s]" % p_name)
+
 func _delete_profile(profileName):
 	print("!INFO: Deleting Existing Profile: [%s]" % profileName)
 	profiles.erase(profileName)
 	_IO_write_profiles()
 	pass
 
-func _get_selected_profile_key():
+func _get_selected_profile_key() -> String:
 	if profiles.size() < 1:
-		print("!WARNING: no user profile avalible")
+		print("!WARNING: no user profiles avalible")
 		return "Guest"
 	
 	for key in profiles.keys():
 		if profiles[key]["selected"]:
 			return key
 	
-	print("!!ERROR: it shouldn't be possible there to be no selected profile")
-	return "Profile not found"
+	print("!WARNING: no profile selected, choosing default")
+	profiles[profiles.keys()[0]]["selected"] = true
+	_IO_write_profiles()
+	return profiles[profiles.keys()[0]]
+
+func _get_selected_profile() -> Profile:
+	return profiles[_get_selected_profile_key()]
 #endregion
 
 func _check_theme_unlock(award_hash):
@@ -169,62 +267,66 @@ func _load_chance_data():
 func _IO_read_profiles():
 	var file = FileAccess.open(FILE_PATH_USER_PROFILES, FileAccess.READ)
 	if file:
-		profiles = JSON.parse_string(file.get_as_text())
+		profiles_raw = JSON.parse_string(file.get_as_text())
 		file.close()
-		pass
 	else:
 		print("!!ERROR: Failed to read profiles.")
-		pass
 		
-	if profiles == null:
-		profiles = {}
-		return
+	if profiles_raw == null:
+		profiles_raw = {}
 	
 	# validate the json structure
 	var saveProfilesChanges = false
 	
-	for key in profiles.keys():
-		if !"name" in profiles[key] || !"id" in profiles[key] || !"selected" in profiles[key]:
-			profiles.erase(key)
+	for key in profiles_raw.keys():
+		if !"name" in profiles_raw[key] || !"id" in profiles_raw[key] || !"selected" in profiles_raw[key]:
+			profiles_raw.erase(key)
 			print("!!Error: Profile [%s] in JSON failed Validation, deleting corrupted entry." % key)
 			saveProfilesChanges = true
 			
-		if !"questions_answered" in profiles[key]:
+		if !"questions_answered" in profiles_raw[key]:
 			print("!INFO: older profile detected, adding \"questions_answered\" member")
-			profiles[key]["questions_answered"] = {}
+			profiles_raw[key]["questions_answered"] = {}
 			saveProfilesChanges = true
 			
-		if !"questions_seen" in profiles[key]:
+		if !"questions_seen" in profiles_raw[key]:
 			print("!INFO: older profile detected, adding \"questions_seen\" member")
-			profiles[key]["questions_seen"] = {}
+			profiles_raw[key]["questions_seen"] = {}
 			saveProfilesChanges = true
 			
-		if !"questions_chances" in profiles[key]:
+		if !"questions_chances" in profiles_raw[key]:
 			print("!INFO: older profile detected, adding \"questions_chances\" member")
-			profiles[key]["questions_chances"] = {}
+			profiles_raw[key]["questions_chances"] = {}
 			saveProfilesChanges = true
 			
 		# add new lowest highest score value
-		if !"score_lowest" in profiles[key]:
-			profiles[key]["score_lowest"] = 0
+		if !"score_lowest" in profiles_raw[key]:
+			profiles_raw[key]["score_lowest"] = 0
 			saveProfilesChanges = true
 			
-		if !"score_highest" in profiles[key]:
-			profiles[key]["score_highest"] = 0
+		if !"score_highest" in profiles_raw[key]:
+			profiles_raw[key]["score_highest"] = 0
 			saveProfilesChanges = true
 		
 		# add new unlocked themes
-		if !"unlocked_themes" in profiles[key]:
-			profiles[key]["unlocked_themes"] = []
+		if !"unlocked_themes" in profiles_raw[key]:
+			profiles_raw[key]["unlocked_themes"] = []
 			saveProfilesChanges = true
-		
+	
+		profiles[key] = Profile.from_raw(profiles_raw[key])
+	
 	if saveProfilesChanges:
 		_IO_write_profiles()
 
 func _IO_write_profiles():
 	var file = FileAccess.open(FILE_PATH_USER_PROFILES, FileAccess.WRITE)
+	
+	var profile_data = {}
+	for key in profiles:
+		profile_data[key] = profiles[key].raw()
+	
 	if file:
-		var jsonString = JSON.stringify(profiles)
+		var jsonString = JSON.stringify(profile_data, "\t")
 		file.store_string(jsonString)
 		file.close()
 	else:

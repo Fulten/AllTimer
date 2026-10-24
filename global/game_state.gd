@@ -200,6 +200,8 @@ func _clear_players():
 	idToCardIndex = {}
 
 func _has_active_id(temp_id: int):
+	if temp_id == 1:
+		return false
 	for key in players:
 		if key == temp_id:
 			return true

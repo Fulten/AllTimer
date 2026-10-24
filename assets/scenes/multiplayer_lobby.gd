@@ -40,6 +40,7 @@ func _refresh_connected_players_list():
 	
 func _connection_reset(error):
 	print("Connection Failed: %s" % error)
+	$ConnectionFailedPopupCase/Label.text = "Connection Failed:\n %s" % error 
 	get_node("ConnectionFailedPopupCase").show()
 	_ui_update_connected_players()
 	_ui_reset_menu()

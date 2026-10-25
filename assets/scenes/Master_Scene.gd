@@ -20,7 +20,7 @@ var peer
 func _ready():
 	randomize()
 	GameState.quiz_phase = GameState.QUIZSTATE.lobby
-	GameState._clear_players()
+	GameState._clear_all_players()
 	_connect_multiplayer_callback_functions()
 	_initilize_mp_lobby_instance()
 
@@ -81,13 +81,13 @@ func _connect_multiplayer_callback_functions():
 
 # Emitted when this MultiplayerAPI's multiplayer_peer successfully connected to a server. Only emitted on clients.
 func _mp_on_connected_to_server():
-	GameState._new_player(UserProfiles._get_selected_profile()["name"], multiplayer.get_unique_id())
+	GameState._add_new_player(UserProfiles._get_selected_profile()["name"], multiplayer.get_unique_id())
 	mp_lobby_instance._connected_to_server()
 
 # Emitted when this MultiplayerAPI's multiplayer_peer fails to establish a connection to a server. Only emitted on clients.
 func _mp_on_connected_fail():
 	multiplayer.multiplayer_peer = null
-	GameState._clear_players()
+	GameState._clear_all_players()
 	mp_lobby_instance._connection_reset("Unable To Connect")
 
 # Emitted when this MultiplayerAPI's multiplayer_peer connects with a new peer. 
@@ -108,12 +108,11 @@ func _mp_on_peer_disconnected(id: int):
 				_remove_player.rpc(id)
 			else:
 				_deactivate_player.rpc(id)
-				quiz_session_instance._player_dropped(id)
 
 # Emitted when this MultiplayerAPI's multiplayer_peer disconnects from server. Only emitted on clients.
 func _mp_on_server_disconnected():
 	multiplayer.multiplayer_peer = null
-	GameState.players.clear()
+	GameState._clear_all_players()
 	mp_lobby_instance._connection_reset("Disconnected From Server")
 #endregions
 
@@ -121,7 +120,7 @@ func _mp_on_server_disconnected():
 @rpc("authority", "reliable")
 func _kick_peer(reason):
 	multiplayer.multiplayer_peer = null
-	GameState.players.clear()
+	GameState._clear_all_players()
 	mp_lobby_instance._connection_reset(reason)
 
 @rpc("authority", "reliable")
@@ -138,7 +137,7 @@ func _recive_player_data(playerName, activeId):
 	elif GameState._player_count() >= 4:
 		_kick_peer.rpc_id(multiplayer.get_remote_sender_id(), "Connection Refused,\n lobby is full")
 	elif GameState._in_lobby():
-		GameState._new_player(playerName, multiplayer.get_remote_sender_id())
+		GameState._add_new_player(playerName, multiplayer.get_remote_sender_id())
 		_send_clients_player_data()
 		mp_lobby_instance._refresh_connected_players_list()
 	else: # if the game has already started deny new players
@@ -150,7 +149,7 @@ func _late_join_client(activeId, playerIds: Array, playerNames: Array):
 	
 	for i in range(playerIds.size()):
 		if not GameState.players.has(playerIds[i]):
-			GameState._new_player(playerNames[i], playerIds[i])
+			GameState._add_new_player(playerNames[i], playerIds[i])
 	
 	_load_into_quiz()
 	_late_join_client_ready.rpc_id(1)
@@ -167,7 +166,7 @@ func _assign_active_id(id):
 func _sync_player_data(playerIds: Array, playerNames: Array):
 	for i in range(playerIds.size()):
 		if not GameState.players.has(playerIds[i]):
-			GameState._new_player(playerNames[i], playerIds[i])
+			GameState._add_new_player(playerNames[i], playerIds[i])
 	mp_lobby_instance._refresh_connected_players_list()
 
 @rpc("authority", "call_local", "reliable")
@@ -179,11 +178,15 @@ func _remove_player(mp_id):
 func _deactivate_player(mp_id):
 	GameState._deactivate_player(mp_id)
 	mp_lobby_instance._refresh_connected_players_list()
+	if GameState._game_started():
+		quiz_session_instance._player_dropped(mp_id)
 
 @rpc("authority", "call_local", "reliable")
 func _reactivate_player(mp_id, active_id):
 	GameState._reactivate_player(mp_id, active_id)
 	mp_lobby_instance._refresh_connected_players_list()
+	if GameState._game_started():
+		quiz_session_instance._player_rejoined(mp_id)
 
 @rpc("authority", "call_local", "reliable")
 func _launch_quiz():
@@ -216,7 +219,7 @@ func _mp_lobby_host_server(ip_address):
 		
 	multiplayer.multiplayer_peer = peer
 	
-	GameState._new_player(UserProfiles._get_selected_profile()["name"], multiplayer.get_unique_id())
+	GameState._add_new_player(UserProfiles._get_selected_profile()["name"], multiplayer.get_unique_id())
 	mp_lobby_instance._refresh_connected_players_list()
 	
 	print("Info: Hosting server on IP: %s, PORT: %d" % [IP_ADDRESS, PORT])
@@ -230,7 +233,7 @@ func _mp_lobby_join(ip_address):
 func _mp_lobby_disconnect():
 	if multiplayer.has_multiplayer_peer():
 		_close_multiplayer_peer()
-		GameState._clear_players()
+		GameState._clear_all_players()
 		mp_lobby_instance._refresh_connected_players_list()
 
 func _mp_lobby_kick_peer(peer_id: int):
@@ -256,7 +259,7 @@ func _mp_lobby_launch_quiz():
 func _mp_lobby_exit():
 	if multiplayer.has_multiplayer_peer():
 		multiplayer.multiplayer_peer = null
-		GameState._clear_players()
+		GameState._clear_all_players()
 		mp_lobby_instance._refresh_connected_players_list()
 	_quit_to_main_menu()
 
@@ -269,8 +272,7 @@ func _quit_to_main_menu():
 func _load_into_quiz():
 	GameState.quiz_phase = GameState.QUIZSTATE.loading
 	_initilize_quiz_scene()
-	
-	
+
 func _initilize_quiz_scene():
 	_local_update_selected_scene()
 	quiz_session_instance = quiz_session_scene.instantiate()
@@ -302,6 +304,6 @@ func _exit_quiz_handler():
 	GameState.quiz_phase = GameState.QUIZSTATE.lobby
 	SoundMaster._play_music_track("mp_lobby")
 	_close_multiplayer_peer()
-	GameState._clear_players()
+	GameState._clear_all_players()
 	mp_lobby_instance._reset_lobby()
 #endregion

@@ -101,7 +101,6 @@ var questions = {}
 var quiz_questions_list = []
 var quiz_question_index = 0 
 var quiz_chances = []
-var player_answers_record = {}
 
 var question_name = "n/a"
 var question_explainer = "explainer_text"
@@ -209,8 +208,13 @@ func _player_dropped(mp_id):
 	if GameState._game_started():
 		_ui_update_lock_player_pannel(mp_id, true)
 	if multiplayer.is_server():
-		_server_full_sync()
 		print("Info: player Dropped id:%s" % mp_id)
+
+func _player_rejoined(mp_id):
+	if GameState._game_started():
+		_ui_lock_player_pannel_dynamic()
+	if multiplayer.is_server():
+		print("Info: player rejoined id:%s" % mp_id)
 
 #region server side functions that handle syncing with players
 #===================================================
@@ -268,7 +272,13 @@ func _server_sync_late_join(mp_id):
 	if GameState.quiz_phase == QUIZSTATE.endScreen:
 		_server_sync_endscreen_info(mp_id)
 	
-	_late_join_load_in.rpc_id(mp_id)
+	var pannels_locked = []
+	
+	for key in GameState.players:
+		if not GameState.players[key]["active"] or GameState.players[key]["hasGuessed"]:
+			pannels_locked.append(key)
+	
+	_late_join_load_in.rpc_id(mp_id, pannels_locked)
 
 func _server_sync_endscreen_info(mp_id = -1):
 	var player_ids = []
@@ -285,10 +295,10 @@ func _server_sync_endscreen_info(mp_id = -1):
 		player_ids[index] = key
 		player_scores[index] = GameState.players[key]["score"]
 	
-	for chance in GameState.chances:
-		for player in GameState.chances[chance].player_hits:
-			if GameState.chances[chance].player_hits[player] >= 1:
-				player_chances[GameState.idToCardIndex[player]].append(chance)
+	for c in GameState.chances:
+		for p in GameState.players:
+			if GameState.players[p].chance_hits.has(c):
+				player_chances[GameState.idToCardIndex[p]].append(c)
 	
 	if mp_id == -1:
 		_sync_player_end_screen.rpc(player_ids, player_scores, player_chances)
@@ -303,25 +313,24 @@ func _server_sync_profile_data():
 			question_uuids.append(question["uuid"])
 		
 		var player_chances = []
-			
-		for chance in GameState.chances:
-			if GameState.chances[chance].player_hits[key] >= 1:
-				player_chances.append(chance)
-			
+		
+		for c in GameState.players[key].chance_hits:
+			player_chances.append(c)
+		
 		if DEBUG:
 			print("!!DEBUG: sending profile data to player_id: [%s]" % key)
 		if key == 1:
 			_sync_profile_data(
 				GameState.players[key].score, 
 				question_uuids, 
-				player_answers_record[key], 
+				GameState.players[key].answer_record, 
 				player_chances)
 		elif multiplayer.get_peers().has(key):
 			_sync_profile_data.rpc_id(
 				key,
 				GameState.players[key].score, 
 				question_uuids, 
-				player_answers_record[key], 
+				GameState.players[key].answer_record, 
 				player_chances)
 #endregion
 
@@ -396,7 +405,7 @@ func _phase_post_question():
 	GameState._check_player_chances(quiz_questions_list[quiz_question_index]["uuid"])
 	
 	for key in GameState.players:
-		player_answers_record[key][quiz_question_index] = GameState.players[key].correct
+		GameState.players[key].answer_record[quiz_question_index] = GameState.players[key].correct
 	
 	_create_player_statuses_table()
 	
@@ -599,9 +608,13 @@ func _player_load_quiz():
 	_client_setup_quiz()
 
 @rpc("authority", "reliable")
-func _late_join_load_in():
+func _late_join_load_in(pannels_locked: Array):
 	_io_load_master_chances()
 	_ui_update_prequiz_rules()
+	
+	for key in pannels_locked:
+		_ui_update_lock_player_pannel(key, true)
+	
 	match GameState.quiz_phase:
 		QUIZSTATE.preQuiz:
 			$ControlSwapper0.play("QuizIntro", -1, 10.0, false)
@@ -636,7 +649,7 @@ func _late_join_load_in():
 			$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.hide()
 			_ui_setup_end_screen()
 			$ControlSwapper0.play("QuizFinish", -1, 20.0, false)
-			
+	
 	_late_join_player_setup_done.rpc_id(1)
 #endregion
 
@@ -648,7 +661,7 @@ func _player_guess_rpc(mp_id, guess):
 		_ui_update_lock_player_pannel(mp_id, true)
 		if multiplayer.is_server():
 			if not ui_countdown_timer.is_stopped():
-				GameState._player_guess(mp_id, guess, ui_countdown_timer.get_time_left())
+				GameState.players[mp_id].player_guess(mp_id, guess, ui_countdown_timer.get_time_left())
 			if GameState._have_all_players_answered():
 				_phase_post_question()
 
@@ -672,7 +685,6 @@ func _player_ready(mp_id):
 @rpc("any_peer", "reliable")
 func _late_join_player_setup_done():
 	GameState.players[multiplayer.get_remote_sender_id()]["loaded"] = true
-	GameState.players[multiplayer.get_remote_sender_id()]["active"] = true
 #endregion
 
 #region server utilities
@@ -760,6 +772,11 @@ func _ui_local_score_rollup():
 			ui_player_scores[i].text = str(current_score + (last_score - current_score) * t)
 		rollup_count -= 1
 		get_tree().create_timer(0.06).timeout.connect(_ui_local_score_rollup)
+
+func _ui_lock_player_pannel_dynamic():
+	for key in GameState.players:
+		var locked = not GameState.players[key]["active"] or GameState.players[key]["hasGuessed"]
+		_ui_update_lock_player_pannel(key, locked)
 
 func _ui_update_lock_player_pannel(mp_id, locked: bool):
 	var card_index = GameState.idToCardIndex[mp_id] + 1
@@ -937,7 +954,7 @@ func _ui_setup_end_screen():
 	# add additional score from chances
 	for key in GameState.players:
 		var chance_bonus = 0
-		for chanceKey in GameState.players[key]["chances"]:
+		for chanceKey in GameState.players[key].chances_scored:
 			var chance_data = _get_chance_data_from_uuid(chanceKey)
 			chance_bonus += chance_data["bonus"]
 		GameState.players[key].score += chance_bonus
@@ -975,12 +992,11 @@ func _ui_setup_end_screen():
 		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/ScoreDisplay/Score" % uiNum).text = "%s" % GameState.players[scoreOrder[n]].score
 		
 		var chanceStr = ""
-		for chanceKey in GameState.players[scoreOrder[n]]["chances"]:
+		for chanceKey in GameState.players[scoreOrder[n]].chances_scored:
 			chanceStr += "%s, " % _get_chance_data_from_uuid(chanceKey)["name"]
 		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/MedalCase/Awards" % uiNum)["text"] = chanceStr
 		
 		get_node("quizEnd/PlayerStandingsOrg/%sPlacer" % uiNum).show()
-
 #endregion
 
 #region timers
@@ -1030,10 +1046,10 @@ func _host_setup_quiz():
 		print("Info: fewer than max questions picked, only %s questions in this quiz" % question_count)
 	
 	for key in GameState.players:
-		player_answers_record[key] = []
-		player_answers_record[key].resize(QUIZ_LENGTH)
-		for i in range(player_answers_record[key].size()):
-			player_answers_record[key][i] = false
+		GameState.players[key].answer_record = []
+		GameState.players[key].answer_record.resize(QUIZ_LENGTH)
+		for i in range(GameState.players[key].answer_record.size()):
+			GameState.players[key].answer_record[i] = false
 	
 	_clean_questions_data()
 	_sync_game_rules.rpc(

@@ -8,55 +8,97 @@ class Player:
 	var loaded: bool
 	var ready: bool
 	
+	var pannel_locked: bool
+	
+	var score: int
+	var last_score: int
+	
 	var guess: int
 	var guessTime: int
 	var hasGuessed: bool
 	var correct: bool
-	var score: int
-	var last_score: int
-	var profileId
-	var chances: Array
 	
-	func initilize(p_name):
-		name = p_name
-		active = true
-		loaded = false
-		ready = false
+	var answer_record: Array
+	var chances_scored: Array
+	var chance_hits: Dictionary
+	
+	static func create(p_name) -> Player:
+		var new_player = Player.new()
+		new_player.name = p_name
+		new_player.active = true
+		new_player.loaded = false
+		new_player.ready = false
 		
-		guess = -1
-		guessTime = 0
-		hasGuessed = false
+		new_player.pannel_locked = false
 		
-		correct = false
-		score = 0
-		last_score = 0
-		chances = []
+		new_player.score = 0
+		new_player.last_score = 0
 		
-	func reset_player():
-		loaded = false
-		ready = false
+		new_player.guess = -1
+		new_player.guessTime = 0
+		new_player.hasGuessed = false
+		new_player.correct = false
 		
-		guess = -1
-		guessTime = 0
-		hasGuessed = false
-		correct = false
-		score = 0
-		last_score = 0
-		chances = []
+		new_player.answer_record = []
+		new_player.chances_scored = []
+		new_player.chance_hits = {}
+		
+		return new_player
+	
+	static func copy(old_player: Player) -> Player:
+		var new_player = Player.new()
+		new_player.name = old_player.name
+		new_player.active = old_player.active
+		new_player.loaded = old_player.loaded
+		new_player.ready = old_player.ready
+		
+		new_player.pannel_locked = old_player.pannel_locked
+		
+		new_player.score = old_player.score
+		new_player.last_score = old_player.last_score
+		
+		new_player.guess = old_player.guess
+		new_player.guessTime = old_player.guessTime
+		new_player.hasGuessed = old_player.hasGuessed
+		new_player.correct = old_player.correct
+		
+		new_player.answer_record = old_player.answer_record
+		new_player.chances_scored = old_player.chances_scored
+		new_player.chance_hits = old_player.chance_hits
+		
+		return new_player
+	
+	func player_guess(player_id, guess, current_time):
+		guess = guess
+		guessTime = current_time
+		hasGuessed = true
 
-	func new_from(old_player):
-		name = old_player["name"]
-		active = true
+	func chance_hit(uuid):
+		if chance_hits.has(uuid):
+			chance_hits[uuid] += 1
+		else:
+			chance_hits[uuid] = 1
+	
+	func reset_state() -> void:
 		loaded = false
 		ready = false
+		
+		score = 0
+		last_score = 0
 		
 		guess = -1
 		guessTime = 0
 		hasGuessed = false
 		correct = false
-		score = old_player["score"]
-		last_score = old_player["last_score"]
-		chances = old_player["chances"]
+		
+		chance_hits = {}
+		chances_scored = []
+		
+	func reset_guess() -> void:
+		guess = -1
+		guessTime = 0
+		hasGuessed = false
+		correct = false
 
 class QuizOptions:
 	var timer: int # length of question answer phase timer
@@ -121,7 +163,6 @@ class Chance:
 	var bonus: int
 	var uuid
 	
-	var player_hits: Dictionary
 	var related_questions: Array
 	
 	static func create(i_name, i_correct, i_bonus, i_uuid) -> Chance:
@@ -131,11 +172,7 @@ class Chance:
 		chance.bonus = i_bonus
 		chance.uuid = i_uuid
 		
-		chance.player_hits = {}
 		chance.related_questions = []
-		
-		for key in GameState.players:
-			chance.player_hits[key] = 0
 		return chance
 #endregion
 
@@ -179,25 +216,27 @@ enum QUIZSTATE {
 
 func _reset_quiz_state():
 	quiz_phase = QUIZSTATE.lobby
-	_reset_players()
+	_reset_all_players()
 	chances.clear()
 	players_loaded = 0
 
 #region player related functions
-func _new_player(p_name, mp_id):
-	var new_player = GameState.Player.new()
-	new_player.initilize(p_name)
-	GameState.players[mp_id] = new_player
+func _add_new_player(p_name, mp_id): 
+	players[mp_id] = Player.create(p_name)
 	_build_player_number_to_id_table()
 
 func _remove_player(mp_id):
 	players.erase(mp_id)
 	_build_player_number_to_id_table()
 
-func _clear_players():
+func _clear_all_players():
 	players.clear()
 	playerCardOrder = [-1,-1,-1,-1]
 	idToCardIndex = {}
+
+func _reset_all_players():
+	for key in players:
+		players[key].reset_state()
 
 func _has_active_id(temp_id: int):
 	if temp_id == 1:
@@ -208,20 +247,14 @@ func _has_active_id(temp_id: int):
 
 func _deactivate_player(mp_id):
 	if players.has(mp_id):
-		players[mp_id]["active"] = false
-		players[mp_id]["loaded"] = false
-	
+		players[mp_id].active = false
+		players[mp_id].loaded = false
+
 func _reactivate_player(mp_id, active_id):
 	if players.has(active_id):
-		var playerData = GameState.Player.new()
-		playerData.new_from(players[active_id])
-		players[mp_id] = playerData
+		players[mp_id] = Player.copy(players[active_id])
 		_remove_player(active_id)
 
-func _reset_players():
-	for key in players:
-		players[key].reset_player()
-		
 func _player_count() -> int:
 	return players.size()
 
@@ -234,33 +267,9 @@ func _build_player_number_to_id_table():
 		idToCardIndex[key] = i
 		i += 1
 
-func _player_has_guessed(player_id) -> bool:
-	return players[player_id]["hasGuessed"]
-
-func _have_all_players_answered() -> bool:
-	var all_players_answered = true
-	for key in players:
-		if players[key]["loaded"] and not players[key]["hasGuessed"]:
-			all_players_answered = false
-	return all_players_answered
-
-func _are_all_players_ready() -> bool:
-	var players_ready = true
-	for key in players:
-		if players[key]["loaded"] and not players[key]["ready"]:
-			players_ready = false
-	return players_ready
-
-func _player_guess(player_id, guess, current_time):
-	players[player_id]["guess"] = guess
-	players[player_id]["guessTime"] = current_time
-	players[player_id]["hasGuessed"] = true
-
 func _reset_player_guesses():
 	for key in players:
-		players[key]["guess"] = -1
-		players[key]["guessTime"] = 0
-		players[key]["hasGuessed"] = false
+		players[key].reset_guess()
 
 func _check_player_answers(correct_answer, score):
 	for key in players:
@@ -281,29 +290,42 @@ func _check_player_chances(question_uuid):
 		if chances[chance_key].related_questions.has(question_uuid):
 			for key in players:
 				if players[key]["hasGuessed"] and (players[key]["correct"] == chances[chance_key].correct):
-					chances[chance_key].player_hits[key] += 1
+					players[key].chance_hit(chance_key)
 
 func _adjust_player_score(key, score):
 	players[key]["last_score"] = players[key]["score"]
 	var awarded_points = (score + score * players[key]["guessTime"] / quizOptions.timer) / 2
 	players[key]["score"] += awarded_points
-
-
-
 #endregion
 
-#region boolean functions that query quiz_phase
+#region boolean queries
 func _game_started() -> bool:
 	return (quiz_phase != QUIZSTATE.lobby 
 		and quiz_phase != QUIZSTATE.loading
-		and quiz_phase != QUIZSTATE.preQuiz 
-		and quiz_phase != QUIZSTATE.endOfRules)
+		and quiz_phase != QUIZSTATE.preQuiz)
 
 func _in_lobby() -> bool:
 	return quiz_phase == QUIZSTATE.lobby
 
 func _can_guess() -> bool:
 	return quiz_phase == QUIZSTATE.question
+
+func _player_has_guessed(player_id) -> bool:
+	return players[player_id]["hasGuessed"]
+
+func _have_all_players_answered() -> bool:
+	var all_players_answered = true
+	for key in players:
+		if players[key]["loaded"] and not players[key]["hasGuessed"]:
+			all_players_answered = false
+	return all_players_answered
+
+func _are_all_players_ready() -> bool:
+	var players_ready = true
+	for key in players:
+		if players[key]["loaded"] and not players[key]["ready"]:
+			players_ready = false
+	return players_ready
 #endregion
 
 #region question filter section

@@ -662,6 +662,7 @@ func _late_join_load_in(pannels_locked: Array):
 @rpc("any_peer", "reliable", "call_local")
 func _player_guess_rpc(mp_id, guess):
 	if GameState.quiz_phase == QUIZSTATE.question:
+		print("test %s" % mp_id)
 		_ui_update_lock_player_pannel(mp_id, true)
 		if multiplayer.is_server():
 			if not ui_countdown_timer.is_stopped():

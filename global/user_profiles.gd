@@ -1,8 +1,8 @@
 extends Node
 
 var FILE_PATH_USER_PROFILES = "user://user_profiles.json"
+var FILE_PATH_USER_PROFILES_BACKUP = "user://user_profiles.json.bak"
 var FILE_PATH_THEME_UNLOCKS = "user://theme_unlocks.json"
-
 class Profile:
 	var name: String
 	var id: int
@@ -257,13 +257,20 @@ func _load_chance_data():
 func _IO_read_profiles():
 	var file = FileAccess.open(FILE_PATH_USER_PROFILES, FileAccess.READ)
 	if file:
-		profiles_raw = JSON.parse_string(file.get_as_text())
+		var file_data = file.get_as_text()
+		profiles_raw = JSON.parse_string(file_data)
 		file.close()
+		
+		if profiles_raw == null:
+			print("!!ERROR: file data null, could be corrupted, saving backup...")
+			var backup = FileAccess.open(FILE_PATH_USER_PROFILES_BACKUP, FileAccess.WRITE)
+			backup.store_string(file_data)
+			backup.close()
+			
+			profiles_raw = {}
 	else:
 		print("!!ERROR: Failed to read profiles.")
 		
-	if profiles_raw == null:
-		profiles_raw = {}
 	
 	# validate the json structure
 	var saveProfilesChanges = false

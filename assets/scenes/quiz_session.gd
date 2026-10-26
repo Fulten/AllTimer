@@ -162,7 +162,7 @@ func _ready():
 	pass
 
 func _load_icons() -> void:
-	for device in ["KB", "XB", "PS"]:
+	for device in ["KB", "XB", "PS","NT"]:
 		for input in range(1, 5):
 			var file := "res://assets/uiux/session_themes/T_%s%s_D.tga" % [device, input]
 			_icons["%s%s" % [device, input]] = load(file)
@@ -171,6 +171,7 @@ func _on_device_changed(device: InputDevice.DeviceType, _id: int) -> void:
 	match device:
 		InputDevice.DeviceType.KEYBOARD_MOUSE: _replace_icons("KB")
 		InputDevice.DeviceType.PLAYSTATION: _replace_icons("PS")
+		InputDevice.DeviceType.SWITCH: _replace_icons("NT")
 		_: _replace_icons("XB")
 
 func _replace_icons(device: String) -> void:

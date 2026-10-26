@@ -283,27 +283,27 @@ func _server_sync_late_join(mp_id):
 func _server_sync_endscreen_info(mp_id = -1):
 	var player_ids = []
 	player_ids.resize(GameState._player_count())
-	var player_scores = []
-	player_scores.resize(GameState._player_count())
-	var player_chances = []
-	player_chances.resize(GameState._player_count())
+	var final_scores = []
+	final_scores.resize(GameState._player_count())
+	var chance_names = []
+	chance_names.resize(GameState._player_count())
 	for i in range(GameState._player_count()):
-		player_chances[i] = []
+		chance_names[i] = []
 	
 	for key in GameState.players:
 		var index = GameState.idToCardIndex[key]
 		player_ids[index] = key
-		player_scores[index] = GameState.players[key]["score"]
+		final_scores[index] = GameState.players[key].final_score
 	
 	for c in GameState.chances:
 		for p in GameState.players:
 			if GameState.players[p].chance_hits.has(c):
-				player_chances[GameState.idToCardIndex[p]].append(c)
+				chance_names[GameState.idToCardIndex[p]].append(GameState.chances[c].name)
 	
 	if mp_id == -1:
-		_sync_player_end_screen.rpc(player_ids, player_scores, player_chances)
+		_sync_player_end_screen.rpc(player_ids, final_scores, chance_names)
 	else:
-		_sync_player_end_screen.rpc_id(mp_id, player_ids, player_scores, player_chances)
+		_sync_player_end_screen.rpc_id(mp_id, player_ids, final_scores, chance_names)
 
 func _server_sync_profile_data():
 	for key in GameState.players:
@@ -321,14 +321,14 @@ func _server_sync_profile_data():
 			print("!!DEBUG: sending profile data to player_id: [%s]" % key)
 		if key == 1:
 			_sync_profile_data(
-				GameState.players[key].score, 
+				GameState.players[key].final_score, 
 				question_uuids, 
 				GameState.players[key].answer_record, 
 				player_chances)
 		elif multiplayer.get_peers().has(key):
 			_sync_profile_data.rpc_id(
 				key,
-				GameState.players[key].score, 
+				GameState.players[key].final_score, 
 				question_uuids, 
 				GameState.players[key].answer_record, 
 				player_chances)
@@ -455,9 +455,14 @@ func _phase_end_screen():
 		print("!!DEBUG: endscreen phase")
 	GameState.quiz_phase = QUIZSTATE.endScreen
 	
+	for p in GameState.players:
+		var final_score = GameState.players[p].score
+		for c in GameState.players[p].chances_scored:
+			final_score += GameState.chances[c]["bonus"]
+		GameState.players[p].final_score = final_score
+	
 	_server_full_sync()
 	_server_sync_endscreen_info()
-	
 	
 	_sync_play_phase_animation.rpc()
 	_server_sync_profile_data()
@@ -587,17 +592,16 @@ func _sync_player_statuses(player_ids: Array, statuses):
 	ui_has_status_table = true
 
 @rpc("authority", "call_local", "reliable")
-func _sync_player_end_screen(ids, scores, chances):
+func _sync_player_end_screen(ids, final_scores, chance_names):
 	for i in range(ids.size()):
-		GameState.players[ids[i]]["score"] = scores[i]
-		GameState.players[ids[i]]["last_score"] = scores[i]
-		for key in chances[i]:
-			GameState.players[ids[i]]["chances"].append(key)
+		GameState.players[ids[i]].final_score = final_scores[i]
+		for chance_name in chance_names[i]:
+			GameState.players[ids[i]].chance_names.append(chance_name)
 
 @rpc("authority", "call_local", "reliable")
 func _sync_profile_data(p_score, question_uuids, answers, chances_scored):
 	UserProfiles._update_profile_with_quiz_data(
-		UserProfiles._get_selected_profile_key(), 
+		UserProfiles._get_selected_profile_key(),
 		p_score,
 		question_uuids,
 		answers,
@@ -661,7 +665,7 @@ func _player_guess_rpc(mp_id, guess):
 		_ui_update_lock_player_pannel(mp_id, true)
 		if multiplayer.is_server():
 			if not ui_countdown_timer.is_stopped():
-				GameState.players[mp_id].player_guess(mp_id, guess, ui_countdown_timer.get_time_left())
+				GameState.players[mp_id].make_guess(guess, ui_countdown_timer.get_time_left())
 			if GameState._have_all_players_answered():
 				_phase_post_question()
 
@@ -951,14 +955,6 @@ func _ui_ani_display_end_screen():
 	$ControlSwapper0.play("QuizFinish")
 	
 func _ui_setup_end_screen():
-	# add additional score from chances
-	for key in GameState.players:
-		var chance_bonus = 0
-		for chanceKey in GameState.players[key].chances_scored:
-			var chance_data = _get_chance_data_from_uuid(chanceKey)
-			chance_bonus += chance_data["bonus"]
-		GameState.players[key].score += chance_bonus
-	
 	# order players by score
 	var scoreOrder = []
 	
@@ -992,10 +988,9 @@ func _ui_setup_end_screen():
 		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/ScoreDisplay/Score" % uiNum).text = "%s" % GameState.players[scoreOrder[n]].score
 		
 		var chanceStr = ""
-		for chanceKey in GameState.players[scoreOrder[n]].chances_scored:
-			chanceStr += "%s, " % _get_chance_data_from_uuid(chanceKey)["name"]
+		for chance_name in GameState.players[scoreOrder[n]].chance_names:
+			chanceStr += "%s, " % chance_name
 		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/MedalCase/Awards" % uiNum)["text"] = chanceStr
-		
 		get_node("quizEnd/PlayerStandingsOrg/%sPlacer" % uiNum).show()
 #endregion
 

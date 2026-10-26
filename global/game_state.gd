@@ -10,6 +10,7 @@ class Player:
 	
 	var pannel_locked: bool
 	
+	var final_score: int
 	var score: int
 	var last_score: int
 	
@@ -20,6 +21,7 @@ class Player:
 	
 	var answer_record: Array
 	var chances_scored: Array
+	var chance_names: Array
 	var chance_hits: Dictionary
 	
 	static func create(p_name) -> Player:
@@ -31,6 +33,7 @@ class Player:
 		
 		new_player.pannel_locked = false
 		
+		new_player.final_score = 0
 		new_player.score = 0
 		new_player.last_score = 0
 		
@@ -41,6 +44,7 @@ class Player:
 		
 		new_player.answer_record = []
 		new_player.chances_scored = []
+		new_player.chance_names = []
 		new_player.chance_hits = {}
 		
 		return new_player
@@ -54,6 +58,7 @@ class Player:
 		
 		new_player.pannel_locked = old_player.pannel_locked
 		
+		new_player.final_score = old_player.final_score
 		new_player.score = old_player.score
 		new_player.last_score = old_player.last_score
 		
@@ -64,12 +69,13 @@ class Player:
 		
 		new_player.answer_record = old_player.answer_record
 		new_player.chances_scored = old_player.chances_scored
+		new_player.chance_names = old_player.chance_names
 		new_player.chance_hits = old_player.chance_hits
 		
 		return new_player
 	
-	func player_guess(player_id, guess, current_time):
-		guess = guess
+	func make_guess(player_guess, current_time):
+		guess = player_guess
 		guessTime = current_time
 		hasGuessed = true
 
@@ -83,6 +89,7 @@ class Player:
 		loaded = false
 		ready = false
 		
+		final_score = 0
 		score = 0
 		last_score = 0
 		
@@ -92,6 +99,7 @@ class Player:
 		correct = false
 		
 		chance_hits = {}
+		chance_names = []
 		chances_scored = []
 		
 	func reset_guess() -> void:

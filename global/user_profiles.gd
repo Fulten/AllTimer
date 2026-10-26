@@ -95,7 +95,6 @@ class Profile:
 				questions_chances[chances[i]] = 1
 			pass
 
-
 #logic for selecting which theme to load is in Master_scene.gd
 var THEME_NAMES = [
 	"Chalkboard",
@@ -172,7 +171,7 @@ func _overwrite_profile_with_reference(updated_profile: Profile):
 func _update_profile_with_quiz_data(p_name: String, q_score: int, question_uuids: Array, question_answers: Array, chances_scored: Array):
 	if profiles.has(p_name):
 		var new_profile = Profile.copy(profiles[p_name])
-
+		
 		if q_score > new_profile.score_highest:
 			new_profile.score_highest = q_score
 		if q_score < new_profile.score_lowest:

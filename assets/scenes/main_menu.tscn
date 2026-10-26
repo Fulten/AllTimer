@@ -2203,16 +2203,16 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -315.0
-offset_top = -167.0
+offset_top = -507.0
 offset_right = 317.0
-offset_bottom = 33.0004
+offset_bottom = -306.999
 grow_horizontal = 2
 grow_vertical = 2
 text = "Profile"
 label_settings = ExtResource("8_3ymww")
 
 [node name="Underline" type="Line2D" parent="Options_Profile"]
-position = Vector2(-6.10352e-05, 10)
+position = Vector2(0, -330)
 points = PackedVector2Array(592, 544, 1320, 544)
 width = 2.0
 default_color = Color(0, 0, 0, 1)
@@ -2224,10 +2224,10 @@ anchor_left = 0.312
 anchor_top = 0.204
 anchor_right = 0.683
 anchor_bottom = 0.4
-offset_left = -7.04004
-offset_top = 339.68
-offset_right = -15.3602
-offset_bottom = 339.997
+offset_left = 11.96
+offset_top = -0.319992
+offset_right = 3.63977
+offset_bottom = -0.00262451
 grow_vertical = 2
 
 [node name="DimensionFrame" type="VBoxContainer" parent="Options_Profile/ProfileSettingsCase"]
@@ -2361,9 +2361,9 @@ anchor_left = 0.448
 anchor_top = 0.869
 anchor_right = 0.552
 anchor_bottom = 0.923
-offset_left = -0.160034
+offset_left = 299.84
 offset_top = 0.47998
-offset_right = 0.160156
+offset_right = 300.16
 offset_bottom = 0.160034
 grow_horizontal = 2
 grow_vertical = 0
@@ -2449,10 +2449,10 @@ anchor_left = 0.171
 anchor_top = 0.363
 anchor_right = 0.583
 anchor_bottom = 0.77
-offset_left = 127.68
-offset_top = 39.96
-offset_right = 128.643
-offset_bottom = 40.4
+offset_left = -0.320007
+offset_top = -0.0400085
+offset_right = 0.643066
+offset_bottom = 0.400024
 mouse_filter = 2
 theme_override_constants/separation = 10
 
@@ -2468,7 +2468,7 @@ layout_mode = 2
 theme = SubResource("Theme_d4m5o")
 theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 10
-columns = 5
+columns = 7
 
 [node name="Award1" type="TextureRect" parent="Options_Profile/AwardsSection/AwardsCase"]
 layout_mode = 2

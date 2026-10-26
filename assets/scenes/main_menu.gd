@@ -871,7 +871,7 @@ func create_new_award(awardHash: String):
 	
 	
 	node_texture.texture = award_texture
-	node_texture.custom_minimum_size = Vector2(128, 128)
+	node_texture.custom_minimum_size = Vector2(100, 100)
 	node_texture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	node_texture.stretch_mode = TextureRect.STRETCH_SCALE
 	

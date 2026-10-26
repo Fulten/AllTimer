@@ -76,7 +76,7 @@
 		"correct": true,
 		"description": "Answered the most questions pertaining to Sony correctly",
 		"icon": "res://assets/uiux/main_menu/Awards/T_SonySycophant_D.tga",
-		"name": "Sony Sycophant",
+		"name": "Sony Specialist",
 		"type": "QUESTION",
 		"uuid": "c82f00b4-260c-4f19-99d5-bf7bb11dc0e0"
 	},
@@ -174,7 +174,7 @@
 		"bonus": 800,
 		"correct": true,
 		"description": "Answered the most questions pertaining to Board and Card games",
-		"icon": "res://assets/uiux/main_menu/Awards/T_Chance_D.tga",
+		"icon": "res://assets/uiux/main_menu/Awards/T_BoardGamer_D.tga",
 		"name": "Board Gamer",
 		"type": "QUESTION",
 		"uuid": "c55d28e0-c1c7-4ed0-a9ff-2a8cfefe1300"

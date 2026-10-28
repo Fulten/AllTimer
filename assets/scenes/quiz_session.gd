@@ -94,7 +94,7 @@ var ROLLUP_MAX = 10
 var use_question_filter = false
 var question_filter = {}
 
-var pre_question_delay_default = 3.0
+var pre_question_delay_default = 5.0
 var post_question_delay_default = 5.0
 
 var questions = {}
@@ -372,9 +372,11 @@ func _phase_pre_question():
 	if DEBUG:
 		print("!!DEBUG: Prequestion phase")
 	GameState.quiz_phase = QUIZSTATE.preQuestion
-
-	@warning_ignore("narrowing_conversion")
-	var extra_seconds : int = roundf(question_body.length() * 0.05)
+	
+	_server_full_sync()
+	
+	var extra_seconds : int = 0
+	extra_seconds = roundi(question_body.length() * 0.05)
 	
 	for key in GameState.players:
 		GameState.players[key].pannel_locked = false
@@ -383,7 +385,6 @@ func _phase_pre_question():
 	if DEBUG:
 		print("!INFO: extra seconds for pre_question phase [%s]" % extra_seconds)
 		
-	_server_full_sync()
 	_sync_play_phase_animation.rpc()
 	
 	ui_prequestion_timer.start(pre_question_delay_default + extra_seconds)
@@ -409,8 +410,7 @@ func _phase_post_question():
 		GameState.players[key].pannel_locked = true
 	_player_pannels_lock.rpc()
 	
-	@warning_ignore("narrowing_conversion")
-	var extra_seconds : int = roundf(question_explainer.length() * 0.025)
+	var extra_seconds : int = roundi(question_explainer.length() * 0.05)
 	
 	var question_score_value = 1000
 	

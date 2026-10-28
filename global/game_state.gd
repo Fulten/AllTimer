@@ -89,6 +89,8 @@ class Player:
 		loaded = false
 		ready = false
 		
+		pannel_locked = false
+		
 		final_score = 0
 		score = 0
 		last_score = 0
@@ -98,6 +100,7 @@ class Player:
 		hasGuessed = false
 		correct = false
 		
+		answer_record = []
 		chance_hits = {}
 		chance_names = []
 		chances_scored = []
@@ -237,6 +240,18 @@ func _remove_player(mp_id):
 	players.erase(mp_id)
 	_build_player_number_to_id_table()
 
+func _reactivate_player(mp_id, active_id):
+	if players.has(active_id):
+		players[mp_id] = Player.copy(players[active_id])
+		players[mp_id].active = true
+		_remove_player(active_id)
+
+func _deactivate_player(mp_id):
+	if players.has(mp_id):
+		players[mp_id].active = false
+		if multiplayer.is_server():
+			players[mp_id].loaded = false
+
 func _clear_all_players():
 	players.clear()
 	playerCardOrder = [-1,-1,-1,-1]
@@ -252,16 +267,6 @@ func _has_active_id(temp_id: int):
 	for key in players:
 		if key == temp_id:
 			return true
-
-func _deactivate_player(mp_id):
-	if players.has(mp_id):
-		players[mp_id].active = false
-		players[mp_id].loaded = false
-
-func _reactivate_player(mp_id, active_id):
-	if players.has(active_id):
-		players[mp_id] = Player.copy(players[active_id])
-		_remove_player(active_id)
 
 func _player_count() -> int:
 	return players.size()
@@ -317,6 +322,11 @@ func _in_lobby() -> bool:
 
 func _can_guess() -> bool:
 	return quiz_phase == QUIZSTATE.question
+
+func _pannels_locked_phase() -> bool:
+	return not (
+		quiz_phase == QUIZSTATE.preQuestion
+		or quiz_phase == QUIZSTATE.question)
 
 func _player_has_guessed(player_id) -> bool:
 	return players[player_id]["hasGuessed"]

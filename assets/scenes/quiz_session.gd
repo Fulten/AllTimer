@@ -202,17 +202,16 @@ func _input(event):
 
 func _player_guess(guess):
 	if GameState._can_guess():
-		_player_guess_rpc.rpc(multiplayer.get_unique_id(), guess)
+		_player_guess_rpc.rpc_id(1, multiplayer.get_unique_id(), guess)
 
 func _player_dropped(mp_id):
 	if GameState._game_started():
 		_ui_update_lock_player_pannel(mp_id, true)
 	if multiplayer.is_server():
+		GameState.players[mp_id].pannel_locked = true
 		print("Info: player Dropped id:%s" % mp_id)
 
 func _player_rejoined(mp_id):
-	if GameState._game_started():
-		_ui_lock_player_pannel_dynamic()
 	if multiplayer.is_server():
 		print("Info: player rejoined id:%s" % mp_id)
 
@@ -275,7 +274,7 @@ func _server_sync_late_join(mp_id):
 	var pannels_locked = []
 	
 	for key in GameState.players:
-		if not GameState.players[key]["active"] or GameState.players[key]["hasGuessed"]:
+		if GameState.players[key].pannel_locked:
 			pannels_locked.append(key)
 	
 	_late_join_load_in.rpc_id(mp_id, pannels_locked)
@@ -348,9 +347,15 @@ func _phase_pre_quiz():
 	var q = quiz_questions_list[quiz_question_index]
 	question_uuid = q["uuid"]
 	
+	for key in GameState.players:
+		GameState.players[key].pannel_locked = true
+	_player_pannels_lock.rpc()
+	
 	_set_question_answers_as_randomised_array(q)
 	
 	_server_full_sync()
+	
+	
 	_sync_play_phase_animation.rpc()
 
 func _phase_end_of_rules():
@@ -370,6 +375,10 @@ func _phase_pre_question():
 
 	@warning_ignore("narrowing_conversion")
 	var extra_seconds : int = roundf(question_body.length() * 0.05)
+	
+	for key in GameState.players:
+		GameState.players[key].pannel_locked = false
+	_player_pannels_unlock.rpc()
 	
 	if DEBUG:
 		print("!INFO: extra seconds for pre_question phase [%s]" % extra_seconds)
@@ -395,6 +404,10 @@ func _phase_post_question():
 		print("!!DEBUG: Postquestion phase")
 	GameState.quiz_phase = QUIZSTATE.postQuestion
 	ui_countdown_timer.stop()
+	
+	for key in GameState.players:
+		GameState.players[key].pannel_locked = true
+	_player_pannels_lock.rpc()
 	
 	@warning_ignore("narrowing_conversion")
 	var extra_seconds : int = roundf(question_explainer.length() * 0.025)
@@ -531,7 +544,6 @@ func _sync_play_phase_animation():
 			return
 		QUIZSTATE.preQuestion:
 			_ui_ani_question_load_a()
-			_ui_update_lock_all_player_pannels(false)
 		QUIZSTATE.question:
 			_ui_ani_question_load_b()
 		QUIZSTATE.postQuestion:
@@ -543,7 +555,6 @@ func _sync_play_phase_animation():
 				ui_has_status_table = false
 				ui_playing_statuses_animation = true
 		QUIZSTATE.endOfPhase:
-			_ui_update_lock_all_player_pannels(false)
 			_ui_ani_question_unload()
 		QUIZSTATE.endScreen:
 			_ui_setup_end_screen()
@@ -655,6 +666,23 @@ func _late_join_load_in(pannels_locked: Array):
 			$ControlSwapper0.play("QuizFinish", -1, 20.0, false)
 	
 	_late_join_player_setup_done.rpc_id(1)
+
+@rpc("authority", "call_local", "reliable")
+func _player_pannels_lock():
+	_ui_update_lock_all_player_pannels(true)
+
+@rpc("authority", "call_local", "reliable")
+func _player_pannels_unlock():
+	_ui_update_lock_all_player_pannels(false)
+
+@rpc("authority", "call_local", "reliable")
+func _player_update_pannel_lock(mp_id, locked):
+	_ui_update_lock_player_pannel(mp_id, locked)
+
+@rpc("authority", "call_local", "reliable")
+func _sync_player_pannels_lock(ids, locked):
+	for i in range(ids.size()):
+		_ui_update_lock_player_pannel(ids[i], locked[i])
 #endregion
 
 #region client side rpc functions
@@ -662,13 +690,12 @@ func _late_join_load_in(pannels_locked: Array):
 @rpc("any_peer", "reliable", "call_local")
 func _player_guess_rpc(mp_id, guess):
 	if GameState.quiz_phase == QUIZSTATE.question:
-		print("test %s" % mp_id)
-		_ui_update_lock_player_pannel(mp_id, true)
-		if multiplayer.is_server():
-			if not ui_countdown_timer.is_stopped():
-				GameState.players[mp_id].make_guess(guess, ui_countdown_timer.get_time_left())
-			if GameState._have_all_players_answered():
-				_phase_post_question()
+		if not ui_countdown_timer.is_stopped() and not GameState.players[mp_id].hasGuessed:
+			GameState.players[mp_id].make_guess(guess, ui_countdown_timer.get_time_left())
+			GameState.players[mp_id].pannel_locked = true
+			_player_update_pannel_lock.rpc(mp_id, true)
+		if GameState._have_all_players_answered():
+			_phase_post_question()
 
 @rpc("any_peer", "reliable")
 func _player_setup_done():
@@ -689,7 +716,24 @@ func _player_ready(mp_id):
 
 @rpc("any_peer", "reliable")
 func _late_join_player_setup_done():
-	GameState.players[multiplayer.get_remote_sender_id()]["loaded"] = true
+	var mp_id = multiplayer.get_remote_sender_id()
+	GameState.players[mp_id]["loaded"] = true
+	
+	if GameState.players[mp_id].hasGuessed or GameState._pannels_locked_phase():
+		GameState.players[mp_id].pannel_locked = true
+	else:
+		GameState.players[mp_id].pannel_locked = false
+	
+	var ids = []
+	ids.resize(GameState._player_count())
+	var locked = []
+	locked.resize(GameState._player_count())
+	
+	for i in range(ids.size()):
+		ids[i] = GameState.playerCardOrder[i]
+		locked[i] = GameState.players[GameState.playerCardOrder[i]].pannel_locked
+	
+	_sync_player_pannels_lock.rpc(ids, locked)
 #endregion
 
 #region server utilities
@@ -778,19 +822,13 @@ func _ui_local_score_rollup():
 		rollup_count -= 1
 		get_tree().create_timer(0.06).timeout.connect(_ui_local_score_rollup)
 
-func _ui_lock_player_pannel_dynamic():
-	for key in GameState.players:
-		var locked = not GameState.players[key]["active"] or GameState.players[key]["hasGuessed"]
-		_ui_update_lock_player_pannel(key, locked)
-
 func _ui_update_lock_player_pannel(mp_id, locked: bool):
 	var card_index = GameState.idToCardIndex[mp_id] + 1
-	if locked or not GameState.players[mp_id]["active"]:
-		get_node("quizInterface/players_region/activePlayer%s/player_case/player_name" % card_index
-			).set_label_settings(asset_player_pannel_locked)
+	var player_case = "quizInterface/players_region/activePlayer%s/player_case/player_name" % card_index
+	if locked:
+		get_node(player_case).set_label_settings(asset_player_pannel_locked)
 	else:
-		get_node("quizInterface/players_region/activePlayer%s/player_case/player_name" % card_index
-			).set_label_settings(asset_player_pannel_default)
+		get_node(player_case).set_label_settings(asset_player_pannel_default)
 
 func _ui_update_lock_all_player_pannels(locked: bool):
 	for key in GameState.players:

@@ -183,10 +183,11 @@ func _deactivate_player(mp_id):
 
 @rpc("authority", "call_local", "reliable")
 func _reactivate_player(mp_id, active_id):
-	GameState._reactivate_player(mp_id, active_id)
-	mp_lobby_instance._refresh_connected_players_list()
-	if GameState._game_started():
-		quiz_session_instance._player_rejoined(mp_id)
+	if not multiplayer.get_unique_id() == mp_id:
+		GameState._reactivate_player(mp_id, active_id)
+		mp_lobby_instance._refresh_connected_players_list()
+		if GameState._game_started():
+			quiz_session_instance._player_rejoined(mp_id)
 
 @rpc("authority", "call_local", "reliable")
 func _launch_quiz():

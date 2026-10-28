@@ -467,6 +467,25 @@ func _phase_end_screen():
 	if DEBUG:
 		print("!!DEBUG: endscreen phase")
 	GameState.quiz_phase = QUIZSTATE.endScreen
+
+	var chance_winners = []
+	var highest_hits = 0
+	
+	for c in GameState.chances:
+		for p in GameState.players:
+			if GameState.players[p].chance_hits.has(c):
+				if GameState.players[p].chance_hits[c] > highest_hits:
+					chance_winners = []
+					chance_winners.append(p)
+					highest_hits = GameState.players[p].chance_hits[c]
+				elif GameState.players[p].chance_hits[c] == highest_hits:
+					chance_winners.append(p)
+		
+		for p in chance_winners:
+			GameState.players[p].chances_scored.append(c)
+		
+		chance_winners = []
+		highest_hits = 0
 	
 	for p in GameState.players:
 		var final_score = GameState.players[p].score

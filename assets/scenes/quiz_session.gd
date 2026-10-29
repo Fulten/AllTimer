@@ -1090,13 +1090,26 @@ func clock_post_question():
 func _host_setup_quiz():
 	_select_question_filter()
 	_io_load_master_questions()
+	_generate_filtered_question_set()
 	_io_load_master_chances()
 	
 	QUIZ_LENGTH = GameState.quizOptions.win_questions
 	var question_count = _select_quiz_questions(QUIZ_LENGTH)
 	if question_count < QUIZ_LENGTH:
 		QUIZ_LENGTH = question_count
-		print("Info: fewer than max questions picked, only %s questions in this quiz" % question_count)
+		print("!Info: fewer than max questions picked, only %s questions in this quiz" % question_count)
+	
+	if QUIZ_LENGTH <= 0:
+		print("!Info: a quiz was generated with no questions, this was likely caused by a question filter. \n Disabling filter and generating a new quiz.")
+		use_question_filter = false
+		_generate_filtered_question_set()
+		QUIZ_LENGTH = 10
+		question_count = _select_quiz_questions(QUIZ_LENGTH)
+		QUIZ_LENGTH = question_count
+		if question_count == 0:
+			print("!!ERROR: generated a quiz with no questions when using unfiltered question data.\n Its possible question_data.json is corrupted.")
+			_server_ending_quiz.rpc()
+	
 	
 	for key in GameState.players:
 		GameState.players[key].answer_record = []
@@ -1137,7 +1150,8 @@ func _io_load_master_questions():
 	if file:
 		master_question_data = JSON.parse_string(file.get_as_text())
 		file.close()
-	# if tags filter is enabled, only store matching questions in the question set
+
+func _generate_filtered_question_set():
 	if use_question_filter:
 		for question in master_question_data:
 			var tagMatch = false
@@ -1150,7 +1164,7 @@ func _io_load_master_questions():
 						break
 				if escape:
 					break
-
+			
 			var a = tagMatch
 			var b = question_filter["blacklist"]
 			# need to use XOR operator for whether or not to accept the question into the set
@@ -1159,11 +1173,12 @@ func _io_load_master_questions():
 	else: # otherwise store the complete list
 		for question in master_question_data:
 			filtered_question_data.append(question)
-	
+
+
 func _clean_questions_data():
 	master_question_data = []
 	filtered_question_data = []
-	
+
 func _io_load_master_chances():
 	var file = FileAccess.open("res://data/chance_data.json", FileAccess.READ)
 	if file:
@@ -1178,7 +1193,7 @@ func _select_quiz_questions(quizSize) -> int:
 	for i in range(quizSize):
 		# return early if we run out of questions,
 		if filtered_question_data.size() == 0:
-			return 0
+			return quiz_size
 		
 		var question = filtered_question_data.pop_at(randi() % filtered_question_data.size())
 		quiz_questions_list.append(question)

@@ -138,7 +138,6 @@ func apply_game_settings(timer: int):
 	return
 #endregion
 
-
 func update_game_state(timer: int):
 	GameState.quizOptions.timer = timer
 
@@ -191,12 +190,12 @@ func _update_current_profile_label():
 		# if there are no profiles selected, mark the first profile in the list as selected
 		UserProfiles.profiles[profiles_list_id_to_name[0]]["selected"] = true
 		currentProfileLable.text = UserProfiles.profiles[profiles_list_id_to_name[0]]["name"]
+		UserProfiles._IO_write_profiles()
 		return
 	
 	# if there are no profiles, user placeholder Guest
 	currentProfileLable.text = "Guest"
 	pass
-	
 
 func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
@@ -207,13 +206,12 @@ func _input(event):
 		node_hover_text.set_position(get_viewport().get_mouse_position() + Vector2(20.0,0.0))
 	pass
 
-
+@warning_ignore("shadowed_variable_base_class")
 func _profileRequired_warning(visible: bool):
 	$Stack_0/MainMenuButtons/PlayButton.visible = !visible
 	$Stack_0/MainMenuButtons/DisabledPlayButton.visible = visible
 	$Stack_0/NotifLocus.visible = visible
 	$Stack_0/NotifLocus/Notif_ProfileRequired.visible = visible
-	
 
 #region Button UX
 func _on_play_button_focus_entered():
@@ -311,7 +309,6 @@ func _on_profile_creator_button_button_up():
 	get_node("Options_Profile/ProfileCreator").show()
 	flag_profiles_menu_sub = true
 
-
 func _on_profiles_list_item_selected(index):
 	for key in UserProfiles.profiles.keys():
 		UserProfiles.profiles[key]["selected"] = false
@@ -322,8 +319,6 @@ func _on_profiles_list_item_selected(index):
 	_update_profile_statistics()
 	UserProfiles._IO_write_profiles()
 	pass 
-
-
 
 func _on_save_button_mouse_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
@@ -337,14 +332,14 @@ func _on_save_button_button_up():
 		if new_profile_name == "": # returns if profile name is empty
 			return	
 		
-		var new_profile = UserProfiles._new_profile(new_profile_name)
-		
-		UserProfiles._save_new_profile(new_profile)
+		UserProfiles._save_new_profile(new_profile_name)
 		handle_profile_refresh()
+		_update_current_profile_label()
+		_profileRequired_warning(false)
+		
 		get_node("Options_Profile/ProfileCreator").hide()
 		$Options_Profile/ProfileCreator/ProfileNamer/ProfileEntryField.text = ""
 		flag_profiles_menu_sub = false
-		pass
 	
 func _on_cancel_profile_button_mouse_entered():
 	$Stack_0/MainMenuButtons/SFX_Hover.play()
@@ -619,7 +614,7 @@ func sync_ui_tag_order() -> void:
 		var target_tag_text = filter_tag_selectors[i].text
 		# find the child tagged with this entry
 		for child in ui_filter_container.get_children():
-			if child.get_meta("tag_ref") == target_tag_text:
+			if child.has_meta("tag_ref") && child.get_meta("tag_ref") == target_tag_text:
 				ui_filter_container.move_child(child, i)
 				break
 

@@ -1,40 +1,115 @@
 extends Node
 
-var file_path_questions_data = "res://data/question_data.json"
 
+#region Class Definitions
 class Player:
 	var name: String
-	var uuid: int
+	var active: bool
+	var loaded: bool
+	var ready: bool
+	
+	var pannel_locked: bool
+	
+	var final_score: int
+	var score: int
+	var last_score: int
+	
 	var guess: int
 	var guessTime: int
 	var hasGuessed: bool
 	var correct: bool
-	var score: int
-	var last_score: int
-	var profileData
-	var chances
 	
-	func initilize(u_profile, i_uuid) :
-		name = u_profile["name"]
-		uuid = i_uuid
+	var answer_record: Array
+	var chances_scored: Array
+	var chance_names: Array
+	var chance_hits: Dictionary
+	
+	static func create(p_name) -> Player:
+		var new_player = Player.new()
+		new_player.name = p_name
+		new_player.active = true
+		new_player.loaded = false
+		new_player.ready = false
+		
+		new_player.pannel_locked = false
+		
+		new_player.final_score = 0
+		new_player.score = 0
+		new_player.last_score = 0
+		
+		new_player.guess = -1
+		new_player.guessTime = 0
+		new_player.hasGuessed = false
+		new_player.correct = false
+		
+		new_player.answer_record = []
+		new_player.chances_scored = []
+		new_player.chance_names = []
+		new_player.chance_hits = {}
+		
+		return new_player
+	
+	static func copy(old_player: Player) -> Player:
+		var new_player = Player.new()
+		new_player.name = old_player.name
+		new_player.active = old_player.active
+		new_player.loaded = old_player.loaded
+		new_player.ready = old_player.ready
+		
+		new_player.pannel_locked = old_player.pannel_locked
+		
+		new_player.final_score = old_player.final_score
+		new_player.score = old_player.score
+		new_player.last_score = old_player.last_score
+		
+		new_player.guess = old_player.guess
+		new_player.guessTime = old_player.guessTime
+		new_player.hasGuessed = old_player.hasGuessed
+		new_player.correct = old_player.correct
+		
+		new_player.answer_record = old_player.answer_record
+		new_player.chances_scored = old_player.chances_scored
+		new_player.chance_names = old_player.chance_names
+		new_player.chance_hits = old_player.chance_hits
+		
+		return new_player
+	
+	func make_guess(player_guess, current_time):
+		guess = player_guess
+		guessTime = current_time
+		hasGuessed = true
+
+	func chance_hit(uuid):
+		if chance_hits.has(uuid):
+			chance_hits[uuid] += 1
+		else:
+			chance_hits[uuid] = 1
+	
+	func reset_state() -> void:
+		loaded = false
+		ready = false
+		
+		pannel_locked = false
+		
+		final_score = 0
+		score = 0
+		last_score = 0
+		
 		guess = -1
 		guessTime = 0
 		hasGuessed = false
 		correct = false
-		score = 0
-		last_score = 0
-		profileData = u_profile
-		chances = {}
-		pass
-	func reset_player():
+		
+		answer_record = []
+		chance_hits = {}
+		chance_names = []
+		chances_scored = []
+		
+	func reset_guess() -> void:
 		guess = -1
 		guessTime = 0
 		hasGuessed = false
 		correct = false
-		score = 0
-		last_score = 0
-		chances = {}
-		pass
 
 class QuizOptions:
 	var timer: int # length of question answer phase timer
@@ -49,40 +124,13 @@ class QuizOptions:
 	# 1 : First to answer 10 questions correctly
 	# 2 : First to reach 1000 points
 
-	func initilize(i_timer = 30, i_win_con = "default", i_win_con_int = 0, i_win_questions = 10, i_win_points = 1000) :
+	func initilize(i_timer = 30, i_win_con = "default", i_win_con_int = 0, i_win_questions = 10, i_win_points = 5000) :
 		timer = i_timer
 		win_con = i_win_con # textual representation of wincondition
 		win_con_int = i_win_con_int #integer representation of windcondition
 		
 		win_questions = i_win_questions
 		win_points = i_win_points
-
-
-var quizOptions = QuizOptions.new()
-
-var players = {}
-
-# translates player number to multiplayer id
-var playerNumberToIds = [-1, -1, -1, -1]
-
-var PlayerCount = 1
-
-var PlayersLoaded = 0
-
-var CurrentQuizQuestions = [] #The questions to be used in the current quiz
-var CurrentQuestionIndex = 0 #The index of question currently on in quiz
-
-var questions = {}
-var tags_list = {}
-
-var TagsFilterFile = "user://quiz_filters.json"
-var TagsFilters = {}
-
-var CurrentChances = [] #The list of chance stars to track for the game
-
-var CurrentTheme = "Chalkboard" #The current quiz theme
-
-var GameStarted = false
 
 class Question:
 	var name: String
@@ -120,127 +168,187 @@ class Question:
 		questionType = i_questionType
 		listIndex = -1
 
-func _add_chance(chance_name, description, type, uuid, value, associated_questions: Array, bonus):
-	CurrentChances.append({ #to be updated when we add more types with an if/switch
-		"name": chance_name,
-		"description": description,
-		"type": type,
-		"uuid": uuid,
-		"correct": value,
-		"associated_questions": associated_questions,
-		"player_hits": [0,0,0,0],
-		"bonus": bonus
-	})
-
-func _get_chance_from_uuid(chance_uuid):
-	for chance in CurrentChances:
-		if chance["uuid"] == chance_uuid:
-			return chance
-	pass
-
-func _adjust_score(player_index,score):
-	var playerId = playerNumberToIds[player_index]
-	players[playerId]["last_score"] = players[playerId]["score"]
-	# var awarded_points = roundf(score * players[playerId]["guessTime"]/30) # old scoring function
-	var awarded_points = (score + score * players[playerId]["guessTime"]/quizOptions.timer)/2
-	players[playerId]["score"] += awarded_points
-
-func _player_has_guessed(player_id):
-	return players[player_id]["guess"] >= 0
-
-func _player_guess(player_id,guess,current_time):
-	players[player_id]["guess"] = guess
-	players[player_id]["guessTime"] = current_time
-	players[player_id]["hasGuessed"] = true
+class Chance:
+	var name: String
+	var correct: bool
+	var bonus: int
+	var uuid
 	
-func _reset_guesses():
-	for i in range(PlayerCount):
-		players[playerNumberToIds[i]]["guess"] = -1
-		players[playerNumberToIds[i]]["guessTime"] = 0
-		players[playerNumberToIds[i]]["hasGuessed"] = false
-
-func _player_correctness(correct_answer, score):
-	for i in PlayerCount:
-		var playerGuess = players[playerNumberToIds[i]]["guess"]
-		# if the player has passed make no change to score
-		if not players[playerNumberToIds[i]]["hasGuessed"]:
-			players[playerNumberToIds[i]]["last_score"] = players[playerNumberToIds[i]]["score"]
-			continue
+	var related_questions: Array
+	
+	static func create(i_name, i_correct, i_bonus, i_uuid) -> Chance:
+		var chance = Chance.new()
+		chance.name = i_name
+		chance.correct = i_correct
+		chance.bonus = i_bonus
+		chance.uuid = i_uuid
 		
-		players[playerNumberToIds[i]]["correct"] = playerGuess == correct_answer
-		if players[playerNumberToIds[i]]["correct"]:
-			_adjust_score(i, score)
-		else:
-			_adjust_score(i, -score)
+		chance.related_questions = []
+		return chance
+#endregion
 
-## updates the question answered and seen metrics section of the player profiles
-## this is called on the server, and only updates the profile data on the server side
-func _update_profile_statistics(current_question_uuid):
-	for i in PlayerCount:
-		var playerCorrectness = players[playerNumberToIds[i]]["correct"]
-		# questions_answered incremented when the user answers the question correctly
-		if playerCorrectness:
-			if current_question_uuid in players[playerNumberToIds[i]]["profileData"]["questions_answered"]:
-				players[playerNumberToIds[i]]["profileData"]["questions_answered"][current_question_uuid] += 1
-				pass
-			else:
-				players[playerNumberToIds[i]]["profileData"]["questions_answered"][current_question_uuid] = 1
-				pass
-			pass
+#region variables
+var quizOptions = QuizOptions.new()
 
-		# questions_seen incremented when the user sees a question
-		if current_question_uuid in players[playerNumberToIds[i]]["profileData"]["questions_seen"]:
-			players[playerNumberToIds[i]]["profileData"]["questions_seen"][current_question_uuid] += 1
-			pass
-		else:
-			players[playerNumberToIds[i]]["profileData"]["questions_seen"][current_question_uuid] = 1
-			pass
-			
-		pass
-	pass
+var players = {}
+var players_loaded = 0
 
-## checks which chances a user has scored
-## and stores them in the profile data
-func _add_chance_hits(question_index):
-	for chance in CurrentChances:
-		if chance["associated_questions"].has(question_index):
-			for i in range(PlayerCount):
-				if players[playerNumberToIds[i]]["correct"] == chance["correct"]:
-					chance["player_hits"][i] += 1
-					players[playerNumberToIds[i]]["chances"][chance["uuid"]] = 1
-					if chance["uuid"] in players[playerNumberToIds[i]]["profileData"]["questions_chances"]:
-						players[playerNumberToIds[i]]["profileData"]["questions_chances"][chance["uuid"]] += 1
-						pass
-					else:
-						players[playerNumberToIds[i]]["profileData"]["questions_chances"][chance["uuid"]] = 1
-						pass
-					pass
-	
-func _build_player_number_to_id_table():
-	playerNumberToIds = [-1,-1,-1,-1]
-	var i = 0
-	for key in players.keys():
-		playerNumberToIds[i] = key
-		i += 1
-		pass
-	pass
+# translates player number to multiplayer id
+var playerCardOrder = [-1, -1, -1, -1]
+var idToCardIndex = {}
 
-func _reset_players():
-	for key in players.keys():
-		players[key].reset_player()
-		pass
+var activeId = -1
+var quiz_phase
+
+var CurrentTheme = "Chalkboard" #The current quiz theme
+
+var QuestionDataFile = "res://data/question_data.json"
+
+var questions = {}
+var chances = {}
+var tags_list = {}
+
+var TagsFilterFile = "user://quiz_filters.json"
+var TagsFilters = {}
+
+#endregion
+
+enum QUIZSTATE {
+	lobby,
+	loading,
+	preQuiz,
+	endOfRules,
+	preQuestion,
+	question,
+	postQuestion,
+	endOfPhase,
+	endScreen
+}
 
 func _reset_quiz_state():
-	_reset_players()
-	PlayersLoaded = 0
-	CurrentQuestionIndex = 0
-	CurrentChances.clear()
-	CurrentQuizQuestions.clear()
-	GameStarted = false
-	pass
-	
+	quiz_phase = QUIZSTATE.lobby
+	_reset_all_players()
+	chances.clear()
+	players_loaded = 0
+
+#region player related functions
+func _add_new_player(p_name, mp_id): 
+	players[mp_id] = Player.create(p_name)
+	_build_player_number_to_id_table()
+
+func _remove_player(mp_id):
+	players.erase(mp_id)
+	_build_player_number_to_id_table()
+
+func _reactivate_player(mp_id, active_id):
+	if players.has(active_id):
+		players[mp_id] = Player.copy(players[active_id])
+		players[mp_id].active = true
+		_remove_player(active_id)
+
+func _deactivate_player(mp_id):
+	if players.has(mp_id):
+		players[mp_id].active = false
+		if multiplayer.is_server():
+			players[mp_id].loaded = false
+
+func _clear_all_players():
+	players.clear()
+	playerCardOrder = [-1,-1,-1,-1]
+	idToCardIndex = {}
+
+func _reset_all_players():
+	for key in players:
+		players[key].reset_state()
+
+func _has_active_id(temp_id: int):
+	if temp_id == 1:
+		return false
+	for key in players:
+		if key == temp_id:
+			return true
+
+func _player_count() -> int:
+	return players.size()
+
+func _build_player_number_to_id_table():
+	playerCardOrder = [-1,-1,-1,-1]
+	idToCardIndex = {}
+	var i = 0
+	for key in players:
+		playerCardOrder[i] = key
+		idToCardIndex[key] = i
+		i += 1
+
+func _reset_player_guesses():
+	for key in players:
+		players[key].reset_guess()
+
+func _check_player_answers(correct_answer, score):
+	for key in players:
+		var playerGuess = players[key]["guess"]
+		# if the player has passed make no change to score
+		if not players[key]["hasGuessed"]:
+			players[key]["last_score"] = players[key]["score"]
+			continue
+		
+		players[key]["correct"] = playerGuess == correct_answer
+		if players[key]["correct"]:
+			_adjust_player_score(key, score)
+		else:
+			_adjust_player_score(key, -score)
+
+func _check_player_chances(question_uuid):
+	for chance_key in chances:
+		if chances[chance_key].related_questions.has(question_uuid):
+			for key in players:
+				if players[key]["hasGuessed"] and (players[key]["correct"] == chances[chance_key].correct):
+					players[key].chance_hit(chance_key)
+
+func _adjust_player_score(key, score):
+	players[key]["last_score"] = players[key]["score"]
+	var awarded_points = (score + score * players[key]["guessTime"] / quizOptions.timer) / 2
+	players[key]["score"] += awarded_points
+#endregion
+
+#region boolean queries
+func _game_started() -> bool:
+	return (quiz_phase != QUIZSTATE.lobby 
+		and quiz_phase != QUIZSTATE.loading
+		and quiz_phase != QUIZSTATE.preQuiz)
+
+func _in_lobby() -> bool:
+	return quiz_phase == QUIZSTATE.lobby
+
+func _can_guess() -> bool:
+	return quiz_phase == QUIZSTATE.question
+
+func _pannels_locked_phase() -> bool:
+	return not (
+		quiz_phase == QUIZSTATE.preQuestion
+		or quiz_phase == QUIZSTATE.question)
+
+func _player_has_guessed(player_id) -> bool:
+	return players[player_id]["hasGuessed"]
+
+func _have_all_players_answered() -> bool:
+	var all_players_answered = true
+	for key in players:
+		if players[key]["loaded"] and not players[key]["hasGuessed"]:
+			all_players_answered = false
+	return all_players_answered
+
+func _are_all_players_ready() -> bool:
+	var players_ready = true
+	for key in players:
+		if players[key]["loaded"] and not players[key]["ready"]:
+			players_ready = false
+	return players_ready
+#endregion
+
+#region question filter section
 func _build_complete_tags_list():
-	_io_read_questions(file_path_questions_data)
+	_io_read_questions(QuestionDataFile)
 	# find all tags and numerate them
 	for key in questions:
 		for tag in questions[key]["tags"]:
@@ -248,7 +356,6 @@ func _build_complete_tags_list():
 				tags_list[tag] += 1
 			else:
 				tags_list[tag] = 1
-		
 
 func _io_read_questions(file_name: String):
 	print("!INFO: Reading Question Data")
@@ -317,3 +424,4 @@ func _IO_write_tags_filter():
 		file.close()
 	else:
 		print("!!ERROR: Failed to save tags filters")
+#endregion

@@ -1,19 +1,19 @@
 extends Control
 
-#region refrences to quiz ui elements
+#region ui stuff
+#===================================================
 @onready var ui_questions_name = $quizInterface/session_organizer/question_header/question_name
 @onready var ui_questions_index = $quizInterface/session_organizer/question_header/question_index
 @onready var ui_countdown_timer = $quizInterface/session_organizer/question_header/Countdown
 @onready var ui_prequestion_timer = $quizInterface/session_organizer/question_header/Prequestion_timer
 @onready var ui_postquestion_timer = $quizInterface/session_organizer/question_header/Postquestion_timer
-@onready var ui_countdown_text = $quizInterface/session_organizer/CountdownLabel
 @onready var ui_questions_body = $quizInterface/session_organizer/question_body
 @onready var ui_post_question = $quizInterface/post_question
 @onready var ui_players = [
-	$quizInterface/players_region/activePlayer1/player_case,
-	$quizInterface/players_region/activePlayer2/player_case,
-	$quizInterface/players_region/activePlayer3/player_case,
-	$quizInterface/players_region/activePlayer4/player_case]
+	$quizInterface/players_region/activePlayer1,
+	$quizInterface/players_region/activePlayer2,
+	$quizInterface/players_region/activePlayer3,
+	$quizInterface/players_region/activePlayer4]
 @onready var ui_multiple_choice_answers = [
 	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair1/a1,
 	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair2/a2,
@@ -24,7 +24,6 @@ extends Control
 	$quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/This/Cat1Button,
 	$quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat/That/Cat2Button
 ]
-
 @onready var ui_player_names = [
 	$quizInterface/players_region/activePlayer1/player_case/player_name,
 	$quizInterface/players_region/activePlayer2/player_case/player_name,
@@ -64,102 +63,114 @@ var surprize_styleBs_a4 = [
 
 var asset_player_pannel_locked
 var asset_player_pannel_default
+
+var pre_quiz_rules_text_rounds = ""
+var pre_quiz_rules_text_rounds2 = ""
+var pre_quiz_rules_text_answers = ""
+var pre_quiz_rules_text_answers2 = ""
+var pre_quiz_rules_text_score = ""
+var pre_quiz_rules_text_score2 = ""
+var pre_quiz_rules_text_timer = ""
 #endregion
 
 #region global variables
+#===================================================
 var master_chances_data = []
 var master_question_data = []
 var filtered_question_data = []
-var chances_set = {}
 
-var local_question_set_uuids = []
-
-signal end_of_quiz
-signal exit_quiz
-
-var QUIZ_SIZE = 10
-var CHANCE_COUNT = 3
-
-var flag_DEBUG = true
-
-var flag_pre_quiz_rules = false
-var pre_question_delay_default = 3.0
-var flag_pre_question_time = false
-var post_question_delay_default = 5.0
-var flag_post_question_time = false
-
-var current_index = 0
-var correct_answer = 0
-var loaded = false
-var players_answered = 0
-var player_input = "p_answer_%s"
-var flag_accept_input = false
-
-var player_statuses_ui_2d: Array[Array]
-
-var flag_game_menu_shown = false
-var flag_in_options_menu = false
-var flag_in_options_submenu = false
-
-var local_clock_reading = [0,0]
-var local_answer_order = [0, 1, 2, 3]
-
-var QuizEndScreen = false
+#signals
+signal sig_end_of_quiz
+signal sig_exit_quiz
 
 var config_path = "user://settings.cfg"
+var QuestionDataFile = "res://data/question_data.json"
 var config = ConfigFile.new()
 
-# variables for score rollup animation
+var DEBUG = true
+var QUIZ_LENGTH = 10
+var ROLLUP_MAX = 10
+
+var use_question_filter = false
+var question_filter = {}
+
+var pre_question_delay_default = 5.0
+var post_question_delay_default = 5.0
+
+var questions = {}
+var quiz_questions_list = []
+var quiz_question_index = 0 
+var quiz_chances = []
+
+var question_name = "n/a"
+var question_explainer = "explainer_text"
+var question_body = "body_text"
+var question_answers = ["answer_0", "answer_1", "answer_2", "answer_3"]
+var question_answers_correct_index = -1
+var question_type = ""
+var question_uuid = ""
+
+var ui_playing_statuses_animation = false
+var ui_has_status_table = false
+
+var menu_location = MENU.noMenu
 var rollup_count = 0
 
-var selectedTagsFilter
-var useTagFilter = false
+var delta_t = 0.0
 
+var player_input = "p_answer_%s"
+var player_statuses_master: Array[Array]
+var player_statuses_local: Array[Array]
+
+var players_ready = 0
+var phase_in_progress = false
+
+enum MENU {
+	noMenu = 0,
+	pauseMenu = 1,
+	optionsMenu = 2,
+	subMenuSound = 3,
+	subMenuDisplay = 4,
+}
 #endregion
 
 var _icons: Dictionary = {}
 
-##Called when the node enters the scene tree for the first time.
-##primarily used by the server to setup the quiz session
+enum QUIZSTATE {
+	lobby,
+	loading,
+	preQuiz,
+	endOfRules,
+	preQuestion,
+	question,
+	postQuestion,
+	endOfPhase,
+	endScreen
+}
+
 func _ready():
-	_reset_question_rules_visibility()
-	_set_theme_specific_graphics()
+	$preQuiz.hide()
+	$quizInterface.hide()
+	$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.hide()
+	menu_location = MENU.noMenu
+	_pause_menu_update_graphics()
+	_set_theme_specific_information()
 	_load_config_settings()
 	_load_icons()
 	_select_music_track()
 	InputDevice.device_changed.connect(_on_device_changed)
 	_on_device_changed(InputDevice.current, InputDevice.last_joypad_id)
 	
+	for i in range(4):
+		ui_players[i].hide()
+		
+	$quizEnd/ReturnToLobbyButton.text = "Exit Session"
+	
 	if multiplayer.is_server():
-		$pauseScreen/pauseCase/pauseBase/quitButton.text = "lobby"
-		QUIZ_SIZE = GameState.quizOptions.win_questions
-		_select_tags_filter()
-		_load_quiz_data()
-		_select_quiz_questions(QUIZ_SIZE)
-		_prepare_quiz_chances(CHANCE_COUNT)
-		_store_quiz_questions_locally()
-		GameState._build_player_number_to_id_table()
-		_sync_server_client_data.rpc(local_question_set_uuids, GameState.playerNumberToIds)
-		_sync_server_client_game_rules.rpc(
-			GameState.quizOptions.timer, 
-			"Highest score after 10 questions", 
-			0,  # cut feature, always use "highest score after x question"
-			10, # 10 questions
-			GameState.quizOptions.win_points)
-		_clean_master_questions()
-		_clean_chance_set_and_master()
-		_generate_answer_order()
-		_sync_answer_order.rpc(local_answer_order)
-		if GameState.CurrentQuizQuestions[current_index]["questionType"] == "True/False":
-			_ui_present_question_true_false.rpc()
-		elif GameState.CurrentQuizQuestions[current_index]["questionType"] == "This/That":
-			_ui_present_question_this_that.rpc()
-		else:
-			_ui_present_question_multiple_choice.rpc()
-		_player_loaded(multiplayer.get_unique_id())
-		print("server [%s] loaded" % multiplayer.get_unique_id())
-		pass
-	pass
+		$quizEnd/ReturnToLobbyButton.text = "Return To Lobby"
+		$pauseScreen/pauseCase/pauseBase/quitButton.text = "Lobby"
+		
+		_host_setup_quiz()
 
 func _load_icons() -> void:
 	for device in ["KB", "XB", "PS","NT"]:
@@ -188,91 +199,431 @@ func _replace_icons(device: String) -> void:
 	%ThisOrThat/This/a1_icon.texture = _icons["%s1" % [device]]
 	%ThisOrThat/That/a2_icon.texture = _icons["%s2" % [device]]
 
-func _process(_delta):
-	if GameState.GameStarted:
-		if multiplayer.is_server():
-			if flag_pre_question_time:
-				local_clock_reading = pre_question_clock()
-			elif flag_post_question_time:
-				local_clock_reading = post_question_clock()
-			else:
-				local_clock_reading = countdown_clock()
-				
-			_sync_server_client_clock_reading.rpc(local_clock_reading)
-			_load_question_refresh_scores()
-			ui_countdown_text.text = "%02d:%02d" % local_clock_reading
-			pass
-		else:
-			_load_question_refresh_scores()
-			ui_countdown_text.text = "%02d:%02d" % local_clock_reading
-			pass
-		pass
-	pass
+func _process(delta):
+	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
+		delta_t += delta
+		if delta_t > 0.2:
+			delta_t = 0.0
+			for key in GameState.players:
+				if GameState.players[key]["loaded"]:
+					_sync_game_timer.rpc_id(key, _get_timer_reading(GameState.quiz_phase))
+
+func _is_event_keypress(event, key) -> bool:
+	return event is InputEventKey and event.pressed and event.keycode == key
 
 func _input(event):
-	# ignore input until quiz starts
-	if !GameState.GameStarted:
-		return
-	# opens game menu locally on client
-	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+	if _is_event_keypress(event, KEY_ESCAPE):
 		_escape_game_menu()
-		pass
 	
-	if (flag_DEBUG and multiplayer.is_server() and !flag_pre_quiz_rules) and (event is InputEventKey and event.pressed and event.keycode == KEY_P):
-		_debug_advance_to_next_question()
-		pass	
+	if DEBUG and multiplayer.has_multiplayer_peer() and multiplayer.is_server():
+		if _is_event_keypress(event, KEY_N):
+			_DEBUG_next_question()
 	
-	for i in range(4):
-		if event.is_action_pressed(player_input % i):
-			if current_index >= GameState.CurrentQuizQuestions.size():
-				return # ignore answer input after quiz has ended
-			#if we're a "this or that" or a "true/false" question ingnore input from 3 or 4
-			var questionType = GameState.CurrentQuizQuestions[current_index]["questionType"]
-			if (questionType == "True/False" or questionType == "This/That") and i > 1:
-				continue
-			if multiplayer.is_server(): # call locally if server
-				_player_guess(1, i)
-				pass
-			else: #send guess to server
-				_player_guess.rpc_id(1, multiplayer.get_unique_id(), i)
-				pass
-			pass
-	pass
+	match GameState.quiz_phase:
+		QUIZSTATE.preQuiz:
+			for guess in range(4):
+				if event.is_action_pressed(player_input % guess):
+					_player_ready(multiplayer.get_unique_id())
+		QUIZSTATE.question:
+			for guess in range(4):
+				if event.is_action_pressed(player_input % guess):
+					var questionType = question_type
+					if (questionType == "True/False" or questionType == "This/That") and guess > 1:
+						break
+					_player_guess(guess)
 
-#region RPC functions used by the server to communicate with clients
-##RPC: called by the server when it wants to sync the quiz timer clock between server and clients
-@rpc("any_peer", "reliable")
-func _sync_server_client_clock_reading(server_clock):
-	local_clock_reading = server_clock
-	pass
+func _player_guess(guess):
+	if GameState._can_guess():
+		_player_guess_rpc.rpc_id(1, multiplayer.get_unique_id(), guess)
+
+func _player_dropped(mp_id):
+	if GameState._game_started():
+		_ui_update_lock_player_pannel(mp_id, true)
+	if multiplayer.is_server():
+		GameState.players[mp_id].pannel_locked = true
+		print("Info: player Dropped id:%s" % mp_id)
+
+func _player_rejoined(mp_id):
+	if multiplayer.is_server():
+		print("Info: player rejoined id:%s" % mp_id)
+
+#region server side functions that handle syncing with players
+#===================================================
+func _server_full_sync(mp_id = -1):
+	_server_sync_player_info(mp_id)
+	_server_sync_quiz_phase(mp_id)
 	
-##RPC: called by the server host on clients to send question and chance data to peers
-@rpc("authority", "reliable")
-func _sync_server_client_data(question_set_uuids, playerNumToIds):
-	_load_quiz_data()
-	GameState.playerNumberToIds = playerNumToIds
+func _server_sync_player_info(mp_id = -1):
+	var player_ids = []
+	player_ids.resize(GameState._player_count())
+	var player_scores = []
+	player_scores.resize(GameState._player_count())
+	var player_scores_last = []
+	player_scores_last.resize(GameState._player_count())
+	var index = 0
 	
-	var i = 0
-	for questionUuid in question_set_uuids:
-		var questionIndex = -1
+	for key in GameState.players:
+		player_ids[index] = key
+		player_scores[index] = GameState.players[key]["score"]
+		player_scores_last[index] = GameState.players[key]["last_score"]
+		index += 1
+	
+	if mp_id == -1:
+		_sync_player_info.rpc(player_ids, player_scores, player_scores_last)
+	else:
+		_sync_player_info.rpc_id(mp_id, player_ids, player_scores, player_scores_last)
+
+func _server_sync_quiz_phase(mp_id = -1):
+	var q = quiz_questions_list[quiz_question_index]
+	question_uuid = q["uuid"]
+	
+	if mp_id == -1:
+		_sync_quiz_phase.rpc(
+			GameState.quiz_phase, 
+			quiz_question_index,
+			q["name"], q["explainer"], q["question"], question_answers, q["questionType"])
+	else:
+		_sync_quiz_phase.rpc_id(
+			mp_id,
+			GameState.quiz_phase, 
+			quiz_question_index,
+			q["name"], q["explainer"], q["question"], question_answers, q["questionType"])
+
+func _server_sync_late_join(mp_id):
+	_server_sync_player_info()
+	_server_sync_quiz_phase(mp_id)
+	_sync_game_rules.rpc_id(
+		mp_id,
+		GameState.quizOptions.timer, 
+		"Highest score after 10 questions", 
+		0,  # cut feature, always use "highest score after x question"
+		10, # 10 questions
+		GameState.quizOptions.win_points)
+	
+	if GameState.quiz_phase == QUIZSTATE.endScreen:
+		_server_sync_endscreen_info(mp_id)
+	
+	var pannels_locked = []
+	
+	for key in GameState.players:
+		if GameState.players[key].pannel_locked:
+			pannels_locked.append(key)
+	
+	_late_join_load_in.rpc_id(mp_id, pannels_locked)
+
+func _server_sync_endscreen_info(mp_id = -1):
+	var player_ids = []
+	player_ids.resize(GameState._player_count())
+	var final_scores = []
+	final_scores.resize(GameState._player_count())
+	var chance_names = []
+	chance_names.resize(GameState._player_count())
+	for i in range(GameState._player_count()):
+		chance_names[i] = []
+	
+	for key in GameState.players:
+		var index = GameState.idToCardIndex[key]
+		player_ids[index] = key
+		final_scores[index] = GameState.players[key].final_score
+	
+	for c in GameState.chances:
+		for p in GameState.players:
+			if GameState.players[p].chance_hits.has(c):
+				chance_names[GameState.idToCardIndex[p]].append(GameState.chances[c].name)
+	
+	if mp_id == -1:
+		_sync_player_end_screen.rpc(player_ids, final_scores, chance_names)
+	else:
+		_sync_player_end_screen.rpc_id(mp_id, player_ids, final_scores, chance_names)
+
+func _server_sync_profile_data():
+	for key in GameState.players:
+		var question_uuids = []
 		
-		for k in range(master_question_data.size()):
-			if master_question_data[k]["uuid"] == questionUuid:
-				questionIndex = k
-				break
-			pass
+		for question in quiz_questions_list:
+			question_uuids.append(question["uuid"])
 		
-		GameState.CurrentQuizQuestions.append(_next_question_data_and_store_chances(i, questionIndex))
-		i += 1
-		pass
+		var player_chances = []
+		
+		for c in GameState.players[key].chance_hits:
+			player_chances.append(c)
+		
+		if DEBUG:
+			print("!!DEBUG: sending profile data to player_id: [%s]" % key)
+		if key == 1:
+			_sync_profile_data(
+				GameState.players[key].final_score, 
+				question_uuids, 
+				GameState.players[key].answer_record, 
+				player_chances)
+		elif multiplayer.get_peers().has(key):
+			_sync_profile_data.rpc_id(
+				key,
+				GameState.players[key].final_score, 
+				question_uuids, 
+				GameState.players[key].answer_record, 
+				player_chances)
+#endregion
+
+#region quiz phase functions
+#===================================================
+func _phase_pre_quiz():
+	if DEBUG:
+		print("!!DEBUG: Prequiz phase")
+	GameState.quiz_phase = QUIZSTATE.preQuiz
 	
-	_clean_master_questions()
-	_clean_chance_set_and_master()
-	_player_loaded.rpc_id(1, multiplayer.get_unique_id())
-	pass
+	ui_prequestion_timer.timeout.connect(_phase_question)
+	ui_countdown_timer.timeout.connect(_phase_post_question)
+	ui_postquestion_timer.timeout.connect(_phase_end_of_phase)
 	
+	var q = quiz_questions_list[quiz_question_index]
+	question_uuid = q["uuid"]
+	
+	for key in GameState.players:
+		GameState.players[key].pannel_locked = true
+	_player_pannels_lock.rpc()
+	
+	_set_question_answers_as_randomised_array(q)
+	
+	_server_full_sync()
+	
+	
+	_sync_play_phase_animation.rpc()
+
+func _phase_end_of_rules():
+	if DEBUG:
+		print("!!DEBUG: End Of Rules phase")
+	GameState.quiz_phase = QUIZSTATE.endOfRules
+	
+	_server_full_sync()
+	_sync_play_phase_animation.rpc()
+	
+	get_tree().create_timer(3.2).timeout.connect(_phase_pre_question)
+
+func _phase_pre_question():
+	if DEBUG:
+		print("!!DEBUG: Prequestion phase")
+	GameState.quiz_phase = QUIZSTATE.preQuestion
+	
+	_server_full_sync()
+	
+	var extra_seconds : int = 0
+	extra_seconds = roundi(question_body.length() * 0.05)
+	
+	for key in GameState.players:
+		GameState.players[key].pannel_locked = false
+	_player_pannels_unlock.rpc()
+	
+	if DEBUG:
+		print("!INFO: extra seconds for pre_question phase [%s]" % extra_seconds)
+		
+	_sync_play_phase_animation.rpc()
+	
+	ui_prequestion_timer.start(pre_question_delay_default + extra_seconds)
+
+func _phase_question():
+	if DEBUG:
+		print("!!DEBUG: Question phase")
+	GameState.quiz_phase = QUIZSTATE.question
+	ui_prequestion_timer.stop()
+	
+	_server_full_sync()
+	_sync_play_phase_animation.rpc()
+	
+	ui_countdown_timer.start(GameState.quizOptions.timer)
+	
+func _phase_post_question():
+	if DEBUG:
+		print("!!DEBUG: Postquestion phase")
+	GameState.quiz_phase = QUIZSTATE.postQuestion
+	ui_countdown_timer.stop()
+	
+	for key in GameState.players:
+		GameState.players[key].pannel_locked = true
+	_player_pannels_lock.rpc()
+	
+	var extra_seconds : int = roundi(question_explainer.length() * 0.05)
+	
+	var question_score_value = 1000
+	
+	GameState._check_player_answers(question_answers_correct_index, question_score_value)
+	GameState._check_player_chances(quiz_questions_list[quiz_question_index]["uuid"])
+	
+	for key in GameState.players:
+		GameState.players[key].answer_record[quiz_question_index] = GameState.players[key].correct
+	
+	_create_player_statuses_table()
+	
+	var player_ids = []
+	player_ids.resize(GameState._player_count())
+	for n in range(GameState._player_count()):
+		player_ids[n] = GameState.playerCardOrder[n]
+		
+	_sync_player_statuses.rpc(player_ids, player_statuses_master)
+	
+	GameState._reset_player_guesses()
+	
+	_server_full_sync()
+	_sync_play_phase_animation.rpc()
+	
+	ui_postquestion_timer.start(post_question_delay_default + extra_seconds + 1.5)
+
+func _phase_end_of_phase():
+	if DEBUG:
+		print("!!DEBUG: end of phase phase")
+	GameState.quiz_phase = QUIZSTATE.endOfPhase
+	ui_postquestion_timer.stop()
+	
+	for key in GameState.players:
+		GameState.players[key]["last_score"] = GameState.players[key]["score"]
+	
+	_server_full_sync()
+	_sync_play_phase_animation.rpc()
+	
+	if quiz_question_index < QUIZ_LENGTH - 1:
+		get_tree().create_timer(1.2).timeout.connect(_phase_next_question)
+	else:
+		get_tree().create_timer(1.2).timeout.connect(_phase_end_screen)
+		
+func _phase_next_question():
+	quiz_question_index += 1
+	
+	var q = quiz_questions_list[quiz_question_index]
+	question_uuid = q["uuid"]
+	
+	_set_question_answers_as_randomised_array(q)
+	
+	_phase_pre_question()
+
+func _phase_end_screen():
+	if DEBUG:
+		print("!!DEBUG: endscreen phase")
+	GameState.quiz_phase = QUIZSTATE.endScreen
+
+	var chance_winners = []
+	var highest_hits = 0
+	
+	for c in GameState.chances:
+		for p in GameState.players:
+			if GameState.players[p].chance_hits.has(c):
+				if GameState.players[p].chance_hits[c] > highest_hits:
+					chance_winners = []
+					chance_winners.append(p)
+					highest_hits = GameState.players[p].chance_hits[c]
+				elif GameState.players[p].chance_hits[c] == highest_hits:
+					chance_winners.append(p)
+		
+		for p in chance_winners:
+			GameState.players[p].chances_scored.append(c)
+		
+		chance_winners = []
+		highest_hits = 0
+	
+	for p in GameState.players:
+		var final_score = GameState.players[p].score
+		for c in GameState.players[p].chances_scored:
+			final_score += GameState.chances[c]["bonus"]
+		GameState.players[p].final_score = final_score
+	
+	_server_full_sync()
+	_server_sync_endscreen_info()
+	
+	_sync_play_phase_animation.rpc()
+	_server_sync_profile_data()
+#endregion
+
+#region server side rpc functions
+#===================================================
+@rpc("authority", "call_local", "reliable")
+func _server_ending_quiz():
+	GameState._reset_quiz_state()
+	
+	#remove inactive players from session when returning to lobby
+	var inactive_players = []
+	for key in GameState.players:
+		if not GameState.players[key]["active"]:
+			inactive_players.append(key)
+	
+	for key in inactive_players:
+		GameState.players.erase(key)
+	
+	sig_end_of_quiz.emit()
+	queue_free()
+
+@rpc("authority", "call_local", "reliable")
+func _sync_quiz_phase(
+	quiz_phase, 
+	question_index: int,
+	q_name: String, 
+	q_explain: String, 
+	q_body: String, 
+	q_answers: Array, 
+	q_type: String
+	):
+	
+	if GameState._game_started():
+		$preQuiz.show()
+		$quizInterface.show()
+	
+	GameState.quiz_phase = quiz_phase
+	quiz_question_index = question_index
+	
+	question_name = q_name
+	question_explainer = q_explain
+	question_body = q_body
+	question_answers = q_answers
+	question_type = q_type
+	
+	_ui_apply_question_data()
+
+@rpc("authority", "call_local", "reliable")
+func _sync_play_phase_animation():
+	ui_post_question.hide()
+		
+	if ui_playing_statuses_animation:
+		ui_playing_statuses_animation = false
+		_ui_ani_reset_player_statuses(player_statuses_local)
+		await $ControlSwapper0.animation_finished
+		
+	match GameState.quiz_phase:
+		QUIZSTATE.preQuiz:
+			_ui_update_prequiz_rules()
+			_ui_ani_quiz_intro()
+			return
+		QUIZSTATE.endOfRules:
+			_ui_ani_quiz_start()
+			return
+		QUIZSTATE.preQuestion:
+			_ui_ani_question_load_a()
+		QUIZSTATE.question:
+			_ui_ani_question_load_b()
+		QUIZSTATE.postQuestion:
+			ui_post_question.show()
+			_ui_ani_question_answers_unload()
+			if ui_has_status_table:
+				await $ControlSwapper0.animation_finished
+				_ui_ani_update_player_statuses(player_statuses_local)
+				ui_has_status_table = false
+				ui_playing_statuses_animation = true
+		QUIZSTATE.endOfPhase:
+			_ui_ani_question_unload()
+		QUIZSTATE.endScreen:
+			_ui_setup_end_screen()
+			_ui_ani_display_end_screen()
+			
+	$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.hide()
+
+@rpc("authority", "call_local", "reliable")
+func _sync_player_info(player_ids: Array, player_scores: Array, player_scores_last):
+	for i in range(player_ids.size()):
+		GameState.players[player_ids[i]]["score"] = player_scores[i]
+		GameState.players[player_ids[i]]["last_score"] = player_scores_last[i]
+	
+		_ui_update_player_panels()
+		_ui_update_scores()
+
 @rpc("authority", "reliable")
-func _sync_server_client_game_rules(
+func _sync_game_rules(
 	i_timer: int, 
 	i_win_con: String, 
 	i_win_con_int: int, 
@@ -285,510 +636,288 @@ func _sync_server_client_game_rules(
 
 	GameState.quizOptions.win_questions = i_win_questions
 	GameState.quizOptions.win_points = i_win_points
-	pass
-
-@rpc("authority", "reliable")
-func _sync_answer_order(server_answer_order):
-	local_answer_order = server_answer_order
-	pass
 	
-@rpc("authority", "reliable")
-func _start_quiz_client():
-	GameState._reset_players()
-	for i in range(GameState.PlayerCount):
-		var player = GameState.players[GameState.playerNumberToIds[i]]
-		ui_player_names[i].text = player["name"]
-		ui_player_scores[i].text = str(player["score"])
-		ui_players[i].visible = true
-		pass
-	
-	GameState.GameStarted = true
-	pass
-	
-@rpc("authority", "reliable")
-func _sync_update_question_on_clients(question_index):
-	current_index = question_index
-	loaded = false
-	pass
-	
-@rpc("authority", "reliable", "call_local")
-func _sync_update_scores_on_clients(scores, last_scores):
-	for key in scores.keys():
-		GameState.players[key]["score"] = scores[key]
-		GameState.players[key]["last_score"] = last_scores[key]
-		pass
-	rollup_count = 10
-	_local_score_rollup()
-	pass
+@rpc("authority", "call_local", "reliable")
+func _sync_game_timer(clock_reading: Array):
+	$quizInterface/session_organizer/CountdownLabel.text = "%02d:%02d" % clock_reading
 
 @rpc("authority", "call_local", "reliable")
-func _show_end_of_quiz_screen():
-	ui_countdown_timer.stop()
-	QuizEndScreen = true
+func _sync_player_statuses(player_ids: Array, statuses):
+	player_statuses_local.resize(GameState._player_count())
+	for n in range(player_ids.size()):
+		var i = GameState.idToCardIndex[player_ids[n]]
+		player_statuses_local[n].resize(3)
+		player_statuses_local[n][0] = statuses[i][0]
+		player_statuses_local[n][1] = statuses[i][1]
+		player_statuses_local[n][2] = statuses[i][2]
+		
+	ui_has_status_table = true
+
+@rpc("authority", "call_local", "reliable")
+func _sync_player_end_screen(ids, final_scores, chance_names):
+	for i in range(ids.size()):
+		GameState.players[ids[i]].final_score = final_scores[i]
+		for chance_name in chance_names[i]:
+			GameState.players[ids[i]].chance_names.append(chance_name)
+
+@rpc("authority", "call_local", "reliable")
+func _sync_profile_data(p_score, question_uuids, answers, chances_scored):
+	UserProfiles._update_profile_with_quiz_data(
+		UserProfiles._get_selected_profile_key(),
+		p_score,
+		question_uuids,
+		answers,
+		chances_scored)
+
+@rpc("authority", "reliable")
+func _player_load_quiz():
+	_client_setup_quiz()
+
+@rpc("authority", "reliable")
+func _late_join_load_in(pannels_locked: Array):
+	_io_load_master_chances()
+	_ui_update_prequiz_rules()
 	
-	## add score from chances
+	for key in pannels_locked:
+		_ui_update_lock_player_pannel(key, true)
+	
+	match GameState.quiz_phase:
+		QUIZSTATE.preQuiz:
+			$ControlSwapper0.play("QuizIntro", -1, 10.0, false)
+		QUIZSTATE.endOfRules:
+			$ControlSwapper0.play("QuizStart", -1, 20.0, false)
+		QUIZSTATE.preQuestion:
+			$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.hide()
+			$ControlSwapper0.play("QuizStart", -1, 20.0, false)
+			await $ControlSwapper0.animation_finished
+			$ControlSwapper0.play("QuestionLoad_A", -1, 20.0, false)
+		QUIZSTATE.question:
+			$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.hide()
+			$ControlSwapper0.play("QuizStart", -1, 20.0, false)
+			await $ControlSwapper0.animation_finished
+			$ControlSwapper0.play("QuestionLoad_A", -1, 20.0, false)
+			await $ControlSwapper0.animation_finished
+			$ControlSwapper0.play("QuestionLoad_B", -1, 20.0, false)
+		QUIZSTATE.postQuestion:
+			$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.hide()
+			$ControlSwapper0.play("QuizStart", -1, 20.0, false)
+			await $ControlSwapper0.animation_finished
+			$ControlSwapper0.play("QuestionLoad_A", -1, 20.0, false)
+			ui_post_question.show()
+		QUIZSTATE.endOfPhase:
+			$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.hide()
+			$ControlSwapper0.play("QuizStart", -1, 20.0, false)
+			await $ControlSwapper0.animation_finished
+			$ControlSwapper0.play("QuestionLoad_A", -1, 20.0, false)
+			await $ControlSwapper0.animation_finished
+			$ControlSwapper0.play("QuestionUnload", -1, 20.0, false)
+		QUIZSTATE.endScreen:
+			$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.hide()
+			_ui_setup_end_screen()
+			$ControlSwapper0.play("QuizFinish", -1, 20.0, false)
+	
+	_late_join_player_setup_done.rpc_id(1)
+
+@rpc("authority", "call_local", "reliable")
+func _player_pannels_lock():
+	_ui_update_lock_all_player_pannels(true)
+
+@rpc("authority", "call_local", "reliable")
+func _player_pannels_unlock():
+	_ui_update_lock_all_player_pannels(false)
+
+@rpc("authority", "call_local", "reliable")
+func _player_update_pannel_lock(mp_id, locked):
+	_ui_update_lock_player_pannel(mp_id, locked)
+
+@rpc("authority", "call_local", "reliable")
+func _sync_player_pannels_lock(ids, locked):
+	for i in range(ids.size()):
+		_ui_update_lock_player_pannel(ids[i], locked[i])
+#endregion
+
+#region client side rpc functions
+#===================================================
+@rpc("any_peer", "reliable", "call_local")
+func _player_guess_rpc(mp_id, guess):
+	if GameState.quiz_phase == QUIZSTATE.question:
+		if not ui_countdown_timer.is_stopped() and not GameState.players[mp_id].hasGuessed:
+			GameState.players[mp_id].make_guess(guess, ui_countdown_timer.get_time_left())
+			GameState.players[mp_id].pannel_locked = true
+			_player_update_pannel_lock.rpc(mp_id, true)
+		if GameState._have_all_players_answered():
+			_phase_post_question()
+
+@rpc("any_peer", "reliable")
+func _player_setup_done():
+	GameState.players[multiplayer.get_remote_sender_id()]["loaded"] = true
+	if multiplayer.is_server():
+		GameState.players_loaded += 1
+		if GameState.players_loaded == GameState._player_count():
+			_phase_pre_quiz()
+
+@rpc("any_peer", "reliable")
+func _player_ready(mp_id):
+	if multiplayer.is_server():
+		GameState.players[mp_id]["ready"] = true
+		if GameState._are_all_players_ready():
+			_phase_end_of_rules()
+	else:
+		_player_ready.rpc_id(1, mp_id)
+
+@rpc("any_peer", "reliable")
+func _late_join_player_setup_done():
+	var mp_id = multiplayer.get_remote_sender_id()
+	GameState.players[mp_id]["loaded"] = true
+	
+	if GameState.players[mp_id].hasGuessed or GameState._pannels_locked_phase():
+		GameState.players[mp_id].pannel_locked = true
+	else:
+		GameState.players[mp_id].pannel_locked = false
+	
+	var ids = []
+	ids.resize(GameState._player_count())
+	var locked = []
+	locked.resize(GameState._player_count())
+	
+	for i in range(ids.size()):
+		ids[i] = GameState.playerCardOrder[i]
+		locked[i] = GameState.players[GameState.playerCardOrder[i]].pannel_locked
+	
+	_sync_player_pannels_lock.rpc(ids, locked)
+#endregion
+
+#region server utilities
+#===================================================
+func _set_question_answers_as_randomised_array(question):
+	var correct = question["correct"]
+	var wrong = question["wrong"]
+	var type = question["questionType"]
+	var answers = [correct, wrong[0], wrong[1], wrong[2]]
+	
+	match type:
+		"True/False":
+			if correct.to_lower() == "true":
+				question_answers_correct_index = 0
+			else:
+				question_answers_correct_index = 1
+			question_answers = ["True", "False", "null", "null"]
+		"This/That":
+			var available_indexes_tt = [0, 1]
+			var i = 0
+			while available_indexes_tt.size():
+				var answer_index = available_indexes_tt.pop_at(randi() % available_indexes_tt.size())
+				question_answers[i] = answers[answer_index]
+				if answer_index == 0:
+					question_answers_correct_index = i
+				i += 1
+			question_answers[2] = "null"
+			question_answers[3] = "null"
+		_: # "Multiple Choice"
+			var available_indexes_tt = [0, 1, 2, 3]
+			var i = 0
+			while available_indexes_tt.size():
+				var answer_index = available_indexes_tt.pop_at(randi() % available_indexes_tt.size())
+				question_answers[i] = answers[answer_index]
+				if answer_index == 0:
+					question_answers_correct_index = i
+				i += 1
+
+func _create_player_statuses_table():
+	player_statuses_master.clear()
+	player_statuses_master.resize(GameState._player_count())
+	
+	for n in range(GameState._player_count()):
+		var playerCorrectness = GameState.players[GameState.playerCardOrder[n]]["correct"]
+		var playerAnswered = GameState.players[GameState.playerCardOrder[n]]["hasGuessed"]
+		
+		if !playerAnswered:
+			player_statuses_master[n] = [true, false, false]
+		elif playerCorrectness:
+			player_statuses_master[n] = [false, false, true]
+		else:
+			player_statuses_master[n] = [false, true, false]
+#endregion
+
+#region quiz ui and animation functions
+#===================================================
+func _ui_update_player_panels():
+	for i in range(GameState._player_count()):
+		if GameState.playerCardOrder[i] != -1:
+			var player_info = GameState.players[GameState.playerCardOrder[i]]
+			ui_player_names[i].text = player_info["name"]
+			ui_players[i].show()
+		else:
+			ui_players[i].hide()
+
+func _ui_update_scores():
 	for key in GameState.players:
-		var chance_bonus = 0
-		for chanceKey in GameState.players[key]["chances"].keys():
-			chance_bonus += GameState._get_chance_from_uuid(chanceKey)["bonus"]
-		GameState.players[key].score += chance_bonus
-	
-	var scoreOrder = []
-	
-	for n in range(4):
-		get_node("quizEnd/PlayerStandingsOrg/%sPlacer" % (n + 1)).hide()
-		pass
-	
-	for key in GameState.players.keys():
-		scoreOrder.append(key)
-		pass
-		
-	# create an index of the player entries thats sorted based on score
-	for n in range(GameState.PlayerCount):
-		var highestScore = GameState.players[scoreOrder[n]].score
-		var indexOfHighest = n
-		var swapTemp
-		
-		for i in range(n, GameState.PlayerCount):
-			if GameState.players[scoreOrder[i]].score > highestScore:
-				highestScore = GameState.players[scoreOrder[i]].score
-				indexOfHighest = i
-				pass
-			pass
-		
-		swapTemp = scoreOrder[n]
-		scoreOrder[n] = scoreOrder[indexOfHighest]
-		scoreOrder[indexOfHighest] = swapTemp
-		pass
-	
-	for n in range(GameState.PlayerCount):
-		var uiNum = n + 1
-		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/MedalCase/Awards" % uiNum)["text"] = "N/A"
-		pass
-		
-	for n in range(GameState.PlayerCount):
-		var uiNum = n + 1
-		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/Name" % uiNum).text = GameState.players[scoreOrder[n]].name
-		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/ScoreDisplay/Score" % uiNum).text = "%s" % GameState.players[scoreOrder[n]].score
-		
-		var chanceStr = ""
-		for chanceKey in GameState.players[scoreOrder[n]]["chances"].keys():
-			chanceStr += "%s, " % (GameState._get_chance_from_uuid(chanceKey)["name"])
-		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/MedalCase/Awards" % uiNum)["text"] = chanceStr
-		
-		get_node("quizEnd/PlayerStandingsOrg/%sPlacer" % uiNum).show()
-		pass
-	
-	$ControlSwapper0.play("QuizFinish")
-	pass
-
-@rpc("authority", "call_local", "reliable")
-func _end_quiz():
-	get_node("quizEnd/PlayerStandingsOrg/1Placer").hide()
-	get_node("quizEnd/PlayerStandingsOrg/2Placer").hide()
-	get_node("quizEnd/PlayerStandingsOrg/3Placer").hide()
-	get_node("quizEnd/PlayerStandingsOrg/4Placer").hide()
-	$quizInterface.show()
-	$quizEnd.hide()
-	QuizEndScreen = false
-	GameState._reset_quiz_state()
-	end_of_quiz.emit()
-	queue_free()
-	pass
-
-@rpc("authority", "reliable", "call_local")
-##RPC: accepts a bool, and tells the clients and server to switch all player pannels between the locked and unlocked states
-func _update_ui_player_pannel_locked_all(lock: bool):
-	for i in range(GameState.PlayerCount):
-		_update_ui_player_pannel_locked(lock, GameState.playerNumberToIds[i])
-		pass
-	pass
-
-@rpc("authority", "reliable", "call_local")
-##RPC: accepts a bool, and tells the clients and server to switch a given player's pannel between the locked and unlocked states
-func _update_ui_player_pannel_locked(lock: bool, in_playerId):
-	var UIPlayerEntry = 0
-	for i in range(GameState.PlayerCount):
-		if GameState.playerNumberToIds[i] == in_playerId:
-			UIPlayerEntry = i + 1
+		if GameState.players[key]["score"] != GameState.players[key]["last_score"]:
+			if rollup_count <= 0:
+				rollup_count = 10
+				_ui_local_score_rollup()
 			break
-		pass
 	
-	if lock:
-		get_node("quizInterface/players_region/activePlayer%s/player_case/player_name" % UIPlayerEntry).set_label_settings(asset_player_pannel_locked)
-		pass
+func _ui_local_score_rollup():
+	var t = float(rollup_count) / float(ROLLUP_MAX)
+	
+	if rollup_count <= 0:
+		for i in range(GameState._player_count()):
+			ui_player_scores[i].text = str(GameState.players[GameState.playerCardOrder[i]]["score"])
 	else:
-		get_node("quizInterface/players_region/activePlayer%s/player_case/player_name" % UIPlayerEntry).set_label_settings(asset_player_pannel_default)
-		pass
-	pass
+		for i in range(GameState._player_count()):
+			var current_score = GameState.players[GameState.playerCardOrder[i]]["score"]
+			var last_score = GameState.players[GameState.playerCardOrder[i]]["last_score"]
+			
+			ui_player_scores[i].text = str(current_score + (last_score - current_score) * t)
+		rollup_count -= 1
+		get_tree().create_timer(0.06).timeout.connect(_ui_local_score_rollup)
 
-##RPC: sends player statistics to clients and save them 
-@rpc("authority", "reliable", "call_local")
-func _sync_and_save_client_profile_statistics(playersData):
-	#gets the data only for the local player
-	var profileData = playersData[multiplayer.get_unique_id()]
-	var gameScore = GameState.players[multiplayer.get_unique_id()].score
-	
-	if profileData["score_highest"] < gameScore:
-		profileData["score_highest"] = gameScore
-		
-	if profileData["score_lowest"] > gameScore:
-		profileData["score_lowest"] = gameScore
-	
-	# account chances to theme unlocks
-	for chanceKey in GameState.players[multiplayer.get_unique_id()]["chances"].keys():
-		UserProfiles._check_theme_unlock(chanceKey)
-		UserProfiles._IO_write_themes_unlocks()
-		pass
-	
-	UserProfiles._overwrite_profile_with_reference(profileData)
-	pass
-
-##RPC: enables and disabled the explainer text for the question based on a bool
-@rpc("authority", "reliable", "call_local")
-@warning_ignore("shadowed_variable_base_class")
-func _show_question_explainer(visible: bool):
-	if visible:
-		ui_post_question.show()
+func _ui_update_lock_player_pannel(mp_id, locked: bool):
+	var card_index = GameState.idToCardIndex[mp_id] + 1
+	var player_case = "quizInterface/players_region/activePlayer%s/player_case/player_name" % card_index
+	if locked:
+		get_node(player_case).set_label_settings(asset_player_pannel_locked)
 	else:
-		ui_post_question.hide()
-	pass
+		get_node(player_case).set_label_settings(asset_player_pannel_default)
 
-## called by master scene when a player disconnects from the game, updating ui graphics
-@rpc("authority", "reliable", "call_local")
-func _player_dropped():
-	GameState._build_player_number_to_id_table()
-	
-	for i in range(4):
-		get_node("quizInterface/players_region/activePlayer%s" % (i + 1)).hide()
-		pass
-	
-	for i in range(GameState.PlayerCount):
-		var player = GameState.players[GameState.playerNumberToIds[i]]
-		ui_player_names[i].text = player["name"]
-		ui_player_scores[i].text = str(player["score"])
-		get_node("quizInterface/players_region/activePlayer%s" % (i + 1)).show()
-		pass
-	pass
+func _ui_update_lock_all_player_pannels(locked: bool):
+	for key in GameState.players:
+		_ui_update_lock_player_pannel(key, locked)
 
-# refrence, status_a: skip, status_b: wrong, status_c, right
-## called by server to sync the player statuses, statuses is expected to be a 2d array 
-@rpc("authority", "reliable", "call_local")
-func _sync_player_statuses(statuses):
+func _ui_apply_question_data():
+	var type = question_type
+	ui_questions_index.text = "%s" % (quiz_question_index + 1)
 	
-	if not multiplayer.is_server():	
-		player_statuses_ui_2d.resize(GameState.PlayerCount)
-		for player_number in range(GameState.PlayerCount):
-			player_statuses_ui_2d[player_number].resize(3)
-			player_statuses_ui_2d[player_number][0] = statuses[player_number][0]
-			player_statuses_ui_2d[player_number][1] = statuses[player_number][1]
-			player_statuses_ui_2d[player_number][2] = statuses[player_number][2]
-			pass
-	$ControlSwapper0.play_backwards("QuestionLoad_B")
-	await $ControlSwapper0.animation_finished
-	_play_status_animation(statuses)
-		
-func _play_status_animation(statuses):
-	for player_number in range(GameState.PlayerCount):
-		if statuses[player_number][0]: # status_a
-			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_SkipShow" % (player_number + 1))
-		if statuses[player_number][1]: # status_b
-			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_WrongShow" % (player_number + 1))
-		if statuses[player_number][2]: # status_c
-			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_RightShow" % (player_number + 1))
-		pass
+	ui_questions_name.text = question_name
+	ui_questions_body.text = question_body
+	ui_post_question.text = question_explainer
+	
+	match type:
+		"True/False":
+			$quizInterface/session_organizer/CenteredAnswerCategories.show()
+			$quizInterface/session_organizer/VerticalAnswerCategories.hide()
+			$quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse.show()
+			$quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat.hide()
+		"This/That":
+			for i in range(2):
+				ui_this_or_that_answers[i].text = question_answers[i]
+			$quizInterface/session_organizer/CenteredAnswerCategories.show()
+			$quizInterface/session_organizer/VerticalAnswerCategories.hide()
+			$quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse.hide()
+			$quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat.show()
+		_:
+			for i in range(4):
+				ui_multiple_choice_answers[i].text = question_answers[i]
+			$quizInterface/session_organizer/VerticalAnswerCategories.show()
+			$quizInterface/session_organizer/CenteredAnswerCategories.hide()
 
-## called by the server to reset all player statuses to be hidden
-@rpc("authority", "reliable", "call_local")
-func _reset_player_statuses():
-	for player_number in range(GameState.PlayerCount):
-		if player_statuses_ui_2d[player_number][0]:
-			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_SkipHide" % (player_number + 1))
-			player_statuses_ui_2d[player_number][0] = false
-		if player_statuses_ui_2d[player_number][1]:
-			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_WrongHide" % (player_number + 1))
-			player_statuses_ui_2d[player_number][1] = false
-		if player_statuses_ui_2d[player_number][2]:
-			get_node("ControlSwapper%s" % player_number).queue("p%sStatus_RightHide" % (player_number + 1))
-			player_statuses_ui_2d[player_number][2] = false
-		pass
-
-## hides the quiz interface and shows the prequiz rules interface
-@rpc("authority", "reliable", "call_local")
-func _display_prequiz_rules():
-	# set the rules dependent elements to hide
-	$preQuiz/preSessionOrganizer/RulesText/Rounds.hide()
-	$preQuiz/preSessionOrganizer/RulesText/Rounds2.hide()
-	
-	$preQuiz/preSessionOrganizer/RulesText/Answers.hide()
-	$preQuiz/preSessionOrganizer/RulesText/Answers2.hide()
-	
-	$preQuiz/preSessionOrganizer/RulesText/Score.hide()
-	$preQuiz/preSessionOrganizer/RulesText/Score2.hide()
-	
-	if GameState.quizOptions.win_con_int == 0: # 0 : Highest score after x questions
-		if !(GameState.CurrentTheme == "Fatal Surprise"):
-			$preQuiz/preSessionOrganizer/RulesText/Rounds.text %= GameState.quizOptions.win_questions
-		$preQuiz/preSessionOrganizer/RulesText/Rounds2.text %= GameState.quizOptions.win_questions
-		$preQuiz/preSessionOrganizer/RulesText/Rounds.show()
-		$preQuiz/preSessionOrganizer/RulesText/Rounds2.show()
-		pass
-	elif GameState.quizOptions.win_con_int == 1: # 1 : First to answer x questions correctly
-		$preQuiz/preSessionOrganizer/RulesText/Answers.text %= GameState.quizOptions.win_questions
-		$preQuiz/preSessionOrganizer/RulesText/Answers2.text %= GameState.quizOptions.win_questions
-		$preQuiz/preSessionOrganizer/RulesText/Answers.show()
-		$preQuiz/preSessionOrganizer/RulesText/Answers2.show()
-		pass
-	elif GameState.quizOptions.win_con_int == 2: # 2 : First to reach x points
-		$preQuiz/preSessionOrganizer/RulesText/Score2.text %= GameState.quizOptions.win_points
-		$preQuiz/preSessionOrganizer/RulesText/Score.show()
-		$preQuiz/preSessionOrganizer/RulesText/Score2.show()
-		pass
-	
-	$preQuiz/preSessionOrganizer/RulesText/Timer.text %= GameState.quizOptions.timer
-
-	#$preQuiz.show()
-	#$quizInterface.hide()
-	$ControlSwapper0.play("QuizIntro")
-	
-	pass
-
-## shows the prequiz rules interface and hides the quiz interface
-@rpc("authority", "reliable", "call_local")
-func _hide_prequiz_rules():
-	#controlswapper handles visibility states
-	#$preQuiz.hide()
-	#$quizInterface.show()
-	$ControlSwapper0.play("QuizStart")
-	pass
-
-@rpc("authority", "reliable", "call_local")
-func _animate_question_load_a():
-	$ControlSwapper0.queue("QuestionLoad_A")
-	
-@rpc("authority", "reliable", "call_local")
-func _animate_question_load_b():
-	$ControlSwapper0.queue("QuestionLoad_B")
-	
-@rpc("authority", "reliable", "call_local")
-func _animate_question_unload():
-	$ControlSwapper0.queue("QuestionUnload")
-
-@rpc("authority", "reliable", "call_local")
-func _ui_present_question_multiple_choice():
-	$quizInterface/session_organizer/VerticalAnswerCategories.show()
-	$quizInterface/session_organizer/CenteredAnswerCategories.hide()
-	pass
-
-@rpc("authority", "reliable", "call_local")
-func _ui_present_question_this_that():
-	$quizInterface/session_organizer/CenteredAnswerCategories.show()
-	$quizInterface/session_organizer/VerticalAnswerCategories.hide()
-	$quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat.show()
-	$quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse.hide()
-	pass
-@rpc("authority", "reliable", "call_local")
-func _ui_present_question_true_false():
-	$quizInterface/session_organizer/CenteredAnswerCategories.show()
-	$quizInterface/session_organizer/VerticalAnswerCategories.hide()
-	$quizInterface/session_organizer/CenteredAnswerCategories/TrueOrFalse.show()
-	$quizInterface/session_organizer/CenteredAnswerCategories/ThisOrThat.hide()
-	pass
-#endregion
-
-#region RPC functions called by clients to communicate with the server
-##RPC: called by clients on the server whenever a player provides input
-@rpc("any_peer", "reliable")
-func _player_guess(playerId, guess):
-	# proccess answer then send updated result to players, don't accept input during pre and post question time
-	if multiplayer.is_server() && flag_accept_input:
-		if flag_pre_quiz_rules:
-			if !GameState._player_has_guessed(playerId):
-				GameState._player_guess(playerId, guess, ui_countdown_timer.get_time_left())
-				players_answered += 1
-				if players_answered >= GameState.PlayerCount:
-					GameState._reset_guesses()
-					_hide_prequiz_rules.rpc()
-					players_answered = 0
-					#delay so _hide_prequiz_rules has time to play its animation
-					get_tree().create_timer(4.2).timeout.connect(_prequestion_delay_phase)
-					pass
-				else:
-					$ControlSwapper0.play("QuizStandby")
-			return
-		if !ui_countdown_timer.is_stopped():
-			if !GameState._player_has_guessed(playerId):
-				GameState._player_guess(playerId, guess, ui_countdown_timer.get_time_left())
-				players_answered += 1
-				_update_ui_player_pannel_locked.rpc(true, playerId)
-				if players_answered >= GameState.PlayerCount:
-					_postquestion_delay_phase()
-					pass
-			pass
-	pass
-	
-# called by players when they have loaded in
-@rpc("any_peer", "reliable")
-func _player_loaded(_peerId):
-	GameState.PlayersLoaded += 1
-	if GameState.PlayersLoaded == GameState.PlayerCount:
-		_start_quiz_client.rpc()
-		_start_quiz_server()
-		pass
-	pass
-#endregion
-
-#region local functions used by the server and clients
-# if there is a filter enabled, store it as the selected filter, and mark the quiz to use it
-func _select_tags_filter():
-	useTagFilter = false
-	for key in GameState.TagsFilters:
-		if GameState.TagsFilters[key]["selected"] == true:
-			selectedTagsFilter = GameState.TagsFilters[key]
-			useTagFilter = true
-			return
-	
-func _reset_question_rules_visibility():
-	# hide all rules text
-	$preQuiz/preSessionOrganizer/RulesText/Rounds.hide()
-	$preQuiz/preSessionOrganizer/RulesText/Rounds2.hide()
-	$preQuiz/preSessionOrganizer/RulesText/Score.hide()
-	$preQuiz/preSessionOrganizer/RulesText/Score2.hide()
-	$preQuiz/preSessionOrganizer/RulesText/Answers.hide()
-	$preQuiz/preSessionOrganizer/RulesText/Answers2.hide()
-	$preQuiz/preSessionOrganizer/RulesText/Timer.hide()
-	$preQuiz/preSessionOrganizer/RulesText/Timer2.hide()
-	
-	#show default question layout, hide 2 question layout
-	$quizInterface/session_organizer/CenteredAnswerCategories.hide()
-	$quizInterface/session_organizer/VerticalAnswerCategories.show()
-	pass
-	
-func _select_music_track():
-	if GameState.CurrentTheme == "Patriotic Cipher":
-		SoundMaster._play_music_track("msg_theme")
-	elif GameState.CurrentTheme == "Fatal Surprise":
-		SoundMaster._play_music_track("fatal_theme")
-	else:
-		SoundMaster._play_music_track("between")
-
-func _set_theme_specific_graphics():
-	if GameState.CurrentTheme == "Patriotic Cipher":
-		asset_player_pannel_locked = load("res://assets/uiux/session_themes/Patriotic Cipher/label_Cipher_ActivePlayer_locked.tres")
-		asset_player_pannel_default = load("res://assets/uiux/session_themes/Patriotic Cipher/label_Cipher_ActivePlayer_default.tres")
-	elif GameState.CurrentTheme == "Fatal Surprise":
-		asset_player_pannel_locked = load("res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_ActivePlayer_locked.tres")
-		asset_player_pannel_default = load("res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_ActivePlayer_default.tres")
-	else:
-		asset_player_pannel_locked = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Locked.tres")
-		asset_player_pannel_default = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Default.tres")
-
-func _escape_game_menu():
-	# back out of the submenu to the options menu
-	if flag_in_options_submenu:
-		$pauseScreen/pauseCase/pauseOptions.show()
-		$pauseScreen/pauseCase/pauseSound.hide()
-		$pauseScreen/pauseCase/pauseDisplay.hide()
-		flag_in_options_submenu = false
-		return
-		
-	if flag_in_options_menu:
-		$pauseScreen/pauseCase/pauseOptions.hide()
-		$pauseScreen/pauseCase/pauseBase.show()
-		_save_sound_settings()
-		_save_display_settings()
-		flag_in_options_menu = false
-		return
-	
-	# if not in any submenus toggle between showing and closing the submenu
-	if !flag_game_menu_shown:
-		$pauseScreen.show()
-		flag_game_menu_shown = true
-	else:
-		$pauseScreen.hide()
-		flag_game_menu_shown = false
-	pass
-
-##used by the server to decide on the order questions will be presented
-func _generate_answer_order():
-	# if question type is "true/false" don't shuffle
-	var questionType = GameState.CurrentQuizQuestions[current_index]["questionType"]
-	if questionType == "True/False":
-		var correct:String = GameState.CurrentQuizQuestions[current_index]["correct"]
-		if correct.to_lower() == "true":
-			local_answer_order = [0, 1, 2, 3]
-		else:
-			local_answer_order = [1, 0, 2, 3]
-		return
-	# "this or that", then only shuffle the first two indices
-	elif questionType == "This/That":
-		var available_indexes_tt = [0,1]
-		local_answer_order = [0, 1, 2, 3]
-		local_answer_order[0] = available_indexes_tt.pop_at(randi() % available_indexes_tt.size())
-		local_answer_order[1] = available_indexes_tt.pop_at(randi() % available_indexes_tt.size())
-		return
-	#default to multiple choice
-	var available_indexes = [0, 1, 2, 3]
-	local_answer_order = [0, 1, 2, 3]
-	local_answer_order[0] = available_indexes.pop_at(randi() % available_indexes.size())
-	local_answer_order[1] = available_indexes.pop_at(randi() % available_indexes.size())
-	local_answer_order[2] = available_indexes.pop_at(randi() % available_indexes.size())
-	local_answer_order[3] = available_indexes.pop_at(randi() % available_indexes.size())
-	
-##uses the given questionIndex to find the corrisponding question in the filtered_question_data array
-##after it will go through the selected questions chances and store them in the chances_set
-func _next_question_data_and_store_chances(questionIndex, selected_index):
-	var nextQuestion = filtered_question_data.pop_at(selected_index)
-	for chance in nextQuestion["chances"]:
-		if !chances_set.has(chance):
-			chances_set[chance] = [questionIndex]
-		else:
-			chances_set[chance].append(questionIndex)
-	return nextQuestion
-
-func _start_quiz_server():
-	# connect the functions for the delay timers
-	ui_prequestion_timer.timeout.connect(_answer_question_phase)
-	ui_countdown_timer.timeout.connect(_postquestion_delay_phase)
-	ui_postquestion_timer.timeout.connect(_end_of_quiz_phase)
-	
-	current_index = 0
-	GameState._reset_players()
-	for i in range(GameState.PlayerCount):
-		var player = GameState.players[GameState.playerNumberToIds[i]]
-		ui_player_names[i].text = player["name"]
-		ui_player_scores[i].text = str(player["score"])
-		ui_players[i].visible = true
-		pass
-	
-	GameState.GameStarted = true
-	_prequiz_rules_phase()
-	pass
-
-func _render_answers_track_correct(current_question, question_order):
-	if GameState.CurrentQuizQuestions[current_index]["questionType"] == "True/False":
-		correct_answer = question_order[0]
-		pass
-	elif GameState.CurrentQuizQuestions[current_index]["questionType"] == "This/That":
-		correct_answer = question_order[0]
-		ui_this_or_that_answers[correct_answer].text = current_question["correct"]
-		ui_this_or_that_answers[question_order[1]].text = current_question["wrong"][0]
-	else:
-		if GameState.CurrentTheme == "Fatal Surprise":
-			_apply_scew_to_fatal_answers()
-		correct_answer = question_order[0]
-		ui_multiple_choice_answers[correct_answer].text = current_question["correct"]
-		ui_multiple_choice_answers[question_order[1]].text = current_question["wrong"][0]
-		ui_multiple_choice_answers[question_order[2]].text = current_question["wrong"][1]
-		ui_multiple_choice_answers[question_order[3]].text = current_question["wrong"][2]
-
-func _apply_scew_to_fatal_answers():
-	var current_question = GameState.CurrentQuizQuestions[current_index]
+func _ui_apply_scew_to_fatal_answers():
 	var average_answer_length = 0
-	average_answer_length += current_question["correct"].length()
-	average_answer_length += current_question["wrong"][0].length()
-	average_answer_length += current_question["wrong"][1].length()
-	average_answer_length += current_question["wrong"][2].length()
+	average_answer_length += question_answers[0].length()
+	average_answer_length += question_answers[1].length()
+	average_answer_length += question_answers[2].length()
+	average_answer_length += question_answers[3].length()
 	average_answer_length /= 4
 	
 	var scew_modifier = float(max(average_answer_length - 25, 0)) * 0.002
@@ -826,262 +955,243 @@ func _apply_scew_to_fatal_answers():
 	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4.add_theme_stylebox_override("normal", surprize_styleBs_a4[1])
 	$quizInterface/session_organizer/VerticalAnswerCategories/MultipleChoice/answer_pair4/a4.add_theme_stylebox_override("pressed", surprize_styleBs_a4[2])
 
+func _ui_ani_update_player_statuses(statuses):
+	for n in range(GameState._player_count()):
+		if statuses[n][0]: # status_a
+			get_node("ControlSwapper%s" % n).queue("p%sStatus_SkipShow" % (n + 1))
+		if statuses[n][1]: # status_b
+			get_node("ControlSwapper%s" % n).queue("p%sStatus_WrongShow" % (n + 1))
+		if statuses[n][2]: # status_c
+			get_node("ControlSwapper%s" % n).queue("p%sStatus_RightShow" % (n + 1))
 
-## starts the pre_quiz_rules timer, this phase displays the rules for 1 minute, or until input is recived from all players
-func _prequiz_rules_phase():
-	flag_accept_input = true
-	flag_pre_quiz_rules = true
-	_display_prequiz_rules.rpc()
-	pass
+## called by the server to reset all player statuses to be hidden
+func _ui_ani_reset_player_statuses(statuses):
+	for n in range(GameState._player_count()):
+		if statuses[n][0]:
+			get_node("ControlSwapper%s" % n).queue("p%sStatus_SkipHide" % (n + 1))
+			statuses[n][0] = false
+		if statuses[n][1]:
+			get_node("ControlSwapper%s" % n).queue("p%sStatus_WrongHide" % (n + 1))
+			statuses[n][1] = false
+		if statuses[n][2]:
+			get_node("ControlSwapper%s" % n).queue("p%sStatus_RightHide" % (n + 1))
+			statuses[n][2] = false
 
-## starts the pre_question timer, and halts accepting answer input from players
-## variable delay to give players time to read the question before allowing them to answer
-func _prequestion_delay_phase():
-	SoundMaster._dynamic_next_track("reading")
-	# add aditional delay depending on how long the question is to read,
-	# currently one extra second per 40 characters ( * 1/40 = 0.025)
-	var current_question = GameState.CurrentQuizQuestions[current_index]
-	@warning_ignore("narrowing_conversion")
-	var extra_seconds : int = roundf(current_question["question"].length() * 0.025)
+func _ui_update_prequiz_rules():
+	# set the rules dependent elements to hide
+	$preQuiz/preSessionOrganizer/RulesText/Rounds.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Rounds2.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Answers.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Answers2.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Score.hide()
+	$preQuiz/preSessionOrganizer/RulesText/Score2.hide()
 	
-	flag_pre_quiz_rules = false
+	var win_con_int = 0
+	var win_questions = 10
+	var win_points = 5000
+	var timer = 30
 	
-	flag_accept_input = false
-	flag_pre_question_time = true
+	if GameState.quizOptions.win_con_int:
+		win_con_int = GameState.quizOptions.win_con_int
+	if GameState.quizOptions.win_questions:
+		win_questions = GameState.quizOptions.win_questions
+	if GameState.quizOptions.win_points:
+		win_points = GameState.quizOptions.win_points
+	if GameState.quizOptions.timer:
+		timer = GameState.quizOptions.timer
 	
-	_animate_question_load_a.rpc()
-	
-	# following the timers experation it will move to the answer_question_phase
-	ui_prequestion_timer.start(pre_question_delay_default + extra_seconds)
-	pass
+	if win_con_int == 0: # 0 : Highest score after x questions
+		if !(GameState.CurrentTheme == "Fatal Surprise"):
+			$preQuiz/preSessionOrganizer/RulesText/Rounds.text = pre_quiz_rules_text_rounds % win_questions
+		$preQuiz/preSessionOrganizer/RulesText/Rounds2.text = pre_quiz_rules_text_rounds2 % win_questions
+		$preQuiz/preSessionOrganizer/RulesText/Rounds.show()
+		$preQuiz/preSessionOrganizer/RulesText/Rounds2.show()
+	elif win_con_int == 1: # 1 : First to answer x questions correctly
+		$preQuiz/preSessionOrganizer/RulesText/Answers.text = pre_quiz_rules_text_answers % win_questions
+		$preQuiz/preSessionOrganizer/RulesText/Answers2.text = pre_quiz_rules_text_answers2 % win_questions
+		$preQuiz/preSessionOrganizer/RulesText/Answers.show()
+		$preQuiz/preSessionOrganizer/RulesText/Answers2.show()
+	elif win_con_int == 2: # 2 : First to reach x points
+		$preQuiz/preSessionOrganizer/RulesText/Score2.text = pre_quiz_rules_text_score2 % win_points
+		$preQuiz/preSessionOrganizer/RulesText/Score.show()
+		$preQuiz/preSessionOrganizer/RulesText/Score2.show()
+	$preQuiz/preSessionOrganizer/RulesText/Timer.text = pre_quiz_rules_text_timer % timer
 
-## starts the timer for the answer phase, answer input is enabled
-## shows the players the possible question answers
-func _answer_question_phase():
-	ui_prequestion_timer.stop()
-	SoundMaster._dynamic_next_track("appear")
+func _on_control_swapper_0_animation_finished(anim_name):
+	if GameState.quiz_phase == QUIZSTATE.preQuiz and "QuizIntro" == anim_name:
+		$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.show()
+		$ControlSwapper0.play("QuizPrompting")
+
+func _ui_ani_quiz_intro():
+	$ControlSwapper0.queue("QuizIntro")
+
+func _ui_ani_quiz_start():
+	$ControlSwapper0.play("QuizStart")
+
+func _ui_ani_question_load_a():
+	$ControlSwapper0.play("QuestionLoad_A")
+
+func _ui_ani_question_load_b():
+	$ControlSwapper0.play("QuestionLoad_B")
+
+func _ui_ani_question_answers_unload():
+	$ControlSwapper0.play_backwards("QuestionLoad_B")
 	
-	flag_accept_input = true
-	flag_pre_question_time = false
+func _ui_ani_question_unload():
+	$ControlSwapper0.play("QuestionUnload")
 	
-	_update_ui_player_pannel_locked_all.rpc(false)
+func _ui_ani_display_end_screen():
+	$ControlSwapper0.play("QuizFinish")
 	
-	_animate_question_load_b.rpc()
+func _ui_setup_end_screen():
+	# order players by score
+	var scoreOrder = []
 	
-	ui_countdown_timer.start(GameState.quizOptions.timer)
-	pass
+	for key in GameState.players:
+		scoreOrder.append(key)
 	
-## strarts the timer for the post question phase, answer input is disabled
-## shows answer explainer
-func _postquestion_delay_phase():
-	ui_countdown_timer.stop()
-	SoundMaster._stop_music_track()
-	SoundMaster._play_sound_effect("locked")
-	SoundMaster._play_music_track("between", true, true, 1.5)
-	flag_accept_input = false
-	flag_post_question_time = true
-	
-	var question_score_value = 1000
-	
-	
-	# determine player correctness
-	var current_question = GameState.CurrentQuizQuestions[current_index]
-	@warning_ignore("narrowing_conversion")
-	var extra_seconds : int = roundf(current_question["explainer"].length() * 0.025)
-	
-	GameState._player_correctness(correct_answer, question_score_value)
-	GameState._add_chance_hits(current_index)
-	GameState._update_profile_statistics(current_question["uuid"])
-	
-	_create_player_statuses_table()
-	_sync_player_statuses.rpc(player_statuses_ui_2d)
-	
-	# unlock all player pannels during postphase
-	_update_ui_player_pannel_locked_all.rpc(false)
-	
-	
-	_show_question_explainer.rpc(true)
-	
-	#sync player scores
-	var scores = {}
-	var last_scores = {}
-	for key in GameState.players.keys():
-		scores[key] = GameState.players[key]["score"]
-		last_scores[key] = GameState.players[key]["last_score"]
-		pass
-	_sync_update_scores_on_clients.rpc(scores, last_scores)
-	
-	ui_postquestion_timer.start(post_question_delay_default + extra_seconds + 1.0)
-	pass
-	
-## end of question phase occurs after each question
-func _end_of_quiz_phase():
-	ui_postquestion_timer.stop()
-	flag_post_question_time = false
-	
-	_show_question_explainer.rpc(false)
-	_reset_player_statuses.rpc()
-	
-	_animate_question_unload.rpc()
-	
-	get_tree().create_timer(1.2).timeout.connect(_next_question)
-	pass
-	
-func _next_question():
-	# set player pannel graphics back to their unlocked state
-	_update_ui_player_pannel_locked_all.rpc(false)
-	current_index += 1
-	if current_index < GameState.CurrentQuizQuestions.size(): # still questions in the quiz
-		_sync_update_question_on_clients.rpc(current_index)
-		players_answered = 0
-		GameState._reset_guesses()
-		loaded = false
-		_generate_answer_order()
-		_sync_answer_order.rpc(local_answer_order)
-		if GameState.CurrentQuizQuestions[current_index]["questionType"] == "True/False":
-			_ui_present_question_true_false.rpc()
-		elif GameState.CurrentQuizQuestions[current_index]["questionType"] == "This/That":
-			_ui_present_question_this_that.rpc()
-		else:
-			_ui_present_question_multiple_choice.rpc()
-		_prequestion_delay_phase()
-	else: # no more questions in the quiz
-		# we need to transcribe profile data into its own array to send using rpc
-		# as rpc will refuse to send typed objects for security reasons
-		var playersData = {}
-		for key in GameState.players.keys():
-			playersData[key] = GameState.players[key].profileData
-			pass
+	# create an index of the player entries thats sorted based on score
+	for n in range(GameState._player_count()):
+		var highestScore = GameState.players[scoreOrder[n]].score
+		var indexOfHighest = n
+		var swapTemp
 		
-		_sync_and_save_client_profile_statistics.rpc(playersData)
-		_show_end_of_quiz_screen.rpc()
-	pass
-	
-## called by quit option on local clients exits the multiplayer session completely
-func _exit_quiz():
-	get_node("quizEnd/PlayerStandingsOrg/1Placer").hide()
-	get_node("quizEnd/PlayerStandingsOrg/2Placer").hide()
-	get_node("quizEnd/PlayerStandingsOrg/3Placer").hide()
-	get_node("quizEnd/PlayerStandingsOrg/4Placer").hide()
-	$quizInterface.show()
-	$quizEnd.hide()
-	QuizEndScreen = false
-	GameState._reset_quiz_state()
-	exit_quiz.emit()
-	queue_free()
-	pass
-
-## uses info in GameState to create a table representing which player statuses should be on
-func _create_player_statuses_table():
-	player_statuses_ui_2d.clear()
-	player_statuses_ui_2d.resize(GameState.PlayerCount)
-	
-	for playerNumber in range(GameState.PlayerCount):
-		var playerCorrectness = GameState.players[GameState.playerNumberToIds[playerNumber]]["correct"]
-		var playerAnswered = GameState.players[GameState.playerNumberToIds[playerNumber]]["hasGuessed"]
+		for i in range(n, GameState._player_count()):
+			if GameState.players[scoreOrder[i]].score > highestScore:
+				highestScore = GameState.players[scoreOrder[i]].score
+				indexOfHighest = i
 		
-		# if player has not answered, they have passed
-		if !playerAnswered:
-			player_statuses_ui_2d[playerNumber] = [true, false, false]
-			continue
+		swapTemp = scoreOrder[n]
+		scoreOrder[n] = scoreOrder[indexOfHighest]
+		scoreOrder[indexOfHighest] = swapTemp
+	
+	#setup ui
+	for n in range(4):
+		var uiNumber = n + 1
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer" % uiNumber).hide()
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/MedalCase/Awards" % uiNumber)["text"] = "N/A"
+	
+	for n in range(GameState._player_count()):
+		var uiNum = n + 1
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/Name" % uiNum).text = GameState.players[scoreOrder[n]].name
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/ScoreDisplay/Score" % uiNum).text = "%s" % GameState.players[scoreOrder[n]].score
 		
-		# if player's answer is correct
-		if playerCorrectness:
-			player_statuses_ui_2d[playerNumber] = [false, false, true]
-			continue
-		# if player's answer is wrong
-		else:
-			player_statuses_ui_2d[playerNumber] = [false, true, false]
-			continue
-	
-	pass
-
-func select_option_by_text(option_button: OptionButton, target_text: String) -> void:
-	for i in range(option_button.item_count):
-		if option_button.get_item_text(i) == str(target_text):
-			option_button.select(i)
-			return
-	print("Warning: Text not found in OptionButton:", target_text)
-	
-
-# depends on the globabal variables
-#var rollup_count
-func _local_score_rollup():
-	var rollup_max = 10
-	var t = float(rollup_count) / float(rollup_max)
-	
-	if rollup_count <= 0:
-		for i in range(GameState.PlayerCount):
-			ui_player_scores[i].text = str(GameState.players[GameState.playerNumberToIds[i]]["score"])
-	else:
-		for i in range(GameState.PlayerCount):
-			var current_score = GameState.players[GameState.playerNumberToIds[i]]["score"]
-			var last_score = GameState.players[GameState.playerNumberToIds[i]]["last_score"]
-		
-			ui_player_scores[i].text = str(current_score + (last_score - current_score) * t)
-			rollup_count -= 1
-		get_tree().create_timer(0.025).timeout.connect(_local_score_rollup)
+		var chanceStr = ""
+		for chance_name in GameState.players[scoreOrder[n]].chance_names:
+			chanceStr += "%s, " % chance_name
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer/MedalCase/Awards" % uiNum)["text"] = chanceStr
+		get_node("quizEnd/PlayerStandingsOrg/%sPlacer" % uiNum).show()
 #endregion
 
-#region functions that translate the timers into minutes and seconds for the ui
-func pre_question_clock():
+#region timers
+#===================================================
+func _get_timer_reading(quiz_phase):
+	match quiz_phase:
+		QUIZSTATE.preQuestion:
+			return clock_pre_question()
+		QUIZSTATE.question:
+			return clock_countdown()
+		QUIZSTATE.postQuestion:
+			return clock_post_question()
+		_:
+			return [0,0]
+
+func clock_pre_question():
 	var time_left = ui_prequestion_timer.get_time_left()
 	var minute = floor(time_left / 60)
 	var second = int(time_left) % 60
 	return [minute, second]
 	
-func post_question_clock():
-	var time_left = ui_postquestion_timer.get_time_left()
+func clock_countdown():
+	var time_left = ui_countdown_timer.get_time_left()
 	var minute = floor(time_left / 60)
 	var second = int(time_left) % 60
 	return [minute, second]
 
+func clock_post_question():
+	var time_left = ui_postquestion_timer.get_time_left()
+	var minute = floor(time_left / 60)
+	var second = int(time_left) % 60
+	return [minute, second]
+	
 func dynamic_music_answers(percentage: float):
 	if SoundMaster.next_track == "appear" and percentage <= .5:
 		SoundMaster._dynamic_next_track("midway")
 	elif SoundMaster.next_track == "midway" and percentage <=.25:
 		SoundMaster._dynamic_next_track("outta_time")
-
-func countdown_clock():
-	var time_left = ui_countdown_timer.get_time_left()
-	dynamic_music_answers(time_left / GameState.quizOptions.timer)
-	var minute = floor(time_left / 60)
-	var second = int(time_left) % 60
-	return [minute, second]
-
 #endregion
 
-func _load_question_refresh_scores():
-	if !loaded:
-		for i in range(4):
-			get_node("quizInterface/players_region/activePlayer%s" % (i + 1)).hide()
-		ui_questions_index.text = str(current_index + 1)
-		var current_question = GameState.CurrentQuizQuestions[current_index]
-		ui_questions_name.text = current_question["name"]
-		ui_questions_body.text = current_question["question"]
-		ui_post_question.text = current_question["explainer"]
-		_render_answers_track_correct(current_question, local_answer_order)
-		for i in range(GameState.PlayerCount):
-			get_node("quizInterface/players_region/activePlayer%s" % (i + 1)).show()
-			ui_player_scores[i].text = str(GameState.players[GameState.playerNumberToIds[i]]["score"])
-		loaded = true
+#region setup for quiz chances and questions
+#===========================================================
+func _host_setup_quiz():
+	_select_question_filter()
+	_io_load_master_questions()
+	_generate_filtered_question_set()
+	_io_load_master_chances()
+	
+	QUIZ_LENGTH = GameState.quizOptions.win_questions
+	var question_count = _select_quiz_questions(QUIZ_LENGTH)
+	if question_count < QUIZ_LENGTH:
+		QUIZ_LENGTH = question_count
+		print("!Info: fewer than max questions picked, only %s questions in this quiz" % question_count)
+	
+	if QUIZ_LENGTH <= 0:
+		print("!Info: a quiz was generated with no questions, this was likely caused by a question filter. \n Disabling filter and generating a new quiz.")
+		use_question_filter = false
+		_generate_filtered_question_set()
+		QUIZ_LENGTH = 10
+		question_count = _select_quiz_questions(QUIZ_LENGTH)
+		QUIZ_LENGTH = question_count
+		if question_count == 0:
+			print("!!ERROR: generated a quiz with no questions when using unfiltered question data.\n Its possible question_data.json is corrupted.")
+			_server_ending_quiz.rpc()
+	
+	
+	for key in GameState.players:
+		GameState.players[key].answer_record = []
+		GameState.players[key].answer_record.resize(QUIZ_LENGTH)
+		for i in range(GameState.players[key].answer_record.size()):
+			GameState.players[key].answer_record[i] = false
+	
+	_clean_questions_data()
+	_sync_game_rules.rpc(
+		GameState.quizOptions.timer, 
+		"Highest score after 10 questions", 
+		0,  # cut feature, always use "highest score after x question"
+		10, # 10 questions
+		GameState.quizOptions.win_points)
+	_player_load_quiz.rpc()
+	_player_setup_done()
+	if DEBUG:
+		print("!!DEBUG: Awards possible for this question set:")
+		var i = 0
+		for key in GameState.chances:
+			print("%s: name: %s, uuid: %s" % [i, GameState.chances[key]["name"], key])
+			i += 1
 
-#region functions used for setting up initial quiz state
-func _load_quiz_data():
-	_load_master_questions()
-	_load_master_chances()
-	pass
+func _client_setup_quiz():
+	_io_load_master_chances()
+	_player_setup_done.rpc_id(1)
+	
+func _select_question_filter():
+	use_question_filter = false
+	for key in GameState.TagsFilters:
+		if GameState.TagsFilters[key]["selected"] == true:
+			question_filter = GameState.TagsFilters[key]
+			use_question_filter = true
+			return
 
-func _load_master_questions():
+func _io_load_master_questions():
 	var file = FileAccess.open("res://data/question_data.json", FileAccess.READ)
 	if file:
 		master_question_data = JSON.parse_string(file.get_as_text())
 		file.close()
-	
-	if useTagFilter:
+
+func _generate_filtered_question_set():
+	if use_question_filter:
 		for question in master_question_data:
 			var tagMatch = false
-			for tag in selectedTagsFilter["tags"]:
+			for tag in question_filter["tags"]:
 				var escape = false
 				for question_tag in question["tags"]:
 					if tag in question_tag.to_lower():
@@ -1090,303 +1200,130 @@ func _load_master_questions():
 						break
 				if escape:
 					break
-
+			
 			var a = tagMatch
-			var b = selectedTagsFilter["blacklist"]
+			var b = question_filter["blacklist"]
 			# need to use XOR operator for whether or not to accept the question into the set
 			if  (a or b) and not (a and b):
 				filtered_question_data.append(question)
-	else:
+	else: # otherwise store the complete list
 		for question in master_question_data:
 			filtered_question_data.append(question)
-	
-func _load_master_chances():
+
+func _clean_questions_data():
+	master_question_data = []
+	filtered_question_data = []
+
+func _io_load_master_chances():
 	var file = FileAccess.open("res://data/chance_data.json", FileAccess.READ)
 	if file:
 		master_chances_data = JSON.parse_string(file.get_as_text())
 		file.close()
-	pass
 
-func _clean_master_questions():
-	master_question_data = []
-	filtered_question_data = []
-	pass
-	
-func _clean_chance_set_and_master():
-	chances_set = {}
+func _clean_chance_data():
 	master_chances_data = []
-	pass
-	
-func _select_quiz_questions(quizSize):
-	GameState.CurrentQuizQuestions = []
+
+func _select_quiz_questions(quizSize) -> int:
+	var quiz_size = 0
 	for i in range(quizSize):
+		# return early if we run out of questions,
 		if filtered_question_data.size() == 0:
-			break
-		GameState.CurrentQuizQuestions.append(_next_question_data_and_store_chances(i, randi() % filtered_question_data.size()))
-	pass
-	
-func _prepare_quiz_chances(chance_count):
-	GameState.CurrentChances = []
-	for i in range(chance_count):
-		if chances_set.keys().size() == 0:
-			break
-		_next_chance()
+			return quiz_size
+		
+		var question = filtered_question_data.pop_at(randi() % filtered_question_data.size())
+		quiz_questions_list.append(question)
+		for key in question["chances"]:
+			if GameState.chances.has(key):
+				GameState.chances[key].related_questions.append(question["uuid"])
+			else:
+				var chance = _get_chance_data_from_uuid(key)
+				GameState.chances[key] = GameState.Chance.create(chance["name"], chance["correct"], chance["bonus"], key)
+				GameState.chances[key].related_questions.append(question["uuid"])
+		quiz_size += 1
+	return quiz_size
 
-func _next_chance():
-	var next_chance = chances_set.keys()[randi() % chances_set.keys().size()]
+func _get_chance_data_from_uuid(chance_uuid) -> Dictionary:
 	for chance in master_chances_data:
-		if chance["uuid"] == next_chance:
-			GameState._add_chance(chance["name"], chance["description"], chance["type"], chance["uuid"], chance["correct"], chances_set[next_chance], chance["bonus"])
-			chances_set.erase(next_chance)
-			return
-		
-func _store_quiz_questions_locally():
-	for question in GameState.CurrentQuizQuestions:
-		local_question_set_uuids.append(question["uuid"])
-		pass
-	pass
+		if chance["uuid"] == chance_uuid:
+			return chance
+	return {}
 #endregion
 
-#region Debug Functions used for testing
-func _debug_score_order_testing():
-	var scoreOrder = ["3", "4", "1", "2"]
-	var scores = {"1":400, "2":500, "3":600, "4":700}
-	
-	print("!Debug Function Start: _debug_score_order_testing")
-	for test in scoreOrder:
-		print(test)
-		
-	for n in range(4):
-		var highestScore = scores[scoreOrder[n]]
-		var indexOfHighest = n
-		var swapTemp
-		
-		for i in range(n, 4):
-			if scores[scoreOrder[i]] > highestScore:
-				highestScore = scores[scoreOrder[i]]
-				indexOfHighest = i
-				pass
-			pass
-		
-		swapTemp = scoreOrder[n]
-		scoreOrder[n] = scoreOrder[indexOfHighest]
-		scoreOrder[indexOfHighest] = swapTemp
-		pass
-		
-	print("!Debug Function End")
-	for test in scoreOrder:
-		print(test)
-	
-	pass
+#region setup for graphics and sound
+#===================================================
+func _select_music_track():
+	if GameState.CurrentTheme == "Patriotic Cipher":
+		SoundMaster._play_music_track("msg_theme")
+	elif GameState.CurrentTheme == "Fatal Surprise":
+		SoundMaster._play_music_track("fatal_theme")
+	else:
+		SoundMaster._play_music_track("default_theme")
 
-func _debug_advance_to_next_question():
-	print("!Debug: Skipping question")
-	flag_pre_quiz_rules = false
-	flag_pre_question_time = false
-	flag_post_question_time = false
-	flag_accept_input = false
-	
-	_create_player_statuses_table()
-	_show_question_explainer.rpc(false)
-	_reset_player_statuses.rpc()
-	
-	_next_question()
-	pass
-
+func _set_theme_specific_information():
+	if GameState.CurrentTheme == "Patriotic Cipher":
+		pre_quiz_rules_text_rounds = "The player with the highest score after %s rounds wins."
+		pre_quiz_rules_text_rounds2 = "The quiz will end after %s round(s)"
+		pre_quiz_rules_text_answers = "The first agent to correctly answer %s questions wins."
+		pre_quiz_rules_text_answers2 = "The quiz will end when an agent correctly answers %s questions"
+		pre_quiz_rules_text_score = "The first agent to reach the high score wins."
+		pre_quiz_rules_text_score2 = "The quiz will end when an agent achieves a score of %s"
+		pre_quiz_rules_text_timer = "Agents will have %s seconds to answer each question."
+		
+		asset_player_pannel_locked = load("res://assets/uiux/session_themes/Patriotic Cipher/label_Cipher_ActivePlayer_locked.tres")
+		asset_player_pannel_default = load("res://assets/uiux/session_themes/Patriotic Cipher/label_Cipher_ActivePlayer_default.tres")
+	elif GameState.CurrentTheme == "Fatal Surprise":
+		pre_quiz_rules_text_rounds = "There's an exact number of rounds in this one, whoever has the highest score at the end takes it all."
+		pre_quiz_rules_text_rounds2 = "This exam lasts for %s round(s), don't let it slip through your fingers."
+		pre_quiz_rules_text_answers = "Score doesn't apply in this run, so there's no penalty for wrong answers."
+		pre_quiz_rules_text_answers2 = "Once somebody answers %s questions correctly, they get crowned winner. You like crowns?"
+		pre_quiz_rules_text_score = "There's a target score we need you to hit before the exam ends -"
+		pre_quiz_rules_text_score2 = "The first person to reach %s points wins, that's gotta be you."
+		pre_quiz_rules_text_timer = "Members only get %s seconds per question."
+		
+		asset_player_pannel_locked = load("res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_ActivePlayer_locked.tres")
+		asset_player_pannel_default = load("res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_ActivePlayer_default.tres")
+	else:
+		pre_quiz_rules_text_rounds = "The player with the highest score after %s rounds wins."
+		pre_quiz_rules_text_rounds2 = "The quiz will end after %s round(s)"
+		pre_quiz_rules_text_answers = "The first player to correctly answer %s questions wins."
+		pre_quiz_rules_text_answers2 = "The quiz will end when a player correctly answers %s questions"
+		pre_quiz_rules_text_score = "The first player to reach the high score wins."
+		pre_quiz_rules_text_score2 = "The quiz will end when a player achieves a score of %s"
+		pre_quiz_rules_text_timer = "Players will have %s seconds to answer each question."
+		
+		asset_player_pannel_locked = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Locked.tres")
+		asset_player_pannel_default = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Default.tres")
 #endregion
 
-#region buttons for inputing question answers via ui
-#region button answer 1
+#region answer buttons
+#===================================================
 func _on_a_1_button_down():
 	# TODO: insert sound effect for button selection
 	pass
-
 func _on_a_1_button_up():
-	# ignore input until the quiz starts
-	var button_value = 0
-	if !GameState.GameStarted:
-		return
-	if multiplayer.is_server(): # call locally if server
-		_player_guess(1, button_value)
-		pass
-	else: #send guess to server
-		_player_guess.rpc_id(1, multiplayer.get_unique_id(), button_value)
-		pass
-	pass
-#endregion
-
-#region button answer 2
+	_player_guess(0)
+	
 func _on_a_2_button_down():
 	# TODO: insert sound effect for button selection
 	pass
-
 func _on_a_2_button_up():
-	# ignore input until the quiz starts
-	var button_value = 1
-	if !GameState.GameStarted:
-		return
-	if multiplayer.is_server(): # call locally if server
-		_player_guess(1, button_value)
-		pass
-	else: #send guess to server
-		_player_guess.rpc_id(1, multiplayer.get_unique_id(), button_value)
-		pass
-	pass
-#endregion
+	_player_guess(1)
 
-#region button answer 3
 func _on_a_3_button_down():
 	# TODO: insert sound effect for button selection
 	pass
-
 func _on_a_3_button_up():
-	# ignore input until the quiz starts
-	var button_value = 2
-	if !GameState.GameStarted:
-		return
-	if multiplayer.is_server(): # call locally if server
-		_player_guess(1, button_value)
-		pass
-	else: #send guess to server
-		_player_guess.rpc_id(1, multiplayer.get_unique_id(), button_value)
-		pass
-	pass
-#endregion
-
-#region button answer 4
+	_player_guess(2)
+	
 func _on_a_4_button_down():
 	# TODO: insert sound effect for button selection
 	pass
-
 func _on_a_4_button_up():
-	# ignore input until the quiz starts
-	var button_value = 3
-	if !GameState.GameStarted:
-		return
-	if multiplayer.is_server(): # call locally if server
-		_player_guess(1, button_value)
-		pass
-	else: #send guess to server
-		_player_guess.rpc_id(1, multiplayer.get_unique_id(), button_value)
-		pass
-	pass
+	_player_guess(3)
 #endregion
 
-#endregion
-
-#region pause menu functionality 
-func _on_resume_button_mouse_entered():
-	$SFX_Hover1.play()
-func _on_resume_button_focus_entered():
-	$SFX_Hover1.play()
-func _on_resume_button_button_down():
-	$SFX_Press.play()
-## returns to the game
-func _on_resume_button_button_up():
-	$pauseScreen.hide()
-	flag_game_menu_shown = false
-	flag_in_options_submenu = false
-
-func _on_options_button_focus_entered():
-	$SFX_Hover2.play()
-func _on_options_button_mouse_entered():
-	$SFX_Hover2.play()
-func _on_options_button_button_down():
-	$SFX_Press.play()
-## opens the options menu
-func _on_options_button_button_up():
-	$pauseScreen/pauseCase/pauseBase.hide()
-	$pauseScreen/pauseCase/pauseOptions.show()
-	flag_in_options_menu = true
-	flag_in_options_submenu = false
-
-func _on_quit_button_focus_entered():
-	$SFX_Hover3.play()
-func _on_quit_button_mouse_entered():
-	$SFX_Hover3.play()
-func _on_quit_button_button_down():
-	$SFX_Press.play()
-## returns to main menu if client, returns everyone to multiplayer lobby if host
-func _on_quit_button_button_up():
-	# if server exit to multiplayer lobby
-	if multiplayer.is_server():
-		_end_quiz.rpc()
-		pass
-	# if client, exit multiplayer session and return to main menu
-	else: 
-		_exit_quiz()
-		pass
-		
-	pass
-
-func _on_options_back_button_focus_entered():
-	$SFX_Hover3.play()
-func _on_options_back_button_mouse_entered():
-	$SFX_Hover3.play()
-func _on_options_back_button_button_down():
-	$SFX_Press.play()
-## backs out of options menu to pause menu
-func _on_options_back_button_button_up():
-	$pauseScreen/pauseCase/pauseOptions.hide()
-	$pauseScreen/pauseCase/pauseBase.show()
-	flag_in_options_menu = false
-	flag_in_options_submenu = false
-
-func _on_sound_button_focus_entered():
-	$SFX_Hover1.play()
-func _on_sound_button_mouse_entered():
-	$SFX_Hover1.play()
-func _on_sound_button_button_down():
-	$SFX_Press.play()
-## opens the sound options submenu
-func _on_sound_button_button_up():
-	$pauseScreen/pauseCase/pauseOptions.hide()
-	$pauseScreen/pauseCase/pauseSound.show()
-	flag_in_options_menu = true
-	flag_in_options_submenu = true
-
-func _on_sound_back_button_focus_entered():
-	$SFX_Hover3.play()
-func _on_sound_back_button_mouse_entered():
-	$SFX_Hover3.play()
-func _on_sound_back_button_button_down():
-	$SFX_Press.play()
-## closes the sound options submenu
-func _on_sound_back_button_button_up():
-	$pauseScreen/pauseCase/pauseSound.hide()
-	$pauseScreen/pauseCase/pauseOptions.show()
-	flag_in_options_menu = true
-	flag_in_options_submenu = false
-	_save_sound_settings()
-
-func _on_display_button_focus_entered():
-	$SFX_Hover2.play()
-func _on_display_button_mouse_entered():
-	$SFX_Hover2.play()
-func _on_display_button_button_down():
-	$SFX_Press.play()
-## opens the display options submenu
-func _on_display_button_button_up():
-	$pauseScreen/pauseCase/pauseOptions.hide()
-	$pauseScreen/pauseCase/pauseDisplay.show()
-	flag_in_options_menu = true
-	flag_in_options_submenu = true
-
-func _on_display_back_button_focus_entered():
-	$SFX_Hover3.play()
-func _on_display_back_button_mouse_entered():
-	$SFX_Hover3.play()
-func _on_display_back_button_button_down():
-	$SFX_Press.play()
-## closes the display options submenu
-func _on_display_back_button_button_up():
-	$pauseScreen/pauseCase/pauseDisplay.hide()
-	$pauseScreen/pauseCase/pauseOptions.show()
-	flag_in_options_menu = true
-	flag_in_options_submenu = false
-	_save_display_settings()
-#endregion
-
+#region pause menu
+#===================================================
 func _load_config_settings():
 	var err = config.load(config_path)
 	if err == OK:
@@ -1405,10 +1342,146 @@ func _load_config_settings():
 		# APPLY
 		_apply_audio_settings(sound_device, master, music, sfx, voiceover)
 		_apply_video_settings(display_type, resolution, input_display, theme)
+	else:
+		print("!!ERROR: load config settings failed Reason: [%s]" % err)
 
-#region Sound Options
-#INFO: volume sliders are handled by MasterVolume.gd script
+func select_option_by_text(option_button: OptionButton, target_text: String) -> void:
+	for i in range(option_button.item_count):
+		if option_button.get_item_text(i) == str(target_text):
+			option_button.select(i)
+			return
+	print("Warning: Text not found in OptionButton:", target_text)
+	
+func _client_disconnect_from_server():
+	GameState._reset_quiz_state()
+	sig_exit_quiz.emit()
+	queue_free()
 
+## when called backs out to the previous menu, if in no menu opens the "pause" menu
+func _escape_game_menu():
+	match menu_location:
+		MENU.noMenu:
+			menu_location = MENU.pauseMenu
+		MENU.pauseMenu:
+			menu_location = MENU.noMenu
+		MENU.optionsMenu:
+			menu_location = MENU.pauseMenu
+		MENU.subMenuSound:
+			menu_location = MENU.optionsMenu
+			_save_sound_settings()
+		MENU.subMenuDisplay:
+			menu_location = MENU.optionsMenu
+			_save_display_settings()
+	_pause_menu_update_graphics()
+
+func _pause_menu_update_graphics():
+	match menu_location:
+		MENU.noMenu:
+			$pauseScreen.hide()
+		MENU.pauseMenu:
+			$pauseScreen.show()
+			$pauseScreen/pauseCase/pauseBase.show()
+			$pauseScreen/pauseCase/pauseOptions.hide()
+			$pauseScreen/pauseCase/pauseSound.hide()
+			$pauseScreen/pauseCase/pauseDisplay.hide()
+		MENU.optionsMenu:
+			$pauseScreen.show()
+			$pauseScreen/pauseCase/pauseBase.hide()
+			$pauseScreen/pauseCase/pauseOptions.show()
+			$pauseScreen/pauseCase/pauseSound.hide()
+			$pauseScreen/pauseCase/pauseDisplay.hide()
+		MENU.subMenuSound:
+			$pauseScreen.show()
+			$pauseScreen/pauseCase/pauseBase.hide()
+			$pauseScreen/pauseCase/pauseOptions.hide()
+			$pauseScreen/pauseCase/pauseSound.show()
+			$pauseScreen/pauseCase/pauseDisplay.hide()
+		MENU.subMenuDisplay:
+			$pauseScreen.show()
+			$pauseScreen/pauseCase/pauseBase.hide()
+			$pauseScreen/pauseCase/pauseOptions.hide()
+			$pauseScreen/pauseCase/pauseSound.hide()
+			$pauseScreen/pauseCase/pauseDisplay.show()
+
+func _on_resume_button_mouse_entered():
+	$SFX_Hover1.play()
+func _on_resume_button_focus_entered():
+	$SFX_Hover1.play()
+func _on_resume_button_button_down():
+	$SFX_Press.play()
+func _on_resume_button_button_up():
+	_escape_game_menu()
+
+func _on_options_button_focus_entered():
+	$SFX_Hover2.play()
+func _on_options_button_mouse_entered():
+	$SFX_Hover2.play()
+func _on_options_button_button_down():
+	$SFX_Press.play()
+func _on_options_button_button_up():
+	menu_location = MENU.optionsMenu
+	_pause_menu_update_graphics()
+
+func _on_quit_button_focus_entered():
+	$SFX_Hover3.play()
+func _on_quit_button_mouse_entered():
+	$SFX_Hover3.play()
+func _on_quit_button_button_down():
+	$SFX_Press.play()
+func _on_quit_button_button_up():
+	if multiplayer.is_server():
+		_server_ending_quiz.rpc()
+	else: 
+		_client_disconnect_from_server()
+
+func _on_options_back_button_focus_entered():
+	$SFX_Hover3.play()
+func _on_options_back_button_mouse_entered():
+	$SFX_Hover3.play()
+func _on_options_back_button_button_down():
+	$SFX_Press.play()
+func _on_options_back_button_button_up():
+	_escape_game_menu()
+
+func _on_sound_button_focus_entered():
+	$SFX_Hover1.play()
+func _on_sound_button_mouse_entered():
+	$SFX_Hover1.play()
+func _on_sound_button_button_down():
+	$SFX_Press.play()
+func _on_sound_button_button_up():
+	menu_location = MENU.subMenuSound
+	_pause_menu_update_graphics()
+
+func _on_sound_back_button_focus_entered():
+	$SFX_Hover3.play()
+func _on_sound_back_button_mouse_entered():
+	$SFX_Hover3.play()
+func _on_sound_back_button_button_down():
+	$SFX_Press.play()
+func _on_sound_back_button_button_up():
+	_escape_game_menu()
+
+func _on_display_button_focus_entered():
+	$SFX_Hover2.play()
+func _on_display_button_mouse_entered():
+	$SFX_Hover2.play()
+func _on_display_button_button_down():
+	$SFX_Press.play()
+func _on_display_button_button_up():
+	menu_location = MENU.subMenuDisplay
+	_pause_menu_update_graphics()
+
+func _on_display_back_button_focus_entered():
+	$SFX_Hover3.play()
+func _on_display_back_button_mouse_entered():
+	$SFX_Hover3.play()
+func _on_display_back_button_button_down():
+	$SFX_Press.play()
+func _on_display_back_button_button_up():
+	_escape_game_menu()
+
+## Sound Options
 func _on_sound_device_options_item_selected(index: int) -> void:
 	AudioServer.set_output_device(%SoundDeviceOptions.get_item_text(index))
 
@@ -1432,10 +1505,8 @@ func _save_sound_settings():
 	config.set_value("audio", "sfx", %VolumeControl3.get_value())
 	config.set_value("audio", "voiceover", %VolumeControl4.get_value())
 	config.save(config_path)
-#endregion
 
-#region Display Options
-
+## Display Options
 func _apply_video_settings(display_type: int, resolution: int, input_display: String, _theme: String):
 	%DisplayList.select(display_type)
 	%ResolutionsList.select(resolution)
@@ -1468,11 +1539,32 @@ const resolution_options = [
 	 Vector2(1920, 1080),
 	 Vector2(2560, 1440)
 ]
+
 func _on_resolutions_list_item_selected(index: int) -> void:
 	DisplayServer.window_set_size(resolution_options[index])
 #endregion
 
+#region debug and testing functions
+#===================================================
+func _DEBUG_next_question():
+	ui_prequestion_timer.stop()
+	ui_countdown_timer.stop()
+	ui_postquestion_timer.stop()
+	
+	if quiz_question_index < QUIZ_LENGTH - 1:
+		_phase_next_question()
+	else:
+		_phase_end_screen()
+#endregion
 
-func _on_control_swapper_0_animation_finished(anim_name):
-	if "QuizIntro" == anim_name:
-		$ControlSwapper0.play("QuizPrompting")
+func _on_return_to_lobby_button_focus_entered():
+	$SFX_Hover3.play()
+func _on_return_to_lobby_button_mouse_entered():
+	$SFX_Hover3.play()
+func _on_return_to_lobby_button_button_down():
+	$SFX_Press.play()
+func _on_return_to_lobby_button_button_up():
+	if multiplayer.is_server():
+		_server_ending_quiz.rpc()
+	else: 
+		_client_disconnect_from_server()

@@ -15,6 +15,8 @@ class Profile:
 	var questions_seen: Dictionary
 	var questions_chances: Dictionary
 	
+	var games_played: int
+	
 	static func create(i_name: String, i_id: int, i_score_low: int, i_score_high: int)-> Profile:
 		var profile = Profile.new()
 		profile.name = i_name
@@ -28,6 +30,7 @@ class Profile:
 		profile.questions_seen = {}
 		profile.questions_chances = {}
 		
+		profile.games_played = 0
 		return profile
 
 	static func copy(old_profile: Profile) -> Profile:
@@ -43,6 +46,7 @@ class Profile:
 		profile.questions_seen = old_profile.questions_seen
 		profile.questions_chances = old_profile.questions_chances
 		
+		profile.games_played = old_profile.games_played
 		return profile
 
 	static func from_raw(raw_data: Dictionary) -> Profile:
@@ -58,6 +62,7 @@ class Profile:
 		profile.questions_seen = raw_data["questions_seen"]
 		profile.questions_chances = raw_data["questions_chances"]
 		
+		profile.games_played = raw_data["games_played"]
 		return profile
 
 	func raw() -> Dictionary:
@@ -72,6 +77,8 @@ class Profile:
 		profile["questions_answered"] = questions_answered
 		profile["questions_seen"] = questions_seen
 		profile["questions_chances"] = questions_chances
+		
+		profile["games_played"] = games_played
 		
 		return profile
 
@@ -179,6 +186,8 @@ func _update_profile_with_quiz_data(p_name: String, q_score: int, question_uuids
 		
 		new_profile.append_answers_answered_seen(question_uuids, question_answers)
 		new_profile.append_answers_chances(chances_scored)
+		
+		new_profile.games_played += 1
 		
 		profiles[new_profile.name] = new_profile
 		
@@ -309,7 +318,12 @@ func _IO_read_profiles():
 		if !"unlocked_themes" in profiles_raw[key]:
 			profiles_raw[key]["unlocked_themes"] = []
 			saveProfilesChanges = true
-	
+		
+		# add new games played
+		if !"games_played" in profiles_raw[key]:
+			profiles_raw[key]["games_played"] = 0
+			saveProfilesChanges = true
+		
 		profiles[key] = Profile.from_raw(profiles_raw[key])
 	
 	if saveProfilesChanges:

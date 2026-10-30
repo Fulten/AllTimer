@@ -861,8 +861,6 @@ func _ui_update_scores():
 func _ui_local_score_rollup():
 	var t = float(rollup_count) / float(ROLLUP_MAX)
 	
-	
-	
 	if rollup_count <= 0:
 		for i in range(GameState._player_count()):
 			ui_player_scores[i].text = str(GameState.players[GameState.playerCardOrder[i]]["score"])

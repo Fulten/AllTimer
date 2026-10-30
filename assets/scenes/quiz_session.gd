@@ -861,15 +861,25 @@ func _ui_update_scores():
 func _ui_local_score_rollup():
 	var t = float(rollup_count) / float(ROLLUP_MAX)
 	
+	
+	
 	if rollup_count <= 0:
 		for i in range(GameState._player_count()):
 			ui_player_scores[i].text = str(GameState.players[GameState.playerCardOrder[i]]["score"])
 	else:
 		for i in range(GameState._player_count()):
-			var current_score = GameState.players[GameState.playerCardOrder[i]]["score"]
-			var last_score = GameState.players[GameState.playerCardOrder[i]]["last_score"]
-			
-			ui_player_scores[i].text = str(current_score + (last_score - current_score) * t)
+			var player = GameState.players[GameState.playerCardOrder[i]]
+			var current_score = player["score"]
+			var last_score = player["last_score"]
+			var negative: bool = current_score - last_score < 0
+			var score_text = "  %s"
+			if rollup_count % 4 <= 1:
+				if negative:
+					score_text = "\\/%s"
+				else:
+					score_text = "/\\%s"
+			score_text = score_text % str(current_score + (last_score - current_score) * t)
+			ui_player_scores[i].text = score_text
 		rollup_count -= 1
 		get_tree().create_timer(0.06).timeout.connect(_ui_local_score_rollup)
 

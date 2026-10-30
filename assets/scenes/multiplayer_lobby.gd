@@ -1,10 +1,10 @@
 extends Control
 
 @onready var ui_mp_peer_display = [
-	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/Peer0,
-	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner1/Peer1,
-	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner2/Peer2,
-	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner3/Peer3]
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase,
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner1,
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner2,
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner3]
 # as multiplayer lobby will be instantiated by the master scene
 # we can use signals to relay actions to the master scene
 signal sig_mp_profile_change
@@ -20,6 +20,9 @@ var IpInputTextNode
 
 var profiles_list_id_to_name = {}
 
+var kick_button_pressed = -1
+var kick_ids = []
+
 func _ready():
 	$StateChangers/LaunchButton.grab_focus()
 	IpInputTextNode = $LobbyOrganizer/Columns/NetworkingColumn/IPField
@@ -29,6 +32,8 @@ func _ready():
 	_init_filter_preset()
 	_init_theme_selector()
 	select_theme_by_text($LobbyOrganizer/Columns/SettingsColumn/ThemeCase/ThemesList, GameState.CurrentTheme)
+	for i in range(4):
+		ui_mp_peer_display[i].hide()
 
 func _process(_delta):
 	pass
@@ -124,16 +129,19 @@ func _init_filter_preset():
 
 func _ui_update_connected_players():
 	for n in range(0, 4):
-		ui_mp_peer_display[n].text = ""
+		ui_mp_peer_display[n].get_node("Peer%s" % n).text = ""
 		ui_mp_peer_display[n].hide()
 	var k = 0
+	kick_ids = []
+	kick_ids.resize(GameState._player_count())
 	for key in GameState.players:
 		if k > 3:
 			print("ERROR: Players array has exceeded size 4")
 			return
 		if GameState.players[key]["active"]:
-			ui_mp_peer_display[k].text = GameState.players[key].name
+			ui_mp_peer_display[k].get_node("Peer%s" % k).text = GameState.players[key].name
 			ui_mp_peer_display[k].show()
+			kick_ids[k] = key
 			k += 1
 
 func _ui_finished_joining():
@@ -169,6 +177,15 @@ func _ui_reset_menu():
 	$LobbyOrganizer/Columns/NetworkingColumn/PeerConnectors/JoinButton.disabled = false
 	$StateChangers/LaunchButton.disabled = true
 	_ui_update_connected_players()
+
+func _ui_show_kick_confirmation():
+	var kick_text = "Kick %s?"
+	var player_name = GameState.players[kick_ids[kick_button_pressed]].name
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer/KickingPeerLabel.text = kick_text % player_name
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer.show()
+	
+func _ui_hide_kick_confirmation():
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer.hide()
 #endregion
 
 #region Ui Signals
@@ -299,48 +316,54 @@ func _on_profiles_list_item_selected(index):
 #endregion
 
 #region UI kickbuttons
-func _on_kick_peer_1_button_down():
-	pass
-func _on_kick_peer_1_pressed():
-	pass
-func _on_kick_peer_1_focus_entered():
-	pass
 func _on_kick_peer_1_mouse_entered():
-	pass
+	$SFX_Hover.play()
+func _on_kick_peer_1_focus_entered():
+	$SFX_Hover.play()
+func _on_kick_peer_1_button_down():
+	$SFX_Press.play()
+func _on_kick_peer_1_pressed():
+	kick_button_pressed = 1
+	_ui_show_kick_confirmation()
 
-func _on_kick_peer_2_button_down():
-	pass
-func _on_kick_peer_2_pressed():
-	pass
-func _on_kick_peer_2_focus_entered():
-	pass
 func _on_kick_peer_2_mouse_entered():
-	pass
+	$SFX_Hover.play()
+func _on_kick_peer_2_focus_entered():
+	$SFX_Hover.play()
+func _on_kick_peer_2_button_down():
+	$SFX_Press.play()
+func _on_kick_peer_2_pressed():
+	kick_button_pressed = 2
+	_ui_show_kick_confirmation()
 
-func _on_kick_peer_3_button_down():
-	pass
-func _on_kick_peer_3_pressed():
-	pass
-func _on_kick_peer_3_focus_entered():
-	pass
 func _on_kick_peer_3_mouse_entered():
-	pass
+	$SFX_Hover.play()
+func _on_kick_peer_3_focus_entered():
+	$SFX_Hover.play()
+func _on_kick_peer_3_button_down():
+	$SFX_Press.play()
+func _on_kick_peer_3_pressed():
+	kick_button_pressed = 3
+	_ui_show_kick_confirmation()
 
-func _on_confirm_kick_button_button_down():
-	pass
-func _on_confirm_kick_button_pressed():
-	pass
-func _on_confirm_kick_button_focus_entered():
-	pass
 func _on_confirm_kick_button_mouse_entered():
-	pass
+	$SFX_Hover.play()
+func _on_confirm_kick_button_focus_entered():
+	$SFX_Hover.play()
+func _on_confirm_kick_button_button_down():
+	$SFX_Press.play()
+func _on_confirm_kick_button_pressed():
+	_kicking_peer(kick_ids[kick_button_pressed])
+	kick_button_pressed = -1
+	_ui_hide_kick_confirmation()
 
-func _on_cancel_kick_button_button_down():
-	pass
-func _on_cancel_kick_button_pressed():
-	pass
-func _on_cancel_kick_button_focus_entered():
-	pass
 func _on_cancel_kick_button_mouse_entered():
-	pass
+	$SFX_Hover.play()
+func _on_cancel_kick_button_focus_entered():
+	$SFX_Hover.play()
+func _on_cancel_kick_button_button_down():
+	$SFX_Press.play()
+func _on_cancel_kick_button_pressed():
+	kick_button_pressed = -1
+	_ui_hide_kick_confirmation()
 #endregion

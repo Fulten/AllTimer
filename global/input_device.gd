@@ -101,6 +101,7 @@ func _detect_joy_type(id: int) -> DeviceType:
 			return DeviceType.SWITCH
 
 	# 2) Fall back to the controller name from the SDL gamepad database.
+	@warning_ignore("shadowed_variable_base_class")
 	var name := Input.get_joy_name(id).to_lower()
 	for key in ["playstation", "dualshock", "dualsense", "ps3", "ps4", "ps5", "sony"]:
 		if name.contains(key):

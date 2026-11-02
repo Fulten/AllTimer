@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq7d0g7kj6tot"]
+
+[ext_resource type="FontFile" uid="uid://bc01r67d5wp2w" path="res://assets/uiux/session_themes/default/LEMONMILK-Regular.otf" id="1_hk1y6"]
+
+[sub_resource type="Theme" id="Theme_2gaq5"]
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/line_spacing = 0
+Label/constants/outline_size = 2
+Label/font_sizes/font_size = 12
+Label/fonts/font = ExtResource("1_hk1y6")
+
+[node name="HoverPopup" type="Node2D"]
+
+[node name="PopupBorder" type="ReferenceRect" parent="."]
+custom_minimum_size = Vector2(200, 100)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+border_color = Color(0.494118, 0, 1, 1)
+border_width = 3.0
+
+[node name="PopupPlate" type="ColorRect" parent="PopupBorder"]
+custom_minimum_size = Vector2(200, 100)
+offset_right = 200.0
+offset_bottom = 100.0
+color = Color(0, 0, 0, 0.356863)
+
+[node name="ChanceDescription" type="Label" parent="PopupBorder/PopupPlate"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 10.0
+offset_right = -8.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_2gaq5")
+text = "Answered the most questions about math incorrectly."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

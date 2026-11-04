@@ -94,7 +94,6 @@ var ROLLUP_MAX = 10
 var use_question_filter = false
 var question_filter = {}
 
-var pre_question_delay_default = 5.0
 var post_question_delay_default = 5.0
 
 var questions = {}
@@ -294,7 +293,7 @@ func _server_sync_late_join(mp_id):
 	_server_sync_quiz_phase(mp_id)
 	_sync_game_rules.rpc_id(
 		mp_id,
-		GameState.quizOptions.timer, 
+		GameState.quizOptions.question_time, 
 		"Highest score after 10 questions", 
 		0,  # cut feature, always use "highest score after x question"
 		10, # 10 questions
@@ -419,7 +418,7 @@ func _phase_pre_question():
 		
 	_sync_play_phase_animation.rpc()
 	
-	ui_prequestion_timer.start(pre_question_delay_default + extra_seconds)
+	ui_prequestion_timer.start(GameState.quizOptions.reading_time + extra_seconds)
 
 func _phase_question():
 	if DEBUG:
@@ -430,7 +429,7 @@ func _phase_question():
 	_server_full_sync()
 	_sync_play_phase_animation.rpc()
 	
-	ui_countdown_timer.start(GameState.quizOptions.timer)
+	ui_countdown_timer.start(GameState.quizOptions.question_time)
 	
 func _phase_post_question():
 	if DEBUG:
@@ -630,7 +629,7 @@ func _sync_game_rules(
 	i_win_questions: int, 
 	i_win_points: int):
 		
-	GameState.quizOptions.timer = i_timer
+	GameState.quizOptions.question_time = i_timer
 	GameState.quizOptions.win_con = i_win_con
 	GameState.quizOptions.win_con_int = i_win_con_int
 
@@ -1005,8 +1004,8 @@ func _ui_update_prequiz_rules():
 		win_questions = GameState.quizOptions.win_questions
 	if GameState.quizOptions.win_points:
 		win_points = GameState.quizOptions.win_points
-	if GameState.quizOptions.timer:
-		timer = GameState.quizOptions.timer
+	if GameState.quizOptions.question_time:
+		timer = GameState.quizOptions.question_time
 	
 	if win_con_int == 0: # 0 : Highest score after x questions
 		if !(GameState.CurrentTheme == "Fatal Surprise"):
@@ -1163,7 +1162,7 @@ func _host_setup_quiz():
 	
 	_clean_questions_data()
 	_sync_game_rules.rpc(
-		GameState.quizOptions.timer, 
+		GameState.quizOptions.question_time, 
 		"Highest score after 10 questions", 
 		0,  # cut feature, always use "highest score after x question"
 		10, # 10 questions
@@ -1183,6 +1182,7 @@ func _client_setup_quiz():
 	
 func _select_question_filter():
 	use_question_filter = false
+	if not GameState.quizOptions.use_filter: return
 	for key in GameState.TagsFilters:
 		if GameState.TagsFilters[key]["selected"] == true:
 			question_filter = GameState.TagsFilters[key]

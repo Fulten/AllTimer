@@ -283,12 +283,12 @@ selected = 0
 popup/item_0/text = "Default"
 popup/item_0/id = 0
 
-[node name="WhitelistToggle" type="Button" parent="LobbyOrganizer/Columns/SettingsColumn/Filters"]
+[node name="FilterEnable" type="Button" parent="LobbyOrganizer/Columns/SettingsColumn/Filters"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("12_cbtm4")
 toggle_mode = true
-text = "Whitelist"
+text = "Filter: Disabled"
 
 [node name="HSeparator" type="HSeparator" parent="LobbyOrganizer/Columns/SettingsColumn"]
 self_modulate = Color(0, 0, 0, 1)
@@ -353,7 +353,7 @@ layout_mode = 2
 text = "reading time: "
 label_settings = ExtResource("5_wtxry")
 
-[node name="OptionButton" type="OptionButton" parent="LobbyOrganizer/Columns/SettingsColumn/ReadingTimeSection"]
+[node name="ReadingTimeOption" type="OptionButton" parent="LobbyOrganizer/Columns/SettingsColumn/ReadingTimeSection"]
 layout_mode = 2
 theme = SubResource("Theme_lwx1r")
 item_count = 3
@@ -545,8 +545,10 @@ flat = true
 [connection signal="mouse_entered" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer/KickConfirmationButtons/CancelKickButton" to="." method="_on_cancel_kick_button_mouse_entered"]
 [connection signal="pressed" from="LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer/KickConfirmationButtons/CancelKickButton" to="." method="_on_cancel_kick_button_pressed"]
 [connection signal="item_selected" from="LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList" to="." method="_on_filter_preset_list_item_selected"]
-[connection signal="button_up" from="LobbyOrganizer/Columns/SettingsColumn/Filters/WhitelistToggle" to="." method="_on_whitelist_toggle_button_up"]
+[connection signal="button_up" from="LobbyOrganizer/Columns/SettingsColumn/Filters/FilterEnable" to="." method="_on_filter_enable_toggle_button_up"]
 [connection signal="item_selected" from="LobbyOrganizer/Columns/SettingsColumn/ProfileCase/ProfilesList" to="." method="_on_profiles_list_item_selected"]
+[connection signal="item_selected" from="LobbyOrganizer/Columns/SettingsColumn/TimerSetting/TimerSettingList" to="." method="_on_timer_setting_list_item_selected"]
+[connection signal="item_selected" from="LobbyOrganizer/Columns/SettingsColumn/ReadingTimeSection/ReadingTimeOption" to="." method="_on_reading_time_option_item_selected"]
 [connection signal="item_selected" from="LobbyOrganizer/Columns/SettingsColumn/ThemeCase/ThemesList" to="." method="_on_themes_list_item_selected"]
 [connection signal="button_down" from="StateChangers/LaunchButton" to="." method="_on_launch_button_button_down"]
 [connection signal="button_up" from="StateChangers/LaunchButton" to="." method="_on_launch_button_button_up"]

@@ -25,7 +25,7 @@ func _ready():
 	$StackAnimator.play("Anim_Stack0_Init")
 	await get_tree().create_timer(0.1).timeout
 	$Stack_0/TitleHeader2.grab_focus()
-	GameState.quizOptions.initilize()
+	GameState.quizOptions = GameState.QuizOptions.create()
 	load_settings()
 	UserProfiles._IO_read_profiles()
 
@@ -58,8 +58,10 @@ func save_video_settings():
 
 
 func save_game_settings():
-	update_game_state(int(%TimerSettingList.get_item_text(%TimerSettingList.get_selected_id())))
-	config.set_value("game", "timer", GameState.quizOptions.timer)
+	update_game_state(int(%TimerSettingList.get_item_text(%TimerSettingList.get_selected_id())), GameState.quizOptions.use_filter, GameState.quizOptions.reading_time)
+	config.set_value("game", "question_time", GameState.quizOptions.question_time)
+	config.set_value("game", "use_filter", GameState.quizOptions.use_filter)
+	config.set_value("game", "reading_time", GameState.quizOptions.reading_time)
 	config.save(config_path)
 #endregion
 
@@ -79,11 +81,13 @@ func load_settings():
 		@warning_ignore("shadowed_variable_base_class")
 		var theme = config.get_value("video", "theme", "default")
 #		GAME
-		var timer = config.get_value("game", "timer", 30)
+		var question_time = config.get_value("game", "question_time", 30)
+		var use_filter = config.get_value("game", "use_filter", false)
+		var reading_time = config.get_value("game", "reading_time", 5)
 #		APPLY
 		apply_audio_settings(sound_device, master, music, sfx, voiceover)
 		apply_video_settings(display_type, resolution, input_display, theme)
-		apply_game_settings(timer)
+		apply_game_settings(question_time, use_filter, reading_time)
 	else:
 		print("No settings file found. Using defaults.")
 
@@ -132,14 +136,16 @@ func apply_video_settings(display_type: int, resolution: int, input_display: Str
 	update_game_state_theme(theme)
 
 
-func apply_game_settings(timer: int):
-	select_option_by_int(%TimerSettingList, timer)
-	update_game_state(timer)
+func apply_game_settings(question_time: int, use_filter: bool, reading_time: int):
+	select_option_by_int(%TimerSettingList, question_time)
+	update_game_state(question_time, use_filter, reading_time)
 	return
 #endregion
 
-func update_game_state(timer: int):
-	GameState.quizOptions.timer = timer
+func update_game_state(question_time: int, use_filter: bool, reading_time: int):
+	GameState.quizOptions.question_time = question_time
+	GameState.quizOptions.use_filter = use_filter
+	GameState.quizOptions.reading_time = reading_time
 
 @warning_ignore("shadowed_variable_base_class")
 func update_game_state_theme(theme: String):

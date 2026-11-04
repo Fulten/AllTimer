@@ -112,25 +112,35 @@ class Player:
 		correct = false
 
 class QuizOptions:
-	var timer: int # length of question answer phase timer
-	var win_con: String
-	var win_con_int: int
-
+	var question_time: int # length of question answer phase timer
+	
+	var use_filter: bool
+	var reading_time: int
+	
+	## depreciated settings
 	var win_questions: int
 	var win_points: int
+	var win_con: String
+	var win_con_int: int
 
 	# win_con_int : win_con
 	# 0 : Highest score after 10 questions
 	# 1 : First to answer 10 questions correctly
 	# 2 : First to reach 1000 points
-
-	func initilize(i_timer = 30, i_win_con = "default", i_win_con_int = 0, i_win_questions = 10, i_win_points = 5000) :
-		timer = i_timer
-		win_con = i_win_con # textual representation of wincondition
-		win_con_int = i_win_con_int #integer representation of windcondition
+	
+	static func create(i_question_time: int = 30, i_reading_time: int = 4, i_use_filter: bool = false) -> QuizOptions:
+		var options = QuizOptions.new()
+		options.question_time = i_question_time
+		options.use_filter = i_use_filter
+		options.reading_time = i_reading_time
 		
-		win_questions = i_win_questions
-		win_points = i_win_points
+		options.win_con = "default"
+		options.win_con_int = 0
+		
+		options.win_questions = 10
+		options.win_points = 5000
+		
+		return options
 
 class Question:
 	var name: String
@@ -188,7 +198,7 @@ class Chance:
 #endregion
 
 #region variables
-var quizOptions = QuizOptions.new()
+var quizOptions: QuizOptions
 
 var players = {}
 var players_loaded = 0
@@ -307,7 +317,7 @@ func _check_player_chances(question_uuid):
 
 func _adjust_player_score(key, score):
 	players[key]["last_score"] = players[key]["score"]
-	var awarded_points = (score + score * players[key]["guessTime"] / quizOptions.timer) / 2
+	var awarded_points = (score + score * players[key]["guessTime"] / quizOptions.question_time) / 2
 	players[key]["score"] += awarded_points
 #endregion
 

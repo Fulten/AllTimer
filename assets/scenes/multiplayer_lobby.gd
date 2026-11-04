@@ -15,6 +15,9 @@ signal sig_mp_disconnect
 signal sig_mp_launch
 signal sig_mp_exit
 
+var config = ConfigFile.new()
+var config_path = "user://settings.cfg"
+
 var ip_address = "127.0.0.1"
 var IpInputTextNode
 
@@ -23,6 +26,19 @@ var profiles_list_id_to_name = {}
 var kick_button_pressed = -1
 var kick_ids = []
 
+var question_timer_options = {
+	0: 5,
+	1: 10,
+	2: 30,
+	3: 60
+}
+
+var reading_timer_options = {
+	0: 2,
+	1: 4,
+	2: 8
+}
+
 func _ready():
 	$StateChangers/LaunchButton.grab_focus()
 	IpInputTextNode = $LobbyOrganizer/Columns/NetworkingColumn/IPField
@@ -30,7 +46,8 @@ func _ready():
 	_ui_refresh_profiles_dropdown()
 	SoundMaster._play_music_track("mp_lobby")
 	_init_filter_preset()
-	_init_theme_selector()
+	_load_config()
+	_ui_init_quiz_option_buttons(GameState.quizOptions.question_time, GameState.quizOptions.reading_time)
 	select_theme_by_text($LobbyOrganizer/Columns/SettingsColumn/ThemeCase/ThemesList, GameState.CurrentTheme)
 	for i in range(4):
 		ui_mp_peer_display[i].hide()
@@ -83,7 +100,7 @@ func _quit_to_main_menu():
 	sig_mp_exit.emit()
 #endregion
 
-#region UI functionality
+#region UI utilities
 func select_theme_by_text(option_button: OptionButton, target_text: String) -> void:
 	for i in range(option_button.item_count):
 		if option_button.get_item_text(i) == str(target_text):
@@ -93,19 +110,8 @@ func select_theme_by_text(option_button: OptionButton, target_text: String) -> v
 	option_button.select(0)
 	GameState.CurrentTheme = option_button.get_item_text(0)
 
-func _init_theme_selector():
-	var ui_themesList = $LobbyOrganizer/Columns/SettingsColumn/ThemeCase/ThemesList
-	ui_themesList.clear()
-	ui_themesList.add_item("Default")
-	for game_theme in UserProfiles.THEME_NAMES:
-		# uncomment the following comments, and delete the extra "ui_themesList.add_item(game_theme)"
-		#if UserProfiles.unlocked_themes[game_theme]["unlocked"]:
-		#	ui_themesList.add_item(game_theme)
-		ui_themesList.add_item(game_theme)
-
 func _init_filter_preset():
 	$LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.clear()
-	var whitelist_btn = $LobbyOrganizer/Columns/SettingsColumn/Filters/WhitelistToggle
 	if GameState.TagsFilters.size() > 0:
 		var i:int = 0
 		var selected:int = 0
@@ -115,17 +121,11 @@ func _init_filter_preset():
 				selected = i
 			i += 1
 		$LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.selected = selected
-		# set the blacklist button
-		if GameState.TagsFilters[$LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.get_item_text(selected)]["blacklist"]:
-			whitelist_btn.text = "Is Blacklist: True"
-			whitelist_btn.button_pressed = true
-		else:
-			whitelist_btn.text = "Is Blacklist: False"
 	else:
 		#if there are no filters
 		$LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.add_item("N/A")
 		$LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.disabled = true
-		whitelist_btn.disabled = true
+		$LobbyOrganizer/Columns/SettingsColumn/Filters/FilterEnable.disabled = true
 
 func _ui_update_connected_players():
 	for n in range(0, 4):
@@ -183,12 +183,12 @@ func _ui_show_kick_confirmation():
 	var player_name = GameState.players[kick_ids[kick_button_pressed]].name
 	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer/KickingPeerLabel.text = kick_text % player_name
 	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer.show()
-	
+
 func _ui_hide_kick_confirmation():
 	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickConfirmationContainer.hide()
 #endregion
 
-#region Ui Signals
+#region Ui networking
 func _on_host_button_mouse_entered():
 	$SFX_Hover.play()
 func _on_host_button_focus_entered():
@@ -244,6 +244,7 @@ func _on_launch_button_button_down():
 	$SFX_Press.play()
 func _on_launch_button_button_up():
 	$StateChangers/LaunchButton.disabled = true
+	_save_game_settings()
 	_launching_server()
 
 func _on_back_to_main_button_mouse_entered():
@@ -253,6 +254,7 @@ func _on_back_to_main_button_focus_entered():
 func _on_back_to_main_button_button_down():
 	$SFX_Press.play()
 func _on_back_to_main_button_button_up():
+	_save_game_settings()
 	_quit_to_main_menu()
 
 func _on_conn_fail_ack_mouse_entered():
@@ -264,55 +266,8 @@ func _on_conn_fail_ack_button_down():
 func _on_conn_fail_ack_button_up():
 	get_node("ConnectionFailedPopupCase").hide()
 
-func _on_whitelist_toggle_button_up():
-	var key = $LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.get_item_text($LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.get_selected_id())
-	var button = $LobbyOrganizer/Columns/SettingsColumn/Filters/WhitelistToggle
-	if button.button_pressed:
-		button.text = "Is Blacklist: True"
-		GameState.TagsFilters[key]["blacklist"] = true
-	else:
-		button.text = "Is Blacklist: False"
-		GameState.TagsFilters[key]["blacklist"] = false
-	GameState._IO_write_tags_filter()
-
-func _on_filter_preset_list_item_selected(index):
-	var key = $LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.get_item_text(index)
-	var whitelist_btn = $LobbyOrganizer/Columns/SettingsColumn/Filters/WhitelistToggle
-	#update the selected tag
-	for filter in GameState.TagsFilters:
-		GameState.TagsFilters[filter]["selected"] = false
-		pass
-	GameState.TagsFilters[key]["selected"] = true
-	# set the blacklist button
-	if GameState.TagsFilters[key]["blacklist"]:
-		whitelist_btn.text = "Is Blacklist: True"
-		whitelist_btn.button_pressed = true
-	else:
-		whitelist_btn.text = "Is Blacklist: False"
-		whitelist_btn.button_pressed = false
-		
-	GameState._IO_write_tags_filter()
-
 func _on_ip_field_text_changed():
 	ip_address = IpInputTextNode.get("text")
-	
-func _on_themes_list_item_selected(index):
-	var ui_themesList = $LobbyOrganizer/Columns/SettingsColumn/ThemeCase/ThemesList
-	GameState.CurrentTheme = ui_themesList.get_item_text(index)
-	# save change to theme to file
-	var config = ConfigFile.new()
-	var err = config.load("user://settings.cfg")
-	if err == OK:
-		config.set_value("video", "theme", ui_themesList.get_item_text(ui_themesList.get_selected_id()))
-		config.save("user://settings.cfg")
-
-func _on_profiles_list_item_selected(index):
-	for key in UserProfiles.profiles.keys():
-		UserProfiles.profiles[key]["selected"] = false
-		
-	UserProfiles.profiles[profiles_list_id_to_name[index]]["selected"] = true
-	UserProfiles._IO_write_profiles()
-	_profile_changed()
 #endregion
 
 #region UI kickbuttons
@@ -367,3 +322,95 @@ func _on_cancel_kick_button_pressed():
 	kick_button_pressed = -1
 	_ui_hide_kick_confirmation()
 #endregion
+
+#region ui quiz options configuration
+
+func _on_filter_enable_toggle_button_up():
+	var button = $LobbyOrganizer/Columns/SettingsColumn/Filters/FilterEnable
+	if button.button_pressed:
+		button.text = "Filter: Enabled"
+		GameState.quizOptions.use_filter = true
+	else:
+		button.text = "Filter: Disabled"
+		GameState.quizOptions.use_filter = false
+
+func _on_filter_preset_list_item_selected(index):
+	var key = $LobbyOrganizer/Columns/SettingsColumn/Filters/FilterPresetList.get_item_text(index)
+	#update the selected tag
+	for filter in GameState.TagsFilters:
+		GameState.TagsFilters[filter]["selected"] = false
+		pass
+	GameState.TagsFilters[key]["selected"] = true
+		
+	GameState._IO_write_tags_filter()
+
+func _on_themes_list_item_selected(index):
+	var ui_themesList = $LobbyOrganizer/Columns/SettingsColumn/ThemeCase/ThemesList
+	GameState.CurrentTheme = ui_themesList.get_item_text(index)
+
+func _on_profiles_list_item_selected(index):
+	for key in UserProfiles.profiles.keys():
+		UserProfiles.profiles[key]["selected"] = false
+		
+	UserProfiles.profiles[profiles_list_id_to_name[index]]["selected"] = true
+	UserProfiles._IO_write_profiles()
+	_profile_changed()
+
+func _on_reading_time_option_item_selected(index):
+	GameState.quizOptions.reading_time = reading_timer_options[index]
+
+func _on_timer_setting_list_item_selected(index):
+	GameState.quizOptions.question_time = question_timer_options[index]
+
+func _load_config():
+	config.load(config_path)
+
+func _ui_init_quiz_option_buttons(question_time: int, reading_time: int):
+	var ui_themesList = $LobbyOrganizer/Columns/SettingsColumn/ThemeCase/ThemesList
+	var ui_filter_toggle = $LobbyOrganizer/Columns/SettingsColumn/Filters/FilterEnable
+	var ui_question_time = %TimerSettingList
+	var ui_reading_time = $LobbyOrganizer/Columns/SettingsColumn/ReadingTimeSection/ReadingTimeOption
+	
+	if question_time > 120: question_time = 60
+	if reading_time > 20: reading_time = 10
+	
+	ui_themesList.clear()
+	ui_themesList.add_item("Default")
+	for game_theme in UserProfiles.THEME_NAMES:
+		#TODO:: uncomment the following comments, and delete the extra "ui_themesList.add_item(game_theme)"
+		#if UserProfiles.unlocked_themes[game_theme]["unlocked"]:
+		#	ui_themesList.add_item(game_theme)
+		ui_themesList.add_item(game_theme)
+	
+	if GameState.quizOptions.use_filter:
+		ui_filter_toggle.button_pressed = true
+		ui_filter_toggle.text = "Filter: Enabled"
+	else:
+		ui_filter_toggle.button_pressed = false
+		ui_filter_toggle.text = "Filter: Disabled"
+	
+	var question_selected_index = 1
+	var reading_selected_index = 1
+	
+	for key in question_timer_options:
+		if question_timer_options[key] == GameState.quizOptions.question_time:
+			question_selected_index = key
+	
+	for key in reading_timer_options:
+		if reading_timer_options[key] == GameState.quizOptions.reading_time:
+			reading_selected_index = key
+	
+	# options for question_time are 5sec, 10sec, 30sec, 60sec
+	ui_question_time.select(question_selected_index)
+	
+	# options for reading_time are 2sec 4sec 8sec
+	ui_reading_time.select(reading_selected_index)
+
+func _save_game_settings():
+	config.set_value("video", "theme", GameState.CurrentTheme)
+	config.set_value("game", "question_time", GameState.quizOptions.question_time)
+	config.set_value("game", "use_filter", GameState.quizOptions.use_filter)
+	config.set_value("game", "reading_time", GameState.quizOptions.reading_time)
+	config.save(config_path)
+#endregion
+

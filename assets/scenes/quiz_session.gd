@@ -87,7 +87,7 @@ var config_path = "user://settings.cfg"
 var QuestionDataFile = "res://data/question_data.json"
 var config = ConfigFile.new()
 
-var DEBUG = true
+var DEBUG: int
 var QUIZ_LENGTH = 10
 var ROLLUP_MAX = 10
 
@@ -148,6 +148,7 @@ enum QUIZSTATE {
 }
 
 func _ready():
+	DEBUG = GameState.DEBUG
 	$preQuiz.hide()
 	$quizInterface.hide()
 	$preQuiz/preSessionOrganizer/RulesText/ReadyCheck.hide()
@@ -214,7 +215,7 @@ func _input(event):
 	if _is_event_keypress(event, KEY_ESCAPE):
 		_escape_game_menu()
 	
-	if DEBUG and multiplayer.has_multiplayer_peer() and multiplayer.is_server():
+	if DEBUG > 0 and multiplayer.has_multiplayer_peer() and multiplayer.is_server():
 		if _is_event_keypress(event, KEY_N):
 			_DEBUG_next_question()
 	
@@ -240,11 +241,13 @@ func _player_dropped(mp_id):
 		_ui_update_lock_player_pannel(mp_id, true)
 	if multiplayer.is_server():
 		GameState.players[mp_id].pannel_locked = true
-		print("Info: player Dropped id:%s" % mp_id)
+		if DEBUG > 1:
+			print("!INFO: player Dropped id:%s" % mp_id)
 
 func _player_rejoined(mp_id):
 	if multiplayer.is_server():
-		print("Info: player rejoined id:%s" % mp_id)
+		if DEBUG > 1:
+			print("!INFO: player rejoined id:%s" % mp_id)
 
 #region server side functions that handle syncing with players
 #===================================================
@@ -347,8 +350,8 @@ func _server_sync_profile_data():
 		for c in GameState.players[key].chance_hits:
 			player_chances.append(c)
 		
-		if DEBUG:
-			print("!!DEBUG: sending profile data to player_id: [%s]" % key)
+		if DEBUG > 1:
+			print("!INFO: sending profile data to player_id: [%s]" % key)
 		if key == 1:
 			_sync_profile_data(
 				GameState.players[key].final_score, 
@@ -367,7 +370,7 @@ func _server_sync_profile_data():
 #region quiz phase functions
 #===================================================
 func _phase_pre_quiz():
-	if DEBUG:
+	if DEBUG > 3:
 		print("!!DEBUG: Prequiz phase")
 	GameState.quiz_phase = QUIZSTATE.preQuiz
 	
@@ -390,7 +393,7 @@ func _phase_pre_quiz():
 	_sync_play_phase_animation.rpc()
 
 func _phase_end_of_rules():
-	if DEBUG:
+	if DEBUG > 3:
 		print("!!DEBUG: End Of Rules phase")
 	GameState.quiz_phase = QUIZSTATE.endOfRules
 	
@@ -400,7 +403,7 @@ func _phase_end_of_rules():
 	get_tree().create_timer(3.2).timeout.connect(_phase_pre_question)
 
 func _phase_pre_question():
-	if DEBUG:
+	if DEBUG > 2:
 		print("!!DEBUG: Prequestion phase")
 	GameState.quiz_phase = QUIZSTATE.preQuestion
 	
@@ -413,7 +416,7 @@ func _phase_pre_question():
 		GameState.players[key].pannel_locked = false
 	_player_pannels_unlock.rpc()
 	
-	if DEBUG:
+	if DEBUG > 2:
 		print("!INFO: extra seconds for pre_question phase [%s]" % extra_seconds)
 		
 	_sync_play_phase_animation.rpc()
@@ -421,7 +424,7 @@ func _phase_pre_question():
 	ui_prequestion_timer.start(GameState.quizOptions.reading_time + extra_seconds)
 
 func _phase_question():
-	if DEBUG:
+	if DEBUG > 2:
 		print("!!DEBUG: Question phase")
 	GameState.quiz_phase = QUIZSTATE.question
 	ui_prequestion_timer.stop()
@@ -432,7 +435,7 @@ func _phase_question():
 	ui_countdown_timer.start(GameState.quizOptions.question_time)
 	
 func _phase_post_question():
-	if DEBUG:
+	if DEBUG > 2:
 		print("!!DEBUG: Postquestion phase")
 	GameState.quiz_phase = QUIZSTATE.postQuestion
 	ui_countdown_timer.stop()
@@ -468,7 +471,7 @@ func _phase_post_question():
 	ui_postquestion_timer.start(post_question_delay_default + extra_seconds + 1.5)
 
 func _phase_end_of_phase():
-	if DEBUG:
+	if DEBUG > 2:
 		print("!!DEBUG: end of phase phase")
 	GameState.quiz_phase = QUIZSTATE.endOfPhase
 	ui_postquestion_timer.stop()
@@ -495,7 +498,7 @@ func _phase_next_question():
 	_phase_pre_question()
 
 func _phase_end_screen():
-	if DEBUG:
+	if DEBUG > 2:
 		print("!!DEBUG: endscreen phase")
 	GameState.quiz_phase = QUIZSTATE.endScreen
 
@@ -1140,17 +1143,20 @@ func _host_setup_quiz():
 	var question_count = _select_quiz_questions(QUIZ_LENGTH)
 	if question_count < QUIZ_LENGTH:
 		QUIZ_LENGTH = question_count
-		print("!Info: fewer than max questions picked, only %s questions in this quiz" % question_count)
+		if DEBUG > 1:
+			print("!INFO: fewer than max questions picked, only %s questions in this quiz" % question_count)
 	
 	if QUIZ_LENGTH <= 0:
-		print("!Info: a quiz was generated with no questions, this was likely caused by a question filter. \n Disabling filter and generating a new quiz.")
+		if DEBUG > 1:
+			print("!INFO: a quiz was generated with no questions, this was likely caused by a question filter. \n Disabling filter and generating a new quiz.")
 		use_question_filter = false
 		_generate_filtered_question_set()
 		QUIZ_LENGTH = 10
 		question_count = _select_quiz_questions(QUIZ_LENGTH)
 		QUIZ_LENGTH = question_count
 		if question_count == 0:
-			print("!!ERROR: generated a quiz with no questions when using unfiltered question data.\n Its possible question_data.json is corrupted.")
+			if DEBUG > 0:
+				print("!!!ERROR: generated a quiz with no questions when using unfiltered question data.\n Its possible question_data.json is corrupted.")
 			_server_ending_quiz.rpc()
 	
 	
@@ -1169,7 +1175,7 @@ func _host_setup_quiz():
 		GameState.quizOptions.win_points)
 	_player_load_quiz.rpc()
 	_player_setup_done()
-	if DEBUG:
+	if DEBUG > 2:
 		print("!!DEBUG: Awards possible for this question set:")
 		var i = 0
 		for key in GameState.chances:

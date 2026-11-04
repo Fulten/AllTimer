@@ -198,6 +198,8 @@ class Chance:
 #endregion
 
 #region variables
+var DEBUG = 1
+
 var quizOptions: QuizOptions
 
 var players = {}
@@ -368,7 +370,8 @@ func _build_complete_tags_list():
 				tags_list[tag] = 1
 
 func _io_read_questions(file_name: String):
-	print("!INFO: Reading Question Data")
+	if DEBUG > 1:
+		print("!INFO: Reading Question Data")
 	var file = FileAccess.open(file_name, FileAccess.READ)
 	var questions_raw
 	if file:
@@ -376,7 +379,8 @@ func _io_read_questions(file_name: String):
 		questions_raw = JSON.parse_string(json_string)
 		file.close()
 	else:
-		print("!!ERROR: Unable to access [\"%s\"]" % file_name)
+		if DEBUG > 0:
+			print("!!ERROR: Unable to access [\"%s\"]" % file_name)
 		return
 	questions.clear()
 	for question_raw in questions_raw:
@@ -400,7 +404,8 @@ func _IO_read_tags_filter():
 		TagsFilters = JSON.parse_string(file.get_as_text())
 		file.close()
 	else:
-		print("!!ERROR: Failed to read tags filters")
+		if DEBUG > 0:
+			print("!!ERROR: Failed to read tags filters")
 		
 	if TagsFilters == null:
 		TagsFilters = {}
@@ -433,5 +438,6 @@ func _IO_write_tags_filter():
 		file.store_string(jsonString)
 		file.close()
 	else:
-		print("!!ERROR: Failed to save tags filters")
+		if DEBUG > 0:
+			print("!!ERROR: Failed to save tags filters")
 #endregion

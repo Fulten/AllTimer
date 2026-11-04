@@ -15,6 +15,8 @@ signal sig_mp_disconnect
 signal sig_mp_launch
 signal sig_mp_exit
 
+var DEBUG: int
+
 var config = ConfigFile.new()
 var config_path = "user://settings.cfg"
 
@@ -40,6 +42,7 @@ var reading_timer_options = {
 }
 
 func _ready():
+	DEBUG = GameState.DEBUG
 	$StateChangers/LaunchButton.grab_focus()
 	IpInputTextNode = $LobbyOrganizer/Columns/NetworkingColumn/IPField
 	IpInputTextNode.set("text", ip_address)
@@ -136,7 +139,8 @@ func _ui_update_connected_players():
 	kick_ids.resize(GameState._player_count())
 	for key in GameState.players:
 		if k > 3:
-			print("ERROR: Players array has exceeded size 4")
+			if DEBUG > 0:
+				print("!!!ERROR: Players array has exceeded size 4")
 			return
 		if GameState.players[key]["active"]:
 			ui_mp_peer_display[k].get_node("Peer%s" % k).text = GameState.players[key].name

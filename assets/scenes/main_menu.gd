@@ -1,5 +1,6 @@
 extends Control
 
+var hover_popup = preload("res://assets/uiux/subscenes/hover_popup.tscn")
 var tags_list_theme = preload("res://assets/scenes/Checkbox_Filter.tres")
 var style_box_empty:StyleBoxEmpty = StyleBoxEmpty.new()
 
@@ -879,15 +880,17 @@ func create_new_award(awardHash: String):
 	#TODO: add hover text to award texture containing detailed description
 	node_texture.mouse_entered.connect(
 		func(): 
-			node_hover_text.text = UserProfiles.chance_descriptors[awardHash]["description"]
+			var node_text = node_hover_text.get_node("PopupPlate/ChanceDescription")
+			node_text.text = UserProfiles.chance_descriptors[awardHash]["description"]
 			node_hover_text.set_position(get_viewport().get_mouse_position())
 			show_award_hover = true
 			node_hover_text.show()
 			)
 	node_texture.mouse_exited.connect(
 		func(): 
+			var node_text = node_hover_text.get_node("PopupPlate/ChanceDescription")
 			show_award_hover = false
-			node_hover_text.text = ""
+			node_text.text = ""
 			node_hover_text.hide()
 			)
 	
@@ -902,24 +905,9 @@ func _select_award_outline_color(awardType: String):
 	if awardType == "QUESTION":
 		return "2200bb"
 	return "000000"
-
+	
 func _create_hover_text_node():
-	var node_lable_settings = LabelSettings.new()
-	var node_style_box = StyleBoxFlat.new()
-	node_hover_text = Label.new()
-	
-	node_style_box.set_border_width_all(5)
-	node_style_box.border_color = "313131"
-	node_style_box.bg_color = "212121"
-	
-	node_lable_settings.font_size = 18
-	
-	node_hover_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	node_hover_text.label_settings = node_lable_settings
-	node_hover_text.text = ""
-	node_hover_text.set_size(Vector2(200.0,20.0))
-	node_hover_text.add_theme_stylebox_override("normal", node_style_box)
+	node_hover_text = hover_popup.instantiate()
 	node_hover_text.hide()
-	
 	get_tree().root.add_child(node_hover_text)
 #endregion

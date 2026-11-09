@@ -880,7 +880,7 @@ func create_new_award(awardHash: String):
 	#TODO: add hover text to award texture containing detailed description
 	node_texture.mouse_entered.connect(
 		func(): 
-			var node_text = node_hover_text.get_node("PopupPlate/ChanceDescription")
+			var node_text = node_hover_text.get_node("%ChanceDescription")
 			node_text.text = UserProfiles.chance_descriptors[awardHash]["description"]
 			node_hover_text.set_position(get_viewport().get_mouse_position())
 			show_award_hover = true
@@ -888,7 +888,7 @@ func create_new_award(awardHash: String):
 			)
 	node_texture.mouse_exited.connect(
 		func(): 
-			var node_text = node_hover_text.get_node("PopupPlate/ChanceDescription")
+			var node_text = node_hover_text.get_node("%ChanceDescription")
 			show_award_hover = false
 			node_text.text = ""
 			node_hover_text.hide()

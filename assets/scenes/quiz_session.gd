@@ -130,12 +130,23 @@ var player_statuses_local: Array[Array]
 var players_ready = 0
 var phase_in_progress = false
 
+var current_music_track = MUSIC_TRACK.between
+
 enum MENU {
 	noMenu = 0,
 	pauseMenu = 1,
 	optionsMenu = 2,
 	subMenuSound = 3,
 	subMenuDisplay = 4,
+}
+
+enum MUSIC_TRACK {
+	reading,
+	midway,
+	between,
+	appear,
+	outta_time,
+	answers_locked
 }
 #endregion
 
@@ -163,7 +174,9 @@ func _ready():
 	_set_theme_specific_information()
 	_load_config_settings()
 	_load_icons()
-	_select_music_track()
+	
+	#_select_music_track()
+	
 	InputDevice.device_changed.connect(_on_device_changed)
 	_on_device_changed(InputDevice.current, InputDevice.last_joypad_id)
 	_setup_score_increment_labels()
@@ -213,6 +226,7 @@ func _process(delta):
 			for key in GameState.players:
 				if GameState.players[key]["loaded"]:
 					_sync_game_timer.rpc_id(key, _get_timer_reading(GameState.quiz_phase))
+					_server_sync_dynamic_music(key)
 
 func _is_event_keypress(event, key) -> bool:
 	return event is InputEventKey and event.pressed and event.keycode == key
@@ -297,6 +311,19 @@ func _server_sync_quiz_phase(mp_id = -1):
 			quiz_question_index,
 			q["name"], q["explainer"], q["question"], question_answers, q["questionType"])
 
+func _server_sync_dynamic_music(mp_id = -1):
+	if GameState.quiz_phase == QUIZSTATE.question:
+		var percentage: float = ui_countdown_timer.get_time_left() / float(GameState.quizOptions.question_time)
+		if SoundMaster.next_track == "appear" and percentage <= 0.5:
+			current_music_track = MUSIC_TRACK.midway
+		elif SoundMaster.next_track == "midway" and percentage <= 0.25:
+			current_music_track = MUSIC_TRACK.outta_time
+	
+	if mp_id == -1:
+		_sync_dynamic_music.rpc(current_music_track)
+	else:
+		_sync_dynamic_music.rpc_id(mp_id, current_music_track)
+
 func _server_sync_late_join(mp_id):
 	_server_sync_player_info()
 	_server_sync_quiz_phase(mp_id)
@@ -379,6 +406,7 @@ func _phase_pre_quiz():
 	if DEBUG > 3:
 		print("!!DEBUG: Prequiz phase")
 	GameState.quiz_phase = QUIZSTATE.preQuiz
+	current_music_track = MUSIC_TRACK.between
 	
 	ui_prequestion_timer.timeout.connect(_phase_question)
 	ui_countdown_timer.timeout.connect(_phase_post_question)
@@ -402,6 +430,7 @@ func _phase_end_of_rules():
 	if DEBUG > 3:
 		print("!!DEBUG: End Of Rules phase")
 	GameState.quiz_phase = QUIZSTATE.endOfRules
+	current_music_track = MUSIC_TRACK.between
 	
 	_server_full_sync()
 	_sync_play_phase_animation.rpc()
@@ -412,6 +441,7 @@ func _phase_pre_question():
 	if DEBUG > 2:
 		print("!!DEBUG: Prequestion phase")
 	GameState.quiz_phase = QUIZSTATE.preQuestion
+	current_music_track = MUSIC_TRACK.reading
 	
 	_server_full_sync()
 	
@@ -433,6 +463,7 @@ func _phase_question():
 	if DEBUG > 2:
 		print("!!DEBUG: Question phase")
 	GameState.quiz_phase = QUIZSTATE.question
+	current_music_track = MUSIC_TRACK.appear
 	ui_prequestion_timer.stop()
 	
 	_server_full_sync()
@@ -444,6 +475,7 @@ func _phase_post_question():
 	if DEBUG > 2:
 		print("!!DEBUG: Postquestion phase")
 	GameState.quiz_phase = QUIZSTATE.postQuestion
+	current_music_track = MUSIC_TRACK.answers_locked
 	ui_countdown_timer.stop()
 	
 	for key in GameState.players:
@@ -480,6 +512,7 @@ func _phase_end_of_phase():
 	if DEBUG > 2:
 		print("!!DEBUG: end of phase phase")
 	GameState.quiz_phase = QUIZSTATE.endOfPhase
+	current_music_track = MUSIC_TRACK.between
 	ui_postquestion_timer.stop()
 	
 	for key in GameState.players:
@@ -507,6 +540,7 @@ func _phase_end_screen():
 	if DEBUG > 2:
 		print("!!DEBUG: endscreen phase")
 	GameState.quiz_phase = QUIZSTATE.endScreen
+	current_music_track = MUSIC_TRACK.between
 
 	var chance_winners = []
 	var highest_hits = 0
@@ -649,6 +683,28 @@ func _sync_game_rules(
 @rpc("authority", "call_local", "reliable")
 func _sync_game_timer(clock_reading: Array):
 	$quizInterface/session_organizer/CountdownLabel.text = "%02d:%02d" % clock_reading
+
+@rpc("authority", "call_local", "reliable")
+func _sync_dynamic_music(track):
+	match track:
+		MUSIC_TRACK.reading:
+			if SoundMaster.next_track != "reading":
+				SoundMaster._dynamic_next_track("reading")
+		MUSIC_TRACK.midway:
+			if SoundMaster.next_track != "midway":
+				SoundMaster._dynamic_next_track("midway")
+		MUSIC_TRACK.between:
+			if SoundMaster.next_track != "between":
+				SoundMaster._dynamic_next_track("between")
+		MUSIC_TRACK.appear:
+			if SoundMaster.next_track != "appear":
+				SoundMaster._dynamic_next_track("appear")
+		MUSIC_TRACK.outta_time:
+			if SoundMaster.next_track != "outta_time":
+				SoundMaster._dynamic_next_track("outta_time")
+		MUSIC_TRACK.answers_locked:
+			if SoundMaster.next_track != "answers_locked":
+				SoundMaster._play_music_track("answers_locked", false, false, 0.0)
 
 @rpc("authority", "call_local", "reliable")
 func _sync_player_statuses(player_ids: Array, statuses):
@@ -1141,12 +1197,6 @@ func clock_post_question():
 	var minute = floor(time_left / 60)
 	var second = int(time_left) % 60
 	return [minute, second]
-	
-func dynamic_music_answers(percentage: float):
-	if SoundMaster.next_track == "appear" and percentage <= .5:
-		SoundMaster._dynamic_next_track("midway")
-	elif SoundMaster.next_track == "midway" and percentage <=.25:
-		SoundMaster._dynamic_next_track("outta_time")
 #endregion
 
 #region setup for quiz chances and questions

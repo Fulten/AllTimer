@@ -50,6 +50,7 @@ func _private_music_to_load():
 	_load_music_track("res://assets/music/Between_Questions.ogg", "between")
 	_load_music_track("res://assets/music/Answers_Appear.ogg", "appear")
 	_load_music_track("res://assets/music/Runnin_out_of_time.ogg", "outta_time")
+	_load_music_track("res://assets/music/Answers_Locked.ogg", "answers_locked")
 
 # loads sound effects to be played
 func _private_effects_to_load():

@@ -29,7 +29,7 @@ extends Control
 	$quizInterface/players_region/activePlayer2/player_case/player_name,
 	$quizInterface/players_region/activePlayer3/player_case/player_name,
 	$quizInterface/players_region/activePlayer4/player_case/player_name]
-@onready var ui_player_scores = [
+@onready var ui_player_scores: Array[Label] = [
 	$quizInterface/players_region/activePlayer1/player_case/status_row/score,
 	$quizInterface/players_region/activePlayer2/player_case/status_row/score,
 	$quizInterface/players_region/activePlayer3/player_case/status_row/score,
@@ -63,6 +63,12 @@ var surprize_styleBs_a4 = [
 
 var asset_player_pannel_locked
 var asset_player_pannel_default
+
+var asset_score_increment_font: FontFile
+var asset_score_increment_setting_increase: LabelSettings
+var asset_score_increment_setting_decrease: LabelSettings
+
+var asset_score_increment_labels: Array[Label] = []
 
 var pre_quiz_rules_text_rounds = ""
 var pre_quiz_rules_text_rounds2 = ""
@@ -160,7 +166,7 @@ func _ready():
 	_select_music_track()
 	InputDevice.device_changed.connect(_on_device_changed)
 	_on_device_changed(InputDevice.current, InputDevice.last_joypad_id)
-	
+	_setup_score_increment_labels()
 	for i in range(4):
 		ui_players[i].hide()
 		
@@ -581,7 +587,8 @@ func _sync_quiz_phase(
 @rpc("authority", "call_local", "reliable")
 func _sync_play_phase_animation():
 	ui_post_question.hide()
-		
+	_set_score_increment_label_positions(1.0)
+	
 	if ui_playing_statuses_animation:
 		ui_playing_statuses_animation = false
 		_ui_ani_reset_player_statuses(player_statuses_local)
@@ -855,8 +862,18 @@ func _ui_update_player_panels():
 func _ui_update_scores():
 	for key in GameState.players:
 		if GameState.players[key]["score"] != GameState.players[key]["last_score"]:
+			var i = GameState.idToCardIndex[key]
+			var score_delta = GameState.players[key]["score"] - GameState.players[key]["last_score"]
+			
+			if score_delta >= 0:
+				asset_score_increment_labels[i].label_settings = asset_score_increment_setting_increase
+				asset_score_increment_labels[i].text = "+%s" % score_delta
+			else:
+				asset_score_increment_labels[i].label_settings = asset_score_increment_setting_decrease
+				asset_score_increment_labels[i].text = "%s" % score_delta
+			
 			if rollup_count <= 0:
-				rollup_count = 10
+				rollup_count = ROLLUP_MAX
 				_ui_local_score_rollup()
 			break
 	
@@ -866,6 +883,7 @@ func _ui_local_score_rollup():
 	if rollup_count <= 0:
 		for i in range(GameState._player_count()):
 			ui_player_scores[i].text = str(GameState.players[GameState.playerCardOrder[i]]["score"])
+			asset_score_increment_labels[i].hide()
 	else:
 		for i in range(GameState._player_count()):
 			var player = GameState.players[GameState.playerCardOrder[i]]
@@ -874,6 +892,12 @@ func _ui_local_score_rollup():
 			var score_text = "%s"
 			score_text = score_text % str(current_score + (last_score - current_score) * t)
 			ui_player_scores[i].text = score_text
+			
+			asset_score_increment_labels[i].modulate.a = 0.2 + 0.8 * t
+			asset_score_increment_labels[i].show()
+			_set_score_increment_label_positions(1.0 + 0.5 * (1.0 - t))
+			
+			
 		rollup_count -= 1
 		get_tree().create_timer(0.06).timeout.connect(_ui_local_score_rollup)
 
@@ -1267,7 +1291,7 @@ func _select_music_track():
 	else:
 		SoundMaster._play_music_track("default_theme")
 
-func _set_theme_specific_information():
+func _set_theme_specific_information() -> void:
 	if GameState.CurrentTheme == "Patriotic Cipher":
 		pre_quiz_rules_text_rounds = "The player with the highest score after %s rounds wins."
 		pre_quiz_rules_text_rounds2 = "The quiz will end after %s round(s)"
@@ -1279,6 +1303,9 @@ func _set_theme_specific_information():
 		
 		asset_player_pannel_locked = load("res://assets/uiux/session_themes/Patriotic Cipher/label_Cipher_ActivePlayer_locked.tres")
 		asset_player_pannel_default = load("res://assets/uiux/session_themes/Patriotic Cipher/label_Cipher_ActivePlayer_default.tres")
+		
+		asset_score_increment_font = load("res://assets/uiux/session_themes/Patriotic Cipher/alarm clock.ttf")
+		
 	elif GameState.CurrentTheme == "Fatal Surprise":
 		pre_quiz_rules_text_rounds = "There's an exact number of rounds in this one, whoever has the highest score at the end takes it all."
 		pre_quiz_rules_text_rounds2 = "This exam lasts for %s round(s), don't let it slip through your fingers."
@@ -1290,6 +1317,9 @@ func _set_theme_specific_information():
 		
 		asset_player_pannel_locked = load("res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_ActivePlayer_locked.tres")
 		asset_player_pannel_default = load("res://assets/uiux/session_themes/Fatal Surprise/label_Surprise_ActivePlayer_default.tres")
+		
+		asset_score_increment_font = load("res://assets/uiux/session_themes/Fatal Surprise/YIKES!__.TTF")
+		
 	else:
 		pre_quiz_rules_text_rounds = "The player with the highest score after %s rounds wins."
 		pre_quiz_rules_text_rounds2 = "The quiz will end after %s round(s)"
@@ -1301,6 +1331,39 @@ func _set_theme_specific_information():
 		
 		asset_player_pannel_locked = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Locked.tres")
 		asset_player_pannel_default = load("res://assets/uiux/session_themes/default/label_Chalk_ActivePlayer_Default.tres")
+				
+		asset_score_increment_font = load("res://assets/uiux/session_themes/default/TeachersStudent-Regular.ttf")
+
+func _setup_score_increment_labels() -> void:
+	asset_score_increment_labels.resize(GameState._player_count())
+	
+	asset_score_increment_setting_increase = LabelSettings.new()
+	asset_score_increment_setting_increase.font = asset_score_increment_font
+	asset_score_increment_setting_increase.font_size = 35
+	asset_score_increment_setting_increase.font_color = Color.GREEN
+	
+	asset_score_increment_setting_decrease = LabelSettings.new()
+	asset_score_increment_setting_decrease.font = asset_score_increment_font
+	asset_score_increment_setting_decrease.font_size = 35
+	asset_score_increment_setting_decrease.font_color = Color.RED
+	
+	for key in GameState.players:
+		var i = GameState.idToCardIndex[key]
+		var new_label = Label.new()
+		new_label.label_settings = asset_score_increment_setting_increase
+		new_label.text = "-Er%s" % i
+		new_label.hide()
+		
+		get_tree().root.add_child(new_label)
+		asset_score_increment_labels[i] = new_label
+
+func _set_score_increment_label_positions(y_offset: float = 0.0, x_offset: float = 0.0) -> void:
+	for i in range(asset_score_increment_labels.size()):
+		var player_pannel_pos: Vector2 = ui_player_scores[i].get_global_rect().position
+		player_pannel_pos.y -= ui_player_scores[i].get_global_rect().size.y * (y_offset) 
+		player_pannel_pos.x -= x_offset
+		asset_score_increment_labels[i].set_position(player_pannel_pos)
+
 #endregion
 
 #region answer buttons

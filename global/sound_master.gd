@@ -86,6 +86,21 @@ func _play_music_track(song_name: String, looping: bool = true, tween: bool = tr
 		songDelayTimer.start(songDelay)
 	else:
 		print("!!Error: song by name:[%s] was not found in songs map" % song_name)
+	
+func _play_music_track_immediate(song_name: String, looping: bool = true, tween: bool = true):
+	if songs.has(song_name):
+		next_track = song_name
+		next_track_loop = looping
+		if tween:
+			# use a tween to fade out the volume before the next track plays
+			var songTween = create_tween()
+			songTween.tween_property(audioStreamPlayerMusic, "volume_db", -60.0, 0.9)
+		
+		audioStreamPlayerMusic.stream = songs[next_track]
+		audioStreamPlayerMusic.volume_db = 0.0
+		audioStreamPlayerMusic.play()
+	else:
+		print("!!Error: song by name:[%s] was not found in songs map" % song_name)
 
 func _private_next_track():
 	audioStreamPlayerMusic.stream = songs[next_track]

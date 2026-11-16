@@ -704,7 +704,7 @@ func _sync_dynamic_music(track):
 				SoundMaster._dynamic_next_track("outta_time")
 		MUSIC_TRACK.answers_locked:
 			if SoundMaster.next_track != "answers_locked":
-				SoundMaster._play_music_track("answers_locked", false, false, 0.0)
+				SoundMaster._play_music_track_immediate("answers_locked", false, false)
 
 @rpc("authority", "call_local", "reliable")
 func _sync_player_statuses(player_ids: Array, statuses):
@@ -823,6 +823,7 @@ func _player_setup_done():
 
 @rpc("any_peer", "reliable")
 func _player_ready(mp_id):
+	_ui_ani_quiz_standby()
 	if multiplayer.is_server():
 		GameState.players[mp_id]["ready"] = true
 		if GameState._are_all_players_ready():
@@ -1108,6 +1109,9 @@ func _on_control_swapper_0_animation_finished(anim_name):
 
 func _ui_ani_quiz_intro():
 	$ControlSwapper0.queue("QuizIntro")
+
+func _ui_ani_quiz_standby():
+	$ControlSwapper0.play("QuizStandby")
 
 func _ui_ani_quiz_start():
 	$ControlSwapper0.play("QuizStart")

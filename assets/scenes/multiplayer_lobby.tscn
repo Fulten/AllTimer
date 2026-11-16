@@ -456,21 +456,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.490196)
 
-[node name="PopupBG2" type="ColorRect" parent="ConnectionFailedPopupCase"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 18.6
-anchor_top = 9.6
-anchor_right = 29.4
-anchor_bottom = 15.0
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 8.0
-offset_bottom = 7.99994
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.4609, 1, 0.729814, 1)
-
 [node name="PopupBG" type="ColorRect" parent="ConnectionFailedPopupCase"]
 layout_mode = 1
 anchors_preset = -1
@@ -483,21 +468,32 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.470588, 0, 0.756863, 1)
 
-[node name="Label" type="Label" parent="ConnectionFailedPopupCase"]
+[node name="PopupBorder" type="ReferenceRect" parent="ConnectionFailedPopupCase/PopupBG"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 19.2
-anchor_top = 10.6
-anchor_right = 28.8
-anchor_bottom = 11.675
-offset_top = -8.0
-offset_bottom = 35.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+border_color = Color(0, 1, 1, 1)
+border_width = 3.0
+editor_only = false
+
+[node name="DisconnectContainer" type="VBoxContainer" parent="ConnectionFailedPopupCase/PopupBG"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.704
+offset_bottom = -0.0639648
+
+[node name="DisconnectMessage" type="Label" parent="ConnectionFailedPopupCase/PopupBG/DisconnectContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 text = "Connection Failed!
 :("
 label_settings = ExtResource("5_wtxry")
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="ConnFailAck" type="Button" parent="ConnectionFailedPopupCase"]
 layout_mode = 1

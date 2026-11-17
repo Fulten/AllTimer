@@ -5,6 +5,13 @@ extends Control
 	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner1,
 	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner2,
 	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner3]
+
+@onready var ui_mp_peer_display_kick_buttons = [
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner1/KickPeer1,
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner2/KickPeer2,
+	$LobbyOrganizer/Columns/NetworkingColumn/PeerCase/KickAligner3/KickPeer3]
+
+
 # as multiplayer lobby will be instantiated by the master scene
 # we can use signals to relay actions to the master scene
 signal sig_mp_profile_change
@@ -134,6 +141,12 @@ func _ui_update_connected_players():
 	for n in range(0, 4):
 		ui_mp_peer_display[n].get_node("Peer%s" % n).text = ""
 		ui_mp_peer_display[n].hide()
+	for n in range(0, 3):
+		if multiplayer.has_multiplayer_peer() && multiplayer.is_server():
+			ui_mp_peer_display_kick_buttons[n].show()
+		else:
+			ui_mp_peer_display_kick_buttons[n].hide()
+	
 	var k = 0
 	kick_ids = []
 	kick_ids.resize(GameState._player_count())

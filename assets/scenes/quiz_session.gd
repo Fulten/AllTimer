@@ -95,7 +95,7 @@ var config = ConfigFile.new()
 
 var DEBUG: int
 var QUIZ_LENGTH = 10
-var ROLLUP_MAX = 10
+var ROLLUP_MAX = 15
 
 var use_question_filter = false
 var question_filter = {}
@@ -919,44 +919,62 @@ func _ui_update_player_panels():
 func _ui_update_scores():
 	for key in GameState.players:
 		if GameState.players[key]["score"] != GameState.players[key]["last_score"]:
-			var i = GameState.idToCardIndex[key]
-			var score_delta = GameState.players[key]["score"] - GameState.players[key]["last_score"]
-			
-			if score_delta >= 0:
-				asset_score_increment_labels[i].label_settings = asset_score_increment_setting_increase
-				asset_score_increment_labels[i].text = "+%s" % score_delta
-			else:
-				asset_score_increment_labels[i].label_settings = asset_score_increment_setting_decrease
-				asset_score_increment_labels[i].text = "%s" % score_delta
-			
 			if rollup_count <= 0:
 				rollup_count = ROLLUP_MAX
+				_ui_local_score_popup()
 				_ui_local_score_rollup()
 			break
+
+func _ui_local_score_popup():
+	var score_increment_tween = get_tree().create_tween()
 	
+	for key in GameState.players:
+		var i = GameState.idToCardIndex[key]
+		var score_delta = GameState.players[key]["score"] - GameState.players[key]["last_score"]
+		
+		if score_delta >= 0:
+			asset_score_increment_labels[i].label_settings = asset_score_increment_setting_increase
+			asset_score_increment_labels[i].text = "+%d" % score_delta
+		else:
+			asset_score_increment_labels[i].label_settings = asset_score_increment_setting_decrease
+			asset_score_increment_labels[i].text = "%d" % score_delta
+		
+		var popup_final_pos: Vector2 = ui_player_scores[i].get_global_rect().position
+		popup_final_pos.y -= ui_player_scores[i].get_global_rect().size.y * 1.1
+	
+		score_increment_tween.tween_property(asset_score_increment_labels[i], "modulate:a", 0.0, 0.9)
+		score_increment_tween.parallel().tween_property(asset_score_increment_labels[i], "position", popup_final_pos, 1.0)
+		score_increment_tween.tween_callback(_ui_local_score_popup_callback)
+		
+		asset_score_increment_labels[i].show()
+		
+	score_increment_tween.play()
+
+func _ui_local_score_popup_callback():
+	for key in GameState.players:
+		var i = GameState.idToCardIndex[key]
+		
+		asset_score_increment_labels[i].hide()
+		asset_score_increment_labels[i].modulate.a = 1.0
+		_set_score_increment_label_positions(1.0)
+
 func _ui_local_score_rollup():
 	var t = float(rollup_count) / float(ROLLUP_MAX)
 	
 	if rollup_count <= 0:
 		for i in range(GameState._player_count()):
 			ui_player_scores[i].text = str(GameState.players[GameState.playerCardOrder[i]]["score"])
-			asset_score_increment_labels[i].hide()
 	else:
 		for i in range(GameState._player_count()):
 			var player = GameState.players[GameState.playerCardOrder[i]]
 			var current_score = player["score"]
 			var last_score = player["last_score"]
-			var score_text = "%s"
-			score_text = score_text % str(current_score + (last_score - current_score) * t)
+			var score_text = "%d"
+			score_text = score_text % (current_score + (last_score - current_score) * t)
 			ui_player_scores[i].text = score_text
 			
-			asset_score_increment_labels[i].modulate.a = 0.2 + 0.8 * t
-			asset_score_increment_labels[i].show()
-			_set_score_increment_label_positions(1.0 + 0.5 * (1.0 - t))
-			
-			
 		rollup_count -= 1
-		get_tree().create_timer(0.06).timeout.connect(_ui_local_score_rollup)
+		get_tree().create_timer(0.03).timeout.connect(_ui_local_score_rollup)
 
 func _ui_update_lock_player_pannel(mp_id, locked: bool):
 	var card_index = GameState.idToCardIndex[mp_id] + 1

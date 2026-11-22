@@ -268,7 +268,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="PresetLabel" type="Label" parent="LobbyOrganizer/Columns/SettingsColumn/Filters"]
+[node name="FilterPresetLabel" type="Label" parent="LobbyOrganizer/Columns/SettingsColumn/Filters"]
 layout_mode = 2
 text = "Filter Preset"
 label_settings = ExtResource("5_wtxry")
@@ -297,7 +297,7 @@ layout_mode = 2
 [node name="ProfileCase" type="VBoxContainer" parent="LobbyOrganizer/Columns/SettingsColumn"]
 layout_mode = 2
 
-[node name="ProfileLabel" type="Label" parent="LobbyOrganizer/Columns/SettingsColumn/ProfileCase"]
+[node name="SelectedProfileLabel" type="Label" parent="LobbyOrganizer/Columns/SettingsColumn/ProfileCase"]
 layout_mode = 2
 text = "selected profile"
 label_settings = ExtResource("5_wtxry")
@@ -348,7 +348,7 @@ popup/item_3/id = 3
 [node name="ReadingTimeSection" type="HBoxContainer" parent="LobbyOrganizer/Columns/SettingsColumn"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="LobbyOrganizer/Columns/SettingsColumn/ReadingTimeSection"]
+[node name="ReadingTimeLabel" type="Label" parent="LobbyOrganizer/Columns/SettingsColumn/ReadingTimeSection"]
 layout_mode = 2
 text = "reading time: "
 label_settings = ExtResource("5_wtxry")
@@ -372,7 +372,7 @@ layout_mode = 2
 [node name="ThemeCase" type="VBoxContainer" parent="LobbyOrganizer/Columns/SettingsColumn"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="LobbyOrganizer/Columns/SettingsColumn/ThemeCase"]
+[node name="QuizSkinLabel" type="Label" parent="LobbyOrganizer/Columns/SettingsColumn/ThemeCase"]
 layout_mode = 2
 text = "Quiz Skin"
 label_settings = ExtResource("5_wtxry")
@@ -394,6 +394,14 @@ popup/item_2/text = "Patriotic Cipher"
 popup/item_2/id = 2
 popup/item_3/text = "Fatal Surprise"
 popup/item_3/id = 3
+
+[node name="NewSkinNotifier" type="Label" parent="LobbyOrganizer/Columns/SettingsColumn/ThemeCase"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("11_2bcij")
+theme_override_font_sizes/font_size = 24
+text = "A new quiz skin is available!"
+horizontal_alignment = 1
 
 [node name="Lobby" type="Label" parent="."]
 layout_mode = 1

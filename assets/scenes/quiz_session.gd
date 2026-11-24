@@ -272,8 +272,8 @@ func _player_rejoined(mp_id):
 #region server side functions that handle syncing with players
 #===================================================
 func _server_full_sync(mp_id = -1):
-	_server_sync_player_info(mp_id)
 	_server_sync_quiz_phase(mp_id)
+	_server_sync_player_info(mp_id)
 	
 func _server_sync_player_info(mp_id = -1):
 	var player_ids = []
@@ -661,9 +661,9 @@ func _sync_player_info(player_ids: Array, player_scores: Array, player_scores_la
 	for i in range(player_ids.size()):
 		GameState.players[player_ids[i]]["score"] = player_scores[i]
 		GameState.players[player_ids[i]]["last_score"] = player_scores_last[i]
-	
-		_ui_update_player_panels()
-		_ui_update_scores()
+		
+	_ui_update_player_panels()
+	_ui_update_scores()
 
 @rpc("authority", "reliable")
 func _sync_game_rules(
@@ -928,11 +928,14 @@ func _ui_update_scores():
 func _ui_local_score_popup():
 	var score_increment_tween = get_tree().create_tween()
 	
-	for key in GameState.players:
-		var i = GameState.idToCardIndex[key]
-		var score_delta = GameState.players[key]["score"] - GameState.players[key]["last_score"]
+	for i in range(GameState._player_count()):
+		var player = GameState.players[GameState.playerCardOrder[i]]
+		var score_delta = player["score"] - player["last_score"]
 		
-		if score_delta >= 0:
+		if score_delta == 0:
+			print("TESTING:: %s" % GameState.quiz_phase)
+			continue
+		elif score_delta > 0:
 			asset_score_increment_labels[i].label_settings = asset_score_increment_setting_increase
 			asset_score_increment_labels[i].text = "+%d" % score_delta
 		else:
@@ -941,13 +944,13 @@ func _ui_local_score_popup():
 		
 		var popup_final_pos: Vector2 = ui_player_scores[i].get_global_rect().position
 		popup_final_pos.y -= ui_player_scores[i].get_global_rect().size.y * 1.1
-	
-		score_increment_tween.tween_property(asset_score_increment_labels[i], "modulate:a", 0.0, 0.9)
+		
+		score_increment_tween.parallel().tween_property(asset_score_increment_labels[i], "modulate:a", 0.0, 0.9)
 		score_increment_tween.parallel().tween_property(asset_score_increment_labels[i], "position", popup_final_pos, 1.0)
-		score_increment_tween.tween_callback(_ui_local_score_popup_callback)
 		
 		asset_score_increment_labels[i].show()
-		
+	
+	score_increment_tween.tween_callback(_ui_local_score_popup_callback)
 	score_increment_tween.play()
 
 func _ui_local_score_popup_callback():
@@ -1129,7 +1132,7 @@ func _ui_ani_quiz_intro():
 	$ControlSwapper0.queue("QuizIntro")
 
 func _ui_ani_quiz_standby():
-	$ControlSwapper0.play("QuizStandby")
+	$ControlSwapper0.play("QuizStandBy")
 
 func _ui_ani_quiz_start():
 	$ControlSwapper0.play("QuizStart")

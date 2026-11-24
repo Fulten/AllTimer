@@ -63,6 +63,8 @@ func _send_clients_player_data(mp_id = -1):
 		_sync_player_data.rpc_id(player_ids, player_names)
 
 func _close_multiplayer_peer():
+	if multiplayer.multiplayer_peer == null:
+		return
 	if multiplayer.is_server():
 		for mp_id in multiplayer.get_peers():
 			multiplayer.multiplayer_peer.disconnect_peer(mp_id)
